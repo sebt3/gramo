@@ -1,0 +1,27 @@
+
+query VynilDistribs {
+  vynilDistribs {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    branch
+    insecure
+    login
+    schedule
+    url
+    status {
+        # components
+        errors
+        last_updated
+    }
+  }
+}

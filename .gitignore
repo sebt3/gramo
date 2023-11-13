@@ -1,0 +1,9 @@
+/dist
+/public
+/node_modules
+/.tags
+/.package-lock.json
+/back/resolvers/*/gen.*
+/back/schema/gen.*
+/front/components/gen.*
+/front/queries/*/gen.*

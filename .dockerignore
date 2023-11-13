@@ -1,0 +1,11 @@
+dist
+public
+node_modules
+.tags
+.package-lock.json
+.gitignore
+.dockerignore
+back/resolvers/*/gen.*
+back/schema/gen.*
+front/components/gen.*
+front/queries/*/gen.*

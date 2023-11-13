@@ -1,0 +1,69 @@
+
+type label {
+  name: String!
+  value: String!
+}
+
+type metadata {
+  name: String!
+  namespace: String
+  annotations: [label!]!
+  labels: [label!]!
+}
+
+type namespaceStatus {
+  phase: String
+}
+type namespace {
+  metadata: metadata
+  status: namespaceStatus
+}
+
+type apiVersion {
+  name: String
+  versions: [apiVersionVersion]
+  preferredVersion: apiVersionVersion
+}
+type apiVersionVersion {
+  groupVersion: String
+  version: String
+}
+type customResourceDefinitionName {
+  categories: [String]
+  listKind: String
+  kind: String
+  plural: String
+  singular: String
+  shortNames: [String]
+}
+type customResourceDefinition {
+  metadata: metadata
+  group: String
+  scope: String
+  names: customResourceDefinitionName
+  acceptedNames: customResourceDefinitionName
+}
+
+type permissionReviewNonResourceRules {
+  nonResourceURLs: [String]
+  verbs: [String]
+}
+type permissionReviewResourceRules {
+  apiGroups: [String]
+  resourceNames: [String]
+  resources: [String]
+  verbs: [String]
+}
+type permissionReview {
+  evaluationError: String
+  incomplete: Boolean
+  nonResourceRules: [permissionReviewNonResourceRules]
+  resourceRules: [permissionReviewResourceRules]
+}
+type Query {
+  namespaces: [namespace]
+  permissions(group: String, resource: String, subresource: String, namespace: String, name: String, verb: String, version: String): Boolean
+  apiVersions: [apiVersion]
+  permissionReview(namespace: String!): permissionReview
+  customResourceDefinitions: [customResourceDefinition]
+}

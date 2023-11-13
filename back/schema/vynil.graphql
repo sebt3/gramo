@@ -1,0 +1,65 @@
+type vynilCategory {
+  name: String!
+  packages: [vynilPackage!]
+}
+type vynilPackage {
+  name: String!
+  commit_id: ID!
+  description: String
+  category: vynilCategory!
+  distribution: vynilDistrib!
+}
+
+type vynilDistribStatus {
+  #components: String!
+  errors: [String]
+  last_updated: String!
+}
+type vynilDistribLoginGit_credentials {
+  key: String!
+  name: String!
+}
+type vynilDistribLoginSsh_key {
+  key: String!
+  name: String!
+}
+type vynilDistribLogin {
+  git_credentials: vynilDistribLoginGit_credentials
+  ssh_key: vynilDistribLoginSsh_key
+}
+type vynilDistrib {
+  metadata: metadata
+  branch: String
+  insecure: Boolean
+  login: vynilDistribLogin
+  schedule: String!
+  url: String!
+  status: vynilDistribStatus
+  packages: [vynilPackage!]
+}
+
+type vynilInstallStatus {
+  commit_id: String!
+  digest: String!
+  errors: [String]
+  last_updated: String!
+  #plan: String
+  status: String!
+  #tfstate: String
+}
+type vynilInstall {
+  metadata: metadata
+  auto_upgrade: Boolean
+  category: vynilCategory
+  component: vynilPackage
+  distrib: vynilDistrib
+  #options: String
+  status: vynilInstallStatus
+}
+
+type Query {
+  vynilCategories: [vynilCategory]
+  vynilPackages: [vynilPackage]
+  vynilDistribs: [vynilDistrib]
+  vynilInstalls(namespace: String!): [vynilInstall]
+}
