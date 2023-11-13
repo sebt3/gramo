@@ -1,6 +1,6 @@
 
-query VynilDistribs {
-  vynilDistribs {
+query VynilDistrib($name: String!) {
+  vynilDistrib($name: String!) {
     metadata {
       annotations {
         name

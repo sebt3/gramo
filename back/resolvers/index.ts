@@ -7,8 +7,8 @@ export const resolvers = {
     ...core.queries,
     ...vynil.queries,
   },
-  /*Mutation: {
-    ...core.mutations,
+  Mutation: {
+    //...core.mutations,
     ...vynil.mutations,
-  }*/
+  }
 };

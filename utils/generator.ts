@@ -214,6 +214,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
     })
     //generateGraphQLQueries(path.resolve(__dirname,'..', 'back','schema',`gen.queries.graphql`), Object.fromEntries(filteredObjects.map(([k,v]) => [getBaseName(k),v])))
 })
+HB.registerHelper('contain', function (v1,v2) { return Array.isArray(v1) && v1.includes(v2) });
 HB.registerHelper('haveType', (item:openapiDefinitionPropertiesDef) => ["array","object","boolean","string","number","integer"].includes(item.type==undefined?"":item.type));
 function getBaseName(key:string) {
     return ['crd.projectcalico.org','toolkit.fluxcd.io'].includes(key)?key.split('.')[1]:key.split('.')[0];
@@ -223,7 +224,7 @@ function getTargetVersion(versions: HashMap<k8sObject>) {
     const regexpV1 = new RegExp('^v1')
     return Object.keys(versions).includes('v1') && regexpV1.test(targetVersion)? 'v1': targetVersion;
 }
-function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDef, haveMeta:boolean=false, haveStatus:boolean=false) {
+function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDef, strType:string='type', haveMeta:boolean=false, haveStatus:boolean=false) {
     let res = "";
     const properties:HashMap<string> = {}
     if (def.properties != undefined) Object.entries(def.properties).forEach(([prop, val]) => {
@@ -236,7 +237,7 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
             case "object":
                 if (prop != 'metadata') {
                     properties[prop] = `${name}${capitalizeFirstLetter(prop)}${req}`;
-                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val);
+                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val, strType);
                 } else {
                     properties[prop] = 'metadata'
                 }
@@ -248,15 +249,15 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
                 case "boolean": properties[prop] = `[Boolean]${req}`;break;
                 case "object":
                     properties[prop] = `[${name}${capitalizeFirstLetter(prop)}Item]${req}`;
-                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items);
+                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items, strType);
                     break;
-                default: properties[`#${prop}`] = `[String]${req}`;break;
+                default: properties[`#${prop}`] = `[JSONObject]${req}`;break;
             }break;
-            default: properties[`#${prop}`] = `String${req}`;break;
+            default: properties[`#${prop}`] = `JSONObject${req}`;break;
         }
     });
     const template = HB.compile(`
-type {{ name }} {
+{{ strType }} {{ name }} {
 {{#if haveMeta}}
   metadata: metadata
 {{/if}}
@@ -271,13 +272,15 @@ type {{ name }} {
         name: name,
         properties: properties,
         haveMeta: haveMeta,
-        haveStatus: haveStatus
+        haveStatus: haveStatus,
+        strType: strType
     });
     return res
 }
 function generateGraphQLTypes(file: string, short:string, apiGroup:string, objects: HashMap<HashMap<k8sObject>>){
     let generated  = "";
     const queries:HashMap<string> = {};
+    const mutations:HashMap<string> = {};
     Object.entries(objects).forEach(([name, versions]) => {
         const targetVersion = getTargetVersion(versions);
         const group = getBaseName(apiGroup);
@@ -285,12 +288,21 @@ function generateGraphQLTypes(file: string, short:string, apiGroup:string, objec
             const status = versions[targetVersion].status as openapiDefinitionPropertiesDef;
             generated += generateGraphQLSubType(`${short}${name}Status`, status);
         }
-        generated += generateGraphQLSubType(`${short}${name}`, versions[targetVersion].spec, true, versions[targetVersion].status != undefined)
+        generated += generateGraphQLSubType(`${short}${name}Spec`, versions[targetVersion].spec, 'input');
+        generated += generateGraphQLSubType(`${short}${name}`, versions[targetVersion].spec, 'type', true, versions[targetVersion].status != undefined)
         if (versions[targetVersion].crd == undefined) return;
         if (versions[targetVersion].crd?.spec.scope == 'Namespaced') {
             queries[`${group}${name}s(namespace: String!)`] = `[${group}${name}]`;
+            queries[`${group}${name}(namespace: String!, name: String!)`] = `${group}${name}`;
+            mutations[`create${capitalizeFirstLetter(group)}${name}(namespace: String!, name: String!, spec: ${group}${name}Spec!)`] = `${group}${name}`;
+            mutations[`patch${capitalizeFirstLetter(group)}${name}(namespace: String!, name: String!, spec: ${group}${name}Spec!)`] = `${group}${name}`;
+            mutations[`delete${capitalizeFirstLetter(group)}${name}(namespace: String!, name: String!)`] = `${group}${name}`;
         } else {
             queries[`${group}${name}s`] = `[${group}${name}]`;
+            queries[`${group}${name}(name: String!)`] = `${group}${name}`;
+            mutations[`create${capitalizeFirstLetter(group)}${name}(name: String!, spec: ${group}${name}Spec!)`] = `${group}${name}`;
+            mutations[`patch${capitalizeFirstLetter(group)}${name}(name: String!, spec: ${group}${name}Spec!)`] = `${group}${name}`;
+            mutations[`delete${capitalizeFirstLetter(group)}${name}(name: String!)`] = `${group}${name}`;
         }
     });
     const template = HB.compile(`
@@ -300,6 +312,13 @@ type Query {
 {{/each}}
 }`, {noEscape: true});
     generated += template({queries: queries});
+    const templateMut = HB.compile(`
+type Mutation {
+{{#each mutations}}
+  {{@key}}: {{this}}
+{{/each}}
+}`, {noEscape: true});
+    generated += templateMut({mutations: mutations});
     fs.writeFileSync(file, generated);
 }
 function generateResolverSubType(name: string, def: openapiDefinitionPropertiesDef) {
@@ -352,7 +371,7 @@ function generateResolverSubTypeGroup(name: string, haveStatus:boolean=false) {
 export interface {{ name }} extends KubernetesObject {
   spec: {{ name }}Spec
 {{#if haveStatus}}
-  status: {{ name }}Status
+  status: {{ name }}Status | undefined
 {{/if}}
 }
 export type {{ name }}List = import('@kubernetes/client-node/dist/types.js').KubernetesListObject<{{ name }}>
@@ -388,9 +407,9 @@ function generateResolverQueries(directory: string, short:string, apiGroup:strin
         const targetVersion = getTargetVersion(versions);
         if (versions[targetVersion].crd == undefined) return;
         const namespaced = versions[targetVersion].crd?.spec.scope == 'Namespaced';
-        const template = HB.compile(`
+        const templateQueries = HB.compile(`
 import {kc, k8s, getMetadata} from '../k8s/libs.js';
-import { {{ short }}{{ name }}List } from './${filePrefix}type.{{ name }}.js';
+import { {{ short }}{{ name }}List, {{ short }}{{ name }} } from './${filePrefix}type.{{ name }}.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
 export const queries = {
 {{#if namespaced}}
@@ -402,32 +421,214 @@ export const queries = {
         try {
           const res = await customApi.listClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}')
 {{/if}}
-          const resList = res.body as {{ short }}{{ name }}List
-          return resList.items.map((ext)=>{return{
-            metadata: getMetadata(ext.metadata),
+            const resList = res.body as {{ short }}{{ name }}List
+            return resList.items.map((ext)=>{return{
+                metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-            {{@key}}: ext.spec.{{@key}},
+                {{@key}}: ext.spec.{{@key}},
 {{/each}}
 {{#if haveStatus}}
-            status: {
+                status: ext.status==undefined?null:{
   {{#each status.properties}}
-                {{@key}}: ext.status.{{@key}},
+                    {{@key}}: ext.status.{{@key}},
   {{/each}}
-            }
+                }
 {{/if}}
-          }})
+            }})
         } catch (err) {
           console.error(err);
         }
         return []
     },
+    {{ mini }}{{ name }}: async (_parent, args: object) => {
+        try {
+{{#if namespaced}}
+            const res = await customApi.getNamespacedCustomObject('{{apiGroup}}','{{version}}',args['namespace'],'{{plural}}', args['name'])
+{{else}}
+            const res = await customApi.getClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}', args['name'])
+{{/if}}
+            const ext = res.body as {{ short }}{{ name }}
+            return {
+                metadata: getMetadata(ext.metadata),
+{{#each spec.properties}}
+                {{@key}}: ext.spec.{{@key}},
+{{/each}}
+{{#if haveStatus}}
+                status: ext.status==undefined?null:{
+  {{#each status.properties}}
+                    {{@key}}: ext.status.{{@key}},
+  {{/each}}
+                }
+{{/if}}
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        return null
+    },
 };
 `, {noEscape: true});
-        fs.writeFileSync(path.resolve(directory,`${filePrefix}query.${name}.ts`), template({
+        const templateMutations = HB.compile(`
+import {kc, k8s, getMetadata} from '../core/libs.js';
+import { {{ short }}{{ name }} } from './${filePrefix}type.{{ name }}.js';
+import rfc6902  from 'rfc6902';
+
+const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
+export const mutations = {
+    create{{ short }}{{ name }}: async (_parent, args: object) => {
+        const spec = {};
+        if (args['spec'] == undefined || args['name']==undefined) return null;
+{{#each spec.properties}}
+    {{#if (contain ../spec.required @key) }}
+        spec['{{@key}}'] = args['spec']['{{@key}}'];
+    {{else}}
+        {{#if (haveType this) }}
+        if (args['spec']['{{@key}}'] !== undefined && typeof args['spec']['{{@key}}'] == '{{this.type}}') spec['{{@key}}'] = args['spec']['{{@key}}'];
+        {{else}}
+        if (args['spec']['{{@key}}'] !== undefined) spec['{{@key}}'] = args['spec']['{{@key}}'];
+        {{/if}}
+    {{/if}}
+{{/each}}
+        const payload = {
+            apiVersion: 'vynil.solidite.fr/v1',
+            kind: '{{ name }}',
+            metadata: {
+{{#if namespaced}}
+              namespace: args['namespace'],
+{{/if}}
+              name: args['name']
+            },
+            spec: spec
+        }
+        try {
+{{#if namespaced}}
+            const res = await customApi.createNamespacedCustomObject('{{apiGroup}}','{{version}}',args['namespace'],'{{plural}}', payload)
+{{else}}
+            const res = await customApi.createClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}', payload)
+{{/if}}
+            const ext = res.body as {{ short }}{{ name }}
+            return {
+                metadata: getMetadata(ext.metadata),
+{{#each spec.properties}}
+                {{@key}}: ext.spec.{{@key}},
+{{/each}}
+{{#if haveStatus}}
+                status: ext.status==undefined?null:{
+  {{#each status.properties}}
+                    {{@key}}: ext.status.{{@key}},
+  {{/each}}
+                }
+{{/if}}
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        return null
+    },
+    patch{{ short }}{{ name }}: async (_parent, args: object) => {
+        const spec = {};
+        if (args['spec'] == undefined || args['name']==undefined) return null;
+{{#each spec.properties}}
+    {{#if (contain ../spec.required @key) }}
+        spec['{{@key}}'] = args['spec']['{{@key}}'];
+    {{else}}
+        {{#if (haveType this) }}
+        if (args['spec']['{{@key}}'] !== undefined && typeof args['spec']['{{@key}}'] == '{{this.type}}') spec['{{@key}}'] = args['spec']['{{@key}}'];
+        {{else}}
+        if (args['spec']['{{@key}}'] !== undefined) spec['{{@key}}'] = args['spec']['{{@key}}'];
+        {{/if}}
+    {{/if}}
+{{/each}}
+        const request = {
+            apiVersion: '{{apiGroup}}/{{version}}',
+            kind: 'Distrib',
+            metadata: {
+{{#if namespaced}}
+              namespace: args['namespace'],
+{{/if}}
+              name: args['name']
+            },
+            spec: spec
+        }
+        try {
+{{#if namespaced}}
+            const resGet = await customApi.getNamespacedCustomObject('{{apiGroup}}','{{version}}',args['namespace'],'{{plural}}', args['name'])
+{{else}}
+            const resGet = await customApi.getClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}', args['name'])
+{{/if}}
+            const extGet = resGet.body as {{ short }}{{ name }}
+            const payload = rfc6902.createPatch(extGet,request).filter(rule => !rule.path.startsWith('/status') && !['/metadata/creationTimestamp', '/metadata/finalizers', '/metadata/generation', '/metadata/managedFields', '/metadata/resourceVersion','/metadata/uid'].includes(rule.path) )
+            const options = { "headers": { "Content-type": k8s.PatchUtils.PATCH_FORMAT_JSON_PATCH}};
+{{#if namespaced}}
+            const res = await customApi.patchNamespacedCustomObject('{{apiGroup}}','{{version}}',args['namespace'],'{{plural}}', args['name'], payload, undefined, undefined, undefined, options)
+{{else}}
+            const res = await customApi.patchClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}', args['name'], payload, undefined, undefined, undefined, options)
+{{/if}}
+            const ext = res.body as {{ short }}{{ name }}
+            return {
+                metadata: getMetadata(ext.metadata),
+{{#each spec.properties}}
+                {{@key}}: ext.spec.{{@key}},
+{{/each}}
+{{#if haveStatus}}
+                status: ext.status==undefined?null:{
+  {{#each status.properties}}
+                    {{@key}}: ext.status.{{@key}},
+  {{/each}}
+                }
+{{/if}}
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        return null
+    },
+    delete{{ short }}{{ name }}: async (_parent, args: object) => {
+    try {
+{{#if namespaced}}
+        const res = await customApi.deleteNamespacedCustomObject('{{apiGroup}}','{{version}}',args['namespace'],'{{plural}}', args['name'])
+{{else}}
+        const res = await customApi.deleteClusterCustomObject('{{apiGroup}}','{{version}}','{{plural}}', args['name'])
+{{/if}}
+        const ext = res.body as {{ short }}{{ name }}
+        return {
+                metadata: getMetadata(ext.metadata),
+{{#each spec.properties}}
+                {{@key}}: ext.spec.{{@key}},
+{{/each}}
+{{#if haveStatus}}
+                status: ext.status==undefined?null:{
+  {{#each status.properties}}
+                    {{@key}}: ext.status.{{@key}},
+  {{/each}}
+                }
+{{/if}}
+        }
+    } catch (err) {
+        console.error(err);
+    }
+    return null
+},
+};
+`, {noEscape: true});
+        fs.writeFileSync(path.resolve(directory,`${filePrefix}query.${name}.ts`), templateQueries({
             name: name,
             apiGroup: apiGroup,
             version: targetVersion,
             spec: versions[targetVersion].spec,
+            mini: minimizeFirstLetter(short),
+            short: capitalizeFirstLetter(short),
+            plural: versions[targetVersion].crd?.spec.names.plural,
+            haveStatus: versions[targetVersion].status != undefined,
+            status: versions[targetVersion].status,
+            namespaced: namespaced
+        }));
+        fs.writeFileSync(path.resolve(directory,`${filePrefix}mutation.${name}.ts`), templateMutations({
+            name: name,
+            apiGroup: apiGroup,
+            version: targetVersion,
+            spec: versions[targetVersion].spec,
+            required: versions[targetVersion].spec.required,
             mini: minimizeFirstLetter(short),
             short: capitalizeFirstLetter(short),
             plural: versions[targetVersion].crd?.spec.names.plural,
@@ -446,7 +647,7 @@ function generateFrontQueries(directory: string, short:string, objects: HashMap<
         const targetVersion = getTargetVersion(versions);
         if (versions[targetVersion].crd == undefined) return;
         const namespaced = versions[targetVersion].crd?.spec.scope == 'Namespaced';
-        const template = HB.compile(`
+        const listTmpl = HB.compile(`
 {{#if namespaced}}
 query {{ short }}{{ name }}s($namespace: String!) {
   {{ mini }}{{ name }}s(namespace: $namespace) {
@@ -487,7 +688,57 @@ query {{ short }}{{ name }}s {
   }
 }
 `);
-        fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}s.graphql`), template({
+        const getTmpl = HB.compile(`
+{{#if namespaced}}
+query {{ short }}{{ name }}($namespace: String!, $name: String!) {
+  {{ mini }}{{ name }}(namespace: $namespace, $name: String!) {
+{{else}}
+query {{ short }}{{ name }}($name: String!) {
+  {{ mini }}{{ name }}($name: String!) {
+{{/if}}
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+{{#each spec.properties}}
+  {{#if (haveType this)}}
+    {{@key}}
+  {{else}}
+    # {{@key}}
+  {{/if}}
+{{/each}}
+{{#if haveStatus}}
+    status {
+  {{#each status.properties}}
+    {{#if (haveType this)}}
+        {{@key}}
+    {{else}}
+        # {{@key}}
+    {{/if}}
+  {{/each}}
+    }
+{{/if}}
+  }
+}
+`);
+        fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}s.graphql`), listTmpl({
+            name: name,
+            spec: versions[targetVersion].spec,
+            mini: minimizeFirstLetter(short),
+            short: capitalizeFirstLetter(short),
+            haveStatus: versions[targetVersion].status != undefined,
+            status: versions[targetVersion].status,
+            namespaced: namespaced
+        }));
+        fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}.graphql`), getTmpl({
             name: name,
             spec: versions[targetVersion].spec,
             mini: minimizeFirstLetter(short),

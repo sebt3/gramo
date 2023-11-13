@@ -1,0 +1,5 @@
+query VynilInstallOption($distrib: String!, $category: String!, $name: String!) {
+  vynilPackage(distrib: $distrib, category: $category, name: $name) {
+    options
+  }
+}

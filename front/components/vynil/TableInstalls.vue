@@ -13,7 +13,7 @@ if (route.params.namespace != undefined && route.params.namespace != '') {
   const { setCurrentNamespace } = useNavigationStore()
   setCurrentNamespace(route.params.namespace)
 }
-const { vynilInstalls, vynilInstallsVars, vynilInstallsRefetch } = setupQuery(navigation.namespace)
+const { vynilInstalls, vynilInstallsRefetch } = setupQuery(navigation.namespace)
 async function actionRefresh() {
   await vynilInstallsRefetch();
 }

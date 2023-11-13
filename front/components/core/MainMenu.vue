@@ -9,7 +9,7 @@ import namespacesQuery from '../../queries/core/namespaceNames.graphql'
 import MainMenuLinks from './MainMenuLinks.vue';
 const navigation = storeToRefs(useNavigationStore())
 const model = navigation.currentNamespace
-const { result, onResult } = useQuery(namespacesQuery);
+const { onResult } = useQuery(namespacesQuery);
 const leftDrawerOpen = ref(false)
 const miniState = ref(true)
 const options = ref([])

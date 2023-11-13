@@ -17,6 +17,6 @@ export interface VynilInstallSpec {
 }
 export interface VynilInstall extends KubernetesObject {
   spec: VynilInstallSpec
-  status: VynilInstallStatus
+  status: VynilInstallStatus | undefined
 }
 export type VynilInstallList = import('@kubernetes/client-node/dist/types.js').KubernetesListObject<VynilInstall>

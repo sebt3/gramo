@@ -1,5 +1,6 @@
-query VynilInstalls($namespace: String!) {
-  vynilInstalls(namespace: $namespace) {
+
+query VynilInstall($namespace: String!, $name: String!) {
+  vynilInstall(namespace: $namespace, $name: String!) {
     metadata {
       annotations {
         name

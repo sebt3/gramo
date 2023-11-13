@@ -1,7 +1,6 @@
 <script setup>
 import MainMenuLinks from './MainMenuLinks.vue';
-import { ref } from 'vue'
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     required: true

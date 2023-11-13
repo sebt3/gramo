@@ -25,6 +25,6 @@ export interface VynilDistribSpec {
 }
 export interface VynilDistrib extends KubernetesObject {
   spec: VynilDistribSpec
-  status: VynilDistribStatus
+  status: VynilDistribStatus | undefined
 }
 export type VynilDistribList = import('@kubernetes/client-node/dist/types.js').KubernetesListObject<VynilDistrib>

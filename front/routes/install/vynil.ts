@@ -1,4 +1,3 @@
-import { storeToRefs } from 'pinia'
 import { useNavigationStore } from '../../stores/navigation'
 const navigation = useNavigationStore()
 const installRedirect = {path: '/install/vynil/installs/'+navigation.namespace}

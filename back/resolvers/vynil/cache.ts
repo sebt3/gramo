@@ -11,7 +11,7 @@ export async function getPackages() {
       const dists = await distribQueries.vynilDistribs()
       dists.forEach((dist) => {
         const distName = dist.metadata?.name;
-        Object.entries(dist.status.components).forEach(([category, pkgs])  => {
+        if (dist.status!=null) Object.entries(dist.status.components).forEach(([category, pkgs])  => {
           Object.entries(pkgs).forEach(([name, pkg])  => {
             const item = Object.assign({}, pkg) as VynilPackage
             item.name = name;

@@ -1,4 +1,4 @@
-FROM node:19-slim as builder
+FROM node:18-slim as builder
 WORKDIR /usr/src
 COPY package.json yarn.lock ./
 RUN yarn install

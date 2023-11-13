@@ -1,4 +1,5 @@
 import {kc, k8s, getMetadata} from './libs.js';
+import GraphQLJSON, { GraphQLJSONObject } from 'graphql-type-json';
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 export const queries = {
     namespaces: async () => {
@@ -19,4 +20,6 @@ export const queries = {
 export const mutations = {
 };
 export const resolvers = {
+    JSON: GraphQLJSON,
+    JSONObject: GraphQLJSONObject,
 };

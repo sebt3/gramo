@@ -2,6 +2,7 @@
 import {getPackages} from './cache.js';
 import { queries as installQueries } from './query.Install.js';
 import { queries as distribQueries } from './query.Distrib.js';
+import { mutations as distribMutations } from './mutation.Distrib.js';
 import { VynilDistribPublic } from './type.Package.js';
 
 export const queries = {
@@ -11,6 +12,11 @@ export const queries = {
     },
     vynilPackages: async () => {
         return await getPackages()
+    },
+    vynilPackage: async (_parent, args: object) => {
+        const pkgs = (await getPackages()).filter(p => p.distrib == args['distrib'] && p.category == args['category'] && p.name == args['name']);
+        if (pkgs.length>0) return pkgs[0];
+        return null;
     },
     ...installQueries,
     ...distribQueries,
@@ -101,4 +107,5 @@ export const resolvers = {
 };
 
 export const mutations = {
+    ...distribMutations
 };
