@@ -408,7 +408,7 @@ function generateResolverQueries(directory: string, short:string, apiGroup:strin
         if (versions[targetVersion].crd == undefined) return;
         const namespaced = versions[targetVersion].crd?.spec.scope == 'Namespaced';
         const templateQueries = HB.compile(`
-import {kc, k8s, getMetadata} from '../k8s/libs.js';
+import {kc, k8s, getMetadata} from '../core/libs.js';
 import { {{ short }}{{ name }}List, {{ short }}{{ name }} } from './${filePrefix}type.{{ name }}.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
 export const queries = {
@@ -691,7 +691,7 @@ query {{ short }}{{ name }}s {
         const getTmpl = HB.compile(`
 {{#if namespaced}}
 query {{ short }}{{ name }}($namespace: String!, $name: String!) {
-  {{ mini }}{{ name }}(namespace: $namespace, $name: String!) {
+  {{ mini }}{{ name }}(namespace: $namespace, name: $name) {
 {{else}}
 query {{ short }}{{ name }}($name: String!) {
   {{ mini }}{{ name }}($name: String!) {

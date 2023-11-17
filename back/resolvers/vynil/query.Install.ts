@@ -25,7 +25,7 @@ export const queries = {
                 }
             }})
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return []
     },
@@ -51,8 +51,8 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
-        return []
+        return null
     },
 };

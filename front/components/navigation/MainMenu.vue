@@ -4,7 +4,9 @@ import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { useNavigationStore } from '../../stores/navigation'
 import { links } from '../../routes/index'
-
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute();
+const router = useRouter();
 import namespacesQuery from '../../queries/core/namespaceNames.graphql'
 import MainMenuLinks from './MainMenuLinks.vue';
 const navigation = storeToRefs(useNavigationStore())
@@ -17,6 +19,18 @@ onResult(res => {
   if (res.loading) return;
   options.value = res.data.namespaces.map(ns => ns.metadata.name)
 })
+function onChangeNamespace() {
+  if (router.currentRoute.value.name != undefined ) {
+    router.push({
+      name: router.currentRoute.value.name,
+      params: {
+        ...route.params,
+        namespace: model.value
+      },
+      replace: true
+    })
+  }
+}
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
@@ -31,7 +45,7 @@ function toggleLeftDrawer() {
         </q-avatar>
         Gramo
       </q-toolbar-title>
-      <q-select v-model="model" :options="options" label="Namespace" standout style="width: 250px" options-dense>
+      <q-select v-model="model" @update:model-value="onChangeNamespace()" :options="options" label="Namespace" standout style="width: 250px" options-dense>
         <template v-slot:prepend>
           <q-icon name="dashboard" />
         </template>

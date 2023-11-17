@@ -61,8 +61,25 @@ export const queries = {
                 group: ext.spec.group,
                 scope: ext.spec.scope,
                 names: ext.spec.names,
+                versions: ext.spec.versions,
                 acceptedNames: ext.status?.acceptedNames
             }})
+        } catch (err) {
+            console.error(err);
+        }
+        return []
+    },
+    customResourceDefinition: async (_parent, args:object) => {
+        try {
+            const extRes = await extApi.readCustomResourceDefinition(args["name"]);
+            return {
+                metadata: getMetadata(extRes.body.metadata),
+                group: extRes.body.spec.group,
+                scope: extRes.body.spec.scope,
+                names: extRes.body.spec.names,
+                versions: extRes.body.spec.versions,
+                acceptedNames: extRes.body.status?.acceptedNames
+            }
         } catch (err) {
             console.error(err);
         }

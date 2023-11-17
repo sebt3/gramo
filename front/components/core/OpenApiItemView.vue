@@ -1,0 +1,105 @@
+<script setup>
+import { ref, computed } from 'vue'
+import { getCssVar } from 'quasar'
+import OpenApiItemView from './OpenApiItemView.vue';
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
+  },
+  apitype: {
+    type: String,
+    default: 'string'
+  },
+  defaultdata: {},
+  data: {},
+  properties: [],
+  items: []
+})
+const value = ref(props.data==undefined?props.defaultdata:props.data)
+const isDefault = computed(() => props.data==undefined || props.defaultdata==props.data)
+const blockquoteBorderColor = ref({"border-left-color": getCssVar('primary')})
+</script>
+<style scoped>
+blockquote {
+  margin-inline-end: 0;
+  margin-inline-start: 5px;
+  padding-inline-start: 5px;
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+</style>
+<template>
+  <div v-if="apitype == 'object'" :class="classed">
+    <div class="text-overline q-mb-md">{{ name }}</div>
+    <blockquote :style="blockquoteBorderColor">
+      <div class="q-gutter-md column">
+        <div v-for="(value, key) in properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(value.type)?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+          <OpenApiItemView
+            :key="key"
+            :name="key"
+            :data="data==undefined?undefined:data[key]"
+            :defaultdata="value.default"
+            :apitype="value.type"
+            :properties="value.properties"
+            :items="value.items"
+          />
+        </div>
+      </div>
+    </blockquote>
+  </div>
+  <div v-else-if="apitype == 'array'">
+    <div class="text-overline q-mb-md">{{ name }}</div>
+    <div v-if="items != undefined && items.type == 'object'" class="q-gutter-md">
+      <q-card v-for="item in value" v-bind:key="item">
+        <q-card-section>
+          <div class="q-gutter-md column">
+            <div v-for="(value, key) in items.properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(value.type)?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+              <OpenApiItemView
+                :key="key"
+                :name="key"
+                :data="item[key]"
+                :defaultdata="value.default"
+                :apitype="value.type"
+                :properties="value.properties"
+                :items="value.items"
+              />
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </div>
+    <blockquote :style="blockquoteBorderColor" v-if="items != undefined && items.type != 'object'">
+      <q-field v-for="item in value" v-bind:key="item" borderless>
+        <template v-slot:control>
+          <div class="self-center full-width no-outline" tabindex="0">{{ item }}</div>
+        </template>
+      </q-field>
+    </blockquote>
+  </div>
+  <div v-else>
+    <q-field :label="name" stack-label borderless :label-color="isDefault?'':'secondary'">
+      <template v-if="['name', 'namespace', 'app-group', 'enable', 'domain', 'domain-name', 'issuer', 'ingress-class', 'pullPolicy', 'registry', 'repository', 'tag', 'key', 'engine', 'username', 'dbname'].includes(name)" v-slot:prepend>
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'name'" name="smart_button" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'namespace'" name="dashboard" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'enable'" name="done" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'app-group'" name="workspaces" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'domain-name'" name="link" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'issuer'" name="local_police" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'ingress-class'" name="alt_route" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'pullPolicy'" name="downloading" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'registry'" name="store" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'repository'" name="image" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'tag'" name="sell" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'dbname'" name="storage" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'engine'" name="settings" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="name == 'username'" name="person" />
+        <q-icon :color="isDefault?'':'secondary'" v-if="['domain', 'key'].includes(name)" :name="name" />
+      </template>
+      <template v-slot:control>
+        <div v-if="apitype != 'boolean'" class="self-center full-width no-outline" tabindex="0">{{ value }}</div>
+        <q-toggle v-if="apitype == 'boolean'" v-model="value" checked-icon="check" color="green" unchecked-icon="clear" disable />
+      </template>
+    </q-field>
+  </div>
+</template>

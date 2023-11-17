@@ -1,0 +1,20 @@
+query CustomResourceDefinition($name: String!) {
+  customResourceDefinition(name: $name) {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+}

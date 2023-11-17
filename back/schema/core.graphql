@@ -38,11 +38,32 @@ type customResourceDefinitionName {
   singular: String
   shortNames: [String]
 }
+type customResourceDefinitionColumn {
+  name: String!
+  type: String!
+  jsonPath: String!
+  description: String
+  format: String
+  priority: Float
+}
+type customResourceDefinitionSchema {
+  openAPIV3Schema: JSONObject
+}
+type customResourceDefinitionVersion {
+  name: String!
+  served: Boolean!
+  storage: Boolean!
+  additionalPrinterColumns: [customResourceDefinitionColumn]
+  deprecated: Boolean
+  deprecationWarning: String
+  schema: customResourceDefinitionSchema
+}
 type customResourceDefinition {
   metadata: metadata
-  group: String
-  scope: String
+  group: String!
+  scope: String!
   names: customResourceDefinitionName
+  versions: [customResourceDefinitionVersion]
   acceptedNames: customResourceDefinitionName
 }
 
@@ -68,4 +89,5 @@ type Query {
   apiVersions: [apiVersion]
   permissionReview(namespace: String!): permissionReview
   customResourceDefinitions: [customResourceDefinition]
+  customResourceDefinition(name: String!): customResourceDefinition
 }

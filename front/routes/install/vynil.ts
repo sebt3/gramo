@@ -1,6 +1,5 @@
 import { useNavigationStore } from '../../stores/navigation'
-const navigation = useNavigationStore()
-const installRedirect = {path: '/install/vynil/installs/'+navigation.namespace}
+const installRedirect = {path: '/install/vynil/installs/'+useNavigationStore().namespace}
 export const link = {
   title: 'Vynil', icon: 'album',
   link: installRedirect.path,
@@ -22,18 +21,24 @@ export const route = {
       children: [
         {
           path: ':namespace?',
-          component: () => import('../../components/vynil/TableInstalls.vue'),
-        }
-      /*
-        {
-          path: ':namespace/:install',
-          component: () => import('../../components/vynil/ViewInstall.vue'),
+          name: 'vynilInstallTable',
+          component: () => import('../../components/vynil/InstallTable.vue'),
         },
         {
-          path: ':namespace/:install/edit',
+          path: ':namespace/view/:name',
+          name: 'vynilInstallView',
+          component: () => import('../../components/vynil/InstallView.vue'),
+        }/*,
+        {
+          path: ':namespace/edit/:name',
+          name: 'vynilInstallEdit',
           component: () => import('../../components/vynil/EditInstall.vue'),
         },
-      */
+        {
+          path: ':namespace/create',
+          name: 'vynilInstallCreate',
+          component: () => import('../../components/vynil/CreateInstall.vue'),
+        }*/
       ]
     },
   ],
