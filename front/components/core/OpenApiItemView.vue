@@ -8,7 +8,7 @@ import { OpenAPIV3 } from "openapi-types";
 const props = withDefaults(defineProps<{
   name: string
   apitype: string
-  data: object
+  data: any
   defaultdata: object
   properties?: Map<string, OpenAPIV3.SchemaObject>
   shownondefault: boolean
@@ -35,7 +35,7 @@ blockquote {
     <div class="text-overline q-mb-md">{{ name }}</div>
     <blockquote :style="blockquoteBorderColor">
       <div class="q-gutter-md column">
-        <div v-for="[key, value] in properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+        <div v-for="[key, value] in Object.entries(properties||{})" v-bind:key="key" :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
           <OpenApiItemView
             v-if="shownondefault || (data != undefined && data[key]!=undefined)"
             :key="key"
@@ -57,7 +57,7 @@ blockquote {
       <q-card v-for="item in value" v-bind:key="item">
         <q-card-section>
           <div class="q-gutter-md column" v-if="items.properties != undefined">
-            <div v-for="[key, value] in getProperties(items)" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+            <div v-for="[key, value] in Object.entries(getProperties(items)||{})" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
               <OpenApiItemView
                 v-if="shownondefault || item[key]!=undefined"
                 :key="key"

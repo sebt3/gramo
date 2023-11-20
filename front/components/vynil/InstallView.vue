@@ -93,7 +93,7 @@ function onSubmit (evt) {
     </div>
   </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card v-if="!loadingOptions && !loadingInstall && install.vynilInstall!=null">
+    <q-card v-if="!loadingOptions && !loadingInstall && installOption != undefined && install.vynilInstall!=null && installOption.vynilPackage != undefined">
       <q-card-section>
         <div class="text-h5 q-mt-none q-mb-none">Options</div>
       </q-card-section>
