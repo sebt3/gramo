@@ -5,3 +5,8 @@ declare module '*.vue' { // NOTE: ts-loader
     const component: ReturnType<typeof defineComponent>;
     export default component;
 }
+
+declare module "*.graphql" {
+    const content: any;
+    export default content;
+}

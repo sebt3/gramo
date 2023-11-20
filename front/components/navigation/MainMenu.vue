@@ -1,8 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { useNavigationStore } from '../../stores/navigation'
+import { descriptions } from '../../routes/index'
 import { links } from '../../routes/index'
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute();
@@ -15,6 +16,12 @@ const { onResult } = useQuery(namespacesQuery);
 const leftDrawerOpen = ref(false)
 const miniState = ref(true)
 const options = ref([])
+const isNamespaced = computed(() => {
+  if (route.name != undefined && descriptions[route.name] != undefined) {
+    return descriptions[route.name].ns
+  }
+  return false
+})
 onResult(res => {
   if (res.loading) return;
   options.value = res.data.namespaces.map(ns => ns.metadata.name)
@@ -45,7 +52,7 @@ function toggleLeftDrawer() {
         </q-avatar>
         Gramo
       </q-toolbar-title>
-      <q-select v-model="model" @update:model-value="onChangeNamespace()" :options="options" label="Namespace" standout style="width: 250px" options-dense>
+      <q-select v-if="isNamespaced" v-model="model" @update:model-value="onChangeNamespace()" :options="options" label="Namespace" standout style="width: 250px" options-dense>
         <template v-slot:prepend>
           <q-icon name="dashboard" />
         </template>
@@ -54,7 +61,7 @@ function toggleLeftDrawer() {
   </q-header>
 
   <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="miniState" :width="400" :breakpoint="500" @mouseover="miniState = false" @mouseout="miniState = true" mini-to-overlay>
-    <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
+    <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: '0' }">
       <q-list padding>
         <MainMenuLinks
           v-for="link in links"

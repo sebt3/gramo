@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const canGoBack = window.history.length > 1;
 function goBack () {
     window.history.go(-1)

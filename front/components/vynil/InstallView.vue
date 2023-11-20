@@ -1,17 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import vynilInstallQuery from '../../queries/vynil/Install.graphql'
 import vynilPackageOptions from '../../queries/vynil/PackageOptions.graphql'
 import MetadataView from '../core/MetadataView.vue';
-import OpenApiItemView from '../core/OpenApiItemView.vue';
+import OpenApiStructView from '../core/OpenApiStructView.vue';
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 const router = useRouter();
 import { useNavigationStore } from '../../stores/navigation'
 const navigation = storeToRefs(useNavigationStore())
 import { setupItem } from '../core/itemSetup'
-const { setItemFromRoute } = setupItem();setItemFromRoute();
+const { setNamespacedItemFromRoute } = setupItem();setNamespacedItemFromRoute();
 const { result: install, loading: loadingInstall, onResult } = useQuery(vynilInstallQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem})
 const { result: installOption, loading: loadingOptions } = useQuery(vynilPackageOptions, computed(() => {return loadingInstall.value||install.value.vynilInstall==null?{}:{
   "distrib": install.value.vynilInstall.distrib.metadata.name,
@@ -33,9 +33,9 @@ function onSubmit (evt) {
 }
 </script>
 <template>
-  <div class="q-pa-md">
-    <q-form @submit="onSubmit" class="q-gutter-md">
-      <q-card bordered v-if="!loadingInstall && install.vynilInstall!=null">
+  <div class="row q-mb-sm q-ml-sm">
+    <div class="col-lg-4">
+      <q-card bordered v-if="!loadingInstall && install.vynilInstall!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Install</div>
         </q-card-section>
@@ -43,54 +43,69 @@ function onSubmit (evt) {
           <MetadataView :metadata="install.vynilInstall.metadata" />
         </q-card-section>
       </q-card>
-      <q-card bordered v-if="!loadingInstall && install.vynilInstall!=null">
+    </div><div class="col-lg-4">
+      <q-card bordered v-if="!loadingInstall && install.vynilInstall!=null" class="q-ma-sm">
+        <q-card-section>
+          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
+        </q-card-section>
+        <q-card-section>
+          <div class="q-gutter-md">
+            <q-field label="Status" stack-label borderless>
+              <template v-slot:prepend><q-icon name="done" /></template>
+              <template v-slot:control>
+                <q-chip class="float-right text-white text-capitalize" :label="install.vynilInstall.status.status" color="warning" v-if="['planning','installing'].includes(install.vynilInstall.status.status)"></q-chip>
+                <q-chip class="float-right text-white text-capitalize" :label="install.vynilInstall.status.status" color="positive" v-if="install.vynilInstall.status.status=='installed'"></q-chip>
+                <q-chip class="float-right text-white text-capitalize" :label="install.vynilInstall.status.status" color="negative" v-if="install.vynilInstall.status.status=='errors'"></q-chip>
+                <q-chip class="float-right text-white text-capitalize" :label="install.vynilInstall.status.status" color="info" v-if="!['installed','planning','installing','errors'].includes(install.vynilInstall.status.status)"></q-chip>
+              </template>
+            </q-field>
+            <q-field label="Errors" stack-label borderless v-if="install.vynilInstall.status.errors.length>0">
+              <template v-slot:prepend><q-icon name="error" /></template>
+              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
+                <div v-for="err in install.vynilInstall.status.errors" v-bind:key="err">{{ err }}</div>
+              </div></template>
+            </q-field>
+          </div>
+        </q-card-section>
+      </q-card>
+    </div><div class="col-lg-4">
+      <q-card bordered v-if="!loadingInstall && install.vynilInstall!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Package</div>
         </q-card-section>
         <q-card-section>
           <div class="q-gutter-md">
-            <div class="row"><div class="col">
-                <q-field label="Distribution" stack-label borderless>
-                  <template v-slot:prepend><q-icon name="alt_route" /></template>
-                  <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.distrib.metadata.name }}</div></template>
-                </q-field>
-              </div><div class="col">
-                <q-field label="Category" stack-label borderless>
-                  <template v-slot:prepend><q-icon name="category" /></template>
-                  <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.category.name }}</div></template>
-                </q-field>
-              </div><div class="col">
-                <q-field label="Name" stack-label borderless>
-                  <template v-slot:prepend><q-icon name="smart_button" /></template>
-                  <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.component.name }}</div></template>
-                </q-field>
-              </div></div>
+            <q-field label="Distribution" stack-label borderless>
+              <template v-slot:prepend><q-icon name="alt_route" /></template>
+              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.distrib.metadata.name }}</div></template>
+            </q-field>
+            <q-field label="Category" stack-label borderless>
+              <template v-slot:prepend><q-icon name="category" /></template>
+              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.category.name }}</div></template>
+            </q-field>
+            <q-field label="Name" stack-label borderless>
+              <template v-slot:prepend><q-icon name="smart_button" /></template>
+              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ install.vynilInstall.component.name }}</div></template>
+            </q-field>
           </div>
         </q-card-section>
       </q-card>
-      <q-card v-if="!loadingOptions && !loadingInstall && install.vynilInstall!=null">
-        <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none">Options</div>
-        </q-card-section>
-        <q-card-section v-if="!loadingOptions">
-          <div class="q-gutter-md column">
-            <div v-for="(value, key) in installOption==undefined?{}:installOption.vynilPackage.options" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(value.type)?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
-              <OpenApiItemView
-                :key="key"
-                :name="key"
-                :data="install.vynilInstall.options==undefined?undefined:install.vynilInstall.options[key]"
-                :defaultdata="value.default"
-                :apitype="value.type"
-                :properties="value.properties"
-                :items="value.items"
-              />
-            </div>
-          </div>
-        </q-card-section>
-        <q-card-actions>
-          <q-btn label="Submit" type="submit" color="primary"/>
-        </q-card-actions>
-      </q-card>
-    </q-form>
+    </div>
   </div>
+  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
+    <q-card v-if="!loadingOptions && !loadingInstall && install.vynilInstall!=null">
+      <q-card-section>
+        <div class="text-h5 q-mt-none q-mb-none">Options</div>
+      </q-card-section>
+      <q-card-section v-if="!loadingOptions">
+        <OpenApiStructView
+          :data="install.vynilInstall.options"
+          :properties="installOption.vynilPackage.options"
+        />
+      </q-card-section>
+      <q-card-actions>
+        <q-btn label="Submit" type="submit" color="primary"/>
+      </q-card-actions>
+    </q-card>
+  </q-form>
 </template>

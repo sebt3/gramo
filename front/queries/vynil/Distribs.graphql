@@ -11,15 +11,15 @@ query VynilDistribs {
         value
       }
       name
-      namespace
     }
     branch
     insecure
-    login
     schedule
     url
+    packages {
+      name
+    }
     status {
-        components
         errors
         last_updated
     }

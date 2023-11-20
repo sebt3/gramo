@@ -1,0 +1,44 @@
+query Dashboard {
+  namespaces {
+    vynilInstalls {
+      metadata {
+        name
+        namespace
+      }
+      component {
+        category {
+          name
+        }
+        name
+        distribution {
+          metadata {
+            name
+          }
+        }
+      }
+      status {
+        errors
+        status
+        last_updated
+      }
+    }
+    metadata {
+      name
+    }
+  }
+  vynilDistribs {
+    packages {
+      category {
+        name
+      }
+      name
+    }
+    metadata {
+      name
+    }
+    status {
+      errors
+      last_updated
+    }
+  }
+}

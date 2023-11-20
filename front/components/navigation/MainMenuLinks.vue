@@ -1,35 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
-defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  caption: {
-    type: String,
-    default: ''
-  },
-  link: {
-    type: String,
-    default: '#'
-  },
-  icon: {
-    type: String,
-    default: ''
-  },
-  level: {
-    type: String,
-    default: ''
-  },
-  active: {
-    type: Boolean,
-    default: true
-  },
-  children: []
-})
+import {menuLinksProps} from '../../routes/interfaces';
+withDefaults(defineProps<menuLinksProps>(), {
+  caption: '',
+  link: '#',
+  icon: '',
+  level: 0,
+  active: true
+});
 </script>
 <template>
-    <div v-if="children.length > 0">
+    <div v-if="children != undefined && children.length > 0">
       <q-expansion-item
           expand-separator
           :header-inset-level="level"
@@ -46,13 +27,13 @@ defineProps({
         </template>
         <MainMenuLinks
             v-for="child in children"
-            :key="child"
+            :key="child.title"
             v-bind="child">
         </MainMenuLinks>
       </q-expansion-item>
     </div>
     <div v-else>
-      <q-item clickable v-ripple :inset-level="level" :active="active">
+      <q-item clickable v-ripple :inset-level="level" :active="active" :href="link">
         <q-item-section v-if="icon != ''" avatar>
             <q-avatar :icon="icon" />
           </q-item-section>

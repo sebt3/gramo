@@ -1,24 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { CSSProperties } from 'vue';
 import { getCssVar } from 'quasar'
 import OpenApiItemView from './OpenApiItemView.vue';
-const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  },
-  apitype: {
-    type: String,
-    default: 'string'
-  },
-  defaultdata: {},
-  data: {},
-  properties: [],
-  items: []
-})
+import {getProperties,getItems,getType} from './openapiSetup';
+import { OpenAPIV3 } from "openapi-types";
+const props = withDefaults(defineProps<{
+  name: string
+  apitype: string
+  data: object
+  defaultdata: object
+  properties?: Map<string, OpenAPIV3.SchemaObject>
+  shownondefault: boolean
+  items?: OpenAPIV3.SchemaObject
+}>(), {
+  apitype: 'string',
+  shownondefault: false
+});
 const value = ref(props.data==undefined?props.defaultdata:props.data)
 const isDefault = computed(() => props.data==undefined || props.defaultdata==props.data)
-const blockquoteBorderColor = ref({"border-left-color": getCssVar('primary')})
+const blockquoteBorderColor = ref({"border-left-color": getCssVar('primary')} as CSSProperties)
 </script>
 <style scoped>
 blockquote {
@@ -30,19 +31,21 @@ blockquote {
 }
 </style>
 <template>
-  <div v-if="apitype == 'object'" :class="classed">
+  <div v-if="apitype == 'object'">
     <div class="text-overline q-mb-md">{{ name }}</div>
     <blockquote :style="blockquoteBorderColor">
       <div class="q-gutter-md column">
-        <div v-for="(value, key) in properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(value.type)?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+        <div v-for="[key, value] in properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
           <OpenApiItemView
+            v-if="shownondefault || (data != undefined && data[key]!=undefined)"
             :key="key"
             :name="key"
             :data="data==undefined?undefined:data[key]"
             :defaultdata="value.default"
             :apitype="value.type"
-            :properties="value.properties"
-            :items="value.items"
+            :properties="getProperties(value)"
+            :items="getItems(value)"
+            :shownondefault="shownondefault"
           />
         </div>
       </div>
@@ -53,16 +56,18 @@ blockquote {
     <div v-if="items != undefined && items.type == 'object'" class="q-gutter-md">
       <q-card v-for="item in value" v-bind:key="item">
         <q-card-section>
-          <div class="q-gutter-md column">
-            <div v-for="(value, key) in items.properties" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(value.type)?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
+          <div class="q-gutter-md column" v-if="items.properties != undefined">
+            <div v-for="[key, value] in getProperties(items)" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
               <OpenApiItemView
+                v-if="shownondefault || item[key]!=undefined"
                 :key="key"
                 :name="key"
                 :data="item[key]"
                 :defaultdata="value.default"
                 :apitype="value.type"
-                :properties="value.properties"
-                :items="value.items"
+                :properties="getProperties(value)"
+                :items="getItems(value)"
+                :shownondefault="shownondefault"
               />
             </div>
           </div>

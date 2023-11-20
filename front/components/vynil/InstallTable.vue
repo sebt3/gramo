@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useQuasar } from 'quasar'
 import { useQuery } from '@vue/apollo-composable'
 import TableHeader from '../core/TableHeader.vue';
-import { setupTableWidget } from '../core/TableSetup'
+import { setupTableWidget, tableColumnAlign } from '../core/TableSetup'
 import vynilInstallsQuery from '../../queries/vynil/Installs.graphql'
 import { useNavigationStore } from '../../stores/navigation'
 import { useRouter } from 'vue-router'
@@ -14,12 +14,12 @@ const navigation = storeToRefs(useNavigationStore())
 const { pagination, setNamespaceFromRoute } = setupTableWidget();setNamespaceFromRoute();let filter = ref('');
 const { result, refetch } = useQuery(vynilInstallsQuery, {"namespace": navigation.currentNamespace})
 const columns = [
-  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: 'left'},
-  {name: 'Distribution', label: 'Distribution', field: row => row.distrib.metadata.name, sortable: true, align: 'left'},
-  {name: 'Category', label: 'Category', field: row => row.category.name, sortable: true, align: 'left'},
-  {name: 'Component', label: 'Component', field: row => row.component.name, sortable: true, align: 'left'},
-  {name: 'Status', label: 'Status', field: row => row.status.status, align: 'left'},
-  {name: 'Action', label: '', field: 'Action', sortable: false, align: 'right'}
+  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Distribution', label: 'Distribution', field: row => row.distrib.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Category', label: 'Category', field: row => row.category.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Component', label: 'Component', field: row => row.component.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: 'Status', field: row => row.status.status, align: tableColumnAlign.left},
+  {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 
 async function actionRefresh() { await refetch() }
@@ -43,7 +43,7 @@ function actionDelete(row) {
 }
 </script>
 <template>
-  <q-card class="no-shadow" bordered>
+  <q-card class="q-ma-sm" bordered>
     <TableHeader title="Vynil Installs" @setup="(f) => {filter = f;}" itemtype='vynil Install' @refresh="actionRefresh()" @create="actionNew()" />
     <q-card-section class="q-pa-none">
       <q-table v-if="result !== undefined && result['vynilInstalls'] !== undefined" :rows="result.vynilInstalls" :columns="columns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>

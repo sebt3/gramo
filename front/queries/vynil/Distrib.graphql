@@ -15,9 +15,15 @@ query VynilDistrib($name: String!) {
     }
     branch
     insecure
-    login
     schedule
     url
+    packages {
+      name
+      description
+      category {
+        name
+      }
+    }
     status {
         components
         errors

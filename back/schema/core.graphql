@@ -18,6 +18,7 @@ type namespaceStatus {
 }
 type namespace {
   metadata: metadata
+  vynilInstalls: [vynilInstall]
   status: namespaceStatus
 }
 

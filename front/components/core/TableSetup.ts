@@ -1,7 +1,10 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNavigationStore } from '../../stores/navigation'
-
+export enum tableColumnAlign {
+    left = "left",
+    right = "right"
+}
 export function setupTableWidget() {
     const filter = ref('')
     const pagination = ref({rowsPerPage: 0})

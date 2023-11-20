@@ -1,23 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 const show_filter = ref(false)
 const filter = ref('')
 const emit = defineEmits(['setup','refresh','create'])
 emit('setup', filter)
-defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  itemtype: {
-    type: String,
-    required: true
-  },
-  usecreate: {
-    type: Boolean,
-    default: true
-  }
-})
+withDefaults(defineProps<{
+  title: string
+  itemtype: string
+  usecreate: boolean
+}>(), {
+  usecreate: true
+});
 </script>
 <template>
     <q-card-section>
@@ -32,7 +25,7 @@ defineProps({
           <q-btn icon="filter_list" @click="show_filter=!show_filter">
             <q-tooltip>Show filter</q-tooltip>
           </q-btn>
-          <q-btn icon="refresh" @click="console.log(filter.value);$emit('refresh')">
+          <q-btn icon="refresh" @click="console.log(filter);$emit('refresh')">
             <q-tooltip>Refresh data</q-tooltip>
           </q-btn>
           <q-btn v-if="usecreate == true" label="Add" color="positive" icon="add" @click="$emit('create')">

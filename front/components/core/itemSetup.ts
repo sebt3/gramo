@@ -8,11 +8,15 @@ export function setupItem() {
         if (route.params.namespace != undefined && typeof route.params.namespace === 'string' && route.params.namespace != '')
             setCurrentNamespace(route.params.namespace);
     }
-    function setItemFromRoute() {
+    function setNamespacedItemFromRoute() {
         setNamespaceFromRoute();
         if (route.params.name != undefined && typeof route.params.name === 'string' && route.params.name != '')
             setCurrentItem(route.params.name);
     }
-    return { setItemFromRoute, setNamespaceFromRoute }
+    function setItemFromRoute() {
+        if (route.params.name != undefined && typeof route.params.name === 'string' && route.params.name != '')
+            setCurrentItem(route.params.name);
+    }
+    return { setNamespacedItemFromRoute, setNamespaceFromRoute, setItemFromRoute }
 }
 export default setupItem
