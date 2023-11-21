@@ -75,7 +75,7 @@ export const resolvers = {
     vynilDistrib: {
         packages: async (parent) => {
             const packages = await getPackages()
-            return packages.filter((pck) => pck.category === parent.metadata.name);
+            return packages.filter((pck) => pck.distrib === parent.metadata.name);
         }
     },
     vynilPackage: {

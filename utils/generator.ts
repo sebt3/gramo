@@ -123,23 +123,78 @@ interface crds { items: Array<k8sDefinitionProperties>}
 Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextensions.k8s.io/v1/customresourcedefinitions')]).then(([data_in, crd_in]) => {
     const data = data_in as openapi
     const crds = crd_in as crds
-    function deref(val:openapiDefinitionPropertiesDef) {
-        let res:openapiDefinitionPropertiesDef = {...val};
-        if (res["$ref"] != undefined) {
-            res = data.definitions[res["$ref"].split('/')[2]] as unknown as openapiDefinitionPropertiesDef
-        }
-        if (res.properties != undefined) {
-            Object.entries(res.properties).forEach(([k,]) => {
-                if (res.properties != undefined && res.properties[k]["$ref"] != undefined) {
-                    res.properties[k] = deref(data.definitions[res.properties[k]["$ref"].split('/')[2]] as unknown as openapiDefinitionPropertiesDef);
+
+    // deref: remplace $ref with actual referenced type
+    const derefs:Map<string, openapiDefinitionPropertiesDef> = ((defs) => {
+        const excluded = [
+            'io.k8s.apimachinery.pkg.apis.meta.v1.Time',
+            'io.k8s.apimachinery.pkg.util.intstr.IntOrString',
+            'io.k8s.apimachinery.pkg.api.resource.Quantity',
+            'io.k8s.api.core.v1.ConfigMapVolumeSource',
+            'io.k8s.api.core.v1.ConfigMapProjection',
+            'io.k8s.api.core.v1.DownwardAPIVolumeSource',
+            'io.k8s.api.core.v1.DownwardAPIProjection',
+            'io.k8s.api.core.v1.SecretProjection',
+            'io.k8s.api.core.v1.SecretVolumeSource',
+            'io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime',
+            'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresourceStatus',
+            'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps']
+        const queue = structuredClone(defs);
+        const ret:Map<string, openapiDefinitionPropertiesDef> = new Map();
+        const deref = (data) => {
+            const res = structuredClone(data);
+            for (const [key, val] of Object.entries(data.properties as HashMap<openapiDefinitionPropertiesDef>)) {
+                if (val['$ref'] != undefined && !excluded.includes(val['$ref'].split('/')[2])) {
+                    res.properties[key] = ret[val['$ref'].split('/')[2]]
                 }
-            })
+                if (val['type'] == 'array' && val['items'] != undefined && val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2])) {
+                    res.properties[key]['items'] = ret[val['items']['$ref'].split('/')[2]]
+                }
+                if (val['type'] == 'object' && val.properties != undefined) {
+                    for (const [k2, v2] of Object.entries(val.properties)) {
+                        if ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2])) {
+                            res.properties[key]['properties'][k2] = ret[val['properties'][k2]['$ref'].split('/')[2]]
+                        }
+                    }
+                }
+            }
+            return res
         }
-        return res
-    }
-    // Sort and deref all the definition into kubernetes objects
+        let counter=0;
+        while (queue.length>0) {
+            const item = queue.shift();
+            if (item===undefined) continue;
+            let missing = false;
+            for (const [key, val] of Object.entries(item[1].properties)) {
+                missing = missing || (val['$ref'] != undefined && key !='metadata' && !excluded.includes(val['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['$ref'].split('/')[2]));
+                if (val['type'] == 'array') {
+                    missing = missing || (val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['items']['$ref'].split('/')[2]));
+                }
+                if (val['type'] == 'object' && typeof val.properties == 'object') {
+                    for (const [k2, v2] of Object.entries(val.properties)) {
+                        missing = missing || ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2]) && !Object.keys(ret).includes((v2 as object)['$ref'].split('/')[2]));
+                    }
+                }
+                if (missing) break;
+            }
+            if (missing) {
+                queue.push(item)
+                counter++;
+                if (counter>queue.length) {
+                    break;
+                }
+                //console.log(queue.length,Object.keys(ret).length)
+                continue;
+            }
+            counter=0;
+            ret[item[0]] = deref(item[1])
+        }
+        return ret
+    })(Object.entries(data.definitions).filter(e => e[1].properties!=undefined && e[1].properties['items']==undefined));new Map();
+
+    // Sort all the definition into kubernetes objects
     const groupedObjects: HashMap<HashMap<HashMap<k8sObject>>> = {}
-    Object.entries(data.definitions).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(derefs)) {
         // Detect goup, object and version from the definition name, exclude unknown
         let group = key.split('.').slice(0,3).join('.');
         let item = ""
@@ -148,27 +203,28 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
             version = key.split('.')[3]
             item = key.split('.')[4]
         } else if (['io.k8s.api','io.fluxcd.toolkit','in.opstreelabs.redis'].includes(group)) {
+            group = key.split('.').slice(0,4).join('.');
             version = key.split('.')[4]
             item = key.split('.')[5]
         } else if (['io.k8s.apimachinery','io.k8s.kube-aggregator'].includes(group)) {
-            group = key.split('.').slice(0,5).join('.');
+            group = key.split('.').slice(0,6).join('.');
             version = key.split('.')[6]
             item = key.split('.')[7]
-            if (item == undefined) return;
+            if (item == undefined) continue;
         } else if (['io.cert-manager.v1','io.traefik.v1alpha1','io.k8up.v1'].includes(group)) {
             group = key.split('.').slice(0,2).join('.');
             version = key.split('.')[2]
             item = key.split('.')[3]
         } else if (['io.k8s.apiextensions-apiserver'].includes(group)) {
-            group = key.split('.').slice(0,5).join('.');
+            group = key.split('.').slice(0,6).join('.');
             version = key.split('.')[6]
             item = key.split('.')[7]
         } else {
             console.debug(`excluding ${key}`);
-            return;
+            continue;
         }
         if (value.properties == undefined || value.properties.spec == undefined || value.properties.apiVersion == undefined) {
-            return;
+            continue;
         }
 
         // Feed the final classment
@@ -177,19 +233,20 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
         if (groupedObjects[api][item] == undefined) groupedObjects[api][item] = {};
         let status:openapiDefinitionPropertiesDef|undefined = undefined;
         if (value.properties.status != undefined)
-            status = deref(value.properties.status);
+            status = value.properties.status;
         groupedObjects[api][item][version] = {
             crd: undefined,
-            spec: deref(value.properties.spec),
+            spec: value.properties.spec,
             status: status
         };
-    });
+    }
     // Add the crd to the matching Objects
     crds.items.forEach((crd) => {
-        if (groupedObjects[crd.spec.group] == undefined) return;
-        if (groupedObjects[crd.spec.group][crd.spec.names.kind] == undefined) return;
+        const group = crd.spec.group;
+        if (groupedObjects[group] == undefined) { console.log('crd1', 'excluding', group, crd.spec.group);return;}
+        if (groupedObjects[group][crd.spec.names.kind] == undefined) return;
         crd.spec.versions.forEach((vers) => {
-            if (groupedObjects[crd.spec.group][crd.spec.names.kind][vers.name] != undefined) crd.spec.group,groupedObjects[crd.spec.group][crd.spec.names.kind][vers.name].crd = crd;
+            if (groupedObjects[group][crd.spec.names.kind][vers.name] != undefined) crd.spec.group,groupedObjects[group][crd.spec.names.kind][vers.name].crd = crd;
         });
     });
     return groupedObjects
@@ -197,6 +254,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
 ////////////////////////////////////
 /// Generate the files based on the grouped data from previous step
 //
+    //Object.keys(groupedObjects).forEach(k => console.log(k))
     const filteredObjects = Object.entries(groupedObjects).filter(([key]) =>
         // Exclude official api for now
         ! ['api.k8s.io', 'apis.pkg.apiextensions-apiserver.k8s.io', 'apis.pkg.kube-aggregator.k8s.io'].includes(key)
@@ -229,6 +287,7 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
     const properties:HashMap<string> = {}
     if (def.properties != undefined) Object.entries(def.properties).forEach(([prop, val]) => {
         const req = def.required != undefined && def.required.includes(prop) ? '!':'';
+        if (val == undefined || val.type == undefined) return;
         switch (val.type) {
             case "string":  properties[prop] = `String${req}`;break;
             case "number":  properties[prop] = `Float${req}`;break;
@@ -236,8 +295,13 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
             case "boolean": properties[prop] = `Boolean${req}`;break;
             case "object":
                 if (prop != 'metadata') {
-                    properties[prop] = `${name}${capitalizeFirstLetter(prop)}${req}`;
-                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val, strType);
+                    const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val, strType);
+                    if(tmp.length>1) {
+                        properties[prop] = `${name}${capitalizeFirstLetter(prop)}${req}`;
+                        res+= tmp;
+                    } else {
+                        properties[`#${prop}`] = `JSONObject${req}`;break;
+                    }
                 } else {
                     properties[prop] = 'metadata'
                 }
@@ -247,10 +311,15 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
                 case "number":  properties[prop] = `[Float]${req}`;break;
                 case "integer": properties[prop] = `[Int]${req}`;break;
                 case "boolean": properties[prop] = `[Boolean]${req}`;break;
-                case "object":
-                    properties[prop] = `[${name}${capitalizeFirstLetter(prop)}Item]${req}`;
-                    res+=generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items, strType);
-                    break;
+                case "object":{
+                    const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items, strType);
+                    if (tmp.length>1) {
+                        properties[prop] = `[${name}${capitalizeFirstLetter(prop)}Item]${req}`;
+                        res+=tmp;
+                    } else {
+                        properties[`#${prop}`] = `JSONObject${req}`;break;
+                    }
+                    break;}
                 default: properties[`#${prop}`] = `[JSONObject]${req}`;break;
             }break;
             default: properties[`#${prop}`] = `JSONObject${req}`;break;
@@ -268,13 +337,15 @@ function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDe
   status: {{ name }}Status
 {{/if}}
 }`);
-    res+=template({
-        name: name,
-        properties: properties,
-        haveMeta: haveMeta,
-        haveStatus: haveStatus,
-        strType: strType
-    });
+    if (Object.keys(properties).filter(i => i[0]!='#').length>0 || haveMeta || haveStatus) {
+        res+=template({
+            name: name,
+            properties: properties,
+            haveMeta: haveMeta,
+            haveStatus: haveStatus,
+            strType: strType
+        });
+    }
     return res
 }
 function generateGraphQLTypes(file: string, short:string, apiGroup:string, objects: HashMap<HashMap<k8sObject>>){
@@ -284,12 +355,16 @@ function generateGraphQLTypes(file: string, short:string, apiGroup:string, objec
     Object.entries(objects).forEach(([name, versions]) => {
         const targetVersion = getTargetVersion(versions);
         const group = getBaseName(apiGroup);
+        let haveStatus = versions[targetVersion].status != undefined
         if (versions[targetVersion].status != undefined) {
             const status = versions[targetVersion].status as openapiDefinitionPropertiesDef;
-            generated += generateGraphQLSubType(`${short}${name}Status`, status);
+            const tmp = generateGraphQLSubType(`${short}${name}Status`, status);
+            if (tmp.length>1)
+                generated += tmp;
+            else haveStatus = false;
         }
         generated += generateGraphQLSubType(`${short}${name}Spec`, versions[targetVersion].spec, 'input');
-        generated += generateGraphQLSubType(`${short}${name}`, versions[targetVersion].spec, 'type', true, versions[targetVersion].status != undefined)
+        generated += generateGraphQLSubType(`${short}${name}`, versions[targetVersion].spec, 'type', true, haveStatus)
         if (versions[targetVersion].crd == undefined) return;
         if (versions[targetVersion].crd?.spec.scope == 'Namespaced') {
             queries[`${group}${name}s(namespace: String!)`] = `[${group}${name}]`;
@@ -311,26 +386,27 @@ type Query {
   {{@key}}: {{this}}
 {{/each}}
 }`, {noEscape: true});
-    generated += template({queries: queries});
+    if (Object.keys(queries).length>0) generated += template({queries: queries});
     const templateMut = HB.compile(`
 type Mutation {
 {{#each mutations}}
   {{@key}}: {{this}}
 {{/each}}
 }`, {noEscape: true});
-    generated += templateMut({mutations: mutations});
+if (Object.keys(mutations).length>0) generated += templateMut({mutations: mutations});
     fs.writeFileSync(file, generated);
 }
 function generateResolverSubType(name: string, def: openapiDefinitionPropertiesDef) {
     let res = "";
     const properties:HashMap<string> = {}
-    if (def.properties != undefined) Object.entries(def.properties).forEach(([prop, val]) => {
+    if (def.properties != undefined && typeof def.properties == 'object') for (const [prop, val] of Object.entries(def.properties)) {
         const req = def.required != undefined && def.required.includes(prop) ? '':' | undefined';
+        if (val == undefined || val.type == undefined) continue;
         switch (val.type) {
             case "string":
             case "number":
-            case "integer":
             case "boolean": properties[prop] = `${val.type}${req}`;break;
+            case "integer": properties[prop] = `number${req}`;break;
             case "object":
                 if (prop != 'metadata') {
                     properties[prop] = `${capitalizeFirstLetter(name)}${capitalizeFirstLetter(prop)}${req}`;
@@ -342,8 +418,8 @@ function generateResolverSubType(name: string, def: openapiDefinitionPropertiesD
             case "array": switch (val.items?.type) {
                 case "string":
                 case "number":
-                case "integer":
                 case "boolean": properties[prop] = `Array<${val.items?.type}>${req}`;break;
+                case "integer": properties[prop] = `Array<number>${req}`;break;
                 case "object":
                     properties[prop] = `Array<${capitalizeFirstLetter(name)}${capitalizeFirstLetter(prop)}Item>${req}`;
                     res+=generateResolverSubType(`${capitalizeFirstLetter(name)}${capitalizeFirstLetter(prop)}Item`, val.items);
@@ -352,7 +428,7 @@ function generateResolverSubType(name: string, def: openapiDefinitionPropertiesD
             }break;
             default: properties[prop] = `object${req}`;break;
         }
-    });
+    }
     const template = HB.compile(`
 export interface {{ name }} {
 {{#each properties}}
@@ -405,6 +481,7 @@ function generateResolverQueries(directory: string, short:string, apiGroup:strin
     }
     Object.entries(objects).forEach(([name, versions]) => {
         const targetVersion = getTargetVersion(versions);
+        if (versions[targetVersion].crd == undefined) console.log('excluding',apiGroup,name);
         if (versions[targetVersion].crd == undefined) return;
         const namespaced = versions[targetVersion].crd?.spec.scope == 'Namespaced';
         const templateQueries = HB.compile(`

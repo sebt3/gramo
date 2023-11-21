@@ -2,8 +2,8 @@
   "ts-node-esm": {
     "require": ["tsconfig-paths/register"]
   },
-
-  "include": ["back/**/*.ts", "front/**/*.tsx", "front/**/*.vue", "front/**/*.d.ts"],
+  "exclude": ["back/**/gen*.ts"],
+  "include": ["back/**/*.ts", "front/**/*.d.ts"],
   //"paths": { "@/*":["./front/*"] },
   "rootDirs": ["front", "back"],
   "compilerOptions": {

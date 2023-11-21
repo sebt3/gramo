@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
   data: any
   defaultdata: object
   properties?: Map<string, OpenAPIV3.SchemaObject>
-  shownondefault: boolean
+  shownondefault?: boolean
   items?: OpenAPIV3.SchemaObject
 }>(), {
   apitype: 'string',

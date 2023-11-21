@@ -79,7 +79,7 @@ const columns = [
   </div>
   <q-card v-if="!loadingDistrib && Distrib.vynilDistrib!=null" class="q-ma-sm">
     <q-card-section>
-      <TableHeader title="Packages" @setup="(f) => {filter = f;}" itemtype='Package' />
+      <TableHeader title="Packages" v-model:model-filter="filter" itemtype='Package' :usecreate="false" :userefresh="false" />
       <q-table :rows="Distrib.vynilDistrib.packages" :columns="columns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom></q-table>
     </q-card-section>
   </q-card>

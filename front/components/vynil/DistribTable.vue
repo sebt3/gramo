@@ -42,7 +42,7 @@ function actionDelete(row) {
 </script>
 <template>
   <q-card class="q-ma-sm" bordered>
-    <TableHeader title="Vynil Distribs" @setup="(f) => {filter = f;}" itemtype='vynil Distrib' @refresh="actionRefresh()" @create="actionNew()" />
+    <TableHeader title="Vynil Distribs" itemtype='vynil Distrib' v-model:model-filter="filter" @refresh="actionRefresh()" @create="actionNew()" />
     <q-card-section class="q-pa-none">
       <q-table v-if="result !== undefined && result['vynilDistribs'] !== undefined" :rows="result.vynilDistribs" :columns="columns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
         <template v-slot:body-cell-Action="props">

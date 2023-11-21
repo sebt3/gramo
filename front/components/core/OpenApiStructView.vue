@@ -5,7 +5,7 @@ import { OpenAPIV3 } from "openapi-types";
 withDefaults(defineProps<{
   data?: any
   properties?: Map<string, OpenAPIV3.SchemaObject>
-  shownondefault: boolean
+  shownondefault?: boolean
 }>(), {
   shownondefault: false
 });
