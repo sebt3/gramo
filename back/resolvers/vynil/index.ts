@@ -26,7 +26,7 @@ export const resolvers = {
     vynilInstall: {
         component: async (parent) => {
             const packages = await getPackages()
-            const lstPkg = packages.filter((pck) => pck.name == parent.componentName && pck.category  == parent.categoryName && pck.distrib  == parent.distribName);
+            const lstPkg = packages.filter((pck) => pck.name == parent.component && pck.category  == parent.category && pck.distrib  == parent.distrib);
             if (lstPkg.length>0) return lstPkg[0];
             const lst = (await distribQueries.vynilDistribs()).filter((i) => i.metadata.name == parent.distrib)
             let distribution:VynilDistribPublic = {
@@ -46,24 +46,24 @@ export const resolvers = {
             if (lst.length>0) distribution = lst[0] as VynilDistribPublic;
             return {
                 category: {
-                    name: parent.categoryName
+                    name: parent.category
                 },
                 distribution: distribution,
                 commit_id: "",
-                name: parent.componentName
+                name: parent.component
             }
         },
         category: async (parent) => {
             return {
-                name: parent.categoryName,
+                name: parent.category,
             };
         },
         distrib: async (parent) => {
-            const lst = (await distribQueries.vynilDistribs()).filter((i) => i.metadata.name == parent.distribName)
+            const lst = (await distribQueries.vynilDistribs()).filter((i) => i.metadata.name == parent.distrib)
             if (lst.length>0) return lst[0];
             return {
                 metadata:{
-                    name: parent.distribName,
+                    name: parent.distrib,
                     labels: [],
                     annotations: []
                 },

@@ -4,8 +4,6 @@ import { useQuasar } from 'quasar'
 import { useQuery } from '@vue/apollo-composable'
 import TableHeader from '../core/TableHeader.vue';
 import { setupTableWidget, tableColumnAlign } from '../core/TableSetup'
-import vynilDashboardQuery from '@/queries/vynil/Dashboard.graphql'
-
 import vynilDistribsQuery from '@/queries/vynil/DistribTable.graphql'
 import { useRouter } from 'vue-router'
 const router = useRouter();
