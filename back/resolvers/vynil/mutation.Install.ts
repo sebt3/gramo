@@ -1,4 +1,3 @@
-
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { VynilInstall } from './type.Install.js';
 import rfc6902  from 'rfc6902';
@@ -59,8 +58,8 @@ export const mutations = {
             apiVersion: 'vynil.solidite.fr/v1',
             kind: 'Distrib',
             metadata: {
-              namespace: args['namespace'],
-              name: args['name']
+                namespace: args['namespace'],
+                name: args['name']
             },
             spec: spec
         }
@@ -98,21 +97,21 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', args['name'])
         const ext = res.body as VynilInstall
         return {
-                metadata: getMetadata(ext.metadata),
-                auto_upgrade: ext.spec.auto_upgrade,
-                category: ext.spec.category,
-                component: ext.spec.component,
-                distrib: ext.spec.distrib,
-                options: ext.spec.options,
-                status: ext.status==undefined?null:{
-                    commit_id: ext.status.commit_id,
-                    digest: ext.status.digest,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
-                    plan: ext.status.plan,
-                    status: ext.status.status,
-                    tfstate: ext.status.tfstate,
-                }
+            metadata: getMetadata(ext.metadata),
+            auto_upgrade: ext.spec.auto_upgrade,
+            category: ext.spec.category,
+            component: ext.spec.component,
+            distrib: ext.spec.distrib,
+            options: ext.spec.options,
+            status: ext.status==undefined?null:{
+                commit_id: ext.status.commit_id,
+                digest: ext.status.digest,
+                errors: ext.status.errors,
+                last_updated: ext.status.last_updated,
+                plan: ext.status.plan,
+                status: ext.status.status,
+                tfstate: ext.status.tfstate,
+            }
         }
     } catch (err) {
         console.error(err);

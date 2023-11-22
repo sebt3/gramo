@@ -5,14 +5,19 @@ import { useQuasar } from 'quasar'
 import { useQuery } from '@vue/apollo-composable'
 import TableHeader from '../core/TableHeader.vue';
 import { setupTableWidget, tableColumnAlign } from '../core/TableSetup'
-import vynilInstallsQuery from '../../queries/vynil/Installs.graphql'
-import { useNavigationStore } from '../../stores/navigation'
+import vynilInstallsQuery from '@/queries/vynil/InstallTable.graphql'
+import { useNavigationStore } from '@/stores/navigation'
 import { useRouter } from 'vue-router'
 const router = useRouter();
 const $q = useQuasar()
 const navigation = storeToRefs(useNavigationStore())
 const { pagination, setNamespaceFromRoute } = setupTableWidget();setNamespaceFromRoute();let filter = ref('');
-const { result, refetch } = useQuery(vynilInstallsQuery, {"namespace": navigation.currentNamespace})
+const { result, refetch, onError } = useQuery(vynilInstallsQuery, {"namespace": navigation.currentNamespace})
+onError(({ graphQLErrors, networkError }) => {
+  if (networkError) console.log('[Network error]:', networkError);
+  if (graphQLErrors)console.log('[graphQL error]:', graphQLErrors);
+});
+
 const columns = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Distribution', label: 'Distribution', field: row => row.distrib.metadata.name, sortable: true, align: tableColumnAlign.left},

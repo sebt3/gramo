@@ -4,12 +4,18 @@ import { useQuasar } from 'quasar'
 import { useQuery } from '@vue/apollo-composable'
 import TableHeader from '../core/TableHeader.vue';
 import { setupTableWidget, tableColumnAlign } from '../core/TableSetup'
-import vynilDistribsQuery from '../../queries/vynil/Distribs.graphql'
+import vynilDashboardQuery from '@/queries/vynil/Dashboard.graphql'
+
+import vynilDistribsQuery from '@/queries/vynil/DistribTable.graphql'
 import { useRouter } from 'vue-router'
 const router = useRouter();
 const $q = useQuasar()
 const { pagination } = setupTableWidget();let filter = ref('');
-const { result, refetch } = useQuery(vynilDistribsQuery);
+const { result, refetch, onError } = useQuery(vynilDistribsQuery);
+onError(({ graphQLErrors, networkError }) => {
+  if (networkError) console.log('[Network error]:', networkError);
+  if (graphQLErrors)console.log('[graphQL error]:', graphQLErrors);
+});
 const columns = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Url', label: 'Url', field: row => row.url, sortable: true, align: tableColumnAlign.left},

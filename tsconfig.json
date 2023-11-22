@@ -2,11 +2,12 @@
   "ts-node-esm": {
     "require": ["tsconfig-paths/register"]
   },
+  "files": ["front/typings.d.ts"],
   "exclude": ["back/**/gen*.ts"],
-  "include": ["back/**/*.ts", "front/**/*.d.ts"],
-  //"paths": { "@/*":["./front/*"] },
+  "include": ["back/**/*.ts", "front/typings.d.ts", "front/**/*.d.ts", "front/**/*.graphql"],
   "rootDirs": ["front", "back"],
   "compilerOptions": {
+    "paths": { "@/*":["./front/*"] },
     "target": "esnext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": ["esnext", "DOM"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */

@@ -1,4 +1,3 @@
-
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { VynilDistrib } from './type.Distrib.js';
 import rfc6902  from 'rfc6902';
@@ -54,7 +53,7 @@ export const mutations = {
             apiVersion: 'vynil.solidite.fr/v1',
             kind: 'Distrib',
             metadata: {
-              name: args['name']
+                name: args['name']
             },
             spec: spec
         }
@@ -88,17 +87,17 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('vynil.solidite.fr','v1','distribs', args['name'])
         const ext = res.body as VynilDistrib
         return {
-                metadata: getMetadata(ext.metadata),
-                branch: ext.spec.branch,
-                insecure: ext.spec.insecure,
-                login: ext.spec.login,
-                schedule: ext.spec.schedule,
-                url: ext.spec.url,
-                status: ext.status==undefined?null:{
-                    components: ext.status.components,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
-                }
+            metadata: getMetadata(ext.metadata),
+            branch: ext.spec.branch,
+            insecure: ext.spec.insecure,
+            login: ext.spec.login,
+            schedule: ext.spec.schedule,
+            url: ext.spec.url,
+            status: ext.status==undefined?null:{
+                components: ext.status.components,
+                errors: ext.status.errors,
+                last_updated: ext.status.last_updated,
+            }
         }
     } catch (err) {
         console.error(err);

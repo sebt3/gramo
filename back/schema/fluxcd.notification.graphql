@@ -1,0 +1,178 @@
+
+type fluxcdReceiverStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdReceiverStatus {
+  conditions: [fluxcdReceiverStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+  webhookPath: String
+}
+input fluxcdReceiverSpecResourcesItem {
+  apiVersion: String
+  kind: String!
+  #matchLabels: JSONObject
+  name: String!
+  namespace: String
+}
+input fluxcdReceiverSpecSecretRef {
+  name: String!
+}
+input fluxcdReceiverSpec {
+  events: [String]
+  interval: String
+  resources: [fluxcdReceiverSpecResourcesItem]!
+  secretRef: fluxcdReceiverSpecSecretRef!
+  suspend: Boolean
+  type: String!
+}
+type fluxcdReceiverResourcesItem {
+  apiVersion: String
+  kind: String!
+  #matchLabels: JSONObject
+  name: String!
+  namespace: String
+}
+type fluxcdReceiverSecretRef {
+  name: String!
+}
+type fluxcdReceiver {
+  metadata: metadata
+  events: [String]
+  interval: String
+  resources: [fluxcdReceiverResourcesItem]!
+  secretRef: fluxcdReceiverSecretRef!
+  suspend: Boolean
+  type: String!
+  status: fluxcdReceiverStatus
+}
+type fluxcdAlertStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdAlertStatus {
+  conditions: [fluxcdAlertStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+}
+input fluxcdAlertSpecEventSourcesItem {
+  apiVersion: String
+  kind: String!
+  #matchLabels: JSONObject
+  name: String!
+  namespace: String
+}
+input fluxcdAlertSpecProviderRef {
+  name: String!
+}
+input fluxcdAlertSpec {
+  #eventMetadata: JSONObject
+  eventSeverity: String
+  eventSources: [fluxcdAlertSpecEventSourcesItem]!
+  exclusionList: [String]
+  inclusionList: [String]
+  providerRef: fluxcdAlertSpecProviderRef!
+  summary: String
+  suspend: Boolean
+}
+type fluxcdAlertEventSourcesItem {
+  apiVersion: String
+  kind: String!
+  #matchLabels: JSONObject
+  name: String!
+  namespace: String
+}
+type fluxcdAlertProviderRef {
+  name: String!
+}
+type fluxcdAlert {
+  metadata: metadata
+  #eventMetadata: JSONObject
+  eventSeverity: String
+  eventSources: [fluxcdAlertEventSourcesItem]!
+  exclusionList: [String]
+  inclusionList: [String]
+  providerRef: fluxcdAlertProviderRef!
+  summary: String
+  suspend: Boolean
+  status: fluxcdAlertStatus
+}
+type fluxcdProviderStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdProviderStatus {
+  conditions: [fluxcdProviderStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+}
+input fluxcdProviderSpecCertSecretRef {
+  name: String!
+}
+input fluxcdProviderSpecSecretRef {
+  name: String!
+}
+input fluxcdProviderSpec {
+  address: String
+  certSecretRef: fluxcdProviderSpecCertSecretRef
+  channel: String
+  interval: String
+  proxy: String
+  secretRef: fluxcdProviderSpecSecretRef
+  suspend: Boolean
+  timeout: String
+  type: String!
+  username: String
+}
+type fluxcdProviderCertSecretRef {
+  name: String!
+}
+type fluxcdProviderSecretRef {
+  name: String!
+}
+type fluxcdProvider {
+  metadata: metadata
+  address: String
+  certSecretRef: fluxcdProviderCertSecretRef
+  channel: String
+  interval: String
+  proxy: String
+  secretRef: fluxcdProviderSecretRef
+  suspend: Boolean
+  timeout: String
+  type: String!
+  username: String
+  status: fluxcdProviderStatus
+}
+type Query {
+  fluxcdReceivers(namespace: String!): [fluxcdReceiver]
+  fluxcdReceiver(namespace: String!, name: String!): fluxcdReceiver
+  fluxcdAlerts(namespace: String!): [fluxcdAlert]
+  fluxcdAlert(namespace: String!, name: String!): fluxcdAlert
+  fluxcdProviders(namespace: String!): [fluxcdProvider]
+  fluxcdProvider(namespace: String!, name: String!): fluxcdProvider
+}
+type Mutation {
+  createFluxcdReceiver(namespace: String!, name: String!, spec: fluxcdReceiverSpec!): fluxcdReceiver
+  patchFluxcdReceiver(namespace: String!, name: String!, spec: fluxcdReceiverSpec!): fluxcdReceiver
+  deleteFluxcdReceiver(namespace: String!, name: String!): fluxcdReceiver
+  createFluxcdAlert(namespace: String!, name: String!, spec: fluxcdAlertSpec!): fluxcdAlert
+  patchFluxcdAlert(namespace: String!, name: String!, spec: fluxcdAlertSpec!): fluxcdAlert
+  deleteFluxcdAlert(namespace: String!, name: String!): fluxcdAlert
+  createFluxcdProvider(namespace: String!, name: String!, spec: fluxcdProviderSpec!): fluxcdProvider
+  patchFluxcdProvider(namespace: String!, name: String!, spec: fluxcdProviderSpec!): fluxcdProvider
+  deleteFluxcdProvider(namespace: String!, name: String!): fluxcdProvider
+}

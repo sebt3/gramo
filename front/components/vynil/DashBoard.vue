@@ -1,12 +1,16 @@
 <script setup>
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import vynilDashboardQuery from '../../queries/vynil/Dashboard.graphql'
-import pieChart from '../charts/pieChart.vue';
-const { onResult } = useQuery(vynilDashboardQuery)
+import vynilDashboardQuery from '@/queries/vynil/Dashboard.graphql'
+import pieChart from '@/components/charts/pieChart.vue';
+const { onResult, onError } = useQuery(vynilDashboardQuery)
 const ready = ref(false);
 const InstallByTs = ref([]);
 const ErrorsByTs = ref([]);
+onError(({ graphQLErrors, networkError }) => {
+  if (networkError) console.log('[Network error]:', networkError);
+  if (graphQLErrors)console.log('[graphQL error]:', graphQLErrors);
+});
 onResult((res) => {
   if ( !res.loading ) {
     ready.value = false;

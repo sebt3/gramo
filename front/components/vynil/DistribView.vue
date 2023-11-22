@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
-import vynilDistribQuery from '../../queries/vynil/Distrib.graphql'
-import customResourceDefinition from '../../queries/core/CustomResourceDefinition.graphql'
+import vynilDistribQuery from '@/queries/vynil/DistribView.graphql'
+import customResourceDefinition from '@/queries/core/CustomResourceDefinition.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiStructView from '../core/OpenApiStructView.vue';
 import { storeToRefs } from 'pinia'
@@ -15,8 +15,12 @@ import { useNavigationStore } from '../../stores/navigation'
 const navigation = storeToRefs(useNavigationStore())
 import { setupItem } from '../core/itemSetup'
 const { setItemFromRoute } = setupItem();setItemFromRoute();
-const { result: Distrib, loading: loadingDistrib, onResult } = useQuery(vynilDistribQuery, {"name": navigation.currentItem})
+const { result: Distrib, loading: loadingDistrib, onResult, onError } = useQuery(vynilDistribQuery, {"name": navigation.currentItem})
 const { result: CRdef, loading: loadingCRD } = useQuery(customResourceDefinition, {"name": 'distribs.vynil.solidite.fr'})
+onError(({ graphQLErrors, networkError }) => {
+  if (networkError) console.log('[Network error]:', networkError);
+  if (graphQLErrors)console.log('[graphQL error]:', graphQLErrors);
+});
 onResult(res => {
   if ( !res.loading && res.data.vynilDistrib == null) {
     const matched = router.currentRoute.value.matched

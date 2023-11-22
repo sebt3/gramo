@@ -1,0 +1,195 @@
+
+type fluxcdKustomizationStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdKustomizationStatusInventoryEntriesItem {
+  id: String!
+  v: String!
+}
+type fluxcdKustomizationStatusInventory {
+  entries: [fluxcdKustomizationStatusInventoryEntriesItem]!
+}
+type fluxcdKustomizationStatus {
+  conditions: [fluxcdKustomizationStatusConditionsItem]
+  inventory: fluxcdKustomizationStatusInventory
+  lastAppliedRevision: String
+  lastAttemptedRevision: String
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+}
+input fluxcdKustomizationSpecDecryptionSecretRef {
+  name: String!
+}
+input fluxcdKustomizationSpecDecryption {
+  provider: String!
+  secretRef: fluxcdKustomizationSpecDecryptionSecretRef
+}
+input fluxcdKustomizationSpecDependsOnItem {
+  name: String!
+  namespace: String
+}
+input fluxcdKustomizationSpecHealthChecksItem {
+  apiVersion: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+input fluxcdKustomizationSpecImagesItem {
+  digest: String
+  name: String!
+  newName: String
+  newTag: String
+}
+input fluxcdKustomizationSpecKubeConfigSecretRef {
+  key: String
+  name: String!
+}
+input fluxcdKustomizationSpecKubeConfig {
+  secretRef: fluxcdKustomizationSpecKubeConfigSecretRef!
+}
+input fluxcdKustomizationSpecPatchesItemTarget {
+  annotationSelector: String
+  group: String
+  kind: String
+  labelSelector: String
+  name: String
+  namespace: String
+  version: String
+}
+input fluxcdKustomizationSpecPatchesItem {
+  patch: String!
+  target: fluxcdKustomizationSpecPatchesItemTarget
+}
+input fluxcdKustomizationSpecPostBuildSubstituteFromItem {
+  kind: String!
+  name: String!
+  optional: Boolean
+}
+input fluxcdKustomizationSpecPostBuild {
+  #substitute: JSONObject
+  substituteFrom: [fluxcdKustomizationSpecPostBuildSubstituteFromItem]
+}
+input fluxcdKustomizationSpecSourceRef {
+  apiVersion: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+input fluxcdKustomizationSpec {
+  #commonMetadata: JSONObject
+  components: [String]
+  decryption: fluxcdKustomizationSpecDecryption
+  dependsOn: [fluxcdKustomizationSpecDependsOnItem]
+  force: Boolean
+  healthChecks: [fluxcdKustomizationSpecHealthChecksItem]
+  images: [fluxcdKustomizationSpecImagesItem]
+  interval: String!
+  kubeConfig: fluxcdKustomizationSpecKubeConfig
+  patches: [fluxcdKustomizationSpecPatchesItem]
+  path: String
+  postBuild: fluxcdKustomizationSpecPostBuild
+  prune: Boolean!
+  retryInterval: String
+  serviceAccountName: String
+  sourceRef: fluxcdKustomizationSpecSourceRef!
+  suspend: Boolean
+  targetNamespace: String
+  timeout: String
+  wait: Boolean
+}
+type fluxcdKustomizationDecryptionSecretRef {
+  name: String!
+}
+type fluxcdKustomizationDecryption {
+  provider: String!
+  secretRef: fluxcdKustomizationDecryptionSecretRef
+}
+type fluxcdKustomizationDependsOnItem {
+  name: String!
+  namespace: String
+}
+type fluxcdKustomizationHealthChecksItem {
+  apiVersion: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+type fluxcdKustomizationImagesItem {
+  digest: String
+  name: String!
+  newName: String
+  newTag: String
+}
+type fluxcdKustomizationKubeConfigSecretRef {
+  key: String
+  name: String!
+}
+type fluxcdKustomizationKubeConfig {
+  secretRef: fluxcdKustomizationKubeConfigSecretRef!
+}
+type fluxcdKustomizationPatchesItemTarget {
+  annotationSelector: String
+  group: String
+  kind: String
+  labelSelector: String
+  name: String
+  namespace: String
+  version: String
+}
+type fluxcdKustomizationPatchesItem {
+  patch: String!
+  target: fluxcdKustomizationPatchesItemTarget
+}
+type fluxcdKustomizationPostBuildSubstituteFromItem {
+  kind: String!
+  name: String!
+  optional: Boolean
+}
+type fluxcdKustomizationPostBuild {
+  #substitute: JSONObject
+  substituteFrom: [fluxcdKustomizationPostBuildSubstituteFromItem]
+}
+type fluxcdKustomizationSourceRef {
+  apiVersion: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+type fluxcdKustomization {
+  metadata: metadata
+  #commonMetadata: JSONObject
+  components: [String]
+  decryption: fluxcdKustomizationDecryption
+  dependsOn: [fluxcdKustomizationDependsOnItem]
+  force: Boolean
+  healthChecks: [fluxcdKustomizationHealthChecksItem]
+  images: [fluxcdKustomizationImagesItem]
+  interval: String!
+  kubeConfig: fluxcdKustomizationKubeConfig
+  patches: [fluxcdKustomizationPatchesItem]
+  path: String
+  postBuild: fluxcdKustomizationPostBuild
+  prune: Boolean!
+  retryInterval: String
+  serviceAccountName: String
+  sourceRef: fluxcdKustomizationSourceRef!
+  suspend: Boolean
+  targetNamespace: String
+  timeout: String
+  wait: Boolean
+  status: fluxcdKustomizationStatus
+}
+type Query {
+  fluxcdKustomizations(namespace: String!): [fluxcdKustomization]
+  fluxcdKustomization(namespace: String!, name: String!): fluxcdKustomization
+}
+type Mutation {
+  createFluxcdKustomization(namespace: String!, name: String!, spec: fluxcdKustomizationSpec!): fluxcdKustomization
+  patchFluxcdKustomization(namespace: String!, name: String!, spec: fluxcdKustomizationSpec!): fluxcdKustomization
+  deleteFluxcdKustomization(namespace: String!, name: String!): fluxcdKustomization
+}

@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from "url";
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import {vitePluginGraphqlLoader} from "vite-plugin-graphql-loader";
@@ -12,5 +13,10 @@ export default defineConfig({
     },
     build: {
         outDir: '../dist/public'
+    },
+    resolve: {
+        alias: [
+            { find: '@', replacement: fileURLToPath(new URL('./front', import.meta.url)) }
+        ],
     }
 })

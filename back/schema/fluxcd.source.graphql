@@ -1,0 +1,446 @@
+
+type fluxcdGitRepositoryStatusArtifact {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdGitRepositoryStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdGitRepositoryStatusIncludedArtifactsItem {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdGitRepositoryStatusObservedIncludeItemRepository {
+  name: String!
+}
+type fluxcdGitRepositoryStatusObservedIncludeItem {
+  fromPath: String
+  repository: fluxcdGitRepositoryStatusObservedIncludeItemRepository!
+  toPath: String
+}
+type fluxcdGitRepositoryStatus {
+  artifact: fluxcdGitRepositoryStatusArtifact
+  conditions: [fluxcdGitRepositoryStatusConditionsItem]
+  includedArtifacts: [fluxcdGitRepositoryStatusIncludedArtifactsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+  observedIgnore: String
+  observedInclude: [fluxcdGitRepositoryStatusObservedIncludeItem]
+  observedRecurseSubmodules: Boolean
+}
+input fluxcdGitRepositorySpecIncludeItemRepository {
+  name: String!
+}
+input fluxcdGitRepositorySpecIncludeItem {
+  fromPath: String
+  repository: fluxcdGitRepositorySpecIncludeItemRepository!
+  toPath: String
+}
+input fluxcdGitRepositorySpecRef {
+  branch: String
+  commit: String
+  name: String
+  semver: String
+  tag: String
+}
+input fluxcdGitRepositorySpecSecretRef {
+  name: String!
+}
+input fluxcdGitRepositorySpecVerifySecretRef {
+  name: String!
+}
+input fluxcdGitRepositorySpecVerify {
+  mode: String!
+  secretRef: fluxcdGitRepositorySpecVerifySecretRef!
+}
+input fluxcdGitRepositorySpec {
+  ignore: String
+  include: [fluxcdGitRepositorySpecIncludeItem]
+  interval: String!
+  recurseSubmodules: Boolean
+  ref: fluxcdGitRepositorySpecRef
+  secretRef: fluxcdGitRepositorySpecSecretRef
+  suspend: Boolean
+  timeout: String
+  url: String!
+  verify: fluxcdGitRepositorySpecVerify
+}
+type fluxcdGitRepositoryIncludeItemRepository {
+  name: String!
+}
+type fluxcdGitRepositoryIncludeItem {
+  fromPath: String
+  repository: fluxcdGitRepositoryIncludeItemRepository!
+  toPath: String
+}
+type fluxcdGitRepositoryRef {
+  branch: String
+  commit: String
+  name: String
+  semver: String
+  tag: String
+}
+type fluxcdGitRepositorySecretRef {
+  name: String!
+}
+type fluxcdGitRepositoryVerifySecretRef {
+  name: String!
+}
+type fluxcdGitRepositoryVerify {
+  mode: String!
+  secretRef: fluxcdGitRepositoryVerifySecretRef!
+}
+type fluxcdGitRepository {
+  metadata: metadata
+  ignore: String
+  include: [fluxcdGitRepositoryIncludeItem]
+  interval: String!
+  recurseSubmodules: Boolean
+  ref: fluxcdGitRepositoryRef
+  secretRef: fluxcdGitRepositorySecretRef
+  suspend: Boolean
+  timeout: String
+  url: String!
+  verify: fluxcdGitRepositoryVerify
+  status: fluxcdGitRepositoryStatus
+}
+type fluxcdBucketStatusArtifact {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdBucketStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdBucketStatus {
+  artifact: fluxcdBucketStatusArtifact
+  conditions: [fluxcdBucketStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+  observedIgnore: String
+  url: String
+}
+input fluxcdBucketSpecSecretRef {
+  name: String!
+}
+input fluxcdBucketSpec {
+  #accessFrom: JSONObject
+  bucketName: String!
+  endpoint: String!
+  ignore: String
+  insecure: Boolean
+  interval: String!
+  provider: String
+  region: String
+  secretRef: fluxcdBucketSpecSecretRef
+  suspend: Boolean
+  timeout: String
+}
+type fluxcdBucketSecretRef {
+  name: String!
+}
+type fluxcdBucket {
+  metadata: metadata
+  #accessFrom: JSONObject
+  bucketName: String!
+  endpoint: String!
+  ignore: String
+  insecure: Boolean
+  interval: String!
+  provider: String
+  region: String
+  secretRef: fluxcdBucketSecretRef
+  suspend: Boolean
+  timeout: String
+  status: fluxcdBucketStatus
+}
+type fluxcdHelmChartStatusArtifact {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdHelmChartStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdHelmChartStatus {
+  artifact: fluxcdHelmChartStatusArtifact
+  conditions: [fluxcdHelmChartStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedChartName: String
+  observedGeneration: Int
+  observedSourceArtifactRevision: String
+  url: String
+}
+input fluxcdHelmChartSpecSourceRef {
+  apiVersion: String
+  kind: String!
+  name: String!
+}
+input fluxcdHelmChartSpecVerifySecretRef {
+  name: String!
+}
+input fluxcdHelmChartSpecVerify {
+  provider: String!
+  secretRef: fluxcdHelmChartSpecVerifySecretRef
+}
+input fluxcdHelmChartSpec {
+  #accessFrom: JSONObject
+  chart: String!
+  interval: String!
+  reconcileStrategy: String
+  sourceRef: fluxcdHelmChartSpecSourceRef!
+  suspend: Boolean
+  valuesFile: String
+  valuesFiles: [String]
+  verify: fluxcdHelmChartSpecVerify
+  version: String
+}
+type fluxcdHelmChartSourceRef {
+  apiVersion: String
+  kind: String!
+  name: String!
+}
+type fluxcdHelmChartVerifySecretRef {
+  name: String!
+}
+type fluxcdHelmChartVerify {
+  provider: String!
+  secretRef: fluxcdHelmChartVerifySecretRef
+}
+type fluxcdHelmChart {
+  metadata: metadata
+  #accessFrom: JSONObject
+  chart: String!
+  interval: String!
+  reconcileStrategy: String
+  sourceRef: fluxcdHelmChartSourceRef!
+  suspend: Boolean
+  valuesFile: String
+  valuesFiles: [String]
+  verify: fluxcdHelmChartVerify
+  version: String
+  status: fluxcdHelmChartStatus
+}
+type fluxcdHelmRepositoryStatusArtifact {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdHelmRepositoryStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdHelmRepositoryStatus {
+  artifact: fluxcdHelmRepositoryStatusArtifact
+  conditions: [fluxcdHelmRepositoryStatusConditionsItem]
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+  url: String
+}
+input fluxcdHelmRepositorySpecSecretRef {
+  name: String!
+}
+input fluxcdHelmRepositorySpec {
+  #accessFrom: JSONObject
+  interval: String!
+  passCredentials: Boolean
+  provider: String
+  secretRef: fluxcdHelmRepositorySpecSecretRef
+  suspend: Boolean
+  timeout: String
+  type: String
+  url: String!
+}
+type fluxcdHelmRepositorySecretRef {
+  name: String!
+}
+type fluxcdHelmRepository {
+  metadata: metadata
+  #accessFrom: JSONObject
+  interval: String!
+  passCredentials: Boolean
+  provider: String
+  secretRef: fluxcdHelmRepositorySecretRef
+  suspend: Boolean
+  timeout: String
+  type: String
+  url: String!
+  status: fluxcdHelmRepositoryStatus
+}
+type fluxcdOCIRepositoryStatusArtifact {
+  digest: String
+  lastUpdateTime: String!
+  #metadata: JSONObject
+  path: String!
+  revision: String!
+  size: Int
+  url: String!
+}
+type fluxcdOCIRepositoryStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type fluxcdOCIRepositoryStatusObservedLayerSelector {
+  mediaType: String
+  operation: String
+}
+type fluxcdOCIRepositoryStatus {
+  artifact: fluxcdOCIRepositoryStatusArtifact
+  conditions: [fluxcdOCIRepositoryStatusConditionsItem]
+  contentConfigChecksum: String
+  lastHandledReconcileAt: String
+  observedGeneration: Int
+  observedIgnore: String
+  observedLayerSelector: fluxcdOCIRepositoryStatusObservedLayerSelector
+  url: String
+}
+input fluxcdOCIRepositorySpecCertSecretRef {
+  name: String!
+}
+input fluxcdOCIRepositorySpecLayerSelector {
+  mediaType: String
+  operation: String
+}
+input fluxcdOCIRepositorySpecRef {
+  digest: String
+  semver: String
+  tag: String
+}
+input fluxcdOCIRepositorySpecSecretRef {
+  name: String!
+}
+input fluxcdOCIRepositorySpecVerifySecretRef {
+  name: String!
+}
+input fluxcdOCIRepositorySpecVerify {
+  provider: String!
+  secretRef: fluxcdOCIRepositorySpecVerifySecretRef
+}
+input fluxcdOCIRepositorySpec {
+  certSecretRef: fluxcdOCIRepositorySpecCertSecretRef
+  ignore: String
+  insecure: Boolean
+  interval: String!
+  layerSelector: fluxcdOCIRepositorySpecLayerSelector
+  provider: String
+  ref: fluxcdOCIRepositorySpecRef
+  secretRef: fluxcdOCIRepositorySpecSecretRef
+  serviceAccountName: String
+  suspend: Boolean
+  timeout: String
+  url: String!
+  verify: fluxcdOCIRepositorySpecVerify
+}
+type fluxcdOCIRepositoryCertSecretRef {
+  name: String!
+}
+type fluxcdOCIRepositoryLayerSelector {
+  mediaType: String
+  operation: String
+}
+type fluxcdOCIRepositoryRef {
+  digest: String
+  semver: String
+  tag: String
+}
+type fluxcdOCIRepositorySecretRef {
+  name: String!
+}
+type fluxcdOCIRepositoryVerifySecretRef {
+  name: String!
+}
+type fluxcdOCIRepositoryVerify {
+  provider: String!
+  secretRef: fluxcdOCIRepositoryVerifySecretRef
+}
+type fluxcdOCIRepository {
+  metadata: metadata
+  certSecretRef: fluxcdOCIRepositoryCertSecretRef
+  ignore: String
+  insecure: Boolean
+  interval: String!
+  layerSelector: fluxcdOCIRepositoryLayerSelector
+  provider: String
+  ref: fluxcdOCIRepositoryRef
+  secretRef: fluxcdOCIRepositorySecretRef
+  serviceAccountName: String
+  suspend: Boolean
+  timeout: String
+  url: String!
+  verify: fluxcdOCIRepositoryVerify
+  status: fluxcdOCIRepositoryStatus
+}
+type Query {
+  fluxcdGitRepositorys(namespace: String!): [fluxcdGitRepository]
+  fluxcdGitRepository(namespace: String!, name: String!): fluxcdGitRepository
+  fluxcdBuckets(namespace: String!): [fluxcdBucket]
+  fluxcdBucket(namespace: String!, name: String!): fluxcdBucket
+  fluxcdHelmCharts(namespace: String!): [fluxcdHelmChart]
+  fluxcdHelmChart(namespace: String!, name: String!): fluxcdHelmChart
+  fluxcdHelmRepositorys(namespace: String!): [fluxcdHelmRepository]
+  fluxcdHelmRepository(namespace: String!, name: String!): fluxcdHelmRepository
+  fluxcdOCIRepositorys(namespace: String!): [fluxcdOCIRepository]
+  fluxcdOCIRepository(namespace: String!, name: String!): fluxcdOCIRepository
+}
+type Mutation {
+  createFluxcdGitRepository(namespace: String!, name: String!, spec: fluxcdGitRepositorySpec!): fluxcdGitRepository
+  patchFluxcdGitRepository(namespace: String!, name: String!, spec: fluxcdGitRepositorySpec!): fluxcdGitRepository
+  deleteFluxcdGitRepository(namespace: String!, name: String!): fluxcdGitRepository
+  createFluxcdBucket(namespace: String!, name: String!, spec: fluxcdBucketSpec!): fluxcdBucket
+  patchFluxcdBucket(namespace: String!, name: String!, spec: fluxcdBucketSpec!): fluxcdBucket
+  deleteFluxcdBucket(namespace: String!, name: String!): fluxcdBucket
+  createFluxcdHelmChart(namespace: String!, name: String!, spec: fluxcdHelmChartSpec!): fluxcdHelmChart
+  patchFluxcdHelmChart(namespace: String!, name: String!, spec: fluxcdHelmChartSpec!): fluxcdHelmChart
+  deleteFluxcdHelmChart(namespace: String!, name: String!): fluxcdHelmChart
+  createFluxcdHelmRepository(namespace: String!, name: String!, spec: fluxcdHelmRepositorySpec!): fluxcdHelmRepository
+  patchFluxcdHelmRepository(namespace: String!, name: String!, spec: fluxcdHelmRepositorySpec!): fluxcdHelmRepository
+  deleteFluxcdHelmRepository(namespace: String!, name: String!): fluxcdHelmRepository
+  createFluxcdOCIRepository(namespace: String!, name: String!, spec: fluxcdOCIRepositorySpec!): fluxcdOCIRepository
+  patchFluxcdOCIRepository(namespace: String!, name: String!, spec: fluxcdOCIRepositorySpec!): fluxcdOCIRepository
+  deleteFluxcdOCIRepository(namespace: String!, name: String!): fluxcdOCIRepository
+}

@@ -14,6 +14,11 @@ const gqlWrapper = (...files)=>{return `${files}`;}
 const typeDefs = gqlWrapper(
   importGraphQL('core.graphql'),
   importGraphQL('vynil.graphql'),
+  importGraphQL('fluxcd.helm.graphql'),
+  importGraphQL('fluxcd.image.graphql'),
+  importGraphQL('fluxcd.kustomize.graphql'),
+  importGraphQL('fluxcd.notification.graphql'),
+  importGraphQL('fluxcd.source.graphql'),
 );
 
 interface MyContext {

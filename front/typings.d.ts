@@ -7,6 +7,6 @@ declare module '*.vue' { // NOTE: ts-loader
 }
 
 declare module "*.graphql" {
-    const content: any;
-    export default content;
+    const Query: import("graphql").DocumentNode;
+    export default Query;
 }
