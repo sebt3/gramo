@@ -1,8 +1,10 @@
 type KubernetesObject = import('@kubernetes/client-node/dist/types.js').KubernetesObject
+export interface FluxcdHelmChartStatusArtifactMetadata {
+}
 export interface FluxcdHelmChartStatusArtifact {
   digest: string | undefined
   lastUpdateTime: string
-  metadata: metadata
+  metadata: FluxcdHelmChartStatusArtifactMetadata | undefined
   path: string
   revision: string
   size: number | undefined

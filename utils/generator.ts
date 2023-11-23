@@ -420,12 +420,12 @@ function generateResolverSubType(name: string, def: openapiDefinitionPropertiesD
             case "boolean": properties[prop] = `${val.type}${req}`;break;
             case "integer": properties[prop] = `number${req}`;break;
             case "object":
-                if (prop != 'metadata') {
+                //if (prop != 'metadata') {
                     properties[prop] = `${capitalizeFirstLetter(name)}${capitalizeFirstLetter(prop)}${req}`;
                     res+=generateResolverSubType(`${capitalizeFirstLetter(name)}${capitalizeFirstLetter(prop)}`, val);
-                } else {
+                /*} else {
                     properties[prop] = 'metadata'
-                }
+                }*/
                 break;
             case "array": switch (val.items?.type) {
                 case "string":

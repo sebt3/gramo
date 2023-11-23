@@ -20,6 +20,14 @@ export interface FluxcdHelmReleaseStatus {
   observedGeneration: number | undefined
   upgradeFailures: number | undefined
 }
+export interface FluxcdHelmReleaseSpecChartMetadataAnnotations {
+}
+export interface FluxcdHelmReleaseSpecChartMetadataLabels {
+}
+export interface FluxcdHelmReleaseSpecChartMetadata {
+  annotations: FluxcdHelmReleaseSpecChartMetadataAnnotations | undefined
+  labels: FluxcdHelmReleaseSpecChartMetadataLabels | undefined
+}
 export interface FluxcdHelmReleaseSpecChartSpecSourceRef {
   apiVersion: string | undefined
   kind: string | undefined
@@ -44,7 +52,7 @@ export interface FluxcdHelmReleaseSpecChartSpec {
   version: string | undefined
 }
 export interface FluxcdHelmReleaseSpecChart {
-  metadata: metadata
+  metadata: FluxcdHelmReleaseSpecChartMetadata | undefined
   spec: FluxcdHelmReleaseSpecChartSpec
 }
 export interface FluxcdHelmReleaseSpecDependsOnItem {

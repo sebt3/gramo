@@ -35,7 +35,7 @@ onResult((res) => {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
       <q-card bordered v-if="ready && InstallByTs.length>0" class="q-ma-sm">
         <q-card-section class="text-center">
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Install per namespace</div>
@@ -44,7 +44,7 @@ onResult((res) => {
           <pieChart v-model:datum="InstallByTs"></pieChart>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-6">
+    </div><div class="col-lg-4">
       <q-card bordered v-if="ready && ErrorsByTs.length>0" class="q-ma-sm">
         <q-card-section class="text-center">
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Install with errors per namespace</div>
@@ -53,7 +53,7 @@ onResult((res) => {
           <pieChart v-model:datum="ErrorsByTs"></pieChart>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-6">
+    </div><div class="col-lg-4">
       <q-card bordered v-if="ready && CatsPerDists.length>0" class="q-ma-sm">
         <q-card-section class="text-center">
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Categories per distributions</div>
@@ -62,7 +62,7 @@ onResult((res) => {
           <pieChart v-model:datum="CatsPerDists"></pieChart>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-6">
+    </div><div class="col-lg-4">
       <q-card bordered v-if="ready && PackagesPerCats.length>0" class="q-ma-sm">
         <q-card-section class="text-center">
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Packages per categories</div>
@@ -71,7 +71,7 @@ onResult((res) => {
           <pieChart v-model:datum="PackagesPerCats"></pieChart>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-6">
+    </div><div class="col-lg-4">
       <q-card bordered v-if="ready && PackagesPerDists.length>0" class="q-ma-sm">
         <q-card-section class="text-center">
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Packages per distributions</div>
