@@ -51,7 +51,7 @@ function actionDelete(row) {
   <q-card class="q-ma-sm" bordered>
     <TableHeader title="Vynil Installs" v-model:model-filter="filter" itemtype='vynil Install' @refresh="actionRefresh()" @create="actionNew()" />
     <q-card-section class="q-pa-none">
-      <q-table v-if="result !== undefined && result['vynilInstalls'] !== undefined" :rows="result.vynilInstalls" :columns="columns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
+      <q-table v-if="result !== undefined && result['namespace'] !== undefined && result['namespace']['vynilInstalls'] !== undefined" :rows="result.namespace.vynilInstalls" :columns="columns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
         <template v-slot:body-cell-Action="props">
           <q-td :props="props">
             <q-btn icon="visibility" size="sm" class="q-ml-sm" flat dense @click="toView(navigation.currentNamespace.value, props.row.metadata.name)">

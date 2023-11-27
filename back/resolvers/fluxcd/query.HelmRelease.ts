@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { FluxcdHelmReleaseList, FluxcdHelmRelease } from './type.HelmRelease.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     fluxcdHelmReleases: async (_parent, args: object) => {
         try {
             const res = await customApi.listNamespacedCustomObject('helm.toolkit.fluxcd.io','v2beta1',args['namespace'],'helmreleases')
@@ -43,10 +43,12 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
     fluxcdHelmRelease: async (_parent, args: object) => {
         try {
             const res = await customApi.getNamespacedCustomObject('helm.toolkit.fluxcd.io','v2beta1',args['namespace'],'helmreleases', args['name'])
@@ -88,7 +90,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

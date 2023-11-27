@@ -7,7 +7,6 @@
     "lint": "eslint front/ back/ utils/",
     "lint:schema": "graphql-schema-linter $(ls --ignore='gen.*' back/schema/|grep -E 'graphql$'|sed 's#^#back/schema/#')",
     "dev": "ts-node-esm back/dev.ts",
-    "start": "ts-node-esm back/dev.ts",
     "prebuild": "NODE_ENV=production vite build --emptyOutDir",
     "build": "tsc -b",
     "postbuild": "mkdir -p dist/back; cp -Rapvf back/schema dist/back/",

@@ -1,5 +1,6 @@
 
 import {getPackages} from './cache.js';
+import { gramoConfig } from '../../config.js'
 import { queries as installQueries } from './query.Install.js';
 import { queries as distribQueries } from './query.Distrib.js';
 import { mutations as distribMutations } from './mutation.Distrib.js';
@@ -19,7 +20,10 @@ export const queries = {
         return null;
     },
     ...installQueries,
-    ...distribQueries,
+    vynilDistrib: distribQueries.vynilDistrib,
+    vynilDistribs: async () => {
+        return (await distribQueries.vynilDistribs()).filter(d=> gramoConfig.limitVynilDistrib == "" || d.metadata.name == gramoConfig.limitVynilDistrib)
+    }
 };
 
 export const resolvers = {
@@ -75,7 +79,11 @@ export const resolvers = {
     vynilDistrib: {
         packages: async (parent) => {
             const packages = await getPackages()
-            return packages.filter((pck) => pck.distrib === parent.metadata.name);
+            return packages.filter(pkg => {
+                if (gramoConfig.limitVynilDistrib != "" && pkg.distrib != gramoConfig.limitVynilDistrib) return false;
+                if (gramoConfig.limitVynilCategory != "" && pkg.category != gramoConfig.limitVynilCategory) return false;
+                return pkg.distrib === parent.metadata.name
+            });
         }
     },
     vynilPackage: {
@@ -85,7 +93,7 @@ export const resolvers = {
             };
         },
         distribution: async (parent) => {
-            const lst = (await distribQueries.vynilDistribs()).filter((i) => i.metadata.name == parent.distrib)
+            const lst = (await queries.vynilDistribs()).filter((i) => i.metadata.name == parent.distrib)
             if (lst.length>0) return lst[0];
             return {
                 metadata:{
@@ -101,7 +109,11 @@ export const resolvers = {
     vynilCategory: {
         packages: async (parent) =>  {
             const packages = await getPackages()
-            return packages.filter((pck) => pck.category === parent.name);
+            return packages.filter(pkg => {
+                if (gramoConfig.limitVynilDistrib != "" && pkg.distrib != gramoConfig.limitVynilDistrib) return false;
+                if (gramoConfig.limitVynilCategory != "" && pkg.category != gramoConfig.limitVynilCategory) return false;
+                return pkg.category === parent.name
+            });
         }
     }
 };

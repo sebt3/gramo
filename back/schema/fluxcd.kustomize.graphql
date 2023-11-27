@@ -185,7 +185,6 @@ type fluxcdKustomization {
   status: fluxcdKustomizationStatus
 }
 type Query {
-  fluxcdKustomizations(namespace: String!): [fluxcdKustomization]
   fluxcdKustomization(namespace: String!, name: String!): fluxcdKustomization
 }
 type Mutation {

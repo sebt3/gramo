@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { FluxcdProviderList, FluxcdProvider } from './type.Provider.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     fluxcdProviders: async (_parent, args: object) => {
         try {
             const res = await customApi.listNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'providers')
@@ -25,10 +25,12 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
     fluxcdProvider: async (_parent, args: object) => {
         try {
             const res = await customApi.getNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'providers', args['name'])
@@ -52,7 +54,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

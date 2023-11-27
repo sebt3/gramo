@@ -1,6 +1,6 @@
-import { queries } from './query.Kustomization.js'
+import { lists } from './query.Kustomization.js'
 export const resolver = {
     fluxcdKustomizations: async (parent, args: object) => {
-        return queries.fluxcdKustomizations(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdKustomizations(parent,{namespace: parent.metadata.name, ...args})
     }
 };

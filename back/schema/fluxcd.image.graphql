@@ -247,11 +247,8 @@ type fluxcdImageUpdateAutomation {
   status: fluxcdImageUpdateAutomationStatus
 }
 type Query {
-  fluxcdImagePolicys(namespace: String!): [fluxcdImagePolicy]
   fluxcdImagePolicy(namespace: String!, name: String!): fluxcdImagePolicy
-  fluxcdImageRepositorys(namespace: String!): [fluxcdImageRepository]
   fluxcdImageRepository(namespace: String!, name: String!): fluxcdImageRepository
-  fluxcdImageUpdateAutomations(namespace: String!): [fluxcdImageUpdateAutomation]
   fluxcdImageUpdateAutomation(namespace: String!, name: String!): fluxcdImageUpdateAutomation
 }
 type Mutation {

@@ -1,6 +1,17 @@
 scalar JSON
 scalar JSONObject
 
+type GramoConfig {
+  defaultNamespace: String!
+  defaultRoute: String!
+  enableGraphQLClient: Boolean!
+  limitVynilCategory: String!
+  limitVynilDistrib: String!
+  limitNamespaceKey: String!
+  limitNamespaceValue: String!
+  limitNamespaceHave: String!
+}
+
 type label {
   name: String!
   value: String!
@@ -19,6 +30,20 @@ type namespaceStatus {
 type namespace {
   metadata: metadata
   vynilInstalls: [vynilInstall]
+  fluxcdGitRepositorys: [fluxcdGitRepository]
+  fluxcdBuckets: [fluxcdBucket]
+  fluxcdHelmCharts: [fluxcdHelmChart]
+  fluxcdHelmRepositorys: [fluxcdHelmRepository]
+  fluxcdOCIRepositorys: [fluxcdOCIRepository]
+  fluxcdReceivers: [fluxcdReceiver]
+  fluxcdAlerts: [fluxcdAlert]
+  fluxcdProviders: [fluxcdProvider]
+  fluxcdKustomizations: [fluxcdKustomization]
+  fluxcdImagePolicys: [fluxcdImagePolicy]
+  fluxcdImageRepositorys: [fluxcdImageRepository]
+  fluxcdImageUpdateAutomations: [fluxcdImageUpdateAutomation]
+  fluxcdHelmReleases: [fluxcdHelmRelease]
+  permissions: permissionReview
   status: namespaceStatus
 }
 
@@ -85,7 +110,9 @@ type permissionReview {
   resourceRules: [permissionReviewResourceRules]
 }
 type Query {
+  gramoConfig: GramoConfig
   namespaces: [namespace]
+  namespace(name: String!): namespace
   permissions(group: String, resource: String, subresource: String, namespace: String, name: String, verb: String, version: String): Boolean
   apiVersions: [apiVersion]
   permissionReview(namespace: String!): permissionReview

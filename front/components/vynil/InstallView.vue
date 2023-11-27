@@ -4,7 +4,8 @@ import { useQuery } from '@vue/apollo-composable'
 import vynilInstallQuery from '@/queries/vynil/InstallView.graphql'
 import vynilPackageOptions from '@/queries/vynil/PackageOptions.graphql'
 import MetadataView from '../core/MetadataView.vue';
-import OpenApiStructView from '../core/OpenApiStructView.vue';
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import {getProperties} from '../core/openapiSetup';
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 const router = useRouter();
@@ -26,7 +27,7 @@ onResult(res => {
       path: matched[matched.length>1?matched.length-2:matched.length-1].path,
       replace: true
     })
-    console.log(res)
+    //console.log(res)
   }
 })
 onError(({ graphQLErrors, networkError }) => {
@@ -39,7 +40,7 @@ function onSubmit (evt) {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <q-card bordered v-if="!loadingInstall && install!=null && install.vynilInstall!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Install</div>
@@ -48,7 +49,7 @@ function onSubmit (evt) {
           <MetadataView :metadata="install.vynilInstall.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-4">
+    </div><div class="col-md-4">
       <q-card bordered v-if="!loadingInstall && install!=null && install.vynilInstall!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
@@ -73,7 +74,7 @@ function onSubmit (evt) {
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-4">
+    </div><div class="col-md-4">
       <q-card bordered v-if="!loadingInstall && install!=null && install.vynilInstall!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Package</div>
@@ -102,15 +103,14 @@ function onSubmit (evt) {
       <q-card-section>
         <div class="text-h5 q-mt-none q-mb-none">Options</div>
       </q-card-section>
-      <q-card-section v-if="!loadingOptions">
-        <OpenApiStructView
-          :data="install.vynilInstall.options"
-          :properties="installOption.vynilPackage.options"
-        />
+      <q-card-section>
+        <OpenApiEdit
+            :in="install.vynilInstall.options"
+            :properties="new Map(Object.entries(installOption.vynilPackage.options))"
+            :read-only="true"
+            :show-default="false"
+          />
       </q-card-section>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
     </q-card>
   </q-form>
 </template>

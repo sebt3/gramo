@@ -1,6 +1,6 @@
-import { useNavigationStore } from '../../stores/navigation'
+import { useConfigStore } from '../../stores/config'
 import {menuLinksProps} from '../interfaces';
-const installRedirect = {path: '/install/vynil/installs/'+useNavigationStore().namespace}
+const installRedirect = {path: '/install/vynil/installs/'+useConfigStore().defaultNamespace}
 export const link:menuLinksProps = {
   title: 'Vynil', icon: 'album',
   link: installRedirect.path,
@@ -76,12 +76,12 @@ export const route = {
           path: ':name/view',
           name: 'vynilDistribView',
           component: () => import('../../components/vynil/DistribView.vue'),
-        }/*,
-        {
+        },
+        /*{
           path: ':name/view/:cat/:comp',
           name: 'vynilPackageView',
           component: () => import('../../components/vynil/PackageView.vue'),
-        },
+        },*/
         {
           path: ':name/edit',
           name: 'vynilDistribEdit',
@@ -90,8 +90,8 @@ export const route = {
         {
           path: 'create',
           name: 'vynilDistribCreate',
-          component: () => import('../../components/vynil/DistribCreate.vue'),
-        }*/
+          component: () => import('../../components/vynil/DistribNew.vue'),
+        }
       ]
     },
   ],

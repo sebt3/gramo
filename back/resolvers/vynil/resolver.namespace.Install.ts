@@ -1,6 +1,6 @@
-import { queries } from './query.Install.js'
+import { lists } from './query.Install.js'
 export const resolver = {
     vynilInstalls: async (parent, args: object) => {
-        return queries.vynilInstalls(parent,{namespace: parent.metadata.name, ...args})
+        return lists.vynilInstalls(parent,{namespace: parent.metadata.name, ...args})
     }
 };

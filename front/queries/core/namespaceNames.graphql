@@ -1,7 +1,0 @@
-query NamespaceNames {
-  namespaces {
-    metadata {
-      name
-    }
-  }
-}

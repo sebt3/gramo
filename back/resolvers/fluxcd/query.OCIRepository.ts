@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { FluxcdOCIRepositoryList, FluxcdOCIRepository } from './type.OCIRepository.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     fluxcdOCIRepositorys: async (_parent, args: object) => {
         try {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'ocirepositories')
@@ -33,10 +33,12 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
     fluxcdOCIRepository: async (_parent, args: object) => {
         try {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'ocirepositories', args['name'])
@@ -68,7 +70,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

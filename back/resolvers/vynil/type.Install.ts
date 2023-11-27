@@ -2,7 +2,7 @@ type KubernetesObject = import('@kubernetes/client-node/dist/types.js').Kubernet
 export interface VynilInstallStatus {
   commit_id: string
   digest: string
-  errors: Array<string> | undefined
+  errors: object | undefined
   last_updated: string
   plan: object | undefined
   status: string

@@ -361,7 +361,6 @@ type fluxcdHelmRelease {
   status: fluxcdHelmReleaseStatus
 }
 type Query {
-  fluxcdHelmReleases(namespace: String!): [fluxcdHelmRelease]
   fluxcdHelmRelease(namespace: String!, name: String!): fluxcdHelmRelease
 }
 type Mutation {

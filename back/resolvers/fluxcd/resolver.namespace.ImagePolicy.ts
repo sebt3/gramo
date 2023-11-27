@@ -1,6 +1,6 @@
-import { queries } from './query.ImagePolicy.js'
+import { lists } from './query.ImagePolicy.js'
 export const resolver = {
     fluxcdImagePolicys: async (parent, args: object) => {
-        return queries.fluxcdImagePolicys(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdImagePolicys(parent,{namespace: parent.metadata.name, ...args})
     }
 };

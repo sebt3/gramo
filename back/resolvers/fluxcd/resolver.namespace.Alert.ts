@@ -1,6 +1,6 @@
-import { queries } from './query.Alert.js'
+import { lists } from './query.Alert.js'
 export const resolver = {
     fluxcdAlerts: async (parent, args: object) => {
-        return queries.fluxcdAlerts(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdAlerts(parent,{namespace: parent.metadata.name, ...args})
     }
 };

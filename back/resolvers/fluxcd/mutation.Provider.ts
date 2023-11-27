@@ -48,7 +48,7 @@ export const mutations = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },
@@ -100,7 +100,7 @@ export const mutations = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },
@@ -127,7 +127,7 @@ export const mutations = {
             }
         }
     } catch (err) {
-        console.error(err);
+        console.error((err as object)['body']);
     }
     return null
 },

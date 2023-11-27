@@ -4,9 +4,10 @@ import { useQuery } from '@vue/apollo-composable'
 import vynilDistribQuery from '@/queries/vynil/DistribView.graphql'
 import customResourceDefinition from '@/queries/core/CustomResourceDefinition.graphql'
 import MetadataView from '../core/MetadataView.vue';
-import OpenApiStructView from '../core/OpenApiStructView.vue';
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import {getProperties} from '../core/openapiSetup';
 import TableHeader from '../core/TableHeader.vue';
 import { setupTableWidget, tableColumnAlign } from '../core/TableSetup'
 const { pagination } = setupTableWidget();let filter = ref('');
@@ -35,19 +36,19 @@ const columns = [
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <q-card bordered v-if="!loadingDistrib && Distrib.vynilDistrib!=null" class="q-ma-sm">
         <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Distrib</div>
+          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Distrib</div>
         </q-card-section>
         <q-card-section>
           <MetadataView :metadata="Distrib.vynilDistrib.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-4">
+    </div><div class="col-md-4">
       <q-card bordered v-if="!loadingDistrib && Distrib.vynilDistrib!=null" class="q-ma-sm">
         <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
+          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
         <q-card-section>
           <div class="q-gutter-md">
@@ -67,15 +68,17 @@ const columns = [
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-lg-4">
+    </div><div class="col-md-4">
       <q-card bordered v-if="!loadingDistrib && Distrib.vynilDistrib!=null" class="q-ma-sm">
         <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
+          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
         </q-card-section>
         <q-card-section v-if="!loadingCRD">
-          <OpenApiStructView
-            :data="Distrib.vynilDistrib"
-            :properties="CRdef.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec.properties"
+          <OpenApiEdit
+            :in="Distrib.vynilDistrib"
+            :properties="getProperties(CRdef.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+            :read-only="true"
+            :show-default="false"
           />
         </q-card-section>
       </q-card>

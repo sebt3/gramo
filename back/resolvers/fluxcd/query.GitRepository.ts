@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { FluxcdGitRepositoryList, FluxcdGitRepository } from './type.GitRepository.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     fluxcdGitRepositorys: async (_parent, args: object) => {
         try {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories')
@@ -30,10 +30,12 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
     fluxcdGitRepository: async (_parent, args: object) => {
         try {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories', args['name'])
@@ -62,7 +64,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

@@ -1,5 +1,6 @@
 query VynilInstalls($namespace: String!) {
-  vynilInstalls(namespace: $namespace) {
+ namespace(name: $namespace) {
+  vynilInstalls {
     metadata {
       annotations {
         name
@@ -47,4 +48,5 @@ query VynilInstalls($namespace: String!) {
         tfstate
     }
   }
+ }
 }

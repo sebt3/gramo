@@ -1,30 +1,23 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { ref, computed } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
 import { useNavigationStore } from '../../stores/navigation'
 import { descriptions } from '../../routes/index'
+
 import { links } from '../../routes/index'
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute();
 const router = useRouter();
-import namespacesQuery from '../../queries/core/namespaceNames.graphql'
 import MainMenuLinks from './MainMenuLinks.vue';
 const navigation = storeToRefs(useNavigationStore())
 const model = navigation.currentNamespace
-const { onResult } = useQuery(namespacesQuery);
 const leftDrawerOpen = ref(false)
 const miniState = ref(true)
-const options = ref([])
 const isNamespaced = computed(() => {
   if (route.name != undefined && descriptions[route.name] != undefined) {
     return descriptions[route.name].ns
   }
   return false
-})
-onResult(res => {
-  if (res.loading) return;
-  options.value = res.data.namespaces.map(ns => ns.metadata.name)
 })
 function onChangeNamespace() {
   if (router.currentRoute.value.name != undefined ) {
@@ -52,7 +45,7 @@ function toggleLeftDrawer() {
         </q-avatar>
         Gramo
       </q-toolbar-title>
-      <q-select v-if="isNamespaced" v-model="model" @update:model-value="onChangeNamespace()" :options="options" label="Namespace" standout style="width: 250px" options-dense>
+      <q-select v-if="isNamespaced" v-model="model" @update:model-value="onChangeNamespace()" :options="navigation.namespaces.value" label="Namespace" standout style="width: 250px" options-dense>
         <template v-slot:prepend>
           <q-icon name="dashboard" />
         </template>

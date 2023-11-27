@@ -1,6 +1,6 @@
-import { queries } from './query.OCIRepository.js'
+import { lists } from './query.OCIRepository.js'
 export const resolver = {
     fluxcdOCIRepositorys: async (parent, args: object) => {
-        return queries.fluxcdOCIRepositorys(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdOCIRepositorys(parent,{namespace: parent.metadata.name, ...args})
     }
 };

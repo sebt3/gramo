@@ -1,4 +1,3 @@
-
 query VynilInstall($namespace: String!, $name: String!) {
   vynilInstall(namespace: $namespace, name: $name) {
     metadata {

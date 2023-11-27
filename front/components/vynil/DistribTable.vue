@@ -26,13 +26,13 @@ const columns = [
 
 async function actionRefresh() { await refetch() }
 function actionNew() {
-  //router.push({ name: 'vynilDistribCreate'})
+  router.push({ name: 'vynilDistribCreate'})
 }
 function toView(name) {
   router.push({ name: 'vynilDistribView', params: {name}})
 }
 function toEdit(name) {
-  //router.push({ name: 'vynilDistribEdit', params: {name}})
+  router.push({ name: 'vynilDistribEdit', params: {name}})
 }
 function actionDelete(row) {
   $q.dialog({

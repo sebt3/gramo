@@ -416,15 +416,10 @@ type fluxcdOCIRepository {
   status: fluxcdOCIRepositoryStatus
 }
 type Query {
-  fluxcdGitRepositorys(namespace: String!): [fluxcdGitRepository]
   fluxcdGitRepository(namespace: String!, name: String!): fluxcdGitRepository
-  fluxcdBuckets(namespace: String!): [fluxcdBucket]
   fluxcdBucket(namespace: String!, name: String!): fluxcdBucket
-  fluxcdHelmCharts(namespace: String!): [fluxcdHelmChart]
   fluxcdHelmChart(namespace: String!, name: String!): fluxcdHelmChart
-  fluxcdHelmRepositorys(namespace: String!): [fluxcdHelmRepository]
   fluxcdHelmRepository(namespace: String!, name: String!): fluxcdHelmRepository
-  fluxcdOCIRepositorys(namespace: String!): [fluxcdOCIRepository]
   fluxcdOCIRepository(namespace: String!, name: String!): fluxcdOCIRepository
 }
 type Mutation {

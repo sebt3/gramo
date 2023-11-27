@@ -1,6 +1,6 @@
-import { queries } from './query.ImageRepository.js'
+import { lists } from './query.ImageRepository.js'
 export const resolver = {
     fluxcdImageRepositorys: async (parent, args: object) => {
-        return queries.fluxcdImageRepositorys(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdImageRepositorys(parent,{namespace: parent.metadata.name, ...args})
     }
 };

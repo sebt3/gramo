@@ -1,9 +1,18 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { route as installRoute, link as installLink, descriptions as installDescriptions } from './install/index'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import {menuLinksProps} from './interfaces';
-const installRedirect = installRoute.redirect!=undefined?installRoute.redirect:{path: '/install'}
+import { useConfigStore } from '../stores/config'
+const { defaultRoute } = useConfigStore()
+const routeChildren:Array<RouteRecordRaw> = [];
+const linkRedirect = {path:''};
+export const links:Array<menuLinksProps> = [];
 
-export const links:Array<menuLinksProps> = [installLink];
+import { route as installRoute, link as installLink, descriptions as installDescriptions } from './install/index'
+if (installRoute.children != undefined && installRoute.children?.length>0) {
+  routeChildren.push(installRoute);
+  links.push(installLink)
+  linkRedirect.path = installRoute.redirect!=undefined?installRoute.redirect.path:'/install'
+}
+
 export const descriptions = {
   root:      {breadcrumb: '', icon: 'home', ns: false},
   ...installDescriptions
@@ -14,8 +23,8 @@ export const router = createRouter({
     {
       path: '/',
       name: 'root',
-      redirect: installRedirect,
-      children: [installRoute]
+      redirect: defaultRoute!=''?{path:defaultRoute}:linkRedirect,
+      children: routeChildren
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../components/navigation/PageNotFound.vue') },
   ]

@@ -158,11 +158,8 @@ type fluxcdProvider {
   status: fluxcdProviderStatus
 }
 type Query {
-  fluxcdReceivers(namespace: String!): [fluxcdReceiver]
   fluxcdReceiver(namespace: String!, name: String!): fluxcdReceiver
-  fluxcdAlerts(namespace: String!): [fluxcdAlert]
   fluxcdAlert(namespace: String!, name: String!): fluxcdAlert
-  fluxcdProviders(namespace: String!): [fluxcdProvider]
   fluxcdProvider(namespace: String!, name: String!): fluxcdProvider
 }
 type Mutation {

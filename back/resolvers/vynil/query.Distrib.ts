@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { VynilDistribList, VynilDistrib } from './type.Distrib.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     vynilDistribs: async () => {
         try {
             const res = await customApi.listClusterCustomObject('vynil.solidite.fr','v1','distribs')
@@ -20,10 +20,13 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
+    vynilDistribs: lists.vynilDistribs,
     vynilDistrib: async (_parent, args: object) => {
         try {
             const res = await customApi.getClusterCustomObject('vynil.solidite.fr','v1','distribs', args['name'])
@@ -42,7 +45,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

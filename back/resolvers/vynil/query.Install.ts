@@ -1,7 +1,7 @@
 import {kc, k8s, getMetadata} from '../core/libs.js';
 import { VynilInstallList, VynilInstall } from './type.Install.js';
 const customApi = kc.makeApiClient(k8s.CustomObjectsApi);
-export const queries = {
+export const lists = {
     vynilInstalls: async (_parent, args: object) => {
         try {
             const res = await customApi.listNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs')
@@ -24,10 +24,12 @@ export const queries = {
                 }
             }})
         } catch (err) {
-          console.error(err);
+          console.error((err as object)['body']);
         }
         return []
-    },
+    }
+};
+export const queries = {
     vynilInstall: async (_parent, args: object) => {
         try {
             const res = await customApi.getNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', args['name'])
@@ -50,7 +52,7 @@ export const queries = {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error((err as object)['body']);
         }
         return null
     },

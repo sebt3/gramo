@@ -1,6 +1,6 @@
-import { queries } from './query.HelmRelease.js'
+import { lists } from './query.HelmRelease.js'
 export const resolver = {
     fluxcdHelmReleases: async (parent, args: object) => {
-        return queries.fluxcdHelmReleases(parent,{namespace: parent.metadata.name, ...args})
+        return lists.fluxcdHelmReleases(parent,{namespace: parent.metadata.name, ...args})
     }
 };
