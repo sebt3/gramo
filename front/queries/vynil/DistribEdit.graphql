@@ -1,0 +1,33 @@
+
+mutation VynilDistrib($name: String!, $spec: vynilDistribSpec!) {
+  patchVynilDistrib(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    branch
+    insecure
+    schedule
+    url
+    packages {
+      name
+      description
+      category {
+        name
+      }
+    }
+    status {
+        components
+        errors
+        last_updated
+    }
+  }
+}

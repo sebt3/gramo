@@ -1,0 +1,51 @@
+
+mutation VynilInstall($namespace: String!, $name: String!) {
+  deleteVynilInstall(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    auto_upgrade
+    category {
+      name
+    }
+    component {
+      category {
+        name
+      }
+      commit_id
+      description
+      name
+    }
+    distrib {
+      url
+      status {
+        errors
+        last_updated
+      }
+      metadata {
+        name
+      }
+      insecure
+      branch
+    }
+    options
+    status {
+        commit_id
+        digest
+        errors
+        last_updated
+        plan
+        status
+        tfstate
+    }
+  }
+}

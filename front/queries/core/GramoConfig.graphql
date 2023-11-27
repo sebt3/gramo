@@ -1,0 +1,49 @@
+query GramoConfig {
+  gramoConfig {
+    defaultNamespace
+    defaultRoute
+  }
+  namespaces {
+    metadata {
+      name
+    }
+    permissions {
+      evaluationError
+      incomplete
+      resourceRules {
+        apiGroups
+        resourceNames
+        resources
+        verbs
+      }
+    }
+  }
+  customResourceDefinitions {
+    metadata {
+      name
+    }
+    group
+    names {
+      plural
+      categories
+      kind
+      listKind
+      shortNames
+      singular
+    }
+    versions {
+      name
+      served
+      deprecated
+      deprecationWarning
+      additionalPrinterColumns {
+        description
+        jsonPath
+        name
+        priority
+        type
+        format
+      }
+    }
+  }
+}
