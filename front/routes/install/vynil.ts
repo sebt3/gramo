@@ -50,12 +50,12 @@ export const route = {
           path: ':namespace/view/:name',
           name: 'vynilInstallView',
           component: () => import('../../components/vynil/InstallView.vue'),
-        }/*,
+        },
         {
           path: ':namespace/edit/:name',
           name: 'vynilInstallEdit',
           component: () => import('../../components/vynil/InstallEdit.vue'),
-        },
+        }/*,
         {
           path: ':namespace/create',
           name: 'vynilInstallCreate',

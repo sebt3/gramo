@@ -1,3 +1,4 @@
+
 export interface dataEntry {
     name: string
     value: number
@@ -5,6 +6,10 @@ export interface dataEntry {
 export interface chartSizeOptions {
     width?: number
     height?: number
+}
+export interface chartMarginOptions {
+    margin?: number
+    marginLegend?: number
 }
 export interface metadataType {
     namespace?: string

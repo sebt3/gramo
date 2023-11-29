@@ -35,7 +35,7 @@ function toView(namespace, name) {
   router.push({ name: 'vynilInstallView', params: {name, namespace}})
 }
 function toEdit(namespace, name) {
-  //router.push({ name: 'vynilInstallEdit', params: {name, namespace}})
+  router.push({ name: 'vynilInstallEdit', params: {name, namespace}})
 }
 function actionDelete(row) {
   $q.dialog({

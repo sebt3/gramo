@@ -1,4 +1,20 @@
+import {chartSizeOptions,chartMarginOptions} from "../core/interfaces"
+export function getSizeOptions(defaultWidth:number,defaultHeight:number,options?:chartSizeOptions) {
+  return {
+    width: options!=undefined&&options.width!==undefined?options.width:defaultWidth,
+    height: options!=undefined&&options.height!==undefined?options.height:defaultHeight
+  }
+}
+export function getMarginOptions(defaultMargin:number,defaultMarginLegend:number,options?:chartMarginOptions) {
+  return {
+    margin: options!=undefined&&options.margin!==undefined?options.margin:defaultMargin,
+    marginLegend: options!=undefined&&options.marginLegend!==undefined?options.marginLegend:defaultMarginLegend
+  }
+}
+
+
 export const arcDirection = d => (d.startAngle + (d.endAngle - d.startAngle) / 2) < Math.PI ? 1 : -1;
+export function onlyUnique(value, index, array) {return array.indexOf(value) === index;}
 export const entryKey = d => d.data.name;
 export function lightenColor (col:string, lightenBy:number=10) {
     const usePound = col[0] == "#";
@@ -19,3 +35,17 @@ export function darkenColor(col:string, darkenBy:number=10) {
     return lightenColor(col, -darkenBy);
 }
 export default lightenColor
+
+let count = 0;
+export function uid(name) {
+  return new Id("O-" + (name == null ? "" : name + "-") + ++count);
+}
+
+function Id(id) {
+  this.id = id;
+  this.href = new URL(`#${id}`, location) + "";
+}
+
+Id.prototype.toString = function() {
+  return "url(" + this.href + ")";
+};
