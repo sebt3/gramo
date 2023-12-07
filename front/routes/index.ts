@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import {menuLinksProps} from './interfaces';
-import { useConfigStore } from '../stores/config'
+import {menuLinksProps} from './interfaces.js';
+import { useConfigStore } from '../stores'
+export * from './interfaces.js'
 const { defaultRoute } = useConfigStore()
 const routeChildren:Array<RouteRecordRaw> = [];
 const linkRedirect = {path:''};
 export const links:Array<menuLinksProps> = [];
 
-import { route as installRoute, link as installLink, descriptions as installDescriptions } from './install/index'
+import { route as installRoute, link as installLink, descriptions as installDescriptions } from './install'
 if (installRoute.children != undefined && installRoute.children?.length>0) {
   routeChildren.push(installRoute);
   links.push(installLink)

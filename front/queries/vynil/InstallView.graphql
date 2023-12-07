@@ -23,6 +23,7 @@ query VynilInstall($namespace: String!, $name: String!) {
       commit_id
       description
       name
+      options
     }
     distrib {
       url

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { descriptions } from '../../routes/index'
+import { descriptions } from '../../routes'
 const router = useRouter();
 </script>
 <template>

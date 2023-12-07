@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 export const useNavigationStore = defineStore('navigation', () => {
   const nss_local:Array<string> = []
@@ -19,4 +19,5 @@ export const useNavigationStore = defineStore('navigation', () => {
   }
   return { namespaces, currentNamespace, currentItem, namespace, item, setNamespaces, setCurrentNamespace, setCurrentItem }
 })
+export function useNavigationStoreRef() { return storeToRefs(useNavigationStore()) }
 export default useNavigationStore

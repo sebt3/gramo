@@ -1,6 +1,6 @@
 import {menuLinksProps} from '../interfaces';
 import { RouteRecordRaw } from 'vue-router'
-import { useCRDStore } from '../../stores/crds'
+import { useCRDStore } from '../../stores'
 const crds = useCRDStore().crds;
 const linkChildren:Array<menuLinksProps> = [];
 const routeChildren:Array<RouteRecordRaw> = [];

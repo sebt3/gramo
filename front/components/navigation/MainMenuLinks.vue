@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
-import {menuLinksProps} from '../../routes/interfaces';
+import { menuLinksProps } from '../../routes';
 withDefaults(defineProps<menuLinksProps>(), {
   caption: '',
   link: '#',

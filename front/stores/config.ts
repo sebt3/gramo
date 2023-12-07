@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import { defaultConfig, gramoConfigType } from '../../back/config.js'
 export const useConfigStore = defineStore('config', () => {
@@ -14,4 +14,5 @@ export const useConfigStore = defineStore('config', () => {
   }
   return { config, gramoConfig, defaultRoute, defaultNamespace, setConfig }
 })
+export function useConfigStoreRef() { return storeToRefs(useConfigStore()) }
 export default useConfigStore

@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import OpenApiEditObject from './OpenApiEditObject.vue';
 import OpenApiEditArray from './OpenApiEditArray.vue';
 import OpenApiEditBoolean from './OpenApiEditBoolean.vue';
 import OpenApiEditString from './OpenApiEditString.vue';
 import OpenApiEditNumber from './OpenApiEditNumber.vue';
-import {getProperties,getItems,getType, getFullData} from './openapiSetup';
+import { ref, watch } from 'vue'
 import { OpenAPIV3 } from "openapi-types";
+import {getProperties,getItems,getType, getFullData} from './openapiSetup';
 const props = withDefaults(defineProps<{
   out?: any
-  in: any
+  in?: any
   properties: Map<string, OpenAPIV3.SchemaObject>
   readOnly?: boolean
   showDefault?: boolean
 }>(), {
+  in: {},
   readOnly: false,
   showDefault: true
 });

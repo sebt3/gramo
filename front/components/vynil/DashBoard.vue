@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
 import vynilDashboardQuery from '@/queries/vynil/Dashboard.graphql'
 import pieChart from '@/components/charts/pieChart.vue';
 import radialLineChart from '@/components/charts/radialLineChart.vue';
+import InstallAllTable from './InstallAllTable.vue';
+import { ref, useQuery, useDistrib, onlyUnique } from './Distrib'
+const { onErrorHandler } = useDistrib()
 const { onResult, onError } = useQuery(vynilDashboardQuery)
 const ready = ref(false);
 const InstallByTs = ref([]);
@@ -12,11 +13,7 @@ const PackagesPerCats = ref([]);
 const PackagesPerDists = ref([]);
 const CatsPerDists = ref([]);
 const CatDistCount = ref([]);
-function onlyUnique(value, index, array) {return array.indexOf(value) === index;}
-onError(({ graphQLErrors, networkError }) => {
-  if (networkError) console.log('[Network error]:', networkError);
-  if (graphQLErrors)console.log('[graphQL error]:', graphQLErrors);
-});
+onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {
     ready.value = false;
@@ -34,7 +31,7 @@ onResult((res) => {
     CatDistCount.value.length = 0;
     CatDistCount.value.push( ...flat.map(l => l.distrib).filter(onlyUnique)
                                       .map(d=> flat.map(l => l.category).filter(onlyUnique)
-                                        .map(c=>{return{category:c,distrib:d, value: flat.filter(i => i.category==c && i.distrib==d).length}}))
+                                        .map(c=>{return{category:c, distrib:d, value: flat.filter(i => i.category==c && i.distrib==d).length}}))
                                     .reduce((res, value) => res.concat(value), []))
     ready.value = true;
   }
@@ -48,7 +45,7 @@ onResult((res) => {
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Distributions packages per categories</div>
         </q-card-section>
         <q-card-section class="text-center">
-          <radialLineChart v-model:datum="CatDistCount" :options="{width:800,margin:0}" :axisX="function (d){return d!=undefined?d['category']:this.id}" :axisColor="function (d){return d!=undefined?d['distrib']:this.id}" :getVal="function (d){return d!=undefined?d['value']:this.id}" ></radialLineChart>
+          <radialLineChart v-model:datum="CatDistCount" :axisX="function (d){return d!=undefined?d['category']:this.id}" :axisColor="function (d){return d!=undefined?d['distrib']:this.id}" :getVal="function (d){return d!=undefined?d['value']:this.id}" ></radialLineChart>
         </q-card-section>
       </q-card>
     </div><div class="col-lg-4">
@@ -98,4 +95,5 @@ onResult((res) => {
       </q-card>
     </div>
   </div>
+  <InstallAllTable />
 </template>

@@ -1,5 +1,5 @@
 import { useRoute } from 'vue-router'
-import { useNavigationStore } from '../../stores/navigation'
+import { useNavigationStore } from '../../stores'
 
 export function setupItem() {
     const { setCurrentNamespace, setCurrentItem } = useNavigationStore();

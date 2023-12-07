@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import type { CSSProperties } from 'vue';
-import { getCssVar } from 'quasar'
 import OpenApiEditObject from './OpenApiEditObject.vue';
 import OpenApiEditArray from './OpenApiEditArray.vue';
 import OpenApiEditBoolean from './OpenApiEditBoolean.vue';
 import OpenApiEditString from './OpenApiEditString.vue';
 import OpenApiEditNumber from './OpenApiEditNumber.vue';
+
+import { ref, watch } from 'vue'
+import type { CSSProperties } from 'vue';
+import { getCssVar } from 'quasar'
 import {getProperties,getItems,getType, getFullData} from './openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
 const props = withDefaults(defineProps<{

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import * as d3 from "d3";
-import {chartSizeOptions,chartMarginOptions} from "../core/interfaces"
+import {chartSizeOptions,chartMarginOptions} from "../core"
 import {onlyUnique,uid,getSizeOptions,getMarginOptions} from "./commonTools"
 const props = defineProps<{
   options?: chartSizeOptions&chartMarginOptions
@@ -10,13 +10,14 @@ const props = defineProps<{
   axisColor: (s:object) => string
   getVal: (s:object) => number
 }>();
-const defaultWidth = 600;
-const marginOptions = getMarginOptions(10,70,props.options);
-const options = ref({...getSizeOptions(defaultWidth, defaultWidth - marginOptions.marginLegend - 2 * marginOptions.margin, props.options),...marginOptions})
-const textRadius = options.value.height / 7;
-const innerRadius = options.value.height / 5;
-const outerRadius = options.value.height / 2 - marginOptions.margin;
+const defaultHeight = 400;
+const defaultWidth = 3*defaultHeight/2;
+const marginOptions = getMarginOptions(10,defaultHeight/2-20,props.options);
+const options = ref({...getSizeOptions(defaultWidth, defaultHeight, props.options),...marginOptions})
 const svgRoot = ref(null);
+const outerRadius = Math.min(options.value.height, options.value.width-options.value.marginLegend) / 2 - options.value.margin;
+const innerRadius = outerRadius / 2;
+const textRadius = outerRadius / 3;
 const color = d3.scaleOrdinal(d3.schemeCategory10).domain(props.datum.map(props.axisColor).filter(onlyUnique))
 const x = d3.scaleBand(props.datum.map(props.axisX).filter(onlyUnique),[0, 2 * Math.PI]);
 const y = d3.scaleRadial().range([innerRadius, outerRadius]).domain([d3.min(props.datum, props.getVal), d3.max(props.datum, props.getVal)]);
@@ -35,7 +36,7 @@ function getRange(key:string) {
 }
 
 onMounted(() => {
-    const svg = d3.select(svgRoot.value).attr("viewBox", [marginOptions.marginLegend-marginOptions.margin-(options.value.width) / 2, -options.value.height / 2, options.value.width, options.value.height]);
+    const svg = d3.select(svgRoot.value);
     svg.select(".lines").selectAll("path").data(color.domain()).join("path")
       .attr("stroke",color).attr("d", lines)
     svg.select(".axis").selectAll("path").data(x.domain()).join("path")
@@ -54,7 +55,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <svg ref="svgRoot" :width="options.width" :height="options.height" stroke-linejoin="round" stroke-linecap="round" style="width: 100%; height: auto; font: 20px sans-serif;">
+  <svg ref="svgRoot" :viewBox="[-((options.width-options.marginLegend) / 2),-(options.height / 2),options.width,options.height]" :width="options.width" :height="options.height" stroke-linejoin="round" stroke-linecap="round" style="width: 100%; height: auto; font: 20px sans-serif;">
     <g class="lines" fill="none" stroke-width="3"></g>
     <g class="circles" text-anchor="middle" fill="none" stroke="currentColor" stroke-opacity="0.2"></g>
     <g class="ticks" text-anchor="middle" dy="0.35em" stroke="#fff" stroke-width="5" fill="currentColor" paint-order="stroke"></g>

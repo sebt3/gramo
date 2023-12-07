@@ -1,5 +1,23 @@
 
 query VynilDistrib($name: String!) {
+  customResourceDefinition(name: "distribs.vynil.solidite.fr") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
   vynilDistrib(name: $name) {
     metadata {
       annotations {

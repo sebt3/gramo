@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
+import MainMenuLinks from './MainMenuLinks.vue';
 import { ref, computed } from 'vue'
-import { useNavigationStore } from '../../stores/navigation'
-import { descriptions } from '../../routes/index'
-
-import { links } from '../../routes/index'
 import { useRouter, useRoute } from 'vue-router'
+import { useNavigationStoreRef } from '../../stores'
+import { descriptions, links } from '../../routes'
+
 const route = useRoute();
 const router = useRouter();
-import MainMenuLinks from './MainMenuLinks.vue';
-const navigation = storeToRefs(useNavigationStore())
+const navigation = useNavigationStoreRef()
 const model = navigation.currentNamespace
 const leftDrawerOpen = ref(false)
 const miniState = ref(true)

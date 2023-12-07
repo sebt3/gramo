@@ -24,13 +24,13 @@ async function createApp() {
     const { createPinia } = await import('pinia')
     app.use(createPinia());
 
-    const { Quasar, Dialog } = await import('quasar');
+    const { Quasar, Dialog, Notify } = await import('quasar');
     app.use(Quasar, {
         config: {
             dark: 'auto'
         },
         plugins: {
-            Dialog
+            Dialog, Notify
         }
     });
     return app

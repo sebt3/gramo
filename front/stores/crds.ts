@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
 interface customResourceDefinitionName {
@@ -49,4 +49,5 @@ export const useCRDStore = defineStore('crd', () => {
   }
   return { list, crds, setCRDs }
 })
+export function useCRDStoreRef() { return storeToRefs(useCRDStore()) }
 export default useCRDStore

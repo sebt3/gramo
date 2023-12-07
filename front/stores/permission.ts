@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
 interface permissionReviewNonResourceRules {
@@ -30,4 +30,5 @@ export const usePermissionStore = defineStore('permission', () => {
   }
   return { list, permissions, setPermissions }
 })
+export function usePermissionStoreRef() { return storeToRefs(usePermissionStore()) }
 export default usePermissionStore

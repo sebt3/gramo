@@ -1,4 +1,4 @@
-import { useConfigStore } from '../../stores/config'
+import { useConfigStore } from '../../stores'
 import {menuLinksProps} from '../interfaces';
 const installRedirect = {path: '/install/vynil/installs/'+useConfigStore().defaultNamespace}
 export const link:menuLinksProps = {
@@ -14,19 +14,20 @@ export const link:menuLinksProps = {
   }]
 }
 export const descriptions = {
-  vynil:              {breadcrumb: 'Vynil', icon: 'album', ns: false},
-  vynilDashboard:     {breadcrumb: 'Dashboard', icon: 'album', ns: false},
-  vynilInstalls:      {breadcrumb: 'Installation', icon: 'album', ns: false},
-  vynilInstallTable:  {breadcrumb: 'List', icon: 'list', ns: true},
-  vynilInstallView:   {breadcrumb: 'View', icon: 'album', ns: true},
-  vynilInstallEdit:   {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  vynilInstallCreate: {breadcrumb: 'Create', icon: 'add', ns: true},
-  vynilDistribs:      {breadcrumb: 'Distribution', icon: 'collections', ns: false},
-  vynilDistribTable:  {breadcrumb: 'List', icon: 'list', ns: false},
-  vynilDistribView:   {breadcrumb: 'View', icon: 'collections', ns: false},
-  vynilPackageView:   {breadcrumb: 'View package', icon: 'inventory', ns: false},
-  vynilDistribEdit:   {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  vynilDistribCreate: {breadcrumb: 'Create', icon: 'add', ns: false}
+  vynil:                {breadcrumb: 'Vynil', icon: 'album', ns: false},
+  vynilDashboard:       {breadcrumb: 'Dashboard', icon: 'album', ns: false},
+  vynilInstalls:        {breadcrumb: 'Installation', icon: 'album', ns: false},
+  vynilInstallAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
+  vynilInstallTable:    {breadcrumb: 'List', icon: 'list', ns: true},
+  vynilInstallView:     {breadcrumb: 'View', icon: 'album', ns: true},
+  vynilInstallEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
+  vynilInstallCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  vynilDistribs:        {breadcrumb: 'Distribution', icon: 'collections', ns: false},
+  vynilDistribTable:    {breadcrumb: 'List', icon: 'list', ns: false},
+  vynilDistribView:     {breadcrumb: 'View', icon: 'collections', ns: false},
+  vynilPackageView:     {breadcrumb: 'View package', icon: 'inventory', ns: false},
+  vynilDistribEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
+  vynilDistribCreate:   {breadcrumb: 'Create', icon: 'add', ns: false}
 }
 export const route = {
   path: 'vynil',
@@ -42,7 +43,12 @@ export const route = {
       name: 'vynilInstalls',
       children: [
         {
-          path: ':namespace?',
+          path: '',
+          name: 'vynilInstallAllTable',
+          component: () => import('../../components/vynil/InstallAllTable.vue'),
+        },
+        {
+          path: ':namespace',
           name: 'vynilInstallTable',
           component: () => import('../../components/vynil/InstallTable.vue'),
         },
@@ -55,12 +61,12 @@ export const route = {
           path: ':namespace/edit/:name',
           name: 'vynilInstallEdit',
           component: () => import('../../components/vynil/InstallEdit.vue'),
-        }/*,
+        },
         {
           path: ':namespace/create',
           name: 'vynilInstallCreate',
-          component: () => import('../../components/vynil/InstallCreate.vue'),
-        }*/
+          component: () => import('../../components/vynil/InstallNew.vue'),
+        }
       ]
     },
     {
