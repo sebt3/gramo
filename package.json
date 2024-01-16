@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint front/ back/ utils/",
     "lint:schema": "graphql-schema-linter $(ls --ignore='gen.*' back/schema/|grep -E 'graphql$'|sed 's#^#back/schema/#')",
+    "gen": "ts-node-esm utils/generator.ts",
     "dev": "ts-node-esm back/dev.ts",
     "prebuild": "NODE_ENV=production vite build --emptyOutDir",
     "build": "tsc -b",

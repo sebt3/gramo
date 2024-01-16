@@ -1,91 +1,89 @@
 <script setup lang="ts">
-import customResourceDefinition from '@/queries/core/CustomResourceDefinition.graphql'
-import MetadataView from '../core/MetadataView.vue';
+import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
+import installNew from '@/queries/vynil/InstallNew.graphql'
 import OpenApiEdit from '../core/OpenApiEdit.vue';
-import { ref, useInstall, useQuery } from './Install.js'
+import { ref, useInstall, useMutation, useQuery, sanitizeData } from './Install.js'
 const name = ref('');
+const stepper = ref(null);
+const step = ref(1);
+const category = ref("");
+const component = ref("");
+const distrib = ref("");
 const data = ref({});
-const { setNamespacedItemFromRoute, notifyWorking } = useInstall();setNamespacedItemFromRoute();
-const { result, loading } = useQuery(customResourceDefinition, {"name": 'installs.vynil.solidite.fr'});
+const { router, navigation, setNamespacedItemFromRoute, notifyWorking, notifyError, notifySuccess } = useInstall();setNamespacedItemFromRoute();
+const { result, loading } = useQuery(installPrepare);
+const { mutate, onDone, onError } = useMutation(installNew);
+onDone(() => {
+  notifySuccess('Creation proceded');
+  router.go(-1);
+});
+onError((err) => {
+  notifyError('Creation failed');
+  console.log('mutation error',err);
+});
+function startStep2() {
+  if (result.value.vynilPackages.filter(p => p.name == component.value && p.distribution.metadata.name == distrib.value && p.category.name == category.value).length>0) {
+    stepper.value.next();
+    console.log('startStep2', result.value.vynilPackages.filter(p => p.name == component.value && p.distribution.metadata.name == distrib.value && p.category.name == category.value)[0])
+  } else {
+    notifyError(`Package ${component.value} in ${category.value} from ${distrib.value} doesnt exist`);
+  }
+
+}
 function onSubmit (evt) {
   notifyWorking('Create in progress');
-  console.log(evt, result.value.vynilPackage.options, result.value.vynilInstall.options)
+  const spec = {
+    category: category.value,
+    distrib: distrib.value,
+    component: component.value,
+    options: sanitizeData(data.value)
+  };
+  mutate({"name": name.value, "namespace": navigation.currentNamespace.value, "spec": spec});
+  console.log('onSubmit', {"name": name.value, "namespace":navigation.currentNamespace.value, "spec": spec}, evt)
 }
 </script>
 <template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-4">
-      <q-card bordered v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Install</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.vynilInstall.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-md-4">
-      <q-card bordered v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            <q-field label="Status" stack-label borderless>
-              <template v-slot:prepend><q-icon name="done" /></template>
-              <template v-slot:control>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="warning" v-if="['planning','installing'].includes(result.vynilInstall.status.status)"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="positive" v-if="result.vynilInstall.status.status=='installed'"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="negative" v-if="result.vynilInstall.status.status=='errors'"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="info" v-if="!['installed','planning','installing','errors'].includes(result.vynilInstall.status.status)"></q-chip>
-              </template>
-            </q-field>
-            <q-field label="Errors" stack-label borderless v-if="result.vynilInstall.status.errors.length>0">
-              <template v-slot:prepend><q-icon name="error" /></template>
-              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
-                <div v-for="err in result.vynilInstall.status.errors" v-bind:key="err">{{ err }}</div>
-              </div></template>
-            </q-field>
-          </div>
-        </q-card-section>
-      </q-card>
-    </div><div class="col-md-4">
-      <q-card bordered v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h5 q-mt-none q-mb-none q-pt-none q-pb-none">Package</div>
-        </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            <q-field label="Distribution" stack-label borderless>
-              <template v-slot:prepend><q-icon name="alt_route" /></template>
-              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ result.vynilInstall.distrib.metadata.name }}</div></template>
-            </q-field>
-            <q-field label="Category" stack-label borderless>
-              <template v-slot:prepend><q-icon name="category" /></template>
-              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ result.vynilInstall.category.name }}</div></template>
-            </q-field>
-            <q-field label="Name" stack-label borderless>
-              <template v-slot:prepend><q-icon name="smart_button" /></template>
-              <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ result.vynilInstall.component.name }}</div></template>
-            </q-field>
-          </div>
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card v-if="!loading">
+    <q-card bordered class="q-ma-sm">
       <q-card-section>
-        <div class="text-h5 q-mt-none q-mb-none">Options</div>
+        <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
       </q-card-section>
       <q-card-section>
-        <OpenApiEdit
-          v-model:out="data"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
+        <q-input v-model="name" label="Name"></q-input>
       </q-card-section>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
+      <q-card-section>
+        <q-field label="Namespace" stack-label>
+          <template v-slot:control>
+            <div class="self-center full-width no-outline" tabindex="0">{{ navigation.currentNamespace.value }}</div>
+          </template>
+        </q-field>
+      </q-card-section>
     </q-card>
+
+    <q-stepper v-model="step"  class="q-ma-sm" bordered ref="stepper" color="primary" animated v-if="!loading" >
+      <q-step :name="1" title="Specifications" icon="settings" :done="step > 1">
+        <div  class="q-gutter-md">
+          <q-select filled v-model="distrib" :options="result.vynilDistribs.map(d=>d.metadata.name)" label="Distribution" stack-label />
+          <q-select filled v-model="category" :options="result.vynilCategories.map(c=>c.name)" label="Category" stack-label />
+          <q-select filled v-if="distrib!=''&&category!=''" :key="`${distrib}-${category}`" v-model="component" :options="result.vynilPackages.filter(p=>p.distribution.metadata.name==distrib&&p.category.name==category).map(p=>p.name)" label="Package" stack-label />
+        </div>
+      </q-step>
+
+      <q-step :name="2" title="Configure" caption="Selected package" icon="settings_suggest" :done="step > 2">
+        <OpenApiEdit
+            v-if="result.vynilPackages.filter(p => p.name == component && p.distribution.metadata.name == distrib && p.category.name == category).length>0"
+            :key="`${distrib}-${category}-${component}`"
+            v-model:out="data"
+            :properties="new Map(Object.entries(result.vynilPackages.filter(p => p.name == component && p.distribution.metadata.name == distrib && p.category.name == category)[0].options))"
+          />
+      </q-step>
+      <template v-slot:navigation>
+        <q-stepper-navigation>
+          <q-btn v-if="step < 2" @click="startStep2()" color="primary" label="Next" :disable="component==''" />
+          <q-btn v-if="step > 1" flat color="primary" @click="stepper.previous()" label="Back" class="q-ml-sm" />
+          <q-btn v-if="step > 1" label="Submit" class="q-ml-sm" type="submit" color="primary"/>
+        </q-stepper-navigation>
+      </template>
+    </q-stepper>
   </q-form>
 </template>

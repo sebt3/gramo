@@ -1,0 +1,32 @@
+query InstallPrepare {
+  customResourceDefinition(name: "installs.vynil.solidite.fr") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    group
+  }
+  vynilDistribs {
+    metadata {
+      name
+    }
+  }
+  vynilCategories {
+    name
+  }
+  vynilPackages {
+    name
+    distribution {
+      metadata {
+        name
+      }
+    }
+    category {
+      name
+    }
+    options
+  }
+}

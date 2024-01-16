@@ -4,6 +4,7 @@ import { gramoConfig } from '../../config.js'
 import { queries as installQueries } from './query.Install.js';
 import { queries as distribQueries } from './query.Distrib.js';
 import { mutations as distribMutations } from './mutation.Distrib.js';
+import { mutations as installMutations } from './mutation.Install.js';
 import { VynilDistribPublic } from './type.Package.js';
 
 export const queries = {
@@ -119,5 +120,6 @@ export const resolvers = {
 };
 
 export const mutations = {
-    ...distribMutations
+    ...distribMutations,
+    ...installMutations
 };

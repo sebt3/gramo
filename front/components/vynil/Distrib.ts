@@ -5,6 +5,7 @@ export { ref, useQuery, useMutation, useCore, sanitizeData, getProperties, onlyU
 export const distribColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Url', label: 'Url', field: row => row.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Branch', label: 'Branch', field: row => row.branch, sortable: true, align: tableColumnAlign.left},
   {name: 'Schedule', label: 'Schedule', field: row => row.schedule, sortable: false, align: tableColumnAlign.left},
   {name: 'Packages', label: 'Package', field: row => row.packages.length, sortable: true, align: tableColumnAlign.left},
   {name: 'Errors', label: 'Errors', field: row => row.status.errors.length, sortable: false, align: tableColumnAlign.left},

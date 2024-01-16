@@ -39,12 +39,10 @@ onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
         </template>
         <template v-slot:body-cell-Status="props">
           <q-td :props="props">
-            <q-chip class="float-right text-white text-capitalize" :label="props.row.status.status" color="warning" v-if="['planning','installing'].includes(props.row.status.status)"></q-chip>
-            <q-chip class="float-right text-white text-capitalize" :label="props.row.status.status" color="positive" v-if="props.row.status.status=='installed'"></q-chip>
+            <q-chip class="float-right text-white text-capitalize" :label="props.row.status.status" :color="['planning','installing'].includes(props.row.status.status)?'warning':props.row.status.status=='installed'?'positive':'info'" v-if="props.row.status.status!='errors'"></q-chip>
             <q-chip class="float-right text-white text-capitalize" :label="props.row.status.status" color="negative" v-if="props.row.status.status=='errors'">
               <q-tooltip>{{ props.row.status.errors[0] }}</q-tooltip>
             </q-chip>
-            <q-chip class="float-right text-white text-capitalize" :label="props.row.status.status" color="info" v-if="!['installed','planning','installing','errors'].includes(props.row.status.status)"></q-chip>
           </q-td>
         </template>
       </q-table>

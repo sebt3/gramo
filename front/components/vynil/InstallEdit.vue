@@ -10,7 +10,23 @@ const { mutate: patchInstall, onDone: onPatchInstall, onError: onPatchError } = 
 const data = ref({});
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchInstall({"name": result.value.vynilDistrib.metadata.name, "namespace": result.value.vynilDistrib.metadata.namespace, "spec": sanitizeData(data.value)});
+  const spec = Object.fromEntries(Object.entries(result.value.vynilInstall).filter(([key, value]) => !value==null&&!['options','category','component','distrib'].includes(key)))
+  const payload = {
+    "name": result.value.vynilInstall.metadata.name,
+    "namespace": result.value.vynilInstall.metadata.namespace,
+    "spec": {
+      "category":result.value.vynilInstall.category.name,
+      "distrib":result.value.vynilInstall.distrib.metadata.name,
+      "component":result.value.vynilInstall.component.name,
+      ...spec,
+      "options": {
+        ...result.value.vynilInstall.options,
+        ...sanitizeData(data.value)
+      }
+    }
+  }
+  console.log(payload)
+  patchInstall(payload);
 }
 onResult(onNotInstallFound);onError(onErrorHandler);onPatchInstall(patchDone);onPatchError(patchError);
 </script>
@@ -35,10 +51,7 @@ onResult(onNotInstallFound);onError(onErrorHandler);onPatchInstall(patchDone);on
             <q-field label="Status" stack-label borderless>
               <template v-slot:prepend><q-icon name="done" /></template>
               <template v-slot:control>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="warning" v-if="['planning','installing'].includes(result.vynilInstall.status.status)"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="positive" v-if="result.vynilInstall.status.status=='installed'"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="negative" v-if="result.vynilInstall.status.status=='errors'"></q-chip>
-                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" color="info" v-if="!['installed','planning','installing','errors'].includes(result.vynilInstall.status.status)"></q-chip>
+                <q-chip class="float-right text-white text-capitalize" :label="result.vynilInstall.status.status" :color="['planning','installing'].includes(result.vynilInstall.status.status)?'warning':result.vynilInstall.status.status=='installed'?'positive':result.vynilInstall.status.status=='errors'?'negative':'info'"></q-chip>
               </template>
             </q-field>
             <q-field label="Errors" stack-label borderless v-if="result.vynilInstall.status.errors.length>0">
