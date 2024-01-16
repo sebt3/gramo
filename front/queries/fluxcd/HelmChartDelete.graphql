@@ -1,0 +1,36 @@
+
+mutation FluxcdHelmChart($namespace: String!, $name: String!) {
+  deleteFluxcdHelmChart(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    chart
+    interval
+    reconcileStrategy
+    sourceRef
+    suspend
+    valuesFile
+    valuesFiles
+    verify
+    version
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedChartName
+      observedGeneration
+      observedSourceArtifactRevision
+      url
+    }
+  }
+}

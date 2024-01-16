@@ -1,0 +1,39 @@
+
+query FluxcdGitRepositorys($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdGitRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    ignore
+    include
+    interval
+    recurseSubmodules
+    ref
+    secretRef
+    suspend
+    timeout
+    url
+    verify
+    status {
+      artifact
+      conditions
+      includedArtifacts
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      observedInclude
+      observedRecurseSubmodules
+    }
+  }
+ }
+}

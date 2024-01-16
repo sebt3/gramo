@@ -1,0 +1,63 @@
+
+query FluxcdKustomization($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "kustomizations.kustomize.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdKustomization(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    commonMetadata
+    components
+    decryption
+    dependsOn
+    force
+    healthChecks
+    images
+    interval
+    kubeConfig
+    patches
+    path
+    postBuild
+    prune
+    retryInterval
+    serviceAccountName
+    sourceRef
+    suspend
+    targetNamespace
+    timeout
+    wait
+    status {
+      conditions
+      inventory
+      lastAppliedRevision
+      lastAttemptedRevision
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+}

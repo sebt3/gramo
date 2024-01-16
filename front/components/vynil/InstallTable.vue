@@ -4,7 +4,7 @@ import installDelete from '@/queries/vynil/InstallDelete.graphql'
 import TableHeader from '../core/TableHeader.vue';
 import { ref, useQuery, useMutation, useInstall, installColumns } from './Install.js'
 let filter = ref('');
-const { deleteDone, deleteError, toView, toEdit, actionDelete, actionNew, navigation, pagination, onErrorHandler, setNamespaceFromRoute } = useInstall();setNamespaceFromRoute();
+const { actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler, setNamespaceFromRoute, navigation } = useInstall();setNamespaceFromRoute();
 const { result, refetch, onError } = useQuery(vynilInstallsQuery, {"namespace": navigation.currentNamespace}, { pollInterval: 500 });
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(installDelete);
 onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
@@ -13,7 +13,7 @@ onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
   <q-card class="q-ma-sm" bordered>
     <TableHeader title="Vynil Installs" v-model:model-filter="filter" itemtype='vynil Install' @refresh="refetch()" @create="actionNew(navigation.currentNamespace.value)" />
     <q-card-section class="q-pa-none">
-      <q-table v-if="result !== undefined && result['namespace']['vynilInstalls'] !== undefined && result['namespace'] !== undefined" :rows="result.namespace.vynilInstalls" :columns="installColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
+      <q-table v-if="result !== undefined && result['namespace'] !== undefined && result['namespace']['vynilInstalls'] !== undefined" :rows="result.namespace.vynilInstalls" :columns="installColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
         <template v-slot:body-cell-Distribution="props">
           <q-td :props="props">
             <router-link :to="{ name: 'vynilDistribView', params: { name: props.row.distrib.metadata.name }}">{{ props.row.distrib.metadata.name }}</router-link>

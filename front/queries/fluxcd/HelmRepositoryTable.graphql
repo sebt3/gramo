@@ -1,0 +1,35 @@
+
+query FluxcdHelmRepositorys($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdHelmRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    interval
+    passCredentials
+    provider
+    secretRef
+    suspend
+    timeout
+    type
+    url
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      url
+    }
+  }
+ }
+}

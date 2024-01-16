@@ -1,0 +1,40 @@
+
+mutation FluxcdOCIRepository($namespace: String!, $name: String!) {
+  deleteFluxcdOCIRepository(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    certSecretRef
+    ignore
+    insecure
+    interval
+    layerSelector
+    provider
+    ref
+    secretRef
+    serviceAccountName
+    suspend
+    timeout
+    url
+    verify
+    status {
+      artifact
+      conditions
+      contentConfigChecksum
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      observedLayerSelector
+      url
+    }
+  }
+}

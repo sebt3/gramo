@@ -1,0 +1,36 @@
+
+mutation FluxcdBucket($namespace: String!, $name: String!, $spec: fluxcdBucketSpec!) {
+  patchFluxcdBucket(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    bucketName
+    endpoint
+    ignore
+    insecure
+    interval
+    provider
+    region
+    secretRef
+    suspend
+    timeout
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      url
+    }
+  }
+}

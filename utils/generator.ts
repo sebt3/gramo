@@ -11,6 +11,7 @@ import {generateResolverTypes} from './gen/genResolverTypes.js'
 import {generateResolverQueries} from './gen/genResolverQueries.js'
 import {generateResolverIndex,generateResolverNamespace} from './gen/genResolverIndexes.js'
 import {generateFrontQueries} from './gen/genFrontQueries.js'
+import {generateFrontComponents} from './gen/genFrontComponents.js'
 ////////////////////////////////////
 /// Configure Handlebars
 //
@@ -218,10 +219,11 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
         const acceptedPrefix = '';
         const unsurePrefix = 'gen.';
         generateGraphQLTypes(path.resolve(__dirname,'..', 'back','schema',`${unsurePrefix}${baseFileName}.graphql`), baseName, key, value);
-        generateResolverTypes(path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
-        generateResolverQueries(path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
-        generateResolverIndex(path.resolve(__dirname,'..', 'back','resolvers',baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
+        generateResolverTypes    (path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
+        generateResolverQueries  (path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
+        generateResolverIndex    (path.resolve(__dirname,'..', 'back','resolvers', baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
         generateResolverNamespace(path.resolve(__dirname,'..', 'back','resolvers','core', `${acceptedPrefix}resolvers.ns.${baseFileName}.ts`), baseDirName, subGroup, baseName, key, value);
         generateFrontQueries(path.resolve(__dirname,'..', 'front','queries', baseDirName), baseName, key, value, unsurePrefix);
+        generateFrontComponents(path.resolve(__dirname,'..', 'front','components', baseDirName), baseName, key, value, unsurePrefix);
     })
 })

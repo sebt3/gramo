@@ -1,0 +1,45 @@
+
+mutation FluxcdKustomization($namespace: String!, $name: String!, $spec: fluxcdKustomizationSpec!) {
+  createFluxcdKustomization(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    commonMetadata
+    components
+    decryption
+    dependsOn
+    force
+    healthChecks
+    images
+    interval
+    kubeConfig
+    patches
+    path
+    postBuild
+    prune
+    retryInterval
+    serviceAccountName
+    sourceRef
+    suspend
+    targetNamespace
+    timeout
+    wait
+    status {
+      conditions
+      inventory
+      lastAppliedRevision
+      lastAttemptedRevision
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+}

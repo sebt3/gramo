@@ -1,0 +1,48 @@
+
+query FluxcdImageUpdateAutomation($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "imageupdateautomations.image.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdImageUpdateAutomation(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    git
+    interval
+    sourceRef
+    suspend
+    update
+    status {
+      conditions
+      lastAutomationRunTime
+      lastHandledReconcileAt
+      lastPushCommit
+      lastPushTime
+      observedGeneration
+    }
+  }
+}

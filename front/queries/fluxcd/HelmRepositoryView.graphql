@@ -1,0 +1,51 @@
+
+query FluxcdHelmRepository($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "helmrepositories.source.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdHelmRepository(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    interval
+    passCredentials
+    provider
+    secretRef
+    suspend
+    timeout
+    type
+    url
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      url
+    }
+  }
+}

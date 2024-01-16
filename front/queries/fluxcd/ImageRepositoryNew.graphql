@@ -1,0 +1,35 @@
+
+mutation FluxcdImageRepository($namespace: String!, $name: String!, $spec: fluxcdImageRepositorySpec!) {
+  createFluxcdImageRepository(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    certSecretRef
+    exclusionList
+    image
+    interval
+    provider
+    secretRef
+    serviceAccountName
+    suspend
+    timeout
+    status {
+      canonicalImageName
+      conditions
+      lastHandledReconcileAt
+      lastScanResult
+      observedExclusionList
+      observedGeneration
+    }
+  }
+}

@@ -1,0 +1,26 @@
+
+mutation FluxcdImagePolicy($namespace: String!, $name: String!) {
+  deleteFluxcdImagePolicy(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    filterTags
+    imageRepositoryRef
+    policy
+    status {
+      conditions
+      latestImage
+      observedGeneration
+      observedPreviousImage
+    }
+  }
+}

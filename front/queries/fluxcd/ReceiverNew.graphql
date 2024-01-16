@@ -1,0 +1,29 @@
+
+mutation FluxcdReceiver($namespace: String!, $name: String!, $spec: fluxcdReceiverSpec!) {
+  createFluxcdReceiver(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    events
+    interval
+    resources
+    secretRef
+    suspend
+    type
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      webhookPath
+    }
+  }
+}

@@ -1,4 +1,22 @@
 query VynilInstall($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "installs.vynil.solidite.fr") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
   vynilInstall(namespace: $namespace, name: $name) {
     metadata {
       annotations {

@@ -1,0 +1,26 @@
+
+mutation FluxcdImagePolicy($namespace: String!, $name: String!, $spec: fluxcdImagePolicySpec!) {
+  createFluxcdImagePolicy(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    filterTags
+    imageRepositoryRef
+    policy
+    status {
+      conditions
+      latestImage
+      observedGeneration
+      observedPreviousImage
+    }
+  }
+}

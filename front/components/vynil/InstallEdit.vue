@@ -28,7 +28,7 @@ function onSubmit() {
   console.log(payload)
   patchInstall(payload);
 }
-onResult(onNotInstallFound);onError(onErrorHandler);onPatchInstall(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(onNotInstallFound);onPatchInstall(patchDone);onPatchError(patchError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">

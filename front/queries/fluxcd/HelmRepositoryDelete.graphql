@@ -1,0 +1,33 @@
+
+mutation FluxcdHelmRepository($namespace: String!, $name: String!) {
+  deleteFluxcdHelmRepository(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    interval
+    passCredentials
+    provider
+    secretRef
+    suspend
+    timeout
+    type
+    url
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      url
+    }
+  }
+}

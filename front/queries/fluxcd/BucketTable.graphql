@@ -1,0 +1,38 @@
+
+query FluxcdBuckets($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdBuckets {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    bucketName
+    endpoint
+    ignore
+    insecure
+    interval
+    provider
+    region
+    secretRef
+    suspend
+    timeout
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      url
+    }
+  }
+ }
+}

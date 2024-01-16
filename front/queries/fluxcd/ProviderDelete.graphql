@@ -1,0 +1,32 @@
+
+mutation FluxcdProvider($namespace: String!, $name: String!) {
+  deleteFluxcdProvider(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    address
+    certSecretRef
+    channel
+    interval
+    proxy
+    secretRef
+    suspend
+    timeout
+    type
+    username
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+}

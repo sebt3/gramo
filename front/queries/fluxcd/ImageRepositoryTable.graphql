@@ -1,0 +1,37 @@
+
+query FluxcdImageRepositorys($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdImageRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    certSecretRef
+    exclusionList
+    image
+    interval
+    provider
+    secretRef
+    serviceAccountName
+    suspend
+    timeout
+    status {
+      canonicalImageName
+      conditions
+      lastHandledReconcileAt
+      lastScanResult
+      observedExclusionList
+      observedGeneration
+    }
+  }
+ }
+}

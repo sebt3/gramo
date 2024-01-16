@@ -1,6 +1,6 @@
 import { QTableColumn } from 'quasar'
-import { useNavigationStoreRef, tableColumnAlign, useCore } from '../core'
-export { ref, useQuery, useMutation, useCore, sanitizeData, getProperties, onlyUnique } from '../core';
+import { tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
+export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties, onlyUnique } from '../core';
 
 export const distribColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -19,10 +19,10 @@ export const packageColumns:Array<QTableColumn> = [
 ];
 
 export function useDistrib() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking,
+    router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotDistribFound: (res) => {
       if ( !res.loading && res.data.vynilDistrib == null) {
         const matched = router.currentRoute.value.matched

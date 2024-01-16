@@ -1,0 +1,33 @@
+
+mutation FluxcdHelmRepository($namespace: String!, $name: String!, $spec: fluxcdHelmRepositorySpec!) {
+  patchFluxcdHelmRepository(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    interval
+    passCredentials
+    provider
+    secretRef
+    suspend
+    timeout
+    type
+    url
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      url
+    }
+  }
+}

@@ -1,0 +1,28 @@
+
+query FluxcdImagePolicys($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdImagePolicys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    filterTags
+    imageRepositoryRef
+    policy
+    status {
+      conditions
+      latestImage
+      observedGeneration
+      observedPreviousImage
+    }
+  }
+ }
+}

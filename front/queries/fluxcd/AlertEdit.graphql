@@ -1,0 +1,30 @@
+
+mutation FluxcdAlert($namespace: String!, $name: String!, $spec: fluxcdAlertSpec!) {
+  patchFluxcdAlert(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    eventMetadata
+    eventSeverity
+    eventSources
+    exclusionList
+    inclusionList
+    providerRef
+    summary
+    suspend
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+}

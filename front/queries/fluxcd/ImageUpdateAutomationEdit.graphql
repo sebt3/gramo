@@ -1,0 +1,30 @@
+
+mutation FluxcdImageUpdateAutomation($namespace: String!, $name: String!, $spec: fluxcdImageUpdateAutomationSpec!) {
+  patchFluxcdImageUpdateAutomation(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    git
+    interval
+    sourceRef
+    suspend
+    update
+    status {
+      conditions
+      lastAutomationRunTime
+      lastHandledReconcileAt
+      lastPushCommit
+      lastPushTime
+      observedGeneration
+    }
+  }
+}

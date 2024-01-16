@@ -1,0 +1,47 @@
+
+query FluxcdReceiver($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "receivers.notification.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdReceiver(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    events
+    interval
+    resources
+    secretRef
+    suspend
+    type
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      webhookPath
+    }
+  }
+}

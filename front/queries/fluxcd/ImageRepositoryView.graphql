@@ -1,0 +1,53 @@
+
+query FluxcdImageRepository($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "imagerepositories.image.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdImageRepository(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    certSecretRef
+    exclusionList
+    image
+    interval
+    provider
+    secretRef
+    serviceAccountName
+    suspend
+    timeout
+    status {
+      canonicalImageName
+      conditions
+      lastHandledReconcileAt
+      lastScanResult
+      observedExclusionList
+      observedGeneration
+    }
+  }
+}

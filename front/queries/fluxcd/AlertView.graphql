@@ -1,0 +1,48 @@
+
+query FluxcdAlert($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "alerts.notification.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdAlert(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    eventMetadata
+    eventSeverity
+    eventSources
+    exclusionList
+    inclusionList
+    providerRef
+    summary
+    suspend
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+}

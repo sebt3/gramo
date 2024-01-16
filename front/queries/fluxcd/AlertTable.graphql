@@ -1,0 +1,32 @@
+
+query FluxcdAlerts($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdAlerts {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    eventMetadata
+    eventSeverity
+    eventSources
+    exclusionList
+    inclusionList
+    providerRef
+    summary
+    suspend
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+ }
+}

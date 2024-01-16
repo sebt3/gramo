@@ -39,7 +39,7 @@ export function generateFrontQueries(directory: string, short:string, apiGroup:s
 {{#if namespaced}}
 query {{ short }}{{ name }}s($namespace: String!) {
  namespace(name: $namespace) {
-  {{ mini }}{{ name }}s(namespace: $namespace) {
+  {{ mini }}{{ name }}s {
 {{else}}
 query {{ short }}{{ name }}s {
   {{ mini }}{{ name }}s {
@@ -54,9 +54,45 @@ query {{ short }}{{ name }}s {
     const getTmpl = HB.compile(`
 {{#if namespaced}}
 query {{ short }}{{ name }}($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "{{plural}}.{{apiGroup}}") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
   {{ mini }}{{ name }}(namespace: $namespace, name: $name) {
 {{else}}
 query {{ short }}{{ name }}($name: String!) {
+  customResourceDefinition(name: "{{plural}}.{{apiGroup}}") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
   {{ mini }}{{ name }}($name: String!) {
 {{/if}}
   ${output}
@@ -95,9 +131,11 @@ mutation {{ short }}{{ name }}($name: String!) {
         const namespaced = versions[targetVersion].crd?.spec.scope == 'Namespaced';
         const baseCfg = {
             name: name,
+            apiGroup: apiGroup,
             spec: versions[targetVersion].spec,
             mini: minimizeFirstLetter(short),
             short: capitalizeFirstLetter(short),
+            plural: versions[targetVersion].crd?.spec.names.plural,
             haveStatus: versions[targetVersion].status != undefined,
             status: versions[targetVersion].status,
             namespaced: namespaced

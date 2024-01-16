@@ -1,0 +1,54 @@
+
+query FluxcdBucket($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "buckets.source.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdBucket(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    bucketName
+    endpoint
+    ignore
+    insecure
+    interval
+    provider
+    region
+    secretRef
+    suspend
+    timeout
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      url
+    }
+  }
+}

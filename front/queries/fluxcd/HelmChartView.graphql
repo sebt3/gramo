@@ -1,0 +1,54 @@
+
+query FluxcdHelmChart($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "helmcharts.source.toolkit.fluxcd.io") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  fluxcdHelmChart(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    chart
+    interval
+    reconcileStrategy
+    sourceRef
+    suspend
+    valuesFile
+    valuesFiles
+    verify
+    version
+    status {
+      artifact
+      conditions
+      lastHandledReconcileAt
+      observedChartName
+      observedGeneration
+      observedSourceArtifactRevision
+      url
+    }
+  }
+}

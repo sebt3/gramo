@@ -1,0 +1,32 @@
+
+query FluxcdImageUpdateAutomations($namespace: String!) {
+ namespace(name: $namespace) {
+  fluxcdImageUpdateAutomations {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    git
+    interval
+    sourceRef
+    suspend
+    update
+    status {
+      conditions
+      lastAutomationRunTime
+      lastHandledReconcileAt
+      lastPushCommit
+      lastPushTime
+      observedGeneration
+    }
+  }
+ }
+}

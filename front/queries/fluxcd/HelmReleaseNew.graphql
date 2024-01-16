@@ -1,0 +1,50 @@
+
+mutation FluxcdHelmRelease($namespace: String!, $name: String!, $spec: fluxcdHelmReleaseSpec!) {
+  createFluxcdHelmRelease(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    chart
+    dependsOn
+    install
+    interval
+    kubeConfig
+    maxHistory
+    persistentClient
+    postRenderers
+    releaseName
+    rollback
+    serviceAccountName
+    storageNamespace
+    suspend
+    targetNamespace
+    test
+    timeout
+    uninstall
+    upgrade
+    # values
+    valuesFrom
+    status {
+      conditions
+      failures
+      helmChart
+      installFailures
+      lastAppliedRevision
+      lastAttemptedRevision
+      lastAttemptedValuesChecksum
+      lastHandledReconcileAt
+      lastReleaseRevision
+      observedGeneration
+      upgradeFailures
+    }
+  }
+}
