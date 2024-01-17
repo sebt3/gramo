@@ -2,6 +2,7 @@
 import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
 import installNew from '@/queries/vynil/InstallNew.graphql'
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import MetadataNew from '../core/MetadataNew.vue';
 import { ref, useInstall, useMutation, useQuery, sanitizeData } from './Install.js'
 const name = ref('');
 const stepper = ref(null);
@@ -49,14 +50,7 @@ function onSubmit (evt) {
         <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
       </q-card-section>
       <q-card-section>
-        <q-input v-model="name" label="Name"></q-input>
-      </q-card-section>
-      <q-card-section>
-        <q-field label="Namespace" stack-label>
-          <template v-slot:control>
-            <div class="self-center full-width no-outline" tabindex="0">{{ navigation.currentNamespace.value }}</div>
-          </template>
-        </q-field>
+        <MetadataNew v-model="name" :namespaced="true" />
       </q-card-section>
     </q-card>
 

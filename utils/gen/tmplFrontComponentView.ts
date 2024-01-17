@@ -5,14 +5,12 @@ import {{ mini }}{{ name }}Query from '@/queries/{{ mini }}/{{ name }}View.graph
 import {{ miniName }}Delete from '@/queries/{{ mini }}/{{ name }}Delete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
-import TableHeader from '../core/TableHeader.vue';
-import { ref, useQuery, useMutation, use{{ name }}, packageColumns, getProperties } from './{{ name }}.js'
-let filter = ref('');
+import { ref, useQuery, useMutation, use{{ name }}, getProperties } from './{{ name }}.js'
 {{#if namespaced}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ name }}Found, navigation, pagination, setNamespacedItemFromRoute, toEdit, actionDelete } = use{{ name }}();setNamespacedItemFromRoute();
+const { onErrorHandler, notifySuccess, notifyError, onNot{{ name }}Found, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = use{{ name }}();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery({{ mini }}{{ name }}Query, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNot{{ name }}Found);
 {{else}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ name }}Found, navigation, pagination, setItemFromRoute, toEdit, actionDelete } = use{{ name }}();setItemFromRoute();
+const { onErrorHandler, notifySuccess, notifyError, onNot{{ name }}Found, navigation, setItemFromRoute, toEdit, actionDelete } = use{{ name }}();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery({{ mini }}{{ name }}Query, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNot{{ name }}Found);
 {{/if}}
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ miniName }}Delete);
@@ -26,7 +24,7 @@ onDeleteError((err) => {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.{{ mini }}{{ name }}!=undefined && result.{{ mini }}{{ name }}!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">{{ name }}
@@ -48,7 +46,6 @@ onDeleteError((err) => {
           <MetadataView :metadata="result.{{ mini }}{{ name }}.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
       <q-card bordered v-if="!loading && result!=undefined && result.{{ mini }}{{ name }}!=undefined && result.{{ mini }}{{ name }}!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
@@ -59,7 +56,7 @@ onDeleteError((err) => {
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
+    </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.{{ mini }}{{ name }}!=undefined && result.{{ mini }}{{ name }}!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
@@ -75,11 +72,5 @@ onDeleteError((err) => {
       </q-card>
     </div>
   </div>
-  <q-card v-if="!loading && result!=undefined && result.{{ mini }}{{ name }}!=undefined && result.{{ mini }}{{ name }}!=null" class="q-ma-sm">
-    <q-card-section>
-      <TableHeader title="Packages" v-model:model-filter="filter" itemtype='Package' :usecreate="false" :userefresh="false" />
-      <q-table :rows="result.{{ mini }}{{ name }}.packages" :columns="packageColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom></q-table>
-    </q-card-section>
-  </q-card>
 </template>
 `, {noEscape: true, preventIndent: true});

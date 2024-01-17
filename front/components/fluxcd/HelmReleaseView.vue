@@ -3,10 +3,8 @@ import fluxcdHelmReleaseQuery from '@/queries/fluxcd/HelmReleaseView.graphql'
 import helmReleaseDelete from '@/queries/fluxcd/HelmReleaseDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
-import TableHeader from '../core/TableHeader.vue';
-import { ref, useQuery, useMutation, useHelmRelease, packageColumns, getProperties } from './HelmRelease.js'
-let filter = ref('');
-const { onErrorHandler, notifySuccess, notifyError, onNotHelmReleaseFound, navigation, pagination, setNamespacedItemFromRoute, toEdit, actionDelete } = useHelmRelease();setNamespacedItemFromRoute();
+import { ref, useQuery, useMutation, useHelmRelease, getProperties } from './HelmRelease.js'
+const { onErrorHandler, notifySuccess, notifyError, onNotHelmReleaseFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useHelmRelease();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdHelmReleaseQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotHelmReleaseFound);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(helmReleaseDelete);
 onDeleteDone(() => {
@@ -19,7 +17,7 @@ onDeleteError((err) => {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdHelmRelease!=undefined && result.fluxcdHelmRelease!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">HelmRelease
@@ -37,7 +35,6 @@ onDeleteError((err) => {
           <MetadataView :metadata="result.fluxcdHelmRelease.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdHelmRelease!=undefined && result.fluxcdHelmRelease!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
@@ -48,7 +45,7 @@ onDeleteError((err) => {
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
+    </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdHelmRelease!=undefined && result.fluxcdHelmRelease!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
@@ -64,10 +61,4 @@ onDeleteError((err) => {
       </q-card>
     </div>
   </div>
-  <q-card v-if="!loading && result!=undefined && result.fluxcdHelmRelease!=undefined && result.fluxcdHelmRelease!=null" class="q-ma-sm">
-    <q-card-section>
-      <TableHeader title="Packages" v-model:model-filter="filter" itemtype='Package' :usecreate="false" :userefresh="false" />
-      <q-table :rows="result.fluxcdHelmRelease.packages" :columns="packageColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom></q-table>
-    </q-card-section>
-  </q-card>
 </template>

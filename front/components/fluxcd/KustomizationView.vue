@@ -3,10 +3,8 @@ import fluxcdKustomizationQuery from '@/queries/fluxcd/KustomizationView.graphql
 import kustomizationDelete from '@/queries/fluxcd/KustomizationDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
-import TableHeader from '../core/TableHeader.vue';
-import { ref, useQuery, useMutation, useKustomization, packageColumns, getProperties } from './Kustomization.js'
-let filter = ref('');
-const { onErrorHandler, notifySuccess, notifyError, onNotKustomizationFound, navigation, pagination, setNamespacedItemFromRoute, toEdit, actionDelete } = useKustomization();setNamespacedItemFromRoute();
+import { ref, useQuery, useMutation, useKustomization, getProperties } from './Kustomization.js'
+const { onErrorHandler, notifySuccess, notifyError, onNotKustomizationFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useKustomization();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdKustomizationQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotKustomizationFound);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(kustomizationDelete);
 onDeleteDone(() => {
@@ -19,7 +17,7 @@ onDeleteError((err) => {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdKustomization!=undefined && result.fluxcdKustomization!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Kustomization
@@ -37,7 +35,6 @@ onDeleteError((err) => {
           <MetadataView :metadata="result.fluxcdKustomization.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdKustomization!=undefined && result.fluxcdKustomization!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
@@ -48,7 +45,7 @@ onDeleteError((err) => {
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
+    </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdKustomization!=undefined && result.fluxcdKustomization!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
@@ -64,10 +61,4 @@ onDeleteError((err) => {
       </q-card>
     </div>
   </div>
-  <q-card v-if="!loading && result!=undefined && result.fluxcdKustomization!=undefined && result.fluxcdKustomization!=null" class="q-ma-sm">
-    <q-card-section>
-      <TableHeader title="Packages" v-model:model-filter="filter" itemtype='Package' :usecreate="false" :userefresh="false" />
-      <q-table :rows="result.fluxcdKustomization.packages" :columns="packageColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom></q-table>
-    </q-card-section>
-  </q-card>
 </template>

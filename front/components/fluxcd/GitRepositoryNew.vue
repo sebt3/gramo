@@ -2,6 +2,7 @@
 import customResourceDefinition from '@/queries/core/CustomResourceDefinition.graphql'
 import gitRepositoryNew from '@/queries/fluxcd/GitRepositoryNew.graphql'
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import MetadataNew from '../core/MetadataNew.vue';
 import { ref, useQuery, useMutation, useGitRepository, sanitizeData, getProperties } from './GitRepository.js'
 const name = ref('');
 const data = ref({});
@@ -28,7 +29,7 @@ function onSubmit() {
         <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
       </q-card-section>
       <q-card-section>
-        <q-input v-model="name" label="Name"></q-input>
+        <MetadataNew v-model="name" :namespaced="true" />
       </q-card-section>
     </q-card>
     <q-card bordered class="q-ma-sm">

@@ -3,10 +3,8 @@ import fluxcdOCIRepositoryQuery from '@/queries/fluxcd/OCIRepositoryView.graphql
 import oCIRepositoryDelete from '@/queries/fluxcd/OCIRepositoryDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
-import TableHeader from '../core/TableHeader.vue';
-import { ref, useQuery, useMutation, useOCIRepository, packageColumns, getProperties } from './OCIRepository.js'
-let filter = ref('');
-const { onErrorHandler, notifySuccess, notifyError, onNotOCIRepositoryFound, navigation, pagination, setNamespacedItemFromRoute, toEdit, actionDelete } = useOCIRepository();setNamespacedItemFromRoute();
+import { ref, useQuery, useMutation, useOCIRepository, getProperties } from './OCIRepository.js'
+const { onErrorHandler, notifySuccess, notifyError, onNotOCIRepositoryFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useOCIRepository();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdOCIRepositoryQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotOCIRepositoryFound);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(oCIRepositoryDelete);
 onDeleteDone(() => {
@@ -19,7 +17,7 @@ onDeleteError((err) => {
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdOCIRepository!=undefined && result.fluxcdOCIRepository!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">OCIRepository
@@ -37,7 +35,6 @@ onDeleteError((err) => {
           <MetadataView :metadata="result.fluxcdOCIRepository.metadata" />
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdOCIRepository!=undefined && result.fluxcdOCIRepository!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
@@ -48,7 +45,7 @@ onDeleteError((err) => {
           </div>
         </q-card-section>
       </q-card>
-    </div><div class="col-md-4">
+    </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.fluxcdOCIRepository!=undefined && result.fluxcdOCIRepository!=null" class="q-ma-sm">
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
@@ -64,10 +61,4 @@ onDeleteError((err) => {
       </q-card>
     </div>
   </div>
-  <q-card v-if="!loading && result!=undefined && result.fluxcdOCIRepository!=undefined && result.fluxcdOCIRepository!=null" class="q-ma-sm">
-    <q-card-section>
-      <TableHeader title="Packages" v-model:model-filter="filter" itemtype='Package' :usecreate="false" :userefresh="false" />
-      <q-table :rows="result.fluxcdOCIRepository.packages" :columns="packageColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom></q-table>
-    </q-card-section>
-  </q-card>
 </template>
