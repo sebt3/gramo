@@ -1,23 +1,23 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'automation';
-const iconImagePolicy = 'album';
-const iconImageRepository = 'album';
-const iconImageUpdateAutomation = 'album';
+const iconImagePolicy = 'auto_mode';
+const iconImageRepository = 'fab fa-docker';
+const iconImageUpdateAutomation = 'auto_mode';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconImagePolicy,
   link: `/${cat}/fluxcd/imagepolicies/`,
   level: 1,
   children: [
   {
-    title: 'ImagePolicy', caption: 'List imagePolicy', icon: 'album',
+    title: 'ImagePolicy', caption: 'List imagePolicy', icon: 'auto_mode',
     link: `/${cat}/fluxcd/imagepolicies/`, level: 2, children: []
   },
   {
-    title: 'ImageRepository', caption: 'List imageRepository', icon: 'album',
+    title: 'ImageRepository', caption: 'List imageRepository', icon: 'fab fa-docker',
     link: `/${cat}/fluxcd/imagerepositories/`, level: 2, children: []
   },
   {
-    title: 'ImageUpdateAutomation', caption: 'List imageUpdateAutomation', icon: 'album',
+    title: 'ImageUpdateAutomation', caption: 'List imageUpdateAutomation', icon: 'auto_mode',
     link: `/${cat}/fluxcd/imageupdateautomations/`, level: 2, children: []
   },
   ]

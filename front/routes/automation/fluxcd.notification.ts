@@ -1,23 +1,23 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'automation';
-const iconReceiver = 'album';
-const iconAlert = 'album';
-const iconProvider = 'album';
+const iconReceiver = 'notifications';
+const iconAlert = 'notifications';
+const iconProvider = 'notifications';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconReceiver,
   link: `/${cat}/fluxcd/receivers/`,
   level: 1,
   children: [
   {
-    title: 'Receiver', caption: 'List receiver', icon: 'album',
+    title: 'Receiver', caption: 'List receiver', icon: 'notifications',
     link: `/${cat}/fluxcd/receivers/`, level: 2, children: []
   },
   {
-    title: 'Alert', caption: 'List alert', icon: 'album',
+    title: 'Alert', caption: 'List alert', icon: 'notifications',
     link: `/${cat}/fluxcd/alerts/`, level: 2, children: []
   },
   {
-    title: 'Provider', caption: 'List provider', icon: 'album',
+    title: 'Provider', caption: 'List provider', icon: 'notifications',
     link: `/${cat}/fluxcd/providers/`, level: 2, children: []
   },
   ]

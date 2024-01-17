@@ -1,0 +1,33 @@
+
+mutation SecretgeneratorBasicAuth($namespace: String!, $name: String!, $spec: secretgeneratorBasicAuthSpec!) {
+  patchSecretgeneratorBasicAuth(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    data
+    encoding
+    forceRegenerate
+    length
+    username
+    status {
+      secret {
+        apiVersion
+        fieldPath
+        kind
+        name
+        namespace
+        resourceVersion
+        uid
+      }
+    }
+  }
+}

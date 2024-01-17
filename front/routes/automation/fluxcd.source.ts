@@ -1,21 +1,21 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'automation';
-const iconGitRepository = 'album';
-const iconBucket = 'album';
+const iconGitRepository = 'storage';
+const iconBucket = 'storage';
 const iconHelmChart = 'album';
-const iconHelmRepository = 'album';
-const iconOCIRepository = 'album';
+const iconHelmRepository = 'storage';
+const iconOCIRepository = 'storage';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconGitRepository,
   link: `/${cat}/fluxcd/gitrepositories/`,
   level: 1,
   children: [
   {
-    title: 'GitRepository', caption: 'List gitRepository', icon: 'album',
+    title: 'GitRepository', caption: 'List gitRepository', icon: 'storage',
     link: `/${cat}/fluxcd/gitrepositories/`, level: 2, children: []
   },
   {
-    title: 'Bucket', caption: 'List bucket', icon: 'album',
+    title: 'Bucket', caption: 'List bucket', icon: 'storage',
     link: `/${cat}/fluxcd/buckets/`, level: 2, children: []
   },
   {
@@ -23,11 +23,11 @@ export const link:menuLinksProps = {
     link: `/${cat}/fluxcd/helmcharts/`, level: 2, children: []
   },
   {
-    title: 'HelmRepository', caption: 'List helmRepository', icon: 'album',
+    title: 'HelmRepository', caption: 'List helmRepository', icon: 'storage',
     link: `/${cat}/fluxcd/helmrepositories/`, level: 2, children: []
   },
   {
-    title: 'OCIRepository', caption: 'List oCIRepository', icon: 'album',
+    title: 'OCIRepository', caption: 'List oCIRepository', icon: 'storage',
     link: `/${cat}/fluxcd/ocirepositories/`, level: 2, children: []
   },
   ]

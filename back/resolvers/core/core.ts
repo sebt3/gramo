@@ -8,6 +8,13 @@ import { resolvers as fluxcdNotificationNSresolver } from './resolvers.ns.fluxcd
 import { resolvers as fluxcdKustomizeNSresolver } from './resolvers.ns.fluxcd.kustomize.js';
 import { resolvers as fluxcdImageNSresolver } from './resolvers.ns.fluxcd.image.js';
 import { resolvers as fluxcdHelmNSresolver } from './resolvers.ns.fluxcd.helm.js';
+//import { resolvers as k8upNSresolver } from './resolvers.ns.k8up.js';
+//import { resolvers as mariadbNSresolver } from './resolvers.ns.mariadb.js';
+import { resolvers as mongodbcommunityNSresolver } from './resolvers.ns.mongodbcommunity.js';
+//import { resolvers as monitoringNSresolver } from './resolvers.ns.monitoring.js';
+//import { resolvers as postgresqlNSresolver } from './resolvers.ns.postgresql.js';
+//import { resolvers as redisNSresolver } from './resolvers.ns.redis.js';
+import { resolvers as secretgeneratorNSresolver } from './resolvers.ns.secretgenerator.js';
 
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 export const queries = {
@@ -71,5 +78,12 @@ export const resolvers = {
         ...fluxcdKustomizeNSresolver,
         ...fluxcdImageNSresolver,
         ...fluxcdHelmNSresolver,
+        ...secretgeneratorNSresolver,
+//        ...k8upNSresolver,
+//        ...mariadbNSresolver,
+        ...mongodbcommunityNSresolver,
+//        ...monitoringNSresolver,
+//        ...postgresqlNSresolver,
+//        ...redisNSresolver,
     }
 };

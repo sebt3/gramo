@@ -1,13 +1,13 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'automation';
-const iconKustomization = 'album';
+const iconKustomization = 'auto_mode';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconKustomization,
   link: `/${cat}/fluxcd/kustomizations/`,
   level: 1,
   children: [
   {
-    title: 'Kustomization', caption: 'List kustomization', icon: 'album',
+    title: 'Kustomization', caption: 'List kustomization', icon: 'auto_mode',
     link: `/${cat}/fluxcd/kustomizations/`, level: 2, children: []
   },
   ]

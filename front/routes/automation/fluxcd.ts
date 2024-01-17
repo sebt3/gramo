@@ -7,6 +7,12 @@ const routeChildren:Array<RouteRecordRaw> = [];
 const linkRedirect = {path:''};
 const cat = 'automation';
 
+import { route as sourceRoute, link as sourceLink, descriptions as sourceDescriptions } from './fluxcd.source'
+if (crds['gitrepositories.source.toolkit.fluxcd.io'] != undefined) {
+  linkRedirect.path = sourceRoute['redirect']!=undefined?sourceRoute['redirect'].path:linkRedirect.path!=''?linkRedirect.path:'/automation/fluxcd/gitrepositories'
+  linkChildren.push(...sourceLink.children)
+  routeChildren.push(...sourceRoute.children)
+}
 import { route as helmRoute, link as helmLink, descriptions as helmDescriptions } from './fluxcd.helm'
 if (crds['helmreleases.helm.toolkit.fluxcd.io'] != undefined) {
   linkRedirect.path = helmRoute['redirect']!=undefined?helmRoute['redirect'].path:linkRedirect.path!=''?linkRedirect.path:'/automation/fluxcd/helmreleases'
@@ -30,12 +36,6 @@ if (crds['alerts.notification.toolkit.fluxcd.io'] != undefined) {
   linkRedirect.path = notificationRoute['redirect']!=undefined?notificationRoute['redirect'].path:linkRedirect.path!=''?linkRedirect.path:'/automation/fluxcd/alerts'
   linkChildren.push(...notificationLink.children)
   routeChildren.push(...notificationRoute.children)
-}
-import { route as sourceRoute, link as sourceLink, descriptions as sourceDescriptions } from './fluxcd.source'
-if (crds['gitrepositories.source.toolkit.fluxcd.io'] != undefined) {
-  linkRedirect.path = sourceRoute['redirect']!=undefined?sourceRoute['redirect'].path:linkRedirect.path!=''?linkRedirect.path:'/automation/fluxcd/gitrepositories'
-  linkChildren.push(...sourceLink.children)
-  routeChildren.push(...sourceRoute.children)
 }
 
 export const descriptions = {

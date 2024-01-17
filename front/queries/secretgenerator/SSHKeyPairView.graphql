@@ -1,0 +1,51 @@
+
+query SecretgeneratorSSHKeyPair($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "sshkeypairs.secretgenerator.mittwald.de") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  secretgeneratorSSHKeyPair(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    data
+    forceRegenerate
+    length
+    privateKey
+    type
+    status {
+      secret {
+        apiVersion
+        fieldPath
+        kind
+        name
+        namespace
+        resourceVersion
+        uid
+      }
+    }
+  }
+}

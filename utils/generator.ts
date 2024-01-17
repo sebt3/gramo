@@ -210,8 +210,8 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
         ! isK8s.test(key)
         // Exclude traefik for now
         && ! isTraefik.test(key)
-        // Include only vynil for now
-        && (['vynil.solidite.fr'].includes(key) || isFlux.test(key))
+        // Exclude some again
+        && ! ['acid.zalan.do','acme.cert-manager.io','cert-manager.io'].includes(key)
     ).forEach(([key, value]) => {
         const baseFileName = getBaseName(key);
         const baseName = getBaseName(key).split('.')[0];
@@ -221,9 +221,9 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
         const unsurePrefix = 'gen.';
         generateGraphQLTypes     (path.resolve(__dirname,'..', 'back','schema',`${unsurePrefix}${baseFileName}.graphql`), baseName, key, value);
         generateResolverNamespace(path.resolve(__dirname,'..', 'back','resolvers','core', `${acceptedPrefix}resolvers.ns.${baseFileName}.ts`), baseDirName, subGroup, baseName, key, value);
-        generateResolverIndex    (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
         generateResolverTypes    (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName), baseName, key, value, acceptedPrefix);
         generateResolverQueries  (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName), baseName, key, value, acceptedPrefix);
+        generateResolverIndex    (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
         generateFrontQueries     (path.resolve(__dirname,'..', 'front','queries',    baseDirName), baseName, key, value, unsurePrefix);
         generateFrontComponents  (path.resolve(__dirname,'..', 'front','components', baseDirName), baseName, key, value, unsurePrefix);
         generateFrontRoutes      (path.resolve(__dirname,'..', 'front','routes',`${unsurePrefix}${baseFileName}.ts`), baseName, key, value);

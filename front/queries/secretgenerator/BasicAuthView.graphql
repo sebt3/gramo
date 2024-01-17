@@ -1,0 +1,51 @@
+
+query SecretgeneratorBasicAuth($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "basicauths.secretgenerator.mittwald.de") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  secretgeneratorBasicAuth(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    data
+    encoding
+    forceRegenerate
+    length
+    username
+    status {
+      secret {
+        apiVersion
+        fieldPath
+        kind
+        name
+        namespace
+        resourceVersion
+        uid
+      }
+    }
+  }
+}

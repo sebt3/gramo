@@ -1,0 +1,225 @@
+
+type mongodbcommunityMongoDBCommunityStatus {
+  currentMongoDBArbiters: Int
+  currentMongoDBMembers: Int!
+  currentStatefulSetArbitersReplicas: Int
+  currentStatefulSetReplicas: Int!
+  message: String
+  mongoUri: String!
+  phase: String!
+  version: String
+}
+input mongodbcommunityMongoDBCommunitySpecAutomationConfigProcessesItem {
+  disabled: Boolean!
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecAutomationConfig {
+  processes: [mongodbcommunityMongoDBCommunitySpecAutomationConfigProcessesItem]!
+}
+input mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef {
+  key: String
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecPrometheusTlsSecretKeyRef {
+  key: String
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecPrometheus {
+  metricsPath: String
+  passwordSecretRef: mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef!
+  port: Int
+  tlsSecretKeyRef: mongodbcommunityMongoDBCommunitySpecPrometheusTlsSecretKeyRef
+  username: String!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityAuthentication {
+  ignoreUnknownUsers: JSONObject
+  modes: [String]!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityRolesItemAuthenticationRestrictionsItem {
+  clientSource: [String]!
+  serverAddress: [String]!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityRolesItemPrivilegesItemResource {
+  anyResource: Boolean
+  cluster: Boolean
+  collection: String
+  db: String
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityRolesItemPrivilegesItem {
+  actions: [String]!
+  resource: mongodbcommunityMongoDBCommunitySpecSecurityRolesItemPrivilegesItemResource!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityRolesItemRolesItem {
+  db: String!
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityRolesItem {
+  authenticationRestrictions: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItemAuthenticationRestrictionsItem]
+  db: String!
+  privileges: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItemPrivilegesItem]!
+  role: String!
+  roles: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItemRolesItem]
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef {
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityTlsCaConfigMapRef {
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityTlsCertificateKeySecretRef {
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecSecurityTls {
+  caCertificateSecretRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef
+  caConfigMapRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaConfigMapRef
+  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCertificateKeySecretRef
+  enabled: Boolean!
+  optional: Boolean
+}
+input mongodbcommunityMongoDBCommunitySpecSecurity {
+  authentication: mongodbcommunityMongoDBCommunitySpecSecurityAuthentication
+  roles: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItem]
+  tls: mongodbcommunityMongoDBCommunitySpecSecurityTls
+}
+input mongodbcommunityMongoDBCommunitySpecUsersItemPasswordSecretRef {
+  key: String
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecUsersItemRolesItem {
+  db: String!
+  name: String!
+}
+input mongodbcommunityMongoDBCommunitySpecUsersItem {
+  connectionStringSecretName: String
+  db: String
+  name: String!
+  passwordSecretRef: mongodbcommunityMongoDBCommunitySpecUsersItemPasswordSecretRef!
+  roles: [mongodbcommunityMongoDBCommunitySpecUsersItemRolesItem]!
+  scramCredentialsSecretName: String!
+}
+input mongodbcommunityMongoDBCommunitySpec {
+  additionalMongodConfig: JSONObject
+  arbiters: Int
+  automationConfig: mongodbcommunityMongoDBCommunitySpecAutomationConfig
+  featureCompatibilityVersion: String
+  members: Int
+  prometheus: mongodbcommunityMongoDBCommunitySpecPrometheus
+  replicaSetHorizons: JSONObject
+  security: mongodbcommunityMongoDBCommunitySpecSecurity!
+  statefulSet: JSONObject
+  type: String!
+  users: [mongodbcommunityMongoDBCommunitySpecUsersItem]!
+  version: String
+}
+type mongodbcommunityMongoDBCommunityAutomationConfigProcessesItem {
+  disabled: Boolean!
+  name: String!
+}
+type mongodbcommunityMongoDBCommunityAutomationConfig {
+  processes: [mongodbcommunityMongoDBCommunityAutomationConfigProcessesItem]!
+}
+type mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef {
+  key: String
+  name: String!
+}
+type mongodbcommunityMongoDBCommunityPrometheusTlsSecretKeyRef {
+  key: String
+  name: String!
+}
+type mongodbcommunityMongoDBCommunityPrometheus {
+  metricsPath: String
+  passwordSecretRef: mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef!
+  port: Int
+  tlsSecretKeyRef: mongodbcommunityMongoDBCommunityPrometheusTlsSecretKeyRef
+  username: String!
+}
+type mongodbcommunityMongoDBCommunitySecurityAuthentication {
+  ignoreUnknownUsers: Boolean
+  modes: [String]!
+}
+type mongodbcommunityMongoDBCommunitySecurityRolesItemAuthenticationRestrictionsItem {
+  clientSource: [String]!
+  serverAddress: [String]!
+}
+type mongodbcommunityMongoDBCommunitySecurityRolesItemPrivilegesItemResource {
+  anyResource: Boolean
+  cluster: Boolean
+  collection: String
+  db: String
+}
+type mongodbcommunityMongoDBCommunitySecurityRolesItemPrivilegesItem {
+  actions: [String]!
+  resource: mongodbcommunityMongoDBCommunitySecurityRolesItemPrivilegesItemResource!
+}
+type mongodbcommunityMongoDBCommunitySecurityRolesItemRolesItem {
+  db: String!
+  name: String!
+}
+type mongodbcommunityMongoDBCommunitySecurityRolesItem {
+  authenticationRestrictions: [mongodbcommunityMongoDBCommunitySecurityRolesItemAuthenticationRestrictionsItem]
+  db: String!
+  privileges: [mongodbcommunityMongoDBCommunitySecurityRolesItemPrivilegesItem]!
+  role: String!
+  roles: [mongodbcommunityMongoDBCommunitySecurityRolesItemRolesItem]
+}
+type mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef {
+  name: String!
+}
+type mongodbcommunityMongoDBCommunitySecurityTlsCaConfigMapRef {
+  name: String!
+}
+type mongodbcommunityMongoDBCommunitySecurityTlsCertificateKeySecretRef {
+  name: String!
+}
+type mongodbcommunityMongoDBCommunitySecurityTls {
+  caCertificateSecretRef: mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef
+  caConfigMapRef: mongodbcommunityMongoDBCommunitySecurityTlsCaConfigMapRef
+  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySecurityTlsCertificateKeySecretRef
+  enabled: Boolean!
+  optional: Boolean
+}
+type mongodbcommunityMongoDBCommunitySecurity {
+  authentication: mongodbcommunityMongoDBCommunitySecurityAuthentication
+  roles: [mongodbcommunityMongoDBCommunitySecurityRolesItem]
+  tls: mongodbcommunityMongoDBCommunitySecurityTls
+}
+type mongodbcommunityMongoDBCommunityUsersItemPasswordSecretRef {
+  key: String
+  name: String!
+}
+type mongodbcommunityMongoDBCommunityUsersItemRolesItem {
+  db: String!
+  name: String!
+}
+type mongodbcommunityMongoDBCommunityUsersItem {
+  connectionStringSecretName: String
+  db: String
+  name: String!
+  passwordSecretRef: mongodbcommunityMongoDBCommunityUsersItemPasswordSecretRef!
+  roles: [mongodbcommunityMongoDBCommunityUsersItemRolesItem]!
+  scramCredentialsSecretName: String!
+}
+type mongodbcommunityMongoDBCommunity {
+  metadata: metadata
+  additionalMongodConfig: JSONObject
+  arbiters: Int
+  automationConfig: mongodbcommunityMongoDBCommunityAutomationConfig
+  featureCompatibilityVersion: String
+  members: Int
+  prometheus: mongodbcommunityMongoDBCommunityPrometheus
+  replicaSetHorizons: JSONObject
+  security: mongodbcommunityMongoDBCommunitySecurity!
+  statefulSet: JSONObject
+  type: String!
+  users: [mongodbcommunityMongoDBCommunityUsersItem]!
+  version: String
+  status: mongodbcommunityMongoDBCommunityStatus
+}
+type Query {
+  mongodbcommunityMongoDBCommunity(namespace: String!, name: String!): mongodbcommunityMongoDBCommunity
+}
+type Mutation {
+  createMongodbcommunityMongoDBCommunity(namespace: String!, name: String!, spec: mongodbcommunityMongoDBCommunitySpec!): mongodbcommunityMongoDBCommunity
+  patchMongodbcommunityMongoDBCommunity(namespace: String!, name: String!, spec: mongodbcommunityMongoDBCommunitySpec!): mongodbcommunityMongoDBCommunity
+  deleteMongodbcommunityMongoDBCommunity(namespace: String!, name: String!): mongodbcommunityMongoDBCommunity
+}
