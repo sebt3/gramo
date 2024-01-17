@@ -3,6 +3,7 @@ import fluxcdHelmChartQuery from '@/queries/fluxcd/HelmChartView.graphql'
 import helmChartDelete from '@/queries/fluxcd/HelmChartDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useHelmChart, getProperties } from './HelmChart.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotHelmChartFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useHelmChart();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdHelmChartQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotHelmChartFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdHelmChart!=null && result.fluxcdHelmChart.status != null">
+          <DefaultStatusView :status="result.fluxcdHelmChart.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

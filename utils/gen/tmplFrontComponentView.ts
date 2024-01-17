@@ -5,6 +5,7 @@ import {{ mini }}{{ name }}Query from '@/queries/{{ mini }}/{{ name }}View.graph
 import {{ miniName }}Delete from '@/queries/{{ mini }}/{{ name }}Delete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, use{{ name }}, getProperties } from './{{ name }}.js'
 {{#if namespaced}}
 const { onErrorHandler, notifySuccess, notifyError, onNot{{ name }}Found, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = use{{ name }}();setNamespacedItemFromRoute();
@@ -50,10 +51,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.{{ mini }}{{ name }}!=null && result.{{ mini }}{{ name }}.status != null">
+          <DefaultStatusView :status="result.{{ mini }}{{ name }}.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

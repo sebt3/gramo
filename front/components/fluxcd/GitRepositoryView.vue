@@ -3,6 +3,7 @@ import fluxcdGitRepositoryQuery from '@/queries/fluxcd/GitRepositoryView.graphql
 import gitRepositoryDelete from '@/queries/fluxcd/GitRepositoryDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useGitRepository, getProperties } from './GitRepository.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotGitRepositoryFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useGitRepository();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdGitRepositoryQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotGitRepositoryFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdGitRepository!=null && result.fluxcdGitRepository.status != null">
+          <DefaultStatusView :status="result.fluxcdGitRepository.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

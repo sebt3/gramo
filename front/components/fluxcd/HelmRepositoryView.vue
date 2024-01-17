@@ -3,6 +3,7 @@ import fluxcdHelmRepositoryQuery from '@/queries/fluxcd/HelmRepositoryView.graph
 import helmRepositoryDelete from '@/queries/fluxcd/HelmRepositoryDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useHelmRepository, getProperties } from './HelmRepository.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotHelmRepositoryFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useHelmRepository();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdHelmRepositoryQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotHelmRepositoryFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdHelmRepository!=null && result.fluxcdHelmRepository.status != null">
+          <DefaultStatusView :status="result.fluxcdHelmRepository.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

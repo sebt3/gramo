@@ -3,6 +3,7 @@ import fluxcdBucketQuery from '@/queries/fluxcd/BucketView.graphql'
 import bucketDelete from '@/queries/fluxcd/BucketDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useBucket, getProperties } from './Bucket.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotBucketFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useBucket();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdBucketQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotBucketFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdBucket!=null && result.fluxcdBucket.status != null">
+          <DefaultStatusView :status="result.fluxcdBucket.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

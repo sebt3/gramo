@@ -3,6 +3,7 @@ import fluxcdKustomizationQuery from '@/queries/fluxcd/KustomizationView.graphql
 import kustomizationEdit from '@/queries/fluxcd/KustomizationEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useKustomization, sanitizeData, getProperties } from './Kustomization.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotKustomizationFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useKustomization();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotKustomizationFound);onPatchKustomization(p
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdKustomization!=null && result.fluxcdKustomization.status != null">
+          <DefaultStatusView :status="result.fluxcdKustomization.status" />
         </q-card-section>
       </q-card>
     </div>

@@ -3,6 +3,7 @@ import fluxcdProviderQuery from '@/queries/fluxcd/ProviderView.graphql'
 import providerEdit from '@/queries/fluxcd/ProviderEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useProvider, sanitizeData, getProperties } from './Provider.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotProviderFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useProvider();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotProviderFound);onPatchProvider(patchDone);
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdProvider!=null && result.fluxcdProvider.status != null">
+          <DefaultStatusView :status="result.fluxcdProvider.status" />
         </q-card-section>
       </q-card>
     </div>

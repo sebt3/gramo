@@ -3,6 +3,7 @@ import fluxcdImagePolicyQuery from '@/queries/fluxcd/ImagePolicyView.graphql'
 import imagePolicyDelete from '@/queries/fluxcd/ImagePolicyDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useImagePolicy, getProperties } from './ImagePolicy.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotImagePolicyFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useImagePolicy();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdImagePolicyQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotImagePolicyFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdImagePolicy!=null && result.fluxcdImagePolicy.status != null">
+          <DefaultStatusView :status="result.fluxcdImagePolicy.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

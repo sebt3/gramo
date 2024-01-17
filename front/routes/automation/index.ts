@@ -14,7 +14,7 @@ if (crds['gitrepositories.source.toolkit.fluxcd.io'] != undefined) {
 }
 
 export const descriptions = {
-  automations:      {breadcrumb: 'Automations', icon: 'apps', ns: false},
+  automation:      {breadcrumb: 'Automations', icon: 'apps', ns: false},
   ...fluxcdDescriptions
 }
 

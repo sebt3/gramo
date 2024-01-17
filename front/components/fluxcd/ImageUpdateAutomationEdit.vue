@@ -3,6 +3,7 @@ import fluxcdImageUpdateAutomationQuery from '@/queries/fluxcd/ImageUpdateAutoma
 import imageUpdateAutomationEdit from '@/queries/fluxcd/ImageUpdateAutomationEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useImageUpdateAutomation, sanitizeData, getProperties } from './ImageUpdateAutomation.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotImageUpdateAutomationFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useImageUpdateAutomation();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotImageUpdateAutomationFound);onPatchImageUp
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdImageUpdateAutomation!=null && result.fluxcdImageUpdateAutomation.status != null">
+          <DefaultStatusView :status="result.fluxcdImageUpdateAutomation.status" />
         </q-card-section>
       </q-card>
     </div>

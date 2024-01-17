@@ -3,6 +3,7 @@ import fluxcdReceiverQuery from '@/queries/fluxcd/ReceiverView.graphql'
 import receiverEdit from '@/queries/fluxcd/ReceiverEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useReceiver, sanitizeData, getProperties } from './Receiver.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotReceiverFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useReceiver();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotReceiverFound);onPatchReceiver(patchDone);
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdReceiver!=null && result.fluxcdReceiver.status != null">
+          <DefaultStatusView :status="result.fluxcdReceiver.status" />
         </q-card-section>
       </q-card>
     </div>

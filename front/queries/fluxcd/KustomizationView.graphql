@@ -31,7 +31,6 @@ query FluxcdKustomization($namespace: String!, $name: String!) {
       name
       namespace
     }
-    commonMetadata
     components
     decryption {
       provider

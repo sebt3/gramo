@@ -3,6 +3,7 @@ import fluxcdOCIRepositoryQuery from '@/queries/fluxcd/OCIRepositoryView.graphql
 import oCIRepositoryDelete from '@/queries/fluxcd/OCIRepositoryDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useOCIRepository, getProperties } from './OCIRepository.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotOCIRepositoryFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useOCIRepository();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdOCIRepositoryQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotOCIRepositoryFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdOCIRepository!=null && result.fluxcdOCIRepository.status != null">
+          <DefaultStatusView :status="result.fluxcdOCIRepository.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

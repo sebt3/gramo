@@ -3,6 +3,7 @@ import fluxcdAlertQuery from '@/queries/fluxcd/AlertView.graphql'
 import alertDelete from '@/queries/fluxcd/AlertDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useAlert, getProperties } from './Alert.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotAlertFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useAlert();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdAlertQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotAlertFound);
@@ -39,10 +40,8 @@ onDeleteError((err) => {
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-            TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdAlert!=null && result.fluxcdAlert.status != null">
+          <DefaultStatusView :status="result.fluxcdAlert.status" />
         </q-card-section>
       </q-card>
     </div><div class="col-md-6">

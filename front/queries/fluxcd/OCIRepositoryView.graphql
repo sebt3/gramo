@@ -42,7 +42,11 @@ query FluxcdOCIRepository($namespace: String!, $name: String!) {
       operation
     }
     provider
-    ref
+    ref {
+      digest
+      semver
+      tag
+    }
     secretRef {
       name
     }

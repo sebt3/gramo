@@ -31,7 +31,6 @@ query FluxcdImageRepository($namespace: String!, $name: String!) {
       name
       namespace
     }
-    accessFrom
     certSecretRef {
       name
     }

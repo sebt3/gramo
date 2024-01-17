@@ -13,7 +13,6 @@ mutation FluxcdImageRepository($namespace: String!, $name: String!, $spec: fluxc
       name
       namespace
     }
-    accessFrom
     certSecretRef {
       name
     }

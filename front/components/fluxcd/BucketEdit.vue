@@ -3,6 +3,7 @@ import fluxcdBucketQuery from '@/queries/fluxcd/BucketView.graphql'
 import bucketEdit from '@/queries/fluxcd/BucketEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useBucket, sanitizeData, getProperties } from './Bucket.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotBucketFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useBucket();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotBucketFound);onPatchBucket(patchDone);onPa
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdBucket!=null && result.fluxcdBucket.status != null">
+          <DefaultStatusView :status="result.fluxcdBucket.status" />
         </q-card-section>
       </q-card>
     </div>

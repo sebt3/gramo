@@ -3,6 +3,7 @@ import fluxcdImageRepositoryQuery from '@/queries/fluxcd/ImageRepositoryView.gra
 import imageRepositoryEdit from '@/queries/fluxcd/ImageRepositoryEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, useImageRepository, sanitizeData, getProperties } from './ImageRepository.js'
 const data = ref({});
 const { patchDone, patchError, notifyWorking, onNotImageRepositoryFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useImageRepository();setNamespacedItemFromRoute();
@@ -30,10 +31,8 @@ onError(onErrorHandler);onResult(onNotImageRepositoryFound);onPatchImageReposito
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.fluxcdImageRepository!=null && result.fluxcdImageRepository.status != null">
+          <DefaultStatusView :status="result.fluxcdImageRepository.status" />
         </q-card-section>
       </q-card>
     </div>

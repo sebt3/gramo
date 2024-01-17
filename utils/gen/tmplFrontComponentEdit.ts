@@ -5,6 +5,7 @@ import {{ mini }}{{ name }}Query from '@/queries/{{ mini }}/{{ name }}View.graph
 import {{ miniName }}Edit from '@/queries/{{ mini }}/{{ name }}Edit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import DefaultStatusView from '../core/DefaultStatusView.vue';
 import { ref, useQuery, useMutation, use{{ name }}, sanitizeData, getProperties } from './{{ name }}.js'
 const data = ref({});
 {{#if namespaced}}
@@ -41,10 +42,8 @@ onError(onErrorHandler);onResult(onNot{{ name }}Found);onPatch{{ name }}(patchDo
         <q-card-section>
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
         </q-card-section>
-        <q-card-section>
-          <div class="q-gutter-md">
-          TODO
-          </div>
+        <q-card-section v-if="!loading && result.{{ mini }}{{ name }}!=null && result.{{ mini }}{{ name }}.status != null">
+          <DefaultStatusView :status="result.{{ mini }}{{ name }}.status" />
         </q-card-section>
       </q-card>
     </div>

@@ -13,7 +13,6 @@ mutation FluxcdKustomization($namespace: String!, $name: String!, $spec: fluxcdK
       name
       namespace
     }
-    commonMetadata
     components
     decryption {
       provider
