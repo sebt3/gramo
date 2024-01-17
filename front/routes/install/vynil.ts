@@ -1,17 +1,19 @@
-import { useConfigStore } from '../../stores'
 import {menuLinksProps} from '../interfaces';
-const installRedirect = {path: '/install/vynil/installs/'+useConfigStore().defaultNamespace}
+const cat = 'install';
 export const link:menuLinksProps = {
   title: 'Vynil', icon: 'album',
-  link: installRedirect.path,
+  link: `/${cat}/vynil/installs/`,
   level: 1,
-  children: [{
-    title: 'Installations', caption: 'Install vynil packages', icon: 'album',
-    link: installRedirect.path, level: 2, children: []
-  },{
-    title: 'Distributions', caption: 'List available applications', icon: 'collections',
-    link: '/install/vynil/dists/', level: 2, children: []
-  }]
+  children: [
+  {
+    title: 'Installations', caption: 'List installed packages', icon: 'album',
+    link: `/${cat}/vynil/installs/`, level: 2, children: []
+  },
+  {
+    title: 'Distributions', caption: 'List available distributions', icon: 'collections',
+    link: `/${cat}/vynil/dists/`, level: 2, children: []
+  },
+  ]
 }
 export const descriptions = {
   vynil:                {breadcrumb: 'Vynil', icon: 'album', ns: false},

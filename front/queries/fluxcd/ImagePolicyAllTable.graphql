@@ -1,0 +1,51 @@
+
+query FluxcdImagePolicys {
+ namespaces {
+  fluxcdImagePolicys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    filterTags {
+      extract
+      pattern
+    }
+    imageRepositoryRef {
+      name
+      namespace
+    }
+    policy {
+      alphabetical {
+        order
+      }
+      numerical {
+        order
+      }
+      semver {
+        range
+      }
+    }
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      latestImage
+      observedGeneration
+      observedPreviousImage
+    }
+  }
+ }
+}

@@ -44,7 +44,7 @@ input fluxcdHelmReleaseSpecChartSpec {
   version: String
 }
 input fluxcdHelmReleaseSpecChart {
-  #metadata: JSONObject
+  metadata: JSONObject
   spec: fluxcdHelmReleaseSpecChartSpec!
 }
 input fluxcdHelmReleaseSpecDependsOnItem {
@@ -98,7 +98,7 @@ input fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemPatchIte
   from: String
   op: String!
   path: String!
-  #value: JSONObject
+  value: JSONObject
 }
 input fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemTarget {
   annotationSelector: String
@@ -117,7 +117,7 @@ input fluxcdHelmReleaseSpecPostRenderersItemKustomize {
   images: [fluxcdHelmReleaseSpecPostRenderersItemKustomizeImagesItem]
   patches: [fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesItem]
   patchesJson6902: [fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902Item]
-  #patchesStrategicMerge: [JSONObject]
+  patchesStrategicMerge: [JSONObject]
 }
 input fluxcdHelmReleaseSpecPostRenderersItem {
   kustomize: fluxcdHelmReleaseSpecPostRenderersItemKustomize
@@ -186,7 +186,7 @@ input fluxcdHelmReleaseSpec {
   timeout: String
   uninstall: fluxcdHelmReleaseSpecUninstall
   upgrade: fluxcdHelmReleaseSpecUpgrade
-  #values: JSONObject
+  values: JSONObject
   valuesFrom: [fluxcdHelmReleaseSpecValuesFromItem]
 }
 type fluxcdHelmReleaseChartSpecSourceRef {
@@ -213,7 +213,7 @@ type fluxcdHelmReleaseChartSpec {
   version: String
 }
 type fluxcdHelmReleaseChart {
-  #metadata: JSONObject
+  metadata: JSONObject
   spec: fluxcdHelmReleaseChartSpec!
 }
 type fluxcdHelmReleaseDependsOnItem {
@@ -267,7 +267,7 @@ type fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemPatchItem {
   from: String
   op: String!
   path: String!
-  #value: JSONObject
+  value: JSONObject
 }
 type fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemTarget {
   annotationSelector: String
@@ -286,7 +286,7 @@ type fluxcdHelmReleasePostRenderersItemKustomize {
   images: [fluxcdHelmReleasePostRenderersItemKustomizeImagesItem]
   patches: [fluxcdHelmReleasePostRenderersItemKustomizePatchesItem]
   patchesJson6902: [fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902Item]
-  #patchesStrategicMerge: [JSONObject]
+  patchesStrategicMerge: [JSONObject]
 }
 type fluxcdHelmReleasePostRenderersItem {
   kustomize: fluxcdHelmReleasePostRenderersItemKustomize
@@ -356,7 +356,7 @@ type fluxcdHelmRelease {
   timeout: String
   uninstall: fluxcdHelmReleaseUninstall
   upgrade: fluxcdHelmReleaseUpgrade
-  #values: JSONObject
+  values: JSONObject
   valuesFrom: [fluxcdHelmReleaseValuesFromItem]
   status: fluxcdHelmReleaseStatus
 }

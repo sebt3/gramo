@@ -15,27 +15,84 @@ mutation FluxcdKustomization($namespace: String!, $name: String!) {
     }
     commonMetadata
     components
-    decryption
-    dependsOn
+    decryption {
+      provider
+      secretRef {
+        name
+      }
+    }
+    dependsOn {
+      name
+      namespace
+    }
     force
-    healthChecks
-    images
+    healthChecks {
+      apiVersion
+      kind
+      name
+      namespace
+    }
+    images {
+      digest
+      name
+      newName
+      newTag
+    }
     interval
-    kubeConfig
-    patches
+    kubeConfig {
+      secretRef {
+        key
+        name
+      }
+    }
+    patches {
+      patch
+      target {
+        annotationSelector
+        group
+        kind
+        labelSelector
+        name
+        namespace
+        version
+      }
+    }
     path
-    postBuild
+    postBuild {
+      substituteFrom {
+        kind
+        name
+        optional
+      }
+    }
     prune
     retryInterval
     serviceAccountName
-    sourceRef
+    sourceRef {
+      apiVersion
+      kind
+      name
+      namespace
+    }
     suspend
     targetNamespace
     timeout
     wait
     status {
-      conditions
-      inventory
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      inventory {
+        entries {
+          id
+          v
+        }
+      }
       lastAppliedRevision
       lastAttemptedRevision
       lastHandledReconcileAt

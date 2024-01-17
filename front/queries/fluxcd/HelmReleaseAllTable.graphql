@@ -1,0 +1,150 @@
+
+query FluxcdHelmReleases {
+ namespaces {
+  fluxcdHelmReleases {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    chart {
+      spec {
+        chart
+        interval
+        reconcileStrategy
+        sourceRef {
+          apiVersion
+          kind
+          name
+          namespace
+        }
+        valuesFile
+        valuesFiles
+        verify {
+          provider
+          secretRef {
+            name
+          }
+        }
+        version
+      }
+    }
+    dependsOn {
+      name
+      namespace
+    }
+    install {
+      crds
+      createNamespace
+      disableHooks
+      disableOpenAPIValidation
+      disableWait
+      disableWaitForJobs
+      remediation {
+        ignoreTestFailures
+        remediateLastFailure
+        retries
+      }
+      replace
+      skipCRDs
+      timeout
+    }
+    interval
+    kubeConfig {
+      secretRef {
+        key
+        name
+      }
+    }
+    maxHistory
+    persistentClient
+    postRenderers {
+      kustomize {
+        images {
+          digest
+          name
+          newName
+          newTag
+        }
+      }
+    }
+    releaseName
+    rollback {
+      cleanupOnFail
+      disableHooks
+      disableWait
+      disableWaitForJobs
+      force
+      recreate
+      timeout
+    }
+    serviceAccountName
+    storageNamespace
+    suspend
+    targetNamespace
+    test {
+      enable
+      ignoreFailures
+      timeout
+    }
+    timeout
+    uninstall {
+      disableHooks
+      disableWait
+      keepHistory
+      timeout
+    }
+    upgrade {
+      cleanupOnFail
+      crds
+      disableHooks
+      disableOpenAPIValidation
+      disableWaitForJobs
+      disableWait
+      force
+      preserveValues
+      remediation {
+        ignoreTestFailures
+        remediateLastFailure
+        retries
+        strategy
+      }
+      timeout
+    }
+    valuesFrom {
+      kind
+      name
+      optional
+      targetPath
+      valuesKey
+    }
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      failures
+      helmChart
+      installFailures
+      lastAppliedRevision
+      lastAttemptedRevision
+      lastAttemptedValuesChecksum
+      lastHandledReconcileAt
+      lastReleaseRevision
+      observedGeneration
+      upgradeFailures
+    }
+  }
+ }
+}

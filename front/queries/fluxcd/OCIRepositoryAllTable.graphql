@@ -1,0 +1,71 @@
+
+query FluxcdOCIRepositorys {
+ namespaces {
+  fluxcdOCIRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    certSecretRef {
+      name
+    }
+    ignore
+    insecure
+    interval
+    layerSelector {
+      mediaType
+      operation
+    }
+    provider
+    ref
+    secretRef {
+      name
+    }
+    serviceAccountName
+    suspend
+    timeout
+    url
+    verify {
+      provider
+      secretRef {
+        name
+      }
+    }
+    status {
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      contentConfigChecksum
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      observedLayerSelector {
+        mediaType
+        operation
+      }
+      url
+    }
+  }
+ }
+}

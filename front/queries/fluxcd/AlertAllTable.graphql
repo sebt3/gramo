@@ -1,0 +1,45 @@
+
+query FluxcdAlerts {
+ namespaces {
+  fluxcdAlerts {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    eventSeverity
+    eventSources {
+      apiVersion
+      kind
+      name
+      namespace
+    }
+    exclusionList
+    inclusionList
+    providerRef {
+      name
+    }
+    summary
+    suspend
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+ }
+}

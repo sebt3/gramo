@@ -1,0 +1,76 @@
+
+query FluxcdReceivers {
+ namespaces {
+  fluxcdReceivers {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    events
+    interval
+    resources
+    secretRef
+    suspend
+    type
+    status {
+      conditions
+      lastHandledReconcileAt
+      observedGeneration
+      webhookPath
+    }
+  }
+ }
+}
+
+query FluxcdReceivers {
+ namespaces {
+  fluxcdReceivers {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    events
+    interval
+    resources {
+      kind
+      name
+      namespace
+      apiVersion
+    }
+    secretRef {
+      name
+    }
+    suspend
+    type
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastHandledReconcileAt
+      observedGeneration
+      webhookPath
+    }
+  }
+ }
+}

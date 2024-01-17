@@ -31,28 +31,126 @@ query FluxcdHelmRelease($namespace: String!, $name: String!) {
       name
       namespace
     }
-    chart
-    dependsOn
-    install
+    chart {
+      spec {
+        chart
+        interval
+        reconcileStrategy
+        sourceRef {
+          apiVersion
+          kind
+          name
+          namespace
+        }
+        valuesFile
+        valuesFiles
+        verify {
+          provider
+          secretRef {
+            name
+          }
+        }
+        version
+      }
+    }
+    dependsOn {
+      name
+      namespace
+    }
+    install {
+      crds
+      createNamespace
+      disableHooks
+      disableOpenAPIValidation
+      disableWait
+      disableWaitForJobs
+      remediation {
+        ignoreTestFailures
+        remediateLastFailure
+        retries
+      }
+      replace
+      skipCRDs
+      timeout
+    }
     interval
-    kubeConfig
+    kubeConfig {
+      secretRef {
+        key
+        name
+      }
+    }
     maxHistory
     persistentClient
-    postRenderers
+    postRenderers {
+      kustomize {
+        images {
+          digest
+          name
+          newName
+          newTag
+        }
+      }
+    }
     releaseName
-    rollback
+    rollback {
+      cleanupOnFail
+      disableHooks
+      disableWait
+      disableWaitForJobs
+      force
+      recreate
+      timeout
+    }
     serviceAccountName
     storageNamespace
     suspend
     targetNamespace
-    test
+    test {
+      enable
+      ignoreFailures
+      timeout
+    }
     timeout
-    uninstall
-    upgrade
-    # values
-    valuesFrom
+    uninstall {
+      disableHooks
+      disableWait
+      keepHistory
+      timeout
+    }
+    upgrade {
+      cleanupOnFail
+      crds
+      disableHooks
+      disableOpenAPIValidation
+      disableWaitForJobs
+      disableWait
+      force
+      preserveValues
+      remediation {
+        ignoreTestFailures
+        remediateLastFailure
+        retries
+        strategy
+      }
+      timeout
+    }
+    valuesFrom {
+      kind
+      name
+      optional
+      targetPath
+      valuesKey
+    }
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       failures
       helmChart
       installFailures

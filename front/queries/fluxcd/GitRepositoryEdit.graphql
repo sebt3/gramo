@@ -14,23 +14,69 @@ mutation FluxcdGitRepository($namespace: String!, $name: String!, $spec: fluxcdG
       namespace
     }
     ignore
-    include
+    include {
+      fromPath
+      repository {
+        name
+      }
+      toPath
+    }
     interval
     recurseSubmodules
-    ref
-    secretRef
+    ref {
+      branch
+      commit
+      name
+      semver
+      tag
+    }
+    secretRef {
+      name
+    }
     suspend
     timeout
     url
-    verify
+    verify {
+      mode
+      secretRef {
+        name
+      }
+    }
     status {
-      artifact
-      conditions
-      includedArtifacts
+      artifact {
+        lastUpdateTime
+        digest
+        path
+        revision
+        url
+        size
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      includedArtifacts {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
       lastHandledReconcileAt
       observedGeneration
       observedIgnore
-      observedInclude
+      observedInclude {
+        repository {
+          name
+        }
+        fromPath
+        toPath
+      }
       observedRecurseSubmodules
     }
   }

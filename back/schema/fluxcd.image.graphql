@@ -97,7 +97,7 @@ input fluxcdImageRepositorySpecSecretRef {
   name: String!
 }
 input fluxcdImageRepositorySpec {
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   certSecretRef: fluxcdImageRepositorySpecCertSecretRef
   exclusionList: [String]
   image: String
@@ -116,7 +116,7 @@ type fluxcdImageRepositorySecretRef {
 }
 type fluxcdImageRepository {
   metadata: metadata
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   certSecretRef: fluxcdImageRepositoryCertSecretRef
   exclusionList: [String]
   image: String

@@ -1,0 +1,53 @@
+
+query FluxcdBuckets {
+ namespaces {
+  fluxcdBuckets {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    bucketName
+    endpoint
+    ignore
+    insecure
+    interval
+    provider
+    region
+    secretRef {
+      name
+    }
+    suspend
+    timeout
+    status {
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      url
+    }
+  }
+ }
+}

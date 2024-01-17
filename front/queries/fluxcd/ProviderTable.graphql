@@ -15,17 +15,28 @@ query FluxcdProviders($namespace: String!) {
       namespace
     }
     address
-    certSecretRef
+    certSecretRef {
+      name
+    }
     channel
     interval
     proxy
-    secretRef
+    secretRef {
+      name
+    }
     suspend
     timeout
     type
     username
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
     }

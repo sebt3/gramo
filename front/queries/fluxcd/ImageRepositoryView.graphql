@@ -32,20 +32,35 @@ query FluxcdImageRepository($namespace: String!, $name: String!) {
       namespace
     }
     accessFrom
-    certSecretRef
+    certSecretRef {
+      name
+    }
     exclusionList
     image
     interval
     provider
-    secretRef
+    secretRef {
+      name
+    }
     serviceAccountName
     suspend
     timeout
     status {
       canonicalImageName
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
-      lastScanResult
+      lastScanResult {
+        latestTags
+        scanTime
+        tagCount
+      }
       observedExclusionList
       observedGeneration
     }

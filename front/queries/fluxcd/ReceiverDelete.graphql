@@ -15,12 +15,26 @@ mutation FluxcdReceiver($namespace: String!, $name: String!) {
     }
     events
     interval
-    resources
-    secretRef
+    resources {
+      kind
+      name
+      namespace
+      apiVersion
+    }
+    secretRef {
+      name
+    }
     suspend
     type
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
       webhookPath

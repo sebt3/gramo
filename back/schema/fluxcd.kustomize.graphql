@@ -71,7 +71,7 @@ input fluxcdKustomizationSpecPostBuildSubstituteFromItem {
   optional: Boolean
 }
 input fluxcdKustomizationSpecPostBuild {
-  #substitute: JSONObject
+  substitute: JSONObject
   substituteFrom: [fluxcdKustomizationSpecPostBuildSubstituteFromItem]
 }
 input fluxcdKustomizationSpecSourceRef {
@@ -81,7 +81,7 @@ input fluxcdKustomizationSpecSourceRef {
   namespace: String
 }
 input fluxcdKustomizationSpec {
-  #commonMetadata: JSONObject
+  commonMetadata: JSONObject
   components: [String]
   decryption: fluxcdKustomizationSpecDecryption
   dependsOn: [fluxcdKustomizationSpecDependsOnItem]
@@ -151,7 +151,7 @@ type fluxcdKustomizationPostBuildSubstituteFromItem {
   optional: Boolean
 }
 type fluxcdKustomizationPostBuild {
-  #substitute: JSONObject
+  substitute: JSONObject
   substituteFrom: [fluxcdKustomizationPostBuildSubstituteFromItem]
 }
 type fluxcdKustomizationSourceRef {
@@ -162,7 +162,7 @@ type fluxcdKustomizationSourceRef {
 }
 type fluxcdKustomization {
   metadata: metadata
-  #commonMetadata: JSONObject
+  commonMetadata: JSONObject
   components: [String]
   decryption: fluxcdKustomizationDecryption
   dependsOn: [fluxcdKustomizationDependsOnItem]

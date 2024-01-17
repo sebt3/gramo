@@ -1,4 +1,3 @@
-import HB from 'handlebars';
 import * as fs from 'fs';
 import path from 'path';
 import {k8sObject, HashMap} from './types.js'

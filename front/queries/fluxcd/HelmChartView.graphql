@@ -31,19 +31,41 @@ query FluxcdHelmChart($namespace: String!, $name: String!) {
       name
       namespace
     }
-    accessFrom
     chart
     interval
     reconcileStrategy
-    sourceRef
+    sourceRef {
+      apiVersion
+      kind
+      name
+    }
     suspend
     valuesFile
     valuesFiles
-    verify
+    verify {
+      provider
+      secretRef {
+        name
+      }
+    }
     version
     status {
-      artifact
-      conditions
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedChartName
       observedGeneration

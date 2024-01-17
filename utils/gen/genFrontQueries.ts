@@ -51,6 +51,15 @@ query {{ short }}{{ name }}s {
 {{/if}}
 }
 `);
+    const allTmpl = HB.compile(`
+query {{ short }}{{ name }}s {
+ namespaces {
+  {{ mini }}{{ name }}s {
+  ${output}
+  }
+ }
+}
+`);
     const getTmpl = HB.compile(`
 {{#if namespaced}}
 query {{ short }}{{ name }}($namespace: String!, $name: String!) {
@@ -163,5 +172,7 @@ mutation {{ short }}{{ name }}($name: String!) {
         }));
         fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}Table.graphql`), listTmpl(baseCfg));
         fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}View.graphql`), getTmpl(baseCfg));
+        if (namespaced)
+          fs.writeFileSync(path.resolve(directory,`${filePrefix}${name}AllTable.graphql`), allTmpl(baseCfg));
     });
 }

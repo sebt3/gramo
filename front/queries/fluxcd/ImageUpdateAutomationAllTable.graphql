@@ -1,0 +1,72 @@
+
+query FluxcdImageUpdateAutomations {
+ namespaces {
+  fluxcdImageUpdateAutomations {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    git {
+      checkout {
+        ref {
+          branch
+          commit
+          name
+          semver
+          tag
+        }
+      }
+      commit {
+        author {
+          email
+          name
+        }
+        messageTemplate
+        signingKey {
+          secretRef {
+            name
+          }
+        }
+      }
+      push {
+        branch
+      }
+    }
+    interval
+    sourceRef {
+      apiVersion
+      kind
+      name
+      namespace
+    }
+    suspend
+    update {
+      path
+      strategy
+    }
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastAutomationRunTime
+      lastHandledReconcileAt
+      lastPushCommit
+      lastPushTime
+      observedGeneration
+    }
+  }
+ }
+}

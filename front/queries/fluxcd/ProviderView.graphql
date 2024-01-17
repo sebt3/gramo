@@ -42,7 +42,14 @@ query FluxcdProvider($namespace: String!, $name: String!) {
     type
     username
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
     }

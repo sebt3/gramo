@@ -2,7 +2,7 @@
 type fluxcdGitRepositoryStatusArtifact {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int
@@ -19,7 +19,7 @@ type fluxcdGitRepositoryStatusConditionsItem {
 type fluxcdGitRepositoryStatusIncludedArtifactsItem {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int
@@ -122,7 +122,7 @@ type fluxcdGitRepository {
 type fluxcdBucketStatusArtifact {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int
@@ -148,7 +148,7 @@ input fluxcdBucketSpecSecretRef {
   name: String!
 }
 input fluxcdBucketSpec {
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   bucketName: String!
   endpoint: String!
   ignore: String
@@ -165,7 +165,7 @@ type fluxcdBucketSecretRef {
 }
 type fluxcdBucket {
   metadata: metadata
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   bucketName: String!
   endpoint: String!
   ignore: String
@@ -181,7 +181,7 @@ type fluxcdBucket {
 type fluxcdHelmChartStatusArtifact {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int
@@ -217,7 +217,7 @@ input fluxcdHelmChartSpecVerify {
   secretRef: fluxcdHelmChartSpecVerifySecretRef
 }
 input fluxcdHelmChartSpec {
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   chart: String!
   interval: String!
   reconcileStrategy: String
@@ -242,7 +242,7 @@ type fluxcdHelmChartVerify {
 }
 type fluxcdHelmChart {
   metadata: metadata
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   chart: String!
   interval: String!
   reconcileStrategy: String
@@ -257,7 +257,7 @@ type fluxcdHelmChart {
 type fluxcdHelmRepositoryStatusArtifact {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int
@@ -282,7 +282,7 @@ input fluxcdHelmRepositorySpecSecretRef {
   name: String!
 }
 input fluxcdHelmRepositorySpec {
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   interval: String!
   passCredentials: Boolean
   provider: String
@@ -297,7 +297,7 @@ type fluxcdHelmRepositorySecretRef {
 }
 type fluxcdHelmRepository {
   metadata: metadata
-  #accessFrom: JSONObject
+  accessFrom: JSONObject
   interval: String!
   passCredentials: Boolean
   provider: String
@@ -311,7 +311,7 @@ type fluxcdHelmRepository {
 type fluxcdOCIRepositoryStatusArtifact {
   digest: String
   lastUpdateTime: String!
-  #metadata: JSONObject
+  metadata: JSONObject
   path: String!
   revision: String!
   size: Int

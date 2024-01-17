@@ -1,0 +1,52 @@
+
+query FluxcdImageRepositorys {
+ namespaces {
+  fluxcdImageRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    accessFrom
+    certSecretRef {
+      name
+    }
+    exclusionList
+    image
+    interval
+    provider
+    secretRef {
+      name
+    }
+    serviceAccountName
+    suspend
+    timeout
+    status {
+      canonicalImageName
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastHandledReconcileAt
+      lastScanResult {
+        latestTags
+        scanTime
+        tagCount
+      }
+      observedExclusionList
+      observedGeneration
+    }
+  }
+ }
+}

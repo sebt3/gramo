@@ -12,6 +12,8 @@ import {generateResolverQueries} from './gen/genResolverQueries.js'
 import {generateResolverIndex,generateResolverNamespace} from './gen/genResolverIndexes.js'
 import {generateFrontQueries} from './gen/genFrontQueries.js'
 import {generateFrontComponents} from './gen/genFrontComponents.js'
+import {generateFrontRoutes} from './gen/genFrontRoutes.js'
+
 ////////////////////////////////////
 /// Configure Handlebars
 //
@@ -203,27 +205,27 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
     const isFlux = /toolkit\.fluxcd\.io$/
     const isTraefik = /^traefik/
     //Object.keys(groupedObjects).filter((k) => ! isK8s.test(k) && !isFlux.test(k)).forEach(k => console.log(k))
-    const filteredObjects = Object.entries(groupedObjects).filter(([key]) =>
+    Object.entries(groupedObjects).filter(([key]) =>
         // Exclude official api for now
         ! isK8s.test(key)
         // Exclude traefik for now
         && ! isTraefik.test(key)
         // Include only vynil for now
         && (['vynil.solidite.fr'].includes(key) || isFlux.test(key))
-    )
-    filteredObjects.forEach(([key, value]) => {
+    ).forEach(([key, value]) => {
         const baseFileName = getBaseName(key);
         const baseName = getBaseName(key).split('.')[0];
         const baseDirName = getBaseName(key).split('.')[0];
         const subGroup = getBaseName(key).includes('.')?`${getBaseName(key).split('.')[1]}.`:'';
         const acceptedPrefix = '';
         const unsurePrefix = 'gen.';
-        generateGraphQLTypes(path.resolve(__dirname,'..', 'back','schema',`${unsurePrefix}${baseFileName}.graphql`), baseName, key, value);
-        generateResolverTypes    (path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
-        generateResolverQueries  (path.resolve(__dirname,'..', 'back','resolvers', baseDirName), baseName, key, value, acceptedPrefix);
-        generateResolverIndex    (path.resolve(__dirname,'..', 'back','resolvers', baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
+        generateGraphQLTypes     (path.resolve(__dirname,'..', 'back','schema',`${unsurePrefix}${baseFileName}.graphql`), baseName, key, value);
         generateResolverNamespace(path.resolve(__dirname,'..', 'back','resolvers','core', `${acceptedPrefix}resolvers.ns.${baseFileName}.ts`), baseDirName, subGroup, baseName, key, value);
-        generateFrontQueries(path.resolve(__dirname,'..', 'front','queries', baseDirName), baseName, key, value, unsurePrefix);
-        generateFrontComponents(path.resolve(__dirname,'..', 'front','components', baseDirName), baseName, key, value, unsurePrefix);
+        generateResolverIndex    (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName, `${unsurePrefix}${subGroup}index.ts`), baseName, key, value);
+        generateResolverTypes    (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName), baseName, key, value, acceptedPrefix);
+        generateResolverQueries  (path.resolve(__dirname,'..', 'back','resolvers',   baseDirName), baseName, key, value, acceptedPrefix);
+        generateFrontQueries     (path.resolve(__dirname,'..', 'front','queries',    baseDirName), baseName, key, value, unsurePrefix);
+        generateFrontComponents  (path.resolve(__dirname,'..', 'front','components', baseDirName), baseName, key, value, unsurePrefix);
+        generateFrontRoutes      (path.resolve(__dirname,'..', 'front','routes',`${unsurePrefix}${baseFileName}.ts`), baseName, key, value);
     })
 })

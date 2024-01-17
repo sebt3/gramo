@@ -16,7 +16,7 @@ type fluxcdReceiverStatus {
 input fluxcdReceiverSpecResourcesItem {
   apiVersion: String
   kind: String!
-  #matchLabels: JSONObject
+  matchLabels: JSONObject
   name: String!
   namespace: String
 }
@@ -34,7 +34,7 @@ input fluxcdReceiverSpec {
 type fluxcdReceiverResourcesItem {
   apiVersion: String
   kind: String!
-  #matchLabels: JSONObject
+  matchLabels: JSONObject
   name: String!
   namespace: String
 }
@@ -67,7 +67,7 @@ type fluxcdAlertStatus {
 input fluxcdAlertSpecEventSourcesItem {
   apiVersion: String
   kind: String!
-  #matchLabels: JSONObject
+  matchLabels: JSONObject
   name: String!
   namespace: String
 }
@@ -75,7 +75,7 @@ input fluxcdAlertSpecProviderRef {
   name: String!
 }
 input fluxcdAlertSpec {
-  #eventMetadata: JSONObject
+  eventMetadata: JSONObject
   eventSeverity: String
   eventSources: [fluxcdAlertSpecEventSourcesItem]!
   exclusionList: [String]
@@ -87,7 +87,7 @@ input fluxcdAlertSpec {
 type fluxcdAlertEventSourcesItem {
   apiVersion: String
   kind: String!
-  #matchLabels: JSONObject
+  matchLabels: JSONObject
   name: String!
   namespace: String
 }
@@ -96,7 +96,7 @@ type fluxcdAlertProviderRef {
 }
 type fluxcdAlert {
   metadata: metadata
-  #eventMetadata: JSONObject
+  eventMetadata: JSONObject
   eventSeverity: String
   eventSources: [fluxcdAlertEventSourcesItem]!
   exclusionList: [String]

@@ -31,11 +31,34 @@ query FluxcdImagePolicy($namespace: String!, $name: String!) {
       name
       namespace
     }
-    filterTags
-    imageRepositoryRef
-    policy
+    filterTags {
+      extract
+      pattern
+    }
+    imageRepositoryRef {
+      name
+      namespace
+    }
+    policy {
+      alphabetical {
+        order
+      }
+      numerical {
+        order
+      }
+      semver {
+        range
+      }
+    }
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       latestImage
       observedGeneration
       observedPreviousImage

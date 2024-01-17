@@ -31,7 +31,6 @@ query FluxcdBucket($namespace: String!, $name: String!) {
       name
       namespace
     }
-    accessFrom
     bucketName
     endpoint
     ignore
@@ -39,12 +38,28 @@ query FluxcdBucket($namespace: String!, $name: String!) {
     interval
     provider
     region
-    secretRef
+    secretRef {
+      name
+    }
     suspend
     timeout
     status {
-      artifact
-      conditions
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
       observedIgnore

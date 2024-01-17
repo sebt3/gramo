@@ -1,0 +1,45 @@
+
+query FluxcdProviders {
+ namespaces {
+  fluxcdProviders {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    address
+    certSecretRef {
+      name
+    }
+    channel
+    interval
+    proxy
+    secretRef {
+      name
+    }
+    suspend
+    timeout
+    type
+    username
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      lastHandledReconcileAt
+      observedGeneration
+    }
+  }
+ }
+}

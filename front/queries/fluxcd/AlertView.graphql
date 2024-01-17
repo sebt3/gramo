@@ -31,16 +31,29 @@ query FluxcdAlert($namespace: String!, $name: String!) {
       name
       namespace
     }
-    eventMetadata
     eventSeverity
-    eventSources
+    eventSources {
+      apiVersion
+      kind
+      name
+      namespace
+    }
     exclusionList
     inclusionList
-    providerRef
+    providerRef {
+      name
+    }
     summary
     suspend
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
     }

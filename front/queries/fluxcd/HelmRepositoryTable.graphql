@@ -14,22 +14,36 @@ query FluxcdHelmRepositorys($namespace: String!) {
       name
       namespace
     }
-    accessFrom
     interval
     passCredentials
     provider
-    secretRef
+    secretRef {
+      name
+    }
     suspend
     timeout
     type
     url
     status {
-      artifact
-      conditions
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastHandledReconcileAt
       observedGeneration
       url
-    }
-  }
+    }  }
  }
 }

@@ -1,0 +1,85 @@
+
+query FluxcdGitRepositorys {
+ namespaces {
+  fluxcdGitRepositorys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    ignore
+    include {
+      fromPath
+      repository {
+        name
+      }
+      toPath
+    }
+    interval
+    recurseSubmodules
+    ref {
+      branch
+      commit
+      name
+      semver
+      tag
+    }
+    secretRef {
+      name
+    }
+    suspend
+    timeout
+    url
+    verify {
+      mode
+      secretRef {
+        name
+      }
+    }
+    status {
+      artifact {
+        lastUpdateTime
+        digest
+        path
+        revision
+        url
+        size
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      includedArtifacts {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      lastHandledReconcileAt
+      observedGeneration
+      observedIgnore
+      observedInclude {
+        repository {
+          name
+        }
+        fromPath
+        toPath
+      }
+      observedRecurseSubmodules
+    }
+  }
+ }
+}

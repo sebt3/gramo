@@ -13,27 +13,56 @@ mutation FluxcdOCIRepository($namespace: String!, $name: String!, $spec: fluxcdO
       name
       namespace
     }
-    certSecretRef
+    certSecretRef {
+      name
+    }
     ignore
     insecure
     interval
-    layerSelector
+    layerSelector {
+      mediaType
+      operation
+    }
     provider
     ref
-    secretRef
+    secretRef {
+      name
+    }
     serviceAccountName
     suspend
     timeout
     url
-    verify
+    verify {
+      provider
+      secretRef {
+        name
+      }
+    }
     status {
-      artifact
-      conditions
+      artifact {
+        digest
+        lastUpdateTime
+        path
+        revision
+        size
+        url
+      }
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       contentConfigChecksum
       lastHandledReconcileAt
       observedGeneration
       observedIgnore
-      observedLayerSelector
+      observedLayerSelector {
+        mediaType
+        operation
+      }
       url
     }
   }

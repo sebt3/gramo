@@ -14,13 +14,53 @@ query FluxcdImageUpdateAutomations($namespace: String!) {
       name
       namespace
     }
-    git
+    git {
+      checkout {
+        ref {
+          branch
+          commit
+          name
+          semver
+          tag
+        }
+      }
+      commit {
+        author {
+          email
+          name
+        }
+        messageTemplate
+        signingKey {
+          secretRef {
+            name
+          }
+        }
+      }
+      push {
+        branch
+      }
+    }
     interval
-    sourceRef
+    sourceRef {
+      apiVersion
+      kind
+      name
+      namespace
+    }
     suspend
-    update
+    update {
+      path
+      strategy
+    }
     status {
-      conditions
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
       lastAutomationRunTime
       lastHandledReconcileAt
       lastPushCommit
