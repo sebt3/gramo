@@ -72,6 +72,35 @@ mutation FluxcdHelmRelease($namespace: String!, $name: String!, $spec: fluxcdHel
           newName
           newTag
         }
+        patches {
+          patch
+          target {
+            annotationSelector
+            group
+            kind
+            labelSelector
+            name
+            namespace
+            version
+          }
+        }
+        patchesJson6902 {
+          patch {
+            from
+            op
+            path
+          }
+          target {
+            annotationSelector
+            group
+            kind
+            labelSelector
+            name
+            namespace
+            version
+          }
+        }
+        patchesStrategicMerge
       }
     }
     releaseName
@@ -105,8 +134,8 @@ mutation FluxcdHelmRelease($namespace: String!, $name: String!, $spec: fluxcdHel
       crds
       disableHooks
       disableOpenAPIValidation
-      disableWaitForJobs
       disableWait
+      disableWaitForJobs
       force
       preserveValues
       remediation {

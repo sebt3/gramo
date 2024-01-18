@@ -11,22 +11,27 @@ export const link:menuLinksProps = {
   level: 1,
   children: [
   {
+    name: 'fluxcdGitRepositorys',
     title: 'GitRepository', caption: 'List gitRepository', icon: 'storage',
     link: `/${cat}/fluxcd/gitrepositories/`, level: 2, children: []
   },
   {
+    name: 'fluxcdBuckets',
     title: 'Bucket', caption: 'List bucket', icon: 'storage',
     link: `/${cat}/fluxcd/buckets/`, level: 2, children: []
   },
   {
+    name: 'fluxcdHelmCharts',
     title: 'HelmChart', caption: 'List helmChart', icon: 'album',
     link: `/${cat}/fluxcd/helmcharts/`, level: 2, children: []
   },
   {
+    name: 'fluxcdHelmRepositorys',
     title: 'HelmRepository', caption: 'List helmRepository', icon: 'storage',
     link: `/${cat}/fluxcd/helmrepositories/`, level: 2, children: []
   },
   {
+    name: 'fluxcdOCIRepositorys',
     title: 'OCIRepository', caption: 'List oCIRepository', icon: 'storage',
     link: `/${cat}/fluxcd/ocirepositories/`, level: 2, children: []
   },

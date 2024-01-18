@@ -1,0 +1,30 @@
+
+query MonitoringPrometheusRules($namespace: String!) {
+ namespace(name: $namespace) {
+  monitoringPrometheusRules {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    groups {
+      interval
+      limit
+      name
+      partial_response_strategy
+      rules {
+        alert
+        for
+        record
+      }
+    }
+  }
+ }
+}

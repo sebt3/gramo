@@ -3,13 +3,16 @@ const cat = 'install';
 export const link:menuLinksProps = {
   title: 'Vynil', icon: 'album',
   link: `/${cat}/vynil/installs/`,
+  name: 'vynil',
   level: 1,
   children: [
   {
+    name: 'vynilInstalls',
     title: 'Installations', caption: 'List installed packages', icon: 'album',
     link: `/${cat}/vynil/installs/`, level: 2, children: []
   },
   {
+    name: 'vynilDistribs',
     title: 'Distributions', caption: 'List available distributions', icon: 'collections',
     link: `/${cat}/vynil/dists/`, level: 2, children: []
   },

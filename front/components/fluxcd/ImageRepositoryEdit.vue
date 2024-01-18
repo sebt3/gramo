@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdImageRepositoryQue
 const { mutate: patchImageRepository, onDone: onPatchImageRepository, onError: onPatchError } = useMutation(imageRepositoryEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchImageRepository({"namespace": navigation.currentNamespace, "name": result.value.fluxcdImageRepository.metadata.name, "spec": sanitizeData(data.value)});
+  patchImageRepository({"namespace": result.value.fluxcdImageRepository.metadata.namespace, "name": result.value.fluxcdImageRepository.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotImageRepositoryFound);onPatchImageRepository(patchDone);onPatchError(patchError);
 </script>

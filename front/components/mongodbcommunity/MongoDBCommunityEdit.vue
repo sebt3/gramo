@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(mongodbcommunityMongoDBC
 const { mutate: patchMongoDBCommunity, onDone: onPatchMongoDBCommunity, onError: onPatchError } = useMutation(mongoDBCommunityEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchMongoDBCommunity({"namespace": navigation.currentNamespace, "name": result.value.mongodbcommunityMongoDBCommunity.metadata.name, "spec": sanitizeData(data.value)});
+  patchMongoDBCommunity({"namespace": result.value.mongodbcommunityMongoDBCommunity.metadata.namespace, "name": result.value.mongodbcommunityMongoDBCommunity.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotMongoDBCommunityFound);onPatchMongoDBCommunity(patchDone);onPatchError(patchError);
 </script>

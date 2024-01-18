@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdKustomizationQuery
 const { mutate: patchKustomization, onDone: onPatchKustomization, onError: onPatchError } = useMutation(kustomizationEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchKustomization({"namespace": navigation.currentNamespace, "name": result.value.fluxcdKustomization.metadata.name, "spec": sanitizeData(data.value)});
+  patchKustomization({"namespace": result.value.fluxcdKustomization.metadata.namespace, "name": result.value.fluxcdKustomization.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotKustomizationFound);onPatchKustomization(patchDone);onPatchError(patchError);
 </script>

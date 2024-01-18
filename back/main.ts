@@ -22,12 +22,12 @@ const typeDefs = gqlWrapper(
   importGraphQL('fluxcd.notification.graphql'),
   importGraphQL('fluxcd.source.graphql'),
   importGraphQL('secretgenerator.graphql'),
-//  importGraphQL('k8up.graphql'),
-//  importGraphQL('mariadb.graphql'),
+  importGraphQL('k8up.graphql'),
+  importGraphQL('mariadb.graphql'),
   importGraphQL('mongodbcommunity.graphql'),
-//  importGraphQL('postgresql.graphql'),
-//  importGraphQL('redis.graphql'),
-//  importGraphQL('monitoring.graphql'),
+  importGraphQL('postgresql.graphql'),
+  importGraphQL('redis.graphql'),
+  importGraphQL('monitoring.graphql'),
 );
 
 interface MyContext {

@@ -72,7 +72,7 @@ export const mutations = {
         if (args['spec']['verify'] !== undefined && typeof args['spec']['verify'] == 'object') spec['verify'] = args['spec']['verify'];
         const request = {
             apiVersion: 'source.toolkit.fluxcd.io/v1',
-            kind: 'Distrib',
+            kind: 'GitRepository',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

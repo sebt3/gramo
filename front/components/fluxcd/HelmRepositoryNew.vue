@@ -29,7 +29,7 @@ function onSubmit() {
         <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
       </q-card-section>
       <q-card-section>
-        <MetadataNew v-model="name" :namespaced="true" />
+        <MetadataNew v-model:name="name" :namespaced="true" />
       </q-card-section>
     </q-card>
     <q-card bordered class="q-ma-sm">

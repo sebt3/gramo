@@ -1,0 +1,3039 @@
+
+type monitoringAlertmanagerStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String
+  observedGeneration: Int
+  reason: String
+  status: String!
+  type: String!
+}
+type monitoringAlertmanagerStatus {
+  availableReplicas: Int!
+  conditions: [monitoringAlertmanagerStatusConditionsItem]
+  paused: Boolean!
+  replicas: Int!
+  unavailableReplicas: Int!
+  updatedReplicas: Int!
+}
+input monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+input monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  matchExpressions: [monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+  matchFields: [monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+}
+input monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  preference: monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!
+  weight: Int!
+}
+input monitoringAlertmanagerSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  nodeSelectorTerms: [monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!]
+}
+input monitoringAlertmanagerSpecAffinityNodeAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: monitoringAlertmanagerSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+}
+input monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+input monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  matchExpressions: [monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem]
+  matchLabels: JSONObject
+}
+input monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  labelSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaces: [String]
+  topologyKey: String!
+}
+input monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  podAffinityTerm: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm!
+  weight: Int!
+}
+input monitoringAlertmanagerSpecAffinityPodAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+input monitoringAlertmanagerSpecAffinityPodAntiAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+input monitoringAlertmanagerSpecAffinity {
+  nodeAffinity: monitoringAlertmanagerSpecAffinityNodeAffinity
+  podAffinity: monitoringAlertmanagerSpecAffinityPodAffinity
+  podAntiAffinity: monitoringAlertmanagerSpecAffinityPodAntiAffinity
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigMatcherStrategy {
+  type: String
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials {
+  key: String!
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization {
+  credentials: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  type: String
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth {
+  password: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  username: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap {
+  key: String!
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId {
+  configMap: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap
+  secret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2 {
+  clientId: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId!
+  clientSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials!
+  endpointParams: JSONObject
+  scopes: [String]
+  tokenUrl: String!
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig {
+  ca: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  cert: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  insecureSkipVerify: Boolean
+  keySecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  serverName: String
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfig {
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  followRedirects: Boolean
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyURL: String
+  tlsConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+input monitoringAlertmanagerSpecAlertmanagerConfigurationGlobal {
+  httpConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfig
+  opsGenieApiKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  opsGenieApiUrl: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  resolveTimeout: String
+  slackApiUrl: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerSpecAlertmanagerConfiguration {
+  global: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobal
+  name: String
+  templates: [monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId]
+}
+input monitoringAlertmanagerSpecContainersItemEnvItemValueFromFieldRef {
+  apiVersion: String
+  fieldPath: String!
+}
+input monitoringAlertmanagerSpecContainersItemEnvItemValueFromResourceFieldRef {
+  containerName: String
+  divisor: JSONObject
+  resource: String!
+}
+input monitoringAlertmanagerSpecContainersItemEnvItemValueFrom {
+  configMapKeyRef: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap
+  fieldRef: monitoringAlertmanagerSpecContainersItemEnvItemValueFromFieldRef
+  resourceFieldRef: monitoringAlertmanagerSpecContainersItemEnvItemValueFromResourceFieldRef
+  secretKeyRef: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerSpecContainersItemEnvItem {
+  name: String!
+  value: String
+  valueFrom: monitoringAlertmanagerSpecContainersItemEnvItemValueFrom
+}
+input monitoringAlertmanagerSpecContainersItemEnvFromItemConfigMapRef {
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecContainersItemEnvFromItemSecretRef {
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecContainersItemEnvFromItem {
+  configMapRef: monitoringAlertmanagerSpecContainersItemEnvFromItemConfigMapRef
+  prefix: String
+  secretRef: monitoringAlertmanagerSpecContainersItemEnvFromItemSecretRef
+}
+input monitoringAlertmanagerSpecContainersItemLifecyclePostStartExec {
+  command: [String]
+}
+input monitoringAlertmanagerSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  name: String!
+  value: String!
+}
+input monitoringAlertmanagerSpecContainersItemLifecyclePostStartHttpGet {
+  host: String
+  httpHeaders: [monitoringAlertmanagerSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem]
+  path: String
+  port: JSONObject!
+  scheme: String
+}
+input monitoringAlertmanagerSpecContainersItemLifecyclePostStartTcpSocket {
+  host: String
+  port: JSONObject!
+}
+input monitoringAlertmanagerSpecContainersItemLifecyclePostStart {
+  exec: monitoringAlertmanagerSpecContainersItemLifecyclePostStartExec
+  httpGet: monitoringAlertmanagerSpecContainersItemLifecyclePostStartHttpGet
+  tcpSocket: monitoringAlertmanagerSpecContainersItemLifecyclePostStartTcpSocket
+}
+input monitoringAlertmanagerSpecContainersItemLifecycle {
+  postStart: monitoringAlertmanagerSpecContainersItemLifecyclePostStart
+  preStop: monitoringAlertmanagerSpecContainersItemLifecyclePostStart
+}
+input monitoringAlertmanagerSpecContainersItemLivenessProbeGrpc {
+  port: Int!
+  service: String
+}
+input monitoringAlertmanagerSpecContainersItemLivenessProbe {
+  exec: monitoringAlertmanagerSpecContainersItemLifecyclePostStartExec
+  failureThreshold: Int
+  grpc: monitoringAlertmanagerSpecContainersItemLivenessProbeGrpc
+  httpGet: monitoringAlertmanagerSpecContainersItemLifecyclePostStartHttpGet
+  initialDelaySeconds: Int
+  periodSeconds: Int
+  successThreshold: Int
+  tcpSocket: monitoringAlertmanagerSpecContainersItemLifecyclePostStartTcpSocket
+  terminationGracePeriodSeconds: Int
+  timeoutSeconds: Int
+}
+input monitoringAlertmanagerSpecContainersItemPortsItem {
+  containerPort: Int!
+  hostIP: String
+  hostPort: Int
+  name: String
+  protocol: String
+}
+input monitoringAlertmanagerSpecContainersItemResizePolicyItem {
+  resourceName: String!
+  restartPolicy: String!
+}
+input monitoringAlertmanagerSpecContainersItemResourcesClaimsItem {
+  name: String!
+}
+input monitoringAlertmanagerSpecContainersItemResources {
+  claims: [monitoringAlertmanagerSpecContainersItemResourcesClaimsItem]
+  limits: JSONObject
+  requests: JSONObject
+}
+input monitoringAlertmanagerSpecContainersItemSecurityContextCapabilities {
+  add: [String]
+  drop: [String]
+}
+input monitoringAlertmanagerSpecContainersItemSecurityContextSeLinuxOptions {
+  level: String
+  role: String
+  type: String
+  user: String
+}
+input monitoringAlertmanagerSpecContainersItemSecurityContextSeccompProfile {
+  localhostProfile: String
+  type: String!
+}
+input monitoringAlertmanagerSpecContainersItemSecurityContextWindowsOptions {
+  gmsaCredentialSpec: String
+  gmsaCredentialSpecName: String
+  hostProcess: Boolean
+  runAsUserName: String
+}
+input monitoringAlertmanagerSpecContainersItemSecurityContext {
+  allowPrivilegeEscalation: Boolean
+  capabilities: monitoringAlertmanagerSpecContainersItemSecurityContextCapabilities
+  privileged: Boolean
+  procMount: String
+  readOnlyRootFilesystem: Boolean
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: monitoringAlertmanagerSpecContainersItemSecurityContextSeLinuxOptions
+  seccompProfile: monitoringAlertmanagerSpecContainersItemSecurityContextSeccompProfile
+  windowsOptions: monitoringAlertmanagerSpecContainersItemSecurityContextWindowsOptions
+}
+input monitoringAlertmanagerSpecContainersItemVolumeDevicesItem {
+  devicePath: String!
+  name: String!
+}
+input monitoringAlertmanagerSpecContainersItemVolumeMountsItem {
+  mountPath: String!
+  mountPropagation: String
+  name: String!
+  readOnly: Boolean
+  subPath: String
+  subPathExpr: String
+}
+input monitoringAlertmanagerSpecContainersItem {
+  args: [String]
+  command: [String]
+  env: [monitoringAlertmanagerSpecContainersItemEnvItem]
+  envFrom: [monitoringAlertmanagerSpecContainersItemEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: monitoringAlertmanagerSpecContainersItemLifecycle
+  livenessProbe: monitoringAlertmanagerSpecContainersItemLivenessProbe
+  name: String!
+  ports: [monitoringAlertmanagerSpecContainersItemPortsItem]
+  readinessProbe: monitoringAlertmanagerSpecContainersItemLivenessProbe
+  resizePolicy: [monitoringAlertmanagerSpecContainersItemResizePolicyItem]
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  securityContext: monitoringAlertmanagerSpecContainersItemSecurityContext
+  startupProbe: monitoringAlertmanagerSpecContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [monitoringAlertmanagerSpecContainersItemVolumeDevicesItem]
+  volumeMounts: [monitoringAlertmanagerSpecContainersItemVolumeMountsItem]
+  workingDir: String
+}
+input monitoringAlertmanagerSpecHostAliasesItem {
+  hostnames: [String]!
+  ip: String!
+}
+input monitoringAlertmanagerSpecImagePullSecretsItem {
+  name: String
+}
+input monitoringAlertmanagerSpecPodMetadata {
+  annotations: JSONObject
+  labels: JSONObject
+  name: String
+}
+input monitoringAlertmanagerSpecSecurityContextSysctlsItem {
+  name: String!
+  value: String!
+}
+input monitoringAlertmanagerSpecSecurityContext {
+  fsGroup: Int
+  fsGroupChangePolicy: String
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: monitoringAlertmanagerSpecContainersItemSecurityContextSeLinuxOptions
+  seccompProfile: monitoringAlertmanagerSpecContainersItemSecurityContextSeccompProfile
+  supplementalGroups: [Int]
+  sysctls: [monitoringAlertmanagerSpecSecurityContextSysctlsItem]
+  windowsOptions: monitoringAlertmanagerSpecContainersItemSecurityContextWindowsOptions
+}
+input monitoringAlertmanagerSpecStorageEmptyDir {
+  medium: String
+  sizeLimit: JSONObject
+}
+input monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecDataSource {
+  apiGroup: String
+  kind: String!
+  name: String!
+}
+input monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecDataSourceRef {
+  apiGroup: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+input monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec {
+  accessModes: [String]
+  dataSource: monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecDataSource
+  dataSourceRef: monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecDataSourceRef
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  selector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  storageClassName: String
+  volumeMode: String
+  volumeName: String
+}
+input monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplate {
+  metadata: JSONObject
+  spec: monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec!
+}
+input monitoringAlertmanagerSpecStorageEphemeral {
+  volumeClaimTemplate: monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplate
+}
+input monitoringAlertmanagerSpecStorageVolumeClaimTemplateStatusConditionsItem {
+  lastProbeTime: String
+  lastTransitionTime: String
+  message: String
+  reason: String
+  status: String!
+  type: String!
+}
+input monitoringAlertmanagerSpecStorageVolumeClaimTemplateStatus {
+  accessModes: [String]
+  allocatedResources: JSONObject
+  capacity: JSONObject
+  conditions: [monitoringAlertmanagerSpecStorageVolumeClaimTemplateStatusConditionsItem]
+  phase: String
+  resizeStatus: String
+}
+input monitoringAlertmanagerSpecStorageVolumeClaimTemplate {
+  apiVersion: String
+  kind: String
+  metadata: monitoringAlertmanagerSpecPodMetadata
+  spec: monitoringAlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec
+  status: monitoringAlertmanagerSpecStorageVolumeClaimTemplateStatus
+}
+input monitoringAlertmanagerSpecStorage {
+  disableMountSubPath: Boolean
+  emptyDir: monitoringAlertmanagerSpecStorageEmptyDir
+  ephemeral: monitoringAlertmanagerSpecStorageEphemeral
+  volumeClaimTemplate: monitoringAlertmanagerSpecStorageVolumeClaimTemplate
+}
+input monitoringAlertmanagerSpecTolerationsItem {
+  effect: String
+  key: String
+  operator: String
+  tolerationSeconds: Int
+  value: String
+}
+input monitoringAlertmanagerSpecTopologySpreadConstraintsItem {
+  labelSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  matchLabelKeys: [String]
+  maxSkew: Int!
+  minDomains: Int
+  nodeAffinityPolicy: String
+  nodeTaintsPolicy: String
+  topologyKey: String!
+  whenUnsatisfiable: String!
+}
+input monitoringAlertmanagerSpecVolumesItemAwsElasticBlockStore {
+  fsType: String
+  partition: Int
+  readOnly: Boolean
+  volumeID: String!
+}
+input monitoringAlertmanagerSpecVolumesItemAzureDisk {
+  cachingMode: String
+  diskName: String!
+  diskURI: String!
+  fsType: String
+  kind: String
+  readOnly: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemAzureFile {
+  readOnly: Boolean
+  secretName: String!
+  shareName: String!
+}
+input monitoringAlertmanagerSpecVolumesItemCephfs {
+  monitors: [String]!
+  path: String
+  readOnly: Boolean
+  secretFile: String
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  user: String
+}
+input monitoringAlertmanagerSpecVolumesItemCinder {
+  fsType: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  volumeID: String!
+}
+input monitoringAlertmanagerSpecVolumesItemConfigMapItemsItem {
+  key: String!
+  mode: Int
+  path: String!
+}
+input monitoringAlertmanagerSpecVolumesItemConfigMap {
+  defaultMode: Int
+  items: [monitoringAlertmanagerSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemCsi {
+  driver: String!
+  fsType: String
+  nodePublishSecretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  readOnly: Boolean
+  volumeAttributes: JSONObject
+}
+input monitoringAlertmanagerSpecVolumesItemDownwardAPIItemsItem {
+  fieldRef: monitoringAlertmanagerSpecContainersItemEnvItemValueFromFieldRef
+  mode: Int
+  path: String!
+  resourceFieldRef: monitoringAlertmanagerSpecContainersItemEnvItemValueFromResourceFieldRef
+}
+input monitoringAlertmanagerSpecVolumesItemDownwardAPI {
+  defaultMode: Int
+  items: [monitoringAlertmanagerSpecVolumesItemDownwardAPIItemsItem]
+}
+input monitoringAlertmanagerSpecVolumesItemFc {
+  fsType: String
+  lun: Int
+  readOnly: Boolean
+  targetWWNs: [String]
+  wwids: [String]
+}
+input monitoringAlertmanagerSpecVolumesItemFlexVolume {
+  driver: String!
+  fsType: String
+  options: JSONObject
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+}
+input monitoringAlertmanagerSpecVolumesItemFlocker {
+  datasetName: String
+  datasetUUID: String
+}
+input monitoringAlertmanagerSpecVolumesItemGcePersistentDisk {
+  fsType: String
+  partition: Int
+  pdName: String!
+  readOnly: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemGitRepo {
+  directory: String
+  repository: String!
+  revision: String
+}
+input monitoringAlertmanagerSpecVolumesItemGlusterfs {
+  endpoints: String!
+  path: String!
+  readOnly: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemHostPath {
+  path: String!
+  type: String
+}
+input monitoringAlertmanagerSpecVolumesItemIscsi {
+  chapAuthDiscovery: Boolean
+  chapAuthSession: Boolean
+  fsType: String
+  initiatorName: String
+  iqn: String!
+  iscsiInterface: String
+  lun: Int!
+  portals: [String]
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  targetPortal: String!
+}
+input monitoringAlertmanagerSpecVolumesItemNfs {
+  path: String!
+  readOnly: Boolean
+  server: String!
+}
+input monitoringAlertmanagerSpecVolumesItemPersistentVolumeClaim {
+  claimName: String!
+  readOnly: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemPhotonPersistentDisk {
+  fsType: String
+  pdID: String!
+}
+input monitoringAlertmanagerSpecVolumesItemPortworxVolume {
+  fsType: String
+  readOnly: Boolean
+  volumeID: String!
+}
+input monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemConfigMap {
+  items: [monitoringAlertmanagerSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemDownwardAPI {
+  items: [monitoringAlertmanagerSpecVolumesItemDownwardAPIItemsItem]
+}
+input monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemSecret {
+  items: [monitoringAlertmanagerSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemServiceAccountToken {
+  audience: String
+  expirationSeconds: Int
+  path: String!
+}
+input monitoringAlertmanagerSpecVolumesItemProjectedSourcesItem {
+  configMap: monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemConfigMap
+  downwardAPI: monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemDownwardAPI
+  secret: monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemSecret
+  serviceAccountToken: monitoringAlertmanagerSpecVolumesItemProjectedSourcesItemServiceAccountToken
+}
+input monitoringAlertmanagerSpecVolumesItemProjected {
+  defaultMode: Int
+  sources: [monitoringAlertmanagerSpecVolumesItemProjectedSourcesItem]
+}
+input monitoringAlertmanagerSpecVolumesItemQuobyte {
+  group: String
+  readOnly: Boolean
+  registry: String!
+  tenant: String
+  user: String
+  volume: String!
+}
+input monitoringAlertmanagerSpecVolumesItemRbd {
+  fsType: String
+  image: String!
+  keyring: String
+  monitors: [String]!
+  pool: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  user: String
+}
+input monitoringAlertmanagerSpecVolumesItemScaleIO {
+  fsType: String
+  gateway: String!
+  protectionDomain: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem!
+  sslEnabled: Boolean
+  storageMode: String
+  storagePool: String
+  system: String!
+  volumeName: String
+}
+input monitoringAlertmanagerSpecVolumesItemSecret {
+  defaultMode: Int
+  items: [monitoringAlertmanagerSpecVolumesItemConfigMapItemsItem]
+  optional: Boolean
+  secretName: String
+}
+input monitoringAlertmanagerSpecVolumesItemStorageos {
+  fsType: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerSpecImagePullSecretsItem
+  volumeName: String
+  volumeNamespace: String
+}
+input monitoringAlertmanagerSpecVolumesItemVsphereVolume {
+  fsType: String
+  storagePolicyID: String
+  storagePolicyName: String
+  volumePath: String!
+}
+input monitoringAlertmanagerSpecVolumesItem {
+  awsElasticBlockStore: monitoringAlertmanagerSpecVolumesItemAwsElasticBlockStore
+  azureDisk: monitoringAlertmanagerSpecVolumesItemAzureDisk
+  azureFile: monitoringAlertmanagerSpecVolumesItemAzureFile
+  cephfs: monitoringAlertmanagerSpecVolumesItemCephfs
+  cinder: monitoringAlertmanagerSpecVolumesItemCinder
+  configMap: monitoringAlertmanagerSpecVolumesItemConfigMap
+  csi: monitoringAlertmanagerSpecVolumesItemCsi
+  downwardAPI: monitoringAlertmanagerSpecVolumesItemDownwardAPI
+  emptyDir: monitoringAlertmanagerSpecStorageEmptyDir
+  ephemeral: monitoringAlertmanagerSpecStorageEphemeral
+  fc: monitoringAlertmanagerSpecVolumesItemFc
+  flexVolume: monitoringAlertmanagerSpecVolumesItemFlexVolume
+  flocker: monitoringAlertmanagerSpecVolumesItemFlocker
+  gcePersistentDisk: monitoringAlertmanagerSpecVolumesItemGcePersistentDisk
+  gitRepo: monitoringAlertmanagerSpecVolumesItemGitRepo
+  glusterfs: monitoringAlertmanagerSpecVolumesItemGlusterfs
+  hostPath: monitoringAlertmanagerSpecVolumesItemHostPath
+  iscsi: monitoringAlertmanagerSpecVolumesItemIscsi
+  name: String!
+  nfs: monitoringAlertmanagerSpecVolumesItemNfs
+  persistentVolumeClaim: monitoringAlertmanagerSpecVolumesItemPersistentVolumeClaim
+  photonPersistentDisk: monitoringAlertmanagerSpecVolumesItemPhotonPersistentDisk
+  portworxVolume: monitoringAlertmanagerSpecVolumesItemPortworxVolume
+  projected: monitoringAlertmanagerSpecVolumesItemProjected
+  quobyte: monitoringAlertmanagerSpecVolumesItemQuobyte
+  rbd: monitoringAlertmanagerSpecVolumesItemRbd
+  scaleIO: monitoringAlertmanagerSpecVolumesItemScaleIO
+  secret: monitoringAlertmanagerSpecVolumesItemSecret
+  storageos: monitoringAlertmanagerSpecVolumesItemStorageos
+  vsphereVolume: monitoringAlertmanagerSpecVolumesItemVsphereVolume
+}
+input monitoringAlertmanagerSpecWebHttpConfigHeaders {
+  contentSecurityPolicy: String
+  strictTransportSecurity: String
+  xContentTypeOptions: String
+  xFrameOptions: String
+  xXSSProtection: String
+}
+input monitoringAlertmanagerSpecWebHttpConfig {
+  headers: monitoringAlertmanagerSpecWebHttpConfigHeaders
+  http2: Boolean
+}
+input monitoringAlertmanagerSpecWebTlsConfig {
+  cert: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId!
+  cipherSuites: [String]
+  clientAuthType: String
+  client_ca: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  curvePreferences: [String]
+  keySecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials!
+  maxVersion: String
+  minVersion: String
+  preferServerCipherSuites: Boolean
+}
+input monitoringAlertmanagerSpecWeb {
+  getConcurrency: Int
+  httpConfig: monitoringAlertmanagerSpecWebHttpConfig
+  timeout: Int
+  tlsConfig: monitoringAlertmanagerSpecWebTlsConfig
+}
+input monitoringAlertmanagerSpec {
+  additionalPeers: [String]
+  affinity: monitoringAlertmanagerSpecAffinity
+  alertmanagerConfigMatcherStrategy: monitoringAlertmanagerSpecAlertmanagerConfigMatcherStrategy
+  alertmanagerConfigNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  alertmanagerConfigSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  alertmanagerConfiguration: monitoringAlertmanagerSpecAlertmanagerConfiguration
+  baseImage: String
+  clusterAdvertiseAddress: String
+  clusterGossipInterval: String
+  clusterPeerTimeout: String
+  clusterPushpullInterval: String
+  configMaps: [String]
+  configSecret: String
+  containers: [monitoringAlertmanagerSpecContainersItem]
+  externalUrl: String
+  forceEnableClusterMode: Boolean
+  hostAliases: [monitoringAlertmanagerSpecHostAliasesItem]
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerSpecImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerSpecContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerSpecPodMetadata
+  portName: String
+  priorityClassName: String
+  replicas: Int
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  retention: String
+  routePrefix: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSpecSecurityContext
+  serviceAccountName: String
+  sha: String
+  storage: monitoringAlertmanagerSpecStorage
+  tag: String
+  tolerations: [monitoringAlertmanagerSpecTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerSpecTopologySpreadConstraintsItem]
+  version: String
+  volumeMounts: [monitoringAlertmanagerSpecContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerSpecVolumesItem]
+  web: monitoringAlertmanagerSpecWeb
+}
+type monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+type monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  matchExpressions: [monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+  matchFields: [monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+}
+type monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  preference: monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!
+  weight: Int!
+}
+type monitoringAlertmanagerAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  nodeSelectorTerms: [monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!]
+}
+type monitoringAlertmanagerAffinityNodeAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: monitoringAlertmanagerAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+}
+type monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+type monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  matchExpressions: [monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem]
+  matchLabels: JSONObject
+}
+type monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  labelSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaces: [String]
+  topologyKey: String!
+}
+type monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  podAffinityTerm: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm!
+  weight: Int!
+}
+type monitoringAlertmanagerAffinityPodAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+type monitoringAlertmanagerAffinityPodAntiAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+type monitoringAlertmanagerAffinity {
+  nodeAffinity: monitoringAlertmanagerAffinityNodeAffinity
+  podAffinity: monitoringAlertmanagerAffinityPodAffinity
+  podAntiAffinity: monitoringAlertmanagerAffinityPodAntiAffinity
+}
+type monitoringAlertmanagerAlertmanagerConfigMatcherStrategy {
+  type: String
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials {
+  key: String!
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization {
+  credentials: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  type: String
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth {
+  password: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  username: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap {
+  key: String!
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId {
+  configMap: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap
+  secret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2 {
+  clientId: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId!
+  clientSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials!
+  endpointParams: JSONObject
+  scopes: [String]
+  tokenUrl: String!
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig {
+  ca: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  cert: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  insecureSkipVerify: Boolean
+  keySecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  serverName: String
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfig {
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  followRedirects: Boolean
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyURL: String
+  tlsConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+type monitoringAlertmanagerAlertmanagerConfigurationGlobal {
+  httpConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfig
+  opsGenieApiKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  opsGenieApiUrl: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  resolveTimeout: String
+  slackApiUrl: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerAlertmanagerConfiguration {
+  global: monitoringAlertmanagerAlertmanagerConfigurationGlobal
+  name: String
+  templates: [monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId]
+}
+type monitoringAlertmanagerContainersItemEnvItemValueFromFieldRef {
+  apiVersion: String
+  fieldPath: String!
+}
+type monitoringAlertmanagerContainersItemEnvItemValueFromResourceFieldRef {
+  containerName: String
+  divisor: JSONObject
+  resource: String!
+}
+type monitoringAlertmanagerContainersItemEnvItemValueFrom {
+  configMapKeyRef: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientIdConfigMap
+  fieldRef: monitoringAlertmanagerContainersItemEnvItemValueFromFieldRef
+  resourceFieldRef: monitoringAlertmanagerContainersItemEnvItemValueFromResourceFieldRef
+  secretKeyRef: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerContainersItemEnvItem {
+  name: String!
+  value: String
+  valueFrom: monitoringAlertmanagerContainersItemEnvItemValueFrom
+}
+type monitoringAlertmanagerContainersItemEnvFromItemConfigMapRef {
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerContainersItemEnvFromItemSecretRef {
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerContainersItemEnvFromItem {
+  configMapRef: monitoringAlertmanagerContainersItemEnvFromItemConfigMapRef
+  prefix: String
+  secretRef: monitoringAlertmanagerContainersItemEnvFromItemSecretRef
+}
+type monitoringAlertmanagerContainersItemLifecyclePostStartExec {
+  command: [String]
+}
+type monitoringAlertmanagerContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  name: String!
+  value: String!
+}
+type monitoringAlertmanagerContainersItemLifecyclePostStartHttpGet {
+  host: String
+  httpHeaders: [monitoringAlertmanagerContainersItemLifecyclePostStartHttpGetHttpHeadersItem]
+  path: String
+  port: JSONObject!
+  scheme: String
+}
+type monitoringAlertmanagerContainersItemLifecyclePostStartTcpSocket {
+  host: String
+  port: JSONObject!
+}
+type monitoringAlertmanagerContainersItemLifecyclePostStart {
+  exec: monitoringAlertmanagerContainersItemLifecyclePostStartExec
+  httpGet: monitoringAlertmanagerContainersItemLifecyclePostStartHttpGet
+  tcpSocket: monitoringAlertmanagerContainersItemLifecyclePostStartTcpSocket
+}
+type monitoringAlertmanagerContainersItemLifecycle {
+  postStart: monitoringAlertmanagerContainersItemLifecyclePostStart
+  preStop: monitoringAlertmanagerContainersItemLifecyclePostStart
+}
+type monitoringAlertmanagerContainersItemLivenessProbeGrpc {
+  port: Int!
+  service: String
+}
+type monitoringAlertmanagerContainersItemLivenessProbe {
+  exec: monitoringAlertmanagerContainersItemLifecyclePostStartExec
+  failureThreshold: Int
+  grpc: monitoringAlertmanagerContainersItemLivenessProbeGrpc
+  httpGet: monitoringAlertmanagerContainersItemLifecyclePostStartHttpGet
+  initialDelaySeconds: Int
+  periodSeconds: Int
+  successThreshold: Int
+  tcpSocket: monitoringAlertmanagerContainersItemLifecyclePostStartTcpSocket
+  terminationGracePeriodSeconds: Int
+  timeoutSeconds: Int
+}
+type monitoringAlertmanagerContainersItemPortsItem {
+  containerPort: Int!
+  hostIP: String
+  hostPort: Int
+  name: String
+  protocol: String
+}
+type monitoringAlertmanagerContainersItemResizePolicyItem {
+  resourceName: String!
+  restartPolicy: String!
+}
+type monitoringAlertmanagerContainersItemResourcesClaimsItem {
+  name: String!
+}
+type monitoringAlertmanagerContainersItemResources {
+  claims: [monitoringAlertmanagerContainersItemResourcesClaimsItem]
+  limits: JSONObject
+  requests: JSONObject
+}
+type monitoringAlertmanagerContainersItemSecurityContextCapabilities {
+  add: [String]
+  drop: [String]
+}
+type monitoringAlertmanagerContainersItemSecurityContextSeLinuxOptions {
+  level: String
+  role: String
+  type: String
+  user: String
+}
+type monitoringAlertmanagerContainersItemSecurityContextSeccompProfile {
+  localhostProfile: String
+  type: String!
+}
+type monitoringAlertmanagerContainersItemSecurityContextWindowsOptions {
+  gmsaCredentialSpec: String
+  gmsaCredentialSpecName: String
+  hostProcess: Boolean
+  runAsUserName: String
+}
+type monitoringAlertmanagerContainersItemSecurityContext {
+  allowPrivilegeEscalation: Boolean
+  capabilities: monitoringAlertmanagerContainersItemSecurityContextCapabilities
+  privileged: Boolean
+  procMount: String
+  readOnlyRootFilesystem: Boolean
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: monitoringAlertmanagerContainersItemSecurityContextSeLinuxOptions
+  seccompProfile: monitoringAlertmanagerContainersItemSecurityContextSeccompProfile
+  windowsOptions: monitoringAlertmanagerContainersItemSecurityContextWindowsOptions
+}
+type monitoringAlertmanagerContainersItemVolumeDevicesItem {
+  devicePath: String!
+  name: String!
+}
+type monitoringAlertmanagerContainersItemVolumeMountsItem {
+  mountPath: String!
+  mountPropagation: String
+  name: String!
+  readOnly: Boolean
+  subPath: String
+  subPathExpr: String
+}
+type monitoringAlertmanagerContainersItem {
+  args: [String]
+  command: [String]
+  env: [monitoringAlertmanagerContainersItemEnvItem]
+  envFrom: [monitoringAlertmanagerContainersItemEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: monitoringAlertmanagerContainersItemLifecycle
+  livenessProbe: monitoringAlertmanagerContainersItemLivenessProbe
+  name: String!
+  ports: [monitoringAlertmanagerContainersItemPortsItem]
+  readinessProbe: monitoringAlertmanagerContainersItemLivenessProbe
+  resizePolicy: [monitoringAlertmanagerContainersItemResizePolicyItem]
+  resources: monitoringAlertmanagerContainersItemResources
+  securityContext: monitoringAlertmanagerContainersItemSecurityContext
+  startupProbe: monitoringAlertmanagerContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [monitoringAlertmanagerContainersItemVolumeDevicesItem]
+  volumeMounts: [monitoringAlertmanagerContainersItemVolumeMountsItem]
+  workingDir: String
+}
+type monitoringAlertmanagerHostAliasesItem {
+  hostnames: [String]!
+  ip: String!
+}
+type monitoringAlertmanagerImagePullSecretsItem {
+  name: String
+}
+type monitoringAlertmanagerPodMetadata {
+  annotations: JSONObject
+  labels: JSONObject
+  name: String
+}
+type monitoringAlertmanagerSecurityContextSysctlsItem {
+  name: String!
+  value: String!
+}
+type monitoringAlertmanagerSecurityContext {
+  fsGroup: Int
+  fsGroupChangePolicy: String
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: monitoringAlertmanagerContainersItemSecurityContextSeLinuxOptions
+  seccompProfile: monitoringAlertmanagerContainersItemSecurityContextSeccompProfile
+  supplementalGroups: [Int]
+  sysctls: [monitoringAlertmanagerSecurityContextSysctlsItem]
+  windowsOptions: monitoringAlertmanagerContainersItemSecurityContextWindowsOptions
+}
+type monitoringAlertmanagerStorageEmptyDir {
+  medium: String
+  sizeLimit: JSONObject
+}
+type monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpecDataSource {
+  apiGroup: String
+  kind: String!
+  name: String!
+}
+type monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpecDataSourceRef {
+  apiGroup: String
+  kind: String!
+  name: String!
+  namespace: String
+}
+type monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpec {
+  accessModes: [String]
+  dataSource: monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpecDataSource
+  dataSourceRef: monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpecDataSourceRef
+  resources: monitoringAlertmanagerContainersItemResources
+  selector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  storageClassName: String
+  volumeMode: String
+  volumeName: String
+}
+type monitoringAlertmanagerStorageEphemeralVolumeClaimTemplate {
+  metadata: JSONObject
+  spec: monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpec!
+}
+type monitoringAlertmanagerStorageEphemeral {
+  volumeClaimTemplate: monitoringAlertmanagerStorageEphemeralVolumeClaimTemplate
+}
+type monitoringAlertmanagerStorageVolumeClaimTemplateStatusConditionsItem {
+  lastProbeTime: String
+  lastTransitionTime: String
+  message: String
+  reason: String
+  status: String!
+  type: String!
+}
+type monitoringAlertmanagerStorageVolumeClaimTemplateStatus {
+  accessModes: [String]
+  allocatedResources: JSONObject
+  capacity: JSONObject
+  conditions: [monitoringAlertmanagerStorageVolumeClaimTemplateStatusConditionsItem]
+  phase: String
+  resizeStatus: String
+}
+type monitoringAlertmanagerStorageVolumeClaimTemplate {
+  apiVersion: String
+  kind: String
+  metadata: monitoringAlertmanagerPodMetadata
+  spec: monitoringAlertmanagerStorageEphemeralVolumeClaimTemplateSpec
+  status: monitoringAlertmanagerStorageVolumeClaimTemplateStatus
+}
+type monitoringAlertmanagerStorage {
+  disableMountSubPath: Boolean
+  emptyDir: monitoringAlertmanagerStorageEmptyDir
+  ephemeral: monitoringAlertmanagerStorageEphemeral
+  volumeClaimTemplate: monitoringAlertmanagerStorageVolumeClaimTemplate
+}
+type monitoringAlertmanagerTolerationsItem {
+  effect: String
+  key: String
+  operator: String
+  tolerationSeconds: Int
+  value: String
+}
+type monitoringAlertmanagerTopologySpreadConstraintsItem {
+  labelSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  matchLabelKeys: [String]
+  maxSkew: Int!
+  minDomains: Int
+  nodeAffinityPolicy: String
+  nodeTaintsPolicy: String
+  topologyKey: String!
+  whenUnsatisfiable: String!
+}
+type monitoringAlertmanagerVolumesItemAwsElasticBlockStore {
+  fsType: String
+  partition: Int
+  readOnly: Boolean
+  volumeID: String!
+}
+type monitoringAlertmanagerVolumesItemAzureDisk {
+  cachingMode: String
+  diskName: String!
+  diskURI: String!
+  fsType: String
+  kind: String
+  readOnly: Boolean
+}
+type monitoringAlertmanagerVolumesItemAzureFile {
+  readOnly: Boolean
+  secretName: String!
+  shareName: String!
+}
+type monitoringAlertmanagerVolumesItemCephfs {
+  monitors: [String]!
+  path: String
+  readOnly: Boolean
+  secretFile: String
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+  user: String
+}
+type monitoringAlertmanagerVolumesItemCinder {
+  fsType: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+  volumeID: String!
+}
+type monitoringAlertmanagerVolumesItemConfigMapItemsItem {
+  key: String!
+  mode: Int
+  path: String!
+}
+type monitoringAlertmanagerVolumesItemConfigMap {
+  defaultMode: Int
+  items: [monitoringAlertmanagerVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerVolumesItemCsi {
+  driver: String!
+  fsType: String
+  nodePublishSecretRef: monitoringAlertmanagerImagePullSecretsItem
+  readOnly: Boolean
+  volumeAttributes: JSONObject
+}
+type monitoringAlertmanagerVolumesItemDownwardAPIItemsItem {
+  fieldRef: monitoringAlertmanagerContainersItemEnvItemValueFromFieldRef
+  mode: Int
+  path: String!
+  resourceFieldRef: monitoringAlertmanagerContainersItemEnvItemValueFromResourceFieldRef
+}
+type monitoringAlertmanagerVolumesItemDownwardAPI {
+  defaultMode: Int
+  items: [monitoringAlertmanagerVolumesItemDownwardAPIItemsItem]
+}
+type monitoringAlertmanagerVolumesItemFc {
+  fsType: String
+  lun: Int
+  readOnly: Boolean
+  targetWWNs: [String]
+  wwids: [String]
+}
+type monitoringAlertmanagerVolumesItemFlexVolume {
+  driver: String!
+  fsType: String
+  options: JSONObject
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+}
+type monitoringAlertmanagerVolumesItemFlocker {
+  datasetName: String
+  datasetUUID: String
+}
+type monitoringAlertmanagerVolumesItemGcePersistentDisk {
+  fsType: String
+  partition: Int
+  pdName: String!
+  readOnly: Boolean
+}
+type monitoringAlertmanagerVolumesItemGitRepo {
+  directory: String
+  repository: String!
+  revision: String
+}
+type monitoringAlertmanagerVolumesItemGlusterfs {
+  endpoints: String!
+  path: String!
+  readOnly: Boolean
+}
+type monitoringAlertmanagerVolumesItemHostPath {
+  path: String!
+  type: String
+}
+type monitoringAlertmanagerVolumesItemIscsi {
+  chapAuthDiscovery: Boolean
+  chapAuthSession: Boolean
+  fsType: String
+  initiatorName: String
+  iqn: String!
+  iscsiInterface: String
+  lun: Int!
+  portals: [String]
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+  targetPortal: String!
+}
+type monitoringAlertmanagerVolumesItemNfs {
+  path: String!
+  readOnly: Boolean
+  server: String!
+}
+type monitoringAlertmanagerVolumesItemPersistentVolumeClaim {
+  claimName: String!
+  readOnly: Boolean
+}
+type monitoringAlertmanagerVolumesItemPhotonPersistentDisk {
+  fsType: String
+  pdID: String!
+}
+type monitoringAlertmanagerVolumesItemPortworxVolume {
+  fsType: String
+  readOnly: Boolean
+  volumeID: String!
+}
+type monitoringAlertmanagerVolumesItemProjectedSourcesItemConfigMap {
+  items: [monitoringAlertmanagerVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerVolumesItemProjectedSourcesItemDownwardAPI {
+  items: [monitoringAlertmanagerVolumesItemDownwardAPIItemsItem]
+}
+type monitoringAlertmanagerVolumesItemProjectedSourcesItemSecret {
+  items: [monitoringAlertmanagerVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type monitoringAlertmanagerVolumesItemProjectedSourcesItemServiceAccountToken {
+  audience: String
+  expirationSeconds: Int
+  path: String!
+}
+type monitoringAlertmanagerVolumesItemProjectedSourcesItem {
+  configMap: monitoringAlertmanagerVolumesItemProjectedSourcesItemConfigMap
+  downwardAPI: monitoringAlertmanagerVolumesItemProjectedSourcesItemDownwardAPI
+  secret: monitoringAlertmanagerVolumesItemProjectedSourcesItemSecret
+  serviceAccountToken: monitoringAlertmanagerVolumesItemProjectedSourcesItemServiceAccountToken
+}
+type monitoringAlertmanagerVolumesItemProjected {
+  defaultMode: Int
+  sources: [monitoringAlertmanagerVolumesItemProjectedSourcesItem]
+}
+type monitoringAlertmanagerVolumesItemQuobyte {
+  group: String
+  readOnly: Boolean
+  registry: String!
+  tenant: String
+  user: String
+  volume: String!
+}
+type monitoringAlertmanagerVolumesItemRbd {
+  fsType: String
+  image: String!
+  keyring: String
+  monitors: [String]!
+  pool: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+  user: String
+}
+type monitoringAlertmanagerVolumesItemScaleIO {
+  fsType: String
+  gateway: String!
+  protectionDomain: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem!
+  sslEnabled: Boolean
+  storageMode: String
+  storagePool: String
+  system: String!
+  volumeName: String
+}
+type monitoringAlertmanagerVolumesItemSecret {
+  defaultMode: Int
+  items: [monitoringAlertmanagerVolumesItemConfigMapItemsItem]
+  optional: Boolean
+  secretName: String
+}
+type monitoringAlertmanagerVolumesItemStorageos {
+  fsType: String
+  readOnly: Boolean
+  secretRef: monitoringAlertmanagerImagePullSecretsItem
+  volumeName: String
+  volumeNamespace: String
+}
+type monitoringAlertmanagerVolumesItemVsphereVolume {
+  fsType: String
+  storagePolicyID: String
+  storagePolicyName: String
+  volumePath: String!
+}
+type monitoringAlertmanagerVolumesItem {
+  awsElasticBlockStore: monitoringAlertmanagerVolumesItemAwsElasticBlockStore
+  azureDisk: monitoringAlertmanagerVolumesItemAzureDisk
+  azureFile: monitoringAlertmanagerVolumesItemAzureFile
+  cephfs: monitoringAlertmanagerVolumesItemCephfs
+  cinder: monitoringAlertmanagerVolumesItemCinder
+  configMap: monitoringAlertmanagerVolumesItemConfigMap
+  csi: monitoringAlertmanagerVolumesItemCsi
+  downwardAPI: monitoringAlertmanagerVolumesItemDownwardAPI
+  emptyDir: monitoringAlertmanagerStorageEmptyDir
+  ephemeral: monitoringAlertmanagerStorageEphemeral
+  fc: monitoringAlertmanagerVolumesItemFc
+  flexVolume: monitoringAlertmanagerVolumesItemFlexVolume
+  flocker: monitoringAlertmanagerVolumesItemFlocker
+  gcePersistentDisk: monitoringAlertmanagerVolumesItemGcePersistentDisk
+  gitRepo: monitoringAlertmanagerVolumesItemGitRepo
+  glusterfs: monitoringAlertmanagerVolumesItemGlusterfs
+  hostPath: monitoringAlertmanagerVolumesItemHostPath
+  iscsi: monitoringAlertmanagerVolumesItemIscsi
+  name: String!
+  nfs: monitoringAlertmanagerVolumesItemNfs
+  persistentVolumeClaim: monitoringAlertmanagerVolumesItemPersistentVolumeClaim
+  photonPersistentDisk: monitoringAlertmanagerVolumesItemPhotonPersistentDisk
+  portworxVolume: monitoringAlertmanagerVolumesItemPortworxVolume
+  projected: monitoringAlertmanagerVolumesItemProjected
+  quobyte: monitoringAlertmanagerVolumesItemQuobyte
+  rbd: monitoringAlertmanagerVolumesItemRbd
+  scaleIO: monitoringAlertmanagerVolumesItemScaleIO
+  secret: monitoringAlertmanagerVolumesItemSecret
+  storageos: monitoringAlertmanagerVolumesItemStorageos
+  vsphereVolume: monitoringAlertmanagerVolumesItemVsphereVolume
+}
+type monitoringAlertmanagerWebHttpConfigHeaders {
+  contentSecurityPolicy: String
+  strictTransportSecurity: String
+  xContentTypeOptions: String
+  xFrameOptions: String
+  xXSSProtection: String
+}
+type monitoringAlertmanagerWebHttpConfig {
+  headers: monitoringAlertmanagerWebHttpConfigHeaders
+  http2: Boolean
+}
+type monitoringAlertmanagerWebTlsConfig {
+  cert: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId!
+  cipherSuites: [String]
+  clientAuthType: String
+  client_ca: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  curvePreferences: [String]
+  keySecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials!
+  maxVersion: String
+  minVersion: String
+  preferServerCipherSuites: Boolean
+}
+type monitoringAlertmanagerWeb {
+  getConcurrency: Int
+  httpConfig: monitoringAlertmanagerWebHttpConfig
+  timeout: Int
+  tlsConfig: monitoringAlertmanagerWebTlsConfig
+}
+type monitoringAlertmanager {
+  metadata: metadata
+  additionalPeers: [String]
+  affinity: monitoringAlertmanagerAffinity
+  alertmanagerConfigMatcherStrategy: monitoringAlertmanagerAlertmanagerConfigMatcherStrategy
+  alertmanagerConfigNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  alertmanagerConfigSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  alertmanagerConfiguration: monitoringAlertmanagerAlertmanagerConfiguration
+  baseImage: String
+  clusterAdvertiseAddress: String
+  clusterGossipInterval: String
+  clusterPeerTimeout: String
+  clusterPushpullInterval: String
+  configMaps: [String]
+  configSecret: String
+  containers: [monitoringAlertmanagerContainersItem]
+  externalUrl: String
+  forceEnableClusterMode: Boolean
+  hostAliases: [monitoringAlertmanagerHostAliasesItem]
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerPodMetadata
+  portName: String
+  priorityClassName: String
+  replicas: Int
+  resources: monitoringAlertmanagerContainersItemResources
+  retention: String
+  routePrefix: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSecurityContext
+  serviceAccountName: String
+  sha: String
+  storage: monitoringAlertmanagerStorage
+  tag: String
+  tolerations: [monitoringAlertmanagerTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerTopologySpreadConstraintsItem]
+  version: String
+  volumeMounts: [monitoringAlertmanagerContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerVolumesItem]
+  web: monitoringAlertmanagerWeb
+  status: monitoringAlertmanagerStatus
+}
+input monitoringPodMonitorSpecAttachMetadata {
+  node: Boolean
+}
+input monitoringPodMonitorSpecNamespaceSelector {
+  any: Boolean
+  matchNames: [String]
+}
+input monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem {
+  action: String
+  modulus: Int
+  regex: String
+  replacement: String
+  separator: String
+  sourceLabels: [String]
+  targetLabel: String
+}
+input monitoringPodMonitorSpecPodMetricsEndpointsItem {
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  enableHttp2: Boolean
+  filterRunning: Boolean
+  followRedirects: Boolean
+  honorLabels: Boolean
+  honorTimestamps: Boolean
+  interval: String
+  metricRelabelings: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  params: JSONObject
+  path: String
+  port: String
+  proxyUrl: String
+  relabelings: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  scheme: String
+  scrapeTimeout: String
+  targetPort: JSONObject
+  tlsConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+input monitoringPodMonitorSpec {
+  attachMetadata: monitoringPodMonitorSpecAttachMetadata
+  jobLabel: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  namespaceSelector: monitoringPodMonitorSpecNamespaceSelector
+  podMetricsEndpoints: [monitoringPodMonitorSpecPodMetricsEndpointsItem]!
+  podTargetLabels: [String]
+  sampleLimit: Int
+  selector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector!
+  targetLimit: Int
+}
+type monitoringPodMonitorAttachMetadata {
+  node: Boolean
+}
+type monitoringPodMonitorNamespaceSelector {
+  any: Boolean
+  matchNames: [String]
+}
+type monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem {
+  action: String
+  modulus: Int
+  regex: String
+  replacement: String
+  separator: String
+  sourceLabels: [String]
+  targetLabel: String
+}
+type monitoringPodMonitorPodMetricsEndpointsItem {
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  enableHttp2: Boolean
+  filterRunning: Boolean
+  followRedirects: Boolean
+  honorLabels: Boolean
+  honorTimestamps: Boolean
+  interval: String
+  metricRelabelings: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  params: JSONObject
+  path: String
+  port: String
+  proxyUrl: String
+  relabelings: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  scheme: String
+  scrapeTimeout: String
+  targetPort: JSONObject
+  tlsConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+type monitoringPodMonitor {
+  metadata: metadata
+  attachMetadata: monitoringPodMonitorAttachMetadata
+  jobLabel: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  namespaceSelector: monitoringPodMonitorNamespaceSelector
+  podMetricsEndpoints: [monitoringPodMonitorPodMetricsEndpointsItem]!
+  podTargetLabels: [String]
+  sampleLimit: Int
+  selector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector!
+  targetLimit: Int
+}
+input monitoringProbeSpecProber {
+  path: String
+  proxyUrl: String
+  scheme: String
+  url: String!
+}
+input monitoringProbeSpecTargetsIngress {
+  namespaceSelector: monitoringPodMonitorSpecNamespaceSelector
+  relabelingConfigs: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  selector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+}
+input monitoringProbeSpecTargetsStaticConfig {
+  labels: JSONObject
+  relabelingConfigs: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  static: [String]
+}
+input monitoringProbeSpecTargets {
+  ingress: monitoringProbeSpecTargetsIngress
+  staticConfig: monitoringProbeSpecTargetsStaticConfig
+}
+input monitoringProbeSpec {
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  interval: String
+  jobName: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  metricRelabelings: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  module: String
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  prober: monitoringProbeSpecProber
+  sampleLimit: Int
+  scrapeTimeout: String
+  targetLimit: Int
+  targets: monitoringProbeSpecTargets
+  tlsConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+type monitoringProbeProber {
+  path: String
+  proxyUrl: String
+  scheme: String
+  url: String!
+}
+type monitoringProbeTargetsIngress {
+  namespaceSelector: monitoringPodMonitorNamespaceSelector
+  relabelingConfigs: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  selector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+}
+type monitoringProbeTargetsStaticConfig {
+  labels: JSONObject
+  relabelingConfigs: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  static: [String]
+}
+type monitoringProbeTargets {
+  ingress: monitoringProbeTargetsIngress
+  staticConfig: monitoringProbeTargetsStaticConfig
+}
+type monitoringProbe {
+  metadata: metadata
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  interval: String
+  jobName: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  metricRelabelings: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  module: String
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  prober: monitoringProbeProber
+  sampleLimit: Int
+  scrapeTimeout: String
+  targetLimit: Int
+  targets: monitoringProbeTargets
+  tlsConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+type monitoringPrometheusStatusShardStatusesItem {
+  availableReplicas: Int!
+  replicas: Int!
+  shardID: String!
+  unavailableReplicas: Int!
+  updatedReplicas: Int!
+}
+type monitoringPrometheusStatus {
+  availableReplicas: Int!
+  conditions: [monitoringAlertmanagerStatusConditionsItem]
+  paused: Boolean!
+  replicas: Int!
+  shardStatuses: [monitoringPrometheusStatusShardStatusesItem]
+  unavailableReplicas: Int!
+  updatedReplicas: Int!
+}
+input monitoringPrometheusSpecAdditionalArgsItem {
+  name: String!
+  value: String
+}
+input monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig {
+  ca: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  caFile: String
+  cert: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  certFile: String
+  insecureSkipVerify: Boolean
+  keyFile: String
+  keySecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  serverName: String
+}
+input monitoringPrometheusSpecAlertingAlertmanagersItem {
+  apiVersion: String
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenFile: String
+  enableHttp2: Boolean
+  name: String!
+  namespace: String!
+  pathPrefix: String
+  port: JSONObject!
+  scheme: String
+  timeout: String
+  tlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+}
+input monitoringPrometheusSpecAlerting {
+  alertmanagers: [monitoringPrometheusSpecAlertingAlertmanagersItem]!
+}
+input monitoringPrometheusSpecApiserverConfigAuthorization {
+  credentials: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  credentialsFile: String
+  type: String
+}
+input monitoringPrometheusSpecApiserverConfig {
+  authorization: monitoringPrometheusSpecApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  host: String!
+  tlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+}
+input monitoringPrometheusSpecArbitraryFSAccessThroughSMs {
+  deny: Boolean
+}
+input monitoringPrometheusSpecExcludedFromEnforcementItem {
+  group: String
+  name: String
+  namespace: String!
+  resource: String!
+}
+input monitoringPrometheusSpecExemplars {
+  maxSize: Int
+}
+input monitoringPrometheusSpecPrometheusRulesExcludedFromEnforceItem {
+  ruleName: String!
+  ruleNamespace: String!
+}
+input monitoringPrometheusSpecQuery {
+  lookbackDelta: String
+  maxConcurrency: Int
+  maxSamples: Int
+  timeout: String
+}
+input monitoringPrometheusSpecRemoteReadItem {
+  authorization: monitoringPrometheusSpecApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  filterExternalLabels: Boolean
+  headers: JSONObject
+  name: String
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyUrl: String
+  readRecent: Boolean
+  remoteTimeout: String
+  requiredMatchers: JSONObject
+  tlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+  url: String!
+}
+input monitoringPrometheusSpecRemoteWriteItemMetadataConfig {
+  send: Boolean
+  sendInterval: String
+}
+input monitoringPrometheusSpecRemoteWriteItemQueueConfig {
+  batchSendDeadline: String
+  capacity: Int
+  maxBackoff: String
+  maxRetries: Int
+  maxSamplesPerSend: Int
+  maxShards: Int
+  minBackoff: String
+  minShards: Int
+  retryOnRateLimit: Boolean
+}
+input monitoringPrometheusSpecRemoteWriteItemSigv4 {
+  accessKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  profile: String
+  region: String
+  roleArn: String
+  secretKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringPrometheusSpecRemoteWriteItem {
+  authorization: monitoringPrometheusSpecApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  headers: JSONObject
+  metadataConfig: monitoringPrometheusSpecRemoteWriteItemMetadataConfig
+  name: String
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyUrl: String
+  queueConfig: monitoringPrometheusSpecRemoteWriteItemQueueConfig
+  remoteTimeout: String
+  sendExemplars: Boolean
+  sigv4: monitoringPrometheusSpecRemoteWriteItemSigv4
+  tlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+  url: String!
+  writeRelabelConfigs: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+}
+input monitoringPrometheusSpecRulesAlert {
+  forGracePeriod: String
+  forOutageTolerance: String
+  resendDelay: String
+}
+input monitoringPrometheusSpecRules {
+  alert: monitoringPrometheusSpecRulesAlert
+}
+input monitoringPrometheusSpecThanos {
+  additionalArgs: [monitoringPrometheusSpecAdditionalArgsItem]
+  baseImage: String
+  blockSize: String
+  getConfigInterval: String
+  getConfigTimeout: String
+  grpcListenLocal: Boolean
+  grpcServerTlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+  httpListenLocal: Boolean
+  image: String
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minTime: String
+  objectStorageConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  objectStorageConfigFile: String
+  readyTimeout: String
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  sha: String
+  tag: String
+  tracingConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  tracingConfigFile: String
+  version: String
+  volumeMounts: [monitoringAlertmanagerSpecContainersItemVolumeMountsItem]
+}
+input monitoringPrometheusSpecTsdb {
+  outOfOrderTimeWindow: String
+}
+input monitoringPrometheusSpecWeb {
+  httpConfig: monitoringAlertmanagerSpecWebHttpConfig
+  maxConnections: Int
+  pageTitle: String
+  tlsConfig: monitoringAlertmanagerSpecWebTlsConfig
+}
+input monitoringPrometheusSpec {
+  additionalAlertManagerConfigs: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  additionalAlertRelabelConfigs: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  additionalArgs: [monitoringPrometheusSpecAdditionalArgsItem]
+  additionalScrapeConfigs: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  affinity: monitoringAlertmanagerSpecAffinity
+  alerting: monitoringPrometheusSpecAlerting
+  allowOverlappingBlocks: Boolean
+  apiserverConfig: monitoringPrometheusSpecApiserverConfig
+  arbitraryFSAccessThroughSMs: monitoringPrometheusSpecArbitraryFSAccessThroughSMs
+  baseImage: String
+  configMaps: [String]
+  containers: [monitoringAlertmanagerSpecContainersItem]
+  disableCompaction: Boolean
+  enableAdminAPI: Boolean
+  enableFeatures: [String]
+  enableRemoteWriteReceiver: Boolean
+  enforcedBodySizeLimit: String
+  enforcedLabelLimit: Int
+  enforcedLabelNameLengthLimit: Int
+  enforcedLabelValueLengthLimit: Int
+  enforcedNamespaceLabel: String
+  enforcedSampleLimit: Int
+  enforcedTargetLimit: Int
+  evaluationInterval: String
+  excludedFromEnforcement: [monitoringPrometheusSpecExcludedFromEnforcementItem]
+  exemplars: monitoringPrometheusSpecExemplars
+  externalLabels: JSONObject
+  externalUrl: String
+  hostAliases: [monitoringAlertmanagerSpecHostAliasesItem]
+  hostNetwork: Boolean
+  ignoreNamespaceSelectors: Boolean
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerSpecImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerSpecContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  overrideHonorLabels: Boolean
+  overrideHonorTimestamps: Boolean
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerSpecPodMetadata
+  podMonitorNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podMonitorSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podTargetLabels: [String]
+  portName: String
+  priorityClassName: String
+  probeNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  probeSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  prometheusExternalLabelName: String
+  prometheusRulesExcludedFromEnforce: [monitoringPrometheusSpecPrometheusRulesExcludedFromEnforceItem]
+  query: monitoringPrometheusSpecQuery
+  queryLogFile: String
+  remoteRead: [monitoringPrometheusSpecRemoteReadItem]
+  remoteWrite: [monitoringPrometheusSpecRemoteWriteItem]
+  replicaExternalLabelName: String
+  replicas: Int
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  retention: String
+  retentionSize: String
+  routePrefix: String
+  ruleNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  ruleSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  rules: monitoringPrometheusSpecRules
+  scrapeConfigNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeConfigSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeInterval: String
+  scrapeTimeout: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSpecSecurityContext
+  serviceAccountName: String
+  serviceMonitorNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  serviceMonitorSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  sha: String
+  shards: Int
+  storage: monitoringAlertmanagerSpecStorage
+  tag: String
+  thanos: monitoringPrometheusSpecThanos
+  tolerations: [monitoringAlertmanagerSpecTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerSpecTopologySpreadConstraintsItem]
+  tsdb: monitoringPrometheusSpecTsdb
+  version: String
+  volumeMounts: [monitoringAlertmanagerSpecContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerSpecVolumesItem]
+  walCompression: Boolean
+  web: monitoringPrometheusSpecWeb
+}
+type monitoringPrometheusAdditionalArgsItem {
+  name: String!
+  value: String
+}
+type monitoringPrometheusAlertingAlertmanagersItemTlsConfig {
+  ca: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  caFile: String
+  cert: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2ClientId
+  certFile: String
+  insecureSkipVerify: Boolean
+  keyFile: String
+  keySecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  serverName: String
+}
+type monitoringPrometheusAlertingAlertmanagersItem {
+  apiVersion: String
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenFile: String
+  enableHttp2: Boolean
+  name: String!
+  namespace: String!
+  pathPrefix: String
+  port: JSONObject!
+  scheme: String
+  timeout: String
+  tlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+}
+type monitoringPrometheusAlerting {
+  alertmanagers: [monitoringPrometheusAlertingAlertmanagersItem]!
+}
+type monitoringPrometheusApiserverConfigAuthorization {
+  credentials: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  credentialsFile: String
+  type: String
+}
+type monitoringPrometheusApiserverConfig {
+  authorization: monitoringPrometheusApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  host: String!
+  tlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+}
+type monitoringPrometheusArbitraryFSAccessThroughSMs {
+  deny: Boolean
+}
+type monitoringPrometheusExcludedFromEnforcementItem {
+  group: String
+  name: String
+  namespace: String!
+  resource: String!
+}
+type monitoringPrometheusExemplars {
+  maxSize: Int
+}
+type monitoringPrometheusPrometheusRulesExcludedFromEnforceItem {
+  ruleName: String!
+  ruleNamespace: String!
+}
+type monitoringPrometheusQuery {
+  lookbackDelta: String
+  maxConcurrency: Int
+  maxSamples: Int
+  timeout: String
+}
+type monitoringPrometheusRemoteReadItem {
+  authorization: monitoringPrometheusApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  filterExternalLabels: Boolean
+  headers: JSONObject
+  name: String
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyUrl: String
+  readRecent: Boolean
+  remoteTimeout: String
+  requiredMatchers: JSONObject
+  tlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+  url: String!
+}
+type monitoringPrometheusRemoteWriteItemMetadataConfig {
+  send: Boolean
+  sendInterval: String
+}
+type monitoringPrometheusRemoteWriteItemQueueConfig {
+  batchSendDeadline: String
+  capacity: Int
+  maxBackoff: String
+  maxRetries: Int
+  maxSamplesPerSend: Int
+  maxShards: Int
+  minBackoff: String
+  minShards: Int
+  retryOnRateLimit: Boolean
+}
+type monitoringPrometheusRemoteWriteItemSigv4 {
+  accessKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  profile: String
+  region: String
+  roleArn: String
+  secretKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringPrometheusRemoteWriteItem {
+  authorization: monitoringPrometheusApiserverConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerToken: String
+  bearerTokenFile: String
+  headers: JSONObject
+  metadataConfig: monitoringPrometheusRemoteWriteItemMetadataConfig
+  name: String
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyUrl: String
+  queueConfig: monitoringPrometheusRemoteWriteItemQueueConfig
+  remoteTimeout: String
+  sendExemplars: Boolean
+  sigv4: monitoringPrometheusRemoteWriteItemSigv4
+  tlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+  url: String!
+  writeRelabelConfigs: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+}
+type monitoringPrometheusRulesAlert {
+  forGracePeriod: String
+  forOutageTolerance: String
+  resendDelay: String
+}
+type monitoringPrometheusRules {
+  alert: monitoringPrometheusRulesAlert
+}
+type monitoringPrometheusThanos {
+  additionalArgs: [monitoringPrometheusAdditionalArgsItem]
+  baseImage: String
+  blockSize: String
+  getConfigInterval: String
+  getConfigTimeout: String
+  grpcListenLocal: Boolean
+  grpcServerTlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+  httpListenLocal: Boolean
+  image: String
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minTime: String
+  objectStorageConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  objectStorageConfigFile: String
+  readyTimeout: String
+  resources: monitoringAlertmanagerContainersItemResources
+  sha: String
+  tag: String
+  tracingConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  tracingConfigFile: String
+  version: String
+  volumeMounts: [monitoringAlertmanagerContainersItemVolumeMountsItem]
+}
+type monitoringPrometheusTsdb {
+  outOfOrderTimeWindow: String
+}
+type monitoringPrometheusWeb {
+  httpConfig: monitoringAlertmanagerWebHttpConfig
+  maxConnections: Int
+  pageTitle: String
+  tlsConfig: monitoringAlertmanagerWebTlsConfig
+}
+type monitoringPrometheus {
+  metadata: metadata
+  additionalAlertManagerConfigs: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  additionalAlertRelabelConfigs: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  additionalArgs: [monitoringPrometheusAdditionalArgsItem]
+  additionalScrapeConfigs: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  affinity: monitoringAlertmanagerAffinity
+  alerting: monitoringPrometheusAlerting
+  allowOverlappingBlocks: Boolean
+  apiserverConfig: monitoringPrometheusApiserverConfig
+  arbitraryFSAccessThroughSMs: monitoringPrometheusArbitraryFSAccessThroughSMs
+  baseImage: String
+  configMaps: [String]
+  containers: [monitoringAlertmanagerContainersItem]
+  disableCompaction: Boolean
+  enableAdminAPI: Boolean
+  enableFeatures: [String]
+  enableRemoteWriteReceiver: Boolean
+  enforcedBodySizeLimit: String
+  enforcedLabelLimit: Int
+  enforcedLabelNameLengthLimit: Int
+  enforcedLabelValueLengthLimit: Int
+  enforcedNamespaceLabel: String
+  enforcedSampleLimit: Int
+  enforcedTargetLimit: Int
+  evaluationInterval: String
+  excludedFromEnforcement: [monitoringPrometheusExcludedFromEnforcementItem]
+  exemplars: monitoringPrometheusExemplars
+  externalLabels: JSONObject
+  externalUrl: String
+  hostAliases: [monitoringAlertmanagerHostAliasesItem]
+  hostNetwork: Boolean
+  ignoreNamespaceSelectors: Boolean
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  overrideHonorLabels: Boolean
+  overrideHonorTimestamps: Boolean
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerPodMetadata
+  podMonitorNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podMonitorSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podTargetLabels: [String]
+  portName: String
+  priorityClassName: String
+  probeNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  probeSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  prometheusExternalLabelName: String
+  prometheusRulesExcludedFromEnforce: [monitoringPrometheusPrometheusRulesExcludedFromEnforceItem]
+  query: monitoringPrometheusQuery
+  queryLogFile: String
+  remoteRead: [monitoringPrometheusRemoteReadItem]
+  remoteWrite: [monitoringPrometheusRemoteWriteItem]
+  replicaExternalLabelName: String
+  replicas: Int
+  resources: monitoringAlertmanagerContainersItemResources
+  retention: String
+  retentionSize: String
+  routePrefix: String
+  ruleNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  ruleSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  rules: monitoringPrometheusRules
+  scrapeConfigNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeConfigSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeInterval: String
+  scrapeTimeout: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSecurityContext
+  serviceAccountName: String
+  serviceMonitorNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  serviceMonitorSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  sha: String
+  shards: Int
+  storage: monitoringAlertmanagerStorage
+  tag: String
+  thanos: monitoringPrometheusThanos
+  tolerations: [monitoringAlertmanagerTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerTopologySpreadConstraintsItem]
+  tsdb: monitoringPrometheusTsdb
+  version: String
+  volumeMounts: [monitoringAlertmanagerContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerVolumesItem]
+  walCompression: Boolean
+  web: monitoringPrometheusWeb
+  status: monitoringPrometheusStatus
+}
+input monitoringPrometheusRuleSpecGroupsItemRulesItem {
+  alert: String
+  annotations: JSONObject
+  expr: JSONObject!
+  for: String
+  labels: JSONObject
+  record: String
+}
+input monitoringPrometheusRuleSpecGroupsItem {
+  interval: String
+  limit: Int
+  name: String!
+  partial_response_strategy: String
+  rules: [monitoringPrometheusRuleSpecGroupsItemRulesItem]
+}
+input monitoringPrometheusRuleSpec {
+  groups: [monitoringPrometheusRuleSpecGroupsItem]
+}
+type monitoringPrometheusRuleGroupsItemRulesItem {
+  alert: String
+  annotations: JSONObject
+  expr: JSONObject!
+  for: String
+  labels: JSONObject
+  record: String
+}
+type monitoringPrometheusRuleGroupsItem {
+  interval: String
+  limit: Int
+  name: String!
+  partial_response_strategy: String
+  rules: [monitoringPrometheusRuleGroupsItemRulesItem]
+}
+type monitoringPrometheusRule {
+  metadata: metadata
+  groups: [monitoringPrometheusRuleGroupsItem]
+}
+input monitoringServiceMonitorSpecEndpointsItem {
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenFile: String
+  bearerTokenSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  enableHttp2: Boolean
+  filterRunning: Boolean
+  followRedirects: Boolean
+  honorLabels: Boolean
+  honorTimestamps: Boolean
+  interval: String
+  metricRelabelings: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  params: JSONObject
+  path: String
+  port: String
+  proxyUrl: String
+  relabelings: [monitoringPodMonitorSpecPodMetricsEndpointsItemMetricRelabelingsItem]
+  scheme: String
+  scrapeTimeout: String
+  targetPort: JSONObject
+  tlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+}
+input monitoringServiceMonitorSpec {
+  attachMetadata: monitoringPodMonitorSpecAttachMetadata
+  endpoints: [monitoringServiceMonitorSpecEndpointsItem]!
+  jobLabel: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  namespaceSelector: monitoringPodMonitorSpecNamespaceSelector
+  podTargetLabels: [String]
+  sampleLimit: Int
+  selector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector!
+  targetLabels: [String]
+  targetLimit: Int
+}
+type monitoringServiceMonitorEndpointsItem {
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenFile: String
+  bearerTokenSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  enableHttp2: Boolean
+  filterRunning: Boolean
+  followRedirects: Boolean
+  honorLabels: Boolean
+  honorTimestamps: Boolean
+  interval: String
+  metricRelabelings: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  params: JSONObject
+  path: String
+  port: String
+  proxyUrl: String
+  relabelings: [monitoringPodMonitorPodMetricsEndpointsItemMetricRelabelingsItem]
+  scheme: String
+  scrapeTimeout: String
+  targetPort: JSONObject
+  tlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+}
+type monitoringServiceMonitor {
+  metadata: metadata
+  attachMetadata: monitoringPodMonitorAttachMetadata
+  endpoints: [monitoringServiceMonitorEndpointsItem]!
+  jobLabel: String
+  labelLimit: Int
+  labelNameLengthLimit: Int
+  labelValueLengthLimit: Int
+  namespaceSelector: monitoringPodMonitorNamespaceSelector
+  podTargetLabels: [String]
+  sampleLimit: Int
+  selector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector!
+  targetLabels: [String]
+  targetLimit: Int
+}
+type monitoringThanosRulerStatus {
+  availableReplicas: Int!
+  conditions: [monitoringAlertmanagerStatusConditionsItem]
+  paused: Boolean!
+  replicas: Int!
+  unavailableReplicas: Int!
+  updatedReplicas: Int!
+}
+input monitoringThanosRulerSpec {
+  additionalArgs: [monitoringPrometheusSpecAdditionalArgsItem]
+  affinity: monitoringAlertmanagerSpecAffinity
+  alertDropLabels: [String]
+  alertQueryUrl: String
+  alertRelabelConfigFile: String
+  alertRelabelConfigs: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  alertmanagersConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  alertmanagersUrl: [String]
+  containers: [monitoringAlertmanagerSpecContainersItem]
+  enforcedNamespaceLabel: String
+  evaluationInterval: String
+  excludedFromEnforcement: [monitoringPrometheusSpecExcludedFromEnforcementItem]
+  externalPrefix: String
+  grpcServerTlsConfig: monitoringPrometheusSpecAlertingAlertmanagersItemTlsConfig
+  hostAliases: [monitoringAlertmanagerSpecHostAliasesItem]
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerSpecImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerSpecContainersItem]
+  labels: JSONObject
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  objectStorageConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  objectStorageConfigFile: String
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerSpecPodMetadata
+  portName: String
+  priorityClassName: String
+  prometheusRulesExcludedFromEnforce: [monitoringPrometheusSpecPrometheusRulesExcludedFromEnforceItem]
+  queryConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  queryEndpoints: [String]
+  replicas: Int
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  retention: String
+  routePrefix: String
+  ruleNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  ruleSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  securityContext: monitoringAlertmanagerSpecSecurityContext
+  serviceAccountName: String
+  storage: monitoringAlertmanagerSpecStorage
+  tolerations: [monitoringAlertmanagerSpecTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerSpecTopologySpreadConstraintsItem]
+  tracingConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  tracingConfigFile: String
+  version: String
+  volumes: [monitoringAlertmanagerSpecVolumesItem]
+}
+type monitoringThanosRuler {
+  metadata: metadata
+  additionalArgs: [monitoringPrometheusAdditionalArgsItem]
+  affinity: monitoringAlertmanagerAffinity
+  alertDropLabels: [String]
+  alertQueryUrl: String
+  alertRelabelConfigFile: String
+  alertRelabelConfigs: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  alertmanagersConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  alertmanagersUrl: [String]
+  containers: [monitoringAlertmanagerContainersItem]
+  enforcedNamespaceLabel: String
+  evaluationInterval: String
+  excludedFromEnforcement: [monitoringPrometheusExcludedFromEnforcementItem]
+  externalPrefix: String
+  grpcServerTlsConfig: monitoringPrometheusAlertingAlertmanagersItemTlsConfig
+  hostAliases: [monitoringAlertmanagerHostAliasesItem]
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerContainersItem]
+  labels: JSONObject
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  objectStorageConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  objectStorageConfigFile: String
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerPodMetadata
+  portName: String
+  priorityClassName: String
+  prometheusRulesExcludedFromEnforce: [monitoringPrometheusPrometheusRulesExcludedFromEnforceItem]
+  queryConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  queryEndpoints: [String]
+  replicas: Int
+  resources: monitoringAlertmanagerContainersItemResources
+  retention: String
+  routePrefix: String
+  ruleNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  ruleSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  securityContext: monitoringAlertmanagerSecurityContext
+  serviceAccountName: String
+  storage: monitoringAlertmanagerStorage
+  tolerations: [monitoringAlertmanagerTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerTopologySpreadConstraintsItem]
+  tracingConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  tracingConfigFile: String
+  version: String
+  volumes: [monitoringAlertmanagerVolumesItem]
+  status: monitoringThanosRulerStatus
+}
+input monitoringAlertmanagerConfigSpecInhibitRulesItemSourceMatchItem {
+  matchType: String
+  name: String!
+  regex: Boolean
+  value: String
+}
+input monitoringAlertmanagerConfigSpecInhibitRulesItem {
+  equal: [String]
+  sourceMatch: [monitoringAlertmanagerConfigSpecInhibitRulesItemSourceMatchItem]
+  targetMatch: [monitoringAlertmanagerConfigSpecInhibitRulesItemSourceMatchItem]
+}
+input monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItemDaysOfMonthItem {
+  end: Int
+  start: Int
+}
+input monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItemTimesItem {
+  endTime: String
+  startTime: String
+}
+input monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItem {
+  daysOfMonth: [monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItemDaysOfMonthItem]
+  months: [String]
+  times: [monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItemTimesItem]
+  weekdays: [String]
+  years: [String]
+}
+input monitoringAlertmanagerConfigSpecMuteTimeIntervalsItem {
+  name: String
+  timeIntervals: [monitoringAlertmanagerConfigSpecMuteTimeIntervalsItemTimeIntervalsItem]
+}
+input monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItemHeadersItem {
+  key: String!
+  value: String!
+}
+input monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItem {
+  authIdentity: String
+  authPassword: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  authSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  authUsername: String
+  from: String
+  headers: [monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItemHeadersItem]
+  hello: String
+  html: String
+  requireTLS: Boolean
+  sendResolved: Boolean
+  smarthost: String
+  text: String
+  tlsConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+  to: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig {
+  authorization: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  followRedirects: Boolean
+  oauth2: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyURL: String
+  tlsConfig: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+input monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemRespondersItem {
+  id: String
+  name: String
+  type: String!
+  username: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItem {
+  actions: String
+  apiKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiURL: String
+  description: String
+  details: [monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItemHeadersItem]
+  entity: String
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  note: String
+  priority: String
+  responders: [monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemRespondersItem]
+  sendResolved: Boolean
+  source: String
+  tags: String
+  updateAlerts: Boolean
+}
+input monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItemPagerDutyImageConfigsItem {
+  alt: String
+  href: String
+  src: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItemPagerDutyLinkConfigsItem {
+  alt: String
+  href: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItem {
+  class: String
+  client: String
+  clientURL: String
+  component: String
+  description: String
+  details: [monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItemHeadersItem]
+  group: String
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  pagerDutyImageConfigs: [monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItemPagerDutyImageConfigsItem]
+  pagerDutyLinkConfigs: [monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItemPagerDutyLinkConfigsItem]
+  routingKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  sendResolved: Boolean
+  serviceKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  severity: String
+  url: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemPushoverConfigsItem {
+  expire: String
+  html: Boolean
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  priority: String
+  retry: String
+  sendResolved: Boolean
+  sound: String
+  title: String
+  token: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  url: String
+  urlTitle: String
+  userKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemActionsItemConfirm {
+  dismissText: String
+  okText: String
+  text: String!
+  title: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemActionsItem {
+  confirm: monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemActionsItemConfirm
+  name: String
+  style: String
+  text: String!
+  type: String!
+  url: String
+  value: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemFieldsItem {
+  short: Boolean
+  title: String!
+  value: String!
+}
+input monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItem {
+  actions: [monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemActionsItem]
+  apiURL: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  callbackId: String
+  channel: String
+  color: String
+  fallback: String
+  fields: [monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItemFieldsItem]
+  footer: String
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  iconEmoji: String
+  iconURL: String
+  imageURL: String
+  linkNames: Boolean
+  mrkdwnIn: [String]
+  pretext: String
+  sendResolved: Boolean
+  shortFields: Boolean
+  text: String
+  thumbURL: String
+  title: String
+  titleLink: String
+  username: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemSnsConfigsItem {
+  apiURL: String
+  attributes: JSONObject
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  phoneNumber: String
+  sendResolved: Boolean
+  sigv4: monitoringPrometheusSpecRemoteWriteItemSigv4
+  subject: String
+  targetARN: String
+  topicARN: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemTelegramConfigsItem {
+  apiURL: String
+  botToken: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  chatID: Int
+  disableNotifications: Boolean
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  parseMode: String
+  sendResolved: Boolean
+}
+input monitoringAlertmanagerConfigSpecReceiversItemVictoropsConfigsItem {
+  apiKey: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiUrl: String
+  customFields: [monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItemHeadersItem]
+  entityDisplayName: String
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  messageType: String
+  monitoringTool: String
+  routingKey: String
+  sendResolved: Boolean
+  stateMessage: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItemWebhookConfigsItem {
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  maxAlerts: Int
+  sendResolved: Boolean
+  url: String
+  urlSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+input monitoringAlertmanagerConfigSpecReceiversItemWechatConfigsItem {
+  agentID: String
+  apiSecret: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiURL: String
+  corpID: String
+  httpConfig: monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  messageType: String
+  sendResolved: Boolean
+  toParty: String
+  toTag: String
+  toUser: String
+}
+input monitoringAlertmanagerConfigSpecReceiversItem {
+  emailConfigs: [monitoringAlertmanagerConfigSpecReceiversItemEmailConfigsItem]
+  name: String!
+  opsgenieConfigs: [monitoringAlertmanagerConfigSpecReceiversItemOpsgenieConfigsItem]
+  pagerdutyConfigs: [monitoringAlertmanagerConfigSpecReceiversItemPagerdutyConfigsItem]
+  pushoverConfigs: [monitoringAlertmanagerConfigSpecReceiversItemPushoverConfigsItem]
+  slackConfigs: [monitoringAlertmanagerConfigSpecReceiversItemSlackConfigsItem]
+  snsConfigs: [monitoringAlertmanagerConfigSpecReceiversItemSnsConfigsItem]
+  telegramConfigs: [monitoringAlertmanagerConfigSpecReceiversItemTelegramConfigsItem]
+  victoropsConfigs: [monitoringAlertmanagerConfigSpecReceiversItemVictoropsConfigsItem]
+  webhookConfigs: [monitoringAlertmanagerConfigSpecReceiversItemWebhookConfigsItem]
+  wechatConfigs: [monitoringAlertmanagerConfigSpecReceiversItemWechatConfigsItem]
+}
+input monitoringAlertmanagerConfigSpecRoute {
+  activeTimeIntervals: [String]
+  continue: Boolean
+  groupBy: [String]
+  groupInterval: String
+  groupWait: String
+  matchers: [monitoringAlertmanagerConfigSpecInhibitRulesItemSourceMatchItem]
+  muteTimeIntervals: [String]
+  receiver: String
+  repeatInterval: String
+  routes: [JSONObject]
+}
+input monitoringAlertmanagerConfigSpec {
+  inhibitRules: [monitoringAlertmanagerConfigSpecInhibitRulesItem]
+  muteTimeIntervals: [monitoringAlertmanagerConfigSpecMuteTimeIntervalsItem]
+  receivers: [monitoringAlertmanagerConfigSpecReceiversItem]
+  route: monitoringAlertmanagerConfigSpecRoute
+}
+type monitoringAlertmanagerConfigInhibitRulesItemSourceMatchItem {
+  matchType: String
+  name: String!
+  regex: Boolean
+  value: String
+}
+type monitoringAlertmanagerConfigInhibitRulesItem {
+  equal: [String]
+  sourceMatch: [monitoringAlertmanagerConfigInhibitRulesItemSourceMatchItem]
+  targetMatch: [monitoringAlertmanagerConfigInhibitRulesItemSourceMatchItem]
+}
+type monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItemDaysOfMonthItem {
+  end: Int
+  start: Int
+}
+type monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItemTimesItem {
+  endTime: String
+  startTime: String
+}
+type monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItem {
+  daysOfMonth: [monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItemDaysOfMonthItem]
+  months: [String]
+  times: [monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItemTimesItem]
+  weekdays: [String]
+  years: [String]
+}
+type monitoringAlertmanagerConfigMuteTimeIntervalsItem {
+  name: String
+  timeIntervals: [monitoringAlertmanagerConfigMuteTimeIntervalsItemTimeIntervalsItem]
+}
+type monitoringAlertmanagerConfigReceiversItemEmailConfigsItemHeadersItem {
+  key: String!
+  value: String!
+}
+type monitoringAlertmanagerConfigReceiversItemEmailConfigsItem {
+  authIdentity: String
+  authPassword: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  authSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  authUsername: String
+  from: String
+  headers: [monitoringAlertmanagerConfigReceiversItemEmailConfigsItemHeadersItem]
+  hello: String
+  html: String
+  requireTLS: Boolean
+  sendResolved: Boolean
+  smarthost: String
+  text: String
+  tlsConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+  to: String
+}
+type monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig {
+  authorization: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorization
+  basicAuth: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigBasicAuth
+  bearerTokenSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  followRedirects: Boolean
+  oauth2: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigOauth2
+  proxyURL: String
+  tlsConfig: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigTlsConfig
+}
+type monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemRespondersItem {
+  id: String
+  name: String
+  type: String!
+  username: String
+}
+type monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItem {
+  actions: String
+  apiKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiURL: String
+  description: String
+  details: [monitoringAlertmanagerConfigReceiversItemEmailConfigsItemHeadersItem]
+  entity: String
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  note: String
+  priority: String
+  responders: [monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemRespondersItem]
+  sendResolved: Boolean
+  source: String
+  tags: String
+  updateAlerts: Boolean
+}
+type monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItemPagerDutyImageConfigsItem {
+  alt: String
+  href: String
+  src: String
+}
+type monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItemPagerDutyLinkConfigsItem {
+  alt: String
+  href: String
+}
+type monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItem {
+  class: String
+  client: String
+  clientURL: String
+  component: String
+  description: String
+  details: [monitoringAlertmanagerConfigReceiversItemEmailConfigsItemHeadersItem]
+  group: String
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  pagerDutyImageConfigs: [monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItemPagerDutyImageConfigsItem]
+  pagerDutyLinkConfigs: [monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItemPagerDutyLinkConfigsItem]
+  routingKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  sendResolved: Boolean
+  serviceKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  severity: String
+  url: String
+}
+type monitoringAlertmanagerConfigReceiversItemPushoverConfigsItem {
+  expire: String
+  html: Boolean
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  priority: String
+  retry: String
+  sendResolved: Boolean
+  sound: String
+  title: String
+  token: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  url: String
+  urlTitle: String
+  userKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerConfigReceiversItemSlackConfigsItemActionsItemConfirm {
+  dismissText: String
+  okText: String
+  text: String!
+  title: String
+}
+type monitoringAlertmanagerConfigReceiversItemSlackConfigsItemActionsItem {
+  confirm: monitoringAlertmanagerConfigReceiversItemSlackConfigsItemActionsItemConfirm
+  name: String
+  style: String
+  text: String!
+  type: String!
+  url: String
+  value: String
+}
+type monitoringAlertmanagerConfigReceiversItemSlackConfigsItemFieldsItem {
+  short: Boolean
+  title: String!
+  value: String!
+}
+type monitoringAlertmanagerConfigReceiversItemSlackConfigsItem {
+  actions: [monitoringAlertmanagerConfigReceiversItemSlackConfigsItemActionsItem]
+  apiURL: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  callbackId: String
+  channel: String
+  color: String
+  fallback: String
+  fields: [monitoringAlertmanagerConfigReceiversItemSlackConfigsItemFieldsItem]
+  footer: String
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  iconEmoji: String
+  iconURL: String
+  imageURL: String
+  linkNames: Boolean
+  mrkdwnIn: [String]
+  pretext: String
+  sendResolved: Boolean
+  shortFields: Boolean
+  text: String
+  thumbURL: String
+  title: String
+  titleLink: String
+  username: String
+}
+type monitoringAlertmanagerConfigReceiversItemSnsConfigsItem {
+  apiURL: String
+  attributes: JSONObject
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  phoneNumber: String
+  sendResolved: Boolean
+  sigv4: monitoringPrometheusRemoteWriteItemSigv4
+  subject: String
+  targetARN: String
+  topicARN: String
+}
+type monitoringAlertmanagerConfigReceiversItemTelegramConfigsItem {
+  apiURL: String
+  botToken: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  chatID: Int
+  disableNotifications: Boolean
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  parseMode: String
+  sendResolved: Boolean
+}
+type monitoringAlertmanagerConfigReceiversItemVictoropsConfigsItem {
+  apiKey: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiUrl: String
+  customFields: [monitoringAlertmanagerConfigReceiversItemEmailConfigsItemHeadersItem]
+  entityDisplayName: String
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  messageType: String
+  monitoringTool: String
+  routingKey: String
+  sendResolved: Boolean
+  stateMessage: String
+}
+type monitoringAlertmanagerConfigReceiversItemWebhookConfigsItem {
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  maxAlerts: Int
+  sendResolved: Boolean
+  url: String
+  urlSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+}
+type monitoringAlertmanagerConfigReceiversItemWechatConfigsItem {
+  agentID: String
+  apiSecret: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  apiURL: String
+  corpID: String
+  httpConfig: monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItemHttpConfig
+  message: String
+  messageType: String
+  sendResolved: Boolean
+  toParty: String
+  toTag: String
+  toUser: String
+}
+type monitoringAlertmanagerConfigReceiversItem {
+  emailConfigs: [monitoringAlertmanagerConfigReceiversItemEmailConfigsItem]
+  name: String!
+  opsgenieConfigs: [monitoringAlertmanagerConfigReceiversItemOpsgenieConfigsItem]
+  pagerdutyConfigs: [monitoringAlertmanagerConfigReceiversItemPagerdutyConfigsItem]
+  pushoverConfigs: [monitoringAlertmanagerConfigReceiversItemPushoverConfigsItem]
+  slackConfigs: [monitoringAlertmanagerConfigReceiversItemSlackConfigsItem]
+  snsConfigs: [monitoringAlertmanagerConfigReceiversItemSnsConfigsItem]
+  telegramConfigs: [monitoringAlertmanagerConfigReceiversItemTelegramConfigsItem]
+  victoropsConfigs: [monitoringAlertmanagerConfigReceiversItemVictoropsConfigsItem]
+  webhookConfigs: [monitoringAlertmanagerConfigReceiversItemWebhookConfigsItem]
+  wechatConfigs: [monitoringAlertmanagerConfigReceiversItemWechatConfigsItem]
+}
+type monitoringAlertmanagerConfigRoute {
+  activeTimeIntervals: [String]
+  continue: Boolean
+  groupBy: [String]
+  groupInterval: String
+  groupWait: String
+  matchers: [monitoringAlertmanagerConfigInhibitRulesItemSourceMatchItem]
+  muteTimeIntervals: [String]
+  receiver: String
+  repeatInterval: String
+  routes: [JSONObject]
+}
+type monitoringAlertmanagerConfig {
+  metadata: metadata
+  inhibitRules: [monitoringAlertmanagerConfigInhibitRulesItem]
+  muteTimeIntervals: [monitoringAlertmanagerConfigMuteTimeIntervalsItem]
+  receivers: [monitoringAlertmanagerConfigReceiversItem]
+  route: monitoringAlertmanagerConfigRoute
+}
+type monitoringPrometheusAgentStatus {
+  availableReplicas: Int!
+  conditions: [monitoringAlertmanagerStatusConditionsItem]
+  paused: Boolean!
+  replicas: Int!
+  shardStatuses: [monitoringPrometheusStatusShardStatusesItem]
+  unavailableReplicas: Int!
+  updatedReplicas: Int!
+}
+input monitoringPrometheusAgentSpec {
+  additionalArgs: [monitoringPrometheusSpecAdditionalArgsItem]
+  additionalScrapeConfigs: monitoringAlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  affinity: monitoringAlertmanagerSpecAffinity
+  apiserverConfig: monitoringPrometheusSpecApiserverConfig
+  arbitraryFSAccessThroughSMs: monitoringPrometheusSpecArbitraryFSAccessThroughSMs
+  configMaps: [String]
+  containers: [monitoringAlertmanagerSpecContainersItem]
+  enableFeatures: [String]
+  enableRemoteWriteReceiver: Boolean
+  enforcedBodySizeLimit: String
+  enforcedLabelLimit: Int
+  enforcedLabelNameLengthLimit: Int
+  enforcedLabelValueLengthLimit: Int
+  enforcedNamespaceLabel: String
+  enforcedSampleLimit: Int
+  enforcedTargetLimit: Int
+  excludedFromEnforcement: [monitoringPrometheusSpecExcludedFromEnforcementItem]
+  externalLabels: JSONObject
+  externalUrl: String
+  hostAliases: [monitoringAlertmanagerSpecHostAliasesItem]
+  hostNetwork: Boolean
+  ignoreNamespaceSelectors: Boolean
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerSpecImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerSpecContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  overrideHonorLabels: Boolean
+  overrideHonorTimestamps: Boolean
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerSpecPodMetadata
+  podMonitorNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podMonitorSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podTargetLabels: [String]
+  portName: String
+  priorityClassName: String
+  probeNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  probeSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  prometheusExternalLabelName: String
+  remoteWrite: [monitoringPrometheusSpecRemoteWriteItem]
+  replicaExternalLabelName: String
+  replicas: Int
+  resources: monitoringAlertmanagerSpecContainersItemResources
+  routePrefix: String
+  scrapeConfigNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeConfigSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeInterval: String
+  scrapeTimeout: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSpecSecurityContext
+  serviceAccountName: String
+  serviceMonitorNamespaceSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  serviceMonitorSelector: monitoringAlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  shards: Int
+  storage: monitoringAlertmanagerSpecStorage
+  tolerations: [monitoringAlertmanagerSpecTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerSpecTopologySpreadConstraintsItem]
+  version: String
+  volumeMounts: [monitoringAlertmanagerSpecContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerSpecVolumesItem]
+  walCompression: Boolean
+  web: monitoringPrometheusSpecWeb
+}
+type monitoringPrometheusAgent {
+  metadata: metadata
+  additionalArgs: [monitoringPrometheusAdditionalArgsItem]
+  additionalScrapeConfigs: monitoringAlertmanagerAlertmanagerConfigurationGlobalHttpConfigAuthorizationCredentials
+  affinity: monitoringAlertmanagerAffinity
+  apiserverConfig: monitoringPrometheusApiserverConfig
+  arbitraryFSAccessThroughSMs: monitoringPrometheusArbitraryFSAccessThroughSMs
+  configMaps: [String]
+  containers: [monitoringAlertmanagerContainersItem]
+  enableFeatures: [String]
+  enableRemoteWriteReceiver: Boolean
+  enforcedBodySizeLimit: String
+  enforcedLabelLimit: Int
+  enforcedLabelNameLengthLimit: Int
+  enforcedLabelValueLengthLimit: Int
+  enforcedNamespaceLabel: String
+  enforcedSampleLimit: Int
+  enforcedTargetLimit: Int
+  excludedFromEnforcement: [monitoringPrometheusExcludedFromEnforcementItem]
+  externalLabels: JSONObject
+  externalUrl: String
+  hostAliases: [monitoringAlertmanagerHostAliasesItem]
+  hostNetwork: Boolean
+  ignoreNamespaceSelectors: Boolean
+  image: String
+  imagePullPolicy: String
+  imagePullSecrets: [monitoringAlertmanagerImagePullSecretsItem]
+  initContainers: [monitoringAlertmanagerContainersItem]
+  listenLocal: Boolean
+  logFormat: String
+  logLevel: String
+  minReadySeconds: Int
+  nodeSelector: JSONObject
+  overrideHonorLabels: Boolean
+  overrideHonorTimestamps: Boolean
+  paused: Boolean
+  podMetadata: monitoringAlertmanagerPodMetadata
+  podMonitorNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podMonitorSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  podTargetLabels: [String]
+  portName: String
+  priorityClassName: String
+  probeNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  probeSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  prometheusExternalLabelName: String
+  remoteWrite: [monitoringPrometheusRemoteWriteItem]
+  replicaExternalLabelName: String
+  replicas: Int
+  resources: monitoringAlertmanagerContainersItemResources
+  routePrefix: String
+  scrapeConfigNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeConfigSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  scrapeInterval: String
+  scrapeTimeout: String
+  secrets: [String]
+  securityContext: monitoringAlertmanagerSecurityContext
+  serviceAccountName: String
+  serviceMonitorNamespaceSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  serviceMonitorSelector: monitoringAlertmanagerAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  shards: Int
+  storage: monitoringAlertmanagerStorage
+  tolerations: [monitoringAlertmanagerTolerationsItem]
+  topologySpreadConstraints: [monitoringAlertmanagerTopologySpreadConstraintsItem]
+  version: String
+  volumeMounts: [monitoringAlertmanagerContainersItemVolumeMountsItem]
+  volumes: [monitoringAlertmanagerVolumesItem]
+  walCompression: Boolean
+  web: monitoringPrometheusWeb
+  status: monitoringPrometheusAgentStatus
+}
+type Query {
+  monitoringAlertmanager(namespace: String!, name: String!): monitoringAlertmanager
+  monitoringPodMonitor(namespace: String!, name: String!): monitoringPodMonitor
+  monitoringProbe(namespace: String!, name: String!): monitoringProbe
+  monitoringPrometheus(namespace: String!, name: String!): monitoringPrometheus
+  monitoringPrometheusRule(namespace: String!, name: String!): monitoringPrometheusRule
+  monitoringServiceMonitor(namespace: String!, name: String!): monitoringServiceMonitor
+  monitoringThanosRuler(namespace: String!, name: String!): monitoringThanosRuler
+  monitoringAlertmanagerConfig(namespace: String!, name: String!): monitoringAlertmanagerConfig
+  monitoringPrometheusAgent(namespace: String!, name: String!): monitoringPrometheusAgent
+}
+type Mutation {
+  createMonitoringAlertmanager(namespace: String!, name: String!, spec: monitoringAlertmanagerSpec!): monitoringAlertmanager
+  patchMonitoringAlertmanager(namespace: String!, name: String!, spec: monitoringAlertmanagerSpec!): monitoringAlertmanager
+  deleteMonitoringAlertmanager(namespace: String!, name: String!): monitoringAlertmanager
+  createMonitoringPodMonitor(namespace: String!, name: String!, spec: monitoringPodMonitorSpec!): monitoringPodMonitor
+  patchMonitoringPodMonitor(namespace: String!, name: String!, spec: monitoringPodMonitorSpec!): monitoringPodMonitor
+  deleteMonitoringPodMonitor(namespace: String!, name: String!): monitoringPodMonitor
+  createMonitoringProbe(namespace: String!, name: String!, spec: monitoringProbeSpec!): monitoringProbe
+  patchMonitoringProbe(namespace: String!, name: String!, spec: monitoringProbeSpec!): monitoringProbe
+  deleteMonitoringProbe(namespace: String!, name: String!): monitoringProbe
+  createMonitoringPrometheus(namespace: String!, name: String!, spec: monitoringPrometheusSpec!): monitoringPrometheus
+  patchMonitoringPrometheus(namespace: String!, name: String!, spec: monitoringPrometheusSpec!): monitoringPrometheus
+  deleteMonitoringPrometheus(namespace: String!, name: String!): monitoringPrometheus
+  createMonitoringPrometheusRule(namespace: String!, name: String!, spec: monitoringPrometheusRuleSpec!): monitoringPrometheusRule
+  patchMonitoringPrometheusRule(namespace: String!, name: String!, spec: monitoringPrometheusRuleSpec!): monitoringPrometheusRule
+  deleteMonitoringPrometheusRule(namespace: String!, name: String!): monitoringPrometheusRule
+  createMonitoringServiceMonitor(namespace: String!, name: String!, spec: monitoringServiceMonitorSpec!): monitoringServiceMonitor
+  patchMonitoringServiceMonitor(namespace: String!, name: String!, spec: monitoringServiceMonitorSpec!): monitoringServiceMonitor
+  deleteMonitoringServiceMonitor(namespace: String!, name: String!): monitoringServiceMonitor
+  createMonitoringThanosRuler(namespace: String!, name: String!, spec: monitoringThanosRulerSpec!): monitoringThanosRuler
+  patchMonitoringThanosRuler(namespace: String!, name: String!, spec: monitoringThanosRulerSpec!): monitoringThanosRuler
+  deleteMonitoringThanosRuler(namespace: String!, name: String!): monitoringThanosRuler
+  createMonitoringAlertmanagerConfig(namespace: String!, name: String!, spec: monitoringAlertmanagerConfigSpec!): monitoringAlertmanagerConfig
+  patchMonitoringAlertmanagerConfig(namespace: String!, name: String!, spec: monitoringAlertmanagerConfigSpec!): monitoringAlertmanagerConfig
+  deleteMonitoringAlertmanagerConfig(namespace: String!, name: String!): monitoringAlertmanagerConfig
+  createMonitoringPrometheusAgent(namespace: String!, name: String!, spec: monitoringPrometheusAgentSpec!): monitoringPrometheusAgent
+  patchMonitoringPrometheusAgent(namespace: String!, name: String!, spec: monitoringPrometheusAgentSpec!): monitoringPrometheusAgent
+  deleteMonitoringPrometheusAgent(namespace: String!, name: String!): monitoringPrometheusAgent
+}

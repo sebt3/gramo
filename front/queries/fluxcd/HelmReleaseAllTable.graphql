@@ -73,6 +73,35 @@ query FluxcdHelmReleases {
           newName
           newTag
         }
+        patches {
+          patch
+          target {
+            annotationSelector
+            group
+            kind
+            labelSelector
+            name
+            namespace
+            version
+          }
+        }
+        patchesJson6902 {
+          patch {
+            from
+            op
+            path
+          }
+          target {
+            annotationSelector
+            group
+            kind
+            labelSelector
+            name
+            namespace
+            version
+          }
+        }
+        patchesStrategicMerge
       }
     }
     releaseName
@@ -106,8 +135,8 @@ query FluxcdHelmReleases {
       crds
       disableHooks
       disableOpenAPIValidation
-      disableWaitForJobs
       disableWait
+      disableWaitForJobs
       force
       preserveValues
       remediation {

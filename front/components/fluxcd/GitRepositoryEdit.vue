@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdGitRepositoryQuery
 const { mutate: patchGitRepository, onDone: onPatchGitRepository, onError: onPatchError } = useMutation(gitRepositoryEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchGitRepository({"namespace": navigation.currentNamespace, "name": result.value.fluxcdGitRepository.metadata.name, "spec": sanitizeData(data.value)});
+  patchGitRepository({"namespace": result.value.fluxcdGitRepository.metadata.namespace, "name": result.value.fluxcdGitRepository.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotGitRepositoryFound);onPatchGitRepository(patchDone);onPatchError(patchError);
 </script>

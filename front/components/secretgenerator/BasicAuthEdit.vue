@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(secretgeneratorBasicAuth
 const { mutate: patchBasicAuth, onDone: onPatchBasicAuth, onError: onPatchError } = useMutation(basicAuthEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchBasicAuth({"namespace": navigation.currentNamespace, "name": result.value.secretgeneratorBasicAuth.metadata.name, "spec": sanitizeData(data.value)});
+  patchBasicAuth({"namespace": result.value.secretgeneratorBasicAuth.metadata.namespace, "name": result.value.secretgeneratorBasicAuth.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotBasicAuthFound);onPatchBasicAuth(patchDone);onPatchError(patchError);
 </script>

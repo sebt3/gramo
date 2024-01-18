@@ -11,12 +11,14 @@ const cat = 'install';
 const icon{{ this.name }} = 'album';
 {{/each}}
 export const link:menuLinksProps = {
+  name: '{{ mini }}',
   title: '{{ short }}', icon: icon{{ name }},
   link: \`/\${cat}/{{ mini }}/{{ plural }}/\`,
   level: 1,
   children: [
 {{#each children}}
   {
+    name: '{{ ../mini }}{{ this.name }}s',
     title: '{{ this.name }}', caption: 'List {{ this.miniName }}', icon: 'album',
     link: \`/\${cat}/{{ ../mini }}/{{ this.plural }}/\`, level: 2, children: []
   },
@@ -44,6 +46,7 @@ export const descriptions = {
 export const route = {
   path: '{{ mini }}',
   name: '{{ mini }}',
+  redirect: {path: link.link as string},
   children: [
 {{#each children}}
     {

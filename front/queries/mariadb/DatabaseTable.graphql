@@ -1,0 +1,43 @@
+
+query MariadbDatabases($namespace: String!) {
+ namespace(name: $namespace) {
+  mariadbDatabases {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    characterSet
+    collate
+    mariaDbRef {
+      apiVersion
+      fieldPath
+      kind
+      name
+      namespace
+      resourceVersion
+      uid
+      waitForIt
+    }
+    name
+    retryInterval
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+    }
+  }
+ }
+}

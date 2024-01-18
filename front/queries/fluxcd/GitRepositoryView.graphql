@@ -62,12 +62,12 @@ query FluxcdGitRepository($namespace: String!, $name: String!) {
     }
     status {
       artifact {
-        lastUpdateTime
         digest
+        lastUpdateTime
         path
         revision
-        url
         size
+        url
       }
       conditions {
         lastTransitionTime
@@ -89,10 +89,10 @@ query FluxcdGitRepository($namespace: String!, $name: String!) {
       observedGeneration
       observedIgnore
       observedInclude {
+        fromPath
         repository {
           name
         }
-        fromPath
         toPath
       }
       observedRecurseSubmodules

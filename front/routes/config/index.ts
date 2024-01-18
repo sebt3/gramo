@@ -20,6 +20,7 @@ export const descriptions = {
 
 export const link:menuLinksProps = {
   title: 'Configuration', icon: 'settings_suggest',
+  name: 'config',
   link: linkRedirect.path,
   level: 0,
   children: linkChildren

@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdProviderQuery, {"n
 const { mutate: patchProvider, onDone: onPatchProvider, onError: onPatchError } = useMutation(providerEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchProvider({"namespace": navigation.currentNamespace, "name": result.value.fluxcdProvider.metadata.name, "spec": sanitizeData(data.value)});
+  patchProvider({"namespace": result.value.fluxcdProvider.metadata.namespace, "name": result.value.fluxcdProvider.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotProviderFound);onPatchProvider(patchDone);onPatchError(patchError);
 </script>

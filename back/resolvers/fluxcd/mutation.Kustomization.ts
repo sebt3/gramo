@@ -100,7 +100,7 @@ export const mutations = {
         if (args['spec']['wait'] !== undefined && typeof args['spec']['wait'] == 'boolean') spec['wait'] = args['spec']['wait'];
         const request = {
             apiVersion: 'kustomize.toolkit.fluxcd.io/v1',
-            kind: 'Distrib',
+            kind: 'Kustomization',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

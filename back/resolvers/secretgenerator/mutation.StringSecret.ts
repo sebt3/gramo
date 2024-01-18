@@ -47,7 +47,7 @@ export const mutations = {
         if (args['spec']['type'] !== undefined && typeof args['spec']['type'] == 'string') spec['type'] = args['spec']['type'];
         const request = {
             apiVersion: 'secretgenerator.mittwald.de/v1alpha1',
-            kind: 'Distrib',
+            kind: 'StringSecret',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

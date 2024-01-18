@@ -164,7 +164,7 @@ export const mutations = {
 {{/each}}
         const request = {
             apiVersion: '{{apiGroup}}/{{version}}',
-            kind: 'Distrib',
+            kind: '{{name}}',
             metadata: {
 {{#if namespaced}}
                 namespace: args['namespace'],

@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdImagePolicyQuery, 
 const { mutate: patchImagePolicy, onDone: onPatchImagePolicy, onError: onPatchError } = useMutation(imagePolicyEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchImagePolicy({"namespace": navigation.currentNamespace, "name": result.value.fluxcdImagePolicy.metadata.name, "spec": sanitizeData(data.value)});
+  patchImagePolicy({"namespace": result.value.fluxcdImagePolicy.metadata.namespace, "name": result.value.fluxcdImagePolicy.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotImagePolicyFound);onPatchImagePolicy(patchDone);onPatchError(patchError);
 </script>

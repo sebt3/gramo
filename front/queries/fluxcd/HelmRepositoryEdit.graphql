@@ -43,5 +43,6 @@ mutation FluxcdHelmRepository($namespace: String!, $name: String!, $spec: fluxcd
       lastHandledReconcileAt
       observedGeneration
       url
-    }  }
+    }
+  }
 }

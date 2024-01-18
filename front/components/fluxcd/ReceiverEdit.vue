@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdReceiverQuery, {"n
 const { mutate: patchReceiver, onDone: onPatchReceiver, onError: onPatchError } = useMutation(receiverEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchReceiver({"namespace": navigation.currentNamespace, "name": result.value.fluxcdReceiver.metadata.name, "spec": sanitizeData(data.value)});
+  patchReceiver({"namespace": result.value.fluxcdReceiver.metadata.namespace, "name": result.value.fluxcdReceiver.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotReceiverFound);onPatchReceiver(patchDone);onPatchError(patchError);
 </script>

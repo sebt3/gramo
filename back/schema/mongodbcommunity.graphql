@@ -20,19 +20,15 @@ input mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef {
   key: String
   name: String!
 }
-input mongodbcommunityMongoDBCommunitySpecPrometheusTlsSecretKeyRef {
-  key: String
-  name: String!
-}
 input mongodbcommunityMongoDBCommunitySpecPrometheus {
   metricsPath: String
   passwordSecretRef: mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef!
   port: Int
-  tlsSecretKeyRef: mongodbcommunityMongoDBCommunitySpecPrometheusTlsSecretKeyRef
+  tlsSecretKeyRef: mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef
   username: String!
 }
 input mongodbcommunityMongoDBCommunitySpecSecurityAuthentication {
-  ignoreUnknownUsers: JSONObject
+  ignoreUnknownUsers: Boolean
   modes: [String]!
 }
 input mongodbcommunityMongoDBCommunitySpecSecurityRolesItemAuthenticationRestrictionsItem {
@@ -63,16 +59,10 @@ input mongodbcommunityMongoDBCommunitySpecSecurityRolesItem {
 input mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef {
   name: String!
 }
-input mongodbcommunityMongoDBCommunitySpecSecurityTlsCaConfigMapRef {
-  name: String!
-}
-input mongodbcommunityMongoDBCommunitySpecSecurityTlsCertificateKeySecretRef {
-  name: String!
-}
 input mongodbcommunityMongoDBCommunitySpecSecurityTls {
   caCertificateSecretRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef
-  caConfigMapRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaConfigMapRef
-  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCertificateKeySecretRef
+  caConfigMapRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef
+  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySpecSecurityTlsCaCertificateSecretRef
   enabled: Boolean!
   optional: Boolean
 }
@@ -81,20 +71,12 @@ input mongodbcommunityMongoDBCommunitySpecSecurity {
   roles: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItem]
   tls: mongodbcommunityMongoDBCommunitySpecSecurityTls
 }
-input mongodbcommunityMongoDBCommunitySpecUsersItemPasswordSecretRef {
-  key: String
-  name: String!
-}
-input mongodbcommunityMongoDBCommunitySpecUsersItemRolesItem {
-  db: String!
-  name: String!
-}
 input mongodbcommunityMongoDBCommunitySpecUsersItem {
   connectionStringSecretName: String
   db: String
   name: String!
-  passwordSecretRef: mongodbcommunityMongoDBCommunitySpecUsersItemPasswordSecretRef!
-  roles: [mongodbcommunityMongoDBCommunitySpecUsersItemRolesItem]!
+  passwordSecretRef: mongodbcommunityMongoDBCommunitySpecPrometheusPasswordSecretRef!
+  roles: [mongodbcommunityMongoDBCommunitySpecSecurityRolesItemRolesItem!]
   scramCredentialsSecretName: String!
 }
 input mongodbcommunityMongoDBCommunitySpec {
@@ -104,7 +86,7 @@ input mongodbcommunityMongoDBCommunitySpec {
   featureCompatibilityVersion: String
   members: Int
   prometheus: mongodbcommunityMongoDBCommunitySpecPrometheus
-  replicaSetHorizons: JSONObject
+  replicaSetHorizons: [JSONObject]
   security: mongodbcommunityMongoDBCommunitySpecSecurity!
   statefulSet: JSONObject
   type: String!
@@ -122,15 +104,11 @@ type mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef {
   key: String
   name: String!
 }
-type mongodbcommunityMongoDBCommunityPrometheusTlsSecretKeyRef {
-  key: String
-  name: String!
-}
 type mongodbcommunityMongoDBCommunityPrometheus {
   metricsPath: String
   passwordSecretRef: mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef!
   port: Int
-  tlsSecretKeyRef: mongodbcommunityMongoDBCommunityPrometheusTlsSecretKeyRef
+  tlsSecretKeyRef: mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef
   username: String!
 }
 type mongodbcommunityMongoDBCommunitySecurityAuthentication {
@@ -165,16 +143,10 @@ type mongodbcommunityMongoDBCommunitySecurityRolesItem {
 type mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef {
   name: String!
 }
-type mongodbcommunityMongoDBCommunitySecurityTlsCaConfigMapRef {
-  name: String!
-}
-type mongodbcommunityMongoDBCommunitySecurityTlsCertificateKeySecretRef {
-  name: String!
-}
 type mongodbcommunityMongoDBCommunitySecurityTls {
   caCertificateSecretRef: mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef
-  caConfigMapRef: mongodbcommunityMongoDBCommunitySecurityTlsCaConfigMapRef
-  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySecurityTlsCertificateKeySecretRef
+  caConfigMapRef: mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef
+  certificateKeySecretRef: mongodbcommunityMongoDBCommunitySecurityTlsCaCertificateSecretRef
   enabled: Boolean!
   optional: Boolean
 }
@@ -183,20 +155,12 @@ type mongodbcommunityMongoDBCommunitySecurity {
   roles: [mongodbcommunityMongoDBCommunitySecurityRolesItem]
   tls: mongodbcommunityMongoDBCommunitySecurityTls
 }
-type mongodbcommunityMongoDBCommunityUsersItemPasswordSecretRef {
-  key: String
-  name: String!
-}
-type mongodbcommunityMongoDBCommunityUsersItemRolesItem {
-  db: String!
-  name: String!
-}
 type mongodbcommunityMongoDBCommunityUsersItem {
   connectionStringSecretName: String
   db: String
   name: String!
-  passwordSecretRef: mongodbcommunityMongoDBCommunityUsersItemPasswordSecretRef!
-  roles: [mongodbcommunityMongoDBCommunityUsersItemRolesItem]!
+  passwordSecretRef: mongodbcommunityMongoDBCommunityPrometheusPasswordSecretRef!
+  roles: [mongodbcommunityMongoDBCommunitySecurityRolesItemRolesItem!]
   scramCredentialsSecretName: String!
 }
 type mongodbcommunityMongoDBCommunity {
@@ -207,7 +171,7 @@ type mongodbcommunityMongoDBCommunity {
   featureCompatibilityVersion: String
   members: Int
   prometheus: mongodbcommunityMongoDBCommunityPrometheus
-  replicaSetHorizons: JSONObject
+  replicaSetHorizons: [JSONObject]
   security: mongodbcommunityMongoDBCommunitySecurity!
   statefulSet: JSONObject
   type: String!

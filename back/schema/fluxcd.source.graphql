@@ -16,15 +16,6 @@ type fluxcdGitRepositoryStatusConditionsItem {
   status: String!
   type: String!
 }
-type fluxcdGitRepositoryStatusIncludedArtifactsItem {
-  digest: String
-  lastUpdateTime: String!
-  metadata: JSONObject
-  path: String!
-  revision: String!
-  size: Int
-  url: String!
-}
 type fluxcdGitRepositoryStatusObservedIncludeItemRepository {
   name: String!
 }
@@ -36,7 +27,7 @@ type fluxcdGitRepositoryStatusObservedIncludeItem {
 type fluxcdGitRepositoryStatus {
   artifact: fluxcdGitRepositoryStatusArtifact
   conditions: [fluxcdGitRepositoryStatusConditionsItem]
-  includedArtifacts: [fluxcdGitRepositoryStatusIncludedArtifactsItem]
+  includedArtifacts: [fluxcdGitRepositoryStatusArtifact]
   lastHandledReconcileAt: String
   observedGeneration: Int
   observedIgnore: String
@@ -58,15 +49,9 @@ input fluxcdGitRepositorySpecRef {
   semver: String
   tag: String
 }
-input fluxcdGitRepositorySpecSecretRef {
-  name: String!
-}
-input fluxcdGitRepositorySpecVerifySecretRef {
-  name: String!
-}
 input fluxcdGitRepositorySpecVerify {
   mode: String!
-  secretRef: fluxcdGitRepositorySpecVerifySecretRef!
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository!
 }
 input fluxcdGitRepositorySpec {
   ignore: String
@@ -74,19 +59,11 @@ input fluxcdGitRepositorySpec {
   interval: String!
   recurseSubmodules: Boolean
   ref: fluxcdGitRepositorySpecRef
-  secretRef: fluxcdGitRepositorySpecSecretRef
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository
   suspend: Boolean
   timeout: String
   url: String!
   verify: fluxcdGitRepositorySpecVerify
-}
-type fluxcdGitRepositoryIncludeItemRepository {
-  name: String!
-}
-type fluxcdGitRepositoryIncludeItem {
-  fromPath: String
-  repository: fluxcdGitRepositoryIncludeItemRepository!
-  toPath: String
 }
 type fluxcdGitRepositoryRef {
   branch: String
@@ -95,57 +72,31 @@ type fluxcdGitRepositoryRef {
   semver: String
   tag: String
 }
-type fluxcdGitRepositorySecretRef {
-  name: String!
-}
-type fluxcdGitRepositoryVerifySecretRef {
-  name: String!
-}
 type fluxcdGitRepositoryVerify {
   mode: String!
-  secretRef: fluxcdGitRepositoryVerifySecretRef!
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository!
 }
 type fluxcdGitRepository {
   metadata: metadata
   ignore: String
-  include: [fluxcdGitRepositoryIncludeItem]
+  include: [fluxcdGitRepositoryStatusObservedIncludeItem]
   interval: String!
   recurseSubmodules: Boolean
   ref: fluxcdGitRepositoryRef
-  secretRef: fluxcdGitRepositorySecretRef
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
   suspend: Boolean
   timeout: String
   url: String!
   verify: fluxcdGitRepositoryVerify
   status: fluxcdGitRepositoryStatus
 }
-type fluxcdBucketStatusArtifact {
-  digest: String
-  lastUpdateTime: String!
-  metadata: JSONObject
-  path: String!
-  revision: String!
-  size: Int
-  url: String!
-}
-type fluxcdBucketStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdBucketStatus {
-  artifact: fluxcdBucketStatusArtifact
-  conditions: [fluxcdBucketStatusConditionsItem]
+  artifact: fluxcdGitRepositoryStatusArtifact
+  conditions: [fluxcdGitRepositoryStatusConditionsItem]
   lastHandledReconcileAt: String
   observedGeneration: Int
   observedIgnore: String
   url: String
-}
-input fluxcdBucketSpecSecretRef {
-  name: String!
 }
 input fluxcdBucketSpec {
   accessFrom: JSONObject
@@ -156,12 +107,9 @@ input fluxcdBucketSpec {
   interval: String!
   provider: String
   region: String
-  secretRef: fluxcdBucketSpecSecretRef
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository
   suspend: Boolean
   timeout: String
-}
-type fluxcdBucketSecretRef {
-  name: String!
 }
 type fluxcdBucket {
   metadata: metadata
@@ -173,31 +121,14 @@ type fluxcdBucket {
   interval: String!
   provider: String
   region: String
-  secretRef: fluxcdBucketSecretRef
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
   suspend: Boolean
   timeout: String
   status: fluxcdBucketStatus
 }
-type fluxcdHelmChartStatusArtifact {
-  digest: String
-  lastUpdateTime: String!
-  metadata: JSONObject
-  path: String!
-  revision: String!
-  size: Int
-  url: String!
-}
-type fluxcdHelmChartStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdHelmChartStatus {
-  artifact: fluxcdHelmChartStatusArtifact
-  conditions: [fluxcdHelmChartStatusConditionsItem]
+  artifact: fluxcdGitRepositoryStatusArtifact
+  conditions: [fluxcdGitRepositoryStatusConditionsItem]
   lastHandledReconcileAt: String
   observedChartName: String
   observedGeneration: Int
@@ -209,12 +140,9 @@ input fluxcdHelmChartSpecSourceRef {
   kind: String!
   name: String!
 }
-input fluxcdHelmChartSpecVerifySecretRef {
-  name: String!
-}
 input fluxcdHelmChartSpecVerify {
   provider: String!
-  secretRef: fluxcdHelmChartSpecVerifySecretRef
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository
 }
 input fluxcdHelmChartSpec {
   accessFrom: JSONObject
@@ -233,12 +161,9 @@ type fluxcdHelmChartSourceRef {
   kind: String!
   name: String!
 }
-type fluxcdHelmChartVerifySecretRef {
-  name: String!
-}
 type fluxcdHelmChartVerify {
   provider: String!
-  secretRef: fluxcdHelmChartVerifySecretRef
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
 }
 type fluxcdHelmChart {
   metadata: metadata
@@ -254,46 +179,23 @@ type fluxcdHelmChart {
   version: String
   status: fluxcdHelmChartStatus
 }
-type fluxcdHelmRepositoryStatusArtifact {
-  digest: String
-  lastUpdateTime: String!
-  metadata: JSONObject
-  path: String!
-  revision: String!
-  size: Int
-  url: String!
-}
-type fluxcdHelmRepositoryStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdHelmRepositoryStatus {
-  artifact: fluxcdHelmRepositoryStatusArtifact
-  conditions: [fluxcdHelmRepositoryStatusConditionsItem]
+  artifact: fluxcdGitRepositoryStatusArtifact
+  conditions: [fluxcdGitRepositoryStatusConditionsItem]
   lastHandledReconcileAt: String
   observedGeneration: Int
   url: String
-}
-input fluxcdHelmRepositorySpecSecretRef {
-  name: String!
 }
 input fluxcdHelmRepositorySpec {
   accessFrom: JSONObject
   interval: String!
   passCredentials: Boolean
   provider: String
-  secretRef: fluxcdHelmRepositorySpecSecretRef
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository
   suspend: Boolean
   timeout: String
   type: String
   url: String!
-}
-type fluxcdHelmRepositorySecretRef {
-  name: String!
 }
 type fluxcdHelmRepository {
   metadata: metadata
@@ -301,46 +203,26 @@ type fluxcdHelmRepository {
   interval: String!
   passCredentials: Boolean
   provider: String
-  secretRef: fluxcdHelmRepositorySecretRef
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
   suspend: Boolean
   timeout: String
   type: String
   url: String!
   status: fluxcdHelmRepositoryStatus
 }
-type fluxcdOCIRepositoryStatusArtifact {
-  digest: String
-  lastUpdateTime: String!
-  metadata: JSONObject
-  path: String!
-  revision: String!
-  size: Int
-  url: String!
-}
-type fluxcdOCIRepositoryStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdOCIRepositoryStatusObservedLayerSelector {
   mediaType: String
   operation: String
 }
 type fluxcdOCIRepositoryStatus {
-  artifact: fluxcdOCIRepositoryStatusArtifact
-  conditions: [fluxcdOCIRepositoryStatusConditionsItem]
+  artifact: fluxcdGitRepositoryStatusArtifact
+  conditions: [fluxcdGitRepositoryStatusConditionsItem]
   contentConfigChecksum: String
   lastHandledReconcileAt: String
   observedGeneration: Int
   observedIgnore: String
   observedLayerSelector: fluxcdOCIRepositoryStatusObservedLayerSelector
   url: String
-}
-input fluxcdOCIRepositorySpecCertSecretRef {
-  name: String!
 }
 input fluxcdOCIRepositorySpecLayerSelector {
   mediaType: String
@@ -351,68 +233,41 @@ input fluxcdOCIRepositorySpecRef {
   semver: String
   tag: String
 }
-input fluxcdOCIRepositorySpecSecretRef {
-  name: String!
-}
-input fluxcdOCIRepositorySpecVerifySecretRef {
-  name: String!
-}
-input fluxcdOCIRepositorySpecVerify {
-  provider: String!
-  secretRef: fluxcdOCIRepositorySpecVerifySecretRef
-}
 input fluxcdOCIRepositorySpec {
-  certSecretRef: fluxcdOCIRepositorySpecCertSecretRef
+  certSecretRef: fluxcdGitRepositorySpecIncludeItemRepository
   ignore: String
   insecure: Boolean
   interval: String!
   layerSelector: fluxcdOCIRepositorySpecLayerSelector
   provider: String
   ref: fluxcdOCIRepositorySpecRef
-  secretRef: fluxcdOCIRepositorySpecSecretRef
+  secretRef: fluxcdGitRepositorySpecIncludeItemRepository
   serviceAccountName: String
   suspend: Boolean
   timeout: String
   url: String!
-  verify: fluxcdOCIRepositorySpecVerify
-}
-type fluxcdOCIRepositoryCertSecretRef {
-  name: String!
-}
-type fluxcdOCIRepositoryLayerSelector {
-  mediaType: String
-  operation: String
+  verify: fluxcdHelmChartSpecVerify
 }
 type fluxcdOCIRepositoryRef {
   digest: String
   semver: String
   tag: String
 }
-type fluxcdOCIRepositorySecretRef {
-  name: String!
-}
-type fluxcdOCIRepositoryVerifySecretRef {
-  name: String!
-}
-type fluxcdOCIRepositoryVerify {
-  provider: String!
-  secretRef: fluxcdOCIRepositoryVerifySecretRef
-}
 type fluxcdOCIRepository {
   metadata: metadata
-  certSecretRef: fluxcdOCIRepositoryCertSecretRef
+  certSecretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
   ignore: String
   insecure: Boolean
   interval: String!
-  layerSelector: fluxcdOCIRepositoryLayerSelector
+  layerSelector: fluxcdOCIRepositoryStatusObservedLayerSelector
   provider: String
   ref: fluxcdOCIRepositoryRef
-  secretRef: fluxcdOCIRepositorySecretRef
+  secretRef: fluxcdGitRepositoryStatusObservedIncludeItemRepository
   serviceAccountName: String
   suspend: Boolean
   timeout: String
   url: String!
-  verify: fluxcdOCIRepositoryVerify
+  verify: fluxcdHelmChartVerify
   status: fluxcdOCIRepositoryStatus
 }
 type Query {

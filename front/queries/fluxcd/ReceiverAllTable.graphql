@@ -1,3 +1,4 @@
+
 query FluxcdReceivers {
  namespaces {
   fluxcdReceivers {
@@ -16,10 +17,10 @@ query FluxcdReceivers {
     events
     interval
     resources {
+      apiVersion
       kind
       name
       namespace
-      apiVersion
     }
     secretRef {
       name

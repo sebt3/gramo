@@ -105,7 +105,7 @@ export const mutations = {
         if (args['spec']['valuesFrom'] !== undefined && Array.isArray(args['spec']['valuesFrom'])) spec['valuesFrom'] = args['spec']['valuesFrom'];
         const request = {
             apiVersion: 'helm.toolkit.fluxcd.io/v2beta1',
-            kind: 'Distrib',
+            kind: 'HelmRelease',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

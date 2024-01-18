@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(secretgeneratorSSHKeyPai
 const { mutate: patchSSHKeyPair, onDone: onPatchSSHKeyPair, onError: onPatchError } = useMutation(sSHKeyPairEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchSSHKeyPair({"namespace": navigation.currentNamespace, "name": result.value.secretgeneratorSSHKeyPair.metadata.name, "spec": sanitizeData(data.value)});
+  patchSSHKeyPair({"namespace": result.value.secretgeneratorSSHKeyPair.metadata.namespace, "name": result.value.secretgeneratorSSHKeyPair.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotSSHKeyPairFound);onPatchSSHKeyPair(patchDone);onPatchError(patchError);
 </script>

@@ -1,0 +1,171 @@
+
+query MonitoringServiceMonitor($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "servicemonitors.monitoring.coreos.com") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  monitoringServiceMonitor(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    attachMetadata {
+      node
+    }
+    endpoints {
+      authorization {
+        credentials {
+          key
+          name
+          optional
+        }
+        type
+      }
+      basicAuth {
+        password {
+          key
+          name
+          optional
+        }
+        username {
+          key
+          name
+          optional
+        }
+      }
+      bearerTokenFile
+      bearerTokenSecret {
+        key
+        name
+        optional
+      }
+      enableHttp2
+      filterRunning
+      followRedirects
+      honorLabels
+      honorTimestamps
+      interval
+      metricRelabelings {
+        action
+        modulus
+        regex
+        replacement
+        separator
+        sourceLabels
+        targetLabel
+      }
+      oauth2 {
+        clientId {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        clientSecret {
+          key
+          name
+          optional
+        }
+        scopes
+        tokenUrl
+      }
+      path
+      port
+      proxyUrl
+      relabelings {
+        action
+        modulus
+        regex
+        replacement
+        separator
+        sourceLabels
+        targetLabel
+      }
+      scheme
+      scrapeTimeout
+      tlsConfig {
+        ca {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        caFile
+        cert {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        certFile
+        insecureSkipVerify
+        keyFile
+        keySecret {
+          key
+          name
+          optional
+        }
+        serverName
+      }
+    }
+    jobLabel
+    labelLimit
+    labelNameLengthLimit
+    labelValueLengthLimit
+    namespaceSelector {
+      any
+      matchNames
+    }
+    podTargetLabels
+    sampleLimit
+    selector {
+      matchExpressions {
+        key
+        operator
+        values
+      }
+    }
+    targetLabels
+    targetLimit
+  }
+}

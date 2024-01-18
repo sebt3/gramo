@@ -1,0 +1,148 @@
+
+mutation MonitoringPodMonitor($namespace: String!, $name: String!, $spec: monitoringPodMonitorSpec!) {
+  patchMonitoringPodMonitor(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    attachMetadata {
+      node
+    }
+    jobLabel
+    labelLimit
+    labelNameLengthLimit
+    labelValueLengthLimit
+    namespaceSelector {
+      any
+      matchNames
+    }
+    podMetricsEndpoints {
+      authorization {
+        credentials {
+          key
+          name
+          optional
+        }
+        type
+      }
+      basicAuth {
+        password {
+          key
+          name
+          optional
+        }
+        username {
+          key
+          name
+          optional
+        }
+      }
+      bearerTokenSecret {
+        key
+        name
+        optional
+      }
+      enableHttp2
+      filterRunning
+      followRedirects
+      honorLabels
+      honorTimestamps
+      interval
+      metricRelabelings {
+        action
+        modulus
+        regex
+        replacement
+        separator
+        sourceLabels
+        targetLabel
+      }
+      oauth2 {
+        clientId {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        clientSecret {
+          key
+          name
+          optional
+        }
+        scopes
+        tokenUrl
+      }
+      path
+      port
+      proxyUrl
+      relabelings {
+        action
+        modulus
+        regex
+        replacement
+        separator
+        sourceLabels
+        targetLabel
+      }
+      scheme
+      scrapeTimeout
+      tlsConfig {
+        ca {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        cert {
+          configMap {
+            key
+            name
+            optional
+          }
+          secret {
+            key
+            name
+            optional
+          }
+        }
+        insecureSkipVerify
+        keySecret {
+          key
+          name
+          optional
+        }
+        serverName
+      }
+    }
+    podTargetLabels
+    sampleLimit
+    selector {
+      matchExpressions {
+        key
+        operator
+        values
+      }
+    }
+    targetLimit
+  }
+}

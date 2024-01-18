@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
 import { menuLinksProps } from '../../routes';
-withDefaults(defineProps<menuLinksProps>(), {
+import { useRouter } from 'vue-router'
+const router = useRouter();
+
+const props = withDefaults(defineProps<menuLinksProps>(), {
   caption: '',
   link: '#',
   icon: '',
@@ -15,7 +18,7 @@ withDefaults(defineProps<menuLinksProps>(), {
           expand-separator
           :header-inset-level="level"
           :href="link"
-          :default-opened="active">
+          :default-opened="active || router.currentRoute.value.matched.map(f=>f.name).includes(props.name)">
         <template v-slot:header>
           <q-item-section v-if="icon != ''" avatar>
             <q-avatar :icon="icon" />
@@ -25,15 +28,17 @@ withDefaults(defineProps<menuLinksProps>(), {
             <q-item-label v-if="caption != ''" caption>{{caption}}</q-item-label>
           </q-item-section>
         </template>
-        <MainMenuLinks
+        <div v-if="router.currentRoute.value.matched.length>1">
+          <MainMenuLinks
             v-for="child in children"
-            :key="child.title"
-            v-bind="child">
-        </MainMenuLinks>
+            :key="`${child.title}-${router.currentRoute.value.matched[router.currentRoute.value.matched.length-1].path}`"
+            v-bind="child"
+            :active="router.currentRoute.value.matched.map(f=>f.name).includes(child.name!=undefined?child.name:'----')" />
+        </div>
       </q-expansion-item>
     </div>
     <div v-else>
-      <q-item clickable v-ripple :inset-level="level" :active="active" :href="link">
+      <q-item clickable v-ripple :inset-level="level" :active="active || router.currentRoute.value.matched.map(f=>f.name).includes(props.name)" :href="link">
         <q-item-section v-if="icon != ''" avatar>
             <q-avatar :icon="icon" />
           </q-item-section>

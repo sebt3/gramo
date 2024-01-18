@@ -47,7 +47,7 @@ export const mutations = {
         spec['policy'] = args['spec']['policy'];
         const request = {
             apiVersion: 'image.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'ImagePolicy',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

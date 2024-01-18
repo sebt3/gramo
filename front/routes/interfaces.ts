@@ -5,5 +5,6 @@ export interface menuLinksProps {
     icon?: string
     level?: number
     active?: boolean
+    name?: string
     children?: Array<menuLinksProps>
 }

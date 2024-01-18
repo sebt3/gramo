@@ -1,0 +1,30 @@
+
+mutation PostgresqlScheduledBackup($namespace: String!, $name: String!, $spec: postgresqlScheduledBackupSpec!) {
+  createPostgresqlScheduledBackup(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    backupOwnerReference
+    cluster {
+      name
+    }
+    immediate
+    schedule
+    suspend
+    target
+    status {
+      lastCheckTime
+      lastScheduleTime
+      nextScheduleTime
+    }
+  }
+}

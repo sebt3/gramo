@@ -56,7 +56,7 @@ export const mutations = {
         if (args['spec']['options'] !== undefined) spec['options'] = args['spec']['options'];
         const request = {
             apiVersion: 'vynil.solidite.fr/v1',
-            kind: 'Distrib',
+            kind: 'Install',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

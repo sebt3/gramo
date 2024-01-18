@@ -56,7 +56,7 @@ export const mutations = {
         spec['type'] = args['spec']['type'];
         const request = {
             apiVersion: 'notification.toolkit.fluxcd.io/v1',
-            kind: 'Distrib',
+            kind: 'Receiver',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

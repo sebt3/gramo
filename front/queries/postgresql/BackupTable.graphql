@@ -1,0 +1,94 @@
+
+query PostgresqlBackups($namespace: String!) {
+ namespace(name: $namespace) {
+  postgresqlBackups {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    cluster {
+      name
+    }
+    target
+    status {
+      azureCredentials {
+        connectionString {
+          key
+          name
+        }
+        inheritFromAzureAD
+        storageAccount {
+          key
+          name
+        }
+        storageKey {
+          key
+          name
+        }
+        storageSasToken {
+          key
+          name
+        }
+      }
+      backupId
+      backupName
+      beginLSN
+      beginWal
+      commandError
+      commandOutput
+      destinationPath
+      encryption
+      endLSN
+      endWal
+      endpointCA {
+        key
+        name
+      }
+      endpointURL
+      error
+      googleCredentials {
+        applicationCredentials {
+          key
+          name
+        }
+        gkeEnvironment
+      }
+      instanceID {
+        ContainerID
+        podName
+      }
+      phase
+      s3Credentials {
+        accessKeyId {
+          key
+          name
+        }
+        inheritFromIAMRole
+        region {
+          key
+          name
+        }
+        secretAccessKey {
+          key
+          name
+        }
+        sessionToken {
+          key
+          name
+        }
+      }
+      serverName
+      startedAt
+      stoppedAt
+    }
+  }
+ }
+}

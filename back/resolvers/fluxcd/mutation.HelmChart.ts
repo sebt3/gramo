@@ -71,7 +71,7 @@ export const mutations = {
         if (args['spec']['version'] !== undefined && typeof args['spec']['version'] == 'string') spec['version'] = args['spec']['version'];
         const request = {
             apiVersion: 'source.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'HelmChart',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

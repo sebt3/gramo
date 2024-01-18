@@ -78,7 +78,7 @@ export const mutations = {
         if (args['spec']['version'] !== undefined && typeof args['spec']['version'] == 'string') spec['version'] = args['spec']['version'];
         const request = {
             apiVersion: 'mongodbcommunity.mongodb.com/v1',
-            kind: 'Distrib',
+            kind: 'MongoDBCommunity',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

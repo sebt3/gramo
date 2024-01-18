@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(secretgeneratorStringSec
 const { mutate: patchStringSecret, onDone: onPatchStringSecret, onError: onPatchError } = useMutation(stringSecretEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchStringSecret({"namespace": navigation.currentNamespace, "name": result.value.secretgeneratorStringSecret.metadata.name, "spec": sanitizeData(data.value)});
+  patchStringSecret({"namespace": result.value.secretgeneratorStringSecret.metadata.namespace, "name": result.value.secretgeneratorStringSecret.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotStringSecretFound);onPatchStringSecret(patchDone);onPatchError(patchError);
 </script>

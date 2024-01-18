@@ -1,0 +1,44 @@
+
+mutation MariadbGrant($namespace: String!, $name: String!, $spec: mariadbGrantSpec!) {
+  patchMariadbGrant(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    database
+    grantOption
+    host
+    mariaDbRef {
+      apiVersion
+      fieldPath
+      kind
+      name
+      namespace
+      resourceVersion
+      uid
+      waitForIt
+    }
+    privileges
+    retryInterval
+    table
+    username
+    status {
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+    }
+  }
+}

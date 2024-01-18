@@ -3,7 +3,36 @@ import * as fs from 'fs';
 import {openapiDefinitionPropertiesDef, k8sObject, HashMap} from './types.js'
 import {getBaseName, getTargetVersion,capitalizeFirstLetter} from './utils.js'
 
-export function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDef, strType:string='type', haveMeta:boolean=false, haveStatus:boolean=false) {
+interface TypeCache {
+    properties: object
+    name: string
+    type: string
+}
+
+let cache:Array<TypeCache> = [];
+
+function deepEqual(obj1, obj2) {
+    if (obj1 === obj2) {
+        return true;
+    }
+    if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1 === null || obj2 === null) {
+        return false;
+    }
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+    for (const key of keys1) {
+        if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+const depthLimit=198;
+export function generateGraphQLSubType(name: string, def: openapiDefinitionPropertiesDef, strType:string='type', haveMeta:boolean=false, haveStatus:boolean=false, depth:number=depthLimit) {
     const template = HB.compile(`
 {{ strType }} {{ name }} {
 {{#if haveMeta}}
@@ -18,6 +47,10 @@ export function generateGraphQLSubType(name: string, def: openapiDefinitionPrope
 }`);
     let res = "";
     const properties:HashMap<string> = {}
+    const match = cache.filter(i => i.type==strType && deepEqual(i.properties, def.properties));
+    if (match.length>0 && depth<depthLimit) {
+        return match[0].name;
+    }
     if (def.properties != undefined) Object.entries(def.properties).forEach(([prop, val]) => {
         const req = def.required != undefined && def.required.includes(prop) ? '!':'';
         if (val == undefined) return;
@@ -27,16 +60,18 @@ export function generateGraphQLSubType(name: string, def: openapiDefinitionPrope
             case "integer": properties[prop] = `Int${req}`;break;
             case "boolean": properties[prop] = `Boolean${req}`;break;
             case "object":
-                /*if (prop != 'metadata')*/ {
-                    const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val, strType);
-                    if(tmp.length>1) {
+                if (depth>0) {
+                    const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}`, val, strType, false, false, depth-1);
+                    if(tmp.length>1 && tmp.includes('{')) {
                         properties[prop] = `${name}${capitalizeFirstLetter(prop)}${req}`;
                         res+= tmp;
+                    } else if(tmp.length>1) {
+                        properties[prop] = `${tmp}${req}`;
                     } else {
                         properties[`#${prop}`] = `JSONObject${req}`;break;
                     }
-                /*} else {
-                    properties[prop] = 'metadata'*/
+                } else {
+                    properties[prop] = `JSONObject${req}`
                 }
                 break;
             case "array": switch (val.items?.type) {
@@ -44,21 +79,32 @@ export function generateGraphQLSubType(name: string, def: openapiDefinitionPrope
                 case "number":  properties[prop] = `[Float]${req}`;break;
                 case "integer": properties[prop] = `[Int]${req}`;break;
                 case "boolean": properties[prop] = `[Boolean]${req}`;break;
-                case "object":{
-                    const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items, strType);
-                    if (tmp.length>1) {
-                        properties[prop] = `[${name}${capitalizeFirstLetter(prop)}Item]${req}`;
-                        res+=tmp;
+                case "object":
+                    if (depth>0) {
+                        const tmp = generateGraphQLSubType(`${name}${capitalizeFirstLetter(prop)}Item`, val.items, strType, false, false, depth-1);
+                        if (tmp.length>1 && tmp.includes('{')) {
+                            properties[prop] = `[${name}${capitalizeFirstLetter(prop)}Item]${req}`;
+                            res+=tmp;
+                        } else if(tmp.length>1) {
+                            properties[prop] = `[${tmp}${req}]`;
+                        } else {
+                            properties[`#${prop}`] = `[JSONObject]${req}`;break;
+                        }
                     } else {
-                        properties[`#${prop}`] = `JSONObject${req}`;break;
+                        properties[prop] = `[JSONObject]${req}`
                     }
-                    break;}
+                    break;
                 default: properties[`#${prop}`] = `[JSONObject]${req}`;break;
             }break;
             default: properties[`#${prop}`] = `JSONObject${req}`;break;
         }
     });
     if (Object.keys(properties).filter(i => i[0]!='#').length>0 || haveMeta || haveStatus) {
+        cache.push({
+            name,
+            type: strType,
+            properties: def.properties as object,
+        })
         res+=template({
             name: name,
             properties: properties,
@@ -70,7 +116,8 @@ export function generateGraphQLSubType(name: string, def: openapiDefinitionPrope
     return res
 }
 
-export function generateGraphQLTypes(file: string, short:string, apiGroup:string, objects: HashMap<HashMap<k8sObject>>){
+export function generateGraphQLTypes(file: string, short:string, apiGroup:string, objects: HashMap<HashMap<k8sObject>>) {
+    cache = [];
     const template = HB.compile(`
 type Query {
 {{#each queries}}

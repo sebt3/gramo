@@ -69,14 +69,6 @@ type fluxcdImagePolicy {
   policy: fluxcdImagePolicyPolicy!
   status: fluxcdImagePolicyStatus
 }
-type fluxcdImageRepositoryStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdImageRepositoryStatusLastScanResult {
   latestTags: [String]
   scanTime: String
@@ -84,16 +76,13 @@ type fluxcdImageRepositoryStatusLastScanResult {
 }
 type fluxcdImageRepositoryStatus {
   canonicalImageName: String
-  conditions: [fluxcdImageRepositoryStatusConditionsItem]
+  conditions: [fluxcdImagePolicyStatusConditionsItem]
   lastHandledReconcileAt: String
   lastScanResult: fluxcdImageRepositoryStatusLastScanResult
   observedExclusionList: [String]
   observedGeneration: Int
 }
 input fluxcdImageRepositorySpecCertSecretRef {
-  name: String!
-}
-input fluxcdImageRepositorySpecSecretRef {
   name: String!
 }
 input fluxcdImageRepositorySpec {
@@ -103,15 +92,12 @@ input fluxcdImageRepositorySpec {
   image: String
   interval: String
   provider: String
-  secretRef: fluxcdImageRepositorySpecSecretRef
+  secretRef: fluxcdImageRepositorySpecCertSecretRef
   serviceAccountName: String
   suspend: Boolean
   timeout: String
 }
 type fluxcdImageRepositoryCertSecretRef {
-  name: String!
-}
-type fluxcdImageRepositorySecretRef {
   name: String!
 }
 type fluxcdImageRepository {
@@ -122,22 +108,14 @@ type fluxcdImageRepository {
   image: String
   interval: String
   provider: String
-  secretRef: fluxcdImageRepositorySecretRef
+  secretRef: fluxcdImageRepositoryCertSecretRef
   serviceAccountName: String
   suspend: Boolean
   timeout: String
   status: fluxcdImageRepositoryStatus
 }
-type fluxcdImageUpdateAutomationStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdImageUpdateAutomationStatus {
-  conditions: [fluxcdImageUpdateAutomationStatusConditionsItem]
+  conditions: [fluxcdImagePolicyStatusConditionsItem]
   lastAutomationRunTime: String
   lastHandledReconcileAt: String
   lastPushCommit: String
@@ -158,11 +136,8 @@ input fluxcdImageUpdateAutomationSpecGitCommitAuthor {
   email: String!
   name: String
 }
-input fluxcdImageUpdateAutomationSpecGitCommitSigningKeySecretRef {
-  name: String!
-}
 input fluxcdImageUpdateAutomationSpecGitCommitSigningKey {
-  secretRef: fluxcdImageUpdateAutomationSpecGitCommitSigningKeySecretRef
+  secretRef: fluxcdImageRepositorySpecCertSecretRef
 }
 input fluxcdImageUpdateAutomationSpecGitCommit {
   author: fluxcdImageUpdateAutomationSpecGitCommitAuthor!
@@ -208,11 +183,8 @@ type fluxcdImageUpdateAutomationGitCommitAuthor {
   email: String!
   name: String
 }
-type fluxcdImageUpdateAutomationGitCommitSigningKeySecretRef {
-  name: String!
-}
 type fluxcdImageUpdateAutomationGitCommitSigningKey {
-  secretRef: fluxcdImageUpdateAutomationGitCommitSigningKeySecretRef
+  secretRef: fluxcdImageRepositoryCertSecretRef
 }
 type fluxcdImageUpdateAutomationGitCommit {
   author: fluxcdImageUpdateAutomationGitCommitAuthor!

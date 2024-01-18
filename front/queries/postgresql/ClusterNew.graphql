@@ -1,0 +1,725 @@
+
+mutation PostgresqlCluster($namespace: String!, $name: String!, $spec: postgresqlClusterSpec!) {
+  createPostgresqlCluster(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    affinity {
+      additionalPodAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+      additionalPodAntiAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+      enablePodAntiAffinity
+      nodeAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          preference {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          nodeSelectorTerms {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+        }
+      }
+      podAntiAffinityType
+      tolerations {
+        effect
+        key
+        operator
+        tolerationSeconds
+        value
+      }
+      topologyKey
+    }
+    backup {
+      barmanObjectStore {
+        azureCredentials {
+          connectionString {
+            key
+            name
+          }
+          inheritFromAzureAD
+          storageAccount {
+            key
+            name
+          }
+          storageKey {
+            key
+            name
+          }
+          storageSasToken {
+            key
+            name
+          }
+        }
+        data {
+          compression
+          encryption
+          immediateCheckpoint
+          jobs
+        }
+        destinationPath
+        endpointCA {
+          key
+          name
+        }
+        endpointURL
+        googleCredentials {
+          applicationCredentials {
+            key
+            name
+          }
+          gkeEnvironment
+        }
+        s3Credentials {
+          accessKeyId {
+            key
+            name
+          }
+          inheritFromIAMRole
+          region {
+            key
+            name
+          }
+          secretAccessKey {
+            key
+            name
+          }
+          sessionToken {
+            key
+            name
+          }
+        }
+        serverName
+        wal {
+          compression
+          encryption
+          maxParallel
+        }
+      }
+      retentionPolicy
+      target
+    }
+    bootstrap {
+      initdb {
+        dataChecksums
+        database
+        encoding
+        import {
+          databases
+          postImportApplicationSQL
+          roles
+          schemaOnly
+          source {
+            externalCluster
+          }
+          type
+        }
+        localeCType
+        localeCollate
+        options
+        owner
+        postInitApplicationSQL
+        postInitApplicationSQLRefs {
+          configMapRefs {
+            key
+            name
+          }
+          secretRefs {
+            key
+            name
+          }
+        }
+        postInitSQL
+        postInitTemplateSQL
+        secret {
+          name
+        }
+        walSegmentSize
+      }
+      pg_basebackup {
+        database
+        owner
+        secret {
+          name
+        }
+        source
+      }
+      recovery {
+        backup {
+          endpointCA {
+            key
+            name
+          }
+          name
+        }
+        database
+        owner
+        recoveryTarget {
+          backupID
+          exclusive
+          targetImmediate
+          targetLSN
+          targetName
+          targetTLI
+          targetTime
+          targetXID
+        }
+        secret {
+          name
+        }
+        source
+        volumeSnapshots {
+          storage {
+            apiGroup
+            kind
+            name
+          }
+          walStorage {
+            apiGroup
+            kind
+            name
+          }
+        }
+      }
+    }
+    certificates {
+      clientCASecret
+      replicationTLSSecret
+      serverAltDNSNames
+      serverCASecret
+      serverTLSSecret
+    }
+    description
+    enableSuperuserAccess
+    env {
+      name
+      value
+      valueFrom {
+        configMapKeyRef {
+          key
+          name
+          optional
+        }
+        fieldRef {
+          apiVersion
+          fieldPath
+        }
+        resourceFieldRef {
+          containerName
+          resource
+        }
+        secretKeyRef {
+          key
+          name
+          optional
+        }
+      }
+    }
+    envFrom {
+      configMapRef {
+        name
+        optional
+      }
+      prefix
+      secretRef {
+        name
+        optional
+      }
+    }
+    externalClusters {
+      barmanObjectStore {
+        azureCredentials {
+          connectionString {
+            key
+            name
+          }
+          inheritFromAzureAD
+          storageAccount {
+            key
+            name
+          }
+          storageKey {
+            key
+            name
+          }
+          storageSasToken {
+            key
+            name
+          }
+        }
+        data {
+          compression
+          encryption
+          immediateCheckpoint
+          jobs
+        }
+        destinationPath
+        endpointCA {
+          key
+          name
+        }
+        endpointURL
+        googleCredentials {
+          applicationCredentials {
+            key
+            name
+          }
+          gkeEnvironment
+        }
+        s3Credentials {
+          accessKeyId {
+            key
+            name
+          }
+          inheritFromIAMRole
+          region {
+            key
+            name
+          }
+          secretAccessKey {
+            key
+            name
+          }
+          sessionToken {
+            key
+            name
+          }
+        }
+        serverName
+        wal {
+          compression
+          encryption
+          maxParallel
+        }
+      }
+      name
+      password {
+        key
+        name
+        optional
+      }
+      sslCert {
+        key
+        name
+        optional
+      }
+      sslKey {
+        key
+        name
+        optional
+      }
+      sslRootCert {
+        key
+        name
+        optional
+      }
+    }
+    failoverDelay
+    imageName
+    imagePullPolicy
+    imagePullSecrets {
+      name
+    }
+    instances
+    logLevel
+    managed {
+      roles {
+        bypassrls
+        comment
+        connectionLimit
+        createdb
+        createrole
+        disablePassword
+        ensure
+        inRoles
+        inherit
+        login
+        name
+        passwordSecret {
+          name
+        }
+        replication
+        superuser
+        validUntil
+      }
+    }
+    maxSyncReplicas
+    minSyncReplicas
+    monitoring {
+      customQueriesConfigMap {
+        key
+        name
+      }
+      customQueriesSecret {
+        key
+        name
+      }
+      disableDefaultQueries
+      enablePodMonitor
+    }
+    nodeMaintenanceWindow {
+      inProgress
+      reusePVC
+    }
+    postgresGID
+    postgresUID
+    postgresql {
+      ldap {
+        bindAsAuth {
+          prefix
+          suffix
+        }
+        bindSearchAuth {
+          baseDN
+          bindDN
+          bindPassword {
+            key
+            name
+            optional
+          }
+          searchAttribute
+          searchFilter
+        }
+        port
+        scheme
+        server
+        tls
+      }
+      pg_hba
+      promotionTimeout
+      shared_preload_libraries
+      syncReplicaElectionConstraint {
+        enabled
+        nodeLabelsAntiAffinity
+      }
+    }
+    primaryUpdateMethod
+    primaryUpdateStrategy
+    priorityClassName
+    projectedVolumeTemplate {
+      defaultMode
+      sources {
+        configMap {
+          items {
+            key
+            mode
+            path
+          }
+          name
+          optional
+        }
+        downwardAPI {
+          items {
+            fieldRef {
+              apiVersion
+              fieldPath
+            }
+            mode
+            path
+            resourceFieldRef {
+              containerName
+              resource
+            }
+          }
+        }
+        secret {
+          items {
+            key
+            mode
+            path
+          }
+          name
+          optional
+        }
+        serviceAccountToken {
+          audience
+          expirationSeconds
+          path
+        }
+      }
+    }
+    replica {
+      enabled
+      source
+    }
+    replicationSlots {
+      highAvailability {
+        enabled
+        slotPrefix
+      }
+      updateInterval
+    }
+    resources {
+      claims {
+        name
+      }
+    }
+    schedulerName
+    seccompProfile {
+      localhostProfile
+      type
+    }
+    startDelay
+    stopDelay
+    storage {
+      pvcTemplate {
+        accessModes
+        dataSource {
+          apiGroup
+          kind
+          name
+        }
+        dataSourceRef {
+          apiGroup
+          kind
+          name
+          namespace
+        }
+        resources {
+          claims {
+            name
+          }
+        }
+        selector {
+          matchExpressions {
+            key
+            operator
+            values
+          }
+        }
+        storageClassName
+        volumeMode
+        volumeName
+      }
+      resizeInUseVolumes
+      size
+      storageClass
+    }
+    superuserSecret {
+      name
+    }
+    switchoverDelay
+    topologySpreadConstraints {
+      labelSelector {
+        matchExpressions {
+          key
+          operator
+          values
+        }
+      }
+      matchLabelKeys
+      maxSkew
+      minDomains
+      nodeAffinityPolicy
+      nodeTaintsPolicy
+      topologyKey
+      whenUnsatisfiable
+    }
+    walStorage {
+      pvcTemplate {
+        accessModes
+        dataSource {
+          apiGroup
+          kind
+          name
+        }
+        dataSourceRef {
+          apiGroup
+          kind
+          name
+          namespace
+        }
+        resources {
+          claims {
+            name
+          }
+        }
+        selector {
+          matchExpressions {
+            key
+            operator
+            values
+          }
+        }
+        storageClassName
+        volumeMode
+        volumeName
+      }
+      resizeInUseVolumes
+      size
+      storageClass
+    }
+    status {
+      azurePVCUpdateEnabled
+      certificates {
+        clientCASecret
+        replicationTLSSecret
+        serverAltDNSNames
+        serverCASecret
+        serverTLSSecret
+      }
+      cloudNativePGCommitHash
+      cloudNativePGOperatorHash
+      conditions {
+        lastTransitionTime
+        message
+        observedGeneration
+        reason
+        status
+        type
+      }
+      currentPrimary
+      currentPrimaryFailingSinceTimestamp
+      currentPrimaryTimestamp
+      danglingPVC
+      firstRecoverabilityPoint
+      healthyPVC
+      initializingPVC
+      instanceNames
+      instances
+      jobCount
+      lastFailedBackup
+      lastSuccessfulBackup
+      latestGeneratedNode
+      onlineUpdateEnabled
+      phase
+      phaseReason
+      poolerIntegrations {
+        pgBouncerIntegration {
+          secrets
+        }
+      }
+      pvcCount
+      readService
+      readyInstances
+      resizingPVC
+      secretsResourceVersion {
+        applicationSecretVersion
+        barmanEndpointCA
+        caSecretVersion
+        clientCaSecretVersion
+        replicationSecretVersion
+        serverCaSecretVersion
+        serverSecretVersion
+        superuserSecretVersion
+      }
+      targetPrimary
+      targetPrimaryTimestamp
+      timelineID
+      topology {
+        nodesUsed
+        successfullyExtracted
+      }
+      unusablePVC
+      writeService
+    }
+  }
+}

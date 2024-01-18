@@ -1,0 +1,1083 @@
+
+mutation MonitoringAlertmanagerConfig($namespace: String!, $name: String!, $spec: monitoringAlertmanagerConfigSpec!) {
+  createMonitoringAlertmanagerConfig(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    inhibitRules {
+      equal
+      sourceMatch {
+        matchType
+        name
+        regex
+        value
+      }
+      targetMatch {
+        matchType
+        name
+        regex
+        value
+      }
+    }
+    muteTimeIntervals {
+      name
+      timeIntervals {
+        daysOfMonth {
+          end
+          start
+        }
+        months
+        times {
+          endTime
+          startTime
+        }
+        weekdays
+        years
+      }
+    }
+    receivers {
+      emailConfigs {
+        authIdentity
+        authPassword {
+          key
+          name
+          optional
+        }
+        authSecret {
+          key
+          name
+          optional
+        }
+        authUsername
+        from
+        headers {
+          key
+          value
+        }
+        hello
+        html
+        requireTLS
+        sendResolved
+        smarthost
+        text
+        tlsConfig {
+          ca {
+            configMap {
+              key
+              name
+              optional
+            }
+            secret {
+              key
+              name
+              optional
+            }
+          }
+          cert {
+            configMap {
+              key
+              name
+              optional
+            }
+            secret {
+              key
+              name
+              optional
+            }
+          }
+          insecureSkipVerify
+          keySecret {
+            key
+            name
+            optional
+          }
+          serverName
+        }
+        to
+      }
+      name
+      opsgenieConfigs {
+        actions
+        apiKey {
+          key
+          name
+          optional
+        }
+        apiURL
+        description
+        details {
+          key
+          value
+        }
+        entity
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        message
+        note
+        priority
+        responders {
+          id
+          name
+          type
+          username
+        }
+        sendResolved
+        source
+        tags
+        updateAlerts
+      }
+      pagerdutyConfigs {
+        class
+        client
+        clientURL
+        component
+        description
+        details {
+          key
+          value
+        }
+        group
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        pagerDutyImageConfigs {
+          alt
+          href
+          src
+        }
+        pagerDutyLinkConfigs {
+          alt
+          href
+        }
+        routingKey {
+          key
+          name
+          optional
+        }
+        sendResolved
+        serviceKey {
+          key
+          name
+          optional
+        }
+        severity
+        url
+      }
+      pushoverConfigs {
+        expire
+        html
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        message
+        priority
+        retry
+        sendResolved
+        sound
+        title
+        token {
+          key
+          name
+          optional
+        }
+        url
+        urlTitle
+        userKey {
+          key
+          name
+          optional
+        }
+      }
+      slackConfigs {
+        actions {
+          confirm {
+            dismissText
+            okText
+            text
+            title
+          }
+          name
+          style
+          text
+          type
+          url
+          value
+        }
+        apiURL {
+          key
+          name
+          optional
+        }
+        callbackId
+        channel
+        color
+        fallback
+        fields {
+          short
+          title
+          value
+        }
+        footer
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        iconEmoji
+        iconURL
+        imageURL
+        linkNames
+        mrkdwnIn
+        pretext
+        sendResolved
+        shortFields
+        text
+        thumbURL
+        title
+        titleLink
+        username
+      }
+      snsConfigs {
+        apiURL
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        message
+        phoneNumber
+        sendResolved
+        sigv4 {
+          accessKey {
+            key
+            name
+            optional
+          }
+          profile
+          region
+          roleArn
+          secretKey {
+            key
+            name
+            optional
+          }
+        }
+        subject
+        targetARN
+        topicARN
+      }
+      telegramConfigs {
+        apiURL
+        botToken {
+          key
+          name
+          optional
+        }
+        chatID
+        disableNotifications
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        message
+        parseMode
+        sendResolved
+      }
+      victoropsConfigs {
+        apiKey {
+          key
+          name
+          optional
+        }
+        apiUrl
+        customFields {
+          key
+          value
+        }
+        entityDisplayName
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        messageType
+        monitoringTool
+        routingKey
+        sendResolved
+        stateMessage
+      }
+      webhookConfigs {
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        maxAlerts
+        sendResolved
+        url
+        urlSecret {
+          key
+          name
+          optional
+        }
+      }
+      wechatConfigs {
+        agentID
+        apiSecret {
+          key
+          name
+          optional
+        }
+        apiURL
+        corpID
+        httpConfig {
+          authorization {
+            credentials {
+              key
+              name
+              optional
+            }
+            type
+          }
+          basicAuth {
+            password {
+              key
+              name
+              optional
+            }
+            username {
+              key
+              name
+              optional
+            }
+          }
+          bearerTokenSecret {
+            key
+            name
+            optional
+          }
+          followRedirects
+          oauth2 {
+            clientId {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            clientSecret {
+              key
+              name
+              optional
+            }
+            scopes
+            tokenUrl
+          }
+          proxyURL
+          tlsConfig {
+            ca {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            cert {
+              configMap {
+                key
+                name
+                optional
+              }
+              secret {
+                key
+                name
+                optional
+              }
+            }
+            insecureSkipVerify
+            keySecret {
+              key
+              name
+              optional
+            }
+            serverName
+          }
+        }
+        message
+        messageType
+        sendResolved
+        toParty
+        toTag
+        toUser
+      }
+    }
+    route {
+      activeTimeIntervals
+      continue
+      groupBy
+      groupInterval
+      groupWait
+      matchers {
+        matchType
+        name
+        regex
+        value
+      }
+      muteTimeIntervals
+      receiver
+      repeatInterval
+      routes
+    }
+  }
+}

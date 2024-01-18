@@ -67,7 +67,7 @@ export const mutations = {
         if (args['spec']['username'] !== undefined && typeof args['spec']['username'] == 'string') spec['username'] = args['spec']['username'];
         const request = {
             apiVersion: 'notification.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'Provider',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

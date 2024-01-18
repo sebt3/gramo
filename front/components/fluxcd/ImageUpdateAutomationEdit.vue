@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdImageUpdateAutomat
 const { mutate: patchImageUpdateAutomation, onDone: onPatchImageUpdateAutomation, onError: onPatchError } = useMutation(imageUpdateAutomationEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchImageUpdateAutomation({"namespace": navigation.currentNamespace, "name": result.value.fluxcdImageUpdateAutomation.metadata.name, "spec": sanitizeData(data.value)});
+  patchImageUpdateAutomation({"namespace": result.value.fluxcdImageUpdateAutomation.metadata.namespace, "name": result.value.fluxcdImageUpdateAutomation.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotImageUpdateAutomationFound);onPatchImageUpdateAutomation(patchDone);onPatchError(patchError);
 </script>

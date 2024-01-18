@@ -100,18 +100,9 @@ input fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemPatchIte
   path: String!
   value: JSONObject
 }
-input fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemTarget {
-  annotationSelector: String
-  group: String
-  kind: String
-  labelSelector: String
-  name: String
-  namespace: String
-  version: String
-}
 input fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902Item {
   patch: [fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemPatchItem]!
-  target: fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesJson6902ItemTarget!
+  target: fluxcdHelmReleaseSpecPostRenderersItemKustomizePatchesItemTarget!
 }
 input fluxcdHelmReleaseSpecPostRenderersItemKustomize {
   images: [fluxcdHelmReleaseSpecPostRenderersItemKustomizeImagesItem]
@@ -269,18 +260,9 @@ type fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemPatchItem {
   path: String!
   value: JSONObject
 }
-type fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemTarget {
-  annotationSelector: String
-  group: String
-  kind: String
-  labelSelector: String
-  name: String
-  namespace: String
-  version: String
-}
 type fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902Item {
   patch: [fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemPatchItem]!
-  target: fluxcdHelmReleasePostRenderersItemKustomizePatchesJson6902ItemTarget!
+  target: fluxcdHelmReleasePostRenderersItemKustomizePatchesItemTarget!
 }
 type fluxcdHelmReleasePostRenderersItemKustomize {
   images: [fluxcdHelmReleasePostRenderersItemKustomizeImagesItem]

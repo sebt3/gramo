@@ -9,14 +9,17 @@ export const link:menuLinksProps = {
   level: 1,
   children: [
   {
+    name: 'fluxcdReceivers',
     title: 'Receiver', caption: 'List receiver', icon: 'notifications',
     link: `/${cat}/fluxcd/receivers/`, level: 2, children: []
   },
   {
+    name: 'fluxcdAlerts',
     title: 'Alert', caption: 'List alert', icon: 'notifications',
     link: `/${cat}/fluxcd/alerts/`, level: 2, children: []
   },
   {
+    name: 'fluxcdProviders',
     title: 'Provider', caption: 'List provider', icon: 'notifications',
     link: `/${cat}/fluxcd/providers/`, level: 2, children: []
   },

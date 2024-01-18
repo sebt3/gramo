@@ -51,106 +51,58 @@ type fluxcdReceiver {
   type: String!
   status: fluxcdReceiverStatus
 }
-type fluxcdAlertStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdAlertStatus {
-  conditions: [fluxcdAlertStatusConditionsItem]
+  conditions: [fluxcdReceiverStatusConditionsItem]
   lastHandledReconcileAt: String
   observedGeneration: Int
-}
-input fluxcdAlertSpecEventSourcesItem {
-  apiVersion: String
-  kind: String!
-  matchLabels: JSONObject
-  name: String!
-  namespace: String
-}
-input fluxcdAlertSpecProviderRef {
-  name: String!
 }
 input fluxcdAlertSpec {
   eventMetadata: JSONObject
   eventSeverity: String
-  eventSources: [fluxcdAlertSpecEventSourcesItem]!
+  eventSources: [fluxcdReceiverSpecResourcesItem!]
   exclusionList: [String]
   inclusionList: [String]
-  providerRef: fluxcdAlertSpecProviderRef!
+  providerRef: fluxcdReceiverSpecSecretRef!
   summary: String
   suspend: Boolean
-}
-type fluxcdAlertEventSourcesItem {
-  apiVersion: String
-  kind: String!
-  matchLabels: JSONObject
-  name: String!
-  namespace: String
-}
-type fluxcdAlertProviderRef {
-  name: String!
 }
 type fluxcdAlert {
   metadata: metadata
   eventMetadata: JSONObject
   eventSeverity: String
-  eventSources: [fluxcdAlertEventSourcesItem]!
+  eventSources: [fluxcdReceiverResourcesItem!]
   exclusionList: [String]
   inclusionList: [String]
-  providerRef: fluxcdAlertProviderRef!
+  providerRef: fluxcdReceiverSecretRef!
   summary: String
   suspend: Boolean
   status: fluxcdAlertStatus
 }
-type fluxcdProviderStatusConditionsItem {
-  lastTransitionTime: String!
-  message: String!
-  observedGeneration: Int
-  reason: String!
-  status: String!
-  type: String!
-}
 type fluxcdProviderStatus {
-  conditions: [fluxcdProviderStatusConditionsItem]
+  conditions: [fluxcdReceiverStatusConditionsItem]
   lastHandledReconcileAt: String
   observedGeneration: Int
 }
-input fluxcdProviderSpecCertSecretRef {
-  name: String!
-}
-input fluxcdProviderSpecSecretRef {
-  name: String!
-}
 input fluxcdProviderSpec {
   address: String
-  certSecretRef: fluxcdProviderSpecCertSecretRef
+  certSecretRef: fluxcdReceiverSpecSecretRef
   channel: String
   interval: String
   proxy: String
-  secretRef: fluxcdProviderSpecSecretRef
+  secretRef: fluxcdReceiverSpecSecretRef
   suspend: Boolean
   timeout: String
   type: String!
   username: String
 }
-type fluxcdProviderCertSecretRef {
-  name: String!
-}
-type fluxcdProviderSecretRef {
-  name: String!
-}
 type fluxcdProvider {
   metadata: metadata
   address: String
-  certSecretRef: fluxcdProviderCertSecretRef
+  certSecretRef: fluxcdReceiverSecretRef
   channel: String
   interval: String
   proxy: String
-  secretRef: fluxcdProviderSecretRef
+  secretRef: fluxcdReceiverSecretRef
   suspend: Boolean
   timeout: String
   type: String!

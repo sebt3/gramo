@@ -1,0 +1,23 @@
+
+query K8upSnapshots {
+ namespaces {
+  k8upSnapshots {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    date
+    id
+    paths
+    repository
+  }
+ }
+}

@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdOCIRepositoryQuery
 const { mutate: patchOCIRepository, onDone: onPatchOCIRepository, onError: onPatchError } = useMutation(oCIRepositoryEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchOCIRepository({"namespace": navigation.currentNamespace, "name": result.value.fluxcdOCIRepository.metadata.name, "spec": sanitizeData(data.value)});
+  patchOCIRepository({"namespace": result.value.fluxcdOCIRepository.metadata.namespace, "name": result.value.fluxcdOCIRepository.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotOCIRepositoryFound);onPatchOCIRepository(patchDone);onPatchError(patchError);
 </script>

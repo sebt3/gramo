@@ -4,9 +4,11 @@ const iconHelmRelease = 'auto_mode';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconHelmRelease,
   link: `/${cat}/fluxcd/helmreleases/`,
+  name: 'fluxcd',
   level: 1,
   children: [
   {
+    name: 'fluxcdHelmReleases',
     title: 'HelmRelease', caption: 'List helmRelease', icon: 'auto_mode',
     link: `/${cat}/fluxcd/helmreleases/`, level: 2, children: []
   },

@@ -55,7 +55,7 @@ export const mutations = {
         if (args['spec']['update'] !== undefined && typeof args['spec']['update'] == 'object') spec['update'] = args['spec']['update'];
         const request = {
             apiVersion: 'image.toolkit.fluxcd.io/v1beta1',
-            kind: 'Distrib',
+            kind: 'ImageUpdateAutomation',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

@@ -61,5 +61,6 @@ query FluxcdHelmRepository($namespace: String!, $name: String!) {
       lastHandledReconcileAt
       observedGeneration
       url
-    }  }
+    }
+  }
 }

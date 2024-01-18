@@ -1,0 +1,1691 @@
+
+type k8upArchiveStatusConditionsItem {
+  lastTransitionTime: String!
+  message: String!
+  observedGeneration: Int
+  reason: String!
+  status: String!
+  type: String!
+}
+type k8upArchiveStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  exclusive: Boolean
+  finished: Boolean
+  started: Boolean
+}
+input k8upArchiveSpecBackendAzureAccountKeySecretRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+input k8upArchiveSpecBackendAzure {
+  accountKeySecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  accountNameSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  container: String
+}
+input k8upArchiveSpecBackendB2 {
+  accountIDSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  accountKeySecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  bucket: String
+  path: String
+}
+input k8upArchiveSpecBackendEnvFromItemConfigMapRef {
+  name: String
+  optional: Boolean
+}
+input k8upArchiveSpecBackendEnvFromItemSecretRef {
+  name: String
+  optional: Boolean
+}
+input k8upArchiveSpecBackendEnvFromItem {
+  configMapRef: k8upArchiveSpecBackendEnvFromItemConfigMapRef
+  prefix: String
+  secretRef: k8upArchiveSpecBackendEnvFromItemSecretRef
+}
+input k8upArchiveSpecBackendGcs {
+  accessTokenSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  bucket: String
+  projectIDSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+}
+input k8upArchiveSpecBackendLocal {
+  mountPath: String
+}
+input k8upArchiveSpecBackendRest {
+  passwordSecretReg: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  url: String
+  userSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+}
+input k8upArchiveSpecBackendS3 {
+  accessKeyIDSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  bucket: String
+  endpoint: String
+  secretAccessKeySecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+}
+input k8upArchiveSpecBackendSwift {
+  container: String
+  path: String
+}
+input k8upArchiveSpecBackend {
+  azure: k8upArchiveSpecBackendAzure
+  b2: k8upArchiveSpecBackendB2
+  envFrom: [k8upArchiveSpecBackendEnvFromItem]
+  gcs: k8upArchiveSpecBackendGcs
+  local: k8upArchiveSpecBackendLocal
+  repoPasswordSecretRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+  rest: k8upArchiveSpecBackendRest
+  s3: k8upArchiveSpecBackendS3
+  swift: k8upArchiveSpecBackendSwift
+}
+input k8upArchiveSpecPodSecurityContextSeLinuxOptions {
+  level: String
+  role: String
+  type: String
+  user: String
+}
+input k8upArchiveSpecPodSecurityContextSeccompProfile {
+  localhostProfile: String
+  type: String!
+}
+input k8upArchiveSpecPodSecurityContextSysctlsItem {
+  name: String!
+  value: String!
+}
+input k8upArchiveSpecPodSecurityContextWindowsOptions {
+  gmsaCredentialSpec: String
+  gmsaCredentialSpecName: String
+  hostProcess: Boolean
+  runAsUserName: String
+}
+input k8upArchiveSpecPodSecurityContext {
+  fsGroup: Int
+  fsGroupChangePolicy: String
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: k8upArchiveSpecPodSecurityContextSeLinuxOptions
+  seccompProfile: k8upArchiveSpecPodSecurityContextSeccompProfile
+  supplementalGroups: [Int]
+  sysctls: [k8upArchiveSpecPodSecurityContextSysctlsItem]
+  windowsOptions: k8upArchiveSpecPodSecurityContextWindowsOptions
+}
+input k8upArchiveSpecRestoreMethodFolder {
+  claimName: String!
+  readOnly: Boolean
+}
+input k8upArchiveSpecRestoreMethod {
+  folder: k8upArchiveSpecRestoreMethodFolder
+  s3: k8upArchiveSpecBackendS3
+}
+input k8upArchiveSpec {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveSpecRestoreMethod
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+type k8upArchiveBackendAzureAccountKeySecretRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+type k8upArchiveBackendAzure {
+  accountKeySecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  accountNameSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  container: String
+}
+type k8upArchiveBackendB2 {
+  accountIDSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  accountKeySecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  bucket: String
+  path: String
+}
+type k8upArchiveBackendEnvFromItemConfigMapRef {
+  name: String
+  optional: Boolean
+}
+type k8upArchiveBackendEnvFromItemSecretRef {
+  name: String
+  optional: Boolean
+}
+type k8upArchiveBackendEnvFromItem {
+  configMapRef: k8upArchiveBackendEnvFromItemConfigMapRef
+  prefix: String
+  secretRef: k8upArchiveBackendEnvFromItemSecretRef
+}
+type k8upArchiveBackendGcs {
+  accessTokenSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  bucket: String
+  projectIDSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+}
+type k8upArchiveBackendLocal {
+  mountPath: String
+}
+type k8upArchiveBackendRest {
+  passwordSecretReg: k8upArchiveBackendAzureAccountKeySecretRef
+  url: String
+  userSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+}
+type k8upArchiveBackendS3 {
+  accessKeyIDSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  bucket: String
+  endpoint: String
+  secretAccessKeySecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+}
+type k8upArchiveBackendSwift {
+  container: String
+  path: String
+}
+type k8upArchiveBackend {
+  azure: k8upArchiveBackendAzure
+  b2: k8upArchiveBackendB2
+  envFrom: [k8upArchiveBackendEnvFromItem]
+  gcs: k8upArchiveBackendGcs
+  local: k8upArchiveBackendLocal
+  repoPasswordSecretRef: k8upArchiveBackendAzureAccountKeySecretRef
+  rest: k8upArchiveBackendRest
+  s3: k8upArchiveBackendS3
+  swift: k8upArchiveBackendSwift
+}
+type k8upArchivePodSecurityContextSeLinuxOptions {
+  level: String
+  role: String
+  type: String
+  user: String
+}
+type k8upArchivePodSecurityContextSeccompProfile {
+  localhostProfile: String
+  type: String!
+}
+type k8upArchivePodSecurityContextSysctlsItem {
+  name: String!
+  value: String!
+}
+type k8upArchivePodSecurityContextWindowsOptions {
+  gmsaCredentialSpec: String
+  gmsaCredentialSpecName: String
+  hostProcess: Boolean
+  runAsUserName: String
+}
+type k8upArchivePodSecurityContext {
+  fsGroup: Int
+  fsGroupChangePolicy: String
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: k8upArchivePodSecurityContextSeLinuxOptions
+  seccompProfile: k8upArchivePodSecurityContextSeccompProfile
+  supplementalGroups: [Int]
+  sysctls: [k8upArchivePodSecurityContextSysctlsItem]
+  windowsOptions: k8upArchivePodSecurityContextWindowsOptions
+}
+type k8upArchiveRestoreMethodFolder {
+  claimName: String!
+  readOnly: Boolean
+}
+type k8upArchiveRestoreMethod {
+  folder: k8upArchiveRestoreMethodFolder
+  s3: k8upArchiveBackendS3
+}
+type k8upArchive {
+  metadata: metadata
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveRestoreMethod
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+  status: k8upArchiveStatus
+}
+type k8upBackupStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  exclusive: Boolean
+  finished: Boolean
+  started: Boolean
+}
+input k8upBackupSpec {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  promURL: String
+  resources: JSONObject
+  statsURL: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+type k8upBackup {
+  metadata: metadata
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  promURL: String
+  resources: JSONObject
+  statsURL: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+  status: k8upBackupStatus
+}
+type k8upCheckStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  exclusive: Boolean
+  finished: Boolean
+  started: Boolean
+}
+input k8upCheckSpec {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  promURL: String
+  resources: JSONObject
+  successfulJobsHistoryLimit: Int
+}
+type k8upCheck {
+  metadata: metadata
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  promURL: String
+  resources: JSONObject
+  successfulJobsHistoryLimit: Int
+  status: k8upCheckStatus
+}
+input k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+input k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  matchExpressions: [k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+  matchFields: [k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+}
+input k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  preference: k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!
+  weight: Int!
+}
+input k8upPreBackupPodSpecPodSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  nodeSelectorTerms: [k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!]
+}
+input k8upPreBackupPodSpecPodSpecAffinityNodeAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodSpecPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: k8upPreBackupPodSpecPodSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  matchExpressions: [k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem]
+  matchLabels: JSONObject
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  labelSelector: k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaceSelector: k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaces: [String]
+  topologyKey: String!
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  podAffinityTerm: k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm!
+  weight: Int!
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+input k8upPreBackupPodSpecPodSpecAffinityPodAntiAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+input k8upPreBackupPodSpecPodSpecAffinity {
+  nodeAffinity: k8upPreBackupPodSpecPodSpecAffinityNodeAffinity
+  podAffinity: k8upPreBackupPodSpecPodSpecAffinityPodAffinity
+  podAntiAffinity: k8upPreBackupPodSpecPodSpecAffinityPodAntiAffinity
+}
+input k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromConfigMapKeyRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+input k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromFieldRef {
+  apiVersion: String
+  fieldPath: String!
+}
+input k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromResourceFieldRef {
+  containerName: String
+  divisor: JSONObject
+  resource: String!
+}
+input k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFrom {
+  configMapKeyRef: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromConfigMapKeyRef
+  fieldRef: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromFieldRef
+  resourceFieldRef: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromResourceFieldRef
+  secretKeyRef: k8upArchiveSpecBackendAzureAccountKeySecretRef
+}
+input k8upPreBackupPodSpecPodSpecContainersItemEnvItem {
+  name: String!
+  value: String
+  valueFrom: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFrom
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartExec {
+  command: [String]
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  name: String!
+  value: String!
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartHttpGet {
+  host: String
+  httpHeaders: [k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem]
+  path: String
+  port: JSONObject!
+  scheme: String
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartTcpSocket {
+  host: String
+  port: JSONObject!
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStart {
+  exec: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartExec
+  httpGet: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartHttpGet
+  tcpSocket: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartTcpSocket
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLifecycle {
+  postStart: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStart
+  preStop: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStart
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLivenessProbeGrpc {
+  port: Int!
+  service: String
+}
+input k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe {
+  exec: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartExec
+  failureThreshold: Int
+  grpc: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbeGrpc
+  httpGet: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartHttpGet
+  initialDelaySeconds: Int
+  periodSeconds: Int
+  successThreshold: Int
+  tcpSocket: k8upPreBackupPodSpecPodSpecContainersItemLifecyclePostStartTcpSocket
+  terminationGracePeriodSeconds: Int
+  timeoutSeconds: Int
+}
+input k8upPreBackupPodSpecPodSpecContainersItemPortsItem {
+  containerPort: Int!
+  hostIP: String
+  hostPort: Int
+  name: String
+  protocol: String
+}
+input k8upPreBackupPodSpecPodSpecContainersItemSecurityContextCapabilities {
+  add: [String]
+  drop: [String]
+}
+input k8upPreBackupPodSpecPodSpecContainersItemSecurityContext {
+  allowPrivilegeEscalation: Boolean
+  capabilities: k8upPreBackupPodSpecPodSpecContainersItemSecurityContextCapabilities
+  privileged: Boolean
+  procMount: String
+  readOnlyRootFilesystem: Boolean
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: k8upArchiveSpecPodSecurityContextSeLinuxOptions
+  seccompProfile: k8upArchiveSpecPodSecurityContextSeccompProfile
+  windowsOptions: k8upArchiveSpecPodSecurityContextWindowsOptions
+}
+input k8upPreBackupPodSpecPodSpecContainersItemVolumeDevicesItem {
+  devicePath: String!
+  name: String!
+}
+input k8upPreBackupPodSpecPodSpecContainersItemVolumeMountsItem {
+  mountPath: String!
+  mountPropagation: String
+  name: String!
+  readOnly: Boolean
+  subPath: String
+  subPathExpr: String
+}
+input k8upPreBackupPodSpecPodSpecContainersItem {
+  args: [String]
+  command: [String]
+  env: [k8upPreBackupPodSpecPodSpecContainersItemEnvItem]
+  envFrom: [k8upArchiveSpecBackendEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: k8upPreBackupPodSpecPodSpecContainersItemLifecycle
+  livenessProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  name: String!
+  ports: [k8upPreBackupPodSpecPodSpecContainersItemPortsItem]
+  readinessProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  resources: JSONObject
+  securityContext: k8upPreBackupPodSpecPodSpecContainersItemSecurityContext
+  startupProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [k8upPreBackupPodSpecPodSpecContainersItemVolumeDevicesItem]
+  volumeMounts: [k8upPreBackupPodSpecPodSpecContainersItemVolumeMountsItem]
+  workingDir: String
+}
+input k8upPreBackupPodSpecPodSpecDnsConfigOptionsItem {
+  name: String
+  value: String
+}
+input k8upPreBackupPodSpecPodSpecDnsConfig {
+  nameservers: [String]
+  options: [k8upPreBackupPodSpecPodSpecDnsConfigOptionsItem]
+  searches: [String]
+}
+input k8upPreBackupPodSpecPodSpecEphemeralContainersItem {
+  args: [String]
+  command: [String]
+  env: [k8upPreBackupPodSpecPodSpecContainersItemEnvItem]
+  envFrom: [k8upArchiveSpecBackendEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: k8upPreBackupPodSpecPodSpecContainersItemLifecycle
+  livenessProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  name: String!
+  ports: [k8upPreBackupPodSpecPodSpecContainersItemPortsItem]
+  readinessProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  resources: JSONObject
+  securityContext: k8upPreBackupPodSpecPodSpecContainersItemSecurityContext
+  startupProbe: k8upPreBackupPodSpecPodSpecContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  targetContainerName: String
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [k8upPreBackupPodSpecPodSpecContainersItemVolumeDevicesItem]
+  volumeMounts: [k8upPreBackupPodSpecPodSpecContainersItemVolumeMountsItem]
+  workingDir: String
+}
+input k8upPreBackupPodSpecPodSpecHostAliasesItem {
+  hostnames: [String]
+  ip: String
+}
+input k8upPreBackupPodSpecPodSpecImagePullSecretsItem {
+  name: String
+}
+input k8upPreBackupPodSpecPodSpecOs {
+  name: String!
+}
+input k8upPreBackupPodSpecPodSpecReadinessGatesItem {
+  conditionType: String!
+}
+input k8upPreBackupPodSpecPodSpecTolerationsItem {
+  effect: String
+  key: String
+  operator: String
+  tolerationSeconds: Int
+  value: String
+}
+input k8upPreBackupPodSpecPodSpecTopologySpreadConstraintsItem {
+  labelSelector: k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  matchLabelKeys: [String]
+  maxSkew: Int!
+  minDomains: Int
+  nodeAffinityPolicy: String
+  nodeTaintsPolicy: String
+  topologyKey: String!
+  whenUnsatisfiable: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemAwsElasticBlockStore {
+  fsType: String
+  partition: Int
+  readOnly: Boolean
+  volumeID: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemAzureDisk {
+  cachingMode: String
+  diskName: String!
+  diskURI: String!
+  fsType: String
+  kind: String
+  readOnly: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemAzureFile {
+  readOnly: Boolean
+  secretName: String!
+  shareName: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemCephfs {
+  monitors: [String]!
+  path: String
+  readOnly: Boolean
+  secretFile: String
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  user: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemCinder {
+  fsType: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  volumeID: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemConfigMapItemsItem {
+  key: String!
+  mode: Int
+  path: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemConfigMap {
+  defaultMode: Int
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemCsi {
+  driver: String!
+  fsType: String
+  nodePublishSecretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  readOnly: Boolean
+  volumeAttributes: JSONObject
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemDownwardAPIItemsItem {
+  fieldRef: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromFieldRef
+  mode: Int
+  path: String!
+  resourceFieldRef: k8upPreBackupPodSpecPodSpecContainersItemEnvItemValueFromResourceFieldRef
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemDownwardAPI {
+  defaultMode: Int
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemDownwardAPIItemsItem]
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemEmptyDir {
+  medium: String
+  sizeLimit: JSONObject
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource {
+  apiGroup: String
+  kind: String!
+  name: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplateSpec {
+  accessModes: [String]
+  dataSource: k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource
+  dataSourceRef: k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource
+  resources: JSONObject
+  selector: k8upPreBackupPodSpecPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  storageClassName: String
+  volumeMode: String
+  volumeName: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplate {
+  metadata: JSONObject
+  spec: k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplateSpec!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemEphemeral {
+  volumeClaimTemplate: k8upPreBackupPodSpecPodSpecVolumesItemEphemeralVolumeClaimTemplate
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemFc {
+  fsType: String
+  lun: Int
+  readOnly: Boolean
+  targetWWNs: [String]
+  wwids: [String]
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemFlexVolume {
+  driver: String!
+  fsType: String
+  options: JSONObject
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemFlocker {
+  datasetName: String
+  datasetUUID: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemGcePersistentDisk {
+  fsType: String
+  partition: Int
+  pdName: String!
+  readOnly: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemGitRepo {
+  directory: String
+  repository: String!
+  revision: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemGlusterfs {
+  endpoints: String!
+  path: String!
+  readOnly: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemHostPath {
+  path: String!
+  type: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemIscsi {
+  chapAuthDiscovery: Boolean
+  chapAuthSession: Boolean
+  fsType: String
+  initiatorName: String
+  iqn: String!
+  iscsiInterface: String
+  lun: Int!
+  portals: [String]
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  targetPortal: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemNfs {
+  path: String!
+  readOnly: Boolean
+  server: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemPhotonPersistentDisk {
+  fsType: String
+  pdID: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemPortworxVolume {
+  fsType: String
+  readOnly: Boolean
+  volumeID: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemConfigMap {
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemDownwardAPI {
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemDownwardAPIItemsItem]
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemSecret {
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemServiceAccountToken {
+  audience: String
+  expirationSeconds: Int
+  path: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItem {
+  configMap: k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemConfigMap
+  downwardAPI: k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemDownwardAPI
+  secret: k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemSecret
+  serviceAccountToken: k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItemServiceAccountToken
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemProjected {
+  defaultMode: Int
+  sources: [k8upPreBackupPodSpecPodSpecVolumesItemProjectedSourcesItem]
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemQuobyte {
+  group: String
+  readOnly: Boolean
+  registry: String!
+  tenant: String
+  user: String
+  volume: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemRbd {
+  fsType: String
+  image: String!
+  keyring: String
+  monitors: [String]!
+  pool: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  user: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemScaleIO {
+  fsType: String
+  gateway: String!
+  protectionDomain: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem!
+  sslEnabled: Boolean
+  storageMode: String
+  storagePool: String
+  system: String!
+  volumeName: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemSecret {
+  defaultMode: Int
+  items: [k8upPreBackupPodSpecPodSpecVolumesItemConfigMapItemsItem]
+  optional: Boolean
+  secretName: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemStorageos {
+  fsType: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodSpecPodSpecImagePullSecretsItem
+  volumeName: String
+  volumeNamespace: String
+}
+input k8upPreBackupPodSpecPodSpecVolumesItemVsphereVolume {
+  fsType: String
+  storagePolicyID: String
+  storagePolicyName: String
+  volumePath: String!
+}
+input k8upPreBackupPodSpecPodSpecVolumesItem {
+  awsElasticBlockStore: k8upPreBackupPodSpecPodSpecVolumesItemAwsElasticBlockStore
+  azureDisk: k8upPreBackupPodSpecPodSpecVolumesItemAzureDisk
+  azureFile: k8upPreBackupPodSpecPodSpecVolumesItemAzureFile
+  cephfs: k8upPreBackupPodSpecPodSpecVolumesItemCephfs
+  cinder: k8upPreBackupPodSpecPodSpecVolumesItemCinder
+  configMap: k8upPreBackupPodSpecPodSpecVolumesItemConfigMap
+  csi: k8upPreBackupPodSpecPodSpecVolumesItemCsi
+  downwardAPI: k8upPreBackupPodSpecPodSpecVolumesItemDownwardAPI
+  emptyDir: k8upPreBackupPodSpecPodSpecVolumesItemEmptyDir
+  ephemeral: k8upPreBackupPodSpecPodSpecVolumesItemEphemeral
+  fc: k8upPreBackupPodSpecPodSpecVolumesItemFc
+  flexVolume: k8upPreBackupPodSpecPodSpecVolumesItemFlexVolume
+  flocker: k8upPreBackupPodSpecPodSpecVolumesItemFlocker
+  gcePersistentDisk: k8upPreBackupPodSpecPodSpecVolumesItemGcePersistentDisk
+  gitRepo: k8upPreBackupPodSpecPodSpecVolumesItemGitRepo
+  glusterfs: k8upPreBackupPodSpecPodSpecVolumesItemGlusterfs
+  hostPath: k8upPreBackupPodSpecPodSpecVolumesItemHostPath
+  iscsi: k8upPreBackupPodSpecPodSpecVolumesItemIscsi
+  name: String!
+  nfs: k8upPreBackupPodSpecPodSpecVolumesItemNfs
+  persistentVolumeClaim: k8upArchiveSpecRestoreMethodFolder
+  photonPersistentDisk: k8upPreBackupPodSpecPodSpecVolumesItemPhotonPersistentDisk
+  portworxVolume: k8upPreBackupPodSpecPodSpecVolumesItemPortworxVolume
+  projected: k8upPreBackupPodSpecPodSpecVolumesItemProjected
+  quobyte: k8upPreBackupPodSpecPodSpecVolumesItemQuobyte
+  rbd: k8upPreBackupPodSpecPodSpecVolumesItemRbd
+  scaleIO: k8upPreBackupPodSpecPodSpecVolumesItemScaleIO
+  secret: k8upPreBackupPodSpecPodSpecVolumesItemSecret
+  storageos: k8upPreBackupPodSpecPodSpecVolumesItemStorageos
+  vsphereVolume: k8upPreBackupPodSpecPodSpecVolumesItemVsphereVolume
+}
+input k8upPreBackupPodSpecPodSpec {
+  activeDeadlineSeconds: Int
+  affinity: k8upPreBackupPodSpecPodSpecAffinity
+  automountServiceAccountToken: Boolean
+  containers: [k8upPreBackupPodSpecPodSpecContainersItem]!
+  dnsConfig: k8upPreBackupPodSpecPodSpecDnsConfig
+  dnsPolicy: String
+  enableServiceLinks: Boolean
+  ephemeralContainers: [k8upPreBackupPodSpecPodSpecEphemeralContainersItem]
+  hostAliases: [k8upPreBackupPodSpecPodSpecHostAliasesItem]
+  hostIPC: Boolean
+  hostNetwork: Boolean
+  hostPID: Boolean
+  hostUsers: Boolean
+  hostname: String
+  imagePullSecrets: [k8upPreBackupPodSpecPodSpecImagePullSecretsItem]
+  initContainers: [k8upPreBackupPodSpecPodSpecContainersItem]
+  nodeName: String
+  nodeSelector: JSONObject
+  os: k8upPreBackupPodSpecPodSpecOs
+  overhead: JSONObject
+  preemptionPolicy: String
+  priority: Int
+  priorityClassName: String
+  readinessGates: [k8upPreBackupPodSpecPodSpecReadinessGatesItem]
+  restartPolicy: String
+  runtimeClassName: String
+  schedulerName: String
+  securityContext: k8upArchiveSpecPodSecurityContext
+  serviceAccount: String
+  serviceAccountName: String
+  setHostnameAsFQDN: Boolean
+  shareProcessNamespace: Boolean
+  subdomain: String
+  terminationGracePeriodSeconds: Int
+  tolerations: [k8upPreBackupPodSpecPodSpecTolerationsItem]
+  topologySpreadConstraints: [k8upPreBackupPodSpecPodSpecTopologySpreadConstraintsItem]
+  volumes: [k8upPreBackupPodSpecPodSpecVolumesItem]
+}
+input k8upPreBackupPodSpecPod {
+  metadata: JSONObject
+  spec: k8upPreBackupPodSpecPodSpec
+}
+input k8upPreBackupPodSpec {
+  backupCommand: String
+  fileExtension: String
+  pod: k8upPreBackupPodSpecPod
+}
+type k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+type k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  matchExpressions: [k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+  matchFields: [k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem]
+}
+type k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  preference: k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!
+  weight: Int!
+}
+type k8upPreBackupPodPodSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  nodeSelectorTerms: [k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference!]
+}
+type k8upPreBackupPodPodSpecAffinityNodeAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodPodSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: k8upPreBackupPodPodSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+}
+type k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  key: String!
+  operator: String!
+  values: [String]
+}
+type k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  matchExpressions: [k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem]
+  matchLabels: JSONObject
+}
+type k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  labelSelector: k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaceSelector: k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  namespaces: [String]
+  topologyKey: String!
+}
+type k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  podAffinityTerm: k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm!
+  weight: Int!
+}
+type k8upPreBackupPodPodSpecAffinityPodAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+type k8upPreBackupPodPodSpecAffinityPodAntiAffinity {
+  preferredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem]
+  requiredDuringSchedulingIgnoredDuringExecution: [k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm]
+}
+type k8upPreBackupPodPodSpecAffinity {
+  nodeAffinity: k8upPreBackupPodPodSpecAffinityNodeAffinity
+  podAffinity: k8upPreBackupPodPodSpecAffinityPodAffinity
+  podAntiAffinity: k8upPreBackupPodPodSpecAffinityPodAntiAffinity
+}
+type k8upPreBackupPodPodSpecContainersItemEnvItemValueFromConfigMapKeyRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+type k8upPreBackupPodPodSpecContainersItemEnvItemValueFromFieldRef {
+  apiVersion: String
+  fieldPath: String!
+}
+type k8upPreBackupPodPodSpecContainersItemEnvItemValueFromResourceFieldRef {
+  containerName: String
+  divisor: JSONObject
+  resource: String!
+}
+type k8upPreBackupPodPodSpecContainersItemEnvItemValueFrom {
+  configMapKeyRef: k8upPreBackupPodPodSpecContainersItemEnvItemValueFromConfigMapKeyRef
+  fieldRef: k8upPreBackupPodPodSpecContainersItemEnvItemValueFromFieldRef
+  resourceFieldRef: k8upPreBackupPodPodSpecContainersItemEnvItemValueFromResourceFieldRef
+  secretKeyRef: k8upArchiveBackendAzureAccountKeySecretRef
+}
+type k8upPreBackupPodPodSpecContainersItemEnvItem {
+  name: String!
+  value: String
+  valueFrom: k8upPreBackupPodPodSpecContainersItemEnvItemValueFrom
+}
+type k8upPreBackupPodPodSpecContainersItemLifecyclePostStartExec {
+  command: [String]
+}
+type k8upPreBackupPodPodSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  name: String!
+  value: String!
+}
+type k8upPreBackupPodPodSpecContainersItemLifecyclePostStartHttpGet {
+  host: String
+  httpHeaders: [k8upPreBackupPodPodSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem]
+  path: String
+  port: JSONObject!
+  scheme: String
+}
+type k8upPreBackupPodPodSpecContainersItemLifecyclePostStartTcpSocket {
+  host: String
+  port: JSONObject!
+}
+type k8upPreBackupPodPodSpecContainersItemLifecyclePostStart {
+  exec: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartExec
+  httpGet: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartHttpGet
+  tcpSocket: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartTcpSocket
+}
+type k8upPreBackupPodPodSpecContainersItemLifecycle {
+  postStart: k8upPreBackupPodPodSpecContainersItemLifecyclePostStart
+  preStop: k8upPreBackupPodPodSpecContainersItemLifecyclePostStart
+}
+type k8upPreBackupPodPodSpecContainersItemLivenessProbeGrpc {
+  port: Int!
+  service: String
+}
+type k8upPreBackupPodPodSpecContainersItemLivenessProbe {
+  exec: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartExec
+  failureThreshold: Int
+  grpc: k8upPreBackupPodPodSpecContainersItemLivenessProbeGrpc
+  httpGet: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartHttpGet
+  initialDelaySeconds: Int
+  periodSeconds: Int
+  successThreshold: Int
+  tcpSocket: k8upPreBackupPodPodSpecContainersItemLifecyclePostStartTcpSocket
+  terminationGracePeriodSeconds: Int
+  timeoutSeconds: Int
+}
+type k8upPreBackupPodPodSpecContainersItemPortsItem {
+  containerPort: Int!
+  hostIP: String
+  hostPort: Int
+  name: String
+  protocol: String
+}
+type k8upPreBackupPodPodSpecContainersItemSecurityContextCapabilities {
+  add: [String]
+  drop: [String]
+}
+type k8upPreBackupPodPodSpecContainersItemSecurityContext {
+  allowPrivilegeEscalation: Boolean
+  capabilities: k8upPreBackupPodPodSpecContainersItemSecurityContextCapabilities
+  privileged: Boolean
+  procMount: String
+  readOnlyRootFilesystem: Boolean
+  runAsGroup: Int
+  runAsNonRoot: Boolean
+  runAsUser: Int
+  seLinuxOptions: k8upArchivePodSecurityContextSeLinuxOptions
+  seccompProfile: k8upArchivePodSecurityContextSeccompProfile
+  windowsOptions: k8upArchivePodSecurityContextWindowsOptions
+}
+type k8upPreBackupPodPodSpecContainersItemVolumeDevicesItem {
+  devicePath: String!
+  name: String!
+}
+type k8upPreBackupPodPodSpecContainersItemVolumeMountsItem {
+  mountPath: String!
+  mountPropagation: String
+  name: String!
+  readOnly: Boolean
+  subPath: String
+  subPathExpr: String
+}
+type k8upPreBackupPodPodSpecContainersItem {
+  args: [String]
+  command: [String]
+  env: [k8upPreBackupPodPodSpecContainersItemEnvItem]
+  envFrom: [k8upArchiveBackendEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: k8upPreBackupPodPodSpecContainersItemLifecycle
+  livenessProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  name: String!
+  ports: [k8upPreBackupPodPodSpecContainersItemPortsItem]
+  readinessProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  resources: JSONObject
+  securityContext: k8upPreBackupPodPodSpecContainersItemSecurityContext
+  startupProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [k8upPreBackupPodPodSpecContainersItemVolumeDevicesItem]
+  volumeMounts: [k8upPreBackupPodPodSpecContainersItemVolumeMountsItem]
+  workingDir: String
+}
+type k8upPreBackupPodPodSpecDnsConfigOptionsItem {
+  name: String
+  value: String
+}
+type k8upPreBackupPodPodSpecDnsConfig {
+  nameservers: [String]
+  options: [k8upPreBackupPodPodSpecDnsConfigOptionsItem]
+  searches: [String]
+}
+type k8upPreBackupPodPodSpecEphemeralContainersItem {
+  args: [String]
+  command: [String]
+  env: [k8upPreBackupPodPodSpecContainersItemEnvItem]
+  envFrom: [k8upArchiveBackendEnvFromItem]
+  image: String
+  imagePullPolicy: String
+  lifecycle: k8upPreBackupPodPodSpecContainersItemLifecycle
+  livenessProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  name: String!
+  ports: [k8upPreBackupPodPodSpecContainersItemPortsItem]
+  readinessProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  resources: JSONObject
+  securityContext: k8upPreBackupPodPodSpecContainersItemSecurityContext
+  startupProbe: k8upPreBackupPodPodSpecContainersItemLivenessProbe
+  stdin: Boolean
+  stdinOnce: Boolean
+  targetContainerName: String
+  terminationMessagePath: String
+  terminationMessagePolicy: String
+  tty: Boolean
+  volumeDevices: [k8upPreBackupPodPodSpecContainersItemVolumeDevicesItem]
+  volumeMounts: [k8upPreBackupPodPodSpecContainersItemVolumeMountsItem]
+  workingDir: String
+}
+type k8upPreBackupPodPodSpecHostAliasesItem {
+  hostnames: [String]
+  ip: String
+}
+type k8upPreBackupPodPodSpecImagePullSecretsItem {
+  name: String
+}
+type k8upPreBackupPodPodSpecOs {
+  name: String!
+}
+type k8upPreBackupPodPodSpecReadinessGatesItem {
+  conditionType: String!
+}
+type k8upPreBackupPodPodSpecTolerationsItem {
+  effect: String
+  key: String
+  operator: String
+  tolerationSeconds: Int
+  value: String
+}
+type k8upPreBackupPodPodSpecTopologySpreadConstraintsItem {
+  labelSelector: k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  matchLabelKeys: [String]
+  maxSkew: Int!
+  minDomains: Int
+  nodeAffinityPolicy: String
+  nodeTaintsPolicy: String
+  topologyKey: String!
+  whenUnsatisfiable: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemAwsElasticBlockStore {
+  fsType: String
+  partition: Int
+  readOnly: Boolean
+  volumeID: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemAzureDisk {
+  cachingMode: String
+  diskName: String!
+  diskURI: String!
+  fsType: String
+  kind: String
+  readOnly: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemAzureFile {
+  readOnly: Boolean
+  secretName: String!
+  shareName: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemCephfs {
+  monitors: [String]!
+  path: String
+  readOnly: Boolean
+  secretFile: String
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  user: String
+}
+type k8upPreBackupPodPodSpecVolumesItemCinder {
+  fsType: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  volumeID: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemConfigMapItemsItem {
+  key: String!
+  mode: Int
+  path: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemConfigMap {
+  defaultMode: Int
+  items: [k8upPreBackupPodPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemCsi {
+  driver: String!
+  fsType: String
+  nodePublishSecretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  readOnly: Boolean
+  volumeAttributes: JSONObject
+}
+type k8upPreBackupPodPodSpecVolumesItemDownwardAPIItemsItem {
+  fieldRef: k8upPreBackupPodPodSpecContainersItemEnvItemValueFromFieldRef
+  mode: Int
+  path: String!
+  resourceFieldRef: k8upPreBackupPodPodSpecContainersItemEnvItemValueFromResourceFieldRef
+}
+type k8upPreBackupPodPodSpecVolumesItemDownwardAPI {
+  defaultMode: Int
+  items: [k8upPreBackupPodPodSpecVolumesItemDownwardAPIItemsItem]
+}
+type k8upPreBackupPodPodSpecVolumesItemEmptyDir {
+  medium: String
+  sizeLimit: JSONObject
+}
+type k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource {
+  apiGroup: String
+  kind: String!
+  name: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplateSpec {
+  accessModes: [String]
+  dataSource: k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource
+  dataSourceRef: k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource
+  resources: JSONObject
+  selector: k8upPreBackupPodPodSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector
+  storageClassName: String
+  volumeMode: String
+  volumeName: String
+}
+type k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplate {
+  metadata: JSONObject
+  spec: k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplateSpec!
+}
+type k8upPreBackupPodPodSpecVolumesItemEphemeral {
+  volumeClaimTemplate: k8upPreBackupPodPodSpecVolumesItemEphemeralVolumeClaimTemplate
+}
+type k8upPreBackupPodPodSpecVolumesItemFc {
+  fsType: String
+  lun: Int
+  readOnly: Boolean
+  targetWWNs: [String]
+  wwids: [String]
+}
+type k8upPreBackupPodPodSpecVolumesItemFlexVolume {
+  driver: String!
+  fsType: String
+  options: JSONObject
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+}
+type k8upPreBackupPodPodSpecVolumesItemFlocker {
+  datasetName: String
+  datasetUUID: String
+}
+type k8upPreBackupPodPodSpecVolumesItemGcePersistentDisk {
+  fsType: String
+  partition: Int
+  pdName: String!
+  readOnly: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemGitRepo {
+  directory: String
+  repository: String!
+  revision: String
+}
+type k8upPreBackupPodPodSpecVolumesItemGlusterfs {
+  endpoints: String!
+  path: String!
+  readOnly: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemHostPath {
+  path: String!
+  type: String
+}
+type k8upPreBackupPodPodSpecVolumesItemIscsi {
+  chapAuthDiscovery: Boolean
+  chapAuthSession: Boolean
+  fsType: String
+  initiatorName: String
+  iqn: String!
+  iscsiInterface: String
+  lun: Int!
+  portals: [String]
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  targetPortal: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemNfs {
+  path: String!
+  readOnly: Boolean
+  server: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemPhotonPersistentDisk {
+  fsType: String
+  pdID: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemPortworxVolume {
+  fsType: String
+  readOnly: Boolean
+  volumeID: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemConfigMap {
+  items: [k8upPreBackupPodPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemDownwardAPI {
+  items: [k8upPreBackupPodPodSpecVolumesItemDownwardAPIItemsItem]
+}
+type k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemSecret {
+  items: [k8upPreBackupPodPodSpecVolumesItemConfigMapItemsItem]
+  name: String
+  optional: Boolean
+}
+type k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemServiceAccountToken {
+  audience: String
+  expirationSeconds: Int
+  path: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItem {
+  configMap: k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemConfigMap
+  downwardAPI: k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemDownwardAPI
+  secret: k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemSecret
+  serviceAccountToken: k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItemServiceAccountToken
+}
+type k8upPreBackupPodPodSpecVolumesItemProjected {
+  defaultMode: Int
+  sources: [k8upPreBackupPodPodSpecVolumesItemProjectedSourcesItem]
+}
+type k8upPreBackupPodPodSpecVolumesItemQuobyte {
+  group: String
+  readOnly: Boolean
+  registry: String!
+  tenant: String
+  user: String
+  volume: String!
+}
+type k8upPreBackupPodPodSpecVolumesItemRbd {
+  fsType: String
+  image: String!
+  keyring: String
+  monitors: [String]!
+  pool: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  user: String
+}
+type k8upPreBackupPodPodSpecVolumesItemScaleIO {
+  fsType: String
+  gateway: String!
+  protectionDomain: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem!
+  sslEnabled: Boolean
+  storageMode: String
+  storagePool: String
+  system: String!
+  volumeName: String
+}
+type k8upPreBackupPodPodSpecVolumesItemSecret {
+  defaultMode: Int
+  items: [k8upPreBackupPodPodSpecVolumesItemConfigMapItemsItem]
+  optional: Boolean
+  secretName: String
+}
+type k8upPreBackupPodPodSpecVolumesItemStorageos {
+  fsType: String
+  readOnly: Boolean
+  secretRef: k8upPreBackupPodPodSpecImagePullSecretsItem
+  volumeName: String
+  volumeNamespace: String
+}
+type k8upPreBackupPodPodSpecVolumesItemVsphereVolume {
+  fsType: String
+  storagePolicyID: String
+  storagePolicyName: String
+  volumePath: String!
+}
+type k8upPreBackupPodPodSpecVolumesItem {
+  awsElasticBlockStore: k8upPreBackupPodPodSpecVolumesItemAwsElasticBlockStore
+  azureDisk: k8upPreBackupPodPodSpecVolumesItemAzureDisk
+  azureFile: k8upPreBackupPodPodSpecVolumesItemAzureFile
+  cephfs: k8upPreBackupPodPodSpecVolumesItemCephfs
+  cinder: k8upPreBackupPodPodSpecVolumesItemCinder
+  configMap: k8upPreBackupPodPodSpecVolumesItemConfigMap
+  csi: k8upPreBackupPodPodSpecVolumesItemCsi
+  downwardAPI: k8upPreBackupPodPodSpecVolumesItemDownwardAPI
+  emptyDir: k8upPreBackupPodPodSpecVolumesItemEmptyDir
+  ephemeral: k8upPreBackupPodPodSpecVolumesItemEphemeral
+  fc: k8upPreBackupPodPodSpecVolumesItemFc
+  flexVolume: k8upPreBackupPodPodSpecVolumesItemFlexVolume
+  flocker: k8upPreBackupPodPodSpecVolumesItemFlocker
+  gcePersistentDisk: k8upPreBackupPodPodSpecVolumesItemGcePersistentDisk
+  gitRepo: k8upPreBackupPodPodSpecVolumesItemGitRepo
+  glusterfs: k8upPreBackupPodPodSpecVolumesItemGlusterfs
+  hostPath: k8upPreBackupPodPodSpecVolumesItemHostPath
+  iscsi: k8upPreBackupPodPodSpecVolumesItemIscsi
+  name: String!
+  nfs: k8upPreBackupPodPodSpecVolumesItemNfs
+  persistentVolumeClaim: k8upArchiveRestoreMethodFolder
+  photonPersistentDisk: k8upPreBackupPodPodSpecVolumesItemPhotonPersistentDisk
+  portworxVolume: k8upPreBackupPodPodSpecVolumesItemPortworxVolume
+  projected: k8upPreBackupPodPodSpecVolumesItemProjected
+  quobyte: k8upPreBackupPodPodSpecVolumesItemQuobyte
+  rbd: k8upPreBackupPodPodSpecVolumesItemRbd
+  scaleIO: k8upPreBackupPodPodSpecVolumesItemScaleIO
+  secret: k8upPreBackupPodPodSpecVolumesItemSecret
+  storageos: k8upPreBackupPodPodSpecVolumesItemStorageos
+  vsphereVolume: k8upPreBackupPodPodSpecVolumesItemVsphereVolume
+}
+type k8upPreBackupPodPodSpec {
+  activeDeadlineSeconds: Int
+  affinity: k8upPreBackupPodPodSpecAffinity
+  automountServiceAccountToken: Boolean
+  containers: [k8upPreBackupPodPodSpecContainersItem]!
+  dnsConfig: k8upPreBackupPodPodSpecDnsConfig
+  dnsPolicy: String
+  enableServiceLinks: Boolean
+  ephemeralContainers: [k8upPreBackupPodPodSpecEphemeralContainersItem]
+  hostAliases: [k8upPreBackupPodPodSpecHostAliasesItem]
+  hostIPC: Boolean
+  hostNetwork: Boolean
+  hostPID: Boolean
+  hostUsers: Boolean
+  hostname: String
+  imagePullSecrets: [k8upPreBackupPodPodSpecImagePullSecretsItem]
+  initContainers: [k8upPreBackupPodPodSpecContainersItem]
+  nodeName: String
+  nodeSelector: JSONObject
+  os: k8upPreBackupPodPodSpecOs
+  overhead: JSONObject
+  preemptionPolicy: String
+  priority: Int
+  priorityClassName: String
+  readinessGates: [k8upPreBackupPodPodSpecReadinessGatesItem]
+  restartPolicy: String
+  runtimeClassName: String
+  schedulerName: String
+  securityContext: k8upArchivePodSecurityContext
+  serviceAccount: String
+  serviceAccountName: String
+  setHostnameAsFQDN: Boolean
+  shareProcessNamespace: Boolean
+  subdomain: String
+  terminationGracePeriodSeconds: Int
+  tolerations: [k8upPreBackupPodPodSpecTolerationsItem]
+  topologySpreadConstraints: [k8upPreBackupPodPodSpecTopologySpreadConstraintsItem]
+  volumes: [k8upPreBackupPodPodSpecVolumesItem]
+}
+type k8upPreBackupPodPod {
+  metadata: JSONObject
+  spec: k8upPreBackupPodPodSpec
+}
+type k8upPreBackupPod {
+  metadata: metadata
+  backupCommand: String
+  fileExtension: String
+  pod: k8upPreBackupPodPod
+}
+type k8upPruneStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  exclusive: Boolean
+  finished: Boolean
+  started: Boolean
+}
+input k8upPruneSpecRetention {
+  hostnames: [String]
+  keepDaily: Int
+  keepHourly: Int
+  keepLast: Int
+  keepMonthly: Int
+  keepTags: [String]
+  keepWeekly: Int
+  keepYearly: Int
+  tags: [String]
+}
+input k8upPruneSpec {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  resources: JSONObject
+  retention: k8upPruneSpecRetention
+  successfulJobsHistoryLimit: Int
+}
+type k8upPruneRetention {
+  hostnames: [String]
+  keepDaily: Int
+  keepHourly: Int
+  keepLast: Int
+  keepMonthly: Int
+  keepTags: [String]
+  keepWeekly: Int
+  keepYearly: Int
+  tags: [String]
+}
+type k8upPrune {
+  metadata: metadata
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  resources: JSONObject
+  retention: k8upPruneRetention
+  successfulJobsHistoryLimit: Int
+  status: k8upPruneStatus
+}
+type k8upRestoreStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  exclusive: Boolean
+  finished: Boolean
+  started: Boolean
+}
+input k8upRestoreSpec {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveSpecRestoreMethod
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+type k8upRestore {
+  metadata: metadata
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveRestoreMethod
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+  status: k8upRestoreStatus
+}
+type k8upScheduleStatusEffectiveSchedulesItem {
+  generatedSchedule: String
+  jobType: String
+}
+type k8upScheduleStatus {
+  conditions: [k8upArchiveStatusConditionsItem]
+  effectiveSchedules: [k8upScheduleStatusEffectiveSchedulesItem]
+}
+input k8upScheduleSpecArchive {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveSpecRestoreMethod
+  schedule: String
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+input k8upScheduleSpecBackup {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  promURL: String
+  resources: JSONObject
+  schedule: String
+  statsURL: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+input k8upScheduleSpecCheck {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  promURL: String
+  resources: JSONObject
+  schedule: String
+  successfulJobsHistoryLimit: Int
+}
+input k8upScheduleSpecPrune {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveSpecBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  resources: JSONObject
+  retention: k8upPruneSpecRetention
+  schedule: String
+  successfulJobsHistoryLimit: Int
+}
+input k8upScheduleSpec {
+  archive: k8upScheduleSpecArchive
+  backend: k8upArchiveSpecBackend
+  backup: k8upScheduleSpecBackup
+  check: k8upScheduleSpecCheck
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchiveSpecPodSecurityContext
+  prune: k8upScheduleSpecPrune
+  resourceRequirementsTemplate: JSONObject
+  restore: k8upScheduleSpecArchive
+  successfulJobsHistoryLimit: Int
+}
+type k8upScheduleArchive {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  resources: JSONObject
+  restoreFilter: String
+  restoreMethod: k8upArchiveRestoreMethod
+  schedule: String
+  snapshot: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+type k8upScheduleBackup {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  promURL: String
+  resources: JSONObject
+  schedule: String
+  statsURL: String
+  successfulJobsHistoryLimit: Int
+  tags: [String]
+}
+type k8upScheduleCheck {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  promURL: String
+  resources: JSONObject
+  schedule: String
+  successfulJobsHistoryLimit: Int
+}
+type k8upSchedulePrune {
+  activeDeadlineSeconds: Int
+  backend: k8upArchiveBackend
+  concurrentRunsAllowed: Boolean
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  resources: JSONObject
+  retention: k8upPruneRetention
+  schedule: String
+  successfulJobsHistoryLimit: Int
+}
+type k8upSchedule {
+  metadata: metadata
+  archive: k8upScheduleArchive
+  backend: k8upArchiveBackend
+  backup: k8upScheduleBackup
+  check: k8upScheduleCheck
+  failedJobsHistoryLimit: Int
+  keepJobs: Int
+  podSecurityContext: k8upArchivePodSecurityContext
+  prune: k8upSchedulePrune
+  resourceRequirementsTemplate: JSONObject
+  restore: k8upScheduleArchive
+  successfulJobsHistoryLimit: Int
+  status: k8upScheduleStatus
+}
+input k8upSnapshotSpec {
+  date: String
+  id: String
+  paths: [String]
+  repository: String
+}
+type k8upSnapshot {
+  metadata: metadata
+  date: String
+  id: String
+  paths: [String]
+  repository: String
+}
+type Query {
+  k8upArchive(namespace: String!, name: String!): k8upArchive
+  k8upBackup(namespace: String!, name: String!): k8upBackup
+  k8upCheck(namespace: String!, name: String!): k8upCheck
+  k8upPreBackupPod(namespace: String!, name: String!): k8upPreBackupPod
+  k8upPrune(namespace: String!, name: String!): k8upPrune
+  k8upRestore(namespace: String!, name: String!): k8upRestore
+  k8upSchedule(namespace: String!, name: String!): k8upSchedule
+  k8upSnapshot(namespace: String!, name: String!): k8upSnapshot
+}
+type Mutation {
+  createK8upArchive(namespace: String!, name: String!, spec: k8upArchiveSpec!): k8upArchive
+  patchK8upArchive(namespace: String!, name: String!, spec: k8upArchiveSpec!): k8upArchive
+  deleteK8upArchive(namespace: String!, name: String!): k8upArchive
+  createK8upBackup(namespace: String!, name: String!, spec: k8upBackupSpec!): k8upBackup
+  patchK8upBackup(namespace: String!, name: String!, spec: k8upBackupSpec!): k8upBackup
+  deleteK8upBackup(namespace: String!, name: String!): k8upBackup
+  createK8upCheck(namespace: String!, name: String!, spec: k8upCheckSpec!): k8upCheck
+  patchK8upCheck(namespace: String!, name: String!, spec: k8upCheckSpec!): k8upCheck
+  deleteK8upCheck(namespace: String!, name: String!): k8upCheck
+  createK8upPreBackupPod(namespace: String!, name: String!, spec: k8upPreBackupPodSpec!): k8upPreBackupPod
+  patchK8upPreBackupPod(namespace: String!, name: String!, spec: k8upPreBackupPodSpec!): k8upPreBackupPod
+  deleteK8upPreBackupPod(namespace: String!, name: String!): k8upPreBackupPod
+  createK8upPrune(namespace: String!, name: String!, spec: k8upPruneSpec!): k8upPrune
+  patchK8upPrune(namespace: String!, name: String!, spec: k8upPruneSpec!): k8upPrune
+  deleteK8upPrune(namespace: String!, name: String!): k8upPrune
+  createK8upRestore(namespace: String!, name: String!, spec: k8upRestoreSpec!): k8upRestore
+  patchK8upRestore(namespace: String!, name: String!, spec: k8upRestoreSpec!): k8upRestore
+  deleteK8upRestore(namespace: String!, name: String!): k8upRestore
+  createK8upSchedule(namespace: String!, name: String!, spec: k8upScheduleSpec!): k8upSchedule
+  patchK8upSchedule(namespace: String!, name: String!, spec: k8upScheduleSpec!): k8upSchedule
+  deleteK8upSchedule(namespace: String!, name: String!): k8upSchedule
+  createK8upSnapshot(namespace: String!, name: String!, spec: k8upSnapshotSpec!): k8upSnapshot
+  patchK8upSnapshot(namespace: String!, name: String!, spec: k8upSnapshotSpec!): k8upSnapshot
+  deleteK8upSnapshot(namespace: String!, name: String!): k8upSnapshot
+}

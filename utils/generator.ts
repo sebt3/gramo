@@ -21,6 +21,40 @@ import HB from 'handlebars';
 HB.registerHelper('eq', (left,right) => left == right);
 HB.registerHelper('contain', (v1,v2) => Array.isArray(v1) && v1.includes(v2));
 HB.registerHelper('haveType', (item:openapiDefinitionPropertiesDef) => ["array","object","boolean","string","number","integer"].includes(item.type==undefined?"":item.type));
+const buildGQueryObject = (name:string, level:number, def:openapiDefinitionPropertiesDef) => {
+    let indent = "";
+    let ret = "";
+    if(!level) level = 3;
+    for (let i = 0; i < level; i++) indent += "  ";
+    if (["object"].includes(def.type==undefined?"":def.type)) {
+        if (def.properties != undefined && Object.entries(def.properties).length>0) {
+            ret += `${indent}${name} {
+`
+            Object.entries(def.properties).forEach(([prop, val]) => {
+                ret+= buildGQueryObject(prop,level+1, val)
+            })
+            ret += `${indent}}
+`
+        }
+    } else if (["array"].includes(def.type==undefined?"":def.type) && ["object"].includes(def.items?.type==undefined?"":def.items?.type)) {
+        if (def.items?.properties != undefined && Object.entries(def.items?.properties).length>0) {
+            ret += `${indent}${name} {
+`
+                Object.entries(def.items?.properties).forEach(([prop, val]) => {
+                ret+= buildGQueryObject(prop,level+1,val)
+            })
+            ret += `${indent}}
+`
+        }
+
+    } else if (["boolean","array","string","number","integer"].includes(def.type==undefined?"":def.type)) {
+        return new HB.SafeString(`${indent}${name}
+`)
+    }
+    return new HB.SafeString(ret)
+
+}
+HB.registerHelper('GQueryObject', buildGQueryObject);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 ////////////////////////////////////

@@ -1,0 +1,28 @@
+
+mutation MonitoringPrometheusRule($namespace: String!, $name: String!, $spec: monitoringPrometheusRuleSpec!) {
+  patchMonitoringPrometheusRule(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    groups {
+      interval
+      limit
+      name
+      partial_response_strategy
+      rules {
+        alert
+        for
+        record
+      }
+    }
+  }
+}

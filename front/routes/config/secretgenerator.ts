@@ -6,17 +6,21 @@ const iconStringSecret = 'key';
 export const link:menuLinksProps = {
   title: 'Secretgenerator', icon: iconBasicAuth,
   link: `/${cat}/secretgenerator/basicauths/`,
+  name: 'secretgenerator',
   level: 1,
   children: [
   {
+    name: 'secretgeneratorBasicAuths',
     title: 'BasicAuth', caption: 'List basicAuth', icon: 'fas fa-user-secret',
     link: `/${cat}/secretgenerator/basicauths/`, level: 2, children: []
   },
   {
+    name: 'secretgeneratorSSHKeyPairs',
     title: 'SSHKeyPair', caption: 'List SSHKeyPair', icon: 'fab fa-keycdn',
     link: `/${cat}/secretgenerator/sshkeypairs/`, level: 2, children: []
   },
   {
+    name: 'secretgeneratorStringSecrets',
     title: 'StringSecret', caption: 'List stringSecret', icon: 'key',
     link: `/${cat}/secretgenerator/stringsecrets/`, level: 2, children: []
   },

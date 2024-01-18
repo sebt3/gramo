@@ -50,7 +50,7 @@ export const mutations = {
         spec['username'] = args['spec']['username'];
         const request = {
             apiVersion: 'secretgenerator.mittwald.de/v1alpha1',
-            kind: 'Distrib',
+            kind: 'BasicAuth',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

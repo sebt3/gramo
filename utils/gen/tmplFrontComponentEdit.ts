@@ -19,7 +19,7 @@ const { mutate: patch{{ name }}, onDone: onPatch{{ name }}, onError: onPatchErro
 function onSubmit() {
   notifyWorking('Update in progress');
 {{#if namespaced}}
-  patch{{ name }}({"namespace": navigation.currentNamespace, "name": result.value.{{ mini }}{{ name }}.metadata.name, "spec": sanitizeData(data.value)});
+  patch{{ name }}({"namespace": result.value.{{ mini }}{{ name }}.metadata.namespace, "name": result.value.{{ mini }}{{ name }}.metadata.name, "spec": sanitizeData(data.value)});
 {{else}}
   patch{{ name }}({"name": result.value.{{ mini }}{{ name }}.metadata.name, "spec": sanitizeData(data.value)});
 {{/if}}

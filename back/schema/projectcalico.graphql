@@ -1,0 +1,877 @@
+
+input projectcalicoBGPConfigurationSpecCommunitiesItem {
+  name: String
+  value: String
+}
+input projectcalicoBGPConfigurationSpecNodeMeshPasswordSecretKeyRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+input projectcalicoBGPConfigurationSpecNodeMeshPassword {
+  secretKeyRef: projectcalicoBGPConfigurationSpecNodeMeshPasswordSecretKeyRef
+}
+input projectcalicoBGPConfigurationSpecPrefixAdvertisementsItem {
+  cidr: String
+  communities: [String]
+}
+input projectcalicoBGPConfigurationSpecServiceClusterIPsItem {
+  cidr: String
+}
+input projectcalicoBGPConfigurationSpec {
+  asNumber: Int
+  bindMode: String
+  communities: [projectcalicoBGPConfigurationSpecCommunitiesItem]
+  ignoredInterfaces: [String]
+  listenPort: Int
+  logSeverityScreen: String
+  nodeMeshMaxRestartTime: String
+  nodeMeshPassword: projectcalicoBGPConfigurationSpecNodeMeshPassword
+  nodeToNodeMeshEnabled: Boolean
+  prefixAdvertisements: [projectcalicoBGPConfigurationSpecPrefixAdvertisementsItem]
+  serviceClusterIPs: [projectcalicoBGPConfigurationSpecServiceClusterIPsItem]
+  serviceExternalIPs: [projectcalicoBGPConfigurationSpecServiceClusterIPsItem]
+  serviceLoadBalancerIPs: [projectcalicoBGPConfigurationSpecServiceClusterIPsItem]
+}
+type projectcalicoBGPConfigurationCommunitiesItem {
+  name: String
+  value: String
+}
+type projectcalicoBGPConfigurationNodeMeshPasswordSecretKeyRef {
+  key: String!
+  name: String
+  optional: Boolean
+}
+type projectcalicoBGPConfigurationNodeMeshPassword {
+  secretKeyRef: projectcalicoBGPConfigurationNodeMeshPasswordSecretKeyRef
+}
+type projectcalicoBGPConfigurationPrefixAdvertisementsItem {
+  cidr: String
+  communities: [String]
+}
+type projectcalicoBGPConfigurationServiceClusterIPsItem {
+  cidr: String
+}
+type projectcalicoBGPConfiguration {
+  metadata: metadata
+  asNumber: Int
+  bindMode: String
+  communities: [projectcalicoBGPConfigurationCommunitiesItem]
+  ignoredInterfaces: [String]
+  listenPort: Int
+  logSeverityScreen: String
+  nodeMeshMaxRestartTime: String
+  nodeMeshPassword: projectcalicoBGPConfigurationNodeMeshPassword
+  nodeToNodeMeshEnabled: Boolean
+  prefixAdvertisements: [projectcalicoBGPConfigurationPrefixAdvertisementsItem]
+  serviceClusterIPs: [projectcalicoBGPConfigurationServiceClusterIPsItem]
+  serviceExternalIPs: [projectcalicoBGPConfigurationServiceClusterIPsItem]
+  serviceLoadBalancerIPs: [projectcalicoBGPConfigurationServiceClusterIPsItem]
+}
+input projectcalicoBGPPeerSpec {
+  asNumber: Int
+  keepOriginalNextHop: Boolean
+  maxRestartTime: String
+  node: String
+  nodeSelector: String
+  numAllowedLocalASNumbers: Int
+  password: projectcalicoBGPConfigurationSpecNodeMeshPassword
+  peerIP: String
+  peerSelector: String
+  reachableBy: String
+  sourceAddress: String
+  ttlSecurity: Int
+}
+type projectcalicoBGPPeer {
+  metadata: metadata
+  asNumber: Int
+  keepOriginalNextHop: Boolean
+  maxRestartTime: String
+  node: String
+  nodeSelector: String
+  numAllowedLocalASNumbers: Int
+  password: projectcalicoBGPConfigurationNodeMeshPassword
+  peerIP: String
+  peerSelector: String
+  reachableBy: String
+  sourceAddress: String
+  ttlSecurity: Int
+}
+input projectcalicoBlockAffinitySpec {
+  cidr: String!
+  deleted: String!
+  node: String!
+  state: String!
+}
+type projectcalicoBlockAffinity {
+  metadata: metadata
+  cidr: String!
+  deleted: String!
+  node: String!
+  state: String!
+}
+type projectcalicoCalicoNodeStatusStatusAgentBirdV4 {
+  lastBootTime: String
+  lastReconfigurationTime: String
+  routerID: String
+  state: String
+  version: String
+}
+type projectcalicoCalicoNodeStatusStatusAgent {
+  birdV4: projectcalicoCalicoNodeStatusStatusAgentBirdV4
+  birdV6: projectcalicoCalicoNodeStatusStatusAgentBirdV4
+}
+type projectcalicoCalicoNodeStatusStatusBgpPeersV4Item {
+  peerIP: String
+  since: String
+  state: String
+  type: String
+}
+type projectcalicoCalicoNodeStatusStatusBgp {
+  numberEstablishedV4: Int!
+  numberEstablishedV6: Int!
+  numberNotEstablishedV4: Int!
+  numberNotEstablishedV6: Int!
+  peersV4: [projectcalicoCalicoNodeStatusStatusBgpPeersV4Item]
+  peersV6: [projectcalicoCalicoNodeStatusStatusBgpPeersV4Item]
+}
+type projectcalicoCalicoNodeStatusStatusRoutesRoutesV4ItemLearnedFrom {
+  peerIP: String
+  sourceType: String
+}
+type projectcalicoCalicoNodeStatusStatusRoutesRoutesV4Item {
+  destination: String
+  gateway: String
+  interface: String
+  learnedFrom: projectcalicoCalicoNodeStatusStatusRoutesRoutesV4ItemLearnedFrom
+  type: String
+}
+type projectcalicoCalicoNodeStatusStatusRoutes {
+  routesV4: [projectcalicoCalicoNodeStatusStatusRoutesRoutesV4Item]
+  routesV6: [projectcalicoCalicoNodeStatusStatusRoutesRoutesV4Item]
+}
+type projectcalicoCalicoNodeStatusStatus {
+  agent: projectcalicoCalicoNodeStatusStatusAgent
+  bgp: projectcalicoCalicoNodeStatusStatusBgp
+  lastUpdated: JSONObject
+  routes: projectcalicoCalicoNodeStatusStatusRoutes
+}
+input projectcalicoCalicoNodeStatusSpec {
+  classes: [String]
+  node: String
+  updatePeriodSeconds: Int
+}
+type projectcalicoCalicoNodeStatus {
+  metadata: metadata
+  classes: [String]
+  node: String
+  updatePeriodSeconds: Int
+  status: projectcalicoCalicoNodeStatusStatus
+}
+input projectcalicoClusterInformationSpec {
+  calicoVersion: String
+  clusterGUID: String
+  clusterType: String
+  datastoreReady: Boolean
+  variant: String
+}
+type projectcalicoClusterInformation {
+  metadata: metadata
+  calicoVersion: String
+  clusterGUID: String
+  clusterType: String
+  datastoreReady: Boolean
+  variant: String
+}
+input projectcalicoFelixConfigurationSpecFailsafeInboundHostPortsItem {
+  net: String
+  port: Int!
+  protocol: String!
+}
+input projectcalicoFelixConfigurationSpecHealthTimeoutOverridesItem {
+  name: String!
+  timeout: String!
+}
+input projectcalicoFelixConfigurationSpecRouteTableRange {
+  max: Int!
+  min: Int!
+}
+input projectcalicoFelixConfigurationSpec {
+  allowIPIPPacketsFromWorkloads: Boolean
+  allowVXLANPacketsFromWorkloads: Boolean
+  awsSrcDstCheck: String
+  bpfConnectTimeLoadBalancingEnabled: Boolean
+  bpfDataIfacePattern: String
+  bpfDisableUnprivileged: Boolean
+  bpfEnabled: Boolean
+  bpfEnforceRPF: String
+  bpfExtToServiceConnmark: Int
+  bpfExternalServiceMode: String
+  bpfHostConntrackBypass: Boolean
+  bpfKubeProxyEndpointSlicesEnabled: Boolean
+  bpfKubeProxyIptablesCleanupEnabled: Boolean
+  bpfKubeProxyMinSyncPeriod: String
+  bpfL3IfacePattern: String
+  bpfLogLevel: String
+  bpfMapSizeConntrack: Int
+  bpfMapSizeIPSets: Int
+  bpfMapSizeIfState: Int
+  bpfMapSizeNATAffinity: Int
+  bpfMapSizeNATBackend: Int
+  bpfMapSizeNATFrontend: Int
+  bpfMapSizeRoute: Int
+  bpfPSNATPorts: JSONObject
+  bpfPolicyDebugEnabled: Boolean
+  chainInsertMode: String
+  dataplaneDriver: String
+  dataplaneWatchdogTimeout: String
+  debugDisableLogDropping: Boolean
+  debugMemoryProfilePath: String
+  debugSimulateCalcGraphHangAfter: String
+  debugSimulateDataplaneHangAfter: String
+  defaultEndpointToHostAction: String
+  deviceRouteProtocol: Int
+  deviceRouteSourceAddress: String
+  deviceRouteSourceAddressIPv6: String
+  disableConntrackInvalidCheck: Boolean
+  endpointReportingDelay: String
+  endpointReportingEnabled: Boolean
+  externalNodesList: [String]
+  failsafeInboundHostPorts: [projectcalicoFelixConfigurationSpecFailsafeInboundHostPortsItem]
+  failsafeOutboundHostPorts: [projectcalicoFelixConfigurationSpecFailsafeInboundHostPortsItem]
+  featureDetectOverride: String
+  featureGates: String
+  floatingIPs: String
+  genericXDPEnabled: Boolean
+  healthEnabled: Boolean
+  healthHost: String
+  healthPort: Int
+  healthTimeoutOverrides: [projectcalicoFelixConfigurationSpecHealthTimeoutOverridesItem]
+  interfaceExclude: String
+  interfacePrefix: String
+  interfaceRefreshInterval: String
+  ipipEnabled: Boolean
+  ipipMTU: Int
+  ipsetsRefreshInterval: String
+  iptablesBackend: String
+  iptablesFilterAllowAction: String
+  iptablesLockFilePath: String
+  iptablesLockProbeInterval: String
+  iptablesLockTimeout: String
+  iptablesMangleAllowAction: String
+  iptablesMarkMask: Int
+  iptablesNATOutgoingInterfaceFilter: String
+  iptablesPostWriteCheckInterval: String
+  iptablesRefreshInterval: String
+  ipv6Support: Boolean
+  kubeNodePortRanges: [JSONObject]
+  logDebugFilenameRegex: String
+  logFilePath: String
+  logPrefix: String
+  logSeverityFile: String
+  logSeverityScreen: String
+  logSeveritySys: String
+  maxIpsetSize: Int
+  metadataAddr: String
+  metadataPort: Int
+  mtuIfacePattern: String
+  natOutgoingAddress: String
+  natPortRange: JSONObject
+  netlinkTimeout: String
+  openstackRegion: String
+  policySyncPathPrefix: String
+  prometheusGoMetricsEnabled: Boolean
+  prometheusMetricsEnabled: Boolean
+  prometheusMetricsHost: String
+  prometheusMetricsPort: Int
+  prometheusProcessMetricsEnabled: Boolean
+  prometheusWireGuardMetricsEnabled: Boolean
+  removeExternalRoutes: Boolean
+  reportingInterval: String
+  reportingTTL: String
+  routeRefreshInterval: String
+  routeSource: String
+  routeSyncDisabled: Boolean
+  routeTableRange: projectcalicoFelixConfigurationSpecRouteTableRange
+  routeTableRanges: [projectcalicoFelixConfigurationSpecRouteTableRange]
+  serviceLoopPrevention: String
+  sidecarAccelerationEnabled: Boolean
+  usageReportingEnabled: Boolean
+  usageReportingInitialDelay: String
+  usageReportingInterval: String
+  useInternalDataplaneDriver: Boolean
+  vxlanEnabled: Boolean
+  vxlanMTU: Int
+  vxlanMTUV6: Int
+  vxlanPort: Int
+  vxlanVNI: Int
+  wireguardEnabled: Boolean
+  wireguardEnabledV6: Boolean
+  wireguardHostEncryptionEnabled: Boolean
+  wireguardInterfaceName: String
+  wireguardInterfaceNameV6: String
+  wireguardKeepAlive: String
+  wireguardListeningPort: Int
+  wireguardListeningPortV6: Int
+  wireguardMTU: Int
+  wireguardMTUV6: Int
+  wireguardRoutingRulePriority: Int
+  workloadSourceSpoofing: String
+  xdpEnabled: Boolean
+  xdpRefreshInterval: String
+}
+type projectcalicoFelixConfigurationFailsafeInboundHostPortsItem {
+  net: String
+  port: Int!
+  protocol: String!
+}
+type projectcalicoFelixConfigurationHealthTimeoutOverridesItem {
+  name: String!
+  timeout: String!
+}
+type projectcalicoFelixConfigurationRouteTableRange {
+  max: Int!
+  min: Int!
+}
+type projectcalicoFelixConfiguration {
+  metadata: metadata
+  allowIPIPPacketsFromWorkloads: Boolean
+  allowVXLANPacketsFromWorkloads: Boolean
+  awsSrcDstCheck: String
+  bpfConnectTimeLoadBalancingEnabled: Boolean
+  bpfDataIfacePattern: String
+  bpfDisableUnprivileged: Boolean
+  bpfEnabled: Boolean
+  bpfEnforceRPF: String
+  bpfExtToServiceConnmark: Int
+  bpfExternalServiceMode: String
+  bpfHostConntrackBypass: Boolean
+  bpfKubeProxyEndpointSlicesEnabled: Boolean
+  bpfKubeProxyIptablesCleanupEnabled: Boolean
+  bpfKubeProxyMinSyncPeriod: String
+  bpfL3IfacePattern: String
+  bpfLogLevel: String
+  bpfMapSizeConntrack: Int
+  bpfMapSizeIPSets: Int
+  bpfMapSizeIfState: Int
+  bpfMapSizeNATAffinity: Int
+  bpfMapSizeNATBackend: Int
+  bpfMapSizeNATFrontend: Int
+  bpfMapSizeRoute: Int
+  bpfPSNATPorts: JSONObject
+  bpfPolicyDebugEnabled: Boolean
+  chainInsertMode: String
+  dataplaneDriver: String
+  dataplaneWatchdogTimeout: String
+  debugDisableLogDropping: Boolean
+  debugMemoryProfilePath: String
+  debugSimulateCalcGraphHangAfter: String
+  debugSimulateDataplaneHangAfter: String
+  defaultEndpointToHostAction: String
+  deviceRouteProtocol: Int
+  deviceRouteSourceAddress: String
+  deviceRouteSourceAddressIPv6: String
+  disableConntrackInvalidCheck: Boolean
+  endpointReportingDelay: String
+  endpointReportingEnabled: Boolean
+  externalNodesList: [String]
+  failsafeInboundHostPorts: [projectcalicoFelixConfigurationFailsafeInboundHostPortsItem]
+  failsafeOutboundHostPorts: [projectcalicoFelixConfigurationFailsafeInboundHostPortsItem]
+  featureDetectOverride: String
+  featureGates: String
+  floatingIPs: String
+  genericXDPEnabled: Boolean
+  healthEnabled: Boolean
+  healthHost: String
+  healthPort: Int
+  healthTimeoutOverrides: [projectcalicoFelixConfigurationHealthTimeoutOverridesItem]
+  interfaceExclude: String
+  interfacePrefix: String
+  interfaceRefreshInterval: String
+  ipipEnabled: Boolean
+  ipipMTU: Int
+  ipsetsRefreshInterval: String
+  iptablesBackend: String
+  iptablesFilterAllowAction: String
+  iptablesLockFilePath: String
+  iptablesLockProbeInterval: String
+  iptablesLockTimeout: String
+  iptablesMangleAllowAction: String
+  iptablesMarkMask: Int
+  iptablesNATOutgoingInterfaceFilter: String
+  iptablesPostWriteCheckInterval: String
+  iptablesRefreshInterval: String
+  ipv6Support: Boolean
+  kubeNodePortRanges: [JSONObject]
+  logDebugFilenameRegex: String
+  logFilePath: String
+  logPrefix: String
+  logSeverityFile: String
+  logSeverityScreen: String
+  logSeveritySys: String
+  maxIpsetSize: Int
+  metadataAddr: String
+  metadataPort: Int
+  mtuIfacePattern: String
+  natOutgoingAddress: String
+  natPortRange: JSONObject
+  netlinkTimeout: String
+  openstackRegion: String
+  policySyncPathPrefix: String
+  prometheusGoMetricsEnabled: Boolean
+  prometheusMetricsEnabled: Boolean
+  prometheusMetricsHost: String
+  prometheusMetricsPort: Int
+  prometheusProcessMetricsEnabled: Boolean
+  prometheusWireGuardMetricsEnabled: Boolean
+  removeExternalRoutes: Boolean
+  reportingInterval: String
+  reportingTTL: String
+  routeRefreshInterval: String
+  routeSource: String
+  routeSyncDisabled: Boolean
+  routeTableRange: projectcalicoFelixConfigurationRouteTableRange
+  routeTableRanges: [projectcalicoFelixConfigurationRouteTableRange]
+  serviceLoopPrevention: String
+  sidecarAccelerationEnabled: Boolean
+  usageReportingEnabled: Boolean
+  usageReportingInitialDelay: String
+  usageReportingInterval: String
+  useInternalDataplaneDriver: Boolean
+  vxlanEnabled: Boolean
+  vxlanMTU: Int
+  vxlanMTUV6: Int
+  vxlanPort: Int
+  vxlanVNI: Int
+  wireguardEnabled: Boolean
+  wireguardEnabledV6: Boolean
+  wireguardHostEncryptionEnabled: Boolean
+  wireguardInterfaceName: String
+  wireguardInterfaceNameV6: String
+  wireguardKeepAlive: String
+  wireguardListeningPort: Int
+  wireguardListeningPortV6: Int
+  wireguardMTU: Int
+  wireguardMTUV6: Int
+  wireguardRoutingRulePriority: Int
+  workloadSourceSpoofing: String
+  xdpEnabled: Boolean
+  xdpRefreshInterval: String
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemDestinationServiceAccounts {
+  names: [String]
+  selector: String
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemDestinationServices {
+  name: String
+  namespace: String
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemDestination {
+  namespaceSelector: String
+  nets: [String]
+  notNets: [String]
+  notPorts: [JSONObject]
+  notSelector: String
+  ports: [JSONObject]
+  selector: String
+  serviceAccounts: projectcalicoGlobalNetworkPolicySpecEgressItemDestinationServiceAccounts
+  services: projectcalicoGlobalNetworkPolicySpecEgressItemDestinationServices
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemHttpPathsItem {
+  exact: String
+  prefix: String
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemHttp {
+  methods: [String]
+  paths: [projectcalicoGlobalNetworkPolicySpecEgressItemHttpPathsItem]
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItemIcmp {
+  code: Int
+  type: Int
+}
+input projectcalicoGlobalNetworkPolicySpecEgressItem {
+  action: String!
+  destination: projectcalicoGlobalNetworkPolicySpecEgressItemDestination
+  http: projectcalicoGlobalNetworkPolicySpecEgressItemHttp
+  icmp: projectcalicoGlobalNetworkPolicySpecEgressItemIcmp
+  ipVersion: Int
+  metadata: JSONObject
+  notICMP: projectcalicoGlobalNetworkPolicySpecEgressItemIcmp
+  notProtocol: JSONObject
+  protocol: JSONObject
+  source: projectcalicoGlobalNetworkPolicySpecEgressItemDestination
+}
+input projectcalicoGlobalNetworkPolicySpec {
+  applyOnForward: Boolean
+  doNotTrack: Boolean
+  egress: [projectcalicoGlobalNetworkPolicySpecEgressItem]
+  ingress: [projectcalicoGlobalNetworkPolicySpecEgressItem]
+  namespaceSelector: String
+  order: Float
+  preDNAT: Boolean
+  selector: String
+  serviceAccountSelector: String
+  types: [String]
+}
+type projectcalicoGlobalNetworkPolicyEgressItemDestinationServiceAccounts {
+  names: [String]
+  selector: String
+}
+type projectcalicoGlobalNetworkPolicyEgressItemDestinationServices {
+  name: String
+  namespace: String
+}
+type projectcalicoGlobalNetworkPolicyEgressItemDestination {
+  namespaceSelector: String
+  nets: [String]
+  notNets: [String]
+  notPorts: [JSONObject]
+  notSelector: String
+  ports: [JSONObject]
+  selector: String
+  serviceAccounts: projectcalicoGlobalNetworkPolicyEgressItemDestinationServiceAccounts
+  services: projectcalicoGlobalNetworkPolicyEgressItemDestinationServices
+}
+type projectcalicoGlobalNetworkPolicyEgressItemHttpPathsItem {
+  exact: String
+  prefix: String
+}
+type projectcalicoGlobalNetworkPolicyEgressItemHttp {
+  methods: [String]
+  paths: [projectcalicoGlobalNetworkPolicyEgressItemHttpPathsItem]
+}
+type projectcalicoGlobalNetworkPolicyEgressItemIcmp {
+  code: Int
+  type: Int
+}
+type projectcalicoGlobalNetworkPolicyEgressItem {
+  action: String!
+  destination: projectcalicoGlobalNetworkPolicyEgressItemDestination
+  http: projectcalicoGlobalNetworkPolicyEgressItemHttp
+  icmp: projectcalicoGlobalNetworkPolicyEgressItemIcmp
+  ipVersion: Int
+  metadata: JSONObject
+  notICMP: projectcalicoGlobalNetworkPolicyEgressItemIcmp
+  notProtocol: JSONObject
+  protocol: JSONObject
+  source: projectcalicoGlobalNetworkPolicyEgressItemDestination
+}
+type projectcalicoGlobalNetworkPolicy {
+  metadata: metadata
+  applyOnForward: Boolean
+  doNotTrack: Boolean
+  egress: [projectcalicoGlobalNetworkPolicyEgressItem]
+  ingress: [projectcalicoGlobalNetworkPolicyEgressItem]
+  namespaceSelector: String
+  order: Float
+  preDNAT: Boolean
+  selector: String
+  serviceAccountSelector: String
+  types: [String]
+}
+input projectcalicoGlobalNetworkSetSpec {
+  nets: [String]
+}
+type projectcalicoGlobalNetworkSet {
+  metadata: metadata
+  nets: [String]
+}
+input projectcalicoHostEndpointSpecPortsItem {
+  name: String!
+  port: Int!
+  protocol: JSONObject!
+}
+input projectcalicoHostEndpointSpec {
+  expectedIPs: [String]
+  interfaceName: String
+  node: String
+  ports: [projectcalicoHostEndpointSpecPortsItem]
+  profiles: [String]
+}
+type projectcalicoHostEndpointPortsItem {
+  name: String!
+  port: Int!
+  protocol: JSONObject!
+}
+type projectcalicoHostEndpoint {
+  metadata: metadata
+  expectedIPs: [String]
+  interfaceName: String
+  node: String
+  ports: [projectcalicoHostEndpointPortsItem]
+  profiles: [String]
+}
+input projectcalicoIPAMBlockSpecAttributesItem {
+  handle_id: String
+  secondary: JSONObject
+}
+input projectcalicoIPAMBlockSpec {
+  affinity: String
+  allocations: [JSONObject]!
+  attributes: [projectcalicoIPAMBlockSpecAttributesItem]!
+  cidr: String!
+  deleted: Boolean
+  sequenceNumber: Int
+  sequenceNumberForAllocation: JSONObject
+  strictAffinity: Boolean!
+  unallocated: [Int]!
+}
+type projectcalicoIPAMBlockAttributesItem {
+  handle_id: String
+  secondary: JSONObject
+}
+type projectcalicoIPAMBlock {
+  metadata: metadata
+  affinity: String
+  allocations: [JSONObject]!
+  attributes: [projectcalicoIPAMBlockAttributesItem]!
+  cidr: String!
+  deleted: Boolean
+  sequenceNumber: Int
+  sequenceNumberForAllocation: JSONObject
+  strictAffinity: Boolean!
+  unallocated: [Int]!
+}
+input projectcalicoIPAMConfigSpec {
+  autoAllocateBlocks: Boolean!
+  maxBlocksPerHost: Int
+  strictAffinity: Boolean!
+}
+type projectcalicoIPAMConfig {
+  metadata: metadata
+  autoAllocateBlocks: Boolean!
+  maxBlocksPerHost: Int
+  strictAffinity: Boolean!
+}
+input projectcalicoIPAMHandleSpec {
+  block: JSONObject!
+  deleted: Boolean
+  handleID: String!
+}
+type projectcalicoIPAMHandle {
+  metadata: metadata
+  block: JSONObject!
+  deleted: Boolean
+  handleID: String!
+}
+input projectcalicoIPPoolSpecIpip {
+  enabled: Boolean
+  mode: String
+}
+input projectcalicoIPPoolSpec {
+  allowedUses: [String]
+  blockSize: Int
+  cidr: String!
+  disableBGPExport: Boolean
+  disabled: Boolean
+  ipip: projectcalicoIPPoolSpecIpip
+  ipipMode: String
+  nat-outgoing: Boolean
+  natOutgoing: Boolean
+  nodeSelector: String
+  vxlanMode: String
+}
+type projectcalicoIPPoolIpip {
+  enabled: Boolean
+  mode: String
+}
+type projectcalicoIPPool {
+  metadata: metadata
+  allowedUses: [String]
+  blockSize: Int
+  cidr: String!
+  disableBGPExport: Boolean
+  disabled: Boolean
+  ipip: projectcalicoIPPoolIpip
+  ipipMode: String
+  nat-outgoing: Boolean
+  natOutgoing: Boolean
+  nodeSelector: String
+  vxlanMode: String
+}
+input projectcalicoIPReservationSpec {
+  reservedCIDRs: [String]
+}
+type projectcalicoIPReservation {
+  metadata: metadata
+  reservedCIDRs: [String]
+}
+type projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNamespace {
+  reconcilerPeriod: String
+}
+type projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNodeHostEndpoint {
+  autoCreate: String
+}
+type projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNode {
+  hostEndpoint: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNodeHostEndpoint
+  leakGracePeriod: String
+  reconcilerPeriod: String
+  syncLabels: String
+}
+type projectcalicoKubeControllersConfigurationStatusRunningConfigControllers {
+  namespace: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNamespace
+  node: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNode
+  policy: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNamespace
+  serviceAccount: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNamespace
+  workloadEndpoint: projectcalicoKubeControllersConfigurationStatusRunningConfigControllersNamespace
+}
+type projectcalicoKubeControllersConfigurationStatusRunningConfig {
+  controllers: projectcalicoKubeControllersConfigurationStatusRunningConfigControllers!
+  debugProfilePort: Int
+  etcdV3CompactionPeriod: String
+  healthChecks: String
+  logSeverityScreen: String
+  prometheusMetricsPort: Int
+}
+type projectcalicoKubeControllersConfigurationStatus {
+  environmentVars: JSONObject
+  runningConfig: projectcalicoKubeControllersConfigurationStatusRunningConfig
+}
+input projectcalicoKubeControllersConfigurationSpecControllersNamespace {
+  reconcilerPeriod: String
+}
+input projectcalicoKubeControllersConfigurationSpecControllersNodeHostEndpoint {
+  autoCreate: String
+}
+input projectcalicoKubeControllersConfigurationSpecControllersNode {
+  hostEndpoint: projectcalicoKubeControllersConfigurationSpecControllersNodeHostEndpoint
+  leakGracePeriod: String
+  reconcilerPeriod: String
+  syncLabels: String
+}
+input projectcalicoKubeControllersConfigurationSpecControllers {
+  namespace: projectcalicoKubeControllersConfigurationSpecControllersNamespace
+  node: projectcalicoKubeControllersConfigurationSpecControllersNode
+  policy: projectcalicoKubeControllersConfigurationSpecControllersNamespace
+  serviceAccount: projectcalicoKubeControllersConfigurationSpecControllersNamespace
+  workloadEndpoint: projectcalicoKubeControllersConfigurationSpecControllersNamespace
+}
+input projectcalicoKubeControllersConfigurationSpec {
+  controllers: projectcalicoKubeControllersConfigurationSpecControllers!
+  debugProfilePort: Int
+  etcdV3CompactionPeriod: String
+  healthChecks: String
+  logSeverityScreen: String
+  prometheusMetricsPort: Int
+}
+type projectcalicoKubeControllersConfiguration {
+  metadata: metadata
+  controllers: projectcalicoKubeControllersConfigurationStatusRunningConfigControllers!
+  debugProfilePort: Int
+  etcdV3CompactionPeriod: String
+  healthChecks: String
+  logSeverityScreen: String
+  prometheusMetricsPort: Int
+  status: projectcalicoKubeControllersConfigurationStatus
+}
+input projectcalicoNetworkPolicySpec {
+  egress: [projectcalicoGlobalNetworkPolicySpecEgressItem]
+  ingress: [projectcalicoGlobalNetworkPolicySpecEgressItem]
+  order: Float
+  selector: String
+  serviceAccountSelector: String
+  types: [String]
+}
+type projectcalicoNetworkPolicy {
+  metadata: metadata
+  egress: [projectcalicoGlobalNetworkPolicyEgressItem]
+  ingress: [projectcalicoGlobalNetworkPolicyEgressItem]
+  order: Float
+  selector: String
+  serviceAccountSelector: String
+  types: [String]
+}
+input projectcalicoNetworkSetSpec {
+  nets: [String]
+}
+type projectcalicoNetworkSet {
+  metadata: metadata
+  nets: [String]
+}
+type Query {
+  projectcalicoBGPConfigurations: [projectcalicoBGPConfiguration]
+  projectcalicoBGPConfiguration(name: String!): projectcalicoBGPConfiguration
+  projectcalicoBGPPeers: [projectcalicoBGPPeer]
+  projectcalicoBGPPeer(name: String!): projectcalicoBGPPeer
+  projectcalicoBlockAffinitys: [projectcalicoBlockAffinity]
+  projectcalicoBlockAffinity(name: String!): projectcalicoBlockAffinity
+  projectcalicoCalicoNodeStatuss: [projectcalicoCalicoNodeStatus]
+  projectcalicoCalicoNodeStatus(name: String!): projectcalicoCalicoNodeStatus
+  projectcalicoClusterInformations: [projectcalicoClusterInformation]
+  projectcalicoClusterInformation(name: String!): projectcalicoClusterInformation
+  projectcalicoFelixConfigurations: [projectcalicoFelixConfiguration]
+  projectcalicoFelixConfiguration(name: String!): projectcalicoFelixConfiguration
+  projectcalicoGlobalNetworkPolicys: [projectcalicoGlobalNetworkPolicy]
+  projectcalicoGlobalNetworkPolicy(name: String!): projectcalicoGlobalNetworkPolicy
+  projectcalicoGlobalNetworkSets: [projectcalicoGlobalNetworkSet]
+  projectcalicoGlobalNetworkSet(name: String!): projectcalicoGlobalNetworkSet
+  projectcalicoHostEndpoints: [projectcalicoHostEndpoint]
+  projectcalicoHostEndpoint(name: String!): projectcalicoHostEndpoint
+  projectcalicoIPAMBlocks: [projectcalicoIPAMBlock]
+  projectcalicoIPAMBlock(name: String!): projectcalicoIPAMBlock
+  projectcalicoIPAMConfigs: [projectcalicoIPAMConfig]
+  projectcalicoIPAMConfig(name: String!): projectcalicoIPAMConfig
+  projectcalicoIPAMHandles: [projectcalicoIPAMHandle]
+  projectcalicoIPAMHandle(name: String!): projectcalicoIPAMHandle
+  projectcalicoIPPools: [projectcalicoIPPool]
+  projectcalicoIPPool(name: String!): projectcalicoIPPool
+  projectcalicoIPReservations: [projectcalicoIPReservation]
+  projectcalicoIPReservation(name: String!): projectcalicoIPReservation
+  projectcalicoKubeControllersConfigurations: [projectcalicoKubeControllersConfiguration]
+  projectcalicoKubeControllersConfiguration(name: String!): projectcalicoKubeControllersConfiguration
+  projectcalicoNetworkPolicy(namespace: String!, name: String!): projectcalicoNetworkPolicy
+  projectcalicoNetworkSet(namespace: String!, name: String!): projectcalicoNetworkSet
+}
+type Mutation {
+  createProjectcalicoBGPConfiguration(name: String!, spec: projectcalicoBGPConfigurationSpec!): projectcalicoBGPConfiguration
+  patchProjectcalicoBGPConfiguration(name: String!, spec: projectcalicoBGPConfigurationSpec!): projectcalicoBGPConfiguration
+  deleteProjectcalicoBGPConfiguration(name: String!): projectcalicoBGPConfiguration
+  createProjectcalicoBGPPeer(name: String!, spec: projectcalicoBGPPeerSpec!): projectcalicoBGPPeer
+  patchProjectcalicoBGPPeer(name: String!, spec: projectcalicoBGPPeerSpec!): projectcalicoBGPPeer
+  deleteProjectcalicoBGPPeer(name: String!): projectcalicoBGPPeer
+  createProjectcalicoBlockAffinity(name: String!, spec: projectcalicoBlockAffinitySpec!): projectcalicoBlockAffinity
+  patchProjectcalicoBlockAffinity(name: String!, spec: projectcalicoBlockAffinitySpec!): projectcalicoBlockAffinity
+  deleteProjectcalicoBlockAffinity(name: String!): projectcalicoBlockAffinity
+  createProjectcalicoCalicoNodeStatus(name: String!, spec: projectcalicoCalicoNodeStatusSpec!): projectcalicoCalicoNodeStatus
+  patchProjectcalicoCalicoNodeStatus(name: String!, spec: projectcalicoCalicoNodeStatusSpec!): projectcalicoCalicoNodeStatus
+  deleteProjectcalicoCalicoNodeStatus(name: String!): projectcalicoCalicoNodeStatus
+  createProjectcalicoClusterInformation(name: String!, spec: projectcalicoClusterInformationSpec!): projectcalicoClusterInformation
+  patchProjectcalicoClusterInformation(name: String!, spec: projectcalicoClusterInformationSpec!): projectcalicoClusterInformation
+  deleteProjectcalicoClusterInformation(name: String!): projectcalicoClusterInformation
+  createProjectcalicoFelixConfiguration(name: String!, spec: projectcalicoFelixConfigurationSpec!): projectcalicoFelixConfiguration
+  patchProjectcalicoFelixConfiguration(name: String!, spec: projectcalicoFelixConfigurationSpec!): projectcalicoFelixConfiguration
+  deleteProjectcalicoFelixConfiguration(name: String!): projectcalicoFelixConfiguration
+  createProjectcalicoGlobalNetworkPolicy(name: String!, spec: projectcalicoGlobalNetworkPolicySpec!): projectcalicoGlobalNetworkPolicy
+  patchProjectcalicoGlobalNetworkPolicy(name: String!, spec: projectcalicoGlobalNetworkPolicySpec!): projectcalicoGlobalNetworkPolicy
+  deleteProjectcalicoGlobalNetworkPolicy(name: String!): projectcalicoGlobalNetworkPolicy
+  createProjectcalicoGlobalNetworkSet(name: String!, spec: projectcalicoGlobalNetworkSetSpec!): projectcalicoGlobalNetworkSet
+  patchProjectcalicoGlobalNetworkSet(name: String!, spec: projectcalicoGlobalNetworkSetSpec!): projectcalicoGlobalNetworkSet
+  deleteProjectcalicoGlobalNetworkSet(name: String!): projectcalicoGlobalNetworkSet
+  createProjectcalicoHostEndpoint(name: String!, spec: projectcalicoHostEndpointSpec!): projectcalicoHostEndpoint
+  patchProjectcalicoHostEndpoint(name: String!, spec: projectcalicoHostEndpointSpec!): projectcalicoHostEndpoint
+  deleteProjectcalicoHostEndpoint(name: String!): projectcalicoHostEndpoint
+  createProjectcalicoIPAMBlock(name: String!, spec: projectcalicoIPAMBlockSpec!): projectcalicoIPAMBlock
+  patchProjectcalicoIPAMBlock(name: String!, spec: projectcalicoIPAMBlockSpec!): projectcalicoIPAMBlock
+  deleteProjectcalicoIPAMBlock(name: String!): projectcalicoIPAMBlock
+  createProjectcalicoIPAMConfig(name: String!, spec: projectcalicoIPAMConfigSpec!): projectcalicoIPAMConfig
+  patchProjectcalicoIPAMConfig(name: String!, spec: projectcalicoIPAMConfigSpec!): projectcalicoIPAMConfig
+  deleteProjectcalicoIPAMConfig(name: String!): projectcalicoIPAMConfig
+  createProjectcalicoIPAMHandle(name: String!, spec: projectcalicoIPAMHandleSpec!): projectcalicoIPAMHandle
+  patchProjectcalicoIPAMHandle(name: String!, spec: projectcalicoIPAMHandleSpec!): projectcalicoIPAMHandle
+  deleteProjectcalicoIPAMHandle(name: String!): projectcalicoIPAMHandle
+  createProjectcalicoIPPool(name: String!, spec: projectcalicoIPPoolSpec!): projectcalicoIPPool
+  patchProjectcalicoIPPool(name: String!, spec: projectcalicoIPPoolSpec!): projectcalicoIPPool
+  deleteProjectcalicoIPPool(name: String!): projectcalicoIPPool
+  createProjectcalicoIPReservation(name: String!, spec: projectcalicoIPReservationSpec!): projectcalicoIPReservation
+  patchProjectcalicoIPReservation(name: String!, spec: projectcalicoIPReservationSpec!): projectcalicoIPReservation
+  deleteProjectcalicoIPReservation(name: String!): projectcalicoIPReservation
+  createProjectcalicoKubeControllersConfiguration(name: String!, spec: projectcalicoKubeControllersConfigurationSpec!): projectcalicoKubeControllersConfiguration
+  patchProjectcalicoKubeControllersConfiguration(name: String!, spec: projectcalicoKubeControllersConfigurationSpec!): projectcalicoKubeControllersConfiguration
+  deleteProjectcalicoKubeControllersConfiguration(name: String!): projectcalicoKubeControllersConfiguration
+  createProjectcalicoNetworkPolicy(namespace: String!, name: String!, spec: projectcalicoNetworkPolicySpec!): projectcalicoNetworkPolicy
+  patchProjectcalicoNetworkPolicy(namespace: String!, name: String!, spec: projectcalicoNetworkPolicySpec!): projectcalicoNetworkPolicy
+  deleteProjectcalicoNetworkPolicy(namespace: String!, name: String!): projectcalicoNetworkPolicy
+  createProjectcalicoNetworkSet(namespace: String!, name: String!, spec: projectcalicoNetworkSetSpec!): projectcalicoNetworkSet
+  patchProjectcalicoNetworkSet(namespace: String!, name: String!, spec: projectcalicoNetworkSetSpec!): projectcalicoNetworkSet
+  deleteProjectcalicoNetworkSet(namespace: String!, name: String!): projectcalicoNetworkSet
+}

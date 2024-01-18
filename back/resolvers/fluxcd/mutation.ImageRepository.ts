@@ -70,7 +70,7 @@ export const mutations = {
         if (args['spec']['timeout'] !== undefined && typeof args['spec']['timeout'] == 'string') spec['timeout'] = args['spec']['timeout'];
         const request = {
             apiVersion: 'image.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'ImageRepository',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

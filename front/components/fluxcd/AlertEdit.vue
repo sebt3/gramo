@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdAlertQuery, {"name
 const { mutate: patchAlert, onDone: onPatchAlert, onError: onPatchError } = useMutation(alertEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchAlert({"namespace": navigation.currentNamespace, "name": result.value.fluxcdAlert.metadata.name, "spec": sanitizeData(data.value)});
+  patchAlert({"namespace": result.value.fluxcdAlert.metadata.namespace, "name": result.value.fluxcdAlert.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotAlertFound);onPatchAlert(patchDone);onPatchError(patchError);
 </script>

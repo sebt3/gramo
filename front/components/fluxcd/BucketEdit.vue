@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdBucketQuery, {"nam
 const { mutate: patchBucket, onDone: onPatchBucket, onError: onPatchError } = useMutation(bucketEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchBucket({"namespace": navigation.currentNamespace, "name": result.value.fluxcdBucket.metadata.name, "spec": sanitizeData(data.value)});
+  patchBucket({"namespace": result.value.fluxcdBucket.metadata.namespace, "name": result.value.fluxcdBucket.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotBucketFound);onPatchBucket(patchDone);onPatchError(patchError);
 </script>

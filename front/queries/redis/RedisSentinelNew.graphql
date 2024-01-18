@@ -1,0 +1,263 @@
+
+mutation RedisRedisSentinel($namespace: String!, $name: String!, $spec: redisRedisSentinelSpec!) {
+  createRedisRedisSentinel(namespace: $namespace, name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    TLS {
+      ca
+      cert
+      key
+      secret {
+        defaultMode
+        items {
+          key
+          mode
+          path
+        }
+        optional
+        secretName
+      }
+    }
+    affinity {
+      nodeAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          preference {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          nodeSelectorTerms {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+        }
+      }
+      podAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+      podAntiAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+    }
+    clusterSize
+    kubernetesConfig {
+      image
+      imagePullPolicy
+      imagePullSecrets {
+        name
+      }
+      redisSecret {
+        key
+        name
+      }
+      service {
+        serviceType
+      }
+      updateStrategy {
+        rollingUpdate {
+          partition
+        }
+        type
+      }
+    }
+    livenessProbe {
+      failureThreshold
+      initialDelaySeconds
+      periodSeconds
+      successThreshold
+      timeoutSeconds
+    }
+    pdb {
+      enabled
+      maxUnavailable
+      minAvailable
+    }
+    priorityClassName
+    readinessProbe {
+      failureThreshold
+      initialDelaySeconds
+      periodSeconds
+      successThreshold
+      timeoutSeconds
+    }
+    redisSentinelConfig {
+      additionalSentinelConfig
+      downAfterMilliseconds
+      failoverTimeout
+      masterGroupName
+      parallelSyncs
+      quorum
+      redisPort
+      redisReplicationName
+    }
+    securityContext {
+      fsGroup
+      fsGroupChangePolicy
+      runAsGroup
+      runAsNonRoot
+      runAsUser
+      seLinuxOptions {
+        level
+        role
+        type
+        user
+      }
+      seccompProfile {
+        localhostProfile
+        type
+      }
+      supplementalGroups
+      sysctls {
+        name
+        value
+      }
+      windowsOptions {
+        gmsaCredentialSpec
+        gmsaCredentialSpecName
+        hostProcess
+        runAsUserName
+      }
+    }
+    serviceAccountName
+    sidecars {
+      env {
+        name
+        value
+        valueFrom {
+          configMapKeyRef {
+            key
+            name
+            optional
+          }
+          fieldRef {
+            apiVersion
+            fieldPath
+          }
+          resourceFieldRef {
+            containerName
+            resource
+          }
+          secretKeyRef {
+            key
+            name
+            optional
+          }
+        }
+      }
+      image
+      imagePullPolicy
+      name
+    }
+    tolerations {
+      effect
+      key
+      operator
+      tolerationSeconds
+      value
+    }
+  }
+}

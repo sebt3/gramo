@@ -1,0 +1,320 @@
+
+query RedisRediss {
+ namespaces {
+  redisRediss {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    TLS {
+      ca
+      cert
+      key
+      secret {
+        defaultMode
+        items {
+          key
+          mode
+          path
+        }
+        optional
+        secretName
+      }
+    }
+    affinity {
+      nodeAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          preference {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          nodeSelectorTerms {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+            matchFields {
+              key
+              operator
+              values
+            }
+          }
+        }
+      }
+      podAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+      podAntiAffinity {
+        preferredDuringSchedulingIgnoredDuringExecution {
+          podAffinityTerm {
+            labelSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaceSelector {
+              matchExpressions {
+                key
+                operator
+                values
+              }
+            }
+            namespaces
+            topologyKey
+          }
+          weight
+        }
+        requiredDuringSchedulingIgnoredDuringExecution {
+          labelSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaceSelector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          namespaces
+          topologyKey
+        }
+      }
+    }
+    kubernetesConfig {
+      image
+      imagePullPolicy
+      imagePullSecrets {
+        name
+      }
+      redisSecret {
+        key
+        name
+      }
+      updateStrategy {
+        rollingUpdate {
+          partition
+        }
+        type
+      }
+    }
+    livenessProbe {
+      failureThreshold
+      initialDelaySeconds
+      periodSeconds
+      successThreshold
+      timeoutSeconds
+    }
+    priorityClassName
+    readinessProbe {
+      failureThreshold
+      initialDelaySeconds
+      periodSeconds
+      successThreshold
+      timeoutSeconds
+    }
+    redisConfig {
+      additionalRedisConfig
+    }
+    redisExporter {
+      enabled
+      env {
+        name
+        value
+        valueFrom {
+          configMapKeyRef {
+            key
+            name
+            optional
+          }
+          fieldRef {
+            apiVersion
+            fieldPath
+          }
+          resourceFieldRef {
+            containerName
+            resource
+          }
+          secretKeyRef {
+            key
+            name
+            optional
+          }
+        }
+      }
+      image
+      imagePullPolicy
+    }
+    securityContext {
+      fsGroup
+      fsGroupChangePolicy
+      runAsGroup
+      runAsNonRoot
+      runAsUser
+      seLinuxOptions {
+        level
+        role
+        type
+        user
+      }
+      seccompProfile {
+        localhostProfile
+        type
+      }
+      supplementalGroups
+      sysctls {
+        name
+        value
+      }
+      windowsOptions {
+        gmsaCredentialSpec
+        gmsaCredentialSpecName
+        hostProcess
+        runAsUserName
+      }
+    }
+    serviceAccountName
+    sidecars {
+      env {
+        name
+        value
+        valueFrom {
+          configMapKeyRef {
+            key
+            name
+            optional
+          }
+          fieldRef {
+            apiVersion
+            fieldPath
+          }
+          resourceFieldRef {
+            containerName
+            resource
+          }
+          secretKeyRef {
+            key
+            name
+            optional
+          }
+        }
+      }
+      image
+      imagePullPolicy
+      name
+    }
+    storage {
+      volumeClaimTemplate {
+        apiVersion
+        kind
+        spec {
+          accessModes
+          dataSource {
+            apiGroup
+            kind
+            name
+          }
+          dataSourceRef {
+            apiGroup
+            kind
+            name
+          }
+          selector {
+            matchExpressions {
+              key
+              operator
+              values
+            }
+          }
+          storageClassName
+          volumeMode
+          volumeName
+        }
+        status {
+          accessModes
+          conditions {
+            lastProbeTime
+            lastTransitionTime
+            message
+            reason
+            status
+            type
+          }
+          phase
+          resizeStatus
+        }
+      }
+    }
+    tolerations {
+      effect
+      key
+      operator
+      tolerationSeconds
+      value
+    }
+  }
+ }
+}

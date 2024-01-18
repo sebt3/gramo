@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdHelmChartQuery, {"
 const { mutate: patchHelmChart, onDone: onPatchHelmChart, onError: onPatchError } = useMutation(helmChartEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchHelmChart({"namespace": navigation.currentNamespace, "name": result.value.fluxcdHelmChart.metadata.name, "spec": sanitizeData(data.value)});
+  patchHelmChart({"namespace": result.value.fluxcdHelmChart.metadata.namespace, "name": result.value.fluxcdHelmChart.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotHelmChartFound);onPatchHelmChart(patchDone);onPatchError(patchError);
 </script>

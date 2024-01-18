@@ -16,10 +16,10 @@ mutation FluxcdReceiver($namespace: String!, $name: String!) {
     events
     interval
     resources {
+      apiVersion
       kind
       name
       namespace
-      apiVersion
     }
     secretRef {
       name

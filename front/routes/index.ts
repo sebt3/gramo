@@ -35,11 +35,19 @@ if (configRoute.children != undefined && configRoute.children?.length>0) {
   linkRedirect.path = configRoute.redirect!=undefined?configRoute.redirect.path:'/config'
 }
 
+import { route as systemRoute, link as systemLink, descriptions as systemDescriptions } from './system'
+if (systemRoute.children != undefined && systemRoute.children?.length>0) {
+  routeChildren.push(systemRoute);
+  links.push(systemLink)
+  linkRedirect.path = systemRoute.redirect!=undefined?systemRoute.redirect.path:'/system'
+}
+
 export const descriptions = {
   root:      {breadcrumb: '', icon: 'home', ns: false},
   ...installDescriptions,
   ...automationDescriptions,
   ...configDescriptions,
+  ...systemDescriptions,
   ...databaseDescriptions,
 }
 export const router = createRouter({

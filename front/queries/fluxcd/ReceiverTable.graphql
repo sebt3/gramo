@@ -17,10 +17,10 @@ query FluxcdReceivers($namespace: String!) {
     events
     interval
     resources {
+      apiVersion
       kind
       name
       namespace
-      apiVersion
     }
     secretRef {
       name

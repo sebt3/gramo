@@ -4,9 +4,11 @@ const iconKustomization = 'auto_mode';
 export const link:menuLinksProps = {
   title: 'Fluxcd', icon: iconKustomization,
   link: `/${cat}/fluxcd/kustomizations/`,
+  name: 'fluxcd',
   level: 1,
   children: [
   {
+    name: 'fluxcdKustomizations',
     title: 'Kustomization', caption: 'List kustomization', icon: 'auto_mode',
     link: `/${cat}/fluxcd/kustomizations/`, level: 2, children: []
   },

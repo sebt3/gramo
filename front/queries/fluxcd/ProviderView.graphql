@@ -32,11 +32,15 @@ query FluxcdProvider($namespace: String!, $name: String!) {
       namespace
     }
     address
-    certSecretRef
+    certSecretRef {
+      name
+    }
     channel
     interval
     proxy
-    secretRef
+    secretRef {
+      name
+    }
     suspend
     timeout
     type

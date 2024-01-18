@@ -17,23 +17,8 @@ export function generateFrontQueries(directory: string, short:string, apiGroup:s
       name
       namespace
     }
-{{#each spec.properties}}
-{{#if (haveType this)}}
-    {{@key}}
-{{else}}
-    # {{@key}}
-{{/if}}
-{{/each}}
-{{#if haveStatus}}
-    status {
-{{#each status.properties}}
-    {{#if (haveType this)}}
-      {{@key}}
-    {{else}}
-      # {{@key}}
-    {{/if}}
-{{/each}}
-    }
+{{#each spec.properties}}{{GQueryObject @key 2 this}}{{/each}}{{#if haveStatus}}    status {
+{{#each status.properties}}{{GQueryObject @key 3 this}}{{/each}}    }
 {{/if}}`;
     const listTmpl = HB.compile(`
 {{#if namespaced}}

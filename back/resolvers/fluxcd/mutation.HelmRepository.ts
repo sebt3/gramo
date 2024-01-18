@@ -66,7 +66,7 @@ export const mutations = {
         spec['url'] = args['spec']['url'];
         const request = {
             apiVersion: 'source.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'HelmRepository',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

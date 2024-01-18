@@ -61,7 +61,7 @@ export const mutations = {
         if (args['spec']['suspend'] !== undefined && typeof args['spec']['suspend'] == 'boolean') spec['suspend'] = args['spec']['suspend'];
         const request = {
             apiVersion: 'notification.toolkit.fluxcd.io/v1beta2',
-            kind: 'Distrib',
+            kind: 'Alert',
             metadata: {
                 namespace: args['namespace'],
                 name: args['name']

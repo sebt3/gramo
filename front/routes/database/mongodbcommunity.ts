@@ -4,9 +4,11 @@ const iconMongoDBCommunity = 'data_object';
 export const link:menuLinksProps = {
   title: 'MongoDB', icon: iconMongoDBCommunity,
   link: `/${cat}/mongodbcommunity/mongodbcommunity/`,
+  name: 'mongodbcommunity',
   level: 1,
   children: [
   {
+    name: 'mongodbcommunityMongoDBCommunitys',
     title: 'MongoDBCommunity', caption: 'List mongoDBCommunity', icon: 'fas fa-database',
     link: `/${cat}/mongodbcommunity/mongodbcommunity/`, level: 2, children: []
   },
@@ -24,6 +26,7 @@ export const descriptions = {
 export const route = {
   path: 'mongodbcommunity',
   name: 'mongodbcommunity',
+  redirect: {path: link.link as string},
   children: [
     {
       path: 'mongodbcommunity',

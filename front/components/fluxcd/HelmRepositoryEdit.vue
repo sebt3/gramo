@@ -11,7 +11,7 @@ const { result, loading, onResult, onError } = useQuery(fluxcdHelmRepositoryQuer
 const { mutate: patchHelmRepository, onDone: onPatchHelmRepository, onError: onPatchError } = useMutation(helmRepositoryEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchHelmRepository({"namespace": navigation.currentNamespace, "name": result.value.fluxcdHelmRepository.metadata.name, "spec": sanitizeData(data.value)});
+  patchHelmRepository({"namespace": result.value.fluxcdHelmRepository.metadata.namespace, "name": result.value.fluxcdHelmRepository.metadata.name, "spec": sanitizeData(data.value)});
 }
 onError(onErrorHandler);onResult(onNotHelmRepositoryFound);onPatchHelmRepository(patchDone);onPatchError(patchError);
 </script>
