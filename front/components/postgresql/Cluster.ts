@@ -4,6 +4,8 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const clusterColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Condition',  label: 'Condition', field: row => row.status.conditions[0].message, sortable: true, align: tableColumnAlign.left},
+  {name: 'Instances',  label: 'Instances', field: row => row.status.instances, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const clusterAllColumns = ([

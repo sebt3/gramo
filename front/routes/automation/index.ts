@@ -8,7 +8,7 @@ const linkRedirect = {path:''};
 
 import { route as fluxcdRoute, link as fluxcdLink, descriptions as fluxcdDescriptions } from './fluxcd'
 if (crds['gitrepositories.source.toolkit.fluxcd.io'] != undefined) {
-  linkRedirect.path = fluxcdRoute['redirect']!=undefined?fluxcdRoute['redirect'].path:linkRedirect.path!=''?linkRedirect.path:'/install/fluxcd'
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:fluxcdRoute['redirect']!=undefined?fluxcdRoute['redirect'].path:'/automation/fluxcd'
   linkChildren.push(fluxcdLink)
   routeChildren.push(fluxcdRoute)
 }

@@ -72,3 +72,10 @@ export function sanitizeData(data:object) {
     if (typeof result === "object" && Object.keys(result).length<1) return null;
     return result;
 }
+
+export function elude(str:string, maxsize:number=20) {
+    if (str.length>maxsize) {
+      return str.substring(0,maxsize-3)+'...'
+    }
+    return str;
+}

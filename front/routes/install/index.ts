@@ -8,7 +8,7 @@ const linkRedirect = {path:''};
 
 import { route as vynilRoute, link as vynilLink, descriptions as vynilDescriptions } from './vynil'
 if (crds['installs.vynil.solidite.fr'] != undefined) {
-  linkRedirect.path = vynilRoute['redirect']!=undefined?vynilRoute['redirect'].path:'/install/vynil'
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:vynilRoute['redirect']!=undefined?vynilRoute['redirect'].path:'/install/vynil'
   linkChildren.push(vynilLink)
   routeChildren.push(vynilRoute)
 }

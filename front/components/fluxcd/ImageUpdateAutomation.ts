@@ -4,6 +4,10 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const imageUpdateAutomationColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Source',  label: 'Source', field: row => row.sourceRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Branch',  label: 'Branch', field: row => row.push.branch, sortable: true, align: tableColumnAlign.left},
+  {name: 'Path',  label: 'Path', field: row => row.update.path, sortable: true, align: tableColumnAlign.left},
+  {name: 'Condition',  label: 'Condition', field: row => row.status.conditions[0].message, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const imageUpdateAutomationAllColumns = ([

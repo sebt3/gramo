@@ -8,7 +8,7 @@ const linkRedirect = {path:''};
 
 import { route as secretgeneratorRoute, link as secretgeneratorLink, descriptions as secretgeneratorDescriptions } from './secretgenerator'
 if (crds['stringsecrets.secretgenerator.mittwald.de'] != undefined) {
-  linkRedirect.path = secretgeneratorRoute['redirect']!=undefined?secretgeneratorRoute['redirect'].path:'/config/secretgenerator'
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:secretgeneratorRoute['redirect']!=undefined?secretgeneratorRoute['redirect'].path:'/config/secretgenerator'
   linkChildren.push(secretgeneratorLink)
   routeChildren.push(secretgeneratorRoute)
 }

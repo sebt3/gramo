@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { metadataType } from "./interfaces"
+import { elude } from "."
 defineProps<{metadata: metadataType}>();
 function getColor(name) {
   const vynil = /^vynil.solidite.fr/;
@@ -27,9 +28,8 @@ function getColor(name) {
         <template v-slot:prepend><q-icon name="short_text" /></template>
         <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
           <span v-for="note in metadata.annotations" v-bind:key="note.name">
-            <q-badge align="middle" :label="note.name"  :color="getColor(note.name)" class="q-pb-sm q-pr-sm">
-              <q-badge align="middle" :label="note.value" :color="getColor(note.name)" v-if="note.name != 'kubectl.kubernetes.io/last-applied-configuration'" class="bg-grey-1" outline />
-              <q-badge align="middle" label="..." :color="getColor(note.name)" v-else class="bg-grey-1" outline />
+            <q-badge align="middle" :label="note.name"  :color="getColor(note.name)" class="q-mb-sm q-mr-sm">
+              <q-badge align="middle" :label="elude(note.value as unknown as string)" :color="getColor(note.name)" class="bg-grey-1" outline />
             </q-badge>
           </span>
         </div></template>

@@ -11,54 +11,54 @@ const iconAlertmanagerConfig = 'album';
 const iconPrometheusAgent = 'album';
 export const link:menuLinksProps = {
   name: 'monitoring',
-  title: 'Monitoring', icon: iconAlertmanager,
-  link: `/${cat}/monitoring/alertmanagers/`,
+  title: 'Monitoring', icon: iconPrometheus,
+  link: `/${cat}/monitoring/prometheusrules/`,
   level: 1,
   children: [
   {
-    name: 'monitoringAlertmanagers',
-    title: 'Alertmanager', caption: 'List alertmanager', icon: 'album',
-    link: `/${cat}/monitoring/alertmanagers/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringPodMonitors',
-    title: 'PodMonitor', caption: 'List podMonitor', icon: 'album',
-    link: `/${cat}/monitoring/podmonitors/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringProbes',
-    title: 'Probe', caption: 'List probe', icon: 'album',
-    link: `/${cat}/monitoring/probes/`, level: 2, children: []
-  },
-  {
     name: 'monitoringPrometheuss',
-    title: 'Prometheus', caption: 'List prometheus', icon: 'album',
+    title: 'Prometheus', caption: 'List prometheus', icon: iconPrometheus,
     link: `/${cat}/monitoring/prometheuses/`, level: 2, children: []
   },
   {
+    name: 'monitoringAlertmanagers',
+    title: 'Alertmanager', caption: 'List alertmanager', icon: iconAlertmanager,
+    link: `/${cat}/monitoring/alertmanagers/`, level: 2, children: []
+  },
+  {
+    name: 'monitoringPrometheusAgents',
+    title: 'PrometheusAgent', caption: 'List prometheusAgent', icon: iconPrometheusAgent,
+    link: `/${cat}/monitoring/prometheusagents/`, level: 2, children: []
+  },
+  {
     name: 'monitoringPrometheusRules',
-    title: 'PrometheusRule', caption: 'List prometheusRule', icon: 'album',
+    title: 'PrometheusRule', caption: 'List prometheusRule', icon: iconPrometheusRule,
     link: `/${cat}/monitoring/prometheusrules/`, level: 2, children: []
   },
   {
     name: 'monitoringServiceMonitors',
-    title: 'ServiceMonitor', caption: 'List serviceMonitor', icon: 'album',
+    title: 'ServiceMonitor', caption: 'List serviceMonitor', icon: iconServiceMonitor,
     link: `/${cat}/monitoring/servicemonitors/`, level: 2, children: []
   },
   {
+    name: 'monitoringPodMonitors',
+    title: 'PodMonitor', caption: 'List podMonitor', icon: iconPodMonitor,
+    link: `/${cat}/monitoring/podmonitors/`, level: 2, children: []
+  },
+  {
+    name: 'monitoringProbes',
+    title: 'Probe', caption: 'List probe', icon: iconProbe,
+    link: `/${cat}/monitoring/probes/`, level: 2, children: []
+  },
+  {
     name: 'monitoringThanosRulers',
-    title: 'ThanosRuler', caption: 'List thanosRuler', icon: 'album',
+    title: 'ThanosRuler', caption: 'List thanosRuler', icon: iconThanosRuler,
     link: `/${cat}/monitoring/thanosrulers/`, level: 2, children: []
   },
   {
     name: 'monitoringAlertmanagerConfigs',
-    title: 'AlertmanagerConfig', caption: 'List alertmanagerConfig', icon: 'album',
+    title: 'AlertmanagerConfig', caption: 'List alertmanagerConfig', icon: iconAlertmanagerConfig,
     link: `/${cat}/monitoring/alertmanagerconfigs/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringPrometheusAgents',
-    title: 'PrometheusAgent', caption: 'List prometheusAgent', icon: 'album',
-    link: `/${cat}/monitoring/prometheusagents/`, level: 2, children: []
   },
   ]
 }

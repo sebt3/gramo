@@ -1,63 +1,63 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'database';
-const iconBackup = 'album';
-const iconConnection = 'album';
-const iconDatabase = 'album';
+const iconBackup = 'backup';
+const iconConnection = 'link';
+const iconDatabase = 'fas fa-database';
 const iconGrant = 'album';
-const iconMariaDB = 'album';
-const iconRestore = 'album';
+const iconMariaDB = 'group_work';
+const iconRestore = 'cloud_download';
 const iconSqlJob = 'album';
-const iconUser = 'album';
+const iconUser = 'fas fa-user';
 export const link:menuLinksProps = {
   name: 'mariadb',
-  title: 'Mariadb', icon: iconBackup,
+  title: 'Mariadb', icon: iconDatabase,
   link: `/${cat}/mariadb/backups/`,
   level: 1,
   children: [
   {
-    name: 'mariadbBackups',
-    title: 'Backup', caption: 'List backup', icon: 'album',
-    link: `/${cat}/mariadb/backups/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbConnections',
-    title: 'Connection', caption: 'List connection', icon: 'album',
-    link: `/${cat}/mariadb/connections/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbDatabases',
-    title: 'Database', caption: 'List database', icon: 'album',
-    link: `/${cat}/mariadb/databases/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbGrants',
-    title: 'Grant', caption: 'List grant', icon: 'album',
-    link: `/${cat}/mariadb/grants/`, level: 2, children: []
-  },
-  {
     name: 'mariadbMariaDBs',
-    title: 'MariaDB', caption: 'List mariaDB', icon: 'album',
+    title: 'MariaDB', caption: 'List mariaDB', icon: iconMariaDB,
     link: `/${cat}/mariadb/mariadbs/`, level: 2, children: []
   },
   {
-    name: 'mariadbRestores',
-    title: 'Restore', caption: 'List restore', icon: 'album',
-    link: `/${cat}/mariadb/restores/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbSqlJobs',
-    title: 'SqlJob', caption: 'List sqlJob', icon: 'album',
-    link: `/${cat}/mariadb/sqljobs/`, level: 2, children: []
+    name: 'mariadbDatabases',
+    title: 'Database', caption: 'List database', icon: iconDatabase,
+    link: `/${cat}/mariadb/databases/`, level: 2, children: []
   },
   {
     name: 'mariadbUsers',
-    title: 'User', caption: 'List user', icon: 'album',
+    title: 'User', caption: 'List user', icon: iconUser,
     link: `/${cat}/mariadb/users/`, level: 2, children: []
+  },
+  {
+    name: 'mariadbGrants',
+    title: 'Grant', caption: 'List grant', icon: iconGrant,
+    link: `/${cat}/mariadb/grants/`, level: 2, children: []
+  },
+  {
+    name: 'mariadbConnections',
+    title: 'Connection', caption: 'List connection', icon: iconConnection,
+    link: `/${cat}/mariadb/connections/`, level: 2, children: []
+  },
+  {
+    name: 'mariadbSqlJobs',
+    title: 'SqlJob', caption: 'List sqlJob', icon: iconSqlJob,
+    link: `/${cat}/mariadb/sqljobs/`, level: 2, children: []
+  },
+  {
+    name: 'mariadbBackups',
+    title: 'Backup', caption: 'List backup', icon: iconBackup,
+    link: `/${cat}/mariadb/backups/`, level: 2, children: []
+  },
+  {
+    name: 'mariadbRestores',
+    title: 'Restore', caption: 'List restore', icon: iconRestore,
+    link: `/${cat}/mariadb/restores/`, level: 2, children: []
   },
   ]
 }
 export const descriptions = {
-  mariadb:                {breadcrumb: 'Mariadb', icon: iconBackup, ns: false},
+  mariadb:                {breadcrumb: 'Mariadb', icon: iconMariaDB, ns: false},
   mariadbBackups:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
   mariadbBackupAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
   mariadbBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true},

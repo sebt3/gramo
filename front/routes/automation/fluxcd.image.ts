@@ -9,15 +9,15 @@ export const link:menuLinksProps = {
   name: 'fluxcd',
   level: 1,
   children: [
-  {
+    {
+      name: 'fluxcdImageRepositorys',
+      title: 'ImageRepository', caption: 'List imageRepository', icon: 'fab fa-docker',
+      link: `/${cat}/fluxcd/imagerepositories/`, level: 2, children: []
+    },
+    {
     name: 'fluxcdImagePolicys',
     title: 'ImagePolicy', caption: 'List imagePolicy', icon: 'auto_mode',
     link: `/${cat}/fluxcd/imagepolicies/`, level: 2, children: []
-  },
-  {
-    name: 'fluxcdImageRepositorys',
-    title: 'ImageRepository', caption: 'List imageRepository', icon: 'fab fa-docker',
-    link: `/${cat}/fluxcd/imagerepositories/`, level: 2, children: []
   },
   {
     name: 'fluxcdImageUpdateAutomations',

@@ -19,7 +19,7 @@ export const link:menuLinksProps = {
 {{#each children}}
   {
     name: '{{ ../mini }}{{ this.name }}s',
-    title: '{{ this.name }}', caption: 'List {{ this.miniName }}', icon: 'album',
+    title: '{{ this.name }}', caption: 'List {{ this.miniName }}', icon: icon{{ this.name }},
     link: \`/\${cat}/{{ ../mini }}/{{ this.plural }}/\`, level: 2, children: []
   },
 {{/each}}

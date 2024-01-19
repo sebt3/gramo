@@ -1,7 +1,7 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'database';
-const iconRedis = 'album';
-const iconRedisCluster = 'album';
+const iconRedis = 'data_object';
+const iconRedisCluster = 'fas fa-database';
 const iconRedisReplication = 'album';
 const iconRedisSentinel = 'album';
 export const link:menuLinksProps = {
@@ -12,22 +12,22 @@ export const link:menuLinksProps = {
   children: [
   {
     name: 'redisRediss',
-    title: 'Redis', caption: 'List redis', icon: 'album',
+    title: 'Redis', caption: 'List redis', icon: iconRedis,
     link: `/${cat}/redis/redis/`, level: 2, children: []
   },
   {
     name: 'redisRedisClusters',
-    title: 'RedisCluster', caption: 'List redisCluster', icon: 'album',
+    title: 'RedisCluster', caption: 'List redisCluster', icon: iconRedisCluster,
     link: `/${cat}/redis/redisclusters/`, level: 2, children: []
   },
   {
     name: 'redisRedisReplications',
-    title: 'RedisReplication', caption: 'List redisReplication', icon: 'album',
+    title: 'RedisReplication', caption: 'List redisReplication', icon: iconRedisReplication,
     link: `/${cat}/redis/redisreplications/`, level: 2, children: []
   },
   {
     name: 'redisRedisSentinels',
-    title: 'RedisSentinel', caption: 'List redisSentinel', icon: 'album',
+    title: 'RedisSentinel', caption: 'List redisSentinel', icon: iconRedisSentinel,
     link: `/${cat}/redis/redissentinels/`, level: 2, children: []
   },
   ]

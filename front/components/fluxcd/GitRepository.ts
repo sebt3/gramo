@@ -4,6 +4,9 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const gitRepositoryColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'URL',  label: 'URL', field: row => row.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Branch',  label: 'Branch', field: row => row.ref.branch, sortable: true, align: tableColumnAlign.left},
+  {name: 'Revision',  label: 'Revision', field: row => row.status.artifact?.revision, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const gitRepositoryAllColumns = ([

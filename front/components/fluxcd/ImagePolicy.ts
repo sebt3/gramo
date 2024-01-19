@@ -4,6 +4,8 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const imagePolicyColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Image',  label: 'Image', field: row => row.imageRepositoryRef, sortable: true, align: tableColumnAlign.left},
+  {name: 'Latest',  label: 'Latest', field: row => row.status.latestImage, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const imagePolicyAllColumns = ([

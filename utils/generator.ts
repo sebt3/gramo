@@ -180,7 +180,11 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
         let group = key.split('.').slice(0,3).join('.');
         let item = ""
         let version=""
-        if (['com.coreos.monitoring','com.mongodb.mongodbcommunity','de.mittwald.secretgenerator','do.zalan.acid','fr.solidite.vynil','io.cert-manager.acme','io.cnpg.postgresql','io.mmontes.mariadb', 'org.projectcalico.crd', 'us.containo.traefik'].includes(group)) {
+        if (['com.rabbitmq.v1beta1', 'org.zalando.v1'].includes(group)) {
+            group = key.split('.').slice(0,2).join('.');
+            version = key.split('.')[2]
+            item = key.split('.')[3]
+        } else if (['com.oracle.mysql','com.coreos.monitoring','com.mongodb.mongodbcommunity','de.mittwald.secretgenerator','do.zalan.acid','fr.solidite.vynil','io.cert-manager.acme','io.cnpg.postgresql','io.mmontes.mariadb', 'org.projectcalico.crd', 'us.containo.traefik'].includes(group)) {
             version = key.split('.')[3]
             item = key.split('.')[4]
         } else if (['io.k8s.api','io.fluxcd.toolkit','in.opstreelabs.redis'].includes(group)) {
@@ -201,7 +205,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis/apiextension
             version = key.split('.')[6]
             item = key.split('.')[7]
         } else {
-            console.debug(`excluding ${key}`);
+            console.debug(`excluding ${key} (${group})`);
             continue;
         }
         if (value.properties == undefined || value.properties.spec == undefined || value.properties.apiVersion == undefined) {

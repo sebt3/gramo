@@ -1,39 +1,39 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'database';
-const iconBackup = 'album';
-const iconCluster = 'album';
+const iconBackup = 'backup';
+const iconCluster = 'fas fa-database';
 const iconPooler = 'album';
-const iconScheduledBackup = 'album';
+const iconScheduledBackup = 'calendar_month';
 export const link:menuLinksProps = {
   name: 'postgresql',
-  title: 'Postgresql', icon: iconBackup,
-  link: `/${cat}/postgresql/backups/`,
+  title: 'Postgresql', icon: iconCluster,
+  link: `/${cat}/postgresql/clusters/`,
   level: 1,
   children: [
   {
-    name: 'postgresqlBackups',
-    title: 'Backup', caption: 'List backup', icon: 'album',
-    link: `/${cat}/postgresql/backups/`, level: 2, children: []
-  },
-  {
     name: 'postgresqlClusters',
-    title: 'Cluster', caption: 'List cluster', icon: 'album',
+    title: 'Cluster', caption: 'List cluster', icon: iconCluster,
     link: `/${cat}/postgresql/clusters/`, level: 2, children: []
   },
   {
     name: 'postgresqlPoolers',
-    title: 'Pooler', caption: 'List pooler', icon: 'album',
+    title: 'Pooler', caption: 'List pooler', icon: iconPooler,
     link: `/${cat}/postgresql/poolers/`, level: 2, children: []
   },
   {
+    name: 'postgresqlBackups',
+    title: 'Backup', caption: 'List backup', icon: iconBackup,
+    link: `/${cat}/postgresql/backups/`, level: 2, children: []
+  },
+  {
     name: 'postgresqlScheduledBackups',
-    title: 'ScheduledBackup', caption: 'List scheduledBackup', icon: 'album',
+    title: 'ScheduledBackup', caption: 'List scheduledBackup', icon: iconScheduledBackup,
     link: `/${cat}/postgresql/scheduledbackups/`, level: 2, children: []
   },
   ]
 }
 export const descriptions = {
-  postgresql:                {breadcrumb: 'Postgresql', icon: iconBackup, ns: false},
+  postgresql:                {breadcrumb: 'Postgresql', icon: iconCluster, ns: false},
   postgresqlBackups:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
   postgresqlBackupAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
   postgresqlBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true},

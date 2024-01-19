@@ -1,63 +1,63 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'system';
 const iconArchive = 'album';
-const iconBackup = 'album';
-const iconCheck = 'album';
+const iconBackup = 'backup';
+const iconCheck = 'cloud_done';
 const iconPreBackupPod = 'album';
-const iconPrune = 'album';
-const iconRestore = 'album';
-const iconSchedule = 'album';
+const iconPrune = 'settings_system_daydream';
+const iconRestore = 'cloud_download';
+const iconSchedule = 'calendar_month';
 const iconSnapshot = 'album';
 export const link:menuLinksProps = {
   name: 'k8up',
-  title: 'K8up', icon: iconArchive,
-  link: `/${cat}/k8up/archives/`,
+  title: 'K8up', icon: iconBackup,
+  link: `/${cat}/k8up/schedules/`,
   level: 1,
   children: [
   {
-    name: 'k8upArchives',
-    title: 'Archive', caption: 'List archive', icon: 'album',
-    link: `/${cat}/k8up/archives/`, level: 2, children: []
-  },
-  {
-    name: 'k8upBackups',
-    title: 'Backup', caption: 'List backup', icon: 'album',
-    link: `/${cat}/k8up/backups/`, level: 2, children: []
-  },
-  {
-    name: 'k8upChecks',
-    title: 'Check', caption: 'List check', icon: 'album',
-    link: `/${cat}/k8up/checks/`, level: 2, children: []
-  },
-  {
-    name: 'k8upPreBackupPods',
-    title: 'PreBackupPod', caption: 'List preBackupPod', icon: 'album',
-    link: `/${cat}/k8up/prebackuppods/`, level: 2, children: []
-  },
-  {
-    name: 'k8upPrunes',
-    title: 'Prune', caption: 'List prune', icon: 'album',
-    link: `/${cat}/k8up/prunes/`, level: 2, children: []
-  },
-  {
-    name: 'k8upRestores',
-    title: 'Restore', caption: 'List restore', icon: 'album',
-    link: `/${cat}/k8up/restores/`, level: 2, children: []
-  },
-  {
     name: 'k8upSchedules',
-    title: 'Schedule', caption: 'List schedule', icon: 'album',
+    title: 'Schedule', caption: 'List schedule', icon: iconSchedule,
     link: `/${cat}/k8up/schedules/`, level: 2, children: []
   },
   {
+    name: 'k8upPreBackupPods',
+    title: 'PreBackupPod', caption: 'List preBackupPod', icon: iconPreBackupPod,
+    link: `/${cat}/k8up/prebackuppods/`, level: 2, children: []
+  },
+  {
+    name: 'k8upBackups',
+    title: 'Backup', caption: 'List backup', icon: iconBackup,
+    link: `/${cat}/k8up/backups/`, level: 2, children: []
+  },
+  {
+    name: 'k8upRestores',
+    title: 'Restore', caption: 'List restore', icon: iconRestore,
+    link: `/${cat}/k8up/restores/`, level: 2, children: []
+  },
+  {
+    name: 'k8upChecks',
+    title: 'Check', caption: 'List check', icon: iconCheck,
+    link: `/${cat}/k8up/checks/`, level: 2, children: []
+  },
+  {
+    name: 'k8upPrunes',
+    title: 'Prune', caption: 'List prune', icon: iconPrune,
+    link: `/${cat}/k8up/prunes/`, level: 2, children: []
+  },
+  {
+    name: 'k8upArchives',
+    title: 'Archive', caption: 'List archive', icon: iconArchive,
+    link: `/${cat}/k8up/archives/`, level: 2, children: []
+  },
+  {
     name: 'k8upSnapshots',
-    title: 'Snapshot', caption: 'List snapshot', icon: 'album',
+    title: 'Snapshot', caption: 'List snapshot', icon: iconSnapshot,
     link: `/${cat}/k8up/snapshots/`, level: 2, children: []
   },
   ]
 }
 export const descriptions = {
-  k8up:                {breadcrumb: 'K8up', icon: iconArchive, ns: false},
+  k8up:                {breadcrumb: 'K8up', icon: iconBackup, ns: false},
   k8upArchives:        {breadcrumb: 'Archive', icon: iconArchive, ns: false},
   k8upArchiveAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
   k8upArchiveTable:    {breadcrumb: 'List', icon: 'list', ns: true},

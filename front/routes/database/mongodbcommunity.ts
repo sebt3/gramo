@@ -1,21 +1,22 @@
 import {menuLinksProps} from '../interfaces';
 const cat = 'database';
-const iconMongoDBCommunity = 'data_object';
+const iconMongoDB = 'data_object';
+const iconMongoDBCommunity = 'fas fa-database';
 export const link:menuLinksProps = {
-  title: 'MongoDB', icon: iconMongoDBCommunity,
+  title: 'MongoDB', icon: iconMongoDB,
   link: `/${cat}/mongodbcommunity/mongodbcommunity/`,
   name: 'mongodbcommunity',
   level: 1,
   children: [
   {
     name: 'mongodbcommunityMongoDBCommunitys',
-    title: 'MongoDBCommunity', caption: 'List mongoDBCommunity', icon: 'fas fa-database',
+    title: 'MongoDBCommunity', caption: 'List mongoDBCommunity', icon: iconMongoDBCommunity,
     link: `/${cat}/mongodbcommunity/mongodbcommunity/`, level: 2, children: []
   },
   ]
 }
 export const descriptions = {
-  mongodbcommunity:                {breadcrumb: 'MongoDB', icon: iconMongoDBCommunity, ns: false},
+  mongodbcommunity:                {breadcrumb: 'MongoDB', icon: iconMongoDB, ns: false},
   mongodbcommunityMongoDBCommunitys:        {breadcrumb: 'MongoDBCommunity', icon: iconMongoDBCommunity, ns: false},
   mongodbcommunityMongoDBCommunityAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
   mongodbcommunityMongoDBCommunityTable:    {breadcrumb: 'List', icon: 'list', ns: true},

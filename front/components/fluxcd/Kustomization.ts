@@ -4,6 +4,7 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const kustomizationColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Condition',  label: 'Condition', field: row => row.status.conditions[0].message, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const kustomizationAllColumns = ([

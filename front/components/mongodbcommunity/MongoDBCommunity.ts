@@ -4,6 +4,9 @@ export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from
 
 export const mongoDBCommunityColumns:Array<QTableColumn> = [
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Type',  label: 'Type', field: row => row.type, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version',  label: 'Version', field: row => row.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase',  label: 'Phase', field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ];
 export const mongoDBCommunityAllColumns = ([
