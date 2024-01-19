@@ -64,8 +64,6 @@ query ProjectcalicoGlobalNetworkPolicy($name: String!) {
         type
       }
       ipVersion
-      metadata {
-      }
       notICMP {
         code
         type
@@ -119,8 +117,6 @@ query ProjectcalicoGlobalNetworkPolicy($name: String!) {
         type
       }
       ipVersion
-      metadata {
-      }
       notICMP {
         code
         type

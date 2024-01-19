@@ -62,8 +62,6 @@ query ProjectcalicoNetworkPolicy($namespace: String!, $name: String!) {
         type
       }
       ipVersion
-      metadata {
-      }
       notICMP {
         code
         type
@@ -117,8 +115,6 @@ query ProjectcalicoNetworkPolicy($namespace: String!, $name: String!) {
         type
       }
       ipVersion
-      metadata {
-      }
       notICMP {
         code
         type
