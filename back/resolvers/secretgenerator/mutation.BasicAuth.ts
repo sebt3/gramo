@@ -26,13 +26,13 @@ export const mutations = {
             const ext = res.body as SecretgeneratorBasicAuth
             return {
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                encoding: ext.spec.encoding,
-                forceRegenerate: ext.spec.forceRegenerate,
-                length: ext.spec.length,
-                username: ext.spec.username,
+                "data": ext.spec['data'],
+                "encoding": ext.spec['encoding'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "length": ext.spec['length'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }
         } catch (err) {
@@ -66,13 +66,13 @@ export const mutations = {
             const ext = res.body as SecretgeneratorBasicAuth
             return {
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                encoding: ext.spec.encoding,
-                forceRegenerate: ext.spec.forceRegenerate,
-                length: ext.spec.length,
-                username: ext.spec.username,
+                "data": ext.spec['data'],
+                "encoding": ext.spec['encoding'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "length": ext.spec['length'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }
         } catch (err) {
@@ -86,13 +86,13 @@ export const mutations = {
         const ext = res.body as SecretgeneratorBasicAuth
         return {
             metadata: getMetadata(ext.metadata),
-            data: ext.spec.data,
-            encoding: ext.spec.encoding,
-            forceRegenerate: ext.spec.forceRegenerate,
-            length: ext.spec.length,
-            username: ext.spec.username,
+            "data": ext.spec['data'],
+            "encoding": ext.spec['encoding'],
+            "forceRegenerate": ext.spec['forceRegenerate'],
+            "length": ext.spec['length'],
+            "username": ext.spec['username'],
             status: ext.status==undefined?null:{
-                secret: ext.status.secret,
+                "secret": ext.status['secret'],
             }
         }
     } catch (err) {

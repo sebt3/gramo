@@ -87,7 +87,7 @@ query {{ short }}{{ name }}($name: String!) {
     }
     group
   }
-  {{ mini }}{{ name }}($name: String!) {
+  {{ mini }}{{ name }}(name: $name) {
 {{/if}}
   ${output}
   }

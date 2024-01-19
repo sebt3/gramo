@@ -1,0 +1,38 @@
+
+query ProjectcalicoIPAMConfig($name: String!) {
+  customResourceDefinition(name: "ipamconfigs.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoIPAMConfig(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    autoAllocateBlocks
+    maxBlocksPerHost
+    strictAffinity
+  }
+}

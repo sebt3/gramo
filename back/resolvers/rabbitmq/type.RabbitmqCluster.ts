@@ -1,0 +1,1987 @@
+type KubernetesObject = import('@kubernetes/client-node/dist/types.js').KubernetesObject
+export interface RabbitmqRabbitmqClusterStatusBinding {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterStatusConditionsItem {
+  "lastTransitionTime": string | undefined
+  "message": string | undefined
+  "reason": string | undefined
+  "status": string
+  "type": string
+}
+export interface RabbitmqRabbitmqClusterStatusDefaultUserSecretReferenceKeys {
+}
+export interface RabbitmqRabbitmqClusterStatusDefaultUserSecretReference {
+  "keys": RabbitmqRabbitmqClusterStatusDefaultUserSecretReferenceKeys
+  "name": string
+  "namespace": string
+}
+export interface RabbitmqRabbitmqClusterStatusDefaultUserServiceReference {
+  "name": string
+  "namespace": string
+}
+export interface RabbitmqRabbitmqClusterStatusDefaultUser {
+  "secretReference": RabbitmqRabbitmqClusterStatusDefaultUserSecretReference | undefined
+  "serviceReference": RabbitmqRabbitmqClusterStatusDefaultUserServiceReference | undefined
+}
+export interface RabbitmqRabbitmqClusterStatus {
+  "binding": RabbitmqRabbitmqClusterStatusBinding | undefined
+  "conditions": Array<RabbitmqRabbitmqClusterStatusConditionsItem>
+  "defaultUser": RabbitmqRabbitmqClusterStatusDefaultUser | undefined
+  "observedGeneration": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchFieldsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem> | undefined
+  "matchFields": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchFieldsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "preference": RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchFieldsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItem {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchExpressionsItem> | undefined
+  "matchFields": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchFieldsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  "nodeSelectorTerms": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItem>
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityNodeAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": RabbitmqRabbitmqClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  "labelSelector": RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "podAffinityTerm": RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem {
+  "labelSelector": RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  "labelSelector": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "podAffinityTerm": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem {
+  "labelSelector": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecAffinity {
+  "nodeAffinity": RabbitmqRabbitmqClusterSpecAffinityNodeAffinity | undefined
+  "podAffinity": RabbitmqRabbitmqClusterSpecAffinityPodAffinity | undefined
+  "podAntiAffinity": RabbitmqRabbitmqClusterSpecAffinityPodAntiAffinity | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecImagePullSecretsItem {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceMetadataAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceMetadataLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceMetadata {
+  "annotations": RabbitmqRabbitmqClusterSpecOverrideServiceMetadataAnnotations | undefined
+  "labels": RabbitmqRabbitmqClusterSpecOverrideServiceMetadataLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceSpecPortsItem {
+  "appProtocol": string | undefined
+  "name": string | undefined
+  "nodePort": number | undefined
+  "port": number
+  "protocol": string | undefined
+  "targetPort": object | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceSpecSelector {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceSpecSessionAffinityConfigClientIP {
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceSpecSessionAffinityConfig {
+  "clientIP": RabbitmqRabbitmqClusterSpecOverrideServiceSpecSessionAffinityConfigClientIP | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideServiceSpec {
+  "allocateLoadBalancerNodePorts": boolean | undefined
+  "clusterIP": string | undefined
+  "clusterIPs": Array<string> | undefined
+  "externalIPs": Array<string> | undefined
+  "externalName": string | undefined
+  "externalTrafficPolicy": string | undefined
+  "healthCheckNodePort": number | undefined
+  "internalTrafficPolicy": string | undefined
+  "ipFamilies": Array<string> | undefined
+  "ipFamilyPolicy": string | undefined
+  "loadBalancerClass": string | undefined
+  "loadBalancerIP": string | undefined
+  "loadBalancerSourceRanges": Array<string> | undefined
+  "ports": Array<RabbitmqRabbitmqClusterSpecOverrideServiceSpecPortsItem> | undefined
+  "publishNotReadyAddresses": boolean | undefined
+  "selector": RabbitmqRabbitmqClusterSpecOverrideServiceSpecSelector | undefined
+  "sessionAffinity": string | undefined
+  "sessionAffinityConfig": RabbitmqRabbitmqClusterSpecOverrideServiceSpecSessionAffinityConfig | undefined
+  "type": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideService {
+  "metadata": RabbitmqRabbitmqClusterSpecOverrideServiceMetadata | undefined
+  "spec": RabbitmqRabbitmqClusterSpecOverrideServiceSpec | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadataAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadataLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadata {
+  "annotations": RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadataAnnotations | undefined
+  "labels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadataLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecPersistentVolumeClaimRetentionPolicy {
+  "whenDeleted": string | undefined
+  "whenScaled": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadataAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadataLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadata {
+  "annotations": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadataAnnotations | undefined
+  "labels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadataLabels | undefined
+  "name": string | undefined
+  "namespace": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchFieldsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchExpressionsItem> | undefined
+  "matchFields": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreferenceMatchFieldsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "preference": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPreference
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchFieldsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItem {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchExpressionsItem> | undefined
+  "matchFields": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItemMatchFieldsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  "nodeSelectorTerms": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsItem>
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  "labelSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "podAffinityTerm": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem {
+  "labelSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm {
+  "labelSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTermNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem {
+  "podAffinityTerm": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItemPodAffinityTerm
+  "weight": number
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem {
+  "labelSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemLabelSelector | undefined
+  "namespaceSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItemNamespaceSelector | undefined
+  "namespaces": Array<string> | undefined
+  "topologyKey": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinity {
+  "preferredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+  "requiredDuringSchedulingIgnoredDuringExecution": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinity {
+  "nodeAffinity": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityNodeAffinity | undefined
+  "podAffinity": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAffinity | undefined
+  "podAntiAffinity": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinityPodAntiAffinity | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromConfigMapKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromFieldRef {
+  "apiVersion": string | undefined
+  "fieldPath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromResourceFieldRef {
+  "containerName": string | undefined
+  "divisor": object | undefined
+  "resource": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromSecretKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFrom {
+  "configMapKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromConfigMapKeyRef | undefined
+  "fieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromFieldRef | undefined
+  "resourceFieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromResourceFieldRef | undefined
+  "secretKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFromSecretKeyRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItem {
+  "name": string
+  "value": string | undefined
+  "valueFrom": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItemValueFrom | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItemConfigMapRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItemSecretRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItem {
+  "configMapRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItemConfigMapRef | undefined
+  "prefix": string | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItemSecretRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStart {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStartTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStop {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStopTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecycle {
+  "postStart": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePostStart | undefined
+  "preStop": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecyclePreStop | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemPortsItem {
+  "containerPort": number
+  "hostIP": string | undefined
+  "hostPort": number | undefined
+  "name": string | undefined
+  "protocol": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextCapabilities {
+  "add": Array<string> | undefined
+  "drop": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextSeLinuxOptions {
+  "level": string | undefined
+  "role": string | undefined
+  "type": string | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextSeccompProfile {
+  "localhostProfile": string | undefined
+  "type": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextWindowsOptions {
+  "gmsaCredentialSpec": string | undefined
+  "gmsaCredentialSpecName": string | undefined
+  "hostProcess": boolean | undefined
+  "runAsUserName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContext {
+  "allowPrivilegeEscalation": boolean | undefined
+  "capabilities": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextCapabilities | undefined
+  "privileged": boolean | undefined
+  "procMount": string | undefined
+  "readOnlyRootFilesystem": boolean | undefined
+  "runAsGroup": number | undefined
+  "runAsNonRoot": boolean | undefined
+  "runAsUser": number | undefined
+  "seLinuxOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextSeLinuxOptions | undefined
+  "seccompProfile": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextSeccompProfile | undefined
+  "windowsOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContextWindowsOptions | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemVolumeDevicesItem {
+  "devicePath": string
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemVolumeMountsItem {
+  "mountPath": string
+  "mountPropagation": string | undefined
+  "name": string
+  "readOnly": boolean | undefined
+  "subPath": string | undefined
+  "subPathExpr": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItem {
+  "args": Array<string> | undefined
+  "command": Array<string> | undefined
+  "env": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvItem> | undefined
+  "envFrom": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemEnvFromItem> | undefined
+  "image": string | undefined
+  "imagePullPolicy": string | undefined
+  "lifecycle": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLifecycle | undefined
+  "livenessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemLivenessProbe | undefined
+  "name": string
+  "ports": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemPortsItem> | undefined
+  "readinessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemReadinessProbe | undefined
+  "resources": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemResources | undefined
+  "securityContext": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemSecurityContext | undefined
+  "startupProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemStartupProbe | undefined
+  "stdin": boolean | undefined
+  "stdinOnce": boolean | undefined
+  "terminationMessagePath": string | undefined
+  "terminationMessagePolicy": string | undefined
+  "tty": boolean | undefined
+  "volumeDevices": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemVolumeDevicesItem> | undefined
+  "volumeMounts": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItemVolumeMountsItem> | undefined
+  "workingDir": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecDnsConfigOptionsItem {
+  "name": string | undefined
+  "value": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecDnsConfig {
+  "nameservers": Array<string> | undefined
+  "options": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecDnsConfigOptionsItem> | undefined
+  "searches": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromConfigMapKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromFieldRef {
+  "apiVersion": string | undefined
+  "fieldPath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromResourceFieldRef {
+  "containerName": string | undefined
+  "divisor": object | undefined
+  "resource": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromSecretKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFrom {
+  "configMapKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromConfigMapKeyRef | undefined
+  "fieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromFieldRef | undefined
+  "resourceFieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromResourceFieldRef | undefined
+  "secretKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFromSecretKeyRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItem {
+  "name": string
+  "value": string | undefined
+  "valueFrom": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItemValueFrom | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItemConfigMapRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItemSecretRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItem {
+  "configMapRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItemConfigMapRef | undefined
+  "prefix": string | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItemSecretRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStart {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStartTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStop {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStopTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecycle {
+  "postStart": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePostStart | undefined
+  "preStop": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecyclePreStop | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemPortsItem {
+  "containerPort": number
+  "hostIP": string | undefined
+  "hostPort": number | undefined
+  "name": string | undefined
+  "protocol": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextCapabilities {
+  "add": Array<string> | undefined
+  "drop": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextSeLinuxOptions {
+  "level": string | undefined
+  "role": string | undefined
+  "type": string | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextSeccompProfile {
+  "localhostProfile": string | undefined
+  "type": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextWindowsOptions {
+  "gmsaCredentialSpec": string | undefined
+  "gmsaCredentialSpecName": string | undefined
+  "hostProcess": boolean | undefined
+  "runAsUserName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContext {
+  "allowPrivilegeEscalation": boolean | undefined
+  "capabilities": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextCapabilities | undefined
+  "privileged": boolean | undefined
+  "procMount": string | undefined
+  "readOnlyRootFilesystem": boolean | undefined
+  "runAsGroup": number | undefined
+  "runAsNonRoot": boolean | undefined
+  "runAsUser": number | undefined
+  "seLinuxOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextSeLinuxOptions | undefined
+  "seccompProfile": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextSeccompProfile | undefined
+  "windowsOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContextWindowsOptions | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemVolumeDevicesItem {
+  "devicePath": string
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemVolumeMountsItem {
+  "mountPath": string
+  "mountPropagation": string | undefined
+  "name": string
+  "readOnly": boolean | undefined
+  "subPath": string | undefined
+  "subPathExpr": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItem {
+  "args": Array<string> | undefined
+  "command": Array<string> | undefined
+  "env": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvItem> | undefined
+  "envFrom": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemEnvFromItem> | undefined
+  "image": string | undefined
+  "imagePullPolicy": string | undefined
+  "lifecycle": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLifecycle | undefined
+  "livenessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemLivenessProbe | undefined
+  "name": string
+  "ports": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemPortsItem> | undefined
+  "readinessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemReadinessProbe | undefined
+  "resources": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemResources | undefined
+  "securityContext": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemSecurityContext | undefined
+  "startupProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemStartupProbe | undefined
+  "stdin": boolean | undefined
+  "stdinOnce": boolean | undefined
+  "targetContainerName": string | undefined
+  "terminationMessagePath": string | undefined
+  "terminationMessagePolicy": string | undefined
+  "tty": boolean | undefined
+  "volumeDevices": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemVolumeDevicesItem> | undefined
+  "volumeMounts": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItemVolumeMountsItem> | undefined
+  "workingDir": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecHostAliasesItem {
+  "hostnames": Array<string> | undefined
+  "ip": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecImagePullSecretsItem {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromConfigMapKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromFieldRef {
+  "apiVersion": string | undefined
+  "fieldPath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromResourceFieldRef {
+  "containerName": string | undefined
+  "divisor": object | undefined
+  "resource": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromSecretKeyRef {
+  "key": string
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFrom {
+  "configMapKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromConfigMapKeyRef | undefined
+  "fieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromFieldRef | undefined
+  "resourceFieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromResourceFieldRef | undefined
+  "secretKeyRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFromSecretKeyRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItem {
+  "name": string
+  "value": string | undefined
+  "valueFrom": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItemValueFrom | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItemConfigMapRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItemSecretRef {
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItem {
+  "configMapRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItemConfigMapRef | undefined
+  "prefix": string | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItemSecretRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStart {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStartTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStop {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopExec | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopHttpGet | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStopTcpSocket | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecycle {
+  "postStart": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePostStart | undefined
+  "preStop": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecyclePreStop | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemPortsItem {
+  "containerPort": number
+  "hostIP": string | undefined
+  "hostPort": number | undefined
+  "name": string | undefined
+  "protocol": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextCapabilities {
+  "add": Array<string> | undefined
+  "drop": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextSeLinuxOptions {
+  "level": string | undefined
+  "role": string | undefined
+  "type": string | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextSeccompProfile {
+  "localhostProfile": string | undefined
+  "type": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextWindowsOptions {
+  "gmsaCredentialSpec": string | undefined
+  "gmsaCredentialSpecName": string | undefined
+  "hostProcess": boolean | undefined
+  "runAsUserName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContext {
+  "allowPrivilegeEscalation": boolean | undefined
+  "capabilities": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextCapabilities | undefined
+  "privileged": boolean | undefined
+  "procMount": string | undefined
+  "readOnlyRootFilesystem": boolean | undefined
+  "runAsGroup": number | undefined
+  "runAsNonRoot": boolean | undefined
+  "runAsUser": number | undefined
+  "seLinuxOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextSeLinuxOptions | undefined
+  "seccompProfile": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextSeccompProfile | undefined
+  "windowsOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContextWindowsOptions | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeExec {
+  "command": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeGrpc {
+  "port": number
+  "service": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeHttpGetHttpHeadersItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeHttpGet {
+  "host": string | undefined
+  "httpHeaders": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeHttpGetHttpHeadersItem> | undefined
+  "path": string | undefined
+  "port": object
+  "scheme": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeTcpSocket {
+  "host": string | undefined
+  "port": object
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbe {
+  "exec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeExec | undefined
+  "failureThreshold": number | undefined
+  "grpc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeGrpc | undefined
+  "httpGet": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeHttpGet | undefined
+  "initialDelaySeconds": number | undefined
+  "periodSeconds": number | undefined
+  "successThreshold": number | undefined
+  "tcpSocket": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbeTcpSocket | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "timeoutSeconds": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemVolumeDevicesItem {
+  "devicePath": string
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemVolumeMountsItem {
+  "mountPath": string
+  "mountPropagation": string | undefined
+  "name": string
+  "readOnly": boolean | undefined
+  "subPath": string | undefined
+  "subPathExpr": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItem {
+  "args": Array<string> | undefined
+  "command": Array<string> | undefined
+  "env": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvItem> | undefined
+  "envFrom": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemEnvFromItem> | undefined
+  "image": string | undefined
+  "imagePullPolicy": string | undefined
+  "lifecycle": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLifecycle | undefined
+  "livenessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemLivenessProbe | undefined
+  "name": string
+  "ports": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemPortsItem> | undefined
+  "readinessProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemReadinessProbe | undefined
+  "resources": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemResources | undefined
+  "securityContext": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemSecurityContext | undefined
+  "startupProbe": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemStartupProbe | undefined
+  "stdin": boolean | undefined
+  "stdinOnce": boolean | undefined
+  "terminationMessagePath": string | undefined
+  "terminationMessagePolicy": string | undefined
+  "tty": boolean | undefined
+  "volumeDevices": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemVolumeDevicesItem> | undefined
+  "volumeMounts": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItemVolumeMountsItem> | undefined
+  "workingDir": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecNodeSelector {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecOs {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecOverhead {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecReadinessGatesItem {
+  "conditionType": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecResourceClaimsItemSource {
+  "resourceClaimName": string | undefined
+  "resourceClaimTemplateName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecResourceClaimsItem {
+  "name": string
+  "source": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecResourceClaimsItemSource | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSchedulingGatesItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSeLinuxOptions {
+  "level": string | undefined
+  "role": string | undefined
+  "type": string | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSeccompProfile {
+  "localhostProfile": string | undefined
+  "type": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSysctlsItem {
+  "name": string
+  "value": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextWindowsOptions {
+  "gmsaCredentialSpec": string | undefined
+  "gmsaCredentialSpecName": string | undefined
+  "hostProcess": boolean | undefined
+  "runAsUserName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContext {
+  "fsGroup": number | undefined
+  "fsGroupChangePolicy": string | undefined
+  "runAsGroup": number | undefined
+  "runAsNonRoot": boolean | undefined
+  "runAsUser": number | undefined
+  "seLinuxOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSeLinuxOptions | undefined
+  "seccompProfile": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSeccompProfile | undefined
+  "supplementalGroups": Array<number> | undefined
+  "sysctls": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextSysctlsItem> | undefined
+  "windowsOptions": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContextWindowsOptions | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTolerationsItem {
+  "effect": string | undefined
+  "key": string | undefined
+  "operator": string | undefined
+  "tolerationSeconds": number | undefined
+  "value": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItem {
+  "labelSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItemLabelSelector | undefined
+  "matchLabelKeys": Array<string> | undefined
+  "maxSkew": number
+  "minDomains": number | undefined
+  "nodeAffinityPolicy": string | undefined
+  "nodeTaintsPolicy": string | undefined
+  "topologyKey": string
+  "whenUnsatisfiable": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAwsElasticBlockStore {
+  "fsType": string | undefined
+  "partition": number | undefined
+  "readOnly": boolean | undefined
+  "volumeID": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAzureDisk {
+  "cachingMode": string | undefined
+  "diskName": string
+  "diskURI": string
+  "fsType": string | undefined
+  "kind": string | undefined
+  "readOnly": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAzureFile {
+  "readOnly": boolean | undefined
+  "secretName": string
+  "shareName": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCephfsSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCephfs {
+  "monitors": Array<string>
+  "path": string | undefined
+  "readOnly": boolean | undefined
+  "secretFile": string | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCephfsSecretRef | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCinderSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCinder {
+  "fsType": string | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCinderSecretRef | undefined
+  "volumeID": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemConfigMapItemsItem {
+  "key": string
+  "mode": number | undefined
+  "path": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemConfigMap {
+  "defaultMode": number | undefined
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemConfigMapItemsItem> | undefined
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsiNodePublishSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsiVolumeAttributes {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsi {
+  "driver": string
+  "fsType": string | undefined
+  "nodePublishSecretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsiNodePublishSecretRef | undefined
+  "readOnly": boolean | undefined
+  "volumeAttributes": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsiVolumeAttributes | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItemFieldRef {
+  "apiVersion": string | undefined
+  "fieldPath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItemResourceFieldRef {
+  "containerName": string | undefined
+  "divisor": object | undefined
+  "resource": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItem {
+  "fieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItemFieldRef | undefined
+  "mode": number | undefined
+  "path": string
+  "resourceFieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItemResourceFieldRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPI {
+  "defaultMode": number | undefined
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPIItemsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEmptyDir {
+  "medium": string | undefined
+  "sizeLimit": object | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateMetadata {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource {
+  "apiGroup": string | undefined
+  "kind": string
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSourceRef {
+  "apiGroup": string | undefined
+  "kind": string
+  "name": string
+  "namespace": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpec {
+  "accessModes": Array<string> | undefined
+  "dataSource": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSource | undefined
+  "dataSourceRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined
+  "resources": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecResources | undefined
+  "selector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpecSelector | undefined
+  "storageClassName": string | undefined
+  "volumeMode": string | undefined
+  "volumeName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplate {
+  "metadata": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateMetadata | undefined
+  "spec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplateSpec
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeral {
+  "volumeClaimTemplate": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeralVolumeClaimTemplate | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFc {
+  "fsType": string | undefined
+  "lun": number | undefined
+  "readOnly": boolean | undefined
+  "targetWWNs": Array<string> | undefined
+  "wwids": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolumeOptions {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolumeSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolume {
+  "driver": string
+  "fsType": string | undefined
+  "options": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolumeOptions | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolumeSecretRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlocker {
+  "datasetName": string | undefined
+  "datasetUUID": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGcePersistentDisk {
+  "fsType": string | undefined
+  "partition": number | undefined
+  "pdName": string
+  "readOnly": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGitRepo {
+  "directory": string | undefined
+  "repository": string
+  "revision": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGlusterfs {
+  "endpoints": string
+  "path": string
+  "readOnly": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemHostPath {
+  "path": string
+  "type": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemIscsiSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemIscsi {
+  "chapAuthDiscovery": boolean | undefined
+  "chapAuthSession": boolean | undefined
+  "fsType": string | undefined
+  "initiatorName": string | undefined
+  "iqn": string
+  "iscsiInterface": string | undefined
+  "lun": number
+  "portals": Array<string> | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemIscsiSecretRef | undefined
+  "targetPortal": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemNfs {
+  "path": string
+  "readOnly": boolean | undefined
+  "server": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPersistentVolumeClaim {
+  "claimName": string
+  "readOnly": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPhotonPersistentDisk {
+  "fsType": string | undefined
+  "pdID": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPortworxVolume {
+  "fsType": string | undefined
+  "readOnly": boolean | undefined
+  "volumeID": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemConfigMapItemsItem {
+  "key": string
+  "mode": number | undefined
+  "path": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemConfigMap {
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemConfigMapItemsItem> | undefined
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItemFieldRef {
+  "apiVersion": string | undefined
+  "fieldPath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItemResourceFieldRef {
+  "containerName": string | undefined
+  "divisor": object | undefined
+  "resource": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItem {
+  "fieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItemFieldRef | undefined
+  "mode": number | undefined
+  "path": string
+  "resourceFieldRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItemResourceFieldRef | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPI {
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPIItemsItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemSecretItemsItem {
+  "key": string
+  "mode": number | undefined
+  "path": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemSecret {
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemSecretItemsItem> | undefined
+  "name": string | undefined
+  "optional": boolean | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemServiceAccountToken {
+  "audience": string | undefined
+  "expirationSeconds": number | undefined
+  "path": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItem {
+  "configMap": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemConfigMap | undefined
+  "downwardAPI": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemDownwardAPI | undefined
+  "secret": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemSecret | undefined
+  "serviceAccountToken": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItemServiceAccountToken | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjected {
+  "defaultMode": number | undefined
+  "sources": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjectedSourcesItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemQuobyte {
+  "group": string | undefined
+  "readOnly": boolean | undefined
+  "registry": string
+  "tenant": string | undefined
+  "user": string | undefined
+  "volume": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemRbdSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemRbd {
+  "fsType": string | undefined
+  "image": string
+  "keyring": string | undefined
+  "monitors": Array<string>
+  "pool": string | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemRbdSecretRef | undefined
+  "user": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemScaleIOSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemScaleIO {
+  "fsType": string | undefined
+  "gateway": string
+  "protectionDomain": string | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemScaleIOSecretRef
+  "sslEnabled": boolean | undefined
+  "storageMode": string | undefined
+  "storagePool": string | undefined
+  "system": string
+  "volumeName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemSecretItemsItem {
+  "key": string
+  "mode": number | undefined
+  "path": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemSecret {
+  "defaultMode": number | undefined
+  "items": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemSecretItemsItem> | undefined
+  "optional": boolean | undefined
+  "secretName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemStorageosSecretRef {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemStorageos {
+  "fsType": string | undefined
+  "readOnly": boolean | undefined
+  "secretRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemStorageosSecretRef | undefined
+  "volumeName": string | undefined
+  "volumeNamespace": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemVsphereVolume {
+  "fsType": string | undefined
+  "storagePolicyID": string | undefined
+  "storagePolicyName": string | undefined
+  "volumePath": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItem {
+  "awsElasticBlockStore": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAwsElasticBlockStore | undefined
+  "azureDisk": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAzureDisk | undefined
+  "azureFile": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemAzureFile | undefined
+  "cephfs": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCephfs | undefined
+  "cinder": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCinder | undefined
+  "configMap": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemConfigMap | undefined
+  "csi": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemCsi | undefined
+  "downwardAPI": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemDownwardAPI | undefined
+  "emptyDir": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEmptyDir | undefined
+  "ephemeral": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemEphemeral | undefined
+  "fc": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFc | undefined
+  "flexVolume": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlexVolume | undefined
+  "flocker": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemFlocker | undefined
+  "gcePersistentDisk": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGcePersistentDisk | undefined
+  "gitRepo": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGitRepo | undefined
+  "glusterfs": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemGlusterfs | undefined
+  "hostPath": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemHostPath | undefined
+  "iscsi": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemIscsi | undefined
+  "name": string
+  "nfs": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemNfs | undefined
+  "persistentVolumeClaim": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPersistentVolumeClaim | undefined
+  "photonPersistentDisk": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPhotonPersistentDisk | undefined
+  "portworxVolume": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemPortworxVolume | undefined
+  "projected": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemProjected | undefined
+  "quobyte": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemQuobyte | undefined
+  "rbd": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemRbd | undefined
+  "scaleIO": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemScaleIO | undefined
+  "secret": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemSecret | undefined
+  "storageos": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemStorageos | undefined
+  "vsphereVolume": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItemVsphereVolume | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpec {
+  "activeDeadlineSeconds": number | undefined
+  "affinity": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecAffinity | undefined
+  "automountServiceAccountToken": boolean | undefined
+  "containers": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecContainersItem>
+  "dnsConfig": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecDnsConfig | undefined
+  "dnsPolicy": string | undefined
+  "enableServiceLinks": boolean | undefined
+  "ephemeralContainers": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecEphemeralContainersItem> | undefined
+  "hostAliases": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecHostAliasesItem> | undefined
+  "hostIPC": boolean | undefined
+  "hostNetwork": boolean | undefined
+  "hostPID": boolean | undefined
+  "hostUsers": boolean | undefined
+  "hostname": string | undefined
+  "imagePullSecrets": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecImagePullSecretsItem> | undefined
+  "initContainers": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecInitContainersItem> | undefined
+  "nodeName": string | undefined
+  "nodeSelector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecNodeSelector | undefined
+  "os": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecOs | undefined
+  "overhead": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecOverhead | undefined
+  "preemptionPolicy": string | undefined
+  "priority": number | undefined
+  "priorityClassName": string | undefined
+  "readinessGates": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecReadinessGatesItem> | undefined
+  "resourceClaims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecResourceClaimsItem> | undefined
+  "restartPolicy": string | undefined
+  "runtimeClassName": string | undefined
+  "schedulerName": string | undefined
+  "schedulingGates": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSchedulingGatesItem> | undefined
+  "securityContext": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecSecurityContext | undefined
+  "serviceAccount": string | undefined
+  "serviceAccountName": string | undefined
+  "setHostnameAsFQDN": boolean | undefined
+  "shareProcessNamespace": boolean | undefined
+  "subdomain": string | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "tolerations": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTolerationsItem> | undefined
+  "topologySpreadConstraints": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecTopologySpreadConstraintsItem> | undefined
+  "volumes": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpecVolumesItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplate {
+  "metadata": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateMetadata | undefined
+  "spec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplateSpec | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecUpdateStrategyRollingUpdate {
+  "maxUnavailable": object | undefined
+  "partition": number | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecUpdateStrategy {
+  "rollingUpdate": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecUpdateStrategyRollingUpdate | undefined
+  "type": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadataAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadataLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadata {
+  "annotations": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadataAnnotations | undefined
+  "labels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadataLabels | undefined
+  "name": string | undefined
+  "namespace": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecDataSource {
+  "apiGroup": string | undefined
+  "kind": string
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecDataSourceRef {
+  "apiGroup": string | undefined
+  "kind": string
+  "name": string
+  "namespace": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelectorMatchExpressionsItem {
+  "key": string
+  "operator": string
+  "values": Array<string> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelectorMatchLabels {
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelector {
+  "matchExpressions": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelectorMatchExpressionsItem> | undefined
+  "matchLabels": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelectorMatchLabels | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpec {
+  "accessModes": Array<string> | undefined
+  "dataSource": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecDataSource | undefined
+  "dataSourceRef": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecDataSourceRef | undefined
+  "resources": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecResources | undefined
+  "selector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpecSelector | undefined
+  "storageClassName": string | undefined
+  "volumeMode": string | undefined
+  "volumeName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItem {
+  "apiVersion": string | undefined
+  "kind": string | undefined
+  "metadata": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemMetadata | undefined
+  "spec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItemSpec | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpec {
+  "minReadySeconds": number | undefined
+  "persistentVolumeClaimRetentionPolicy": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecPersistentVolumeClaimRetentionPolicy | undefined
+  "podManagementPolicy": string | undefined
+  "replicas": number | undefined
+  "selector": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecSelector | undefined
+  "serviceName": string | undefined
+  "template": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecTemplate | undefined
+  "updateStrategy": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecUpdateStrategy | undefined
+  "volumeClaimTemplates": Array<RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpecVolumeClaimTemplatesItem> | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverrideStatefulSet {
+  "metadata": RabbitmqRabbitmqClusterSpecOverrideStatefulSetMetadata | undefined
+  "spec": RabbitmqRabbitmqClusterSpecOverrideStatefulSetSpec | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecOverride {
+  "service": RabbitmqRabbitmqClusterSpecOverrideService | undefined
+  "statefulSet": RabbitmqRabbitmqClusterSpecOverrideStatefulSet | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecPersistence {
+  "storage": object | undefined
+  "storageClassName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecRabbitmq {
+  "additionalConfig": string | undefined
+  "additionalPlugins": Array<string> | undefined
+  "advancedConfig": string | undefined
+  "envConfig": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecResourcesClaimsItem {
+  "name": string
+}
+export interface RabbitmqRabbitmqClusterSpecResourcesLimits {
+}
+export interface RabbitmqRabbitmqClusterSpecResourcesRequests {
+}
+export interface RabbitmqRabbitmqClusterSpecResources {
+  "claims": Array<RabbitmqRabbitmqClusterSpecResourcesClaimsItem> | undefined
+  "limits": RabbitmqRabbitmqClusterSpecResourcesLimits | undefined
+  "requests": RabbitmqRabbitmqClusterSpecResourcesRequests | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecSecretBackendExternalSecret {
+  "name": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecSecretBackendVaultAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecSecretBackendVaultTls {
+  "altNames": string | undefined
+  "commonName": string | undefined
+  "ipSans": string | undefined
+  "pkiIssuerPath": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecSecretBackendVault {
+  "annotations": RabbitmqRabbitmqClusterSpecSecretBackendVaultAnnotations | undefined
+  "defaultUserPath": string | undefined
+  "defaultUserUpdaterImage": string | undefined
+  "role": string | undefined
+  "tls": RabbitmqRabbitmqClusterSpecSecretBackendVaultTls | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecSecretBackend {
+  "externalSecret": RabbitmqRabbitmqClusterSpecSecretBackendExternalSecret | undefined
+  "vault": RabbitmqRabbitmqClusterSpecSecretBackendVault | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecServiceAnnotations {
+}
+export interface RabbitmqRabbitmqClusterSpecService {
+  "annotations": RabbitmqRabbitmqClusterSpecServiceAnnotations | undefined
+  "type": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecTls {
+  "caSecretName": string | undefined
+  "disableNonTLSListeners": boolean | undefined
+  "secretName": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpecTolerationsItem {
+  "effect": string | undefined
+  "key": string | undefined
+  "operator": string | undefined
+  "tolerationSeconds": number | undefined
+  "value": string | undefined
+}
+export interface RabbitmqRabbitmqClusterSpec {
+  "affinity": RabbitmqRabbitmqClusterSpecAffinity | undefined
+  "delayStartSeconds": number | undefined
+  "image": string | undefined
+  "imagePullSecrets": Array<RabbitmqRabbitmqClusterSpecImagePullSecretsItem> | undefined
+  "override": RabbitmqRabbitmqClusterSpecOverride | undefined
+  "persistence": RabbitmqRabbitmqClusterSpecPersistence | undefined
+  "rabbitmq": RabbitmqRabbitmqClusterSpecRabbitmq | undefined
+  "replicas": number | undefined
+  "resources": RabbitmqRabbitmqClusterSpecResources | undefined
+  "secretBackend": RabbitmqRabbitmqClusterSpecSecretBackend | undefined
+  "service": RabbitmqRabbitmqClusterSpecService | undefined
+  "skipPostDeploySteps": boolean | undefined
+  "terminationGracePeriodSeconds": number | undefined
+  "tls": RabbitmqRabbitmqClusterSpecTls | undefined
+  "tolerations": Array<RabbitmqRabbitmqClusterSpecTolerationsItem> | undefined
+}
+export interface RabbitmqRabbitmqCluster extends KubernetesObject {
+  spec: RabbitmqRabbitmqClusterSpec
+  status: RabbitmqRabbitmqClusterStatus | undefined
+}
+export type RabbitmqRabbitmqClusterList = import('@kubernetes/client-node/dist/types.js').KubernetesListObject<RabbitmqRabbitmqCluster>

@@ -8,16 +8,16 @@ export const lists = {
             const resList = res.body as PostgresqlPoolerList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                cluster: ext.spec.cluster,
-                deploymentStrategy: ext.spec.deploymentStrategy,
-                instances: ext.spec.instances,
-                monitoring: ext.spec.monitoring,
-                pgbouncer: ext.spec.pgbouncer,
-                template: ext.spec.template,
-                type: ext.spec.type,
+                "cluster": ext.spec['cluster'],
+                "deploymentStrategy": ext.spec['deploymentStrategy'],
+                "instances": ext.spec['instances'],
+                "monitoring": ext.spec['monitoring'],
+                "pgbouncer": ext.spec['pgbouncer'],
+                "template": ext.spec['template'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    instances: ext.status.instances,
-                    secrets: ext.status.secrets,
+                    "instances": ext.status['instances'],
+                    "secrets": ext.status['secrets'],
                 }
             }})
         } catch (err) {
@@ -33,16 +33,16 @@ export const queries = {
             const ext = res.body as PostgresqlPooler
             return {
                 metadata: getMetadata(ext.metadata),
-                cluster: ext.spec.cluster,
-                deploymentStrategy: ext.spec.deploymentStrategy,
-                instances: ext.spec.instances,
-                monitoring: ext.spec.monitoring,
-                pgbouncer: ext.spec.pgbouncer,
-                template: ext.spec.template,
-                type: ext.spec.type,
+                "cluster": ext.spec['cluster'],
+                "deploymentStrategy": ext.spec['deploymentStrategy'],
+                "instances": ext.spec['instances'],
+                "monitoring": ext.spec['monitoring'],
+                "pgbouncer": ext.spec['pgbouncer'],
+                "template": ext.spec['template'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    instances: ext.status.instances,
-                    secrets: ext.status.secrets,
+                    "instances": ext.status['instances'],
+                    "secrets": ext.status['secrets'],
                 }
             }
         } catch (err) {

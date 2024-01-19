@@ -8,18 +8,18 @@ export const lists = {
             const resList = res.body as MariadbRestoreList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                affinity: ext.spec.affinity,
-                backoffLimit: ext.spec.backoffLimit,
-                backupRef: ext.spec.backupRef,
-                fileName: ext.spec.fileName,
-                mariaDbRef: ext.spec.mariaDbRef,
-                nodeSelector: ext.spec.nodeSelector,
-                resources: ext.spec.resources,
-                restartPolicy: ext.spec.restartPolicy,
-                tolerations: ext.spec.tolerations,
-                volume: ext.spec.volume,
+                "affinity": ext.spec['affinity'],
+                "backoffLimit": ext.spec['backoffLimit'],
+                "backupRef": ext.spec['backupRef'],
+                "fileName": ext.spec['fileName'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "nodeSelector": ext.spec['nodeSelector'],
+                "resources": ext.spec['resources'],
+                "restartPolicy": ext.spec['restartPolicy'],
+                "tolerations": ext.spec['tolerations'],
+                "volume": ext.spec['volume'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }})
         } catch (err) {
@@ -35,18 +35,18 @@ export const queries = {
             const ext = res.body as MariadbRestore
             return {
                 metadata: getMetadata(ext.metadata),
-                affinity: ext.spec.affinity,
-                backoffLimit: ext.spec.backoffLimit,
-                backupRef: ext.spec.backupRef,
-                fileName: ext.spec.fileName,
-                mariaDbRef: ext.spec.mariaDbRef,
-                nodeSelector: ext.spec.nodeSelector,
-                resources: ext.spec.resources,
-                restartPolicy: ext.spec.restartPolicy,
-                tolerations: ext.spec.tolerations,
-                volume: ext.spec.volume,
+                "affinity": ext.spec['affinity'],
+                "backoffLimit": ext.spec['backoffLimit'],
+                "backupRef": ext.spec['backupRef'],
+                "fileName": ext.spec['fileName'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "nodeSelector": ext.spec['nodeSelector'],
+                "resources": ext.spec['resources'],
+                "restartPolicy": ext.spec['restartPolicy'],
+                "tolerations": ext.spec['tolerations'],
+                "volume": ext.spec['volume'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {

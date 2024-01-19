@@ -8,6 +8,9 @@ import * as mongodbcommunity from './mongodbcommunity/index.js';
 import * as monitoring from './monitoring/index.js';
 import * as postgresql from './postgresql/index.js';
 import * as redis from './redis/index.js';
+import * as rabbitmq from './rabbitmq/index.js';
+import * as mysql from './mysql/index.js';
+import * as projectcalico from './projectcalico/index.js';
 export const resolvers = {
   ...core.resolvers,
   ...vynil.resolvers,
@@ -19,6 +22,9 @@ export const resolvers = {
   ...monitoring.resolvers,
   ...postgresql.resolvers,
   ...redis.resolvers,
+  ...rabbitmq.resolvers,
+  ...mysql.resolvers,
+  ...projectcalico.resolvers,
   Query: {
     ...core.queries,
     ...vynil.queries,
@@ -30,6 +36,9 @@ export const resolvers = {
     ...postgresql.queries,
     ...secretgenerator.queries,
     ...redis.queries,
+    ...rabbitmq.queries,
+    ...mysql.queries,
+    ...projectcalico.queries,
   },
   Mutation: {
     ...core.mutations,
@@ -42,5 +51,8 @@ export const resolvers = {
     ...postgresql.mutations,
     ...secretgenerator.mutations,
     ...redis.mutations,
+    ...rabbitmq.mutations,
+    ...mysql.mutations,
+    ...projectcalico.mutations,
   }
 };

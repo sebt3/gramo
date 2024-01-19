@@ -29,18 +29,18 @@ export const mutations = {
             const ext = res.body as FluxcdAlert
             return {
                 metadata: getMetadata(ext.metadata),
-                eventMetadata: ext.spec.eventMetadata,
-                eventSeverity: ext.spec.eventSeverity,
-                eventSources: ext.spec.eventSources,
-                exclusionList: ext.spec.exclusionList,
-                inclusionList: ext.spec.inclusionList,
-                providerRef: ext.spec.providerRef,
-                summary: ext.spec.summary,
-                suspend: ext.spec.suspend,
+                "eventMetadata": ext.spec['eventMetadata'],
+                "eventSeverity": ext.spec['eventSeverity'],
+                "eventSources": ext.spec['eventSources'],
+                "exclusionList": ext.spec['exclusionList'],
+                "inclusionList": ext.spec['inclusionList'],
+                "providerRef": ext.spec['providerRef'],
+                "summary": ext.spec['summary'],
+                "suspend": ext.spec['suspend'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -77,18 +77,18 @@ export const mutations = {
             const ext = res.body as FluxcdAlert
             return {
                 metadata: getMetadata(ext.metadata),
-                eventMetadata: ext.spec.eventMetadata,
-                eventSeverity: ext.spec.eventSeverity,
-                eventSources: ext.spec.eventSources,
-                exclusionList: ext.spec.exclusionList,
-                inclusionList: ext.spec.inclusionList,
-                providerRef: ext.spec.providerRef,
-                summary: ext.spec.summary,
-                suspend: ext.spec.suspend,
+                "eventMetadata": ext.spec['eventMetadata'],
+                "eventSeverity": ext.spec['eventSeverity'],
+                "eventSources": ext.spec['eventSources'],
+                "exclusionList": ext.spec['exclusionList'],
+                "inclusionList": ext.spec['inclusionList'],
+                "providerRef": ext.spec['providerRef'],
+                "summary": ext.spec['summary'],
+                "suspend": ext.spec['suspend'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -102,18 +102,18 @@ export const mutations = {
         const ext = res.body as FluxcdAlert
         return {
             metadata: getMetadata(ext.metadata),
-            eventMetadata: ext.spec.eventMetadata,
-            eventSeverity: ext.spec.eventSeverity,
-            eventSources: ext.spec.eventSources,
-            exclusionList: ext.spec.exclusionList,
-            inclusionList: ext.spec.inclusionList,
-            providerRef: ext.spec.providerRef,
-            summary: ext.spec.summary,
-            suspend: ext.spec.suspend,
+            "eventMetadata": ext.spec['eventMetadata'],
+            "eventSeverity": ext.spec['eventSeverity'],
+            "eventSources": ext.spec['eventSources'],
+            "exclusionList": ext.spec['exclusionList'],
+            "inclusionList": ext.spec['inclusionList'],
+            "providerRef": ext.spec['providerRef'],
+            "summary": ext.spec['summary'],
+            "suspend": ext.spec['suspend'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                observedGeneration: ext.status.observedGeneration,
+                "conditions": ext.status['conditions'],
+                "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                "observedGeneration": ext.status['observedGeneration'],
             }
         }
     } catch (err) {

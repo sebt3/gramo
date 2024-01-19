@@ -2,10 +2,10 @@ type KubernetesObject = import('@kubernetes/client-node/dist/types.js').Kubernet
 export interface K8upSnapshotStatus {
 }
 export interface K8upSnapshotSpec {
-  date: string | undefined
-  id: string | undefined
-  paths: Array<string> | undefined
-  repository: string | undefined
+  "date": string | undefined
+  "id": string | undefined
+  "paths": Array<string> | undefined
+  "repository": string | undefined
 }
 export interface K8upSnapshot extends KubernetesObject {
   spec: K8upSnapshotSpec

@@ -27,16 +27,16 @@ export const mutations = {
             const ext = res.body as PostgresqlScheduledBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                backupOwnerReference: ext.spec.backupOwnerReference,
-                cluster: ext.spec.cluster,
-                immediate: ext.spec.immediate,
-                schedule: ext.spec.schedule,
-                suspend: ext.spec.suspend,
-                target: ext.spec.target,
+                "backupOwnerReference": ext.spec['backupOwnerReference'],
+                "cluster": ext.spec['cluster'],
+                "immediate": ext.spec['immediate'],
+                "schedule": ext.spec['schedule'],
+                "suspend": ext.spec['suspend'],
+                "target": ext.spec['target'],
                 status: ext.status==undefined?null:{
-                    lastCheckTime: ext.status.lastCheckTime,
-                    lastScheduleTime: ext.status.lastScheduleTime,
-                    nextScheduleTime: ext.status.nextScheduleTime,
+                    "lastCheckTime": ext.status['lastCheckTime'],
+                    "lastScheduleTime": ext.status['lastScheduleTime'],
+                    "nextScheduleTime": ext.status['nextScheduleTime'],
                 }
             }
         } catch (err) {
@@ -71,16 +71,16 @@ export const mutations = {
             const ext = res.body as PostgresqlScheduledBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                backupOwnerReference: ext.spec.backupOwnerReference,
-                cluster: ext.spec.cluster,
-                immediate: ext.spec.immediate,
-                schedule: ext.spec.schedule,
-                suspend: ext.spec.suspend,
-                target: ext.spec.target,
+                "backupOwnerReference": ext.spec['backupOwnerReference'],
+                "cluster": ext.spec['cluster'],
+                "immediate": ext.spec['immediate'],
+                "schedule": ext.spec['schedule'],
+                "suspend": ext.spec['suspend'],
+                "target": ext.spec['target'],
                 status: ext.status==undefined?null:{
-                    lastCheckTime: ext.status.lastCheckTime,
-                    lastScheduleTime: ext.status.lastScheduleTime,
-                    nextScheduleTime: ext.status.nextScheduleTime,
+                    "lastCheckTime": ext.status['lastCheckTime'],
+                    "lastScheduleTime": ext.status['lastScheduleTime'],
+                    "nextScheduleTime": ext.status['nextScheduleTime'],
                 }
             }
         } catch (err) {
@@ -94,16 +94,16 @@ export const mutations = {
         const ext = res.body as PostgresqlScheduledBackup
         return {
             metadata: getMetadata(ext.metadata),
-            backupOwnerReference: ext.spec.backupOwnerReference,
-            cluster: ext.spec.cluster,
-            immediate: ext.spec.immediate,
-            schedule: ext.spec.schedule,
-            suspend: ext.spec.suspend,
-            target: ext.spec.target,
+            "backupOwnerReference": ext.spec['backupOwnerReference'],
+            "cluster": ext.spec['cluster'],
+            "immediate": ext.spec['immediate'],
+            "schedule": ext.spec['schedule'],
+            "suspend": ext.spec['suspend'],
+            "target": ext.spec['target'],
             status: ext.status==undefined?null:{
-                lastCheckTime: ext.status.lastCheckTime,
-                lastScheduleTime: ext.status.lastScheduleTime,
-                nextScheduleTime: ext.status.nextScheduleTime,
+                "lastCheckTime": ext.status['lastCheckTime'],
+                "lastScheduleTime": ext.status['lastScheduleTime'],
+                "nextScheduleTime": ext.status['nextScheduleTime'],
             }
         }
     } catch (err) {

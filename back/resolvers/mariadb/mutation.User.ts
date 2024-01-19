@@ -27,14 +27,14 @@ export const mutations = {
             const ext = res.body as MariadbUser
             return {
                 metadata: getMetadata(ext.metadata),
-                host: ext.spec.host,
-                mariaDbRef: ext.spec.mariaDbRef,
-                maxUserConnections: ext.spec.maxUserConnections,
-                name: ext.spec.name,
-                passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-                retryInterval: ext.spec.retryInterval,
+                "host": ext.spec['host'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "maxUserConnections": ext.spec['maxUserConnections'],
+                "name": ext.spec['name'],
+                "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+                "retryInterval": ext.spec['retryInterval'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -69,14 +69,14 @@ export const mutations = {
             const ext = res.body as MariadbUser
             return {
                 metadata: getMetadata(ext.metadata),
-                host: ext.spec.host,
-                mariaDbRef: ext.spec.mariaDbRef,
-                maxUserConnections: ext.spec.maxUserConnections,
-                name: ext.spec.name,
-                passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-                retryInterval: ext.spec.retryInterval,
+                "host": ext.spec['host'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "maxUserConnections": ext.spec['maxUserConnections'],
+                "name": ext.spec['name'],
+                "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+                "retryInterval": ext.spec['retryInterval'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -90,14 +90,14 @@ export const mutations = {
         const ext = res.body as MariadbUser
         return {
             metadata: getMetadata(ext.metadata),
-            host: ext.spec.host,
-            mariaDbRef: ext.spec.mariaDbRef,
-            maxUserConnections: ext.spec.maxUserConnections,
-            name: ext.spec.name,
-            passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-            retryInterval: ext.spec.retryInterval,
+            "host": ext.spec['host'],
+            "mariaDbRef": ext.spec['mariaDbRef'],
+            "maxUserConnections": ext.spec['maxUserConnections'],
+            "name": ext.spec['name'],
+            "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+            "retryInterval": ext.spec['retryInterval'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
+                "conditions": ext.status['conditions'],
             }
         }
     } catch (err) {

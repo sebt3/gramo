@@ -31,21 +31,21 @@ export const mutations = {
             const ext = res.body as K8upBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                activeDeadlineSeconds: ext.spec.activeDeadlineSeconds,
-                backend: ext.spec.backend,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                promURL: ext.spec.promURL,
-                resources: ext.spec.resources,
-                statsURL: ext.spec.statsURL,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
-                tags: ext.spec.tags,
+                "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
+                "backend": ext.spec['backend'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "promURL": ext.spec['promURL'],
+                "resources": ext.spec['resources'],
+                "statsURL": ext.spec['statsURL'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
+                "tags": ext.spec['tags'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    exclusive: ext.status.exclusive,
-                    finished: ext.status.finished,
-                    started: ext.status.started,
+                    "conditions": ext.status['conditions'],
+                    "exclusive": ext.status['exclusive'],
+                    "finished": ext.status['finished'],
+                    "started": ext.status['started'],
                 }
             }
         } catch (err) {
@@ -84,21 +84,21 @@ export const mutations = {
             const ext = res.body as K8upBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                activeDeadlineSeconds: ext.spec.activeDeadlineSeconds,
-                backend: ext.spec.backend,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                promURL: ext.spec.promURL,
-                resources: ext.spec.resources,
-                statsURL: ext.spec.statsURL,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
-                tags: ext.spec.tags,
+                "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
+                "backend": ext.spec['backend'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "promURL": ext.spec['promURL'],
+                "resources": ext.spec['resources'],
+                "statsURL": ext.spec['statsURL'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
+                "tags": ext.spec['tags'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    exclusive: ext.status.exclusive,
-                    finished: ext.status.finished,
-                    started: ext.status.started,
+                    "conditions": ext.status['conditions'],
+                    "exclusive": ext.status['exclusive'],
+                    "finished": ext.status['finished'],
+                    "started": ext.status['started'],
                 }
             }
         } catch (err) {
@@ -112,21 +112,21 @@ export const mutations = {
         const ext = res.body as K8upBackup
         return {
             metadata: getMetadata(ext.metadata),
-            activeDeadlineSeconds: ext.spec.activeDeadlineSeconds,
-            backend: ext.spec.backend,
-            failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-            keepJobs: ext.spec.keepJobs,
-            podSecurityContext: ext.spec.podSecurityContext,
-            promURL: ext.spec.promURL,
-            resources: ext.spec.resources,
-            statsURL: ext.spec.statsURL,
-            successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
-            tags: ext.spec.tags,
+            "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
+            "backend": ext.spec['backend'],
+            "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+            "keepJobs": ext.spec['keepJobs'],
+            "podSecurityContext": ext.spec['podSecurityContext'],
+            "promURL": ext.spec['promURL'],
+            "resources": ext.spec['resources'],
+            "statsURL": ext.spec['statsURL'],
+            "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
+            "tags": ext.spec['tags'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                exclusive: ext.status.exclusive,
-                finished: ext.status.finished,
-                started: ext.status.started,
+                "conditions": ext.status['conditions'],
+                "exclusive": ext.status['exclusive'],
+                "finished": ext.status['finished'],
+                "started": ext.status['started'],
             }
         }
     } catch (err) {

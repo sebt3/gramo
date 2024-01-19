@@ -29,16 +29,16 @@ export const mutations = {
             const ext = res.body as MariadbGrant
             return {
                 metadata: getMetadata(ext.metadata),
-                database: ext.spec.database,
-                grantOption: ext.spec.grantOption,
-                host: ext.spec.host,
-                mariaDbRef: ext.spec.mariaDbRef,
-                privileges: ext.spec.privileges,
-                retryInterval: ext.spec.retryInterval,
-                table: ext.spec.table,
-                username: ext.spec.username,
+                "database": ext.spec['database'],
+                "grantOption": ext.spec['grantOption'],
+                "host": ext.spec['host'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "privileges": ext.spec['privileges'],
+                "retryInterval": ext.spec['retryInterval'],
+                "table": ext.spec['table'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -75,16 +75,16 @@ export const mutations = {
             const ext = res.body as MariadbGrant
             return {
                 metadata: getMetadata(ext.metadata),
-                database: ext.spec.database,
-                grantOption: ext.spec.grantOption,
-                host: ext.spec.host,
-                mariaDbRef: ext.spec.mariaDbRef,
-                privileges: ext.spec.privileges,
-                retryInterval: ext.spec.retryInterval,
-                table: ext.spec.table,
-                username: ext.spec.username,
+                "database": ext.spec['database'],
+                "grantOption": ext.spec['grantOption'],
+                "host": ext.spec['host'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "privileges": ext.spec['privileges'],
+                "retryInterval": ext.spec['retryInterval'],
+                "table": ext.spec['table'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -98,16 +98,16 @@ export const mutations = {
         const ext = res.body as MariadbGrant
         return {
             metadata: getMetadata(ext.metadata),
-            database: ext.spec.database,
-            grantOption: ext.spec.grantOption,
-            host: ext.spec.host,
-            mariaDbRef: ext.spec.mariaDbRef,
-            privileges: ext.spec.privileges,
-            retryInterval: ext.spec.retryInterval,
-            table: ext.spec.table,
-            username: ext.spec.username,
+            "database": ext.spec['database'],
+            "grantOption": ext.spec['grantOption'],
+            "host": ext.spec['host'],
+            "mariaDbRef": ext.spec['mariaDbRef'],
+            "privileges": ext.spec['privileges'],
+            "retryInterval": ext.spec['retryInterval'],
+            "table": ext.spec['table'],
+            "username": ext.spec['username'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
+                "conditions": ext.status['conditions'],
             }
         }
     } catch (err) {

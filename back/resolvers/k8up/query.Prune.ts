@@ -8,19 +8,19 @@ export const lists = {
             const resList = res.body as K8upPruneList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                activeDeadlineSeconds: ext.spec.activeDeadlineSeconds,
-                backend: ext.spec.backend,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                resources: ext.spec.resources,
-                retention: ext.spec.retention,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
+                "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
+                "backend": ext.spec['backend'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "resources": ext.spec['resources'],
+                "retention": ext.spec['retention'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    exclusive: ext.status.exclusive,
-                    finished: ext.status.finished,
-                    started: ext.status.started,
+                    "conditions": ext.status['conditions'],
+                    "exclusive": ext.status['exclusive'],
+                    "finished": ext.status['finished'],
+                    "started": ext.status['started'],
                 }
             }})
         } catch (err) {
@@ -36,19 +36,19 @@ export const queries = {
             const ext = res.body as K8upPrune
             return {
                 metadata: getMetadata(ext.metadata),
-                activeDeadlineSeconds: ext.spec.activeDeadlineSeconds,
-                backend: ext.spec.backend,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                resources: ext.spec.resources,
-                retention: ext.spec.retention,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
+                "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
+                "backend": ext.spec['backend'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "resources": ext.spec['resources'],
+                "retention": ext.spec['retention'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    exclusive: ext.status.exclusive,
-                    finished: ext.status.finished,
-                    started: ext.status.started,
+                    "conditions": ext.status['conditions'],
+                    "exclusive": ext.status['exclusive'],
+                    "finished": ext.status['finished'],
+                    "started": ext.status['started'],
                 }
             }
         } catch (err) {

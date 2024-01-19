@@ -35,6 +35,13 @@ if (configRoute.children != undefined && configRoute.children?.length>0) {
   linkRedirect.path = configRoute.redirect!=undefined?configRoute.redirect.path:'/config'
 }
 
+import { route as networkRoute, link as networkLink, descriptions as networkDescriptions } from './network'
+if (networkRoute.children != undefined && networkRoute.children?.length>0) {
+  routeChildren.push(networkRoute);
+  links.push(networkLink)
+  linkRedirect.path = networkRoute.redirect!=undefined?networkRoute.redirect.path:'/network'
+}
+
 import { route as systemRoute, link as systemLink, descriptions as systemDescriptions } from './system'
 if (systemRoute.children != undefined && systemRoute.children?.length>0) {
   routeChildren.push(systemRoute);
@@ -49,6 +56,7 @@ export const descriptions = {
   ...configDescriptions,
   ...systemDescriptions,
   ...databaseDescriptions,
+  ...networkDescriptions,
 }
 export const router = createRouter({
   history: createWebHistory('/'),

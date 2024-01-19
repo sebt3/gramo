@@ -1,0 +1,27 @@
+
+mutation ProjectcalicoIPAMBlock($name: String!, $spec: projectcalicoIPAMBlockSpec!) {
+  patchProjectcalicoIPAMBlock(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    affinity
+    allocations
+    attributes {
+      handle_id
+    }
+    cidr
+    deleted
+    sequenceNumber
+    strictAffinity
+    unallocated
+  }
+}

@@ -25,10 +25,10 @@ export const mutations = {
             const ext = res.body as MonitoringAlertmanagerConfig
             return {
                 metadata: getMetadata(ext.metadata),
-                inhibitRules: ext.spec.inhibitRules,
-                muteTimeIntervals: ext.spec.muteTimeIntervals,
-                receivers: ext.spec.receivers,
-                route: ext.spec.route,
+                "inhibitRules": ext.spec['inhibitRules'],
+                "muteTimeIntervals": ext.spec['muteTimeIntervals'],
+                "receivers": ext.spec['receivers'],
+                "route": ext.spec['route'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -60,10 +60,10 @@ export const mutations = {
             const ext = res.body as MonitoringAlertmanagerConfig
             return {
                 metadata: getMetadata(ext.metadata),
-                inhibitRules: ext.spec.inhibitRules,
-                muteTimeIntervals: ext.spec.muteTimeIntervals,
-                receivers: ext.spec.receivers,
-                route: ext.spec.route,
+                "inhibitRules": ext.spec['inhibitRules'],
+                "muteTimeIntervals": ext.spec['muteTimeIntervals'],
+                "receivers": ext.spec['receivers'],
+                "route": ext.spec['route'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -76,10 +76,10 @@ export const mutations = {
         const ext = res.body as MonitoringAlertmanagerConfig
         return {
             metadata: getMetadata(ext.metadata),
-            inhibitRules: ext.spec.inhibitRules,
-            muteTimeIntervals: ext.spec.muteTimeIntervals,
-            receivers: ext.spec.receivers,
-            route: ext.spec.route,
+            "inhibitRules": ext.spec['inhibitRules'],
+            "muteTimeIntervals": ext.spec['muteTimeIntervals'],
+            "receivers": ext.spec['receivers'],
+            "route": ext.spec['route'],
         }
     } catch (err) {
         console.error((err as object)['body']);

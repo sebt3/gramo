@@ -24,14 +24,14 @@ export const mutations = {
             const ext = res.body as FluxcdImagePolicy
             return {
                 metadata: getMetadata(ext.metadata),
-                filterTags: ext.spec.filterTags,
-                imageRepositoryRef: ext.spec.imageRepositoryRef,
-                policy: ext.spec.policy,
+                "filterTags": ext.spec['filterTags'],
+                "imageRepositoryRef": ext.spec['imageRepositoryRef'],
+                "policy": ext.spec['policy'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    latestImage: ext.status.latestImage,
-                    observedGeneration: ext.status.observedGeneration,
-                    observedPreviousImage: ext.status.observedPreviousImage,
+                    "conditions": ext.status['conditions'],
+                    "latestImage": ext.status['latestImage'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "observedPreviousImage": ext.status['observedPreviousImage'],
                 }
             }
         } catch (err) {
@@ -63,14 +63,14 @@ export const mutations = {
             const ext = res.body as FluxcdImagePolicy
             return {
                 metadata: getMetadata(ext.metadata),
-                filterTags: ext.spec.filterTags,
-                imageRepositoryRef: ext.spec.imageRepositoryRef,
-                policy: ext.spec.policy,
+                "filterTags": ext.spec['filterTags'],
+                "imageRepositoryRef": ext.spec['imageRepositoryRef'],
+                "policy": ext.spec['policy'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    latestImage: ext.status.latestImage,
-                    observedGeneration: ext.status.observedGeneration,
-                    observedPreviousImage: ext.status.observedPreviousImage,
+                    "conditions": ext.status['conditions'],
+                    "latestImage": ext.status['latestImage'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "observedPreviousImage": ext.status['observedPreviousImage'],
                 }
             }
         } catch (err) {
@@ -84,14 +84,14 @@ export const mutations = {
         const ext = res.body as FluxcdImagePolicy
         return {
             metadata: getMetadata(ext.metadata),
-            filterTags: ext.spec.filterTags,
-            imageRepositoryRef: ext.spec.imageRepositoryRef,
-            policy: ext.spec.policy,
+            "filterTags": ext.spec['filterTags'],
+            "imageRepositoryRef": ext.spec['imageRepositoryRef'],
+            "policy": ext.spec['policy'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                latestImage: ext.status.latestImage,
-                observedGeneration: ext.status.observedGeneration,
-                observedPreviousImage: ext.status.observedPreviousImage,
+                "conditions": ext.status['conditions'],
+                "latestImage": ext.status['latestImage'],
+                "observedGeneration": ext.status['observedGeneration'],
+                "observedPreviousImage": ext.status['observedPreviousImage'],
             }
         }
     } catch (err) {

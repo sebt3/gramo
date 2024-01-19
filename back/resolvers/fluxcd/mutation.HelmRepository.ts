@@ -30,21 +30,21 @@ export const mutations = {
             const ext = res.body as FluxcdHelmRepository
             return {
                 metadata: getMetadata(ext.metadata),
-                accessFrom: ext.spec.accessFrom,
-                interval: ext.spec.interval,
-                passCredentials: ext.spec.passCredentials,
-                provider: ext.spec.provider,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                timeout: ext.spec.timeout,
-                type: ext.spec.type,
-                url: ext.spec.url,
+                "accessFrom": ext.spec['accessFrom'],
+                "interval": ext.spec['interval'],
+                "passCredentials": ext.spec['passCredentials'],
+                "provider": ext.spec['provider'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "timeout": ext.spec['timeout'],
+                "type": ext.spec['type'],
+                "url": ext.spec['url'],
                 status: ext.status==undefined?null:{
-                    artifact: ext.status.artifact,
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
-                    url: ext.status.url,
+                    "artifact": ext.status['artifact'],
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "url": ext.status['url'],
                 }
             }
         } catch (err) {
@@ -82,21 +82,21 @@ export const mutations = {
             const ext = res.body as FluxcdHelmRepository
             return {
                 metadata: getMetadata(ext.metadata),
-                accessFrom: ext.spec.accessFrom,
-                interval: ext.spec.interval,
-                passCredentials: ext.spec.passCredentials,
-                provider: ext.spec.provider,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                timeout: ext.spec.timeout,
-                type: ext.spec.type,
-                url: ext.spec.url,
+                "accessFrom": ext.spec['accessFrom'],
+                "interval": ext.spec['interval'],
+                "passCredentials": ext.spec['passCredentials'],
+                "provider": ext.spec['provider'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "timeout": ext.spec['timeout'],
+                "type": ext.spec['type'],
+                "url": ext.spec['url'],
                 status: ext.status==undefined?null:{
-                    artifact: ext.status.artifact,
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
-                    url: ext.status.url,
+                    "artifact": ext.status['artifact'],
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "url": ext.status['url'],
                 }
             }
         } catch (err) {
@@ -110,21 +110,21 @@ export const mutations = {
         const ext = res.body as FluxcdHelmRepository
         return {
             metadata: getMetadata(ext.metadata),
-            accessFrom: ext.spec.accessFrom,
-            interval: ext.spec.interval,
-            passCredentials: ext.spec.passCredentials,
-            provider: ext.spec.provider,
-            secretRef: ext.spec.secretRef,
-            suspend: ext.spec.suspend,
-            timeout: ext.spec.timeout,
-            type: ext.spec.type,
-            url: ext.spec.url,
+            "accessFrom": ext.spec['accessFrom'],
+            "interval": ext.spec['interval'],
+            "passCredentials": ext.spec['passCredentials'],
+            "provider": ext.spec['provider'],
+            "secretRef": ext.spec['secretRef'],
+            "suspend": ext.spec['suspend'],
+            "timeout": ext.spec['timeout'],
+            "type": ext.spec['type'],
+            "url": ext.spec['url'],
             status: ext.status==undefined?null:{
-                artifact: ext.status.artifact,
-                conditions: ext.status.conditions,
-                lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                observedGeneration: ext.status.observedGeneration,
-                url: ext.status.url,
+                "artifact": ext.status['artifact'],
+                "conditions": ext.status['conditions'],
+                "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                "observedGeneration": ext.status['observedGeneration'],
+                "url": ext.status['url'],
             }
         }
     } catch (err) {

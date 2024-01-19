@@ -1,0 +1,36 @@
+
+query ProjectcalicoNetworkSet($namespace: String!, $name: String!) {
+  customResourceDefinition(name: "networksets.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoNetworkSet(namespace: $namespace, name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    nets
+  }
+}

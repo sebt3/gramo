@@ -24,9 +24,9 @@ export const mutations = {
             const ext = res.body as K8upPreBackupPod
             return {
                 metadata: getMetadata(ext.metadata),
-                backupCommand: ext.spec.backupCommand,
-                fileExtension: ext.spec.fileExtension,
-                pod: ext.spec.pod,
+                "backupCommand": ext.spec['backupCommand'],
+                "fileExtension": ext.spec['fileExtension'],
+                "pod": ext.spec['pod'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -57,9 +57,9 @@ export const mutations = {
             const ext = res.body as K8upPreBackupPod
             return {
                 metadata: getMetadata(ext.metadata),
-                backupCommand: ext.spec.backupCommand,
-                fileExtension: ext.spec.fileExtension,
-                pod: ext.spec.pod,
+                "backupCommand": ext.spec['backupCommand'],
+                "fileExtension": ext.spec['fileExtension'],
+                "pod": ext.spec['pod'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -72,9 +72,9 @@ export const mutations = {
         const ext = res.body as K8upPreBackupPod
         return {
             metadata: getMetadata(ext.metadata),
-            backupCommand: ext.spec.backupCommand,
-            fileExtension: ext.spec.fileExtension,
-            pod: ext.spec.pod,
+            "backupCommand": ext.spec['backupCommand'],
+            "fileExtension": ext.spec['fileExtension'],
+            "pod": ext.spec['pod'],
         }
     } catch (err) {
         console.error((err as object)['body']);

@@ -8,10 +8,10 @@ export const lists = {
             const resList = res.body as K8upSnapshotList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                date: ext.spec.date,
-                id: ext.spec.id,
-                paths: ext.spec.paths,
-                repository: ext.spec.repository,
+                "date": ext.spec['date'],
+                "id": ext.spec['id'],
+                "paths": ext.spec['paths'],
+                "repository": ext.spec['repository'],
                 status: ext.status==undefined?null:{
                 }
             }})
@@ -28,10 +28,10 @@ export const queries = {
             const ext = res.body as K8upSnapshot
             return {
                 metadata: getMetadata(ext.metadata),
-                date: ext.spec.date,
-                id: ext.spec.id,
-                paths: ext.spec.paths,
-                repository: ext.spec.repository,
+                "date": ext.spec['date'],
+                "id": ext.spec['id'],
+                "paths": ext.spec['paths'],
+                "repository": ext.spec['repository'],
                 status: ext.status==undefined?null:{
                 }
             }

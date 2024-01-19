@@ -32,17 +32,17 @@ export const mutations = {
             const ext = res.body as MonitoringPodMonitor
             return {
                 metadata: getMetadata(ext.metadata),
-                attachMetadata: ext.spec.attachMetadata,
-                jobLabel: ext.spec.jobLabel,
-                labelLimit: ext.spec.labelLimit,
-                labelNameLengthLimit: ext.spec.labelNameLengthLimit,
-                labelValueLengthLimit: ext.spec.labelValueLengthLimit,
-                namespaceSelector: ext.spec.namespaceSelector,
-                podMetricsEndpoints: ext.spec.podMetricsEndpoints,
-                podTargetLabels: ext.spec.podTargetLabels,
-                sampleLimit: ext.spec.sampleLimit,
-                selector: ext.spec.selector,
-                targetLimit: ext.spec.targetLimit,
+                "attachMetadata": ext.spec['attachMetadata'],
+                "jobLabel": ext.spec['jobLabel'],
+                "labelLimit": ext.spec['labelLimit'],
+                "labelNameLengthLimit": ext.spec['labelNameLengthLimit'],
+                "labelValueLengthLimit": ext.spec['labelValueLengthLimit'],
+                "namespaceSelector": ext.spec['namespaceSelector'],
+                "podMetricsEndpoints": ext.spec['podMetricsEndpoints'],
+                "podTargetLabels": ext.spec['podTargetLabels'],
+                "sampleLimit": ext.spec['sampleLimit'],
+                "selector": ext.spec['selector'],
+                "targetLimit": ext.spec['targetLimit'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -81,17 +81,17 @@ export const mutations = {
             const ext = res.body as MonitoringPodMonitor
             return {
                 metadata: getMetadata(ext.metadata),
-                attachMetadata: ext.spec.attachMetadata,
-                jobLabel: ext.spec.jobLabel,
-                labelLimit: ext.spec.labelLimit,
-                labelNameLengthLimit: ext.spec.labelNameLengthLimit,
-                labelValueLengthLimit: ext.spec.labelValueLengthLimit,
-                namespaceSelector: ext.spec.namespaceSelector,
-                podMetricsEndpoints: ext.spec.podMetricsEndpoints,
-                podTargetLabels: ext.spec.podTargetLabels,
-                sampleLimit: ext.spec.sampleLimit,
-                selector: ext.spec.selector,
-                targetLimit: ext.spec.targetLimit,
+                "attachMetadata": ext.spec['attachMetadata'],
+                "jobLabel": ext.spec['jobLabel'],
+                "labelLimit": ext.spec['labelLimit'],
+                "labelNameLengthLimit": ext.spec['labelNameLengthLimit'],
+                "labelValueLengthLimit": ext.spec['labelValueLengthLimit'],
+                "namespaceSelector": ext.spec['namespaceSelector'],
+                "podMetricsEndpoints": ext.spec['podMetricsEndpoints'],
+                "podTargetLabels": ext.spec['podTargetLabels'],
+                "sampleLimit": ext.spec['sampleLimit'],
+                "selector": ext.spec['selector'],
+                "targetLimit": ext.spec['targetLimit'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -104,17 +104,17 @@ export const mutations = {
         const ext = res.body as MonitoringPodMonitor
         return {
             metadata: getMetadata(ext.metadata),
-            attachMetadata: ext.spec.attachMetadata,
-            jobLabel: ext.spec.jobLabel,
-            labelLimit: ext.spec.labelLimit,
-            labelNameLengthLimit: ext.spec.labelNameLengthLimit,
-            labelValueLengthLimit: ext.spec.labelValueLengthLimit,
-            namespaceSelector: ext.spec.namespaceSelector,
-            podMetricsEndpoints: ext.spec.podMetricsEndpoints,
-            podTargetLabels: ext.spec.podTargetLabels,
-            sampleLimit: ext.spec.sampleLimit,
-            selector: ext.spec.selector,
-            targetLimit: ext.spec.targetLimit,
+            "attachMetadata": ext.spec['attachMetadata'],
+            "jobLabel": ext.spec['jobLabel'],
+            "labelLimit": ext.spec['labelLimit'],
+            "labelNameLengthLimit": ext.spec['labelNameLengthLimit'],
+            "labelValueLengthLimit": ext.spec['labelValueLengthLimit'],
+            "namespaceSelector": ext.spec['namespaceSelector'],
+            "podMetricsEndpoints": ext.spec['podMetricsEndpoints'],
+            "podTargetLabels": ext.spec['podTargetLabels'],
+            "sampleLimit": ext.spec['sampleLimit'],
+            "selector": ext.spec['selector'],
+            "targetLimit": ext.spec['targetLimit'],
         }
     } catch (err) {
         console.error((err as object)['body']);

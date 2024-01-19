@@ -28,6 +28,9 @@ const typeDefs = gqlWrapper(
   importGraphQL('postgresql.graphql'),
   importGraphQL('redis.graphql'),
   importGraphQL('monitoring.graphql'),
+  importGraphQL('rabbitmq.graphql'),
+  importGraphQL('mysql.graphql'),
+  importGraphQL('projectcalico.graphql'),
 );
 
 interface MyContext {

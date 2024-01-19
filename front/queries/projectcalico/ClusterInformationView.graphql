@@ -1,0 +1,40 @@
+
+query ProjectcalicoClusterInformation($name: String!) {
+  customResourceDefinition(name: "clusterinformations.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoClusterInformation(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    calicoVersion
+    clusterGUID
+    clusterType
+    datastoreReady
+    variant
+  }
+}

@@ -8,13 +8,13 @@ export const lists = {
             const resList = res.body as MariadbDatabaseList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                characterSet: ext.spec.characterSet,
-                collate: ext.spec.collate,
-                mariaDbRef: ext.spec.mariaDbRef,
-                name: ext.spec.name,
-                retryInterval: ext.spec.retryInterval,
+                "characterSet": ext.spec['characterSet'],
+                "collate": ext.spec['collate'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "name": ext.spec['name'],
+                "retryInterval": ext.spec['retryInterval'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }})
         } catch (err) {
@@ -30,13 +30,13 @@ export const queries = {
             const ext = res.body as MariadbDatabase
             return {
                 metadata: getMetadata(ext.metadata),
-                characterSet: ext.spec.characterSet,
-                collate: ext.spec.collate,
-                mariaDbRef: ext.spec.mariaDbRef,
-                name: ext.spec.name,
-                retryInterval: ext.spec.retryInterval,
+                "characterSet": ext.spec['characterSet'],
+                "collate": ext.spec['collate'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "name": ext.spec['name'],
+                "retryInterval": ext.spec['retryInterval'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {

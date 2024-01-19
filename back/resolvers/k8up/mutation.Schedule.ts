@@ -32,20 +32,20 @@ export const mutations = {
             const ext = res.body as K8upSchedule
             return {
                 metadata: getMetadata(ext.metadata),
-                archive: ext.spec.archive,
-                backend: ext.spec.backend,
-                backup: ext.spec.backup,
-                check: ext.spec.check,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                prune: ext.spec.prune,
-                resourceRequirementsTemplate: ext.spec.resourceRequirementsTemplate,
-                restore: ext.spec.restore,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
+                "archive": ext.spec['archive'],
+                "backend": ext.spec['backend'],
+                "backup": ext.spec['backup'],
+                "check": ext.spec['check'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "prune": ext.spec['prune'],
+                "resourceRequirementsTemplate": ext.spec['resourceRequirementsTemplate'],
+                "restore": ext.spec['restore'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    effectiveSchedules: ext.status.effectiveSchedules,
+                    "conditions": ext.status['conditions'],
+                    "effectiveSchedules": ext.status['effectiveSchedules'],
                 }
             }
         } catch (err) {
@@ -85,20 +85,20 @@ export const mutations = {
             const ext = res.body as K8upSchedule
             return {
                 metadata: getMetadata(ext.metadata),
-                archive: ext.spec.archive,
-                backend: ext.spec.backend,
-                backup: ext.spec.backup,
-                check: ext.spec.check,
-                failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-                keepJobs: ext.spec.keepJobs,
-                podSecurityContext: ext.spec.podSecurityContext,
-                prune: ext.spec.prune,
-                resourceRequirementsTemplate: ext.spec.resourceRequirementsTemplate,
-                restore: ext.spec.restore,
-                successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
+                "archive": ext.spec['archive'],
+                "backend": ext.spec['backend'],
+                "backup": ext.spec['backup'],
+                "check": ext.spec['check'],
+                "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+                "keepJobs": ext.spec['keepJobs'],
+                "podSecurityContext": ext.spec['podSecurityContext'],
+                "prune": ext.spec['prune'],
+                "resourceRequirementsTemplate": ext.spec['resourceRequirementsTemplate'],
+                "restore": ext.spec['restore'],
+                "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    effectiveSchedules: ext.status.effectiveSchedules,
+                    "conditions": ext.status['conditions'],
+                    "effectiveSchedules": ext.status['effectiveSchedules'],
                 }
             }
         } catch (err) {
@@ -112,20 +112,20 @@ export const mutations = {
         const ext = res.body as K8upSchedule
         return {
             metadata: getMetadata(ext.metadata),
-            archive: ext.spec.archive,
-            backend: ext.spec.backend,
-            backup: ext.spec.backup,
-            check: ext.spec.check,
-            failedJobsHistoryLimit: ext.spec.failedJobsHistoryLimit,
-            keepJobs: ext.spec.keepJobs,
-            podSecurityContext: ext.spec.podSecurityContext,
-            prune: ext.spec.prune,
-            resourceRequirementsTemplate: ext.spec.resourceRequirementsTemplate,
-            restore: ext.spec.restore,
-            successfulJobsHistoryLimit: ext.spec.successfulJobsHistoryLimit,
+            "archive": ext.spec['archive'],
+            "backend": ext.spec['backend'],
+            "backup": ext.spec['backup'],
+            "check": ext.spec['check'],
+            "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
+            "keepJobs": ext.spec['keepJobs'],
+            "podSecurityContext": ext.spec['podSecurityContext'],
+            "prune": ext.spec['prune'],
+            "resourceRequirementsTemplate": ext.spec['resourceRequirementsTemplate'],
+            "restore": ext.spec['restore'],
+            "successfulJobsHistoryLimit": ext.spec['successfulJobsHistoryLimit'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                effectiveSchedules: ext.status.effectiveSchedules,
+                "conditions": ext.status['conditions'],
+                "effectiveSchedules": ext.status['effectiveSchedules'],
             }
         }
     } catch (err) {

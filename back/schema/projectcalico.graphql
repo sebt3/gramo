@@ -666,7 +666,6 @@ input projectcalicoIPPoolSpec {
   disabled: Boolean
   ipip: projectcalicoIPPoolSpecIpip
   ipipMode: String
-  nat-outgoing: Boolean
   natOutgoing: Boolean
   nodeSelector: String
   vxlanMode: String
@@ -684,7 +683,6 @@ type projectcalicoIPPool {
   disabled: Boolean
   ipip: projectcalicoIPPoolIpip
   ipipMode: String
-  nat-outgoing: Boolean
   natOutgoing: Boolean
   nodeSelector: String
   vxlanMode: String

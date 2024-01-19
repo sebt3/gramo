@@ -1,0 +1,20 @@
+
+query ProjectcalicoIPAMConfigs {
+  projectcalicoIPAMConfigs {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    autoAllocateBlocks
+    maxBlocksPerHost
+    strictAffinity
+  }
+}

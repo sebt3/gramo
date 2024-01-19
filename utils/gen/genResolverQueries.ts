@@ -31,12 +31,12 @@ export const lists = {
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-                {{@key}}: ext.spec.{{@key}},
+                "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
 {{#if haveStatus}}
                 status: ext.status==undefined?null:{
   {{#each status.properties}}
-                    {{@key}}: ext.status.{{@key}},
+                    "{{@key}}": ext.status['{{@key}}'],
   {{/each}}
                 }
 {{/if}}
@@ -62,12 +62,12 @@ export const queries = {
             return {
                 metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-                {{@key}}: ext.spec.{{@key}},
+                "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
 {{#if haveStatus}}
                 status: ext.status==undefined?null:{
   {{#each status.properties}}
-                    {{@key}}: ext.status.{{@key}},
+                    "{{@key}}": ext.status['{{@key}}'],
   {{/each}}
                 }
 {{/if}}
@@ -127,12 +127,12 @@ export const mutations = {
             return {
                 metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-                {{@key}}: ext.spec.{{@key}},
+                "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
 {{#if haveStatus}}
                 status: ext.status==undefined?null:{
   {{#each status.properties}}
-                    {{@key}}: ext.status.{{@key}},
+                    "{{@key}}": ext.status['{{@key}}'],
   {{/each}}
                 }
 {{/if}}
@@ -191,12 +191,12 @@ export const mutations = {
             return {
                 metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-                {{@key}}: ext.spec.{{@key}},
+                "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
 {{#if haveStatus}}
                 status: ext.status==undefined?null:{
   {{#each status.properties}}
-                    {{@key}}: ext.status.{{@key}},
+                    "{{@key}}": ext.status['{{@key}}'],
   {{/each}}
                 }
 {{/if}}
@@ -217,12 +217,12 @@ export const mutations = {
         return {
             metadata: getMetadata(ext.metadata),
 {{#each spec.properties}}
-            {{@key}}: ext.spec.{{@key}},
+            "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
 {{#if haveStatus}}
             status: ext.status==undefined?null:{
   {{#each status.properties}}
-                {{@key}}: ext.status.{{@key}},
+                "{{@key}}": ext.status['{{@key}}'],
   {{/each}}
             }
 {{/if}}

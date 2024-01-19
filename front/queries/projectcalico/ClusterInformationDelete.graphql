@@ -1,0 +1,22 @@
+
+mutation ProjectcalicoClusterInformation($name: String!) {
+  deleteProjectcalicoClusterInformation(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    calicoVersion
+    clusterGUID
+    clusterType
+    datastoreReady
+    variant
+  }
+}

@@ -15,7 +15,9 @@ import { resolvers as monitoringNSresolver } from './resolvers.ns.monitoring.js'
 import { resolvers as postgresqlNSresolver } from './resolvers.ns.postgresql.js';
 import { resolvers as redisNSresolver } from './resolvers.ns.redis.js';
 import { resolvers as secretgeneratorNSresolver } from './resolvers.ns.secretgenerator.js';
-
+import { resolvers as rabbitmqNSresolver } from './resolvers.ns.rabbitmq.js';
+import { resolvers as mysqlNSresolver } from './resolvers.ns.mysql.js';
+import { resolvers as projectcalicoNSresolver } from './resolvers.ns.projectcalico.js';
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 export const queries = {
     gramoConfig: () => gramoConfig,
@@ -85,5 +87,8 @@ export const resolvers = {
         ...monitoringNSresolver,
         ...postgresqlNSresolver,
         ...redisNSresolver,
+        ...rabbitmqNSresolver,
+        ...mysqlNSresolver,
+        ...projectcalicoNSresolver,
     }
 };

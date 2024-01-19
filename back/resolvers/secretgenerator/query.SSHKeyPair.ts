@@ -8,13 +8,13 @@ export const lists = {
             const resList = res.body as SecretgeneratorSSHKeyPairList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                forceRegenerate: ext.spec.forceRegenerate,
-                length: ext.spec.length,
-                privateKey: ext.spec.privateKey,
-                type: ext.spec.type,
+                "data": ext.spec['data'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "length": ext.spec['length'],
+                "privateKey": ext.spec['privateKey'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }})
         } catch (err) {
@@ -30,13 +30,13 @@ export const queries = {
             const ext = res.body as SecretgeneratorSSHKeyPair
             return {
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                forceRegenerate: ext.spec.forceRegenerate,
-                length: ext.spec.length,
-                privateKey: ext.spec.privateKey,
-                type: ext.spec.type,
+                "data": ext.spec['data'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "length": ext.spec['length'],
+                "privateKey": ext.spec['privateKey'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }
         } catch (err) {

@@ -1,0 +1,75 @@
+
+mutation ProjectcalicoKubeControllersConfiguration($name: String!) {
+  deleteProjectcalicoKubeControllersConfiguration(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    controllers {
+      namespace {
+        reconcilerPeriod
+      }
+      node {
+        hostEndpoint {
+          autoCreate
+        }
+        leakGracePeriod
+        reconcilerPeriod
+        syncLabels
+      }
+      policy {
+        reconcilerPeriod
+      }
+      serviceAccount {
+        reconcilerPeriod
+      }
+      workloadEndpoint {
+        reconcilerPeriod
+      }
+    }
+    debugProfilePort
+    etcdV3CompactionPeriod
+    healthChecks
+    logSeverityScreen
+    prometheusMetricsPort
+    status {
+      runningConfig {
+        controllers {
+          namespace {
+            reconcilerPeriod
+          }
+          node {
+            hostEndpoint {
+              autoCreate
+            }
+            leakGracePeriod
+            reconcilerPeriod
+            syncLabels
+          }
+          policy {
+            reconcilerPeriod
+          }
+          serviceAccount {
+            reconcilerPeriod
+          }
+          workloadEndpoint {
+            reconcilerPeriod
+          }
+        }
+        debugProfilePort
+        etcdV3CompactionPeriod
+        healthChecks
+        logSeverityScreen
+        prometheusMetricsPort
+      }
+    }
+  }
+}

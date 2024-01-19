@@ -1,0 +1,20 @@
+
+mutation ProjectcalicoIPAMConfig($name: String!, $spec: projectcalicoIPAMConfigSpec!) {
+  patchProjectcalicoIPAMConfig(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    autoAllocateBlocks
+    maxBlocksPerHost
+    strictAffinity
+  }
+}

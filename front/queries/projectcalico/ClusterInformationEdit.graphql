@@ -1,0 +1,22 @@
+
+mutation ProjectcalicoClusterInformation($name: String!, $spec: projectcalicoClusterInformationSpec!) {
+  patchProjectcalicoClusterInformation(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    calicoVersion
+    clusterGUID
+    clusterType
+    datastoreReady
+    variant
+  }
+}

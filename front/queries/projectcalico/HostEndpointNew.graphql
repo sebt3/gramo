@@ -1,0 +1,25 @@
+
+mutation ProjectcalicoHostEndpoint($name: String!, $spec: projectcalicoHostEndpointSpec!) {
+  createProjectcalicoHostEndpoint(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    expectedIPs
+    interfaceName
+    node
+    ports {
+      name
+      port
+    }
+    profiles
+  }
+}

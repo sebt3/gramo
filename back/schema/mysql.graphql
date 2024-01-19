@@ -1,0 +1,405 @@
+
+input mysqlInnoDBClusterSpecImagePullSecretsItem {
+  name: String
+}
+input mysqlInnoDBClusterSpecKeyringEncryptedFile {
+  fileName: String!
+  password: String!
+  readOnly: Boolean
+  storage: JSONObject!
+}
+input mysqlInnoDBClusterSpecKeyringFile {
+  fileName: String!
+  readOnly: Boolean
+  storage: JSONObject!
+}
+input mysqlInnoDBClusterSpecKeyringOciEndpoints {
+  encryption: String
+  management: String
+  secrets: String
+  vaults: String
+}
+input mysqlInnoDBClusterSpecKeyringOci {
+  caCertificate: String
+  compartment: String
+  endpoints: mysqlInnoDBClusterSpecKeyringOciEndpoints
+  keyFingerprint: String!
+  keySecret: String!
+  masterKey: String
+  tenancy: String!
+  user: String!
+  virtualVault: String
+}
+input mysqlInnoDBClusterSpecKeyring {
+  encryptedFile: mysqlInnoDBClusterSpecKeyringEncryptedFile
+  file: mysqlInnoDBClusterSpecKeyringFile
+  oci: mysqlInnoDBClusterSpecKeyringOci
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdErrorLog {
+  options: JSONObject
+  tag: String
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdGeneralLog {
+  options: JSONObject
+  tag: String
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationAnnotationsItem {
+  annotationName: String!
+  fieldName: String!
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationLabelsItem {
+  fieldName: String!
+  labelName: String!
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationPodFieldsItem {
+  fieldName: String!
+  fieldPath: String!
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationResourceFieldsItem {
+  containerName: String!
+  fieldName: String!
+  resource: String!
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationStaticFieldsItem {
+  fieldName: String!
+  fieldValue: String!
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentation {
+  annotations: [mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationAnnotationsItem]
+  enabled: Boolean
+  labels: [mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationLabelsItem]
+  podFields: [mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationPodFieldsItem]
+  resourceFields: [mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationResourceFieldsItem]
+  staticFields: [mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentationStaticFieldsItem]
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentdSlowQueryLog {
+  options: JSONObject
+  tag: String
+}
+input mysqlInnoDBClusterSpecLogsCollectorFluentd {
+  additionalFilterConfiguration: String
+  errorLog: mysqlInnoDBClusterSpecLogsCollectorFluentdErrorLog
+  generalLog: mysqlInnoDBClusterSpecLogsCollectorFluentdGeneralLog
+  recordAugmentation: mysqlInnoDBClusterSpecLogsCollectorFluentdRecordAugmentation
+  sinks: [JSONObject]
+  slowQueryLog: mysqlInnoDBClusterSpecLogsCollectorFluentdSlowQueryLog
+}
+input mysqlInnoDBClusterSpecLogsCollector {
+  containerName: String
+  env: [JSONObject]
+  fluentd: mysqlInnoDBClusterSpecLogsCollectorFluentd
+  image: String
+}
+input mysqlInnoDBClusterSpecLogsError {
+  collect: Boolean
+  verbosity: Int
+}
+input mysqlInnoDBClusterSpecLogsGeneral {
+  collect: Boolean
+  enabled: Boolean
+}
+input mysqlInnoDBClusterSpecLogsSlowQuery {
+  collect: Boolean
+  enabled: Boolean
+  longQueryTime: Float
+}
+input mysqlInnoDBClusterSpecLogs {
+  collector: mysqlInnoDBClusterSpecLogsCollector
+  error: mysqlInnoDBClusterSpecLogsError
+  general: mysqlInnoDBClusterSpecLogsGeneral
+  slowQuery: mysqlInnoDBClusterSpecLogsSlowQuery
+}
+input mysqlInnoDBClusterSpecMetrics {
+  enable: Boolean!
+  image: String!
+  monitor: Boolean
+  monitorSpec: JSONObject
+  options: [String]
+  tlsSecret: String
+  webConfig: String
+}
+input mysqlInnoDBClusterSpecReadReplicasItem {
+  baseServerId: Int!
+  datadirVolumeClaimTemplate: JSONObject
+  instances: Int
+  mycnf: String
+  name: String!
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  version: String
+}
+input mysqlInnoDBClusterSpecRouterRoutingOptions {
+  invalidated_cluster_policy: String
+  read_only_targets: String
+  stats_updates_frequency: Int
+}
+input mysqlInnoDBClusterSpecRouter {
+  bootstrapOptions: [String]
+  instances: Int
+  options: [String]
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  routingOptions: mysqlInnoDBClusterSpecRouterRoutingOptions
+  tlsSecretName: String
+  version: String
+}
+input mysqlInnoDBClusterSpecService {
+  annotations: JSONObject
+  defaultPort: String
+  labels: JSONObject
+  type: String
+}
+input mysqlInnoDBClusterSpec {
+  backupProfiles: [JSONObject]
+  backupSchedules: [JSONObject]
+  baseServerId: Int
+  datadirVolumeClaimTemplate: JSONObject
+  edition: String
+  imagePullPolicy: String
+  imagePullSecrets: [mysqlInnoDBClusterSpecImagePullSecretsItem]
+  imageRepository: String
+  initDB: JSONObject
+  instances: Int
+  keyring: mysqlInnoDBClusterSpecKeyring
+  logs: mysqlInnoDBClusterSpecLogs
+  metrics: mysqlInnoDBClusterSpecMetrics
+  mycnf: String
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  readReplicas: [mysqlInnoDBClusterSpecReadReplicasItem]
+  router: mysqlInnoDBClusterSpecRouter
+  secretName: String!
+  service: mysqlInnoDBClusterSpecService
+  serviceAccountName: String
+  tlsCASecretName: String
+  tlsSecretName: String
+  tlsUseSelfSigned: Boolean
+  version: String
+}
+type mysqlInnoDBClusterImagePullSecretsItem {
+  name: String
+}
+type mysqlInnoDBClusterKeyringEncryptedFile {
+  fileName: String!
+  password: String!
+  readOnly: Boolean
+  storage: JSONObject!
+}
+type mysqlInnoDBClusterKeyringFile {
+  fileName: String!
+  readOnly: Boolean
+  storage: JSONObject!
+}
+type mysqlInnoDBClusterKeyringOciEndpoints {
+  encryption: String
+  management: String
+  secrets: String
+  vaults: String
+}
+type mysqlInnoDBClusterKeyringOci {
+  caCertificate: String
+  compartment: String
+  endpoints: mysqlInnoDBClusterKeyringOciEndpoints
+  keyFingerprint: String!
+  keySecret: String!
+  masterKey: String
+  tenancy: String!
+  user: String!
+  virtualVault: String
+}
+type mysqlInnoDBClusterKeyring {
+  encryptedFile: mysqlInnoDBClusterKeyringEncryptedFile
+  file: mysqlInnoDBClusterKeyringFile
+  oci: mysqlInnoDBClusterKeyringOci
+}
+type mysqlInnoDBClusterLogsCollectorFluentdErrorLog {
+  options: JSONObject
+  tag: String
+}
+type mysqlInnoDBClusterLogsCollectorFluentdGeneralLog {
+  options: JSONObject
+  tag: String
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationAnnotationsItem {
+  annotationName: String!
+  fieldName: String!
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationLabelsItem {
+  fieldName: String!
+  labelName: String!
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationPodFieldsItem {
+  fieldName: String!
+  fieldPath: String!
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationResourceFieldsItem {
+  containerName: String!
+  fieldName: String!
+  resource: String!
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationStaticFieldsItem {
+  fieldName: String!
+  fieldValue: String!
+}
+type mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentation {
+  annotations: [mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationAnnotationsItem]
+  enabled: Boolean
+  labels: [mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationLabelsItem]
+  podFields: [mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationPodFieldsItem]
+  resourceFields: [mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationResourceFieldsItem]
+  staticFields: [mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentationStaticFieldsItem]
+}
+type mysqlInnoDBClusterLogsCollectorFluentdSlowQueryLog {
+  options: JSONObject
+  tag: String
+}
+type mysqlInnoDBClusterLogsCollectorFluentd {
+  additionalFilterConfiguration: String
+  errorLog: mysqlInnoDBClusterLogsCollectorFluentdErrorLog
+  generalLog: mysqlInnoDBClusterLogsCollectorFluentdGeneralLog
+  recordAugmentation: mysqlInnoDBClusterLogsCollectorFluentdRecordAugmentation
+  sinks: [JSONObject]
+  slowQueryLog: mysqlInnoDBClusterLogsCollectorFluentdSlowQueryLog
+}
+type mysqlInnoDBClusterLogsCollector {
+  containerName: String
+  env: [JSONObject]
+  fluentd: mysqlInnoDBClusterLogsCollectorFluentd
+  image: String
+}
+type mysqlInnoDBClusterLogsError {
+  collect: Boolean
+  verbosity: Int
+}
+type mysqlInnoDBClusterLogsGeneral {
+  collect: Boolean
+  enabled: Boolean
+}
+type mysqlInnoDBClusterLogsSlowQuery {
+  collect: Boolean
+  enabled: Boolean
+  longQueryTime: Float
+}
+type mysqlInnoDBClusterLogs {
+  collector: mysqlInnoDBClusterLogsCollector
+  error: mysqlInnoDBClusterLogsError
+  general: mysqlInnoDBClusterLogsGeneral
+  slowQuery: mysqlInnoDBClusterLogsSlowQuery
+}
+type mysqlInnoDBClusterMetrics {
+  enable: Boolean!
+  image: String!
+  monitor: Boolean
+  monitorSpec: JSONObject
+  options: [String]
+  tlsSecret: String
+  webConfig: String
+}
+type mysqlInnoDBClusterReadReplicasItem {
+  baseServerId: Int!
+  datadirVolumeClaimTemplate: JSONObject
+  instances: Int
+  mycnf: String
+  name: String!
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  version: String
+}
+type mysqlInnoDBClusterRouterRoutingOptions {
+  invalidated_cluster_policy: String
+  read_only_targets: String
+  stats_updates_frequency: Int
+}
+type mysqlInnoDBClusterRouter {
+  bootstrapOptions: [String]
+  instances: Int
+  options: [String]
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  routingOptions: mysqlInnoDBClusterRouterRoutingOptions
+  tlsSecretName: String
+  version: String
+}
+type mysqlInnoDBClusterService {
+  annotations: JSONObject
+  defaultPort: String
+  labels: JSONObject
+  type: String
+}
+type mysqlInnoDBCluster {
+  metadata: metadata
+  backupProfiles: [JSONObject]
+  backupSchedules: [JSONObject]
+  baseServerId: Int
+  datadirVolumeClaimTemplate: JSONObject
+  edition: String
+  imagePullPolicy: String
+  imagePullSecrets: [mysqlInnoDBClusterImagePullSecretsItem]
+  imageRepository: String
+  initDB: JSONObject
+  instances: Int
+  keyring: mysqlInnoDBClusterKeyring
+  logs: mysqlInnoDBClusterLogs
+  metrics: mysqlInnoDBClusterMetrics
+  mycnf: String
+  podAnnotations: JSONObject
+  podLabels: JSONObject
+  podSpec: JSONObject
+  readReplicas: [mysqlInnoDBClusterReadReplicasItem]
+  router: mysqlInnoDBClusterRouter
+  secretName: String!
+  service: mysqlInnoDBClusterService
+  serviceAccountName: String
+  tlsCASecretName: String
+  tlsSecretName: String
+  tlsUseSelfSigned: Boolean
+  version: String
+}
+type mysqlMySQLBackupStatus {
+  bucket: String
+  completionTime: String
+  container: String
+  elapsedTime: String
+  message: String
+  method: String
+  ociTenancy: String
+  output: String
+  size: String
+  source: String
+  spaceAvailable: String
+  startTime: String
+  status: String
+}
+input mysqlMySQLBackupSpec {
+  addTimestampToBackupDirectory: Boolean
+  backupProfile: JSONObject
+  backupProfileName: String
+  clusterName: String!
+  deleteBackupData: Boolean
+}
+type mysqlMySQLBackup {
+  metadata: metadata
+  addTimestampToBackupDirectory: Boolean
+  backupProfile: JSONObject
+  backupProfileName: String
+  clusterName: String!
+  deleteBackupData: Boolean
+  status: mysqlMySQLBackupStatus
+}
+type Query {
+  mysqlInnoDBCluster(namespace: String!, name: String!): mysqlInnoDBCluster
+  mysqlMySQLBackup(namespace: String!, name: String!): mysqlMySQLBackup
+}
+type Mutation {
+  createMysqlInnoDBCluster(namespace: String!, name: String!, spec: mysqlInnoDBClusterSpec!): mysqlInnoDBCluster
+  patchMysqlInnoDBCluster(namespace: String!, name: String!, spec: mysqlInnoDBClusterSpec!): mysqlInnoDBCluster
+  deleteMysqlInnoDBCluster(namespace: String!, name: String!): mysqlInnoDBCluster
+  createMysqlMySQLBackup(namespace: String!, name: String!, spec: mysqlMySQLBackupSpec!): mysqlMySQLBackup
+  patchMysqlMySQLBackup(namespace: String!, name: String!, spec: mysqlMySQLBackupSpec!): mysqlMySQLBackup
+  deleteMysqlMySQLBackup(namespace: String!, name: String!): mysqlMySQLBackup
+}

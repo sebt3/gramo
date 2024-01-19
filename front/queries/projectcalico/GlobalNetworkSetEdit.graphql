@@ -1,0 +1,18 @@
+
+mutation ProjectcalicoGlobalNetworkSet($name: String!, $spec: projectcalicoGlobalNetworkSetSpec!) {
+  patchProjectcalicoGlobalNetworkSet(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    nets
+  }
+}

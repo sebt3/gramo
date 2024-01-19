@@ -1,0 +1,18 @@
+
+query ProjectcalicoIPReservations {
+  projectcalicoIPReservations {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    reservedCIDRs
+  }
+}

@@ -26,18 +26,18 @@ export const mutations = {
             const ext = res.body as FluxcdImageUpdateAutomation
             return {
                 metadata: getMetadata(ext.metadata),
-                git: ext.spec.git,
-                interval: ext.spec.interval,
-                sourceRef: ext.spec.sourceRef,
-                suspend: ext.spec.suspend,
-                update: ext.spec.update,
+                "git": ext.spec['git'],
+                "interval": ext.spec['interval'],
+                "sourceRef": ext.spec['sourceRef'],
+                "suspend": ext.spec['suspend'],
+                "update": ext.spec['update'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastAutomationRunTime: ext.status.lastAutomationRunTime,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    lastPushCommit: ext.status.lastPushCommit,
-                    lastPushTime: ext.status.lastPushTime,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastAutomationRunTime": ext.status['lastAutomationRunTime'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "lastPushCommit": ext.status['lastPushCommit'],
+                    "lastPushTime": ext.status['lastPushTime'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -71,18 +71,18 @@ export const mutations = {
             const ext = res.body as FluxcdImageUpdateAutomation
             return {
                 metadata: getMetadata(ext.metadata),
-                git: ext.spec.git,
-                interval: ext.spec.interval,
-                sourceRef: ext.spec.sourceRef,
-                suspend: ext.spec.suspend,
-                update: ext.spec.update,
+                "git": ext.spec['git'],
+                "interval": ext.spec['interval'],
+                "sourceRef": ext.spec['sourceRef'],
+                "suspend": ext.spec['suspend'],
+                "update": ext.spec['update'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastAutomationRunTime: ext.status.lastAutomationRunTime,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    lastPushCommit: ext.status.lastPushCommit,
-                    lastPushTime: ext.status.lastPushTime,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastAutomationRunTime": ext.status['lastAutomationRunTime'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "lastPushCommit": ext.status['lastPushCommit'],
+                    "lastPushTime": ext.status['lastPushTime'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -96,18 +96,18 @@ export const mutations = {
         const ext = res.body as FluxcdImageUpdateAutomation
         return {
             metadata: getMetadata(ext.metadata),
-            git: ext.spec.git,
-            interval: ext.spec.interval,
-            sourceRef: ext.spec.sourceRef,
-            suspend: ext.spec.suspend,
-            update: ext.spec.update,
+            "git": ext.spec['git'],
+            "interval": ext.spec['interval'],
+            "sourceRef": ext.spec['sourceRef'],
+            "suspend": ext.spec['suspend'],
+            "update": ext.spec['update'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                lastAutomationRunTime: ext.status.lastAutomationRunTime,
-                lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                lastPushCommit: ext.status.lastPushCommit,
-                lastPushTime: ext.status.lastPushTime,
-                observedGeneration: ext.status.observedGeneration,
+                "conditions": ext.status['conditions'],
+                "lastAutomationRunTime": ext.status['lastAutomationRunTime'],
+                "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                "lastPushCommit": ext.status['lastPushCommit'],
+                "lastPushTime": ext.status['lastPushTime'],
+                "observedGeneration": ext.status['observedGeneration'],
             }
         }
     } catch (err) {

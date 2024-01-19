@@ -13,11 +13,25 @@ if (crds['mongodbcommunity.mongodbcommunity.mongodb.com'] != undefined) {
   routeChildren.push(postgresqlRoute)
 }
 
+import { route as mysqlRoute, link as mysqlLink, descriptions as mysqlDescriptions } from './mysql'
+if (crds['mongodbcommunity.mongodbcommunity.mongodb.com'] != undefined) {
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:mysqlRoute['redirect']!=undefined?mysqlRoute['redirect'].path:'/database/mysql'
+  linkChildren.push(mysqlLink)
+  routeChildren.push(mysqlRoute)
+}
+
 import { route as mariadbRoute, link as mariadbLink, descriptions as mariadbDescriptions } from './mariadb'
 if (crds['mongodbcommunity.mongodbcommunity.mongodb.com'] != undefined) {
   linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:mariadbRoute['redirect']!=undefined?mariadbRoute['redirect'].path:'/database/mariadb'
   linkChildren.push(mariadbLink)
   routeChildren.push(mariadbRoute)
+}
+
+import { route as rabbitmqRoute, link as rabbitmqLink, descriptions as rabbitmqDescriptions } from './rabbitmq'
+if (crds['mongodbcommunity.mongodbcommunity.mongodb.com'] != undefined) {
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:rabbitmqRoute['redirect']!=undefined?rabbitmqRoute['redirect'].path:'/database/rabbitmq'
+  linkChildren.push(rabbitmqLink)
+  routeChildren.push(rabbitmqRoute)
 }
 
 import { route as mongodbcommunityRoute, link as mongodbcommunityLink, descriptions as mongodbcommunityDescriptions } from './mongodbcommunity'
@@ -40,6 +54,8 @@ export const descriptions = {
   ...mariadbDescriptions,
   ...postgresqlDescriptions,
   ...redisDescriptions,
+  ...rabbitmqDescriptions,
+  ...mysqlDescriptions,
 }
 
 export const link:menuLinksProps = {

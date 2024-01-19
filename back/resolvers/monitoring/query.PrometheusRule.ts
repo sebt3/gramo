@@ -8,7 +8,7 @@ export const lists = {
             const resList = res.body as MonitoringPrometheusRuleList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                groups: ext.spec.groups,
+                "groups": ext.spec['groups'],
             }})
         } catch (err) {
           console.error((err as object)['body']);
@@ -23,7 +23,7 @@ export const queries = {
             const ext = res.body as MonitoringPrometheusRule
             return {
                 metadata: getMetadata(ext.metadata),
-                groups: ext.spec.groups,
+                "groups": ext.spec['groups'],
             }
         } catch (err) {
             console.error((err as object)['body']);

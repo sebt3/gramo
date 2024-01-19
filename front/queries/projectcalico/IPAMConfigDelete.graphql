@@ -1,0 +1,20 @@
+
+mutation ProjectcalicoIPAMConfig($name: String!) {
+  deleteProjectcalicoIPAMConfig(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    autoAllocateBlocks
+    maxBlocksPerHost
+    strictAffinity
+  }
+}

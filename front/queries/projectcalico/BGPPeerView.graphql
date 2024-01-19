@@ -1,0 +1,53 @@
+
+query ProjectcalicoBGPPeer($name: String!) {
+  customResourceDefinition(name: "bgppeers.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoBGPPeer(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    asNumber
+    keepOriginalNextHop
+    maxRestartTime
+    node
+    nodeSelector
+    numAllowedLocalASNumbers
+    password {
+      secretKeyRef {
+        key
+        name
+        optional
+      }
+    }
+    peerIP
+    peerSelector
+    reachableBy
+    sourceAddress
+    ttlSecurity
+  }
+}

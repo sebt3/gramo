@@ -8,7 +8,7 @@ function generateResolverSubType(name: string, def: openapiDefinitionPropertiesD
     const template = HB.compile(`
 export interface {{ name }} {
 {{#each properties}}
-  {{@key}}: {{this}}
+  "{{@key}}": {{this}}
 {{/each}}
 }`, {noEscape: true});
     let res = "";

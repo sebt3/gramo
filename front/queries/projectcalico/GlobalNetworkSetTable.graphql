@@ -1,0 +1,18 @@
+
+query ProjectcalicoGlobalNetworkSets {
+  projectcalicoGlobalNetworkSets {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    nets
+  }
+}

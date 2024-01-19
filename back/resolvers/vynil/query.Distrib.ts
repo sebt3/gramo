@@ -8,15 +8,15 @@ export const lists = {
             const resList = res.body as VynilDistribList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                branch: ext.spec.branch,
-                insecure: ext.spec.insecure,
-                login: ext.spec.login,
-                schedule: ext.spec.schedule,
-                url: ext.spec.url,
+                "branch": ext.spec['branch'],
+                "insecure": ext.spec['insecure'],
+                "login": ext.spec['login'],
+                "schedule": ext.spec['schedule'],
+                "url": ext.spec['url'],
                 status: ext.status==undefined?null:{
-                    components: ext.status.components,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
+                    "components": ext.status['components'],
+                    "errors": ext.status['errors'],
+                    "last_updated": ext.status['last_updated'],
                 }
             }})
         } catch (err) {
@@ -33,15 +33,15 @@ export const queries = {
             const ext = res.body as VynilDistrib
             return {
                 metadata: getMetadata(ext.metadata),
-                branch: ext.spec.branch,
-                insecure: ext.spec.insecure,
-                login: ext.spec.login,
-                schedule: ext.spec.schedule,
-                url: ext.spec.url,
+                "branch": ext.spec['branch'],
+                "insecure": ext.spec['insecure'],
+                "login": ext.spec['login'],
+                "schedule": ext.spec['schedule'],
+                "url": ext.spec['url'],
                 status: ext.status==undefined?null:{
-                    components: ext.status.components,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
+                    "components": ext.status['components'],
+                    "errors": ext.status['errors'],
+                    "last_updated": ext.status['last_updated'],
                 }
             }
         } catch (err) {

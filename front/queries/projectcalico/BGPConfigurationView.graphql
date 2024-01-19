@@ -1,0 +1,66 @@
+
+query ProjectcalicoBGPConfiguration($name: String!) {
+  customResourceDefinition(name: "bgpconfigurations.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoBGPConfiguration(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    asNumber
+    bindMode
+    communities {
+      name
+      value
+    }
+    ignoredInterfaces
+    listenPort
+    logSeverityScreen
+    nodeMeshMaxRestartTime
+    nodeMeshPassword {
+      secretKeyRef {
+        key
+        name
+        optional
+      }
+    }
+    nodeToNodeMeshEnabled
+    prefixAdvertisements {
+      cidr
+      communities
+    }
+    serviceClusterIPs {
+      cidr
+    }
+    serviceExternalIPs {
+      cidr
+    }
+    serviceLoadBalancerIPs {
+      cidr
+    }
+  }
+}

@@ -1,0 +1,18 @@
+
+mutation ProjectcalicoIPReservation($name: String!) {
+  deleteProjectcalicoIPReservation(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    reservedCIDRs
+  }
+}

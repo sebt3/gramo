@@ -32,19 +32,19 @@ export const mutations = {
             const ext = res.body as MariadbBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                affinity: ext.spec.affinity,
-                args: ext.spec.args,
-                backoffLimit: ext.spec.backoffLimit,
-                mariaDbRef: ext.spec.mariaDbRef,
-                maxRetentionDays: ext.spec.maxRetentionDays,
-                nodeSelector: ext.spec.nodeSelector,
-                resources: ext.spec.resources,
-                restartPolicy: ext.spec.restartPolicy,
-                schedule: ext.spec.schedule,
-                storage: ext.spec.storage,
-                tolerations: ext.spec.tolerations,
+                "affinity": ext.spec['affinity'],
+                "args": ext.spec['args'],
+                "backoffLimit": ext.spec['backoffLimit'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "maxRetentionDays": ext.spec['maxRetentionDays'],
+                "nodeSelector": ext.spec['nodeSelector'],
+                "resources": ext.spec['resources'],
+                "restartPolicy": ext.spec['restartPolicy'],
+                "schedule": ext.spec['schedule'],
+                "storage": ext.spec['storage'],
+                "tolerations": ext.spec['tolerations'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -84,19 +84,19 @@ export const mutations = {
             const ext = res.body as MariadbBackup
             return {
                 metadata: getMetadata(ext.metadata),
-                affinity: ext.spec.affinity,
-                args: ext.spec.args,
-                backoffLimit: ext.spec.backoffLimit,
-                mariaDbRef: ext.spec.mariaDbRef,
-                maxRetentionDays: ext.spec.maxRetentionDays,
-                nodeSelector: ext.spec.nodeSelector,
-                resources: ext.spec.resources,
-                restartPolicy: ext.spec.restartPolicy,
-                schedule: ext.spec.schedule,
-                storage: ext.spec.storage,
-                tolerations: ext.spec.tolerations,
+                "affinity": ext.spec['affinity'],
+                "args": ext.spec['args'],
+                "backoffLimit": ext.spec['backoffLimit'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "maxRetentionDays": ext.spec['maxRetentionDays'],
+                "nodeSelector": ext.spec['nodeSelector'],
+                "resources": ext.spec['resources'],
+                "restartPolicy": ext.spec['restartPolicy'],
+                "schedule": ext.spec['schedule'],
+                "storage": ext.spec['storage'],
+                "tolerations": ext.spec['tolerations'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -110,19 +110,19 @@ export const mutations = {
         const ext = res.body as MariadbBackup
         return {
             metadata: getMetadata(ext.metadata),
-            affinity: ext.spec.affinity,
-            args: ext.spec.args,
-            backoffLimit: ext.spec.backoffLimit,
-            mariaDbRef: ext.spec.mariaDbRef,
-            maxRetentionDays: ext.spec.maxRetentionDays,
-            nodeSelector: ext.spec.nodeSelector,
-            resources: ext.spec.resources,
-            restartPolicy: ext.spec.restartPolicy,
-            schedule: ext.spec.schedule,
-            storage: ext.spec.storage,
-            tolerations: ext.spec.tolerations,
+            "affinity": ext.spec['affinity'],
+            "args": ext.spec['args'],
+            "backoffLimit": ext.spec['backoffLimit'],
+            "mariaDbRef": ext.spec['mariaDbRef'],
+            "maxRetentionDays": ext.spec['maxRetentionDays'],
+            "nodeSelector": ext.spec['nodeSelector'],
+            "resources": ext.spec['resources'],
+            "restartPolicy": ext.spec['restartPolicy'],
+            "schedule": ext.spec['schedule'],
+            "storage": ext.spec['storage'],
+            "tolerations": ext.spec['tolerations'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
+                "conditions": ext.status['conditions'],
             }
         }
     } catch (err) {

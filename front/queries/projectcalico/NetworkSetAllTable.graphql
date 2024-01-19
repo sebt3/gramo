@@ -1,0 +1,20 @@
+
+query ProjectcalicoNetworkSets {
+ namespaces {
+  projectcalicoNetworkSets {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    nets
+  }
+ }
+}

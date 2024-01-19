@@ -25,10 +25,10 @@ export const mutations = {
             const ext = res.body as K8upSnapshot
             return {
                 metadata: getMetadata(ext.metadata),
-                date: ext.spec.date,
-                id: ext.spec.id,
-                paths: ext.spec.paths,
-                repository: ext.spec.repository,
+                "date": ext.spec['date'],
+                "id": ext.spec['id'],
+                "paths": ext.spec['paths'],
+                "repository": ext.spec['repository'],
                 status: ext.status==undefined?null:{
                 }
             }
@@ -62,10 +62,10 @@ export const mutations = {
             const ext = res.body as K8upSnapshot
             return {
                 metadata: getMetadata(ext.metadata),
-                date: ext.spec.date,
-                id: ext.spec.id,
-                paths: ext.spec.paths,
-                repository: ext.spec.repository,
+                "date": ext.spec['date'],
+                "id": ext.spec['id'],
+                "paths": ext.spec['paths'],
+                "repository": ext.spec['repository'],
                 status: ext.status==undefined?null:{
                 }
             }
@@ -80,10 +80,10 @@ export const mutations = {
         const ext = res.body as K8upSnapshot
         return {
             metadata: getMetadata(ext.metadata),
-            date: ext.spec.date,
-            id: ext.spec.id,
-            paths: ext.spec.paths,
-            repository: ext.spec.repository,
+            "date": ext.spec['date'],
+            "id": ext.spec['id'],
+            "paths": ext.spec['paths'],
+            "repository": ext.spec['repository'],
             status: ext.status==undefined?null:{
             }
         }

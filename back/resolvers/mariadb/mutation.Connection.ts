@@ -30,17 +30,17 @@ export const mutations = {
             const ext = res.body as MariadbConnection
             return {
                 metadata: getMetadata(ext.metadata),
-                database: ext.spec.database,
-                healthCheck: ext.spec.healthCheck,
-                mariaDbRef: ext.spec.mariaDbRef,
-                params: ext.spec.params,
-                passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-                secretName: ext.spec.secretName,
-                secretTemplate: ext.spec.secretTemplate,
-                serviceName: ext.spec.serviceName,
-                username: ext.spec.username,
+                "database": ext.spec['database'],
+                "healthCheck": ext.spec['healthCheck'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "params": ext.spec['params'],
+                "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+                "secretName": ext.spec['secretName'],
+                "secretTemplate": ext.spec['secretTemplate'],
+                "serviceName": ext.spec['serviceName'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -78,17 +78,17 @@ export const mutations = {
             const ext = res.body as MariadbConnection
             return {
                 metadata: getMetadata(ext.metadata),
-                database: ext.spec.database,
-                healthCheck: ext.spec.healthCheck,
-                mariaDbRef: ext.spec.mariaDbRef,
-                params: ext.spec.params,
-                passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-                secretName: ext.spec.secretName,
-                secretTemplate: ext.spec.secretTemplate,
-                serviceName: ext.spec.serviceName,
-                username: ext.spec.username,
+                "database": ext.spec['database'],
+                "healthCheck": ext.spec['healthCheck'],
+                "mariaDbRef": ext.spec['mariaDbRef'],
+                "params": ext.spec['params'],
+                "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+                "secretName": ext.spec['secretName'],
+                "secretTemplate": ext.spec['secretTemplate'],
+                "serviceName": ext.spec['serviceName'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
+                    "conditions": ext.status['conditions'],
                 }
             }
         } catch (err) {
@@ -102,17 +102,17 @@ export const mutations = {
         const ext = res.body as MariadbConnection
         return {
             metadata: getMetadata(ext.metadata),
-            database: ext.spec.database,
-            healthCheck: ext.spec.healthCheck,
-            mariaDbRef: ext.spec.mariaDbRef,
-            params: ext.spec.params,
-            passwordSecretKeyRef: ext.spec.passwordSecretKeyRef,
-            secretName: ext.spec.secretName,
-            secretTemplate: ext.spec.secretTemplate,
-            serviceName: ext.spec.serviceName,
-            username: ext.spec.username,
+            "database": ext.spec['database'],
+            "healthCheck": ext.spec['healthCheck'],
+            "mariaDbRef": ext.spec['mariaDbRef'],
+            "params": ext.spec['params'],
+            "passwordSecretKeyRef": ext.spec['passwordSecretKeyRef'],
+            "secretName": ext.spec['secretName'],
+            "secretTemplate": ext.spec['secretTemplate'],
+            "serviceName": ext.spec['serviceName'],
+            "username": ext.spec['username'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
+                "conditions": ext.status['conditions'],
             }
         }
     } catch (err) {

@@ -27,17 +27,17 @@ export const mutations = {
             const ext = res.body as FluxcdReceiver
             return {
                 metadata: getMetadata(ext.metadata),
-                events: ext.spec.events,
-                interval: ext.spec.interval,
-                resources: ext.spec.resources,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                type: ext.spec.type,
+                "events": ext.spec['events'],
+                "interval": ext.spec['interval'],
+                "resources": ext.spec['resources'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
-                    webhookPath: ext.status.webhookPath,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "webhookPath": ext.status['webhookPath'],
                 }
             }
         } catch (err) {
@@ -72,17 +72,17 @@ export const mutations = {
             const ext = res.body as FluxcdReceiver
             return {
                 metadata: getMetadata(ext.metadata),
-                events: ext.spec.events,
-                interval: ext.spec.interval,
-                resources: ext.spec.resources,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                type: ext.spec.type,
+                "events": ext.spec['events'],
+                "interval": ext.spec['interval'],
+                "resources": ext.spec['resources'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
-                    webhookPath: ext.status.webhookPath,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
+                    "webhookPath": ext.status['webhookPath'],
                 }
             }
         } catch (err) {
@@ -96,17 +96,17 @@ export const mutations = {
         const ext = res.body as FluxcdReceiver
         return {
             metadata: getMetadata(ext.metadata),
-            events: ext.spec.events,
-            interval: ext.spec.interval,
-            resources: ext.spec.resources,
-            secretRef: ext.spec.secretRef,
-            suspend: ext.spec.suspend,
-            type: ext.spec.type,
+            "events": ext.spec['events'],
+            "interval": ext.spec['interval'],
+            "resources": ext.spec['resources'],
+            "secretRef": ext.spec['secretRef'],
+            "suspend": ext.spec['suspend'],
+            "type": ext.spec['type'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                observedGeneration: ext.status.observedGeneration,
-                webhookPath: ext.status.webhookPath,
+                "conditions": ext.status['conditions'],
+                "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                "observedGeneration": ext.status['observedGeneration'],
+                "webhookPath": ext.status['webhookPath'],
             }
         }
     } catch (err) {

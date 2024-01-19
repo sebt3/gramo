@@ -1,0 +1,36 @@
+
+query ProjectcalicoIPReservation($name: String!) {
+  customResourceDefinition(name: "ipreservations.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoIPReservation(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    reservedCIDRs
+  }
+}

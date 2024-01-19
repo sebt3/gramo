@@ -1,0 +1,19 @@
+
+query ProjectcalicoIPAMHandles {
+  projectcalicoIPAMHandles {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    deleted
+    handleID
+  }
+}

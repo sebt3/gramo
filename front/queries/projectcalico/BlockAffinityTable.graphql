@@ -1,0 +1,21 @@
+
+query ProjectcalicoBlockAffinitys {
+  projectcalicoBlockAffinitys {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    cidr
+    deleted
+    node
+    state
+  }
+}

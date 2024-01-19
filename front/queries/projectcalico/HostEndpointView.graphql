@@ -1,0 +1,43 @@
+
+query ProjectcalicoHostEndpoint($name: String!) {
+  customResourceDefinition(name: "hostendpoints.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoHostEndpoint(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    expectedIPs
+    interfaceName
+    node
+    ports {
+      name
+      port
+    }
+    profiles
+  }
+}

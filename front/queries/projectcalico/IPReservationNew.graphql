@@ -1,0 +1,18 @@
+
+mutation ProjectcalicoIPReservation($name: String!, $spec: projectcalicoIPReservationSpec!) {
+  createProjectcalicoIPReservation(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    reservedCIDRs
+  }
+}

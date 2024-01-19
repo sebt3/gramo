@@ -31,20 +31,20 @@ export const mutations = {
             const ext = res.body as FluxcdProvider
             return {
                 metadata: getMetadata(ext.metadata),
-                address: ext.spec.address,
-                certSecretRef: ext.spec.certSecretRef,
-                channel: ext.spec.channel,
-                interval: ext.spec.interval,
-                proxy: ext.spec.proxy,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                timeout: ext.spec.timeout,
-                type: ext.spec.type,
-                username: ext.spec.username,
+                "address": ext.spec['address'],
+                "certSecretRef": ext.spec['certSecretRef'],
+                "channel": ext.spec['channel'],
+                "interval": ext.spec['interval'],
+                "proxy": ext.spec['proxy'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "timeout": ext.spec['timeout'],
+                "type": ext.spec['type'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -83,20 +83,20 @@ export const mutations = {
             const ext = res.body as FluxcdProvider
             return {
                 metadata: getMetadata(ext.metadata),
-                address: ext.spec.address,
-                certSecretRef: ext.spec.certSecretRef,
-                channel: ext.spec.channel,
-                interval: ext.spec.interval,
-                proxy: ext.spec.proxy,
-                secretRef: ext.spec.secretRef,
-                suspend: ext.spec.suspend,
-                timeout: ext.spec.timeout,
-                type: ext.spec.type,
-                username: ext.spec.username,
+                "address": ext.spec['address'],
+                "certSecretRef": ext.spec['certSecretRef'],
+                "channel": ext.spec['channel'],
+                "interval": ext.spec['interval'],
+                "proxy": ext.spec['proxy'],
+                "secretRef": ext.spec['secretRef'],
+                "suspend": ext.spec['suspend'],
+                "timeout": ext.spec['timeout'],
+                "type": ext.spec['type'],
+                "username": ext.spec['username'],
                 status: ext.status==undefined?null:{
-                    conditions: ext.status.conditions,
-                    lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                    observedGeneration: ext.status.observedGeneration,
+                    "conditions": ext.status['conditions'],
+                    "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                    "observedGeneration": ext.status['observedGeneration'],
                 }
             }
         } catch (err) {
@@ -110,20 +110,20 @@ export const mutations = {
         const ext = res.body as FluxcdProvider
         return {
             metadata: getMetadata(ext.metadata),
-            address: ext.spec.address,
-            certSecretRef: ext.spec.certSecretRef,
-            channel: ext.spec.channel,
-            interval: ext.spec.interval,
-            proxy: ext.spec.proxy,
-            secretRef: ext.spec.secretRef,
-            suspend: ext.spec.suspend,
-            timeout: ext.spec.timeout,
-            type: ext.spec.type,
-            username: ext.spec.username,
+            "address": ext.spec['address'],
+            "certSecretRef": ext.spec['certSecretRef'],
+            "channel": ext.spec['channel'],
+            "interval": ext.spec['interval'],
+            "proxy": ext.spec['proxy'],
+            "secretRef": ext.spec['secretRef'],
+            "suspend": ext.spec['suspend'],
+            "timeout": ext.spec['timeout'],
+            "type": ext.spec['type'],
+            "username": ext.spec['username'],
             status: ext.status==undefined?null:{
-                conditions: ext.status.conditions,
-                lastHandledReconcileAt: ext.status.lastHandledReconcileAt,
-                observedGeneration: ext.status.observedGeneration,
+                "conditions": ext.status['conditions'],
+                "lastHandledReconcileAt": ext.status['lastHandledReconcileAt'],
+                "observedGeneration": ext.status['observedGeneration'],
             }
         }
     } catch (err) {

@@ -25,12 +25,12 @@ export const mutations = {
             const ext = res.body as SecretgeneratorStringSecret
             return {
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                fields: ext.spec.fields,
-                forceRegenerate: ext.spec.forceRegenerate,
-                type: ext.spec.type,
+                "data": ext.spec['data'],
+                "fields": ext.spec['fields'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }
         } catch (err) {
@@ -63,12 +63,12 @@ export const mutations = {
             const ext = res.body as SecretgeneratorStringSecret
             return {
                 metadata: getMetadata(ext.metadata),
-                data: ext.spec.data,
-                fields: ext.spec.fields,
-                forceRegenerate: ext.spec.forceRegenerate,
-                type: ext.spec.type,
+                "data": ext.spec['data'],
+                "fields": ext.spec['fields'],
+                "forceRegenerate": ext.spec['forceRegenerate'],
+                "type": ext.spec['type'],
                 status: ext.status==undefined?null:{
-                    secret: ext.status.secret,
+                    "secret": ext.status['secret'],
                 }
             }
         } catch (err) {
@@ -82,12 +82,12 @@ export const mutations = {
         const ext = res.body as SecretgeneratorStringSecret
         return {
             metadata: getMetadata(ext.metadata),
-            data: ext.spec.data,
-            fields: ext.spec.fields,
-            forceRegenerate: ext.spec.forceRegenerate,
-            type: ext.spec.type,
+            "data": ext.spec['data'],
+            "fields": ext.spec['fields'],
+            "forceRegenerate": ext.spec['forceRegenerate'],
+            "type": ext.spec['type'],
             status: ext.status==undefined?null:{
-                secret: ext.status.secret,
+                "secret": ext.status['secret'],
             }
         }
     } catch (err) {

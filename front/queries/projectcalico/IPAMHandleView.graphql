@@ -1,0 +1,37 @@
+
+query ProjectcalicoIPAMHandle($name: String!) {
+  customResourceDefinition(name: "ipamhandles.crd.projectcalico.org") {
+    versions {
+      name
+      served
+      schema {
+        openAPIV3Schema
+      }
+    }
+    names {
+      categories
+      kind
+      listKind
+      plural
+      singular
+      shortNames
+    }
+    group
+  }
+  projectcalicoIPAMHandle(name: $name) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    deleted
+    handleID
+  }
+}

@@ -26,19 +26,19 @@ export const mutations = {
             const ext = res.body as VynilInstall
             return {
                 metadata: getMetadata(ext.metadata),
-                auto_upgrade: ext.spec.auto_upgrade,
-                category: ext.spec.category,
-                component: ext.spec.component,
-                distrib: ext.spec.distrib,
-                options: ext.spec.options,
+                "auto_upgrade": ext.spec['auto_upgrade'],
+                "category": ext.spec['category'],
+                "component": ext.spec['component'],
+                "distrib": ext.spec['distrib'],
+                "options": ext.spec['options'],
                 status: ext.status==undefined?null:{
-                    commit_id: ext.status.commit_id,
-                    digest: ext.status.digest,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
-                    plan: ext.status.plan,
-                    status: ext.status.status,
-                    tfstate: ext.status.tfstate,
+                    "commit_id": ext.status['commit_id'],
+                    "digest": ext.status['digest'],
+                    "errors": ext.status['errors'],
+                    "last_updated": ext.status['last_updated'],
+                    "plan": ext.status['plan'],
+                    "status": ext.status['status'],
+                    "tfstate": ext.status['tfstate'],
                 }
             }
         } catch (err) {
@@ -72,19 +72,19 @@ export const mutations = {
             const ext = res.body as VynilInstall
             return {
                 metadata: getMetadata(ext.metadata),
-                auto_upgrade: ext.spec.auto_upgrade,
-                category: ext.spec.category,
-                component: ext.spec.component,
-                distrib: ext.spec.distrib,
-                options: ext.spec.options,
+                "auto_upgrade": ext.spec['auto_upgrade'],
+                "category": ext.spec['category'],
+                "component": ext.spec['component'],
+                "distrib": ext.spec['distrib'],
+                "options": ext.spec['options'],
                 status: ext.status==undefined?null:{
-                    commit_id: ext.status.commit_id,
-                    digest: ext.status.digest,
-                    errors: ext.status.errors,
-                    last_updated: ext.status.last_updated,
-                    plan: ext.status.plan,
-                    status: ext.status.status,
-                    tfstate: ext.status.tfstate,
+                    "commit_id": ext.status['commit_id'],
+                    "digest": ext.status['digest'],
+                    "errors": ext.status['errors'],
+                    "last_updated": ext.status['last_updated'],
+                    "plan": ext.status['plan'],
+                    "status": ext.status['status'],
+                    "tfstate": ext.status['tfstate'],
                 }
             }
         } catch (err) {
@@ -98,19 +98,19 @@ export const mutations = {
         const ext = res.body as VynilInstall
         return {
             metadata: getMetadata(ext.metadata),
-            auto_upgrade: ext.spec.auto_upgrade,
-            category: ext.spec.category,
-            component: ext.spec.component,
-            distrib: ext.spec.distrib,
-            options: ext.spec.options,
+            "auto_upgrade": ext.spec['auto_upgrade'],
+            "category": ext.spec['category'],
+            "component": ext.spec['component'],
+            "distrib": ext.spec['distrib'],
+            "options": ext.spec['options'],
             status: ext.status==undefined?null:{
-                commit_id: ext.status.commit_id,
-                digest: ext.status.digest,
-                errors: ext.status.errors,
-                last_updated: ext.status.last_updated,
-                plan: ext.status.plan,
-                status: ext.status.status,
-                tfstate: ext.status.tfstate,
+                "commit_id": ext.status['commit_id'],
+                "digest": ext.status['digest'],
+                "errors": ext.status['errors'],
+                "last_updated": ext.status['last_updated'],
+                "plan": ext.status['plan'],
+                "status": ext.status['status'],
+                "tfstate": ext.status['tfstate'],
             }
         }
     } catch (err) {

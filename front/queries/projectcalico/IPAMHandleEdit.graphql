@@ -1,0 +1,19 @@
+
+mutation ProjectcalicoIPAMHandle($name: String!, $spec: projectcalicoIPAMHandleSpec!) {
+  patchProjectcalicoIPAMHandle(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    deleted
+    handleID
+  }
+}

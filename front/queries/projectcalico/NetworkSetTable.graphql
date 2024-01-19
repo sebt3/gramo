@@ -1,0 +1,20 @@
+
+query ProjectcalicoNetworkSets($namespace: String!) {
+ namespace(name: $namespace) {
+  projectcalicoNetworkSets {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    nets
+  }
+ }
+}

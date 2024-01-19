@@ -80,6 +80,11 @@ type namespace {
   redisRedisClusters: [redisRedisCluster]
   redisRedisReplications: [redisRedisReplication]
   redisRedisSentinels: [redisRedisSentinel]
+  rabbitmqRabbitmqClusters: [rabbitmqRabbitmqCluster]
+  mysqlInnoDBClusters: [mysqlInnoDBCluster]
+  mysqlMySQLBackups: [mysqlMySQLBackup]
+  projectcalicoNetworkPolicys: [projectcalicoNetworkPolicy]
+  projectcalicoNetworkSets: [projectcalicoNetworkSet]
 
   permissions: permissionReview
   status: namespaceStatus

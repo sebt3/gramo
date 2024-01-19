@@ -8,9 +8,9 @@ export const lists = {
             const resList = res.body as K8upPreBackupPodList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                backupCommand: ext.spec.backupCommand,
-                fileExtension: ext.spec.fileExtension,
-                pod: ext.spec.pod,
+                "backupCommand": ext.spec['backupCommand'],
+                "fileExtension": ext.spec['fileExtension'],
+                "pod": ext.spec['pod'],
             }})
         } catch (err) {
           console.error((err as object)['body']);
@@ -25,9 +25,9 @@ export const queries = {
             const ext = res.body as K8upPreBackupPod
             return {
                 metadata: getMetadata(ext.metadata),
-                backupCommand: ext.spec.backupCommand,
-                fileExtension: ext.spec.fileExtension,
-                pod: ext.spec.pod,
+                "backupCommand": ext.spec['backupCommand'],
+                "fileExtension": ext.spec['fileExtension'],
+                "pod": ext.spec['pod'],
             }
         } catch (err) {
             console.error((err as object)['body']);

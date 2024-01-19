@@ -1,0 +1,35 @@
+
+query ProjectcalicoBGPPeers {
+  projectcalicoBGPPeers {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    asNumber
+    keepOriginalNextHop
+    maxRestartTime
+    node
+    nodeSelector
+    numAllowedLocalASNumbers
+    password {
+      secretKeyRef {
+        key
+        name
+        optional
+      }
+    }
+    peerIP
+    peerSelector
+    reachableBy
+    sourceAddress
+    ttlSecurity
+  }
+}

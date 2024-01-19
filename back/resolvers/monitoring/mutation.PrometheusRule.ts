@@ -22,7 +22,7 @@ export const mutations = {
             const ext = res.body as MonitoringPrometheusRule
             return {
                 metadata: getMetadata(ext.metadata),
-                groups: ext.spec.groups,
+                "groups": ext.spec['groups'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -51,7 +51,7 @@ export const mutations = {
             const ext = res.body as MonitoringPrometheusRule
             return {
                 metadata: getMetadata(ext.metadata),
-                groups: ext.spec.groups,
+                "groups": ext.spec['groups'],
             }
         } catch (err) {
             console.error((err as object)['body']);
@@ -64,7 +64,7 @@ export const mutations = {
         const ext = res.body as MonitoringPrometheusRule
         return {
             metadata: getMetadata(ext.metadata),
-            groups: ext.spec.groups,
+            "groups": ext.spec['groups'],
         }
     } catch (err) {
         console.error((err as object)['body']);

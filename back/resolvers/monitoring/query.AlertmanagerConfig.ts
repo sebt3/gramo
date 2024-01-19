@@ -8,10 +8,10 @@ export const lists = {
             const resList = res.body as MonitoringAlertmanagerConfigList
             return resList.items.map((ext)=>{return{
                 metadata: getMetadata(ext.metadata),
-                inhibitRules: ext.spec.inhibitRules,
-                muteTimeIntervals: ext.spec.muteTimeIntervals,
-                receivers: ext.spec.receivers,
-                route: ext.spec.route,
+                "inhibitRules": ext.spec['inhibitRules'],
+                "muteTimeIntervals": ext.spec['muteTimeIntervals'],
+                "receivers": ext.spec['receivers'],
+                "route": ext.spec['route'],
             }})
         } catch (err) {
           console.error((err as object)['body']);
@@ -26,10 +26,10 @@ export const queries = {
             const ext = res.body as MonitoringAlertmanagerConfig
             return {
                 metadata: getMetadata(ext.metadata),
-                inhibitRules: ext.spec.inhibitRules,
-                muteTimeIntervals: ext.spec.muteTimeIntervals,
-                receivers: ext.spec.receivers,
-                route: ext.spec.route,
+                "inhibitRules": ext.spec['inhibitRules'],
+                "muteTimeIntervals": ext.spec['muteTimeIntervals'],
+                "receivers": ext.spec['receivers'],
+                "route": ext.spec['route'],
             }
         } catch (err) {
             console.error((err as object)['body']);

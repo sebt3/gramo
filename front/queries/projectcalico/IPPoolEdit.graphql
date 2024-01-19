@@ -1,0 +1,30 @@
+
+mutation ProjectcalicoIPPool($name: String!, $spec: projectcalicoIPPoolSpec!) {
+  patchProjectcalicoIPPool(name: $name, spec: $spec) {
+    metadata {
+      annotations {
+        name
+        value
+      }
+      labels {
+        name
+        value
+      }
+      name
+      namespace
+    }
+    allowedUses
+    blockSize
+    cidr
+    disableBGPExport
+    disabled
+    ipip {
+      enabled
+      mode
+    }
+    ipipMode
+    natOutgoing
+    nodeSelector
+    vxlanMode
+  }
+}
