@@ -30,6 +30,7 @@ query ProjectcalicoGlobalNetworkSet($name: String!) {
       }
       name
       namespace
+      obj
     }
     nets
   }

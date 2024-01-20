@@ -25,7 +25,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'mysqlbackups', payload)
             const ext = res.body as MysqlMySQLBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "addTimestampToBackupDirectory": ext.spec['addTimestampToBackupDirectory'],
                 "backupProfile": ext.spec['backupProfile'],
                 "backupProfileName": ext.spec['backupProfileName'],
@@ -77,7 +77,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'mysqlbackups', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MysqlMySQLBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "addTimestampToBackupDirectory": ext.spec['addTimestampToBackupDirectory'],
                 "backupProfile": ext.spec['backupProfile'],
                 "backupProfileName": ext.spec['backupProfileName'],
@@ -109,7 +109,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'mysqlbackups', args['name'])
         const ext = res.body as MysqlMySQLBackup
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "addTimestampToBackupDirectory": ext.spec['addTimestampToBackupDirectory'],
             "backupProfile": ext.spec['backupProfile'],
             "backupProfileName": ext.spec['backupProfileName'],

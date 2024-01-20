@@ -13,6 +13,7 @@ query MariadbUsers {
       }
       name
       namespace
+      obj
     }
     host
     mariaDbRef {

@@ -13,6 +13,7 @@ query PostgresqlPoolers {
       }
       name
       namespace
+      obj
     }
     cluster {
       name

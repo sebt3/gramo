@@ -8,10 +8,10 @@ export const iPPoolColumns:Array<QTableColumn> = [
 ];
 
 export function useIPPool() {
-  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotIPPoolFound: (res) => {
       if ( !res.loading && res.data.projectcalicoIPPool == null) {
         const matched = router.currentRoute.value.matched

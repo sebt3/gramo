@@ -22,7 +22,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','ipamconfigs', payload)
             const ext = res.body as ProjectcalicoIPAMConfig
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "autoAllocateBlocks": ext.spec['autoAllocateBlocks'],
                 "maxBlocksPerHost": ext.spec['maxBlocksPerHost'],
                 "strictAffinity": ext.spec['strictAffinity'],
@@ -54,7 +54,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','ipamconfigs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoIPAMConfig
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "autoAllocateBlocks": ext.spec['autoAllocateBlocks'],
                 "maxBlocksPerHost": ext.spec['maxBlocksPerHost'],
                 "strictAffinity": ext.spec['strictAffinity'],
@@ -69,7 +69,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','ipamconfigs', args['name'])
         const ext = res.body as ProjectcalicoIPAMConfig
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "autoAllocateBlocks": ext.spec['autoAllocateBlocks'],
             "maxBlocksPerHost": ext.spec['maxBlocksPerHost'],
             "strictAffinity": ext.spec['strictAffinity'],

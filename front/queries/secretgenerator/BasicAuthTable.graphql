@@ -13,8 +13,8 @@ query SecretgeneratorBasicAuths($namespace: String!) {
       }
       name
       namespace
+      obj
     }
-    data
     encoding
     forceRegenerate
     length

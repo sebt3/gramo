@@ -25,7 +25,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', payload)
             const ext = res.body as VynilInstall
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "auto_upgrade": ext.spec['auto_upgrade'],
                 "category": ext.spec['category'],
                 "component": ext.spec['component'],
@@ -71,7 +71,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as VynilInstall
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "auto_upgrade": ext.spec['auto_upgrade'],
                 "category": ext.spec['category'],
                 "component": ext.spec['component'],
@@ -97,7 +97,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', args['name'])
         const ext = res.body as VynilInstall
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "auto_upgrade": ext.spec['auto_upgrade'],
             "category": ext.spec['category'],
             "component": ext.spec['component'],

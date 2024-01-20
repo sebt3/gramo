@@ -13,6 +13,7 @@ query FluxcdProviders {
       }
       name
       namespace
+      obj
     }
     address
     certSecretRef {

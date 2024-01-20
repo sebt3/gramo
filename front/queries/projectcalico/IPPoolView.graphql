@@ -30,6 +30,7 @@ query ProjectcalicoIPPool($name: String!) {
       }
       name
       namespace
+      obj
     }
     allowedUses
     blockSize
@@ -41,6 +42,7 @@ query ProjectcalicoIPPool($name: String!) {
       mode
     }
     ipipMode
+    nat-outgoing
     natOutgoing
     nodeSelector
     vxlanMode

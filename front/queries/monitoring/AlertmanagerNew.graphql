@@ -12,6 +12,7 @@ mutation MonitoringAlertmanager($namespace: String!, $name: String!, $spec: moni
       }
       name
       namespace
+      obj
     }
     additionalPeers
     affinity {

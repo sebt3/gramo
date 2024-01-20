@@ -25,7 +25,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'databases', payload)
             const ext = res.body as MariadbDatabase
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "characterSet": ext.spec['characterSet'],
                 "collate": ext.spec['collate'],
                 "mariaDbRef": ext.spec['mariaDbRef'],
@@ -65,7 +65,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'databases', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MariadbDatabase
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "characterSet": ext.spec['characterSet'],
                 "collate": ext.spec['collate'],
                 "mariaDbRef": ext.spec['mariaDbRef'],
@@ -85,7 +85,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'databases', args['name'])
         const ext = res.body as MariadbDatabase
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "characterSet": ext.spec['characterSet'],
             "collate": ext.spec['collate'],
             "mariaDbRef": ext.spec['mariaDbRef'],

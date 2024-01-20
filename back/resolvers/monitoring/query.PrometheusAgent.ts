@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'prometheusagents')
             const resList = res.body as MonitoringPrometheusAgentList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "additionalScrapeConfigs": ext.spec['additionalScrapeConfigs'],
                 "affinity": ext.spec['affinity'],
@@ -96,7 +96,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'prometheusagents', args['name'])
             const ext = res.body as MonitoringPrometheusAgent
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "additionalScrapeConfigs": ext.spec['additionalScrapeConfigs'],
                 "affinity": ext.spec['affinity'],

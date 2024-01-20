@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redissentinels')
             const resList = res.body as RedisRedisSentinelList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "affinity": ext.spec['affinity'],
                 "clusterSize": ext.spec['clusterSize'],
@@ -37,7 +37,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redissentinels', args['name'])
             const ext = res.body as RedisRedisSentinel
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "affinity": ext.spec['affinity'],
                 "clusterSize": ext.spec['clusterSize'],

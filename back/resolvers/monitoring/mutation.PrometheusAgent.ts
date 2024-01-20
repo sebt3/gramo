@@ -86,7 +86,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'prometheusagents', payload)
             const ext = res.body as MonitoringPrometheusAgent
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "additionalScrapeConfigs": ext.spec['additionalScrapeConfigs'],
                 "affinity": ext.spec['affinity'],
@@ -254,7 +254,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'prometheusagents', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringPrometheusAgent
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "additionalScrapeConfigs": ext.spec['additionalScrapeConfigs'],
                 "affinity": ext.spec['affinity'],
@@ -341,7 +341,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'prometheusagents', args['name'])
         const ext = res.body as MonitoringPrometheusAgent
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "additionalArgs": ext.spec['additionalArgs'],
             "additionalScrapeConfigs": ext.spec['additionalScrapeConfigs'],
             "affinity": ext.spec['affinity'],

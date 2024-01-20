@@ -46,7 +46,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'innodbclusters', payload)
             const ext = res.body as MysqlInnoDBCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupProfiles": ext.spec['backupProfiles'],
                 "backupSchedules": ext.spec['backupSchedules'],
                 "baseServerId": ext.spec['baseServerId'],
@@ -127,7 +127,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'innodbclusters', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MysqlInnoDBCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupProfiles": ext.spec['backupProfiles'],
                 "backupSchedules": ext.spec['backupSchedules'],
                 "baseServerId": ext.spec['baseServerId'],
@@ -167,7 +167,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'innodbclusters', args['name'])
         const ext = res.body as MysqlInnoDBCluster
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "backupProfiles": ext.spec['backupProfiles'],
             "backupSchedules": ext.spec['backupSchedules'],
             "baseServerId": ext.spec['baseServerId'],

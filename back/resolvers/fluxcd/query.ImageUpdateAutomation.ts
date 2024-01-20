@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta1',args['namespace'],'imageupdateautomations')
             const resList = res.body as FluxcdImageUpdateAutomationList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "git": ext.spec['git'],
                 "interval": ext.spec['interval'],
                 "sourceRef": ext.spec['sourceRef'],
@@ -34,7 +34,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta1',args['namespace'],'imageupdateautomations', args['name'])
             const ext = res.body as FluxcdImageUpdateAutomation
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "git": ext.spec['git'],
                 "interval": ext.spec['interval'],
                 "sourceRef": ext.spec['sourceRef'],

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs')
             const resList = res.body as VynilInstallList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "auto_upgrade": ext.spec['auto_upgrade'],
                 "category": ext.spec['category'],
                 "component": ext.spec['component'],
@@ -35,7 +35,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('vynil.solidite.fr','v1',args['namespace'],'installs', args['name'])
             const ext = res.body as VynilInstall
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "auto_upgrade": ext.spec['auto_upgrade'],
                 "category": ext.spec['category'],
                 "component": ext.spec['component'],

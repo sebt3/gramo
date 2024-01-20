@@ -12,6 +12,7 @@ query ProjectcalicoBlockAffinitys {
       }
       name
       namespace
+      obj
     }
     cidr
     deleted

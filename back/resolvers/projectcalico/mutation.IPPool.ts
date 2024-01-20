@@ -30,7 +30,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','ippools', payload)
             const ext = res.body as ProjectcalicoIPPool
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowedUses": ext.spec['allowedUses'],
                 "blockSize": ext.spec['blockSize'],
                 "cidr": ext.spec['cidr'],
@@ -78,7 +78,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','ippools', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoIPPool
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowedUses": ext.spec['allowedUses'],
                 "blockSize": ext.spec['blockSize'],
                 "cidr": ext.spec['cidr'],
@@ -101,7 +101,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','ippools', args['name'])
         const ext = res.body as ProjectcalicoIPPool
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "allowedUses": ext.spec['allowedUses'],
             "blockSize": ext.spec['blockSize'],
             "cidr": ext.spec['cidr'],

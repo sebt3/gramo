@@ -30,6 +30,7 @@ query VynilDistrib($name: String!) {
       }
       name
       namespace
+      obj
     }
     branch
     insecure

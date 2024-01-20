@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','globalnetworksets')
             const resList = res.body as ProjectcalicoGlobalNetworkSetList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "nets": ext.spec['nets'],
             }})
         } catch (err) {
@@ -23,7 +23,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','globalnetworksets', args['name'])
             const ext = res.body as ProjectcalicoGlobalNetworkSet
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "nets": ext.spec['nets'],
             }
         } catch (err) {

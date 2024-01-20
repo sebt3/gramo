@@ -12,6 +12,7 @@ mutation MonitoringServiceMonitor($namespace: String!, $name: String!, $spec: mo
       }
       name
       namespace
+      obj
     }
     attachMetadata {
       node

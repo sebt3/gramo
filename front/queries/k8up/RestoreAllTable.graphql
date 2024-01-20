@@ -13,6 +13,7 @@ query K8upRestores {
       }
       name
       namespace
+      obj
     }
     activeDeadlineSeconds
     backend {

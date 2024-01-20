@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'thanosrulers')
             const resList = res.body as MonitoringThanosRulerList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "affinity": ext.spec['affinity'],
                 "alertDropLabels": ext.spec['alertDropLabels'],
@@ -78,7 +78,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'thanosrulers', args['name'])
             const ext = res.body as MonitoringThanosRuler
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalArgs": ext.spec['additionalArgs'],
                 "affinity": ext.spec['affinity'],
                 "alertDropLabels": ext.spec['alertDropLabels'],

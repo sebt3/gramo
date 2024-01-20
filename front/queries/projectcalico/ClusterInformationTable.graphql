@@ -12,6 +12,7 @@ query ProjectcalicoClusterInformations {
       }
       name
       namespace
+      obj
     }
     calicoVersion
     clusterGUID

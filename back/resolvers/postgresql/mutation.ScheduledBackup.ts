@@ -26,7 +26,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'scheduledbackups', payload)
             const ext = res.body as PostgresqlScheduledBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupOwnerReference": ext.spec['backupOwnerReference'],
                 "cluster": ext.spec['cluster'],
                 "immediate": ext.spec['immediate'],
@@ -70,7 +70,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'scheduledbackups', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as PostgresqlScheduledBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupOwnerReference": ext.spec['backupOwnerReference'],
                 "cluster": ext.spec['cluster'],
                 "immediate": ext.spec['immediate'],
@@ -93,7 +93,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'scheduledbackups', args['name'])
         const ext = res.body as PostgresqlScheduledBackup
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "backupOwnerReference": ext.spec['backupOwnerReference'],
             "cluster": ext.spec['cluster'],
             "immediate": ext.spec['immediate'],

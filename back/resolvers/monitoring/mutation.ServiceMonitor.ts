@@ -32,7 +32,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'servicemonitors', payload)
             const ext = res.body as MonitoringServiceMonitor
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "endpoints": ext.spec['endpoints'],
                 "jobLabel": ext.spec['jobLabel'],
@@ -83,7 +83,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'servicemonitors', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringServiceMonitor
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "endpoints": ext.spec['endpoints'],
                 "jobLabel": ext.spec['jobLabel'],
@@ -107,7 +107,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'servicemonitors', args['name'])
         const ext = res.body as MonitoringServiceMonitor
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "attachMetadata": ext.spec['attachMetadata'],
             "endpoints": ext.spec['endpoints'],
             "jobLabel": ext.spec['jobLabel'],

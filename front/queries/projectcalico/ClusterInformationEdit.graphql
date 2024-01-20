@@ -12,6 +12,7 @@ mutation ProjectcalicoClusterInformation($name: String!, $spec: projectcalicoClu
       }
       name
       namespace
+      obj
     }
     calicoVersion
     clusterGUID

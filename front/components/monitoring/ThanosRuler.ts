@@ -11,10 +11,10 @@ export const thanosRulerAllColumns = ([
 ] as Array<QTableColumn>).concat(thanosRulerColumns);
 
 export function useThanosRuler() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotThanosRulerFound: (res) => {
       if ( !res.loading && res.data.monitoringThanosRuler == null) {
         const matched = router.currentRoute.value.matched

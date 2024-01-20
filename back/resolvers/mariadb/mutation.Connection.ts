@@ -29,7 +29,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'connections', payload)
             const ext = res.body as MariadbConnection
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "healthCheck": ext.spec['healthCheck'],
                 "mariaDbRef": ext.spec['mariaDbRef'],
@@ -77,7 +77,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'connections', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MariadbConnection
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "healthCheck": ext.spec['healthCheck'],
                 "mariaDbRef": ext.spec['mariaDbRef'],
@@ -101,7 +101,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'connections', args['name'])
         const ext = res.body as MariadbConnection
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "database": ext.spec['database'],
             "healthCheck": ext.spec['healthCheck'],
             "mariaDbRef": ext.spec['mariaDbRef'],

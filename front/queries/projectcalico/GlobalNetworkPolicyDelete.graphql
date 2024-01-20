@@ -12,6 +12,7 @@ mutation ProjectcalicoGlobalNetworkPolicy($name: String!) {
       }
       name
       namespace
+      obj
     }
     applyOnForward
     doNotTrack

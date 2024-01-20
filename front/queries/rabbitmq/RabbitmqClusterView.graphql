@@ -30,6 +30,7 @@ query RabbitmqRabbitmqCluster($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

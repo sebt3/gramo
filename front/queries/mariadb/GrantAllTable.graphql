@@ -13,6 +13,7 @@ query MariadbGrants {
       }
       name
       namespace
+      obj
     }
     database
     grantOption

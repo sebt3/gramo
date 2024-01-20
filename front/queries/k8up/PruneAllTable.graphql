@@ -13,6 +13,7 @@ query K8upPrunes {
       }
       name
       namespace
+      obj
     }
     activeDeadlineSeconds
     backend {

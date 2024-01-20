@@ -24,7 +24,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('k8up.io','v1',args['namespace'],'snapshots', payload)
             const ext = res.body as K8upSnapshot
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "date": ext.spec['date'],
                 "id": ext.spec['id'],
                 "paths": ext.spec['paths'],
@@ -61,7 +61,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('k8up.io','v1',args['namespace'],'snapshots', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as K8upSnapshot
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "date": ext.spec['date'],
                 "id": ext.spec['id'],
                 "paths": ext.spec['paths'],
@@ -79,7 +79,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('k8up.io','v1',args['namespace'],'snapshots', args['name'])
         const ext = res.body as K8upSnapshot
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "date": ext.spec['date'],
             "id": ext.spec['id'],
             "paths": ext.spec['paths'],

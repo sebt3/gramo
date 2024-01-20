@@ -31,7 +31,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'backups', payload)
             const ext = res.body as MariadbBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "args": ext.spec['args'],
                 "backoffLimit": ext.spec['backoffLimit'],
@@ -83,7 +83,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'backups', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MariadbBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "args": ext.spec['args'],
                 "backoffLimit": ext.spec['backoffLimit'],
@@ -109,7 +109,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'backups', args['name'])
         const ext = res.body as MariadbBackup
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "affinity": ext.spec['affinity'],
             "args": ext.spec['args'],
             "backoffLimit": ext.spec['backoffLimit'],

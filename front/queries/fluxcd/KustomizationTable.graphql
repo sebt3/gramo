@@ -13,6 +13,7 @@ query FluxcdKustomizations($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     components
     decryption {

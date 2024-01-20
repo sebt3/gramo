@@ -12,6 +12,7 @@ query ProjectcalicoKubeControllersConfigurations {
       }
       name
       namespace
+      obj
     }
     controllers {
       namespace {

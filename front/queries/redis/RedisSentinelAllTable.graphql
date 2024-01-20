@@ -13,6 +13,7 @@ query RedisRedisSentinels {
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

@@ -26,7 +26,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('crd.projectcalico.org','v1',args['namespace'],'networkpolicies', payload)
             const ext = res.body as ProjectcalicoNetworkPolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "egress": ext.spec['egress'],
                 "ingress": ext.spec['ingress'],
                 "order": ext.spec['order'],
@@ -65,7 +65,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('crd.projectcalico.org','v1',args['namespace'],'networkpolicies', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoNetworkPolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "egress": ext.spec['egress'],
                 "ingress": ext.spec['ingress'],
                 "order": ext.spec['order'],
@@ -83,7 +83,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('crd.projectcalico.org','v1',args['namespace'],'networkpolicies', args['name'])
         const ext = res.body as ProjectcalicoNetworkPolicy
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "egress": ext.spec['egress'],
             "ingress": ext.spec['ingress'],
             "order": ext.spec['order'],

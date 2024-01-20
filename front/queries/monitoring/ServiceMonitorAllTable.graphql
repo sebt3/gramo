@@ -13,6 +13,7 @@ query MonitoringServiceMonitors {
       }
       name
       namespace
+      obj
     }
     attachMetadata {
       node

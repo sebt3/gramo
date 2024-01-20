@@ -28,7 +28,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','ipamblocks', payload)
             const ext = res.body as ProjectcalicoIPAMBlock
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "allocations": ext.spec['allocations'],
                 "attributes": ext.spec['attributes'],
@@ -72,7 +72,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','ipamblocks', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoIPAMBlock
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "allocations": ext.spec['allocations'],
                 "attributes": ext.spec['attributes'],
@@ -93,7 +93,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','ipamblocks', args['name'])
         const ext = res.body as ProjectcalicoIPAMBlock
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "affinity": ext.spec['affinity'],
             "allocations": ext.spec['allocations'],
             "attributes": ext.spec['attributes'],

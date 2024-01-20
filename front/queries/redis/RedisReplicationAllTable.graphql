@@ -13,6 +13,7 @@ query RedisRedisReplications {
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

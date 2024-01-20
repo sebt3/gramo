@@ -13,6 +13,7 @@ query MonitoringPrometheuss($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     additionalAlertManagerConfigs {
       key

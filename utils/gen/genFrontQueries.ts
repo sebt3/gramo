@@ -16,6 +16,7 @@ export function generateFrontQueries(directory: string, short:string, apiGroup:s
       }
       name
       namespace
+      obj
     }
 {{#each spec.properties}}{{GQueryObject @key 2 this}}{{/each}}{{#if haveStatus}}    status {
 {{#each status.properties}}{{GQueryObject @key 3 this}}{{/each}}    }

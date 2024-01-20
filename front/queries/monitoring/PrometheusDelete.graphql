@@ -12,6 +12,7 @@ mutation MonitoringPrometheus($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     additionalAlertManagerConfigs {
       key

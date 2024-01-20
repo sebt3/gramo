@@ -13,6 +13,7 @@ query FluxcdBuckets {
       }
       name
       namespace
+      obj
     }
     bucketName
     endpoint

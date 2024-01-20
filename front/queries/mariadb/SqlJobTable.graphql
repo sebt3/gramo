@@ -13,6 +13,7 @@ query MariadbSqlJobs($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','kubecontrollersconfigurations')
             const resList = res.body as ProjectcalicoKubeControllersConfigurationList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "controllers": ext.spec['controllers'],
                 "debugProfilePort": ext.spec['debugProfilePort'],
                 "etcdV3CompactionPeriod": ext.spec['etcdV3CompactionPeriod'],
@@ -32,7 +32,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','kubecontrollersconfigurations', args['name'])
             const ext = res.body as ProjectcalicoKubeControllersConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "controllers": ext.spec['controllers'],
                 "debugProfilePort": ext.spec['debugProfilePort'],
                 "etcdV3CompactionPeriod": ext.spec['etcdV3CompactionPeriod'],

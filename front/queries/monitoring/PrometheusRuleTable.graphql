@@ -13,6 +13,7 @@ query MonitoringPrometheusRules($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     groups {
       interval

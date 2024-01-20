@@ -13,10 +13,10 @@ export const backupAllColumns = ([
 ] as Array<QTableColumn>).concat(backupColumns);
 
 export function useBackup() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotBackupFound: (res) => {
       if ( !res.loading && res.data.mariadbBackup == null) {
         const matched = router.currentRoute.value.matched

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmrepositories')
             const resList = res.body as FluxcdHelmRepositoryList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "interval": ext.spec['interval'],
                 "passCredentials": ext.spec['passCredentials'],
@@ -37,7 +37,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmrepositories', args['name'])
             const ext = res.body as FluxcdHelmRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "interval": ext.spec['interval'],
                 "passCredentials": ext.spec['passCredentials'],

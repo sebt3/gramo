@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','felixconfigurations')
             const resList = res.body as ProjectcalicoFelixConfigurationList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowIPIPPacketsFromWorkloads": ext.spec['allowIPIPPacketsFromWorkloads'],
                 "allowVXLANPacketsFromWorkloads": ext.spec['allowVXLANPacketsFromWorkloads'],
                 "awsSrcDstCheck": ext.spec['awsSrcDstCheck'],
@@ -144,7 +144,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','felixconfigurations', args['name'])
             const ext = res.body as ProjectcalicoFelixConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowIPIPPacketsFromWorkloads": ext.spec['allowIPIPPacketsFromWorkloads'],
                 "allowVXLANPacketsFromWorkloads": ext.spec['allowVXLANPacketsFromWorkloads'],
                 "awsSrcDstCheck": ext.spec['awsSrcDstCheck'],

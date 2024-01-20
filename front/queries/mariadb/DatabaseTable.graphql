@@ -13,6 +13,7 @@ query MariadbDatabases($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     characterSet
     collate

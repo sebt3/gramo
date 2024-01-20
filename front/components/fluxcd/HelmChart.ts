@@ -11,10 +11,10 @@ export const helmChartAllColumns = ([
 ] as Array<QTableColumn>).concat(helmChartColumns);
 
 export function useHelmChart() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotHelmChartFound: (res) => {
       if ( !res.loading && res.data.fluxcdHelmChart == null) {
         const matched = router.currentRoute.value.matched

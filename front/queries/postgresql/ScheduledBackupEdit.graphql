@@ -12,6 +12,7 @@ mutation PostgresqlScheduledBackup($namespace: String!, $name: String!, $spec: p
       }
       name
       namespace
+      obj
     }
     backupOwnerReference
     cluster {

@@ -13,6 +13,7 @@ query FluxcdHelmReleases {
       }
       name
       namespace
+      obj
     }
     chart {
       spec {

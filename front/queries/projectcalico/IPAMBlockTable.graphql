@@ -12,6 +12,7 @@ query ProjectcalicoIPAMBlocks {
       }
       name
       namespace
+      obj
     }
     affinity
     allocations

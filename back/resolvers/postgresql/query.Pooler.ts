@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'poolers')
             const resList = res.body as PostgresqlPoolerList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "deploymentStrategy": ext.spec['deploymentStrategy'],
                 "instances": ext.spec['instances'],
@@ -32,7 +32,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'poolers', args['name'])
             const ext = res.body as PostgresqlPooler
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "deploymentStrategy": ext.spec['deploymentStrategy'],
                 "instances": ext.spec['instances'],

@@ -12,6 +12,7 @@ mutation MariadbUser($namespace: String!, $name: String!, $spec: mariadbUserSpec
       }
       name
       namespace
+      obj
     }
     host
     mariaDbRef {

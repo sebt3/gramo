@@ -13,6 +13,7 @@ query MonitoringServiceMonitors($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     attachMetadata {
       node

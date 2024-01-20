@@ -32,7 +32,7 @@ export const queries = {
                 if (gramoConfig.limitNamespaceValue!="" && ns.metadata?.labels != undefined && (ns.metadata?.labels as object)[gramoConfig.limitNamespaceKey] == gramoConfig.limitNamespaceValue) return true;
                 return false;
             }).map((ns)=>{return{
-                metadata: getMetadata(ns.metadata),
+                metadata: getMetadata(ns.metadata, ns),
                 status: {
                     phase: ns.status?.phase
                 }
@@ -50,7 +50,7 @@ export const queries = {
             if (gramoConfig.limitNamespaceKey!="" && gramoConfig.limitNamespaceValue!="" && (nsRes.body.metadata?.labels as object)[gramoConfig.limitNamespaceKey] != gramoConfig.limitNamespaceValue) return null;
             if (gramoConfig.limitNamespaceKey!="" && gramoConfig.limitNamespaceHave!="" && !(nsRes.body.metadata?.labels as object)[gramoConfig.limitNamespaceKey].split(',').includes(gramoConfig.limitNamespaceHave)) return null;
             return {
-                metadata: getMetadata(nsRes.body.metadata),
+                metadata: getMetadata(nsRes.body.metadata, nsRes.body),
                 status: {
                     phase: nsRes.body.status?.phase
                 }

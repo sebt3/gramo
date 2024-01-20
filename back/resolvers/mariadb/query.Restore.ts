@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'restores')
             const resList = res.body as MariadbRestoreList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "backoffLimit": ext.spec['backoffLimit'],
                 "backupRef": ext.spec['backupRef'],
@@ -34,7 +34,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'restores', args['name'])
             const ext = res.body as MariadbRestore
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "backoffLimit": ext.spec['backoffLimit'],
                 "backupRef": ext.spec['backupRef'],

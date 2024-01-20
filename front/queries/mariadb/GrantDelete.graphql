@@ -12,6 +12,7 @@ mutation MariadbGrant($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     database
     grantOption

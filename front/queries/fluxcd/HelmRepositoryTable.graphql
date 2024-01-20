@@ -13,6 +13,7 @@ query FluxcdHelmRepositorys($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     interval
     passCredentials

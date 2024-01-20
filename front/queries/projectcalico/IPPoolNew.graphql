@@ -12,6 +12,7 @@ mutation ProjectcalicoIPPool($name: String!, $spec: projectcalicoIPPoolSpec!) {
       }
       name
       namespace
+      obj
     }
     allowedUses
     blockSize
@@ -23,6 +24,7 @@ mutation ProjectcalicoIPPool($name: String!, $spec: projectcalicoIPPoolSpec!) {
       mode
     }
     ipipMode
+    nat-outgoing
     natOutgoing
     nodeSelector
     vxlanMode

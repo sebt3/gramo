@@ -12,6 +12,7 @@ mutation MysqlInnoDBCluster($namespace: String!, $name: String!, $spec: mysqlInn
       }
       name
       namespace
+      obj
     }
     backupProfiles
     backupSchedules

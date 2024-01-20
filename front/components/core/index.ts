@@ -2,6 +2,8 @@ import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { setupTableWidget } from './tableSetup.js'
 import { setupItem } from './itemSetup.js'
+import { stringify } from 'yaml'
+import { ref } from 'vue'
 
 export * from './itemSetup.js'
 export * from './openapiSetup.js'
@@ -16,8 +18,19 @@ export function useCore() {
     const $q = useQuasar();
     const { pagination, setNamespaceFromRoute } = setupTableWidget();
     const { setItemFromRoute, setNamespacedItemFromRoute } = setupItem();
+    const viewer = ref({
+        tab: 'simple',
+        full: '',
+        spec: ''
+    });
     return {
         router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute,
+        viewer, viewerUpdate: (res, obj) => {
+            if(!res.loading) {
+                viewer.value.full=gqlDataToYaml(obj)
+                viewer.value.spec=gqlDataToYaml({spec: obj.spec})
+            }
+        },
         notify: (arg) => $q.notify(arg),
         notifyWorking: (msg:string) => $q.notify({
             spinner: true,
@@ -54,7 +67,7 @@ export function useCore() {
         }
     }
 }
-// Remove the 'null' values produced by the openAPI editor component for unused fields so mutations are happy²
+// Remove the 'null' values produced by the openAPI editor component for unused fields so mutations are happy
 export function sanitizeData(data:object) {
     const result = Array.isArray(data) ? [] : {};
     let value;
@@ -78,4 +91,13 @@ export function elude(str:string, maxsize:number=20) {
       return str.substring(0,maxsize-3)+'...'
     }
     return str;
+}
+function deepRemoveType(ret: object) {
+    if (Object.keys(ret).includes('__typename')) {delete ret['__typename']}
+    Object.keys(ret).filter(k => typeof ret[k] == 'object' && ret[k] != null && ret[k] != undefined).forEach(k => ret[k] = deepRemoveType(ret[k]))
+    return ret
+}
+export function gqlDataToYaml(o: object) {
+    if (typeof o !== 'object') return o;
+    return stringify(deepRemoveType(JSON.parse(JSON.stringify(o))));
 }

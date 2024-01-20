@@ -12,6 +12,7 @@ mutation FluxcdAlert($namespace: String!, $name: String!, $spec: fluxcdAlertSpec
       }
       name
       namespace
+      obj
     }
     eventSeverity
     eventSources {

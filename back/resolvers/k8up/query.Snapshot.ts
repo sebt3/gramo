@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('k8up.io','v1',args['namespace'],'snapshots')
             const resList = res.body as K8upSnapshotList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "date": ext.spec['date'],
                 "id": ext.spec['id'],
                 "paths": ext.spec['paths'],
@@ -27,7 +27,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('k8up.io','v1',args['namespace'],'snapshots', args['name'])
             const ext = res.body as K8upSnapshot
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "date": ext.spec['date'],
                 "id": ext.spec['id'],
                 "paths": ext.spec['paths'],

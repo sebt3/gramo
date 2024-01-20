@@ -12,6 +12,7 @@ mutation MonitoringPrometheusAgent($namespace: String!, $name: String!, $spec: m
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

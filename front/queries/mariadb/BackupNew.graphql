@@ -12,6 +12,7 @@ mutation MariadbBackup($namespace: String!, $name: String!, $spec: mariadbBackup
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

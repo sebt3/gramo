@@ -30,6 +30,7 @@ query ProjectcalicoFelixConfiguration($name: String!) {
       }
       name
       namespace
+      obj
     }
     allowIPIPPacketsFromWorkloads
     allowVXLANPacketsFromWorkloads

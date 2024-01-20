@@ -12,6 +12,7 @@ mutation ProjectcalicoKubeControllersConfiguration($name: String!, $spec: projec
       }
       name
       namespace
+      obj
     }
     controllers {
       namespace {

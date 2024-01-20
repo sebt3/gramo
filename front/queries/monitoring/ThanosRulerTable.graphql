@@ -13,6 +13,7 @@ query MonitoringThanosRulers($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

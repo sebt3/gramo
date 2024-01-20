@@ -33,7 +33,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'ocirepositories', payload)
             const ext = res.body as FluxcdOCIRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "certSecretRef": ext.spec['certSecretRef'],
                 "ignore": ext.spec['ignore'],
                 "insecure": ext.spec['insecure'],
@@ -96,7 +96,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'ocirepositories', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdOCIRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "certSecretRef": ext.spec['certSecretRef'],
                 "ignore": ext.spec['ignore'],
                 "insecure": ext.spec['insecure'],
@@ -131,7 +131,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'ocirepositories', args['name'])
         const ext = res.body as FluxcdOCIRepository
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "certSecretRef": ext.spec['certSecretRef'],
             "ignore": ext.spec['ignore'],
             "insecure": ext.spec['insecure'],

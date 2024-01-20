@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('notification.toolkit.fluxcd.io','v1',args['namespace'],'receivers')
             const resList = res.body as FluxcdReceiverList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "events": ext.spec['events'],
                 "interval": ext.spec['interval'],
                 "resources": ext.spec['resources'],
@@ -33,7 +33,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('notification.toolkit.fluxcd.io','v1',args['namespace'],'receivers', args['name'])
             const ext = res.body as FluxcdReceiver
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "events": ext.spec['events'],
                 "interval": ext.spec['interval'],
                 "resources": ext.spec['resources'],

@@ -4,9 +4,10 @@ import clusterInformationDelete from '@/queries/projectcalico/ClusterInformation
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
+import MonacoViewer from '../core/MonacoViewer.vue';
 import { ref, useQuery, useMutation, useClusterInformation, getProperties } from './ClusterInformation.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotClusterInformationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useClusterInformation();setItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(projectcalicoClusterInformationQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotClusterInformationFound);
+const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotClusterInformationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useClusterInformation();setItemFromRoute();
+const { result, loading, onResult, onError } = useQuery(projectcalicoClusterInformationQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotClusterInformationFound(res);viewerUpdate(res, res.data.projectcalicoClusterInformation.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(clusterInformationDelete);
 onDeleteDone(() => {
   notifySuccess('Deletion proceded');
@@ -46,17 +47,27 @@ onDeleteError((err) => {
       </q-card>
     </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.projectcalicoClusterInformation!=undefined && result.projectcalicoClusterInformation!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
-        </q-card-section>
-        <q-card-section>
-          <OpenApiEdit
-            :in="result.projectcalicoClusterInformation"
-            :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            :read-only="true"
-            :show-default="false"
-          />
-        </q-card-section>
+        <q-tabs v-model="viewer.tab" class="bg-primary text-white">
+          <q-tab label="Options" name="simple" />
+          <q-tab label="Specifications" name="spec" />
+          <q-tab label="full Yaml" name="yaml" />
+        </q-tabs>
+        <q-tab-panels v-model="viewer.tab" animated>
+          <q-tab-panel name="simple">
+            <OpenApiEdit
+              :in="result.projectcalicoClusterInformation"
+              :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+              :read-only="true"
+              :show-default="false"
+            />
+          </q-tab-panel>
+          <q-tab-panel name="spec">
+            <MonacoViewer :text="viewer.spec" :key="viewer.spec" />
+          </q-tab-panel>
+          <q-tab-panel name="yaml">
+            <MonacoViewer :text="viewer.full" :key="viewer.spec" />
+          </q-tab-panel>
+        </q-tab-panels>
       </q-card>
     </div>
   </div>

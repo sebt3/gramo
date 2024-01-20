@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redisclusters')
             const resList = res.body as RedisRedisClusterList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "clusterSize": ext.spec['clusterSize'],
                 "clusterVersion": ext.spec['clusterVersion'],
@@ -39,7 +39,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redisclusters', args['name'])
             const ext = res.body as RedisRedisCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "clusterSize": ext.spec['clusterSize'],
                 "clusterVersion": ext.spec['clusterVersion'],

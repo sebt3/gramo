@@ -30,6 +30,7 @@ query MonitoringPrometheusAgent($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

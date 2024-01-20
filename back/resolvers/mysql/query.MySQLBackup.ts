@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'mysqlbackups')
             const resList = res.body as MysqlMySQLBackupList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "addTimestampToBackupDirectory": ext.spec['addTimestampToBackupDirectory'],
                 "backupProfile": ext.spec['backupProfile'],
                 "backupProfileName": ext.spec['backupProfileName'],
@@ -41,7 +41,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'mysqlbackups', args['name'])
             const ext = res.body as MysqlMySQLBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "addTimestampToBackupDirectory": ext.spec['addTimestampToBackupDirectory'],
                 "backupProfile": ext.spec['backupProfile'],
                 "backupProfileName": ext.spec['backupProfileName'],

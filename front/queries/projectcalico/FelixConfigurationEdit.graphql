@@ -12,6 +12,7 @@ mutation ProjectcalicoFelixConfiguration($name: String!, $spec: projectcalicoFel
       }
       name
       namespace
+      obj
     }
     allowIPIPPacketsFromWorkloads
     allowVXLANPacketsFromWorkloads

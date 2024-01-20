@@ -13,6 +13,7 @@ query K8upPreBackupPods($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     backupCommand
     fileExtension
@@ -273,7 +274,6 @@ query K8upPreBackupPods($namespace: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {
@@ -497,7 +497,6 @@ query K8upPreBackupPods($namespace: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {
@@ -724,7 +723,6 @@ query K8upPreBackupPods($namespace: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {

@@ -22,7 +22,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'backups', payload)
             const ext = res.body as PostgresqlBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "target": ext.spec['target'],
                 status: ext.status==undefined?null:{
@@ -76,7 +76,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'backups', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as PostgresqlBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "target": ext.spec['target'],
                 status: ext.status==undefined?null:{
@@ -113,7 +113,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'backups', args['name'])
         const ext = res.body as PostgresqlBackup
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "cluster": ext.spec['cluster'],
             "target": ext.spec['target'],
             status: ext.status==undefined?null:{

@@ -13,6 +13,7 @@ query MysqlInnoDBClusters {
       }
       name
       namespace
+      obj
     }
     backupProfiles
     backupSchedules

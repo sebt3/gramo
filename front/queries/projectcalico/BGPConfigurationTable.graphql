@@ -12,6 +12,7 @@ query ProjectcalicoBGPConfigurations {
       }
       name
       namespace
+      obj
     }
     asNumber
     bindMode

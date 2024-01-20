@@ -12,8 +12,8 @@ mutation SecretgeneratorSSHKeyPair($namespace: String!, $name: String!, $spec: s
       }
       name
       namespace
+      obj
     }
-    data
     forceRegenerate
     length
     privateKey

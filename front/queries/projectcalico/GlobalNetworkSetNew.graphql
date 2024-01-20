@@ -12,6 +12,7 @@ mutation ProjectcalicoGlobalNetworkSet($name: String!, $spec: projectcalicoGloba
       }
       name
       namespace
+      obj
     }
     nets
   }

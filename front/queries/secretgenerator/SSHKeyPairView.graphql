@@ -30,8 +30,8 @@ query SecretgeneratorSSHKeyPair($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
-    data
     forceRegenerate
     length
     privateKey

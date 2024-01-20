@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','ipamblocks')
             const resList = res.body as ProjectcalicoIPAMBlockList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "allocations": ext.spec['allocations'],
                 "attributes": ext.spec['attributes'],
@@ -31,7 +31,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','ipamblocks', args['name'])
             const ext = res.body as ProjectcalicoIPAMBlock
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "allocations": ext.spec['allocations'],
                 "attributes": ext.spec['attributes'],

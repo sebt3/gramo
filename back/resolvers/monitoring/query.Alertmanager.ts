@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'alertmanagers')
             const resList = res.body as MonitoringAlertmanagerList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalPeers": ext.spec['additionalPeers'],
                 "affinity": ext.spec['affinity'],
                 "alertmanagerConfigMatcherStrategy": ext.spec['alertmanagerConfigMatcherStrategy'],
@@ -75,7 +75,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'alertmanagers', args['name'])
             const ext = res.body as MonitoringAlertmanager
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalPeers": ext.spec['additionalPeers'],
                 "affinity": ext.spec['affinity'],
                 "alertmanagerConfigMatcherStrategy": ext.spec['alertmanagerConfigMatcherStrategy'],

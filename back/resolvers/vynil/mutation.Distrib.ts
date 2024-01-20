@@ -24,7 +24,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('vynil.solidite.fr','v1','distribs', payload)
             const ext = res.body as VynilDistrib
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "branch": ext.spec['branch'],
                 "insecure": ext.spec['insecure'],
                 "login": ext.spec['login'],
@@ -65,7 +65,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('vynil.solidite.fr','v1','distribs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as VynilDistrib
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "branch": ext.spec['branch'],
                 "insecure": ext.spec['insecure'],
                 "login": ext.spec['login'],
@@ -87,7 +87,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('vynil.solidite.fr','v1','distribs', args['name'])
         const ext = res.body as VynilDistrib
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "branch": ext.spec['branch'],
             "insecure": ext.spec['insecure'],
             "login": ext.spec['login'],

@@ -13,6 +13,7 @@ query K8upSchedules {
       }
       name
       namespace
+      obj
     }
     archive {
       activeDeadlineSeconds

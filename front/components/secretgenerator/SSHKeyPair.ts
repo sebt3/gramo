@@ -11,10 +11,10 @@ export const sSHKeyPairAllColumns = ([
 ] as Array<QTableColumn>).concat(sSHKeyPairColumns);
 
 export function useSSHKeyPair() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotSSHKeyPairFound: (res) => {
       if ( !res.loading && res.data.secretgeneratorSSHKeyPair == null) {
         const matched = router.currentRoute.value.matched

@@ -30,6 +30,7 @@ query K8upSnapshot($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     date
     id

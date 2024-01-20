@@ -28,7 +28,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'alerts', payload)
             const ext = res.body as FluxcdAlert
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "eventMetadata": ext.spec['eventMetadata'],
                 "eventSeverity": ext.spec['eventSeverity'],
                 "eventSources": ext.spec['eventSources'],
@@ -76,7 +76,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'alerts', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdAlert
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "eventMetadata": ext.spec['eventMetadata'],
                 "eventSeverity": ext.spec['eventSeverity'],
                 "eventSources": ext.spec['eventSources'],
@@ -101,7 +101,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'alerts', args['name'])
         const ext = res.body as FluxcdAlert
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "eventMetadata": ext.spec['eventMetadata'],
             "eventSeverity": ext.spec['eventSeverity'],
             "eventSources": ext.spec['eventSources'],

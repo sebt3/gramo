@@ -12,6 +12,7 @@ mutation FluxcdImageUpdateAutomation($namespace: String!, $name: String!, $spec:
       }
       name
       namespace
+      obj
     }
     git {
       checkout {

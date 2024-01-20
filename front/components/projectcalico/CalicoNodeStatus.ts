@@ -8,10 +8,10 @@ export const calicoNodeStatusColumns:Array<QTableColumn> = [
 ];
 
 export function useCalicoNodeStatus() {
-  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotCalicoNodeStatusFound: (res) => {
       if ( !res.loading && res.data.projectcalicoCalicoNodeStatus == null) {
         const matched = router.currentRoute.value.matched

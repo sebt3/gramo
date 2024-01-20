@@ -13,6 +13,7 @@ query RabbitmqRabbitmqClusters($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

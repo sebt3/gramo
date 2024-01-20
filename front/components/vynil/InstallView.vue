@@ -3,11 +3,12 @@ import vynilInstallQuery from '@/queries/vynil/InstallView.graphql'
 import installDelete from '@/queries/vynil/InstallDelete.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import MonacoViewer from '../core/MonacoViewer.vue';
 import { useInstall, useMutation, useQuery } from './Install.js'
-const { deleteDone, deleteError, onErrorHandler, onNotInstallFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete, toViewReloaded } = useInstall();setNamespacedItemFromRoute();
+const { viewer, viewerUpdate, deleteDone, deleteError, onErrorHandler, onNotInstallFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete, toViewReloaded } = useInstall();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem}, { pollInterval: 500 });
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(installDelete);
-onResult(onNotInstallFound);onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
+onResult(res => {onNotInstallFound(res);viewerUpdate(res, res.data.vynilInstall.metadata.obj)});onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -81,17 +82,27 @@ onResult(onNotInstallFound);onError(onErrorHandler);onDeleteDone(deleteDone);onD
       </q-card>
     </div>
   </div>
-    <q-card v-if="!loading && result!=null && result.vynilInstall!=null">
-      <q-card-section>
-        <div class="text-h5 q-mt-none q-mb-none">Options</div>
-      </q-card-section>
-      <q-card-section>
+  <q-card v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
+    <q-tabs v-model="viewer.tab" class="bg-primary text-white">
+      <q-tab label="Options" name="simple" />
+      <q-tab label="Specifications" name="spec" />
+      <q-tab label="full Yaml" name="yaml" />
+    </q-tabs>
+    <q-tab-panels v-model="viewer.tab" animated>
+      <q-tab-panel name="simple">
         <OpenApiEdit
             :in="result.vynilInstall.options"
             :properties="new Map(Object.entries(result.vynilInstall.component.options))"
             :read-only="true"
             :show-default="false"
           />
-      </q-card-section>
-    </q-card>
+      </q-tab-panel>
+      <q-tab-panel name="spec">
+        <MonacoViewer :text="viewer.spec" :key="viewer.spec" />
+      </q-tab-panel>
+      <q-tab-panel name="yaml">
+        <MonacoViewer :text="viewer.full" :key="viewer.spec" />
+      </q-tab-panel>
+    </q-tab-panels>
+  </q-card>
 </template>

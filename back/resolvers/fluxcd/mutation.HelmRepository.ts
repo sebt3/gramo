@@ -29,7 +29,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmrepositories', payload)
             const ext = res.body as FluxcdHelmRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "interval": ext.spec['interval'],
                 "passCredentials": ext.spec['passCredentials'],
@@ -81,7 +81,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmrepositories', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdHelmRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "interval": ext.spec['interval'],
                 "passCredentials": ext.spec['passCredentials'],
@@ -109,7 +109,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmrepositories', args['name'])
         const ext = res.body as FluxcdHelmRepository
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "accessFrom": ext.spec['accessFrom'],
             "interval": ext.spec['interval'],
             "passCredentials": ext.spec['passCredentials'],

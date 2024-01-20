@@ -13,10 +13,10 @@ export const restoreAllColumns = ([
 ] as Array<QTableColumn>).concat(restoreColumns);
 
 export function useRestore() {
-  const { router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
+  const { viewer, viewerUpdate, router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, setNamespacedItemFromRoute } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    viewer, viewerUpdate, router, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotRestoreFound: (res) => {
       if ( !res.loading && res.data.mariadbRestore == null) {
         const matched = router.currentRoute.value.matched

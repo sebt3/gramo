@@ -30,6 +30,7 @@ query FluxcdOCIRepository($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     certSecretRef {
       name

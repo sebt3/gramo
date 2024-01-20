@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'scheduledbackups')
             const resList = res.body as PostgresqlScheduledBackupList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupOwnerReference": ext.spec['backupOwnerReference'],
                 "cluster": ext.spec['cluster'],
                 "immediate": ext.spec['immediate'],
@@ -32,7 +32,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'scheduledbackups', args['name'])
             const ext = res.body as PostgresqlScheduledBackup
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupOwnerReference": ext.spec['backupOwnerReference'],
                 "cluster": ext.spec['cluster'],
                 "immediate": ext.spec['immediate'],

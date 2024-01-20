@@ -12,6 +12,7 @@ mutation VynilDistrib($name: String!, $spec: vynilDistribSpec!) {
       }
       name
       namespace
+      obj
     }
     branch
     insecure

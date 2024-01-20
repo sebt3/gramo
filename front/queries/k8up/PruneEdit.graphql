@@ -12,6 +12,7 @@ mutation K8upPrune($namespace: String!, $name: String!, $spec: k8upPruneSpec!) {
       }
       name
       namespace
+      obj
     }
     activeDeadlineSeconds
     backend {

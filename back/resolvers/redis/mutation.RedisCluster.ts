@@ -36,7 +36,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redisclusters', payload)
             const ext = res.body as RedisRedisCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "clusterSize": ext.spec['clusterSize'],
                 "clusterVersion": ext.spec['clusterVersion'],
@@ -97,7 +97,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redisclusters', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as RedisRedisCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "clusterSize": ext.spec['clusterSize'],
                 "clusterVersion": ext.spec['clusterVersion'],
@@ -127,7 +127,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redisclusters', args['name'])
         const ext = res.body as RedisRedisCluster
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "TLS": ext.spec['TLS'],
             "clusterSize": ext.spec['clusterSize'],
             "clusterVersion": ext.spec['clusterVersion'],

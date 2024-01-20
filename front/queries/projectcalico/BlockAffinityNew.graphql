@@ -12,6 +12,7 @@ mutation ProjectcalicoBlockAffinity($name: String!, $spec: projectcalicoBlockAff
       }
       name
       namespace
+      obj
     }
     cidr
     deleted

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'servicemonitors')
             const resList = res.body as MonitoringServiceMonitorList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "endpoints": ext.spec['endpoints'],
                 "jobLabel": ext.spec['jobLabel'],
@@ -33,7 +33,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'servicemonitors', args['name'])
             const ext = res.body as MonitoringServiceMonitor
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "endpoints": ext.spec['endpoints'],
                 "jobLabel": ext.spec['jobLabel'],

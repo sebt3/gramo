@@ -12,6 +12,7 @@ mutation FluxcdHelmRelease($namespace: String!, $name: String!, $spec: fluxcdHel
       }
       name
       namespace
+      obj
     }
     chart {
       spec {

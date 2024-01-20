@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','caliconodestatuses')
             const resList = res.body as ProjectcalicoCalicoNodeStatusList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "classes": ext.spec['classes'],
                 "node": ext.spec['node'],
                 "updatePeriodSeconds": ext.spec['updatePeriodSeconds'],
@@ -31,7 +31,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','caliconodestatuses', args['name'])
             const ext = res.body as ProjectcalicoCalicoNodeStatus
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "classes": ext.spec['classes'],
                 "node": ext.spec['node'],
                 "updatePeriodSeconds": ext.spec['updatePeriodSeconds'],

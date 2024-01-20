@@ -30,6 +30,7 @@ query MonitoringServiceMonitor($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     attachMetadata {
       node

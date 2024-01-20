@@ -4,9 +4,10 @@ import hostEndpointDelete from '@/queries/projectcalico/HostEndpointDelete.graph
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
+import MonacoViewer from '../core/MonacoViewer.vue';
 import { ref, useQuery, useMutation, useHostEndpoint, getProperties } from './HostEndpoint.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotHostEndpointFound, navigation, setItemFromRoute, toEdit, actionDelete } = useHostEndpoint();setItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(projectcalicoHostEndpointQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(onNotHostEndpointFound);
+const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotHostEndpointFound, navigation, setItemFromRoute, toEdit, actionDelete } = useHostEndpoint();setItemFromRoute();
+const { result, loading, onResult, onError } = useQuery(projectcalicoHostEndpointQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotHostEndpointFound(res);viewerUpdate(res, res.data.projectcalicoHostEndpoint.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(hostEndpointDelete);
 onDeleteDone(() => {
   notifySuccess('Deletion proceded');
@@ -46,17 +47,27 @@ onDeleteError((err) => {
       </q-card>
     </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.projectcalicoHostEndpoint!=undefined && result.projectcalicoHostEndpoint!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
-        </q-card-section>
-        <q-card-section>
-          <OpenApiEdit
-            :in="result.projectcalicoHostEndpoint"
-            :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            :read-only="true"
-            :show-default="false"
-          />
-        </q-card-section>
+        <q-tabs v-model="viewer.tab" class="bg-primary text-white">
+          <q-tab label="Options" name="simple" />
+          <q-tab label="Specifications" name="spec" />
+          <q-tab label="full Yaml" name="yaml" />
+        </q-tabs>
+        <q-tab-panels v-model="viewer.tab" animated>
+          <q-tab-panel name="simple">
+            <OpenApiEdit
+              :in="result.projectcalicoHostEndpoint"
+              :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+              :read-only="true"
+              :show-default="false"
+            />
+          </q-tab-panel>
+          <q-tab-panel name="spec">
+            <MonacoViewer :text="viewer.spec" :key="viewer.spec" />
+          </q-tab-panel>
+          <q-tab-panel name="yaml">
+            <MonacoViewer :text="viewer.full" :key="viewer.spec" />
+          </q-tab-panel>
+        </q-tab-panels>
       </q-card>
     </div>
   </div>

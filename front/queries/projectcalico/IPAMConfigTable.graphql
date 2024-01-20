@@ -12,6 +12,7 @@ query ProjectcalicoIPAMConfigs {
       }
       name
       namespace
+      obj
     }
     autoAllocateBlocks
     maxBlocksPerHost

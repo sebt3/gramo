@@ -30,6 +30,7 @@ query FluxcdAlert($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     eventSeverity
     eventSources {

@@ -12,6 +12,7 @@ mutation MonitoringProbe($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     authorization {
       credentials {

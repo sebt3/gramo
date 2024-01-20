@@ -13,6 +13,7 @@ query PostgresqlClusters {
       }
       name
       namespace
+      obj
     }
     affinity {
       additionalPodAffinity {

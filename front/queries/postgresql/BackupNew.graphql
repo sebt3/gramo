@@ -12,6 +12,7 @@ mutation PostgresqlBackup($namespace: String!, $name: String!, $spec: postgresql
       }
       name
       namespace
+      obj
     }
     cluster {
       name

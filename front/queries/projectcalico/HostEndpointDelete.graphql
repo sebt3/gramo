@@ -12,6 +12,7 @@ mutation ProjectcalicoHostEndpoint($name: String!) {
       }
       name
       namespace
+      obj
     }
     expectedIPs
     interfaceName

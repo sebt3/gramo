@@ -12,6 +12,7 @@ mutation MonitoringPrometheusRule($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     groups {
       interval

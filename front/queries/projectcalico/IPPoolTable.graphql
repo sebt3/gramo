@@ -12,6 +12,7 @@ query ProjectcalicoIPPools {
       }
       name
       namespace
+      obj
     }
     allowedUses
     blockSize
@@ -23,6 +24,7 @@ query ProjectcalicoIPPools {
       mode
     }
     ipipMode
+    nat-outgoing
     natOutgoing
     nodeSelector
     vxlanMode

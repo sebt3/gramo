@@ -12,6 +12,7 @@ mutation MysqlMySQLBackup($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     addTimestampToBackupDirectory
     backupProfileName

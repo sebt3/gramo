@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','ippools')
             const resList = res.body as ProjectcalicoIPPoolList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowedUses": ext.spec['allowedUses'],
                 "blockSize": ext.spec['blockSize'],
                 "cidr": ext.spec['cidr'],
@@ -33,7 +33,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','ippools', args['name'])
             const ext = res.body as ProjectcalicoIPPool
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowedUses": ext.spec['allowedUses'],
                 "blockSize": ext.spec['blockSize'],
                 "cidr": ext.spec['cidr'],

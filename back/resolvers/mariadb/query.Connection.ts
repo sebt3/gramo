@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'connections')
             const resList = res.body as MariadbConnectionList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "healthCheck": ext.spec['healthCheck'],
                 "mariaDbRef": ext.spec['mariaDbRef'],
@@ -33,7 +33,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'connections', args['name'])
             const ext = res.body as MariadbConnection
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "healthCheck": ext.spec['healthCheck'],
                 "mariaDbRef": ext.spec['mariaDbRef'],

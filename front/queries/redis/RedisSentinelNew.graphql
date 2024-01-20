@@ -12,6 +12,7 @@ mutation RedisRedisSentinel($namespace: String!, $name: String!, $spec: redisRed
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

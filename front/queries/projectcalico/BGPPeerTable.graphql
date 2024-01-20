@@ -12,6 +12,7 @@ query ProjectcalicoBGPPeers {
       }
       name
       namespace
+      obj
     }
     asNumber
     keepOriginalNextHop

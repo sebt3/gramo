@@ -30,6 +30,7 @@ query ProjectcalicoNetworkPolicy($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     egress {
       action

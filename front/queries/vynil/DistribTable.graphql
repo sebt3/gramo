@@ -11,6 +11,7 @@ query VynilDistribs {
         value
       }
       name
+      obj
     }
     branch
     insecure

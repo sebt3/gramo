@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'clusters')
             const resList = res.body as PostgresqlClusterList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "backup": ext.spec['backup'],
                 "bootstrap": ext.spec['bootstrap'],
@@ -101,7 +101,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'clusters', args['name'])
             const ext = res.body as PostgresqlCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "backup": ext.spec['backup'],
                 "bootstrap": ext.spec['bootstrap'],

@@ -12,6 +12,7 @@ mutation ProjectcalicoBGPPeer($name: String!) {
       }
       name
       namespace
+      obj
     }
     asNumber
     keepOriginalNextHop

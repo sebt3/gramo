@@ -12,6 +12,7 @@ mutation PostgresqlCluster($namespace: String!, $name: String!, $spec: postgresq
       }
       name
       namespace
+      obj
     }
     affinity {
       additionalPodAffinity {

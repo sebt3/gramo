@@ -108,7 +108,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheuses', payload)
             const ext = res.body as MonitoringPrometheus
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalAlertManagerConfigs": ext.spec['additionalAlertManagerConfigs'],
                 "additionalAlertRelabelConfigs": ext.spec['additionalAlertRelabelConfigs'],
                 "additionalArgs": ext.spec['additionalArgs'],
@@ -320,7 +320,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheuses', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringPrometheus
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalAlertManagerConfigs": ext.spec['additionalAlertManagerConfigs'],
                 "additionalAlertRelabelConfigs": ext.spec['additionalAlertRelabelConfigs'],
                 "additionalArgs": ext.spec['additionalArgs'],
@@ -429,7 +429,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheuses', args['name'])
         const ext = res.body as MonitoringPrometheus
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "additionalAlertManagerConfigs": ext.spec['additionalAlertManagerConfigs'],
             "additionalAlertRelabelConfigs": ext.spec['additionalAlertRelabelConfigs'],
             "additionalArgs": ext.spec['additionalArgs'],

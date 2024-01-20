@@ -24,7 +24,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','hostendpoints', payload)
             const ext = res.body as ProjectcalicoHostEndpoint
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "expectedIPs": ext.spec['expectedIPs'],
                 "interfaceName": ext.spec['interfaceName'],
                 "node": ext.spec['node'],
@@ -60,7 +60,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','hostendpoints', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoHostEndpoint
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "expectedIPs": ext.spec['expectedIPs'],
                 "interfaceName": ext.spec['interfaceName'],
                 "node": ext.spec['node'],
@@ -77,7 +77,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','hostendpoints', args['name'])
         const ext = res.body as ProjectcalicoHostEndpoint
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "expectedIPs": ext.spec['expectedIPs'],
             "interfaceName": ext.spec['interfaceName'],
             "node": ext.spec['node'],

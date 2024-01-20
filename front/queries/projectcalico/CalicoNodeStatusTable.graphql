@@ -12,6 +12,7 @@ query ProjectcalicoCalicoNodeStatuss {
       }
       name
       namespace
+      obj
     }
     classes
     node

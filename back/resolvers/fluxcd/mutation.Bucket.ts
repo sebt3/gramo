@@ -31,7 +31,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'buckets', payload)
             const ext = res.body as FluxcdBucket
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "bucketName": ext.spec['bucketName'],
                 "endpoint": ext.spec['endpoint'],
@@ -88,7 +88,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'buckets', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdBucket
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "bucketName": ext.spec['bucketName'],
                 "endpoint": ext.spec['endpoint'],
@@ -119,7 +119,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'buckets', args['name'])
         const ext = res.body as FluxcdBucket
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "accessFrom": ext.spec['accessFrom'],
             "bucketName": ext.spec['bucketName'],
             "endpoint": ext.spec['endpoint'],

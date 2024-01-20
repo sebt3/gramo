@@ -12,8 +12,8 @@ mutation SecretgeneratorBasicAuth($namespace: String!, $name: String!, $spec: se
       }
       name
       namespace
+      obj
     }
-    data
     encoding
     forceRegenerate
     length

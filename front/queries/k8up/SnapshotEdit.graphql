@@ -12,6 +12,7 @@ mutation K8upSnapshot($namespace: String!, $name: String!, $spec: k8upSnapshotSp
       }
       name
       namespace
+      obj
     }
     date
     id

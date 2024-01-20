@@ -12,6 +12,7 @@ mutation ProjectcalicoIPAMConfig($name: String!) {
       }
       name
       namespace
+      obj
     }
     autoAllocateBlocks
     maxBlocksPerHost

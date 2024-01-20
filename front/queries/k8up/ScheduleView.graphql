@@ -30,6 +30,7 @@ query K8upSchedule($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     archive {
       activeDeadlineSeconds

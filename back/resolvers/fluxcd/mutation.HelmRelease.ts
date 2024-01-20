@@ -40,7 +40,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('helm.toolkit.fluxcd.io','v2beta1',args['namespace'],'helmreleases', payload)
             const ext = res.body as FluxcdHelmRelease
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "chart": ext.spec['chart'],
                 "dependsOn": ext.spec['dependsOn'],
                 "install": ext.spec['install'],
@@ -120,7 +120,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('helm.toolkit.fluxcd.io','v2beta1',args['namespace'],'helmreleases', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdHelmRelease
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "chart": ext.spec['chart'],
                 "dependsOn": ext.spec['dependsOn'],
                 "install": ext.spec['install'],
@@ -165,7 +165,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('helm.toolkit.fluxcd.io','v2beta1',args['namespace'],'helmreleases', args['name'])
         const ext = res.body as FluxcdHelmRelease
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "chart": ext.spec['chart'],
             "dependsOn": ext.spec['dependsOn'],
             "install": ext.spec['install'],

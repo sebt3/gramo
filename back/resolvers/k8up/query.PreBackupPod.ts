@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('k8up.io','v1',args['namespace'],'prebackuppods')
             const resList = res.body as K8upPreBackupPodList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupCommand": ext.spec['backupCommand'],
                 "fileExtension": ext.spec['fileExtension'],
                 "pod": ext.spec['pod'],
@@ -24,7 +24,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('k8up.io','v1',args['namespace'],'prebackuppods', args['name'])
             const ext = res.body as K8upPreBackupPod
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupCommand": ext.spec['backupCommand'],
                 "fileExtension": ext.spec['fileExtension'],
                 "pod": ext.spec['pod'],

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('kustomize.toolkit.fluxcd.io','v1',args['namespace'],'kustomizations')
             const resList = res.body as FluxcdKustomizationList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "commonMetadata": ext.spec['commonMetadata'],
                 "components": ext.spec['components'],
                 "decryption": ext.spec['decryption'],
@@ -49,7 +49,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('kustomize.toolkit.fluxcd.io','v1',args['namespace'],'kustomizations', args['name'])
             const ext = res.body as FluxcdKustomization
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "commonMetadata": ext.spec['commonMetadata'],
                 "components": ext.spec['components'],
                 "decryption": ext.spec['decryption'],

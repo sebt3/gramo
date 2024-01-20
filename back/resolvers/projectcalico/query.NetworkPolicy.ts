@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('crd.projectcalico.org','v1',args['namespace'],'networkpolicies')
             const resList = res.body as ProjectcalicoNetworkPolicyList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "egress": ext.spec['egress'],
                 "ingress": ext.spec['ingress'],
                 "order": ext.spec['order'],
@@ -27,7 +27,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('crd.projectcalico.org','v1',args['namespace'],'networkpolicies', args['name'])
             const ext = res.body as ProjectcalicoNetworkPolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "egress": ext.spec['egress'],
                 "ingress": ext.spec['ingress'],
                 "order": ext.spec['order'],

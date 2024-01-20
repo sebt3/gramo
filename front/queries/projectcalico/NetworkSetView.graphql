@@ -30,6 +30,7 @@ query ProjectcalicoNetworkSet($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     nets
   }

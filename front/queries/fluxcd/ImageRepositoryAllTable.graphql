@@ -13,6 +13,7 @@ query FluxcdImageRepositorys {
       }
       name
       namespace
+      obj
     }
     certSecretRef {
       name

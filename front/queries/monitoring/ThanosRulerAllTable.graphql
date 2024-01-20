@@ -13,6 +13,7 @@ query MonitoringThanosRulers {
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

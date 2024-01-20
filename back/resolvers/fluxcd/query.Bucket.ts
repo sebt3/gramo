@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'buckets')
             const resList = res.body as FluxcdBucketList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "bucketName": ext.spec['bucketName'],
                 "endpoint": ext.spec['endpoint'],
@@ -40,7 +40,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'buckets', args['name'])
             const ext = res.body as FluxcdBucket
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "bucketName": ext.spec['bucketName'],
                 "endpoint": ext.spec['endpoint'],

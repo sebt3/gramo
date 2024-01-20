@@ -13,6 +13,7 @@ query FluxcdReceivers($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     events
     interval

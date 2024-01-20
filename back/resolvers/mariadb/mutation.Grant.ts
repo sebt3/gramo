@@ -28,7 +28,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'grants', payload)
             const ext = res.body as MariadbGrant
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "grantOption": ext.spec['grantOption'],
                 "host": ext.spec['host'],
@@ -74,7 +74,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'grants', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MariadbGrant
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "database": ext.spec['database'],
                 "grantOption": ext.spec['grantOption'],
                 "host": ext.spec['host'],
@@ -97,7 +97,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'grants', args['name'])
         const ext = res.body as MariadbGrant
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "database": ext.spec['database'],
             "grantOption": ext.spec['grantOption'],
             "host": ext.spec['host'],

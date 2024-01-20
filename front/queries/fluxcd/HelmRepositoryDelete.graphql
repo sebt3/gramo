@@ -12,6 +12,7 @@ mutation FluxcdHelmRepository($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     interval
     passCredentials

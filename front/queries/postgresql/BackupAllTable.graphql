@@ -13,6 +13,7 @@ query PostgresqlBackups {
       }
       name
       namespace
+      obj
     }
     cluster {
       name

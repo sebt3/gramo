@@ -13,6 +13,7 @@ query PostgresqlPoolers($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     cluster {
       name

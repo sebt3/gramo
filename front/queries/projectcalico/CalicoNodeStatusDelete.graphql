@@ -12,6 +12,7 @@ mutation ProjectcalicoCalicoNodeStatus($name: String!) {
       }
       name
       namespace
+      obj
     }
     classes
     node

@@ -13,6 +13,7 @@ query PostgresqlScheduledBackups {
       }
       name
       namespace
+      obj
     }
     backupOwnerReference
     cluster {

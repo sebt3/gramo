@@ -10,7 +10,7 @@ export const queries = {
         try {
             const extRes = await extApi.listCustomResourceDefinition();
             return extRes.body.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 group: ext.spec.group,
                 scope: ext.spec.scope,
                 names: ext.spec.names,
@@ -26,7 +26,7 @@ export const queries = {
         try {
             const extRes = await extApi.readCustomResourceDefinition(args["name"]);
             return {
-                metadata: getMetadata(extRes.body.metadata),
+                metadata: getMetadata(extRes.body.metadata, extRes.body),
                 group: extRes.body.spec.group,
                 scope: extRes.body.spec.scope,
                 names: extRes.body.spec.names,

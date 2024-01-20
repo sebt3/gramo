@@ -12,6 +12,7 @@ query VynilInstalls($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     auto_upgrade
     category {

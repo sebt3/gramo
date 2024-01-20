@@ -12,6 +12,7 @@ mutation FluxcdOCIRepository($namespace: String!, $name: String!, $spec: fluxcdO
       }
       name
       namespace
+      obj
     }
     certSecretRef {
       name

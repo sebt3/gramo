@@ -12,6 +12,7 @@ query ProjectcalicoIPAMHandles {
       }
       name
       namespace
+      obj
     }
     deleted
     handleID

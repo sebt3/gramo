@@ -30,6 +30,7 @@ query MonitoringAlertmanagerConfig($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     inhibitRules {
       equal

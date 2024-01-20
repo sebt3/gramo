@@ -66,7 +66,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'alertmanagers', payload)
             const ext = res.body as MonitoringAlertmanager
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalPeers": ext.spec['additionalPeers'],
                 "affinity": ext.spec['affinity'],
                 "alertmanagerConfigMatcherStrategy": ext.spec['alertmanagerConfigMatcherStrategy'],
@@ -193,7 +193,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'alertmanagers', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringAlertmanager
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalPeers": ext.spec['additionalPeers'],
                 "affinity": ext.spec['affinity'],
                 "alertmanagerConfigMatcherStrategy": ext.spec['alertmanagerConfigMatcherStrategy'],
@@ -259,7 +259,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'alertmanagers', args['name'])
         const ext = res.body as MonitoringAlertmanager
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "additionalPeers": ext.spec['additionalPeers'],
             "affinity": ext.spec['affinity'],
             "alertmanagerConfigMatcherStrategy": ext.spec['alertmanagerConfigMatcherStrategy'],

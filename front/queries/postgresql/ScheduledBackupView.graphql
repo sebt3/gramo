@@ -30,6 +30,7 @@ query PostgresqlScheduledBackup($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     backupOwnerReference
     cluster {

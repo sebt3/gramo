@@ -12,6 +12,7 @@ mutation ProjectcalicoBGPConfiguration($name: String!, $spec: projectcalicoBGPCo
       }
       name
       namespace
+      obj
     }
     asNumber
     bindMode

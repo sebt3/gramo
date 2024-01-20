@@ -13,8 +13,8 @@ query SecretgeneratorBasicAuths {
       }
       name
       namespace
+      obj
     }
-    data
     encoding
     forceRegenerate
     length

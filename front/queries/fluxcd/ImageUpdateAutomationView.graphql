@@ -30,6 +30,7 @@ query FluxcdImageUpdateAutomation($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     git {
       checkout {

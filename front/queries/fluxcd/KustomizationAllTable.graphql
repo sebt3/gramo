@@ -13,6 +13,7 @@ query FluxcdKustomizations {
       }
       name
       namespace
+      obj
     }
     components
     decryption {

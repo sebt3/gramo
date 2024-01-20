@@ -13,6 +13,7 @@ query ProjectcalicoNetworkPolicys {
       }
       name
       namespace
+      obj
     }
     egress {
       action

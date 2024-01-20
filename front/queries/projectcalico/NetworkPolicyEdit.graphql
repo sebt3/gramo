@@ -12,6 +12,7 @@ mutation ProjectcalicoNetworkPolicy($namespace: String!, $name: String!, $spec: 
       }
       name
       namespace
+      obj
     }
     egress {
       action

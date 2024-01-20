@@ -13,6 +13,7 @@ query FluxcdOCIRepositorys {
       }
       name
       namespace
+      obj
     }
     certSecretRef {
       name

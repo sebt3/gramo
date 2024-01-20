@@ -13,6 +13,7 @@ query MysqlInnoDBClusters($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     backupProfiles
     backupSchedules

@@ -12,6 +12,7 @@ mutation ProjectcalicoIPAMHandle($name: String!, $spec: projectcalicoIPAMHandleS
       }
       name
       namespace
+      obj
     }
     deleted
     handleID

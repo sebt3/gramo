@@ -12,6 +12,7 @@ query ProjectcalicoFelixConfigurations {
       }
       name
       namespace
+      obj
     }
     allowIPIPPacketsFromWorkloads
     allowVXLANPacketsFromWorkloads

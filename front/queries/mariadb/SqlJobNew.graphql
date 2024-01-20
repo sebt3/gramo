@@ -12,6 +12,7 @@ mutation MariadbSqlJob($namespace: String!, $name: String!, $spec: mariadbSqlJob
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

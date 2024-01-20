@@ -12,6 +12,7 @@ mutation MonitoringAlertmanagerConfig($namespace: String!, $name: String!, $spec
       }
       name
       namespace
+      obj
     }
     inhibitRules {
       equal

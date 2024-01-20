@@ -12,6 +12,7 @@ mutation FluxcdKustomization($namespace: String!, $name: String!, $spec: fluxcdK
       }
       name
       namespace
+      obj
     }
     components
     decryption {

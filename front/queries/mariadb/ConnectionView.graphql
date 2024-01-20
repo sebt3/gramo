@@ -30,6 +30,7 @@ query MariadbConnection($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     database
     healthCheck {

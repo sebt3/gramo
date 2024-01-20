@@ -12,6 +12,7 @@ mutation ProjectcalicoIPAMBlock($name: String!, $spec: projectcalicoIPAMBlockSpe
       }
       name
       namespace
+      obj
     }
     affinity
     allocations

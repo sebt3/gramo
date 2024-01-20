@@ -141,7 +141,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','felixconfigurations', payload)
             const ext = res.body as ProjectcalicoFelixConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowIPIPPacketsFromWorkloads": ext.spec['allowIPIPPacketsFromWorkloads'],
                 "allowVXLANPacketsFromWorkloads": ext.spec['allowVXLANPacketsFromWorkloads'],
                 "awsSrcDstCheck": ext.spec['awsSrcDstCheck'],
@@ -411,7 +411,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','felixconfigurations', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoFelixConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "allowIPIPPacketsFromWorkloads": ext.spec['allowIPIPPacketsFromWorkloads'],
                 "allowVXLANPacketsFromWorkloads": ext.spec['allowVXLANPacketsFromWorkloads'],
                 "awsSrcDstCheck": ext.spec['awsSrcDstCheck'],
@@ -545,7 +545,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','felixconfigurations', args['name'])
         const ext = res.body as ProjectcalicoFelixConfiguration
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "allowIPIPPacketsFromWorkloads": ext.spec['allowIPIPPacketsFromWorkloads'],
             "allowVXLANPacketsFromWorkloads": ext.spec['allowVXLANPacketsFromWorkloads'],
             "awsSrcDstCheck": ext.spec['awsSrcDstCheck'],

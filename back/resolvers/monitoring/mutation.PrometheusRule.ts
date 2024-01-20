@@ -21,7 +21,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheusrules', payload)
             const ext = res.body as MonitoringPrometheusRule
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "groups": ext.spec['groups'],
             }
         } catch (err) {
@@ -50,7 +50,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheusrules', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringPrometheusRule
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "groups": ext.spec['groups'],
             }
         } catch (err) {
@@ -63,7 +63,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheusrules', args['name'])
         const ext = res.body as MonitoringPrometheusRule
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "groups": ext.spec['groups'],
         }
     } catch (err) {

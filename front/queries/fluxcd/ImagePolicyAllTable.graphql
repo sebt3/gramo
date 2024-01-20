@@ -13,6 +13,7 @@ query FluxcdImagePolicys {
       }
       name
       namespace
+      obj
     }
     filterTags {
       extract

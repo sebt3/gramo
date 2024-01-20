@@ -12,6 +12,7 @@ mutation MariadbConnection($namespace: String!, $name: String!, $spec: mariadbCo
       }
       name
       namespace
+      obj
     }
     database
     healthCheck {

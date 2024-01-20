@@ -24,7 +24,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','clusterinformations', payload)
             const ext = res.body as ProjectcalicoClusterInformation
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "calicoVersion": ext.spec['calicoVersion'],
                 "clusterGUID": ext.spec['clusterGUID'],
                 "clusterType": ext.spec['clusterType'],
@@ -60,7 +60,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','clusterinformations', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoClusterInformation
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "calicoVersion": ext.spec['calicoVersion'],
                 "clusterGUID": ext.spec['clusterGUID'],
                 "clusterType": ext.spec['clusterType'],
@@ -77,7 +77,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','clusterinformations', args['name'])
         const ext = res.body as ProjectcalicoClusterInformation
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "calicoVersion": ext.spec['calicoVersion'],
             "clusterGUID": ext.spec['clusterGUID'],
             "clusterType": ext.spec['clusterType'],

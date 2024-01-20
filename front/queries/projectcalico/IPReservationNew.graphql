@@ -12,6 +12,7 @@ mutation ProjectcalicoIPReservation($name: String!, $spec: projectcalicoIPReserv
       }
       name
       namespace
+      obj
     }
     reservedCIDRs
   }

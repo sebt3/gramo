@@ -12,6 +12,7 @@ query ProjectcalicoGlobalNetworkPolicys {
       }
       name
       namespace
+      obj
     }
     applyOnForward
     doNotTrack

@@ -22,7 +22,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','caliconodestatuses', payload)
             const ext = res.body as ProjectcalicoCalicoNodeStatus
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "classes": ext.spec['classes'],
                 "node": ext.spec['node'],
                 "updatePeriodSeconds": ext.spec['updatePeriodSeconds'],
@@ -60,7 +60,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','caliconodestatuses', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoCalicoNodeStatus
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "classes": ext.spec['classes'],
                 "node": ext.spec['node'],
                 "updatePeriodSeconds": ext.spec['updatePeriodSeconds'],
@@ -81,7 +81,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','caliconodestatuses', args['name'])
         const ext = res.body as ProjectcalicoCalicoNodeStatus
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "classes": ext.spec['classes'],
             "node": ext.spec['node'],
             "updatePeriodSeconds": ext.spec['updatePeriodSeconds'],

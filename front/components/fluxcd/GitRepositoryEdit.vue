@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import monaco from 'monaco-editor'
 import fluxcdGitRepositoryQuery from '@/queries/fluxcd/GitRepositoryView.graphql'
 import gitRepositoryEdit from '@/queries/fluxcd/GitRepositoryEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';

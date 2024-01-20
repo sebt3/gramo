@@ -32,7 +32,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mongodbcommunity.mongodb.com','v1',args['namespace'],'mongodbcommunity', payload)
             const ext = res.body as MongodbcommunityMongoDBCommunity
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalMongodConfig": ext.spec['additionalMongodConfig'],
                 "arbiters": ext.spec['arbiters'],
                 "automationConfig": ext.spec['automationConfig'],
@@ -93,7 +93,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mongodbcommunity.mongodb.com','v1',args['namespace'],'mongodbcommunity', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MongodbcommunityMongoDBCommunity
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalMongodConfig": ext.spec['additionalMongodConfig'],
                 "arbiters": ext.spec['arbiters'],
                 "automationConfig": ext.spec['automationConfig'],
@@ -127,7 +127,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mongodbcommunity.mongodb.com','v1',args['namespace'],'mongodbcommunity', args['name'])
         const ext = res.body as MongodbcommunityMongoDBCommunity
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "additionalMongodConfig": ext.spec['additionalMongodConfig'],
             "arbiters": ext.spec['arbiters'],
             "automationConfig": ext.spec['automationConfig'],

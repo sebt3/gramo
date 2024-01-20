@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagepolicies')
             const resList = res.body as FluxcdImagePolicyList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "filterTags": ext.spec['filterTags'],
                 "imageRepositoryRef": ext.spec['imageRepositoryRef'],
                 "policy": ext.spec['policy'],
@@ -30,7 +30,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagepolicies', args['name'])
             const ext = res.body as FluxcdImagePolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "filterTags": ext.spec['filterTags'],
                 "imageRepositoryRef": ext.spec['imageRepositoryRef'],
                 "policy": ext.spec['policy'],

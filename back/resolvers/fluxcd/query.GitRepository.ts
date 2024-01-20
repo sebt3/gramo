@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories')
             const resList = res.body as FluxcdGitRepositoryList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "ignore": ext.spec['ignore'],
                 "include": ext.spec['include'],
                 "interval": ext.spec['interval'],
@@ -41,7 +41,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories', args['name'])
             const ext = res.body as FluxcdGitRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "ignore": ext.spec['ignore'],
                 "include": ext.spec['include'],
                 "interval": ext.spec['interval'],

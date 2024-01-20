@@ -27,7 +27,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'poolers', payload)
             const ext = res.body as PostgresqlPooler
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "deploymentStrategy": ext.spec['deploymentStrategy'],
                 "instances": ext.spec['instances'],
@@ -72,7 +72,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'poolers', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as PostgresqlPooler
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "cluster": ext.spec['cluster'],
                 "deploymentStrategy": ext.spec['deploymentStrategy'],
                 "instances": ext.spec['instances'],
@@ -95,7 +95,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('postgresql.cnpg.io','v1',args['namespace'],'poolers', args['name'])
         const ext = res.body as PostgresqlPooler
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "cluster": ext.spec['cluster'],
             "deploymentStrategy": ext.spec['deploymentStrategy'],
             "instances": ext.spec['instances'],

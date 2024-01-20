@@ -29,7 +29,7 @@ export const lists = {
 {{/if}}
             const resList = res.body as {{ short }}{{ name }}List
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
 {{#each spec.properties}}
                 "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
@@ -60,7 +60,7 @@ export const queries = {
 {{/if}}
             const ext = res.body as {{ short }}{{ name }}
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
 {{#each spec.properties}}
                 "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
@@ -125,7 +125,7 @@ export const mutations = {
 {{/if}}
             const ext = res.body as {{ short }}{{ name }}
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
 {{#each spec.properties}}
                 "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
@@ -189,7 +189,7 @@ export const mutations = {
 {{/if}}
             const ext = res.body as {{ short }}{{ name }}
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
 {{#each spec.properties}}
                 "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}
@@ -215,7 +215,7 @@ export const mutations = {
 {{/if}}
         const ext = res.body as {{ short }}{{ name }}
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
 {{#each spec.properties}}
             "{{@key}}": ext.spec['{{@key}}'],
 {{/each}}

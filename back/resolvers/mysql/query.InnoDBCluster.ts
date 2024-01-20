@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'innodbclusters')
             const resList = res.body as MysqlInnoDBClusterList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupProfiles": ext.spec['backupProfiles'],
                 "backupSchedules": ext.spec['backupSchedules'],
                 "baseServerId": ext.spec['baseServerId'],
@@ -49,7 +49,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('mysql.oracle.com','v2',args['namespace'],'innodbclusters', args['name'])
             const ext = res.body as MysqlInnoDBCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupProfiles": ext.spec['backupProfiles'],
                 "backupSchedules": ext.spec['backupSchedules'],
                 "baseServerId": ext.spec['baseServerId'],

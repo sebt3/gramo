@@ -13,6 +13,7 @@ query FluxcdGitRepositorys {
       }
       name
       namespace
+      obj
     }
     ignore
     include {

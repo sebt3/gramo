@@ -30,6 +30,7 @@ query K8upCheck($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     activeDeadlineSeconds
     backend {

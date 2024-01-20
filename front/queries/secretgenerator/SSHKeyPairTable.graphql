@@ -13,8 +13,8 @@ query SecretgeneratorSSHKeyPairs($namespace: String!) {
       }
       name
       namespace
+      obj
     }
-    data
     forceRegenerate
     length
     privateKey

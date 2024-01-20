@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('vynil.solidite.fr','v1','distribs')
             const resList = res.body as VynilDistribList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "branch": ext.spec['branch'],
                 "insecure": ext.spec['insecure'],
                 "login": ext.spec['login'],
@@ -32,7 +32,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('vynil.solidite.fr','v1','distribs', args['name'])
             const ext = res.body as VynilDistrib
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "branch": ext.spec['branch'],
                 "insecure": ext.spec['insecure'],
                 "login": ext.spec['login'],

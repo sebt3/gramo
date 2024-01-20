@@ -30,6 +30,7 @@ query RedisRedisSentinel($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

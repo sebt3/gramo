@@ -30,7 +30,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagerepositories', payload)
             const ext = res.body as FluxcdImageRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "exclusionList": ext.spec['exclusionList'],
@@ -85,7 +85,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagerepositories', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdImageRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "exclusionList": ext.spec['exclusionList'],
@@ -115,7 +115,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagerepositories', args['name'])
         const ext = res.body as FluxcdImageRepository
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "accessFrom": ext.spec['accessFrom'],
             "certSecretRef": ext.spec['certSecretRef'],
             "exclusionList": ext.spec['exclusionList'],

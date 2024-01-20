@@ -13,6 +13,7 @@ query K8upChecks {
       }
       name
       namespace
+      obj
     }
     activeDeadlineSeconds
     backend {

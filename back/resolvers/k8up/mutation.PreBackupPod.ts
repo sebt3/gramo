@@ -23,7 +23,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('k8up.io','v1',args['namespace'],'prebackuppods', payload)
             const ext = res.body as K8upPreBackupPod
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupCommand": ext.spec['backupCommand'],
                 "fileExtension": ext.spec['fileExtension'],
                 "pod": ext.spec['pod'],
@@ -56,7 +56,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('k8up.io','v1',args['namespace'],'prebackuppods', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as K8upPreBackupPod
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "backupCommand": ext.spec['backupCommand'],
                 "fileExtension": ext.spec['fileExtension'],
                 "pod": ext.spec['pod'],
@@ -71,7 +71,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('k8up.io','v1',args['namespace'],'prebackuppods', args['name'])
         const ext = res.body as K8upPreBackupPod
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "backupCommand": ext.spec['backupCommand'],
             "fileExtension": ext.spec['fileExtension'],
             "pod": ext.spec['pod'],

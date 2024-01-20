@@ -30,7 +30,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories', payload)
             const ext = res.body as FluxcdGitRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "ignore": ext.spec['ignore'],
                 "include": ext.spec['include'],
                 "interval": ext.spec['interval'],
@@ -87,7 +87,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdGitRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "ignore": ext.spec['ignore'],
                 "include": ext.spec['include'],
                 "interval": ext.spec['interval'],
@@ -119,7 +119,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('source.toolkit.fluxcd.io','v1',args['namespace'],'gitrepositories', args['name'])
         const ext = res.body as FluxcdGitRepository
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "ignore": ext.spec['ignore'],
             "include": ext.spec['include'],
             "interval": ext.spec['interval'],

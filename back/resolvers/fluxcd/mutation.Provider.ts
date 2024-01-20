@@ -30,7 +30,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'providers', payload)
             const ext = res.body as FluxcdProvider
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "address": ext.spec['address'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "channel": ext.spec['channel'],
@@ -82,7 +82,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'providers', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdProvider
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "address": ext.spec['address'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "channel": ext.spec['channel'],
@@ -109,7 +109,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('notification.toolkit.fluxcd.io','v1beta2',args['namespace'],'providers', args['name'])
         const ext = res.body as FluxcdProvider
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "address": ext.spec['address'],
             "certSecretRef": ext.spec['certSecretRef'],
             "channel": ext.spec['channel'],

@@ -30,6 +30,7 @@ query ProjectcalicoIPAMHandle($name: String!) {
       }
       name
       namespace
+      obj
     }
     deleted
     handleID

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'podmonitors')
             const resList = res.body as MonitoringPodMonitorList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "jobLabel": ext.spec['jobLabel'],
                 "labelLimit": ext.spec['labelLimit'],
@@ -32,7 +32,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'podmonitors', args['name'])
             const ext = res.body as MonitoringPodMonitor
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "attachMetadata": ext.spec['attachMetadata'],
                 "jobLabel": ext.spec['jobLabel'],
                 "labelLimit": ext.spec['labelLimit'],

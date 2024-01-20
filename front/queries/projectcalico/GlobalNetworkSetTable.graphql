@@ -12,6 +12,7 @@ query ProjectcalicoGlobalNetworkSets {
       }
       name
       namespace
+      obj
     }
     nets
   }

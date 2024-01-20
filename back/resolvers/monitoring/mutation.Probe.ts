@@ -37,7 +37,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'probes', payload)
             const ext = res.body as MonitoringProbe
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "authorization": ext.spec['authorization'],
                 "basicAuth": ext.spec['basicAuth'],
                 "bearerTokenSecret": ext.spec['bearerTokenSecret'],
@@ -98,7 +98,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'probes', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringProbe
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "authorization": ext.spec['authorization'],
                 "basicAuth": ext.spec['basicAuth'],
                 "bearerTokenSecret": ext.spec['bearerTokenSecret'],
@@ -127,7 +127,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'probes', args['name'])
         const ext = res.body as MonitoringProbe
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "authorization": ext.spec['authorization'],
             "basicAuth": ext.spec['basicAuth'],
             "bearerTokenSecret": ext.spec['bearerTokenSecret'],

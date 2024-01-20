@@ -34,7 +34,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redis', payload)
             const ext = res.body as RedisRedis
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "affinity": ext.spec['affinity'],
                 "kubernetesConfig": ext.spec['kubernetesConfig'],
@@ -91,7 +91,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redis', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as RedisRedis
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "TLS": ext.spec['TLS'],
                 "affinity": ext.spec['affinity'],
                 "kubernetesConfig": ext.spec['kubernetesConfig'],
@@ -119,7 +119,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('redis.redis.opstreelabs.in','v1beta1',args['namespace'],'redis', args['name'])
         const ext = res.body as RedisRedis
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "TLS": ext.spec['TLS'],
             "affinity": ext.spec['affinity'],
             "kubernetesConfig": ext.spec['kubernetesConfig'],

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagerepositories')
             const resList = res.body as FluxcdImageRepositoryList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "exclusionList": ext.spec['exclusionList'],
@@ -39,7 +39,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagerepositories', args['name'])
             const ext = res.body as FluxcdImageRepository
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "certSecretRef": ext.spec['certSecretRef'],
                 "exclusionList": ext.spec['exclusionList'],

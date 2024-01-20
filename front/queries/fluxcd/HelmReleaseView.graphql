@@ -30,6 +30,7 @@ query FluxcdHelmRelease($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     chart {
       spec {

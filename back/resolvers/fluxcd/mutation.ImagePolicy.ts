@@ -23,7 +23,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagepolicies', payload)
             const ext = res.body as FluxcdImagePolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "filterTags": ext.spec['filterTags'],
                 "imageRepositoryRef": ext.spec['imageRepositoryRef'],
                 "policy": ext.spec['policy'],
@@ -62,7 +62,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagepolicies', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdImagePolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "filterTags": ext.spec['filterTags'],
                 "imageRepositoryRef": ext.spec['imageRepositoryRef'],
                 "policy": ext.spec['policy'],
@@ -83,7 +83,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta2',args['namespace'],'imagepolicies', args['name'])
         const ext = res.body as FluxcdImagePolicy
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "filterTags": ext.spec['filterTags'],
             "imageRepositoryRef": ext.spec['imageRepositoryRef'],
             "policy": ext.spec['policy'],

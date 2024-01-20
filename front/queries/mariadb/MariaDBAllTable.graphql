@@ -13,6 +13,7 @@ query MariadbMariaDBs {
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

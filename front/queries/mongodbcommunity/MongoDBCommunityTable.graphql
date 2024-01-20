@@ -13,6 +13,7 @@ query MongodbcommunityMongoDBCommunitys($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     arbiters
     featureCompatibilityVersion

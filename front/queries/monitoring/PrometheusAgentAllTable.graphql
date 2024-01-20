@@ -13,6 +13,7 @@ query MonitoringPrometheusAgents {
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

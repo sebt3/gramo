@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('rabbitmq.com','v1beta1',args['namespace'],'rabbitmqclusters')
             const resList = res.body as RabbitmqRabbitmqClusterList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "delayStartSeconds": ext.spec['delayStartSeconds'],
                 "image": ext.spec['image'],
@@ -42,7 +42,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('rabbitmq.com','v1beta1',args['namespace'],'rabbitmqclusters', args['name'])
             const ext = res.body as RabbitmqRabbitmqCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "delayStartSeconds": ext.spec['delayStartSeconds'],
                 "image": ext.spec['image'],

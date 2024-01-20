@@ -12,6 +12,7 @@ mutation MariadbDatabase($namespace: String!, $name: String!, $spec: mariadbData
       }
       name
       namespace
+      obj
     }
     characterSet
     collate

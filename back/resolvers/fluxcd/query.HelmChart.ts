@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmcharts')
             const resList = res.body as FluxcdHelmChartList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "chart": ext.spec['chart'],
                 "interval": ext.spec['interval'],
@@ -40,7 +40,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmcharts', args['name'])
             const ext = res.body as FluxcdHelmChart
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "chart": ext.spec['chart'],
                 "interval": ext.spec['interval'],

@@ -25,7 +25,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('secretgenerator.mittwald.de','v1alpha1',args['namespace'],'sshkeypairs', payload)
             const ext = res.body as SecretgeneratorSSHKeyPair
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "data": ext.spec['data'],
                 "forceRegenerate": ext.spec['forceRegenerate'],
                 "length": ext.spec['length'],
@@ -65,7 +65,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('secretgenerator.mittwald.de','v1alpha1',args['namespace'],'sshkeypairs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as SecretgeneratorSSHKeyPair
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "data": ext.spec['data'],
                 "forceRegenerate": ext.spec['forceRegenerate'],
                 "length": ext.spec['length'],
@@ -85,7 +85,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('secretgenerator.mittwald.de','v1alpha1',args['namespace'],'sshkeypairs', args['name'])
         const ext = res.body as SecretgeneratorSSHKeyPair
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "data": ext.spec['data'],
             "forceRegenerate": ext.spec['forceRegenerate'],
             "length": ext.spec['length'],

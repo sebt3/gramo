@@ -13,6 +13,7 @@ query PostgresqlBackups($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     cluster {
       name

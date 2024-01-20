@@ -29,7 +29,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','globalnetworkpolicies', payload)
             const ext = res.body as ProjectcalicoGlobalNetworkPolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "applyOnForward": ext.spec['applyOnForward'],
                 "doNotTrack": ext.spec['doNotTrack'],
                 "egress": ext.spec['egress'],
@@ -75,7 +75,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','globalnetworkpolicies', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoGlobalNetworkPolicy
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "applyOnForward": ext.spec['applyOnForward'],
                 "doNotTrack": ext.spec['doNotTrack'],
                 "egress": ext.spec['egress'],
@@ -97,7 +97,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','globalnetworkpolicies', args['name'])
         const ext = res.body as ProjectcalicoGlobalNetworkPolicy
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "applyOnForward": ext.spec['applyOnForward'],
             "doNotTrack": ext.spec['doNotTrack'],
             "egress": ext.spec['egress'],

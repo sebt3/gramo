@@ -12,6 +12,7 @@ mutation VynilInstall($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     auto_upgrade
     category {

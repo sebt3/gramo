@@ -12,6 +12,7 @@ mutation K8upPreBackupPod($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     backupCommand
     fileExtension
@@ -272,7 +273,6 @@ mutation K8upPreBackupPod($namespace: String!, $name: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {
@@ -496,7 +496,6 @@ mutation K8upPreBackupPod($namespace: String!, $name: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {
@@ -723,7 +722,6 @@ mutation K8upPreBackupPod($namespace: String!, $name: String!) {
             terminationGracePeriodSeconds
             timeoutSeconds
           }
-
           securityContext {
             allowPrivilegeEscalation
             capabilities {

@@ -24,7 +24,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'alertmanagerconfigs', payload)
             const ext = res.body as MonitoringAlertmanagerConfig
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "inhibitRules": ext.spec['inhibitRules'],
                 "muteTimeIntervals": ext.spec['muteTimeIntervals'],
                 "receivers": ext.spec['receivers'],
@@ -59,7 +59,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'alertmanagerconfigs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MonitoringAlertmanagerConfig
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "inhibitRules": ext.spec['inhibitRules'],
                 "muteTimeIntervals": ext.spec['muteTimeIntervals'],
                 "receivers": ext.spec['receivers'],
@@ -75,7 +75,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('monitoring.coreos.com','v1alpha1',args['namespace'],'alertmanagerconfigs', args['name'])
         const ext = res.body as MonitoringAlertmanagerConfig
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "inhibitRules": ext.spec['inhibitRules'],
             "muteTimeIntervals": ext.spec['muteTimeIntervals'],
             "receivers": ext.spec['receivers'],

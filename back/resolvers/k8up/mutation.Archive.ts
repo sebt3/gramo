@@ -31,7 +31,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('k8up.io','v1',args['namespace'],'archives', payload)
             const ext = res.body as K8upArchive
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
                 "backend": ext.spec['backend'],
                 "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
@@ -86,7 +86,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('k8up.io','v1',args['namespace'],'archives', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as K8upArchive
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
                 "backend": ext.spec['backend'],
                 "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],
@@ -115,7 +115,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('k8up.io','v1',args['namespace'],'archives', args['name'])
         const ext = res.body as K8upArchive
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "activeDeadlineSeconds": ext.spec['activeDeadlineSeconds'],
             "backend": ext.spec['backend'],
             "failedJobsHistoryLimit": ext.spec['failedJobsHistoryLimit'],

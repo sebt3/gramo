@@ -26,7 +26,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('notification.toolkit.fluxcd.io','v1',args['namespace'],'receivers', payload)
             const ext = res.body as FluxcdReceiver
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "events": ext.spec['events'],
                 "interval": ext.spec['interval'],
                 "resources": ext.spec['resources'],
@@ -71,7 +71,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('notification.toolkit.fluxcd.io','v1',args['namespace'],'receivers', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdReceiver
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "events": ext.spec['events'],
                 "interval": ext.spec['interval'],
                 "resources": ext.spec['resources'],
@@ -95,7 +95,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('notification.toolkit.fluxcd.io','v1',args['namespace'],'receivers', args['name'])
         const ext = res.body as FluxcdReceiver
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "events": ext.spec['events'],
             "interval": ext.spec['interval'],
             "resources": ext.spec['resources'],

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('mongodbcommunity.mongodb.com','v1',args['namespace'],'mongodbcommunity')
             const resList = res.body as MongodbcommunityMongoDBCommunityList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalMongodConfig": ext.spec['additionalMongodConfig'],
                 "arbiters": ext.spec['arbiters'],
                 "automationConfig": ext.spec['automationConfig'],
@@ -43,7 +43,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('mongodbcommunity.mongodb.com','v1',args['namespace'],'mongodbcommunity', args['name'])
             const ext = res.body as MongodbcommunityMongoDBCommunity
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "additionalMongodConfig": ext.spec['additionalMongodConfig'],
                 "arbiters": ext.spec['arbiters'],
                 "automationConfig": ext.spec['automationConfig'],

@@ -12,6 +12,7 @@ query ProjectcalicoIPReservations {
       }
       name
       namespace
+      obj
     }
     reservedCIDRs
   }

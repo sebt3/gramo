@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('secretgenerator.mittwald.de','v1alpha1',args['namespace'],'basicauths')
             const resList = res.body as SecretgeneratorBasicAuthList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "data": ext.spec['data'],
                 "encoding": ext.spec['encoding'],
                 "forceRegenerate": ext.spec['forceRegenerate'],
@@ -29,7 +29,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('secretgenerator.mittwald.de','v1alpha1',args['namespace'],'basicauths', args['name'])
             const ext = res.body as SecretgeneratorBasicAuth
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "data": ext.spec['data'],
                 "encoding": ext.spec['encoding'],
                 "forceRegenerate": ext.spec['forceRegenerate'],

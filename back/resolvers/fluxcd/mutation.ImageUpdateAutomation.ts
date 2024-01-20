@@ -25,7 +25,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta1',args['namespace'],'imageupdateautomations', payload)
             const ext = res.body as FluxcdImageUpdateAutomation
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "git": ext.spec['git'],
                 "interval": ext.spec['interval'],
                 "sourceRef": ext.spec['sourceRef'],
@@ -70,7 +70,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta1',args['namespace'],'imageupdateautomations', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdImageUpdateAutomation
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "git": ext.spec['git'],
                 "interval": ext.spec['interval'],
                 "sourceRef": ext.spec['sourceRef'],
@@ -95,7 +95,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('image.toolkit.fluxcd.io','v1beta1',args['namespace'],'imageupdateautomations', args['name'])
         const ext = res.body as FluxcdImageUpdateAutomation
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "git": ext.spec['git'],
             "interval": ext.spec['interval'],
             "sourceRef": ext.spec['sourceRef'],

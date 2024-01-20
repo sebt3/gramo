@@ -12,6 +12,7 @@ mutation FluxcdBucket($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     bucketName
     endpoint

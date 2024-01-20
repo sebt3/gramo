@@ -12,6 +12,7 @@ mutation FluxcdGitRepository($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     ignore
     include {

@@ -30,6 +30,7 @@ query MongodbcommunityMongoDBCommunity($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     arbiters
     featureCompatibilityVersion

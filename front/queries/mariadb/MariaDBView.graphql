@@ -30,6 +30,7 @@ query MariadbMariaDB($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listClusterCustomObject('crd.projectcalico.org','v1','bgppeers')
             const resList = res.body as ProjectcalicoBGPPeerList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "asNumber": ext.spec['asNumber'],
                 "keepOriginalNextHop": ext.spec['keepOriginalNextHop'],
                 "maxRestartTime": ext.spec['maxRestartTime'],
@@ -34,7 +34,7 @@ export const queries = {
             const res = await customApi.getClusterCustomObject('crd.projectcalico.org','v1','bgppeers', args['name'])
             const ext = res.body as ProjectcalicoBGPPeer
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "asNumber": ext.spec['asNumber'],
                 "keepOriginalNextHop": ext.spec['keepOriginalNextHop'],
                 "maxRestartTime": ext.spec['maxRestartTime'],

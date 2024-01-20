@@ -13,6 +13,7 @@ query RedisRedisReplications($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

@@ -30,6 +30,7 @@ query MonitoringAlertmanager($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     additionalPeers
     affinity {

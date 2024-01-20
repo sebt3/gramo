@@ -7,7 +7,7 @@ export const lists = {
             const res = await customApi.listNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheusrules')
             const resList = res.body as MonitoringPrometheusRuleList
             return resList.items.map((ext)=>{return{
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "groups": ext.spec['groups'],
             }})
         } catch (err) {
@@ -22,7 +22,7 @@ export const queries = {
             const res = await customApi.getNamespacedCustomObject('monitoring.coreos.com','v1',args['namespace'],'prometheusrules', args['name'])
             const ext = res.body as MonitoringPrometheusRule
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "groups": ext.spec['groups'],
             }
         } catch (err) {

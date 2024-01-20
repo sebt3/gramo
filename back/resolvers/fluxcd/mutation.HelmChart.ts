@@ -30,7 +30,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmcharts', payload)
             const ext = res.body as FluxcdHelmChart
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "chart": ext.spec['chart'],
                 "interval": ext.spec['interval'],
@@ -86,7 +86,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmcharts', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdHelmChart
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "accessFrom": ext.spec['accessFrom'],
                 "chart": ext.spec['chart'],
                 "interval": ext.spec['interval'],
@@ -117,7 +117,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('source.toolkit.fluxcd.io','v1beta2',args['namespace'],'helmcharts', args['name'])
         const ext = res.body as FluxcdHelmChart
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "accessFrom": ext.spec['accessFrom'],
             "chart": ext.spec['chart'],
             "interval": ext.spec['interval'],

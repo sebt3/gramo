@@ -30,6 +30,7 @@ query FluxcdHelmChart($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     chart
     interval

@@ -13,6 +13,7 @@ query K8upSnapshots {
       }
       name
       namespace
+      obj
     }
     date
     id

@@ -13,6 +13,7 @@ query MonitoringAlertmanagers {
       }
       name
       namespace
+      obj
     }
     additionalPeers
     affinity {

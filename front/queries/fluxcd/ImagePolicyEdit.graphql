@@ -12,6 +12,7 @@ mutation FluxcdImagePolicy($namespace: String!, $name: String!, $spec: fluxcdIma
       }
       name
       namespace
+      obj
     }
     filterTags {
       extract

@@ -30,6 +30,7 @@ query FluxcdProvider($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     address
     certSecretRef {

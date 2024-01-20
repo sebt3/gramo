@@ -32,7 +32,7 @@ export const mutations = {
             const res = await customApi.createClusterCustomObject('crd.projectcalico.org','v1','bgpconfigurations', payload)
             const ext = res.body as ProjectcalicoBGPConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "asNumber": ext.spec['asNumber'],
                 "bindMode": ext.spec['bindMode'],
                 "communities": ext.spec['communities'],
@@ -84,7 +84,7 @@ export const mutations = {
             const res = await customApi.patchClusterCustomObject('crd.projectcalico.org','v1','bgpconfigurations', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as ProjectcalicoBGPConfiguration
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "asNumber": ext.spec['asNumber'],
                 "bindMode": ext.spec['bindMode'],
                 "communities": ext.spec['communities'],
@@ -109,7 +109,7 @@ export const mutations = {
         const res = await customApi.deleteClusterCustomObject('crd.projectcalico.org','v1','bgpconfigurations', args['name'])
         const ext = res.body as ProjectcalicoBGPConfiguration
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "asNumber": ext.spec['asNumber'],
             "bindMode": ext.spec['bindMode'],
             "communities": ext.spec['communities'],

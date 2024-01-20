@@ -13,6 +13,7 @@ query MysqlMySQLBackups {
       }
       name
       namespace
+      obj
     }
     addTimestampToBackupDirectory
     backupProfileName

@@ -12,6 +12,7 @@ mutation RabbitmqRabbitmqCluster($namespace: String!, $name: String!, $spec: rab
       }
       name
       namespace
+      obj
     }
     affinity {
       nodeAffinity {

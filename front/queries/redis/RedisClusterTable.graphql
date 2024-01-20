@@ -13,6 +13,7 @@ query RedisRedisClusters($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     TLS {
       ca

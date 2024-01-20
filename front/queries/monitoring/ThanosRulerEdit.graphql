@@ -12,6 +12,7 @@ mutation MonitoringThanosRuler($namespace: String!, $name: String!, $spec: monit
       }
       name
       namespace
+      obj
     }
     additionalArgs {
       name

@@ -30,6 +30,7 @@ query ProjectcalicoIPReservation($name: String!) {
       }
       name
       namespace
+      obj
     }
     reservedCIDRs
   }

@@ -13,6 +13,7 @@ query FluxcdHelmCharts {
       }
       name
       namespace
+      obj
     }
     chart
     interval

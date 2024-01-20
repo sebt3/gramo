@@ -30,6 +30,7 @@ query FluxcdImagePolicy($namespace: String!, $name: String!) {
       }
       name
       namespace
+      obj
     }
     filterTags {
       extract

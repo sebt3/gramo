@@ -12,6 +12,7 @@ query ProjectcalicoHostEndpoints {
       }
       name
       namespace
+      obj
     }
     expectedIPs
     interfaceName

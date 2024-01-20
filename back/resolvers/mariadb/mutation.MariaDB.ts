@@ -61,7 +61,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'mariadbs', payload)
             const ext = res.body as MariadbMariaDB
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "args": ext.spec['args'],
                 "bootstrapFrom": ext.spec['bootstrapFrom'],
@@ -176,7 +176,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'mariadbs', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as MariadbMariaDB
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "args": ext.spec['args'],
                 "bootstrapFrom": ext.spec['bootstrapFrom'],
@@ -235,7 +235,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('mariadb.mmontes.io','v1alpha1',args['namespace'],'mariadbs', args['name'])
         const ext = res.body as MariadbMariaDB
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "affinity": ext.spec['affinity'],
             "args": ext.spec['args'],
             "bootstrapFrom": ext.spec['bootstrapFrom'],

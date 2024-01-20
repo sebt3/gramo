@@ -40,7 +40,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('kustomize.toolkit.fluxcd.io','v1',args['namespace'],'kustomizations', payload)
             const ext = res.body as FluxcdKustomization
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "commonMetadata": ext.spec['commonMetadata'],
                 "components": ext.spec['components'],
                 "decryption": ext.spec['decryption'],
@@ -115,7 +115,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('kustomize.toolkit.fluxcd.io','v1',args['namespace'],'kustomizations', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as FluxcdKustomization
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "commonMetadata": ext.spec['commonMetadata'],
                 "components": ext.spec['components'],
                 "decryption": ext.spec['decryption'],
@@ -155,7 +155,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('kustomize.toolkit.fluxcd.io','v1',args['namespace'],'kustomizations', args['name'])
         const ext = res.body as FluxcdKustomization
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "commonMetadata": ext.spec['commonMetadata'],
             "components": ext.spec['components'],
             "decryption": ext.spec['decryption'],

@@ -13,6 +13,7 @@ query MonitoringProbes($namespace: String!) {
       }
       name
       namespace
+      obj
     }
     authorization {
       credentials {

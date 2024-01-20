@@ -35,7 +35,7 @@ export const mutations = {
             const res = await customApi.createNamespacedCustomObject('rabbitmq.com','v1beta1',args['namespace'],'rabbitmqclusters', payload)
             const ext = res.body as RabbitmqRabbitmqCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "delayStartSeconds": ext.spec['delayStartSeconds'],
                 "image": ext.spec['image'],
@@ -98,7 +98,7 @@ export const mutations = {
             const res = await customApi.patchNamespacedCustomObject('rabbitmq.com','v1beta1',args['namespace'],'rabbitmqclusters', args['name'], payload, undefined, undefined, undefined, options)
             const ext = res.body as RabbitmqRabbitmqCluster
             return {
-                metadata: getMetadata(ext.metadata),
+                metadata: getMetadata(ext.metadata, ext),
                 "affinity": ext.spec['affinity'],
                 "delayStartSeconds": ext.spec['delayStartSeconds'],
                 "image": ext.spec['image'],
@@ -131,7 +131,7 @@ export const mutations = {
         const res = await customApi.deleteNamespacedCustomObject('rabbitmq.com','v1beta1',args['namespace'],'rabbitmqclusters', args['name'])
         const ext = res.body as RabbitmqRabbitmqCluster
         return {
-            metadata: getMetadata(ext.metadata),
+            metadata: getMetadata(ext.metadata, ext),
             "affinity": ext.spec['affinity'],
             "delayStartSeconds": ext.spec['delayStartSeconds'],
             "image": ext.spec['image'],
