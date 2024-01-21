@@ -38,9 +38,7 @@ function toggleLeftDrawer() {
     <q-toolbar>
       <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
       <q-toolbar-title>
-        <q-avatar>
-          <q-icon name="album" />
-        </q-avatar>
+        <img src="/icon.svg" loading="lazy" class="q-mt-sm" />
         Gramo
       </q-toolbar-title>
       <q-select v-if="isNamespaced" v-model="model" @update:model-value="onChangeNamespace()" :options="navigation.namespaces.value" label="Namespace" standout style="width: 250px" options-dense>
