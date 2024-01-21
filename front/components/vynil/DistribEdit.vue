@@ -3,16 +3,17 @@ import vynilDistribQuery from '@/queries/vynil/DistribView.graphql'
 import distribEdit from '@/queries/vynil/DistribEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import MonacoEditor from '../core/MonacoEditor.vue';
 import { ref, useQuery, useMutation, useDistrib, sanitizeData, getProperties } from './Distrib.js'
 const data = ref({});
-const { patchDone, patchError, notifyWorking, onNotDistribFound, setItemFromRoute, navigation, onErrorHandler } = useDistrib();setItemFromRoute();
+const { editor, patchDone, patchError, notifyWorking, onNotDistribFound, setItemFromRoute, navigation, onErrorHandler } = useDistrib();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilDistribQuery, {"name": navigation.currentItem}, { pollInterval: 500 });
 const { mutate: patchDistrib, onDone: onPatchDistrib, onError: onPatchError } = useMutation(distribEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchDistrib({"name": result.value.vynilDistrib.metadata.name, "spec": sanitizeData(data.value)});
+  patchDistrib({"name": result.value.vynilDistrib.metadata.name, "spec": sanitizeData(editor.value.tab=='simple'?data.value:editor.value.spec)});
 }
-onError(onErrorHandler);onResult(onNotDistribFound);onPatchDistrib(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotDistribFound(res);editor.value.updateFromQuery(res, res.loading?{}:{options: res.data.vynilDistrib.metadata.obj.spec})});onPatchDistrib(patchDone);onPatchError(patchError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -52,16 +53,22 @@ onError(onErrorHandler);onResult(onNotDistribFound);onPatchDistrib(patchDone);on
   </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
     <q-card bordered v-if="!loading && result.vynilDistrib!=null" class="q-ma-sm">
-      <q-card-section>
-        <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Specification</div>
-      </q-card-section>
-      <q-card-section>
-        <OpenApiEdit
-          v-model:out="data"
-          :in="result.vynilDistrib"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-        />
-      </q-card-section>
+      <q-tabs v-model="editor.tab" class="bg-primary text-white">
+        <q-tab label="Options" name="simple" />
+        <q-tab label="Specifications" name="spec" />
+      </q-tabs>
+      <q-tab-panels v-model="editor.tab" animated>
+        <q-tab-panel name="simple">
+          <OpenApiEdit
+            v-model:out="data"
+            :in="result.vynilDistrib"
+            :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+            />
+        </q-tab-panel>
+        <q-tab-panel name="spec">
+          <MonacoEditor :text="editor.yaml" :key="editor.yaml" @update:text="v=>editor.setYaml(v)" />
+        </q-tab-panel>
+      </q-tab-panels>
       <q-card-actions>
         <q-btn label="Submit" type="submit" color="primary"/>
       </q-card-actions>

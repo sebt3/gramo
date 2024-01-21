@@ -3,8 +3,9 @@ import vynilInstallQuery from '@/queries/vynil/InstallView.graphql'
 import installEdit from '@/queries/vynil/InstallEdit.graphql'
 import MetadataView from '../core/MetadataView.vue';
 import OpenApiEdit from '../core/OpenApiEdit.vue';
+import MonacoEditor from '../core/MonacoEditor.vue';
 import { useInstall, ref, useMutation, useQuery, sanitizeData } from './Install.js'
-const { onNotInstallFound, onErrorHandler, navigation, setNamespacedItemFromRoute, patchDone, patchError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
+const { editor, onNotInstallFound, onErrorHandler, navigation, setNamespacedItemFromRoute, patchDone, patchError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem}, { pollInterval: 500 });
 const { mutate: patchInstall, onDone: onPatchInstall, onError: onPatchError } = useMutation(installEdit);
 const data = ref({});
@@ -19,16 +20,16 @@ function onSubmit() {
       "distrib":result.value.vynilInstall.distrib.metadata.name,
       "component":result.value.vynilInstall.component.name,
       ...spec,
-      "options": {
+      "options": editor.value.tab=='simple'?{
         ...result.value.vynilInstall.options,
         ...sanitizeData(data.value)
-      }
+      }:sanitizeData(editor.value.spec['options'])
     }
   }
   console.log(payload)
   patchInstall(payload);
 }
-onError(onErrorHandler);onResult(onNotInstallFound);onPatchInstall(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotInstallFound(res);editor.value.updateFromQuery(res, res.loading?{}:{options: res.data.vynilInstall.metadata.obj.spec.options})});onPatchInstall(patchDone);onPatchError(patchError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -88,17 +89,23 @@ onError(onErrorHandler);onResult(onNotInstallFound);onPatchInstall(patchDone);on
     </div>
   </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card v-if="!loading && result!=null && result.vynilInstall!=null">
-      <q-card-section>
-        <div class="text-h5 q-mt-none q-mb-none">Options</div>
-      </q-card-section>
-      <q-card-section>
-        <OpenApiEdit
-            :in="result.vynilInstall.options"
-            v-model:out="data"
-            :properties="new Map(Object.entries(result.vynilInstall.component.options))"
-          />
-      </q-card-section>
+    <q-card v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
+      <q-tabs v-model="editor.tab" class="bg-primary text-white">
+        <q-tab label="Options" name="simple" />
+        <q-tab label="Specifications" name="spec" />
+      </q-tabs>
+      <q-tab-panels v-model="editor.tab" animated>
+        <q-tab-panel name="simple">
+          <OpenApiEdit
+              :in="result.vynilInstall.options"
+              v-model:out="data"
+              :properties="new Map(Object.entries(result.vynilInstall.component.options))"
+            />
+        </q-tab-panel>
+        <q-tab-panel name="spec">
+          <MonacoEditor :text="editor.yaml" :key="editor.yaml" @update:text="v=>editor.setYaml(v)" />
+        </q-tab-panel>
+      </q-tab-panels>
       <q-card-actions>
         <q-btn label="Submit" type="submit" color="primary"/>
       </q-card-actions>

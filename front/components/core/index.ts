@@ -2,7 +2,7 @@ import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { setupTableWidget } from './tableSetup.js'
 import { setupItem } from './itemSetup.js'
-import { stringify } from 'yaml'
+import { stringify, parse } from 'yaml'
 import { ref } from 'vue'
 
 export * from './itemSetup.js'
@@ -23,9 +23,17 @@ export function useCore() {
         full: '',
         spec: ''
     });
+    const editor = ref({
+        tab: 'simple',
+        yaml: '',
+        spec: {},
+        setSpec: (s) => {editor.value.spec = s;editor.value.yaml = stringify(s)},
+        setYaml: (y) => {editor.value.yaml = y;editor.value.spec = parse(y);console.log(editor.value.spec)},
+        updateFromQuery: (res: object, obj: object) => {if(!res['loading'])editor.value.setSpec(obj)},
+    });
     return {
         router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute,
-        viewer, viewerUpdate: (res, obj) => {
+        editor, viewer, viewerUpdate: (res, obj) => {
             if(!res.loading) {
                 viewer.value.full=gqlDataToYaml(obj)
                 viewer.value.spec=gqlDataToYaml({spec: obj.spec})
