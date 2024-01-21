@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useBucket, getProperties } from './Bucket.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotBucketFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useBucket();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotBucketFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useBucket();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdBucketQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotBucketFound(res);viewerUpdate(res, res.loading?{}:res.data.fluxcdBucket.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(bucketDelete);
 onDeleteDone(() => {

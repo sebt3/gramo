@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useScheduledBackup, getProperties } from './ScheduledBackup.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotScheduledBackupFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useScheduledBackup();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotScheduledBackupFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useScheduledBackup();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(postgresqlScheduledBackupQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotScheduledBackupFound(res);viewerUpdate(res, res.loading?{}:res.data.postgresqlScheduledBackup.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(scheduledBackupDelete);
 onDeleteDone(() => {

@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useUser, getProperties } from './User.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotUserFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useUser();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotUserFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useUser();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(mariadbUserQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotUserFound(res);viewerUpdate(res, res.loading?{}:res.data.mariadbUser.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(userDelete);
 onDeleteDone(() => {

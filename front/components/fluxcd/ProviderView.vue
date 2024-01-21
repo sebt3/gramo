@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useProvider, getProperties } from './Provider.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotProviderFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useProvider();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotProviderFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useProvider();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdProviderQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotProviderFound(res);viewerUpdate(res, res.loading?{}:res.data.fluxcdProvider.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(providerDelete);
 onDeleteDone(() => {

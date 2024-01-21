@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useClusterInformation, getProperties } from './ClusterInformation.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotClusterInformationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useClusterInformation();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotClusterInformationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useClusterInformation();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoClusterInformationQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotClusterInformationFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoClusterInformation.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(clusterInformationDelete);
 onDeleteDone(() => {

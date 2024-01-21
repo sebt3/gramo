@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useRedisSentinel, getProperties } from './RedisSentinel.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRedisSentinelFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRedisSentinel();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRedisSentinelFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRedisSentinel();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(redisRedisSentinelQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotRedisSentinelFound(res);viewerUpdate(res, res.loading?{}:res.data.redisRedisSentinel.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(redisSentinelDelete);
 onDeleteDone(() => {

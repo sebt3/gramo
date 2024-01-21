@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useRestore, getProperties } from './Restore.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRestoreFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRestore();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRestoreFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRestore();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(mariadbRestoreQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotRestoreFound(res);viewerUpdate(res, res.loading?{}:res.data.mariadbRestore.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(restoreDelete);
 onDeleteDone(() => {

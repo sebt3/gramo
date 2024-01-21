@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useCluster, getProperties } from './Cluster.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotClusterFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useCluster();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotClusterFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useCluster();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(postgresqlClusterQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotClusterFound(res);viewerUpdate(res, res.loading?{}:res.data.postgresqlCluster.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(clusterDelete);
 onDeleteDone(() => {

@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, usePrometheus, getProperties } from './Prometheus.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotPrometheusFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = usePrometheus();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotPrometheusFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = usePrometheus();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(monitoringPrometheusQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotPrometheusFound(res);viewerUpdate(res, res.loading?{}:res.data.monitoringPrometheus.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(prometheusDelete);
 onDeleteDone(() => {

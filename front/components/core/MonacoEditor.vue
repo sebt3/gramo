@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted } from "vue";
+import { OpenAPIV3 } from "openapi-types";
 const emit = defineEmits(['update:text'])
 const props = withDefaults(defineProps<{
+  properties: Map<string, OpenAPIV3.SchemaObject>
   text: string
   lang?: string
   theme?: string
@@ -26,11 +28,12 @@ onMounted(() => {
     theme: props.theme,
     language: props.lang,
     lineNumbers: props.lineNumber?"on":"off",
+    scrollBeyondLastLine: false,
     wordWrap: props.wordWrap,
     wrappingIndent: props.wrappingIndent,
   });
   editor.focus();
-  editor.onDidBlurEditorText(() => {console.log('blur');emit('update:text', editor.getValue())})
+  editor.onDidBlurEditorText(() => {emit('update:text', editor.getValue())})
 });
 </script>
 <template>

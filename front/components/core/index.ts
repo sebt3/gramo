@@ -27,9 +27,10 @@ export function useCore() {
         tab: 'simple',
         yaml: '',
         spec: {},
+        ready: false,
         setSpec: (s) => {editor.value.spec = s;editor.value.yaml = stringify(s)},
-        setYaml: (y) => {editor.value.yaml = y;editor.value.spec = parse(y);console.log(editor.value.spec)},
-        updateFromQuery: (res: object, obj: object) => {if(!res['loading'])editor.value.setSpec(obj)},
+        setYaml: (y) => {editor.value.yaml = y;editor.value.spec = parse(y);},
+        updateFromQuery: (res: object, obj: object) => {editor.value.ready=false;if(!res['loading']){editor.value.setSpec(obj);editor.value.ready=true;}},
     });
     return {
         router, $q, pagination, setNamespaceFromRoute, setItemFromRoute, setNamespacedItemFromRoute,

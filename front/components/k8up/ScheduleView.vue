@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useSchedule, getProperties } from './Schedule.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotScheduleFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useSchedule();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotScheduleFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useSchedule();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(k8upScheduleQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotScheduleFound(res);viewerUpdate(res, res.loading?{}:res.data.k8upSchedule.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(scheduleDelete);
 onDeleteDone(() => {

@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useConnection, getProperties } from './Connection.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotConnectionFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useConnection();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotConnectionFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useConnection();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(mariadbConnectionQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotConnectionFound(res);viewerUpdate(res, res.loading?{}:res.data.mariadbConnection.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(connectionDelete);
 onDeleteDone(() => {

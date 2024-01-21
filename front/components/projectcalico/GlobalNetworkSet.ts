@@ -8,10 +8,10 @@ export const globalNetworkSetColumns:Array<QTableColumn> = [
 ];
 
 export function useGlobalNetworkSet() {
-  const { viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { editor, viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    editor, viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotGlobalNetworkSetFound: (res) => {
       if ( !res.loading && res.data.projectcalicoGlobalNetworkSet == null) {
         const matched = router.currentRoute.value.matched

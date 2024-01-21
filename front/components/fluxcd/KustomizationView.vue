@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useKustomization, getProperties } from './Kustomization.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotKustomizationFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useKustomization();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotKustomizationFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useKustomization();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(fluxcdKustomizationQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotKustomizationFound(res);viewerUpdate(res, res.loading?{}:res.data.fluxcdKustomization.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(kustomizationDelete);
 onDeleteDone(() => {

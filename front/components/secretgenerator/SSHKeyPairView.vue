@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useSSHKeyPair, getProperties } from './SSHKeyPair.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotSSHKeyPairFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useSSHKeyPair();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotSSHKeyPairFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useSSHKeyPair();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(secretgeneratorSSHKeyPairQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotSSHKeyPairFound(res);viewerUpdate(res, res.loading?{}:res.data.secretgeneratorSSHKeyPair.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(sSHKeyPairDelete);
 onDeleteDone(() => {

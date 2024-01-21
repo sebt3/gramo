@@ -59,7 +59,7 @@ onDeleteError((err) => {
     </div><div class="col-md-6">
       <q-card bordered v-if="!loading && result!=undefined && result.{{ mini }}{{ name }}!=undefined && result.{{ mini }}{{ name }}!=null" class="q-ma-sm">
         <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
-          <q-tab label="Options" name="simple" />
+          <q-tab label="Simple" name="simple" />
           <q-tab label="Specifications" name="spec" />
           <q-tab label="full Yaml" name="yaml" />
         </q-tabs>

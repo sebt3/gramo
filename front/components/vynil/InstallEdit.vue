@@ -89,21 +89,25 @@ onError(onErrorHandler);onResult(res => {onNotInstallFound(res);editor.value.upd
     </div>
   </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card v-if="!loading && result!=null && result.vynilInstall!=null" class="q-ma-sm">
+    <q-card v-if="!loading && editor.ready && result!=null && result.vynilInstall!=null" class="q-ma-sm">
       <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Options" name="simple" />
-        <q-tab label="Specifications" name="spec" />
+        <q-tab label="Editor" name="simple" />
+        <q-tab label="Yaml" name="spec" />
       </q-tabs>
       <q-tab-panels v-model="editor.tab" animated>
         <q-tab-panel name="simple">
           <OpenApiEdit
-              :in="result.vynilInstall.options"
-              v-model:out="data"
+              :in="Object.keys(editor.spec).includes('options')?editor.spec['options']:{}"
+              @update:out="v=>{data=v;editor.setSpec({options: v})}"
               :properties="new Map(Object.entries(result.vynilInstall.component.options))"
             />
         </q-tab-panel>
         <q-tab-panel name="spec">
-          <MonacoEditor :text="editor.yaml" :key="editor.yaml" @update:text="v=>editor.setYaml(v)" />
+          <MonacoEditor
+            :text="editor.yaml"
+            @update:text="v=>editor.setYaml(v)"
+            :properties="new Map(Object.entries(result.vynilInstall.component.options))"
+            />
         </q-tab-panel>
       </q-tab-panels>
       <q-card-actions>

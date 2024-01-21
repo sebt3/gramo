@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useRedis, getProperties } from './Redis.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRedisFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRedis();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotRedisFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useRedis();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(redisRedisQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotRedisFound(res);viewerUpdate(res, res.loading?{}:res.data.redisRedis.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(redisDelete);
 onDeleteDone(() => {

@@ -8,10 +8,10 @@ export const iPAMBlockColumns:Array<QTableColumn> = [
 ];
 
 export function useIPAMBlock() {
-  const { viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { editor, viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    editor, viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotIPAMBlockFound: (res) => {
       if ( !res.loading && res.data.projectcalicoIPAMBlock == null) {
         const matched = router.currentRoute.value.matched

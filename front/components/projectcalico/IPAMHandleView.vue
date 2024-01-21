@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useIPAMHandle, getProperties } from './IPAMHandle.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotIPAMHandleFound, navigation, setItemFromRoute, toEdit, actionDelete } = useIPAMHandle();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotIPAMHandleFound, navigation, setItemFromRoute, toEdit, actionDelete } = useIPAMHandle();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoIPAMHandleQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotIPAMHandleFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoIPAMHandle.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(iPAMHandleDelete);
 onDeleteDone(() => {

@@ -8,10 +8,10 @@ export const hostEndpointColumns:Array<QTableColumn> = [
 ];
 
 export function useHostEndpoint() {
-  const { viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
+  const { editor, viewer, viewerUpdate, router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   return {
     navigation: useNavigationStoreRef(),
-    viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    editor, viewer, viewerUpdate, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotHostEndpointFound: (res) => {
       if ( !res.loading && res.data.projectcalicoHostEndpoint == null) {
         const matched = router.currentRoute.value.matched

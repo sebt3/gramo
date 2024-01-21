@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useGlobalNetworkPolicy, getProperties } from './GlobalNetworkPolicy.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotGlobalNetworkPolicyFound, navigation, setItemFromRoute, toEdit, actionDelete } = useGlobalNetworkPolicy();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotGlobalNetworkPolicyFound, navigation, setItemFromRoute, toEdit, actionDelete } = useGlobalNetworkPolicy();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoGlobalNetworkPolicyQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotGlobalNetworkPolicyFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoGlobalNetworkPolicy.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(globalNetworkPolicyDelete);
 onDeleteDone(() => {

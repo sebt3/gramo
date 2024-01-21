@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useIPReservation, getProperties } from './IPReservation.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotIPReservationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useIPReservation();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotIPReservationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useIPReservation();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoIPReservationQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotIPReservationFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoIPReservation.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(iPReservationDelete);
 onDeleteDone(() => {

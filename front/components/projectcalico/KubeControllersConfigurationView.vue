@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useKubeControllersConfiguration, getProperties } from './KubeControllersConfiguration.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotKubeControllersConfigurationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useKubeControllersConfiguration();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotKubeControllersConfigurationFound, navigation, setItemFromRoute, toEdit, actionDelete } = useKubeControllersConfiguration();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoKubeControllersConfigurationQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotKubeControllersConfigurationFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoKubeControllersConfiguration.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(kubeControllersConfigurationDelete);
 onDeleteDone(() => {

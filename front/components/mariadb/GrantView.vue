@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useGrant, getProperties } from './Grant.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotGrantFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useGrant();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotGrantFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useGrant();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(mariadbGrantQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotGrantFound(res);viewerUpdate(res, res.loading?{}:res.data.mariadbGrant.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(grantDelete);
 onDeleteDone(() => {

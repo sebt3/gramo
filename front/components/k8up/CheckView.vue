@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useCheck, getProperties } from './Check.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotCheckFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useCheck();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotCheckFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useCheck();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(k8upCheckQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotCheckFound(res);viewerUpdate(res, res.loading?{}:res.data.k8upCheck.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(checkDelete);
 onDeleteDone(() => {

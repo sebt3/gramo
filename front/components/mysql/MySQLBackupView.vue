@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useMySQLBackup, getProperties } from './MySQLBackup.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotMySQLBackupFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useMySQLBackup();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotMySQLBackupFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useMySQLBackup();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(mysqlMySQLBackupQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotMySQLBackupFound(res);viewerUpdate(res, res.loading?{}:res.data.mysqlMySQLBackup.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(mySQLBackupDelete);
 onDeleteDone(() => {

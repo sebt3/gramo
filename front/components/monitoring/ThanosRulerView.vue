@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useThanosRuler, getProperties } from './ThanosRuler.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotThanosRulerFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useThanosRuler();setNamespacedItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotThanosRulerFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useThanosRuler();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(monitoringThanosRulerQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotThanosRulerFound(res);viewerUpdate(res, res.loading?{}:res.data.monitoringThanosRuler.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(thanosRulerDelete);
 onDeleteDone(() => {

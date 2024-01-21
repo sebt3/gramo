@@ -13,7 +13,7 @@ function onSubmit() {
   notifyWorking('Update in progress');
   patchDistrib({"name": result.value.vynilDistrib.metadata.name, "spec": sanitizeData(editor.value.tab=='simple'?data.value:editor.value.spec)});
 }
-onError(onErrorHandler);onResult(res => {onNotDistribFound(res);editor.value.updateFromQuery(res, res.loading?{}:{options: res.data.vynilDistrib.metadata.obj.spec})});onPatchDistrib(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotDistribFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.vynilDistrib.metadata.obj.spec})});onPatchDistrib(patchDone);onPatchError(patchError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -52,21 +52,25 @@ onError(onErrorHandler);onResult(res => {onNotDistribFound(res);editor.value.upd
     </div>
   </div>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && result.vynilDistrib!=null" class="q-ma-sm">
+    <q-card bordered v-if="!loading && editor.ready && result.vynilDistrib!=null" class="q-ma-sm">
       <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Options" name="simple" />
-        <q-tab label="Specifications" name="spec" />
+        <q-tab label="Editor" name="simple" />
+        <q-tab label="Yaml" name="spec" />
       </q-tabs>
       <q-tab-panels v-model="editor.tab" animated>
         <q-tab-panel name="simple">
           <OpenApiEdit
-            v-model:out="data"
-            :in="result.vynilDistrib"
+            :in="Object.keys(editor.spec).includes('spec')?editor.spec['spec']:{}"
+            @update:out="v=>{data=v;editor.setSpec({spec: v})}"
             :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
             />
         </q-tab-panel>
         <q-tab-panel name="spec">
-          <MonacoEditor :text="editor.yaml" :key="editor.yaml" @update:text="v=>editor.setYaml(v)" />
+          <MonacoEditor
+            :text="editor.yaml"
+            @update:text="v=>editor.setYaml(v)"
+            :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+            />
         </q-tab-panel>
       </q-tab-panels>
       <q-card-actions>

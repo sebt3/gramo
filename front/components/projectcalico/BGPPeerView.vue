@@ -6,7 +6,7 @@ import OpenApiEdit from '../core/OpenApiEdit.vue';
 import DefaultStatusView from '../core/DefaultStatusView.vue';
 import MonacoViewer from '../core/MonacoViewer.vue';
 import { useQuery, useMutation, useBGPPeer, getProperties } from './BGPPeer.js'
-const { viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotBGPPeerFound, navigation, setItemFromRoute, toEdit, actionDelete } = useBGPPeer();setItemFromRoute();
+const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotBGPPeerFound, navigation, setItemFromRoute, toEdit, actionDelete } = useBGPPeer();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoBGPPeerQuery, { "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotBGPPeerFound(res);viewerUpdate(res, res.loading?{}:res.data.projectcalicoBGPPeer.metadata.obj)});
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(bGPPeerDelete);
 onDeleteDone(() => {

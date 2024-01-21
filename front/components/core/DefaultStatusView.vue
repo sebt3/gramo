@@ -26,10 +26,10 @@ function getConditionColor(cond) {
         </div></template>
       </q-field>
     </div>
-    <div v-for="key in Object.keys(status).filter(k => typeof status[k] === 'string' && ['phase','latestImage','lastPushCommit', 'lastPushTime','lastAppliedRevision'].includes(key))" :key="key">
-      <q-field label="{{ key.charAt(0).toUpperCase() + key.slice(1) }}" stack-label borderless>
+    <div v-for="k in Object.keys(status).filter(key => typeof status[key] === 'string' && ['phase','latestImage','lastPushCommit', 'lastPushTime','lastAppliedRevision'].includes(key))" v-bind:key="k">
+      <q-field label="{{ k.charAt(0).toUpperCase() + k.slice(1) }}" stack-label borderless>
         <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
-        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> {{ status[key] }}
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> {{ status[k] }}
         </div></template>
       </q-field>
     </div>
