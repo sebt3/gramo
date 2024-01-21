@@ -24,7 +24,6 @@ mutation ProjectcalicoIPPool($name: String!, $spec: projectcalicoIPPoolSpec!) {
       mode
     }
     ipipMode
-    nat-outgoing
     natOutgoing
     nodeSelector
     vxlanMode

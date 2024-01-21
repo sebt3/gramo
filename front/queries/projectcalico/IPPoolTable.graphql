@@ -24,7 +24,6 @@ query ProjectcalicoIPPools {
       mode
     }
     ipipMode
-    nat-outgoing
     natOutgoing
     nodeSelector
     vxlanMode
