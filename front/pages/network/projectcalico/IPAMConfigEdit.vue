@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import projectcalicoIPAMConfigQuery from '@/queries/projectcalico/IPAMConfig.read.graphql'
 import IPAMConfigEdit from '@/queries/projectcalico/IPAMConfig.patch.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import projectcalicoIPAMConfigMeta from '@/components/projectcalico/IPAMConfigMeta.vue';
 import projectcalicoIPAMConfigEdit from '@/components/projectcalico/IPAMConfigEdit.vue';
-import { useQuery, useMutation, useIPAMConfig, IPAMConfigSimpleExcludes } from '../../../libs/projectcalico/IPAMConfig.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotIPAMConfigFound, navigation, setItemFromRoute } = useIPAMConfig();setItemFromRoute();
+import { useQuery, useMutation, sanitizeData, useIPAMConfig, IPAMConfigSimpleExcludes } from '../../../libs/projectcalico/IPAMConfig.js'
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNotIPAMConfigFound, navigation, editor, setItemFromRoute } = useIPAMConfig();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoIPAMConfigQuery, {
   "obj": {
     "filters": [
@@ -15,40 +17,17 @@ const { result, loading, onResult, onError } = useQuery(projectcalicoIPAMConfigQ
       }
     ], "excludes": IPAMConfigSimpleExcludes
   },
-});onError(onErrorHandler); onResult(res => {onNotIPAMConfigFound(res)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(IPAMConfigDelete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
-})
-</script>
-
-
-
-<script setup lang="ts">
-import projectcalicoIPAMConfigQuery from '@/queries/projectcalico/IPAMConfig.read.graphql'
-import IPAMConfigEdit from '@/queries/projectcalico/IPAMConfig.patch.graphql'
-import MetadataView from '@/components/core/MetadataView.vue';
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { ref, useQuery, useMutation, useIPAMConfig, sanitizeData, getProperties } from '../../../libs/projectcalico/IPAMConfig.js'
-const spec  = ref({});
-const { editor, patchDone, patchError, notifyWorking, onNotIPAMConfigFound, setItemFromRoute, navigation, onErrorHandler } = useIPAMConfig();setItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(projectcalicoIPAMConfigQuery, {"name": navigation.currentItem}, { pollInterval: 500 });
+});
 const { mutate: patchIPAMConfig, onDone: onPatchIPAMConfig, onError: onPatchError } = useMutation(IPAMConfigEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchIPAMConfig({ "name": result.value.projectcalicoIPAMConfig.metadata.name, "spec": sanitizeData(spec.value) });
+  patchIPAMConfig({
+    "name": result.projectcalicoIPAMConfig[0].metadata.name,
+    "spec": sanitizeData(editor.value.obj['spec']),
+  });
 }
-onError(onErrorHandler);onResult(res => {onNotIPAMConfigFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.projectcalicoIPAMConfig.metadata.obj.spec})});onPatchIPAMConfig(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotIPAMConfigFound(res);editor.value.updateFromQuery(res, res.loading?{}:res.data.projectcalicoIPAMConfig[0])});onPatchIPAMConfig(patchDone);onPatchError(patchError);
 </script>
-
-
-
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -57,8 +36,9 @@ onError(onErrorHandler);onResult(res => {onNotIPAMConfigFound(res);editor.value.
         v-if="!loading && result!=undefined && result.projectcalicoIPAMConfig[0]!=undefined && result.projectcalicoIPAMConfig[0]!=null"
         :model="result.projectcalicoIPAMConfig[0]"
        />
-    </div><div class="col-md-6">
-      <projectcalicoIPAMConfigView
+    </div>
+    <div class="col-md-12">
+      <projectcalicoIPAMConfigEdit
         v-if="!loading && result!=undefined && result.projectcalicoIPAMConfig[0]!=undefined && result.projectcalicoIPAMConfig[0]!=null"
         :model="result.projectcalicoIPAMConfig[0]"
        />
@@ -66,55 +46,3 @@ onError(onErrorHandler);onResult(res => {onNotIPAMConfigFound(res);editor.value.
   </div>
 </template>
 
-
-
-<template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-sm-8 col-md-6">
-      <q-card bordered v-if="!loading && result.projectcalicoIPAMConfig!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">IPAMConfig</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.projectcalicoIPAMConfig.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-sm-4 col-md-6">
-      <q-card bordered v-if="!loading && result.projectcalicoIPAMConfig!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result.projectcalicoIPAMConfig!=null && result.projectcalicoIPAMConfig.status != null">
-          <DefaultStatusView :status="result.projectcalicoIPAMConfig.status" />
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && editor.ready && result.projectcalicoIPAMConfig!=null" class="q-ma-sm">
-      <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Editor" name="simple" />
-        <q-tab label="Yaml" name="spec" />
-      </q-tabs>
-      <q-tab-panels v-model="editor.tab" animated>
-        <q-tab-panel name="simple">
-          <OpenApiEdit
-          :in="Object.keys(editor.spec).includes('spec')?editor.spec['spec']:{}"
-          @update:out="v=>{ spec=v;editor.setspecSpec({ spec: v})}"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            />
-        </q-tab-panel>
-        <q-tab-panel name="spec">
-          <MonacoEditor
-          :text="editor.yamlspec" :key="editor.yamlspec"
-          @update:text="v=>editor.setspecYaml(v)"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
-    </q-card>
-  </q-form>
-</template>

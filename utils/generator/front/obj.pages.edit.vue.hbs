@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import {{ group }}{{ short }}Meta from '@/components/{{ group }}/{{ short }}Meta.vue';
 import {{ group }}{{ short }}Edit from '@/components/{{ group }}/{{ short }}Edit.vue';
 {{#if (contain readProperties 'status')}}
 import {{ group }}{{ short }}Status from '@/components/{{ group }}/{{ short }}Status.vue';
 {{/if}}
-import { useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+import { useQuery, useMutation, sanitizeData, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
@@ -33,47 +35,22 @@ const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Qu
     ]
   }
 {{/if}}
-});onError(onErrorHandler); onResult(res => {onNot{{ short }}Found(res)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
-})
-</script>
-
-
-
-<script setup lang="ts">
-import {{group}}{{short}}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
-import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
-import MetadataView from '@/components/core/MetadataView.vue';
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { ref, useQuery, useMutation, use{{ short }}, sanitizeData, getProperties } from '../../../libs/{{ group }}/{{ short }}.js'
-{{#each writeProperties}}
-const {{this}}  = ref({});
-{{/each}}
-{{#if namespaced}}
-const { editor, patchDone, patchError, notifyWorking, onNot{{ short }}Found, setNamespacedItemFromRoute, navigation, onErrorHandler } = use{{ short }}();setNamespacedItemFromRoute();
-const { result, loading, onResult, onError } = useQuery({{group}}{{short}}Query, {"namespace": navigation.currentNamespace, "name": navigation.currentItem}, { pollInterval: 500 });
-{{else}}
-const { editor, patchDone, patchError, notifyWorking, onNot{{ short }}Found, setItemFromRoute, navigation, onErrorHandler } = use{{ short }}();setItemFromRoute();
-const { result, loading, onResult, onError } = useQuery({{group}}{{short}}Query, {"name": navigation.currentItem}, { pollInterval: 500 });
-{{/if}}
+});
 const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patch{{ short }}({ {{#if namespaced}}"namespace": result.value.{{group}}{{short}}.metadata.namespace, {{/if}}"name": result.value.{{group}}{{short}}.metadata.name{{#each writeProperties}}, "{{this}}": sanitizeData({{this}}.value){{/each}} });
+  patch{{ short }}({
+    "name": result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.name,
+{{#if namespaced}}
+    "namespace": result.k8sNamespace[0].{{ group }}{{ short }}[0].metadata.namespace,
+{{/if}}
+{{#each writeProperties}}
+    "{{this}}": sanitizeData(editor.value.obj['{{this}}']),
+{{/each}}
+  });
 }
-onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.{{group}}{{short}}.metadata.obj.spec})});onPatch{{ short }}(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value.updateFromQuery(res, res.loading?{}:res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0])});onPatch{{ short }}(patchDone);onPatchError(patchError);
 </script>
-
-
-
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -82,28 +59,17 @@ onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value
         v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
        />
+    </div>
 {{#if (contain readProperties 'status')}}
+    <div class="col-md-6">
       <{{ group }}{{ short }}Status
         v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
        />
+    </div>
 {{/if}}
-{{#each resolvers}}
-  {{#if (eq type 'parent')}}
-      <{{ resultGroup }}{{ resultShort }}Meta
-        v-if="!loading && result!=undefined{{#if ../namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=undefined && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}.length>0"
-        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}[0]"
-       />
-  {{/if}}
-  {{#if (eq type 'child')}}
-      <{{ resultGroup }}{{ resultShort }}List
-        v-if="!loading && result!=undefined{{#if ../namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=undefined && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}.length>0"
-        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
-       />
-  {{/if}}
-{{/each}}
-    </div><div class="col-md-6">
-      <{{ group }}{{ short }}View
+    <div class="col-md-12">
+      <{{ group }}{{ short }}Edit
         v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
        />
@@ -111,59 +77,3 @@ onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value
   </div>
 </template>
 
-
-
-<template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-sm-8 col-md-6">
-      <q-card bordered v-if="!loading && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{group}}{{short}}!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">{{ short }}</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{group}}{{short}}.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-sm-4 col-md-6">
-      <q-card bordered v-if="!loading && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}!=null && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}.status != null">
-          <DefaultStatusView :status="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}.status" />
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && editor.ready && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}!=null" class="q-ma-sm">
-      <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Editor" name="simple" />
-        <q-tab label="Yaml" name="spec" />
-      </q-tabs>
-      <q-tab-panels v-model="editor.tab" animated>
-        <q-tab-panel name="simple">
-{{#each writeProperties}}
-          <OpenApiEdit
-          :in="Object.keys(editor.{{this}}).includes('{{this}}')?editor.{{this}}['{{this}}']:{}"
-          @update:out="v=>{ {{this}}=v;editor.set{{this}}Spec({ {{this}}: v})}"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            />
-{{/each}}
-        </q-tab-panel>
-        <q-tab-panel name="spec">
-{{#each writeProperties}}
-          <MonacoEditor
-          :text="editor.yaml{{this}}" :key="editor.yaml{{this}}"
-          @update:text="v=>editor.set{{this}}Yaml(v)"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
-{{/each}}
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
-    </q-card>
-  </q-form>
-</template>

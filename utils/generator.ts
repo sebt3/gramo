@@ -154,7 +154,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
             objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.patch.graphql`, {...o, mutationType: 'Patch'})
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.read.graphql`, {...o, detailed: false})
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.details.graphql`, {...o, detailed: true})
-            //objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)
+            objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)
             objCompList(path.resolve(path_front, 'components', g.name),`${o.short}List.vue`, o)
             objCompMeta(path.resolve(path_front, 'components', g.name),`${o.short}Meta.vue`, o)
             if (o.readProperties.includes('status'))

@@ -22,6 +22,22 @@ export function useValidatingWebhookConfiguration() {
         "webhooks": '',
       }
   });
+  const onlyReadProperties = (obj) => {
+      const res = {}
+      Object.keys(obj).forEach(k=>{
+        if (["webhooks"].includes(k)||k=='metadata')
+          res[k] = obj[k];
+      })
+      return res
+    };
+  const onlyWriteProperties = (obj) => {
+      const res = {}
+      Object.keys(obj).forEach(k=>{
+        if (["webhooks"].includes(k))
+          res[k] = obj[k];
+      })
+      return res
+    };
   const editor = ref({
       tab: 'simple',
       yaml: '',
@@ -29,30 +45,14 @@ export function useValidatingWebhookConfiguration() {
       setKey: (key, o) => {editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)},
       ready: false,
       setYaml: (y) => {editor.value.yaml = y;editor.value.obj = parse(y);},
-//      updateFromQuery: (res: object, obj: object) => {editor.value.ready=false;if(!res['loading']){editor.value.setSpec(obj);editor.value.ready=true;}},
+      updateFromQuery: (res: object, obj: object) => {editor.value.ready=false;if(!res['loading']){editor.value.obj = onlyWriteProperties(obj);editor.value.yaml = stringify(editor.value.obj);editor.value.ready=true;}},
   });
   return {
-    editor, viewer, viewerUpdate: (obj) => {
+    onlyReadProperties, onlyWriteProperties, editor, viewer, viewerUpdate: (obj) => {
       viewer.value.full=gqlDataToYaml(obj)
       viewer.value.props["webhooks"]=gqlDataToYaml({"webhooks": obj["webhooks"]})
     },
     navigation: useNavigationStoreRef(),
-    onlyReadProperties: (obj) => {
-      const res = {}
-      Object.keys(obj).forEach(k=>{
-        if (["webhooks"].includes(k)||k=='metadata')
-          res[k] = obj[k];
-      })
-      return res
-    },
-    onlyWriteProperties: (obj) => {
-      const res = {}
-      Object.keys(obj).forEach(k=>{
-        if (["webhooks"].includes(k))
-          res[k] = obj[k];
-      })
-      return res
-    },
     router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNotValidatingWebhookConfigurationFound: (res) => {
     if ( !res.loading && res.data.k8sValidatingWebhookConfiguration == null) {

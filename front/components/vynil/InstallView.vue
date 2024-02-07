@@ -3,7 +3,7 @@
 import { onMounted } from "vue";
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import MonacoViewer from '@/components/core/MonacoViewer.vue';
-import { useInstall, getProperties, InstallDefinition } from '../../libs/vynil/Install.js'
+import { useInstall } from '../../libs/vynil/Install.js'
 const { onlyReadProperties, viewer, viewerUpdate, setNamespacedItemFromRoute } = useInstall();setNamespacedItemFromRoute();
 const props = defineProps<{model: object}>();
 onMounted(() => {

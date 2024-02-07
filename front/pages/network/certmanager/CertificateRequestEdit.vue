@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import certmanagerCertificateRequestQuery from '@/queries/certmanager/CertificateRequest.read.graphql'
 import CertificateRequestEdit from '@/queries/certmanager/CertificateRequest.patch.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import certmanagerCertificateRequestMeta from '@/components/certmanager/CertificateRequestMeta.vue';
 import certmanagerCertificateRequestEdit from '@/components/certmanager/CertificateRequestEdit.vue';
 import certmanagerCertificateRequestStatus from '@/components/certmanager/CertificateRequestStatus.vue';
-import { useQuery, useMutation, useCertificateRequest, CertificateRequestSimpleExcludes } from '../../../libs/certmanager/CertificateRequest.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotCertificateRequestFound, navigation, setNamespacedItemFromRoute } = useCertificateRequest();setNamespacedItemFromRoute();
+import { useQuery, useMutation, sanitizeData, useCertificateRequest, CertificateRequestSimpleExcludes } from '../../../libs/certmanager/CertificateRequest.js'
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNotCertificateRequestFound, navigation, editor, setNamespacedItemFromRoute } = useCertificateRequest();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(certmanagerCertificateRequestQuery, {
   "obj": {
     "filters": [
@@ -25,40 +27,18 @@ const { result, loading, onResult, onError } = useQuery(certmanagerCertificateRe
       }
     ]
   }
-});onError(onErrorHandler); onResult(res => {onNotCertificateRequestFound(res)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(CertificateRequestDelete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
-})
-</script>
-
-
-
-<script setup lang="ts">
-import certmanagerCertificateRequestQuery from '@/queries/certmanager/CertificateRequest.read.graphql'
-import CertificateRequestEdit from '@/queries/certmanager/CertificateRequest.patch.graphql'
-import MetadataView from '@/components/core/MetadataView.vue';
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { ref, useQuery, useMutation, useCertificateRequest, sanitizeData, getProperties } from '../../../libs/certmanager/CertificateRequest.js'
-const spec  = ref({});
-const { editor, patchDone, patchError, notifyWorking, onNotCertificateRequestFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useCertificateRequest();setNamespacedItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(certmanagerCertificateRequestQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem}, { pollInterval: 500 });
+});
 const { mutate: patchCertificateRequest, onDone: onPatchCertificateRequest, onError: onPatchError } = useMutation(CertificateRequestEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchCertificateRequest({ "namespace": result.value.certmanagerCertificateRequest.metadata.namespace, "name": result.value.certmanagerCertificateRequest.metadata.name, "spec": sanitizeData(spec.value) });
+  patchCertificateRequest({
+    "name": result.k8sNamespace[0].certmanagerCertificateRequest[0].metadata.name,
+    "namespace": result.k8sNamespace[0].certmanagerCertificateRequest[0].metadata.namespace,
+    "spec": sanitizeData(editor.value.obj['spec']),
+  });
 }
-onError(onErrorHandler);onResult(res => {onNotCertificateRequestFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.certmanagerCertificateRequest.metadata.obj.spec})});onPatchCertificateRequest(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotCertificateRequestFound(res);editor.value.updateFromQuery(res, res.loading?{}:res.data.k8sNamespace[0].certmanagerCertificateRequest[0])});onPatchCertificateRequest(patchDone);onPatchError(patchError);
 </script>
-
-
-
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -67,12 +47,15 @@ onError(onErrorHandler);onResult(res => {onNotCertificateRequestFound(res);edito
         v-if="!loading && result!=undefined && result.k8sNamespace!=undefined  && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=undefined && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=null"
         :model="result.k8sNamespace[0].certmanagerCertificateRequest[0]"
        />
+    </div>
+    <div class="col-md-6">
       <certmanagerCertificateRequestStatus
         v-if="!loading && result!=undefined && result.k8sNamespace!=undefined  && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=undefined && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=null"
         :model="result.k8sNamespace[0].certmanagerCertificateRequest[0]"
        />
-    </div><div class="col-md-6">
-      <certmanagerCertificateRequestView
+    </div>
+    <div class="col-md-12">
+      <certmanagerCertificateRequestEdit
         v-if="!loading && result!=undefined && result.k8sNamespace!=undefined  && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=undefined && result.k8sNamespace[0].certmanagerCertificateRequest[0]!=null"
         :model="result.k8sNamespace[0].certmanagerCertificateRequest[0]"
        />
@@ -80,55 +63,3 @@ onError(onErrorHandler);onResult(res => {onNotCertificateRequestFound(res);edito
   </div>
 </template>
 
-
-
-<template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-sm-8 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sNamespace[0].certmanagerCertificateRequest!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">CertificateRequest</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.k8sNamespace[0].certmanagerCertificateRequest.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-sm-4 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sNamespace[0].certmanagerCertificateRequest!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result.k8sNamespace[0].certmanagerCertificateRequest!=null && result.k8sNamespace[0].certmanagerCertificateRequest.status != null">
-          <DefaultStatusView :status="result.k8sNamespace[0].certmanagerCertificateRequest.status" />
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && editor.ready && result.k8sNamespace[0].certmanagerCertificateRequest!=null" class="q-ma-sm">
-      <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Editor" name="simple" />
-        <q-tab label="Yaml" name="spec" />
-      </q-tabs>
-      <q-tab-panels v-model="editor.tab" animated>
-        <q-tab-panel name="simple">
-          <OpenApiEdit
-          :in="Object.keys(editor.spec).includes('spec')?editor.spec['spec']:{}"
-          @update:out="v=>{ spec=v;editor.setspecSpec({ spec: v})}"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            />
-        </q-tab-panel>
-        <q-tab-panel name="spec">
-          <MonacoEditor
-          :text="editor.yamlspec" :key="editor.yamlspec"
-          @update:text="v=>editor.setspecYaml(v)"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
-    </q-card>
-  </q-form>
-</template>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import projectcalicoNetworkPolicyQuery from '@/queries/projectcalico/NetworkPolicy.read.graphql'
 import NetworkPolicyEdit from '@/queries/projectcalico/NetworkPolicy.patch.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import projectcalicoNetworkPolicyMeta from '@/components/projectcalico/NetworkPolicyMeta.vue';
 import projectcalicoNetworkPolicyEdit from '@/components/projectcalico/NetworkPolicyEdit.vue';
-import { useQuery, useMutation, useNetworkPolicy, NetworkPolicySimpleExcludes } from '../../../libs/projectcalico/NetworkPolicy.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotNetworkPolicyFound, navigation, setNamespacedItemFromRoute } = useNetworkPolicy();setNamespacedItemFromRoute();
+import { useQuery, useMutation, sanitizeData, useNetworkPolicy, NetworkPolicySimpleExcludes } from '../../../libs/projectcalico/NetworkPolicy.js'
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNotNetworkPolicyFound, navigation, editor, setNamespacedItemFromRoute } = useNetworkPolicy();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(projectcalicoNetworkPolicyQuery, {
   "obj": {
     "filters": [
@@ -24,40 +26,18 @@ const { result, loading, onResult, onError } = useQuery(projectcalicoNetworkPoli
       }
     ]
   }
-});onError(onErrorHandler); onResult(res => {onNotNetworkPolicyFound(res)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(NetworkPolicyDelete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
-})
-</script>
-
-
-
-<script setup lang="ts">
-import projectcalicoNetworkPolicyQuery from '@/queries/projectcalico/NetworkPolicy.read.graphql'
-import NetworkPolicyEdit from '@/queries/projectcalico/NetworkPolicy.patch.graphql'
-import MetadataView from '@/components/core/MetadataView.vue';
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { ref, useQuery, useMutation, useNetworkPolicy, sanitizeData, getProperties } from '../../../libs/projectcalico/NetworkPolicy.js'
-const spec  = ref({});
-const { editor, patchDone, patchError, notifyWorking, onNotNetworkPolicyFound, setNamespacedItemFromRoute, navigation, onErrorHandler } = useNetworkPolicy();setNamespacedItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(projectcalicoNetworkPolicyQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem}, { pollInterval: 500 });
+});
 const { mutate: patchNetworkPolicy, onDone: onPatchNetworkPolicy, onError: onPatchError } = useMutation(NetworkPolicyEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchNetworkPolicy({ "namespace": result.value.projectcalicoNetworkPolicy.metadata.namespace, "name": result.value.projectcalicoNetworkPolicy.metadata.name, "spec": sanitizeData(spec.value) });
+  patchNetworkPolicy({
+    "name": result.k8sNamespace[0].projectcalicoNetworkPolicy[0].metadata.name,
+    "namespace": result.k8sNamespace[0].projectcalicoNetworkPolicy[0].metadata.namespace,
+    "spec": sanitizeData(editor.value.obj['spec']),
+  });
 }
-onError(onErrorHandler);onResult(res => {onNotNetworkPolicyFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.projectcalicoNetworkPolicy.metadata.obj.spec})});onPatchNetworkPolicy(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotNetworkPolicyFound(res);editor.value.updateFromQuery(res, res.loading?{}:res.data.k8sNamespace[0].projectcalicoNetworkPolicy[0])});onPatchNetworkPolicy(patchDone);onPatchError(patchError);
 </script>
-
-
-
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -66,8 +46,9 @@ onError(onErrorHandler);onResult(res => {onNotNetworkPolicyFound(res);editor.val
         v-if="!loading && result!=undefined && result.k8sNamespace!=undefined  && result.k8sNamespace[0].projectcalicoNetworkPolicy[0]!=undefined && result.k8sNamespace[0].projectcalicoNetworkPolicy[0]!=null"
         :model="result.k8sNamespace[0].projectcalicoNetworkPolicy[0]"
        />
-    </div><div class="col-md-6">
-      <projectcalicoNetworkPolicyView
+    </div>
+    <div class="col-md-12">
+      <projectcalicoNetworkPolicyEdit
         v-if="!loading && result!=undefined && result.k8sNamespace!=undefined  && result.k8sNamespace[0].projectcalicoNetworkPolicy[0]!=undefined && result.k8sNamespace[0].projectcalicoNetworkPolicy[0]!=null"
         :model="result.k8sNamespace[0].projectcalicoNetworkPolicy[0]"
        />
@@ -75,55 +56,3 @@ onError(onErrorHandler);onResult(res => {onNotNetworkPolicyFound(res);editor.val
   </div>
 </template>
 
-
-
-<template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-sm-8 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sNamespace[0].projectcalicoNetworkPolicy!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">NetworkPolicy</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.k8sNamespace[0].projectcalicoNetworkPolicy.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-sm-4 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sNamespace[0].projectcalicoNetworkPolicy!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result.k8sNamespace[0].projectcalicoNetworkPolicy!=null && result.k8sNamespace[0].projectcalicoNetworkPolicy.status != null">
-          <DefaultStatusView :status="result.k8sNamespace[0].projectcalicoNetworkPolicy.status" />
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && editor.ready && result.k8sNamespace[0].projectcalicoNetworkPolicy!=null" class="q-ma-sm">
-      <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Editor" name="simple" />
-        <q-tab label="Yaml" name="spec" />
-      </q-tabs>
-      <q-tab-panels v-model="editor.tab" animated>
-        <q-tab-panel name="simple">
-          <OpenApiEdit
-          :in="Object.keys(editor.spec).includes('spec')?editor.spec['spec']:{}"
-          @update:out="v=>{ spec=v;editor.setspecSpec({ spec: v})}"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            />
-        </q-tab-panel>
-        <q-tab-panel name="spec">
-          <MonacoEditor
-          :text="editor.yamlspec" :key="editor.yamlspec"
-          @update:text="v=>editor.setspecYaml(v)"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
-    </q-card>
-  </q-form>
-</template>

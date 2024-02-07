@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import k8sMutatingWebhookConfigurationQuery from '@/queries/k8s/MutatingWebhookConfiguration.read.graphql'
 import MutatingWebhookConfigurationEdit from '@/queries/k8s/MutatingWebhookConfiguration.patch.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import k8sMutatingWebhookConfigurationMeta from '@/components/k8s/MutatingWebhookConfigurationMeta.vue';
 import k8sMutatingWebhookConfigurationEdit from '@/components/k8s/MutatingWebhookConfigurationEdit.vue';
-import { useQuery, useMutation, useMutatingWebhookConfiguration, MutatingWebhookConfigurationSimpleExcludes } from '../../../libs/k8s/MutatingWebhookConfiguration.js'
-const { onErrorHandler, notifySuccess, notifyError, onNotMutatingWebhookConfigurationFound, navigation, setItemFromRoute } = useMutatingWebhookConfiguration();setItemFromRoute();
+import { useQuery, useMutation, sanitizeData, useMutatingWebhookConfiguration, MutatingWebhookConfigurationSimpleExcludes } from '../../../libs/k8s/MutatingWebhookConfiguration.js'
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNotMutatingWebhookConfigurationFound, navigation, editor, setItemFromRoute } = useMutatingWebhookConfiguration();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(k8sMutatingWebhookConfigurationQuery, {
   "obj": {
     "filters": [
@@ -15,40 +17,17 @@ const { result, loading, onResult, onError } = useQuery(k8sMutatingWebhookConfig
       }
     ], "excludes": MutatingWebhookConfigurationSimpleExcludes
   },
-});onError(onErrorHandler); onResult(res => {onNotMutatingWebhookConfigurationFound(res)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(MutatingWebhookConfigurationDelete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
-})
-</script>
-
-
-
-<script setup lang="ts">
-import k8sMutatingWebhookConfigurationQuery from '@/queries/k8s/MutatingWebhookConfiguration.read.graphql'
-import MutatingWebhookConfigurationEdit from '@/queries/k8s/MutatingWebhookConfiguration.patch.graphql'
-import MetadataView from '@/components/core/MetadataView.vue';
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { ref, useQuery, useMutation, useMutatingWebhookConfiguration, sanitizeData, getProperties } from '../../../libs/k8s/MutatingWebhookConfiguration.js'
-const webhooks  = ref({});
-const { editor, patchDone, patchError, notifyWorking, onNotMutatingWebhookConfigurationFound, setItemFromRoute, navigation, onErrorHandler } = useMutatingWebhookConfiguration();setItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(k8sMutatingWebhookConfigurationQuery, {"name": navigation.currentItem}, { pollInterval: 500 });
+});
 const { mutate: patchMutatingWebhookConfiguration, onDone: onPatchMutatingWebhookConfiguration, onError: onPatchError } = useMutation(MutatingWebhookConfigurationEdit);
 function onSubmit() {
   notifyWorking('Update in progress');
-  patchMutatingWebhookConfiguration({ "name": result.value.k8sMutatingWebhookConfiguration.metadata.name, "webhooks": sanitizeData(webhooks.value) });
+  patchMutatingWebhookConfiguration({
+    "name": result.k8sMutatingWebhookConfiguration[0].metadata.name,
+    "webhooks": sanitizeData(editor.value.obj['webhooks']),
+  });
 }
-onError(onErrorHandler);onResult(res => {onNotMutatingWebhookConfigurationFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.k8sMutatingWebhookConfiguration.metadata.obj.spec})});onPatchMutatingWebhookConfiguration(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(res => {onNotMutatingWebhookConfigurationFound(res);editor.value.updateFromQuery(res, res.loading?{}:res.data.k8sMutatingWebhookConfiguration[0])});onPatchMutatingWebhookConfiguration(patchDone);onPatchError(patchError);
 </script>
-
-
-
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -57,8 +36,9 @@ onError(onErrorHandler);onResult(res => {onNotMutatingWebhookConfigurationFound(
         v-if="!loading && result!=undefined && result.k8sMutatingWebhookConfiguration[0]!=undefined && result.k8sMutatingWebhookConfiguration[0]!=null"
         :model="result.k8sMutatingWebhookConfiguration[0]"
        />
-    </div><div class="col-md-6">
-      <k8sMutatingWebhookConfigurationView
+    </div>
+    <div class="col-md-12">
+      <k8sMutatingWebhookConfigurationEdit
         v-if="!loading && result!=undefined && result.k8sMutatingWebhookConfiguration[0]!=undefined && result.k8sMutatingWebhookConfiguration[0]!=null"
         :model="result.k8sMutatingWebhookConfiguration[0]"
        />
@@ -66,55 +46,3 @@ onError(onErrorHandler);onResult(res => {onNotMutatingWebhookConfigurationFound(
   </div>
 </template>
 
-
-
-<template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-sm-8 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sMutatingWebhookConfiguration!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">MutatingWebhookConfiguration</div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.k8sMutatingWebhookConfiguration.metadata" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-sm-4 col-md-6">
-      <q-card bordered v-if="!loading && result.k8sMutatingWebhookConfiguration!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result.k8sMutatingWebhookConfiguration!=null && result.k8sMutatingWebhookConfiguration.status != null">
-          <DefaultStatusView :status="result.k8sMutatingWebhookConfiguration.status" />
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
-    <q-card bordered v-if="!loading && editor.ready && result.k8sMutatingWebhookConfiguration!=null" class="q-ma-sm">
-      <q-tabs v-model="editor.tab" class="bg-primary text-white">
-        <q-tab label="Editor" name="simple" />
-        <q-tab label="Yaml" name="spec" />
-      </q-tabs>
-      <q-tab-panels v-model="editor.tab" animated>
-        <q-tab-panel name="simple">
-          <OpenApiEdit
-          :in="Object.keys(editor.webhooks).includes('webhooks')?editor.webhooks['webhooks']:{}"
-          @update:out="v=>{ webhooks=v;editor.setwebhooksSpec({ webhooks: v})}"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-            />
-        </q-tab-panel>
-        <q-tab-panel name="spec">
-          <MonacoEditor
-          :text="editor.yamlwebhooks" :key="editor.yamlwebhooks"
-          @update:text="v=>editor.setwebhooksYaml(v)"
-          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-          />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-card-actions>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </q-card-actions>
-    </q-card>
-  </q-form>
-</template>

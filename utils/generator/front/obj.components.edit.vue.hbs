@@ -13,17 +13,17 @@ const props = defineProps<{model: object}>();
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
-    <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
+    <q-tabs v-model="editor.tab" class="bg-primary text-grey-4" active-color="white">
       <q-tab label="Simple" name="simple" />
       <q-tab label="full Yaml" name="yaml" />
     </q-tabs>
-    <q-tab-panels v-model="viewer.tab" animated>
+    <q-tab-panels v-model="editor.tab" animated>
       <q-tab-panel name="simple">
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
         <OpenApiEdit
           :in="model['{{this}}']"
-          @update:out="v=>{ {{this}}=v;editor.setkey({{this}}, v)}"
+          @update:out="(v)=>editor.setkey('{{this}}', v)"
           :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
         />
   {{/if}}
@@ -33,7 +33,7 @@ const props = defineProps<{model: object}>();
           <MonacoEditor
             :text="editor.yaml" :key="editor.yaml"
             @update:text="v=>editor.setYaml(v)"
-            :properties="getProperties({properties: Object.fromEntries(Object.entries(Object{{ ../short }}Definition).filter(([n])=>!['metadata','status'].include(n)))"
+            :properties="getProperties({properties: Object.fromEntries(Object.entries({{ short }}Definition).filter(([n])=>!['metadata','status'].includes(n)))})"
             />
       </q-tab-panel>
     </q-tab-panels>

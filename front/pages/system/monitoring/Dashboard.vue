@@ -107,7 +107,7 @@ onResult((res) => {
 })
 </script>
 <template>
-  <div class="row q-mb-sm q-ml-sm">
+  <div class="row q-mb-sm q-ml-sm" v-if="isNamespaced()">
     <div class="col-lg-4" v-if="ready && AlertmanagerByTs.length>1" >
       <q-card bordered class="q-ma-sm">
         <q-card-section class="text-center">
