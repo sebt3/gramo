@@ -1,0 +1,13 @@
+mutation traefikMiddleware($namespace: String!, $name: String!) {
+  traefikMiddlewareDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

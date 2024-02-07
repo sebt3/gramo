@@ -1,0 +1,96 @@
+import k8s from '@kubernetes/client-node';
+import rfc6902  from 'rfc6902';
+import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
+{{#each autoResolvers}}
+import { lists as list{{this.targetShort}} } from '../{{this.targetGroup}}/{{this.targetShort}}.js';
+{{#if (and (and (eq this.type 'provide') (eq this.algo 'roleBinding')) (not (startWith this.targetShort 'Cluster')))}}
+import { lists as listNamespace } from '../k8s/Namespace.js';
+{{/if}}
+{{#if (and (and (eq this.type 'provide') (eq this.algo 'storageClass')) (eq this.targetShort 'PersistentVolumeClaim'))}}
+import { lists as listNamespace } from '../k8s/Namespace.js';
+{{/if}}
+{{#if (and (and (eq this.type 'usedBy') (eq this.algo 'nodeName')) (eq this.targetShort 'Pod'))}}
+import { lists as listNamespace } from '../k8s/Namespace.js';
+{{/if}}
+{{#if (and (eq this.algo 'vynil') (and (eq type 'usedBy') (eq targetShort 'Install')))}}
+import { lists as listNamespace } from '../k8s/Namespace.js';
+{{/if}}
+{{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Package')))}}
+import { gramoConfig } from '../../config.js'
+{{/if}}
+{{/each}}
+
+{{#if (defined crd)}}
+const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
+{{else}}
+const k8sApi = kc.makeApiClient(k8s.{{capitalizeFirstLetter sub}}{{capitalizeFirstLetter apiVersion}}Api);
+{{/if}}
+
+export const mutations = {
+{{> createResolver ctx=. }}
+{{> deleteResolver ctx=. }}
+{{> patchResolver ctx=. }}
+};
+export const lists = {
+{{> listResolver ctx=. }}
+};
+{{#unless namespaced}}
+export const queries = {
+    {{group}}{{short}}: lists.{{group}}{{short}},
+};
+{{/unless}}
+export const resolvers = {
+{{#if autoResolvers}}
+    {{group}}{{short}}: {
+  {{#each autoResolvers}}
+    {{#if (eq algo 'vynil')}}
+{{> resolversVynil algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'selector')}}
+{{> resolversSelector algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'ingress')}}
+{{> resolversIngress algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'serviceAccount')}}
+{{> resolversServiceAccount algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'nodeName')}}
+{{> resolversNodeName algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'secret')}}
+{{> resolversSecret algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'configMap')}}
+{{> resolversConfigMap algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'storageClass')}}
+{{> resolversStorageClass algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'apiService')}}
+{{> resolversApiService algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'roleBinding')}}
+{{> resolversRoleBinding algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'role')}}
+{{> resolversRole algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'k8s')}}
+{{> resolversK8S algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'pvc')}}
+{{> resolversPVC algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+  {{/each}}
+    }
+{{/if}}
+};
+{{#if namespaced}}
+export const nsResolver = {
+    {{group}}{{short}}: async (parent, args: object) => {
+        return lists.{{group}}{{short}}(parent,{namespace: parent.metadata.name, ...args})
+    }
+};
+{{/if}}
+

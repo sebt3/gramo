@@ -1,0 +1,23 @@
+import * as core from './core/index.js';
+{{#each groups}}
+import * as {{this.name}} from './{{this.name}}/index.js';
+{{/each}}
+
+export const resolvers = {
+{{#each groups}}
+  ...{{this.name}}.resolvers,
+{{/each}}
+  ...core.resolvers,
+  Query: {
+{{#each groups}}
+    ...{{this.name}}.queries,
+{{/each}}
+    ...core.queries
+  },
+  Mutation: {
+{{#each groups}}
+    ...{{this.name}}.mutations,
+{{/each}}
+    ...core.mutations
+  }
+};

@@ -1,0 +1,14 @@
+mutation cnpgBackup($namespace: String!, $name: String!, $spec: JSONObject) {
+  cnpgBackupPatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

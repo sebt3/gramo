@@ -6,7 +6,7 @@ import OpenApiEditString from './OpenApiEditString.vue';
 import OpenApiEditNumber from './OpenApiEditNumber.vue';
 import { ref, watch } from 'vue'
 import { OpenAPIV3 } from "openapi-types";
-import {getProperties,getItems,getType, getFullData} from './openapiSetup';
+import {getProperties,getItems,getType, getFullData} from '../../libs/core/openapiSetup';
 const props = withDefaults(defineProps<{
   out?: any
   in?: any

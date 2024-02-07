@@ -1,0 +1,15 @@
+query k8sPriorityClassQuery($obj: queryParameters,) {
+    k8sPriorityClass(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      description
+      globalDefault
+      preemptionPolicy
+      value
+    }
+}

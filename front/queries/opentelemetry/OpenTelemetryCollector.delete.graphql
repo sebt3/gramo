@@ -1,0 +1,14 @@
+mutation opentelemetryOpenTelemetryCollector($namespace: String!, $name: String!) {
+  opentelemetryOpenTelemetryCollectorDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

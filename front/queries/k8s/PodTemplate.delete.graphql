@@ -1,0 +1,13 @@
+mutation k8sPodTemplate($namespace: String!, $name: String!) {
+  k8sPodTemplateDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      template
+  }
+}

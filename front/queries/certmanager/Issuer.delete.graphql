@@ -1,0 +1,14 @@
+mutation certmanagerIssuer($namespace: String!, $name: String!) {
+  certmanagerIssuerDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

@@ -1,0 +1,13 @@
+mutation projectcalicoBGPConfiguration($name: String!, $spec: JSONObject) {
+  projectcalicoBGPConfigurationPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

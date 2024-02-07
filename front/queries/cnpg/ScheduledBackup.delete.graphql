@@ -1,0 +1,14 @@
+mutation cnpgScheduledBackup($namespace: String!, $name: String!) {
+  cnpgScheduledBackupDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

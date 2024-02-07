@@ -1,0 +1,40 @@
+query redisRedisQuery($namespace: queryParameters, $obj: queryParameters,, $childService: queryParameters, $childStatefulSet: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    redisRedis(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      childService(params: $childService) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      childStatefulSet(params: $childStatefulSet) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      spec
+      status
+    }
+  }
+}

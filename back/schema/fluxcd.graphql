@@ -1,0 +1,106 @@
+type fluxcdKustomization {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdReceiver {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdAlert {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdProvider {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdGitRepository {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdBucket {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdHelmChart {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdHelmRepository {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdOCIRepository {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdImageUpdateAutomation {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdImagePolicy {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdImageRepository {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type fluxcdHelmRelease {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type Mutation {
+    fluxcdKustomizationCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdKustomization
+    fluxcdKustomizationPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdKustomization
+    fluxcdKustomizationDelete(namespace: String!, name: String!): fluxcdKustomization
+    fluxcdReceiverCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdReceiver
+    fluxcdReceiverPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdReceiver
+    fluxcdReceiverDelete(namespace: String!, name: String!): fluxcdReceiver
+    fluxcdAlertCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdAlert
+    fluxcdAlertPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdAlert
+    fluxcdAlertDelete(namespace: String!, name: String!): fluxcdAlert
+    fluxcdProviderCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdProvider
+    fluxcdProviderPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdProvider
+    fluxcdProviderDelete(namespace: String!, name: String!): fluxcdProvider
+    fluxcdGitRepositoryCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdGitRepository
+    fluxcdGitRepositoryPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdGitRepository
+    fluxcdGitRepositoryDelete(namespace: String!, name: String!): fluxcdGitRepository
+    fluxcdBucketCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdBucket
+    fluxcdBucketPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdBucket
+    fluxcdBucketDelete(namespace: String!, name: String!): fluxcdBucket
+    fluxcdHelmChartCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmChart
+    fluxcdHelmChartPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmChart
+    fluxcdHelmChartDelete(namespace: String!, name: String!): fluxcdHelmChart
+    fluxcdHelmRepositoryCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmRepository
+    fluxcdHelmRepositoryPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmRepository
+    fluxcdHelmRepositoryDelete(namespace: String!, name: String!): fluxcdHelmRepository
+    fluxcdOCIRepositoryCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdOCIRepository
+    fluxcdOCIRepositoryPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdOCIRepository
+    fluxcdOCIRepositoryDelete(namespace: String!, name: String!): fluxcdOCIRepository
+    fluxcdImageUpdateAutomationCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImageUpdateAutomation
+    fluxcdImageUpdateAutomationPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImageUpdateAutomation
+    fluxcdImageUpdateAutomationDelete(namespace: String!, name: String!): fluxcdImageUpdateAutomation
+    fluxcdImagePolicyCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImagePolicy
+    fluxcdImagePolicyPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImagePolicy
+    fluxcdImagePolicyDelete(namespace: String!, name: String!): fluxcdImagePolicy
+    fluxcdImageRepositoryCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImageRepository
+    fluxcdImageRepositoryPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdImageRepository
+    fluxcdImageRepositoryDelete(namespace: String!, name: String!): fluxcdImageRepository
+    fluxcdHelmReleaseCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmRelease
+    fluxcdHelmReleasePatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): fluxcdHelmRelease
+    fluxcdHelmReleaseDelete(namespace: String!, name: String!): fluxcdHelmRelease
+}

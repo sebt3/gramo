@@ -1,0 +1,12 @@
+query projectcalicoIPAMBlockQuery($obj: queryParameters,) {
+    projectcalicoIPAMBlock(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

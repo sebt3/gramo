@@ -1,0 +1,13 @@
+mutation k8sCSIDriver($name: String!) {
+  k8sCSIDriverDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

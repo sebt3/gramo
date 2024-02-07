@@ -1,0 +1,14 @@
+mutation certmanagerClusterIssuer($name: String!, $spec: JSONObject) {
+  certmanagerClusterIssuerCreate(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

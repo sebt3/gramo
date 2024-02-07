@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMBlock($name: String!) {
+  projectcalicoIPAMBlockDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

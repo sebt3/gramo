@@ -1,0 +1,14 @@
+mutation k8sResourceQuota($namespace: String!, $name: String!) {
+  k8sResourceQuotaDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

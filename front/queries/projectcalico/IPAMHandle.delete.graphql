@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMHandle($name: String!) {
+  projectcalicoIPAMHandleDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

@@ -1,0 +1,31 @@
+query oracleQuery($namespace: queryParameters, $InnoDBCluster: queryParameters, $MySQLBackup: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    oracleInnoDBCluster(params: $InnoDBCluster) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    oracleMySQLBackup(params: $MySQLBackup) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

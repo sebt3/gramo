@@ -1,0 +1,14 @@
+mutation jaegertracingJaeger($namespace: String!, $name: String!) {
+  jaegertracingJaegerDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

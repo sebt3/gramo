@@ -1,0 +1,16 @@
+query k8sJobQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8sJob(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

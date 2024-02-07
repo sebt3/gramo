@@ -1,0 +1,13 @@
+mutation projectcalicoHostEndpoint($name: String!, $spec: JSONObject) {
+  projectcalicoHostEndpointPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

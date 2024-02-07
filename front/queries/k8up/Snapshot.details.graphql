@@ -1,0 +1,16 @@
+query k8upSnapshotQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8upSnapshot(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

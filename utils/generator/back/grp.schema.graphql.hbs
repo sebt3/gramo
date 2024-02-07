@@ -1,0 +1,28 @@
+{{#each objects}}
+{{#unless (isCustomTyped ../name this.short)}}
+type {{../name}}{{this.short}} {
+  {{#each this.gqlDefs}}
+    {{@key}}: {{this}}
+  {{/each}}
+  {{#each this.resolvers}}
+    {{this.name}}{{this.args}}: {{this.result}}
+  {{/each}}
+}
+{{/unless}}
+{{/each}}
+{{#if (haveQueries objects)}}
+type Query {
+{{#each objects}}
+  {{#unless this.namespaced}}
+    {{../name}}{{this.short}}(params: queryParameters): [{{../name}}{{this.short}}]
+  {{/unless}}
+{{/each}}
+}
+{{/if}}
+type Mutation {
+{{#each objects}}
+    {{../name}}{{this.short}}Create({{#if this.namespaced}}namespace: String!, {{/if}}name: String!, {{genParameterQuery this}}): {{../name}}{{this.short}}
+    {{../name}}{{this.short}}Patch({{#if this.namespaced}}namespace: String!, {{/if}}name: String!, {{genParameterQuery this}}): {{../name}}{{this.short}}
+    {{../name}}{{this.short}}Delete({{#if this.namespaced}}namespace: String!, {{/if}}name: String!): {{../name}}{{this.short}}
+{{/each}}
+}

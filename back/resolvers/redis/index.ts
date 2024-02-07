@@ -1,20 +1,18 @@
-
-import { queries as RedisQueries } from './query.Redis.js';
-import { mutations as RedisMutations } from './mutation.Redis.js';
-import { queries as RedisClusterQueries } from './query.RedisCluster.js';
-import { mutations as RedisClusterMutations } from './mutation.RedisCluster.js';
-import { queries as RedisReplicationQueries } from './query.RedisReplication.js';
-import { mutations as RedisReplicationMutations } from './mutation.RedisReplication.js';
-import { queries as RedisSentinelQueries } from './query.RedisSentinel.js';
-import { mutations as RedisSentinelMutations } from './mutation.RedisSentinel.js';
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+import { mutations as RedisMutations, resolvers as RedisResolvers } from './Redis.js';
+import { mutations as RedisClusterMutations, resolvers as RedisClusterResolvers } from './RedisCluster.js';
+import { mutations as RedisReplicationMutations, resolvers as RedisReplicationResolvers } from './RedisReplication.js';
+import { mutations as RedisSentinelMutations, resolvers as RedisSentinelResolvers } from './RedisSentinel.js';
 export const queries = {
-    ...RedisQueries,
-    ...RedisClusterQueries,
-    ...RedisReplicationQueries,
-    ...RedisSentinelQueries,
+    ...customQueries
 };
 
 export const resolvers = {
+    ...RedisResolvers,
+    ...RedisClusterResolvers,
+    ...RedisReplicationResolvers,
+    ...RedisSentinelResolvers,
+    ...customResolvers
 };
 
 export const mutations = {
@@ -22,4 +20,5 @@ export const mutations = {
     ...RedisClusterMutations,
     ...RedisReplicationMutations,
     ...RedisSentinelMutations,
+    ...customMutations
 };

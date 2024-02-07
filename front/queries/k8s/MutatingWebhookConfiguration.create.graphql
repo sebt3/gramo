@@ -1,0 +1,13 @@
+mutation k8sMutatingWebhookConfiguration($name: String!, $webhooks: [JSONObject]) {
+  k8sMutatingWebhookConfigurationCreate(name: $name, webhooks: $webhooks) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      webhooks
+  }
+}

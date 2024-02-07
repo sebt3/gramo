@@ -1,0 +1,78 @@
+query certmanagerQuery($namespace: queryParameters, $Challenge: queryParameters, $Order: queryParameters, $Certificate: queryParameters, $CertificateRequest: queryParameters, $ClusterIssuer: queryParameters, $Issuer: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    certmanagerChallenge(params: $Challenge) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    certmanagerOrder(params: $Order) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    certmanagerCertificate(params: $Certificate) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    certmanagerCertificateRequest(params: $CertificateRequest) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    certmanagerIssuer(params: $Issuer) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+  certmanagerClusterIssuer(params: $ClusterIssuer) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+}

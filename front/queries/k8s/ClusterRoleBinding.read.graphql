@@ -1,0 +1,13 @@
+query k8sClusterRoleBindingQuery($obj: queryParameters,) {
+    k8sClusterRoleBinding(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      roleRef
+      subjects
+    }
+}

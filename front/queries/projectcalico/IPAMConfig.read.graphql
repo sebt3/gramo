@@ -1,0 +1,12 @@
+query projectcalicoIPAMConfigQuery($obj: queryParameters,) {
+    projectcalicoIPAMConfig(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

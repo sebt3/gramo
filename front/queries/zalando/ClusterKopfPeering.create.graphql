@@ -1,0 +1,13 @@
+mutation zalandoClusterKopfPeering($name: String!) {
+  zalandoClusterKopfPeeringCreate(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      status
+  }
+}

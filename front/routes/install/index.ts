@@ -1,25 +1,24 @@
 import {menuLinksProps} from '../interfaces';
 import { RouteRecordRaw } from 'vue-router'
-import { useCRDStore } from '../../stores'
-const crds = useCRDStore().crds;
+import { installIcon, installTitle, installDesc } from '../custom.js';
 const linkChildren:Array<menuLinksProps> = [];
 const routeChildren:Array<RouteRecordRaw> = [];
 const linkRedirect = {path:''};
 
 import { route as vynilRoute, link as vynilLink, descriptions as vynilDescriptions } from './vynil'
-if (crds['installs.vynil.solidite.fr'] != undefined) {
-  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:vynilRoute['redirect']!=undefined?vynilRoute['redirect'].path:'/install/vynil'
+if (Array.isArray(vynilLink.children) && vynilLink.children.length>0) {
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:vynilRoute['redirect']!=undefined?vynilRoute['redirect'].path:'//vynil'
   linkChildren.push(vynilLink)
   routeChildren.push(vynilRoute)
 }
 
 export const descriptions = {
-  install:      {breadcrumb: 'Applications', icon: 'apps', ns: false},
-  ...vynilDescriptions
+  install:      {breadcrumb: installTitle, icon: installIcon, ns: false},
+  ...vynilDescriptions,
 }
 
 export const link:menuLinksProps = {
-  title: 'Installation', caption: "d'applications", icon: 'apps',
+  title: installTitle, caption: installDesc, icon: installIcon,
   link: linkRedirect.path,
   level: 0,
   children: linkChildren

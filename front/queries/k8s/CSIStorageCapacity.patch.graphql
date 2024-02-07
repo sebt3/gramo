@@ -1,0 +1,16 @@
+mutation k8sCSIStorageCapacity($namespace: String!, $name: String!, $capacity: JSONObject, $maximumVolumeSize: JSONObject, $nodeTopology: JSONObject, $storageClassName: String) {
+  k8sCSIStorageCapacityPatch(namespace: $namespace, name: $name, capacity: $capacity, maximumVolumeSize: $maximumVolumeSize, nodeTopology: $nodeTopology, storageClassName: $storageClassName) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      capacity
+      maximumVolumeSize
+      nodeTopology
+      storageClassName
+  }
+}

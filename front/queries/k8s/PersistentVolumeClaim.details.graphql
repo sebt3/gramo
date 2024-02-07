@@ -1,0 +1,152 @@
+query k8sPersistentVolumeClaimQuery($namespace: queryParameters, $obj: queryParameters,, $parentCluster: queryParameters, $parentStatefulSet: queryParameters, $providedToStorageClass: queryParameters, $usePersistentVolume: queryParameters, $usedByPod: queryParameters, $usedByReplicaSet: queryParameters, $usedByJob: queryParameters, $usedByCronJob: queryParameters, $usedByDeployment: queryParameters, $usedByDaemonSet: queryParameters, $usedByPodTemplate: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sPersistentVolumeClaim(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      parentCluster(params: $parentCluster) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentStatefulSet(params: $parentStatefulSet) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      providedToStorageClass(params: $providedToStorageClass) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        allowVolumeExpansion
+        allowedTopologies
+        mountOptions
+        parameters
+        provisioner
+        reclaimPolicy
+        volumeBindingMode
+      }
+      usePersistentVolume(params: $usePersistentVolume) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByPod(params: $usedByPod) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByReplicaSet(params: $usedByReplicaSet) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByJob(params: $usedByJob) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByCronJob(params: $usedByCronJob) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByDeployment(params: $usedByDeployment) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByDaemonSet(params: $usedByDaemonSet) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByPodTemplate(params: $usedByPodTemplate) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        template
+      }
+      spec
+      status
+    }
+  }
+}

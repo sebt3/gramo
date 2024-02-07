@@ -1,0 +1,13 @@
+mutation k8sLimitRange($namespace: String!, $name: String!) {
+  k8sLimitRangeDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

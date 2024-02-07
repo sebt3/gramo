@@ -1,0 +1,20 @@
+{{#if (eq type 'provide')}}
+        {{type}}{{targetShort}}: async (user, args: object) => {
+        {{#if (eq this.targetShort 'PersistentVolumeClaim')}}
+            const nss = await listNamespace.k8sNamespace(user, args)
+            return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+                const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(user, {namespace: ns, ...args})
+                return lst.filter(r=>r['spec']['storageClassName']==user['metadata']['name'])
+            }))).flat().filter((v)=>v!=null)
+        {{else}}
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(user, args)
+            return lst.filter(r=>r['spec']['storageClassName']==user['metadata']['name'])
+        {{/if}}
+        },
+{{/if}}
+{{#if (eq type 'providedTo')}}
+        {{type}}{{targetShort}}: async (used, args: object) => {
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args)
+            return lst.filter(r=>r['metadata']['name']==used['spec']['storageClassName'])
+        },
+{{/if}}

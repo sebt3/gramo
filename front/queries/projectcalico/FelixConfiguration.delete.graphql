@@ -1,0 +1,13 @@
+mutation projectcalicoFelixConfiguration($name: String!) {
+  projectcalicoFelixConfigurationDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

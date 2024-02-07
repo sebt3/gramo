@@ -1,0 +1,14 @@
+mutation fluxcdImageRepository($namespace: String!, $name: String!) {
+  fluxcdImageRepositoryDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

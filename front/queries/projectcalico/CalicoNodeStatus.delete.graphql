@@ -1,0 +1,14 @@
+mutation projectcalicoCalicoNodeStatus($name: String!) {
+  projectcalicoCalicoNodeStatusDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

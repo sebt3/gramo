@@ -1,0 +1,12 @@
+query projectcalicoIPAMHandleQuery($obj: queryParameters,) {
+    projectcalicoIPAMHandle(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

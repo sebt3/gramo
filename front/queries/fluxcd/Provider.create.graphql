@@ -1,0 +1,14 @@
+mutation fluxcdProvider($namespace: String!, $name: String!, $spec: JSONObject) {
+  fluxcdProviderCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

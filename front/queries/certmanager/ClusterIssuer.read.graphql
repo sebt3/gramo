@@ -1,0 +1,13 @@
+query certmanagerClusterIssuerQuery($obj: queryParameters,) {
+    certmanagerClusterIssuer(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

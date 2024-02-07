@@ -1,0 +1,12 @@
+query projectcalicoIPReservationQuery($obj: queryParameters,) {
+    projectcalicoIPReservation(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

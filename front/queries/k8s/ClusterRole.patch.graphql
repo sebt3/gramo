@@ -1,0 +1,14 @@
+mutation k8sClusterRole($name: String!, $aggregationRule: JSONObject, $rules: [JSONObject]) {
+  k8sClusterRolePatch(name: $name, aggregationRule: $aggregationRule, rules: $rules) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      aggregationRule
+      rules
+  }
+}

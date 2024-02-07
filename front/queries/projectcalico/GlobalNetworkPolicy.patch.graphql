@@ -1,0 +1,13 @@
+mutation projectcalicoGlobalNetworkPolicy($name: String!, $spec: JSONObject) {
+  projectcalicoGlobalNetworkPolicyPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

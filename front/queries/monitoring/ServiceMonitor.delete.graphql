@@ -1,0 +1,13 @@
+mutation monitoringServiceMonitor($namespace: String!, $name: String!) {
+  monitoringServiceMonitorDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

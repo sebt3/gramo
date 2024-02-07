@@ -1,0 +1,16 @@
+query oracleInnoDBClusterQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    oracleInnoDBCluster(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

@@ -1,0 +1,15 @@
+query traefikIngressRouteUDPQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    traefikIngressRouteUDP(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+  }
+}

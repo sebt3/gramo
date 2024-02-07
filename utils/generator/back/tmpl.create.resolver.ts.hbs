@@ -1,0 +1,35 @@
+{{#with ctx}}
+    {{group}}{{short}}Create: async (_parent, args: object) => {
+        const payload = {
+            apiVersion: '{{apiGroup}}/{{apiVersion}}',
+            kind: '{{ name }}',
+{{#if namespaced}}
+            metadata: getMetaNS(args),
+{{else}}
+            metadata: getMeta(args),
+{{/if}}
+{{#each writeProperties}}
+            "{{this}}": args['{{this}}'],
+{{/each}}
+        }
+        try {
+{{#if (defined crd)}}
+  {{#if namespaced}}
+            const res = await k8sApi.createNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', payload)
+  {{else}}
+            const res = await k8sApi.createClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', payload)
+  {{/if}}
+{{else}}
+  {{#if namespaced}}
+            const res = await k8sApi.createNamespaced{{ short }}(args['namespace'], payload)
+  {{else}}
+            const res = await k8sApi.create{{ short }}(payload)
+  {{/if}}
+{{/if}}
+            return res.body
+        } catch (err) {
+            console.error((err as object)['body']);
+        }
+        return null
+    },
+{{/with}}

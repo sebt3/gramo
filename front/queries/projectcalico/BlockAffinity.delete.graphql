@@ -1,0 +1,13 @@
+mutation projectcalicoBlockAffinity($name: String!) {
+  projectcalicoBlockAffinityDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

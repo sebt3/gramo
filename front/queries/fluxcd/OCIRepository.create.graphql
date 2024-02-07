@@ -1,0 +1,14 @@
+mutation fluxcdOCIRepository($namespace: String!, $name: String!, $spec: JSONObject) {
+  fluxcdOCIRepositoryCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

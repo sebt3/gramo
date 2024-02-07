@@ -7,5 +7,8 @@ node_modules
 .dockerignore
 back/resolvers/*/gen.*
 back/schema/gen.*
-front/components/gen.*
+front/components/*/gen.*
+front/routes/*/gen.*
 front/queries/*/gen.*
+front/pages/*/*/gen.*
+front/libs/*/gen.*

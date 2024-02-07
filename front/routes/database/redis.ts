@@ -1,190 +1,195 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'database';
-const iconRedis = 'data_object';
-const iconRedisCluster = 'fas fa-database';
-const iconRedisReplication = 'album';
-const iconRedisSentinel = 'album';
+import { iconRedis, iconRedisCluster, iconRedisReplication, iconRedisSentinel,  redisIcon, redisTitle }from '../../libs/redis/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  name: 'redis',
-  title: 'Redis', icon: iconRedis,
-  link: `/${cat}/redis/redis/`,
+  name: 'databaseredis',
+  title: redisTitle, icon: redisIcon,
+  link: '/database/redis/',
   level: 1,
   children: [
-  {
+  crds['redis.redis.redis.opstreelabs.in'] == undefined?[]:[{
     name: 'redisRediss',
-    title: 'Redis', caption: 'List redis', icon: iconRedis,
-    link: `/${cat}/redis/redis/`, level: 2, children: []
-  },
-  {
+    title: 'Redis', caption: 'List Redis', icon: iconRedis,
+    link: '/database/redis/Redis/', level: 2, children: []
+  }],
+  crds['redisclusters.redis.redis.opstreelabs.in'] == undefined?[]:[{
     name: 'redisRedisClusters',
-    title: 'RedisCluster', caption: 'List redisCluster', icon: iconRedisCluster,
-    link: `/${cat}/redis/redisclusters/`, level: 2, children: []
-  },
-  {
+    title: 'RedisCluster', caption: 'List RedisCluster', icon: iconRedisCluster,
+    link: '/database/redis/RedisCluster/', level: 2, children: []
+  }],
+  crds['redisreplications.redis.redis.opstreelabs.in'] == undefined?[]:[{
     name: 'redisRedisReplications',
-    title: 'RedisReplication', caption: 'List redisReplication', icon: iconRedisReplication,
-    link: `/${cat}/redis/redisreplications/`, level: 2, children: []
-  },
-  {
+    title: 'RedisReplication', caption: 'List RedisReplication', icon: iconRedisReplication,
+    link: '/database/redis/RedisReplication/', level: 2, children: []
+  }],
+  crds['redissentinels.redis.redis.opstreelabs.in'] == undefined?[]:[{
     name: 'redisRedisSentinels',
-    title: 'RedisSentinel', caption: 'List redisSentinel', icon: iconRedisSentinel,
-    link: `/${cat}/redis/redissentinels/`, level: 2, children: []
-  },
-  ]
+    title: 'RedisSentinel', caption: 'List RedisSentinel', icon: iconRedisSentinel,
+    link: '/database/redis/RedisSentinel/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  redis:                {breadcrumb: 'Redis', icon: iconRedis, ns: false},
-  redisRediss:        {breadcrumb: 'Redis', icon: iconRedis, ns: false},
+  databaseredis:                {breadcrumb: redisTitle, icon: redisIcon, ns: false},
+  databaseredisDashboard:       {breadcrumb: 'Dashboard', icon: redisIcon, ns: false},
+  redisRedis:        {breadcrumb: 'Redis', icon: iconRedis, ns: false},
   redisRedisAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  redisRedisTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  redisRedisView:     {breadcrumb: 'View', icon: iconRedis, ns: true},
-  redisRedisEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  redisRedisCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  redisRedisClusters:        {breadcrumb: 'RedisCluster', icon: iconRedisCluster, ns: false},
+  redisRedisTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  redisRedisView:     {breadcrumb: 'View', icon: iconRedis, ns: true },
+  redisRedisEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  redisRedisCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  redisRedisCluster:        {breadcrumb: 'RedisCluster', icon: iconRedisCluster, ns: false},
   redisRedisClusterAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  redisRedisClusterTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  redisRedisClusterView:     {breadcrumb: 'View', icon: iconRedisCluster, ns: true},
-  redisRedisClusterEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  redisRedisClusterCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  redisRedisReplications:        {breadcrumb: 'RedisReplication', icon: iconRedisReplication, ns: false},
+  redisRedisClusterTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  redisRedisClusterView:     {breadcrumb: 'View', icon: iconRedisCluster, ns: true },
+  redisRedisClusterEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  redisRedisClusterCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  redisRedisReplication:        {breadcrumb: 'RedisReplication', icon: iconRedisReplication, ns: false},
   redisRedisReplicationAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  redisRedisReplicationTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  redisRedisReplicationView:     {breadcrumb: 'View', icon: iconRedisReplication, ns: true},
-  redisRedisReplicationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  redisRedisReplicationCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  redisRedisSentinels:        {breadcrumb: 'RedisSentinel', icon: iconRedisSentinel, ns: false},
+  redisRedisReplicationTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  redisRedisReplicationView:     {breadcrumb: 'View', icon: iconRedisReplication, ns: true },
+  redisRedisReplicationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  redisRedisReplicationCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  redisRedisSentinel:        {breadcrumb: 'RedisSentinel', icon: iconRedisSentinel, ns: false},
   redisRedisSentinelAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  redisRedisSentinelTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  redisRedisSentinelView:     {breadcrumb: 'View', icon: iconRedisSentinel, ns: true},
-  redisRedisSentinelEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  redisRedisSentinelCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  redisRedisSentinelTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  redisRedisSentinelView:     {breadcrumb: 'View', icon: iconRedisSentinel, ns: true },
+  redisRedisSentinelEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  redisRedisSentinelCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'redis',
-  name: 'redis',
+  name: 'databaseredis',
   redirect: {path: link.link as string},
   children: [
     {
-      path: 'redis',
-      name: 'redisRediss',
+      path: '',
+      name: 'databaseredisDashboard',
+      component: () => import('../../pages/database/redis/Dashboard.vue'),
+    },
+    {
+      path: 'Redis',
+      name: 'redisRedis',
       children: [
         {
           path: '',
           name: 'redisRedisAllTable',
-          component: () => import('../../components/redis/RedisAllTable.vue'),
+          component: () => import('../../pages/database/redis/RedisList.vue'),
         },
         {
           path: ':namespace',
           name: 'redisRedisTable',
-          component: () => import('../../components/redis/RedisTable.vue'),
+          component: () => import('../../pages/database/redis/RedisList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'redisRedisView',
-          component: () => import('../../components/redis/RedisView.vue'),
+          component: () => import('../../pages/database/redis/RedisView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'redisRedisEdit',
-          component: () => import('../../components/redis/RedisEdit.vue'),
+          component: () => import('../../pages/database/redis/RedisEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'redisRedisCreate',
-          component: () => import('../../components/redis/RedisNew.vue'),
+          component: () => import('../../pages/database/redis/RedisNew.vue'),
         }
       ]
     },
     {
-      path: 'redisclusters',
-      name: 'redisRedisClusters',
+      path: 'RedisCluster',
+      name: 'redisRedisCluster',
       children: [
         {
           path: '',
           name: 'redisRedisClusterAllTable',
-          component: () => import('../../components/redis/RedisClusterAllTable.vue'),
+          component: () => import('../../pages/database/redis/RedisClusterList.vue'),
         },
         {
           path: ':namespace',
           name: 'redisRedisClusterTable',
-          component: () => import('../../components/redis/RedisClusterTable.vue'),
+          component: () => import('../../pages/database/redis/RedisClusterList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'redisRedisClusterView',
-          component: () => import('../../components/redis/RedisClusterView.vue'),
+          component: () => import('../../pages/database/redis/RedisClusterView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'redisRedisClusterEdit',
-          component: () => import('../../components/redis/RedisClusterEdit.vue'),
+          component: () => import('../../pages/database/redis/RedisClusterEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'redisRedisClusterCreate',
-          component: () => import('../../components/redis/RedisClusterNew.vue'),
+          component: () => import('../../pages/database/redis/RedisClusterNew.vue'),
         }
       ]
     },
     {
-      path: 'redisreplications',
-      name: 'redisRedisReplications',
+      path: 'RedisReplication',
+      name: 'redisRedisReplication',
       children: [
         {
           path: '',
           name: 'redisRedisReplicationAllTable',
-          component: () => import('../../components/redis/RedisReplicationAllTable.vue'),
+          component: () => import('../../pages/database/redis/RedisReplicationList.vue'),
         },
         {
           path: ':namespace',
           name: 'redisRedisReplicationTable',
-          component: () => import('../../components/redis/RedisReplicationTable.vue'),
+          component: () => import('../../pages/database/redis/RedisReplicationList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'redisRedisReplicationView',
-          component: () => import('../../components/redis/RedisReplicationView.vue'),
+          component: () => import('../../pages/database/redis/RedisReplicationView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'redisRedisReplicationEdit',
-          component: () => import('../../components/redis/RedisReplicationEdit.vue'),
+          component: () => import('../../pages/database/redis/RedisReplicationEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'redisRedisReplicationCreate',
-          component: () => import('../../components/redis/RedisReplicationNew.vue'),
+          component: () => import('../../pages/database/redis/RedisReplicationNew.vue'),
         }
       ]
     },
     {
-      path: 'redissentinels',
-      name: 'redisRedisSentinels',
+      path: 'RedisSentinel',
+      name: 'redisRedisSentinel',
       children: [
         {
           path: '',
           name: 'redisRedisSentinelAllTable',
-          component: () => import('../../components/redis/RedisSentinelAllTable.vue'),
+          component: () => import('../../pages/database/redis/RedisSentinelList.vue'),
         },
         {
           path: ':namespace',
           name: 'redisRedisSentinelTable',
-          component: () => import('../../components/redis/RedisSentinelTable.vue'),
+          component: () => import('../../pages/database/redis/RedisSentinelList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'redisRedisSentinelView',
-          component: () => import('../../components/redis/RedisSentinelView.vue'),
+          component: () => import('../../pages/database/redis/RedisSentinelView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'redisRedisSentinelEdit',
-          component: () => import('../../components/redis/RedisSentinelEdit.vue'),
+          component: () => import('../../pages/database/redis/RedisSentinelEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'redisRedisSentinelCreate',
-          component: () => import('../../components/redis/RedisSentinelNew.vue'),
+          component: () => import('../../pages/database/redis/RedisSentinelNew.vue'),
         }
       ]
     },

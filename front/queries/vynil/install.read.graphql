@@ -1,0 +1,30 @@
+query vynilQuery($namespace: queryParameters, $Distrib: queryParameters, $Install: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    vynilInstall(params: $Install) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+  vynilDistrib(params: $Distrib) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+}

@@ -1,0 +1,12 @@
+{{#each objects}}
+  {{#if namespaced}}
+import { nsResolver as {{this.short}}NSresolver } from '../{{../name}}/{{this.short}}.js';
+  {{/if}}
+{{/each}}
+export const resolvers = {
+{{#each objects}}
+  {{#if namespaced}}
+    ...{{this.short}}NSresolver,
+  {{/if}}
+{{/each}}
+};

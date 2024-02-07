@@ -1,0 +1,14 @@
+mutation fluxcdHelmChart($namespace: String!, $name: String!) {
+  fluxcdHelmChartDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

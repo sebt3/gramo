@@ -1,0 +1,12 @@
+query k8sCSIDriverQuery($obj: queryParameters,) {
+    k8sCSIDriver(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

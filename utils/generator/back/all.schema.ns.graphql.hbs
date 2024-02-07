@@ -1,0 +1,13 @@
+type k8sNamespace {
+  metadata: metadata
+  spec: JSONObject
+  status: JSONObject
+  permissions: permissionReview
+{{#each groups}}
+  {{#each this.objects}}
+    {{#if this.namespaced}}
+  {{../name}}{{this.short}}(params: queryParameters): [{{../name}}{{this.short}}]
+    {{/if}}
+  {{/each}}
+{{/each}}
+}

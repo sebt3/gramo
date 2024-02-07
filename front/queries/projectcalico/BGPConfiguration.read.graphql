@@ -1,0 +1,12 @@
+query projectcalicoBGPConfigurationQuery($obj: queryParameters,) {
+    projectcalicoBGPConfiguration(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

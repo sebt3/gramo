@@ -1,0 +1,15 @@
+mutation {{ group }}{{ short }}({{#if namespaced}}$namespace: String!, {{/if}}$name: String!{{#unless (isDelete mutationType)}}{{#each writeProperties}}, ${{this}}: {{getGQLType this ../gqlDefs}}{{/each}}{{/unless}}) {
+  {{ group }}{{ short }}{{ mutationType }}({{#if namespaced}}namespace: $namespace, {{/if}}name: $name{{#unless (isDelete mutationType)}}{{#each writeProperties}}, {{this}}: ${{this}}{{/each}}{{/unless}}) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+{{#each readProperties}}
+      {{this}}
+{{/each}}
+  }
+}

@@ -1,0 +1,14 @@
+mutation vynilInstall($namespace: String!, $name: String!, $spec: JSONObject) {
+  vynilInstallCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

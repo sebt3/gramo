@@ -1,0 +1,16 @@
+query k8sRoleBindingQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8sRoleBinding(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      roleRef
+      subjects
+    }
+  }
+}

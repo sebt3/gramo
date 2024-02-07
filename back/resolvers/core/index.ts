@@ -1,15 +1,13 @@
-import * as core from './core.js';
-import * as api from './api.js';
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+
+export const queries = {
+    ...customQueries
+};
 
 export const resolvers = {
-    ...api.resolvers,
-    ...core.resolvers,
+    ...customResolvers
 };
-export const queries = {
-    ...api.queries,
-    ...core.queries,
-};
+
 export const mutations = {
-    ...api.mutations,
-    ...core.mutations,
+    ...customMutations
 };

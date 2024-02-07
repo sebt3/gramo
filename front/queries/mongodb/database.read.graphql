@@ -1,0 +1,19 @@
+query mongodbQuery($namespace: queryParameters, $MongoDBCommunity: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    mongodbMongoDBCommunity(params: $MongoDBCommunity) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

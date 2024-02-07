@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMConfig($name: String!, $spec: JSONObject) {
+  projectcalicoIPAMConfigPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

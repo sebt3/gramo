@@ -1,0 +1,14 @@
+mutation projectcalicoKubeControllersConfiguration($name: String!, $spec: JSONObject) {
+  projectcalicoKubeControllersConfigurationCreate(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

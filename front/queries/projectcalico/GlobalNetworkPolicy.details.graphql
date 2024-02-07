@@ -1,0 +1,12 @@
+query projectcalicoGlobalNetworkPolicyQuery($obj: queryParameters,) {
+    projectcalicoGlobalNetworkPolicy(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

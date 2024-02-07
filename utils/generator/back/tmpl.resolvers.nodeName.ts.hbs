@@ -1,0 +1,15 @@
+{{#if (eq type 'usedBy')}}
+        {{type}}{{targetShort}}: async (node, args: object) => {
+            const nss = await listNamespace.k8sNamespace(node, args)
+            return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+                const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(node, {namespace: ns, ...args})
+                return lst.filter(pod=> pod['spec']['nodeName']==node['metadata']['name'])
+            }))).flat()
+        },
+{{/if}}
+{{#if (eq type 'use')}}
+        {{type}}{{targetShort}}: async (pod, args: object) => {
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(pod, args)
+            return lst.filter(node=>pod['spec']['nodeName']==node['metadata']['name'])
+        },
+{{/if}}

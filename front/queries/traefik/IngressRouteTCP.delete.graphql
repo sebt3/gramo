@@ -1,0 +1,13 @@
+mutation traefikIngressRouteTCP($namespace: String!, $name: String!) {
+  traefikIngressRouteTCPDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

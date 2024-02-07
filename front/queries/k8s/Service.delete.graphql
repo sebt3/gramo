@@ -1,0 +1,14 @@
+mutation k8sService($namespace: String!, $name: String!) {
+  k8sServiceDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

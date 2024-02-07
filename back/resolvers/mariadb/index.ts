@@ -1,32 +1,26 @@
-
-import { queries as BackupQueries } from './query.Backup.js';
-import { mutations as BackupMutations } from './mutation.Backup.js';
-import { queries as ConnectionQueries } from './query.Connection.js';
-import { mutations as ConnectionMutations } from './mutation.Connection.js';
-import { queries as DatabaseQueries } from './query.Database.js';
-import { mutations as DatabaseMutations } from './mutation.Database.js';
-import { queries as GrantQueries } from './query.Grant.js';
-import { mutations as GrantMutations } from './mutation.Grant.js';
-import { queries as MariaDBQueries } from './query.MariaDB.js';
-import { mutations as MariaDBMutations } from './mutation.MariaDB.js';
-import { queries as RestoreQueries } from './query.Restore.js';
-import { mutations as RestoreMutations } from './mutation.Restore.js';
-import { queries as SqlJobQueries } from './query.SqlJob.js';
-import { mutations as SqlJobMutations } from './mutation.SqlJob.js';
-import { queries as UserQueries } from './query.User.js';
-import { mutations as UserMutations } from './mutation.User.js';
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+import { mutations as BackupMutations, resolvers as BackupResolvers } from './Backup.js';
+import { mutations as ConnectionMutations, resolvers as ConnectionResolvers } from './Connection.js';
+import { mutations as DatabaseMutations, resolvers as DatabaseResolvers } from './Database.js';
+import { mutations as GrantMutations, resolvers as GrantResolvers } from './Grant.js';
+import { mutations as MariaDBMutations, resolvers as MariaDBResolvers } from './MariaDB.js';
+import { mutations as RestoreMutations, resolvers as RestoreResolvers } from './Restore.js';
+import { mutations as SqlJobMutations, resolvers as SqlJobResolvers } from './SqlJob.js';
+import { mutations as UserMutations, resolvers as UserResolvers } from './User.js';
 export const queries = {
-    ...BackupQueries,
-    ...ConnectionQueries,
-    ...DatabaseQueries,
-    ...GrantQueries,
-    ...MariaDBQueries,
-    ...RestoreQueries,
-    ...SqlJobQueries,
-    ...UserQueries,
+    ...customQueries
 };
 
 export const resolvers = {
+    ...BackupResolvers,
+    ...ConnectionResolvers,
+    ...DatabaseResolvers,
+    ...GrantResolvers,
+    ...MariaDBResolvers,
+    ...RestoreResolvers,
+    ...SqlJobResolvers,
+    ...UserResolvers,
+    ...customResolvers
 };
 
 export const mutations = {
@@ -38,4 +32,5 @@ export const mutations = {
     ...RestoreMutations,
     ...SqlJobMutations,
     ...UserMutations,
+    ...customMutations
 };

@@ -1,0 +1,13 @@
+mutation projectcalicoHostEndpoint($name: String!) {
+  projectcalicoHostEndpointDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

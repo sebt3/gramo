@@ -1,362 +1,363 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'database';
-const iconBackup = 'backup';
-const iconConnection = 'link';
-const iconDatabase = 'fas fa-database';
-const iconGrant = 'album';
-const iconMariaDB = 'group_work';
-const iconRestore = 'cloud_download';
-const iconSqlJob = 'album';
-const iconUser = 'fas fa-user';
+import { iconBackup, iconConnection, iconDatabase, iconGrant, iconMariaDB, iconRestore, iconSqlJob, iconUser,  mariadbIcon, mariadbTitle }from '../../libs/mariadb/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  name: 'mariadb',
-  title: 'Mariadb', icon: iconDatabase,
-  link: `/${cat}/mariadb/backups/`,
+  name: 'databasemariadb',
+  title: mariadbTitle, icon: mariadbIcon,
+  link: '/database/mariadb/',
   level: 1,
   children: [
-  {
-    name: 'mariadbMariaDBs',
-    title: 'MariaDB', caption: 'List mariaDB', icon: iconMariaDB,
-    link: `/${cat}/mariadb/mariadbs/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbDatabases',
-    title: 'Database', caption: 'List database', icon: iconDatabase,
-    link: `/${cat}/mariadb/databases/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbUsers',
-    title: 'User', caption: 'List user', icon: iconUser,
-    link: `/${cat}/mariadb/users/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbGrants',
-    title: 'Grant', caption: 'List grant', icon: iconGrant,
-    link: `/${cat}/mariadb/grants/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbConnections',
-    title: 'Connection', caption: 'List connection', icon: iconConnection,
-    link: `/${cat}/mariadb/connections/`, level: 2, children: []
-  },
-  {
-    name: 'mariadbSqlJobs',
-    title: 'SqlJob', caption: 'List sqlJob', icon: iconSqlJob,
-    link: `/${cat}/mariadb/sqljobs/`, level: 2, children: []
-  },
-  {
+  crds['backups.mariadb.mmontes.io'] == undefined?[]:[{
     name: 'mariadbBackups',
-    title: 'Backup', caption: 'List backup', icon: iconBackup,
-    link: `/${cat}/mariadb/backups/`, level: 2, children: []
-  },
-  {
+    title: 'Backup', caption: 'List Backup', icon: iconBackup,
+    link: '/database/mariadb/Backup/', level: 2, children: []
+  }],
+  crds['connections.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbConnections',
+    title: 'Connection', caption: 'List Connection', icon: iconConnection,
+    link: '/database/mariadb/Connection/', level: 2, children: []
+  }],
+  crds['databases.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbDatabases',
+    title: 'Database', caption: 'List Database', icon: iconDatabase,
+    link: '/database/mariadb/Database/', level: 2, children: []
+  }],
+  crds['grants.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbGrants',
+    title: 'Grant', caption: 'List Grant', icon: iconGrant,
+    link: '/database/mariadb/Grant/', level: 2, children: []
+  }],
+  crds['mariadbs.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbMariaDBs',
+    title: 'MariaDB', caption: 'List MariaDB', icon: iconMariaDB,
+    link: '/database/mariadb/MariaDB/', level: 2, children: []
+  }],
+  crds['restores.mariadb.mmontes.io'] == undefined?[]:[{
     name: 'mariadbRestores',
-    title: 'Restore', caption: 'List restore', icon: iconRestore,
-    link: `/${cat}/mariadb/restores/`, level: 2, children: []
-  },
-  ]
+    title: 'Restore', caption: 'List Restore', icon: iconRestore,
+    link: '/database/mariadb/Restore/', level: 2, children: []
+  }],
+  crds['sqljobs.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbSqlJobs',
+    title: 'SqlJob', caption: 'List SqlJob', icon: iconSqlJob,
+    link: '/database/mariadb/SqlJob/', level: 2, children: []
+  }],
+  crds['users.mariadb.mmontes.io'] == undefined?[]:[{
+    name: 'mariadbUsers',
+    title: 'User', caption: 'List User', icon: iconUser,
+    link: '/database/mariadb/User/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  mariadb:                {breadcrumb: 'Mariadb', icon: iconMariaDB, ns: false},
-  mariadbBackups:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
+  databasemariadb:                {breadcrumb: mariadbTitle, icon: mariadbIcon, ns: false},
+  databasemariadbDashboard:       {breadcrumb: 'Dashboard', icon: mariadbIcon, ns: false},
+  mariadbBackup:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
   mariadbBackupAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbBackupView:     {breadcrumb: 'View', icon: iconBackup, ns: true},
-  mariadbBackupEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbBackupCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbConnections:        {breadcrumb: 'Connection', icon: iconConnection, ns: false},
+  mariadbBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbBackupView:     {breadcrumb: 'View', icon: iconBackup, ns: true },
+  mariadbBackupEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbBackupCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbConnection:        {breadcrumb: 'Connection', icon: iconConnection, ns: false},
   mariadbConnectionAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbConnectionTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbConnectionView:     {breadcrumb: 'View', icon: iconConnection, ns: true},
-  mariadbConnectionEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbConnectionCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbDatabases:        {breadcrumb: 'Database', icon: iconDatabase, ns: false},
+  mariadbConnectionTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbConnectionView:     {breadcrumb: 'View', icon: iconConnection, ns: true },
+  mariadbConnectionEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbConnectionCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbDatabase:        {breadcrumb: 'Database', icon: iconDatabase, ns: false},
   mariadbDatabaseAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbDatabaseTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbDatabaseView:     {breadcrumb: 'View', icon: iconDatabase, ns: true},
-  mariadbDatabaseEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbDatabaseCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbGrants:        {breadcrumb: 'Grant', icon: iconGrant, ns: false},
+  mariadbDatabaseTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbDatabaseView:     {breadcrumb: 'View', icon: iconDatabase, ns: true },
+  mariadbDatabaseEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbDatabaseCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbGrant:        {breadcrumb: 'Grant', icon: iconGrant, ns: false},
   mariadbGrantAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbGrantTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbGrantView:     {breadcrumb: 'View', icon: iconGrant, ns: true},
-  mariadbGrantEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbGrantCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbMariaDBs:        {breadcrumb: 'MariaDB', icon: iconMariaDB, ns: false},
+  mariadbGrantTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbGrantView:     {breadcrumb: 'View', icon: iconGrant, ns: true },
+  mariadbGrantEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbGrantCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbMariaDB:        {breadcrumb: 'MariaDB', icon: iconMariaDB, ns: false},
   mariadbMariaDBAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbMariaDBTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbMariaDBView:     {breadcrumb: 'View', icon: iconMariaDB, ns: true},
-  mariadbMariaDBEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbMariaDBCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbRestores:        {breadcrumb: 'Restore', icon: iconRestore, ns: false},
+  mariadbMariaDBTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbMariaDBView:     {breadcrumb: 'View', icon: iconMariaDB, ns: true },
+  mariadbMariaDBEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbMariaDBCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbRestore:        {breadcrumb: 'Restore', icon: iconRestore, ns: false},
   mariadbRestoreAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbRestoreTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbRestoreView:     {breadcrumb: 'View', icon: iconRestore, ns: true},
-  mariadbRestoreEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbRestoreCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbSqlJobs:        {breadcrumb: 'SqlJob', icon: iconSqlJob, ns: false},
+  mariadbRestoreTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbRestoreView:     {breadcrumb: 'View', icon: iconRestore, ns: true },
+  mariadbRestoreEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbRestoreCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbSqlJob:        {breadcrumb: 'SqlJob', icon: iconSqlJob, ns: false},
   mariadbSqlJobAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbSqlJobTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbSqlJobView:     {breadcrumb: 'View', icon: iconSqlJob, ns: true},
-  mariadbSqlJobEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbSqlJobCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  mariadbUsers:        {breadcrumb: 'User', icon: iconUser, ns: false},
+  mariadbSqlJobTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbSqlJobView:     {breadcrumb: 'View', icon: iconSqlJob, ns: true },
+  mariadbSqlJobEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbSqlJobCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  mariadbUser:        {breadcrumb: 'User', icon: iconUser, ns: false},
   mariadbUserAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  mariadbUserTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  mariadbUserView:     {breadcrumb: 'View', icon: iconUser, ns: true},
-  mariadbUserEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  mariadbUserCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  mariadbUserTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  mariadbUserView:     {breadcrumb: 'View', icon: iconUser, ns: true },
+  mariadbUserEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  mariadbUserCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'mariadb',
-  name: 'mariadb',
+  name: 'databasemariadb',
   redirect: {path: link.link as string},
   children: [
     {
-      path: 'backups',
-      name: 'mariadbBackups',
+      path: '',
+      name: 'databasemariadbDashboard',
+      component: () => import('../../pages/database/mariadb/Dashboard.vue'),
+    },
+    {
+      path: 'Backup',
+      name: 'mariadbBackup',
       children: [
         {
           path: '',
           name: 'mariadbBackupAllTable',
-          component: () => import('../../components/mariadb/BackupAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/BackupList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbBackupTable',
-          component: () => import('../../components/mariadb/BackupTable.vue'),
+          component: () => import('../../pages/database/mariadb/BackupList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbBackupView',
-          component: () => import('../../components/mariadb/BackupView.vue'),
+          component: () => import('../../pages/database/mariadb/BackupView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbBackupEdit',
-          component: () => import('../../components/mariadb/BackupEdit.vue'),
+          component: () => import('../../pages/database/mariadb/BackupEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbBackupCreate',
-          component: () => import('../../components/mariadb/BackupNew.vue'),
+          component: () => import('../../pages/database/mariadb/BackupNew.vue'),
         }
       ]
     },
     {
-      path: 'connections',
-      name: 'mariadbConnections',
+      path: 'Connection',
+      name: 'mariadbConnection',
       children: [
         {
           path: '',
           name: 'mariadbConnectionAllTable',
-          component: () => import('../../components/mariadb/ConnectionAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/ConnectionList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbConnectionTable',
-          component: () => import('../../components/mariadb/ConnectionTable.vue'),
+          component: () => import('../../pages/database/mariadb/ConnectionList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbConnectionView',
-          component: () => import('../../components/mariadb/ConnectionView.vue'),
+          component: () => import('../../pages/database/mariadb/ConnectionView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbConnectionEdit',
-          component: () => import('../../components/mariadb/ConnectionEdit.vue'),
+          component: () => import('../../pages/database/mariadb/ConnectionEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbConnectionCreate',
-          component: () => import('../../components/mariadb/ConnectionNew.vue'),
+          component: () => import('../../pages/database/mariadb/ConnectionNew.vue'),
         }
       ]
     },
     {
-      path: 'databases',
-      name: 'mariadbDatabases',
+      path: 'Database',
+      name: 'mariadbDatabase',
       children: [
         {
           path: '',
           name: 'mariadbDatabaseAllTable',
-          component: () => import('../../components/mariadb/DatabaseAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/DatabaseList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbDatabaseTable',
-          component: () => import('../../components/mariadb/DatabaseTable.vue'),
+          component: () => import('../../pages/database/mariadb/DatabaseList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbDatabaseView',
-          component: () => import('../../components/mariadb/DatabaseView.vue'),
+          component: () => import('../../pages/database/mariadb/DatabaseView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbDatabaseEdit',
-          component: () => import('../../components/mariadb/DatabaseEdit.vue'),
+          component: () => import('../../pages/database/mariadb/DatabaseEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbDatabaseCreate',
-          component: () => import('../../components/mariadb/DatabaseNew.vue'),
+          component: () => import('../../pages/database/mariadb/DatabaseNew.vue'),
         }
       ]
     },
     {
-      path: 'grants',
-      name: 'mariadbGrants',
+      path: 'Grant',
+      name: 'mariadbGrant',
       children: [
         {
           path: '',
           name: 'mariadbGrantAllTable',
-          component: () => import('../../components/mariadb/GrantAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/GrantList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbGrantTable',
-          component: () => import('../../components/mariadb/GrantTable.vue'),
+          component: () => import('../../pages/database/mariadb/GrantList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbGrantView',
-          component: () => import('../../components/mariadb/GrantView.vue'),
+          component: () => import('../../pages/database/mariadb/GrantView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbGrantEdit',
-          component: () => import('../../components/mariadb/GrantEdit.vue'),
+          component: () => import('../../pages/database/mariadb/GrantEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbGrantCreate',
-          component: () => import('../../components/mariadb/GrantNew.vue'),
+          component: () => import('../../pages/database/mariadb/GrantNew.vue'),
         }
       ]
     },
     {
-      path: 'mariadbs',
-      name: 'mariadbMariaDBs',
+      path: 'MariaDB',
+      name: 'mariadbMariaDB',
       children: [
         {
           path: '',
           name: 'mariadbMariaDBAllTable',
-          component: () => import('../../components/mariadb/MariaDBAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/MariaDBList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbMariaDBTable',
-          component: () => import('../../components/mariadb/MariaDBTable.vue'),
+          component: () => import('../../pages/database/mariadb/MariaDBList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbMariaDBView',
-          component: () => import('../../components/mariadb/MariaDBView.vue'),
+          component: () => import('../../pages/database/mariadb/MariaDBView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbMariaDBEdit',
-          component: () => import('../../components/mariadb/MariaDBEdit.vue'),
+          component: () => import('../../pages/database/mariadb/MariaDBEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbMariaDBCreate',
-          component: () => import('../../components/mariadb/MariaDBNew.vue'),
+          component: () => import('../../pages/database/mariadb/MariaDBNew.vue'),
         }
       ]
     },
     {
-      path: 'restores',
-      name: 'mariadbRestores',
+      path: 'Restore',
+      name: 'mariadbRestore',
       children: [
         {
           path: '',
           name: 'mariadbRestoreAllTable',
-          component: () => import('../../components/mariadb/RestoreAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/RestoreList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbRestoreTable',
-          component: () => import('../../components/mariadb/RestoreTable.vue'),
+          component: () => import('../../pages/database/mariadb/RestoreList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbRestoreView',
-          component: () => import('../../components/mariadb/RestoreView.vue'),
+          component: () => import('../../pages/database/mariadb/RestoreView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbRestoreEdit',
-          component: () => import('../../components/mariadb/RestoreEdit.vue'),
+          component: () => import('../../pages/database/mariadb/RestoreEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbRestoreCreate',
-          component: () => import('../../components/mariadb/RestoreNew.vue'),
+          component: () => import('../../pages/database/mariadb/RestoreNew.vue'),
         }
       ]
     },
     {
-      path: 'sqljobs',
-      name: 'mariadbSqlJobs',
+      path: 'SqlJob',
+      name: 'mariadbSqlJob',
       children: [
         {
           path: '',
           name: 'mariadbSqlJobAllTable',
-          component: () => import('../../components/mariadb/SqlJobAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/SqlJobList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbSqlJobTable',
-          component: () => import('../../components/mariadb/SqlJobTable.vue'),
+          component: () => import('../../pages/database/mariadb/SqlJobList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbSqlJobView',
-          component: () => import('../../components/mariadb/SqlJobView.vue'),
+          component: () => import('../../pages/database/mariadb/SqlJobView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbSqlJobEdit',
-          component: () => import('../../components/mariadb/SqlJobEdit.vue'),
+          component: () => import('../../pages/database/mariadb/SqlJobEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbSqlJobCreate',
-          component: () => import('../../components/mariadb/SqlJobNew.vue'),
+          component: () => import('../../pages/database/mariadb/SqlJobNew.vue'),
         }
       ]
     },
     {
-      path: 'users',
-      name: 'mariadbUsers',
+      path: 'User',
+      name: 'mariadbUser',
       children: [
         {
           path: '',
           name: 'mariadbUserAllTable',
-          component: () => import('../../components/mariadb/UserAllTable.vue'),
+          component: () => import('../../pages/database/mariadb/UserList.vue'),
         },
         {
           path: ':namespace',
           name: 'mariadbUserTable',
-          component: () => import('../../components/mariadb/UserTable.vue'),
+          component: () => import('../../pages/database/mariadb/UserList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'mariadbUserView',
-          component: () => import('../../components/mariadb/UserView.vue'),
+          component: () => import('../../pages/database/mariadb/UserView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'mariadbUserEdit',
-          component: () => import('../../components/mariadb/UserEdit.vue'),
+          component: () => import('../../pages/database/mariadb/UserEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'mariadbUserCreate',
-          component: () => import('../../components/mariadb/UserNew.vue'),
+          component: () => import('../../pages/database/mariadb/UserNew.vue'),
         }
       ]
     },

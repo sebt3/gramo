@@ -1,9 +1,13 @@
-query Dashboard {
-  namespaces {
-    vynilInstalls {
+query Dashboard($namespace: queryParameters, $obj: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    vynilInstall(params: $obj) {
       metadata {
         name
         namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
       }
       component {
         category {
@@ -16,29 +20,21 @@ query Dashboard {
           }
         }
       }
-      status {
-        errors
-        status
-        last_updated
-      }
+      spec
+      status
     }
+  }
+  vynilDistrib(params: $obj) {
     metadata {
       name
     }
-  }
-  vynilDistribs {
     packages {
       category {
         name
       }
       name
     }
-    metadata {
-      name
-    }
-    status {
-      errors
-      last_updated
-    }
+    spec
+    status
   }
 }

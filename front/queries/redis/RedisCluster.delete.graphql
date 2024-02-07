@@ -1,0 +1,14 @@
+mutation redisRedisCluster($namespace: String!, $name: String!) {
+  redisRedisClusterDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

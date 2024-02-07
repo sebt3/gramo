@@ -1,0 +1,14 @@
+mutation k8sPodDisruptionBudget($namespace: String!, $name: String!) {
+  k8sPodDisruptionBudgetDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

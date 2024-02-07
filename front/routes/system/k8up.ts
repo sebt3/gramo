@@ -1,362 +1,363 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'system';
-const iconArchive = 'album';
-const iconBackup = 'backup';
-const iconCheck = 'cloud_done';
-const iconPreBackupPod = 'album';
-const iconPrune = 'settings_system_daydream';
-const iconRestore = 'cloud_download';
-const iconSchedule = 'calendar_month';
-const iconSnapshot = 'album';
+import { iconArchive, iconBackup, iconCheck, iconPreBackupPod, iconPrune, iconRestore, iconSchedule, iconSnapshot,  k8upIcon, k8upTitle }from '../../libs/k8up/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  name: 'k8up',
-  title: 'K8up', icon: iconBackup,
-  link: `/${cat}/k8up/schedules/`,
+  name: 'systemk8up',
+  title: k8upTitle, icon: k8upIcon,
+  link: '/system/k8up/',
   level: 1,
   children: [
-  {
-    name: 'k8upSchedules',
-    title: 'Schedule', caption: 'List schedule', icon: iconSchedule,
-    link: `/${cat}/k8up/schedules/`, level: 2, children: []
-  },
-  {
-    name: 'k8upPreBackupPods',
-    title: 'PreBackupPod', caption: 'List preBackupPod', icon: iconPreBackupPod,
-    link: `/${cat}/k8up/prebackuppods/`, level: 2, children: []
-  },
-  {
-    name: 'k8upBackups',
-    title: 'Backup', caption: 'List backup', icon: iconBackup,
-    link: `/${cat}/k8up/backups/`, level: 2, children: []
-  },
-  {
-    name: 'k8upRestores',
-    title: 'Restore', caption: 'List restore', icon: iconRestore,
-    link: `/${cat}/k8up/restores/`, level: 2, children: []
-  },
-  {
-    name: 'k8upChecks',
-    title: 'Check', caption: 'List check', icon: iconCheck,
-    link: `/${cat}/k8up/checks/`, level: 2, children: []
-  },
-  {
-    name: 'k8upPrunes',
-    title: 'Prune', caption: 'List prune', icon: iconPrune,
-    link: `/${cat}/k8up/prunes/`, level: 2, children: []
-  },
-  {
+  crds['archives.k8up.io'] == undefined?[]:[{
     name: 'k8upArchives',
-    title: 'Archive', caption: 'List archive', icon: iconArchive,
-    link: `/${cat}/k8up/archives/`, level: 2, children: []
-  },
-  {
+    title: 'Archive', caption: 'List Archive', icon: iconArchive,
+    link: '/system/k8up/Archive/', level: 2, children: []
+  }],
+  crds['backups.k8up.io'] == undefined?[]:[{
+    name: 'k8upBackups',
+    title: 'Backup', caption: 'List Backup', icon: iconBackup,
+    link: '/system/k8up/Backup/', level: 2, children: []
+  }],
+  crds['checks.k8up.io'] == undefined?[]:[{
+    name: 'k8upChecks',
+    title: 'Check', caption: 'List Check', icon: iconCheck,
+    link: '/system/k8up/Check/', level: 2, children: []
+  }],
+  crds['prebackuppods.k8up.io'] == undefined?[]:[{
+    name: 'k8upPreBackupPods',
+    title: 'PreBackupPod', caption: 'List PreBackupPod', icon: iconPreBackupPod,
+    link: '/system/k8up/PreBackupPod/', level: 2, children: []
+  }],
+  crds['prunes.k8up.io'] == undefined?[]:[{
+    name: 'k8upPrunes',
+    title: 'Prune', caption: 'List Prune', icon: iconPrune,
+    link: '/system/k8up/Prune/', level: 2, children: []
+  }],
+  crds['restores.k8up.io'] == undefined?[]:[{
+    name: 'k8upRestores',
+    title: 'Restore', caption: 'List Restore', icon: iconRestore,
+    link: '/system/k8up/Restore/', level: 2, children: []
+  }],
+  crds['schedules.k8up.io'] == undefined?[]:[{
+    name: 'k8upSchedules',
+    title: 'Schedule', caption: 'List Schedule', icon: iconSchedule,
+    link: '/system/k8up/Schedule/', level: 2, children: []
+  }],
+  crds['snapshots.k8up.io'] == undefined?[]:[{
     name: 'k8upSnapshots',
-    title: 'Snapshot', caption: 'List snapshot', icon: iconSnapshot,
-    link: `/${cat}/k8up/snapshots/`, level: 2, children: []
-  },
-  ]
+    title: 'Snapshot', caption: 'List Snapshot', icon: iconSnapshot,
+    link: '/system/k8up/Snapshot/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  k8up:                {breadcrumb: 'K8up', icon: iconBackup, ns: false},
-  k8upArchives:        {breadcrumb: 'Archive', icon: iconArchive, ns: false},
+  systemk8up:                {breadcrumb: k8upTitle, icon: k8upIcon, ns: false},
+  systemk8upDashboard:       {breadcrumb: 'Dashboard', icon: k8upIcon, ns: false},
+  k8upArchive:        {breadcrumb: 'Archive', icon: iconArchive, ns: false},
   k8upArchiveAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upArchiveTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upArchiveView:     {breadcrumb: 'View', icon: iconArchive, ns: true},
-  k8upArchiveEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upArchiveCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upBackups:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
+  k8upArchiveTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upArchiveView:     {breadcrumb: 'View', icon: iconArchive, ns: true },
+  k8upArchiveEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upArchiveCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upBackup:        {breadcrumb: 'Backup', icon: iconBackup, ns: false},
   k8upBackupAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upBackupView:     {breadcrumb: 'View', icon: iconBackup, ns: true},
-  k8upBackupEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upBackupCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upChecks:        {breadcrumb: 'Check', icon: iconCheck, ns: false},
+  k8upBackupTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upBackupView:     {breadcrumb: 'View', icon: iconBackup, ns: true },
+  k8upBackupEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upBackupCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upCheck:        {breadcrumb: 'Check', icon: iconCheck, ns: false},
   k8upCheckAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upCheckTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upCheckView:     {breadcrumb: 'View', icon: iconCheck, ns: true},
-  k8upCheckEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upCheckCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upPreBackupPods:        {breadcrumb: 'PreBackupPod', icon: iconPreBackupPod, ns: false},
+  k8upCheckTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upCheckView:     {breadcrumb: 'View', icon: iconCheck, ns: true },
+  k8upCheckEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upCheckCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upPreBackupPod:        {breadcrumb: 'PreBackupPod', icon: iconPreBackupPod, ns: false},
   k8upPreBackupPodAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upPreBackupPodTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upPreBackupPodView:     {breadcrumb: 'View', icon: iconPreBackupPod, ns: true},
-  k8upPreBackupPodEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upPreBackupPodCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upPrunes:        {breadcrumb: 'Prune', icon: iconPrune, ns: false},
+  k8upPreBackupPodTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upPreBackupPodView:     {breadcrumb: 'View', icon: iconPreBackupPod, ns: true },
+  k8upPreBackupPodEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upPreBackupPodCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upPrune:        {breadcrumb: 'Prune', icon: iconPrune, ns: false},
   k8upPruneAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upPruneTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upPruneView:     {breadcrumb: 'View', icon: iconPrune, ns: true},
-  k8upPruneEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upPruneCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upRestores:        {breadcrumb: 'Restore', icon: iconRestore, ns: false},
+  k8upPruneTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upPruneView:     {breadcrumb: 'View', icon: iconPrune, ns: true },
+  k8upPruneEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upPruneCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upRestore:        {breadcrumb: 'Restore', icon: iconRestore, ns: false},
   k8upRestoreAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upRestoreTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upRestoreView:     {breadcrumb: 'View', icon: iconRestore, ns: true},
-  k8upRestoreEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upRestoreCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upSchedules:        {breadcrumb: 'Schedule', icon: iconSchedule, ns: false},
+  k8upRestoreTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upRestoreView:     {breadcrumb: 'View', icon: iconRestore, ns: true },
+  k8upRestoreEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upRestoreCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upSchedule:        {breadcrumb: 'Schedule', icon: iconSchedule, ns: false},
   k8upScheduleAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upScheduleTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upScheduleView:     {breadcrumb: 'View', icon: iconSchedule, ns: true},
-  k8upScheduleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upScheduleCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  k8upSnapshots:        {breadcrumb: 'Snapshot', icon: iconSnapshot, ns: false},
+  k8upScheduleTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upScheduleView:     {breadcrumb: 'View', icon: iconSchedule, ns: true },
+  k8upScheduleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upScheduleCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  k8upSnapshot:        {breadcrumb: 'Snapshot', icon: iconSnapshot, ns: false},
   k8upSnapshotAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  k8upSnapshotTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  k8upSnapshotView:     {breadcrumb: 'View', icon: iconSnapshot, ns: true},
-  k8upSnapshotEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  k8upSnapshotCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  k8upSnapshotTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  k8upSnapshotView:     {breadcrumb: 'View', icon: iconSnapshot, ns: true },
+  k8upSnapshotEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  k8upSnapshotCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'k8up',
-  name: 'k8up',
+  name: 'systemk8up',
   redirect: {path: link.link as string},
   children: [
     {
-      path: 'archives',
-      name: 'k8upArchives',
+      path: '',
+      name: 'systemk8upDashboard',
+      component: () => import('../../pages/system/k8up/Dashboard.vue'),
+    },
+    {
+      path: 'Archive',
+      name: 'k8upArchive',
       children: [
         {
           path: '',
           name: 'k8upArchiveAllTable',
-          component: () => import('../../components/k8up/ArchiveAllTable.vue'),
+          component: () => import('../../pages/system/k8up/ArchiveList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upArchiveTable',
-          component: () => import('../../components/k8up/ArchiveTable.vue'),
+          component: () => import('../../pages/system/k8up/ArchiveList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upArchiveView',
-          component: () => import('../../components/k8up/ArchiveView.vue'),
+          component: () => import('../../pages/system/k8up/ArchiveView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upArchiveEdit',
-          component: () => import('../../components/k8up/ArchiveEdit.vue'),
+          component: () => import('../../pages/system/k8up/ArchiveEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upArchiveCreate',
-          component: () => import('../../components/k8up/ArchiveNew.vue'),
+          component: () => import('../../pages/system/k8up/ArchiveNew.vue'),
         }
       ]
     },
     {
-      path: 'backups',
-      name: 'k8upBackups',
+      path: 'Backup',
+      name: 'k8upBackup',
       children: [
         {
           path: '',
           name: 'k8upBackupAllTable',
-          component: () => import('../../components/k8up/BackupAllTable.vue'),
+          component: () => import('../../pages/system/k8up/BackupList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upBackupTable',
-          component: () => import('../../components/k8up/BackupTable.vue'),
+          component: () => import('../../pages/system/k8up/BackupList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upBackupView',
-          component: () => import('../../components/k8up/BackupView.vue'),
+          component: () => import('../../pages/system/k8up/BackupView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upBackupEdit',
-          component: () => import('../../components/k8up/BackupEdit.vue'),
+          component: () => import('../../pages/system/k8up/BackupEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upBackupCreate',
-          component: () => import('../../components/k8up/BackupNew.vue'),
+          component: () => import('../../pages/system/k8up/BackupNew.vue'),
         }
       ]
     },
     {
-      path: 'checks',
-      name: 'k8upChecks',
+      path: 'Check',
+      name: 'k8upCheck',
       children: [
         {
           path: '',
           name: 'k8upCheckAllTable',
-          component: () => import('../../components/k8up/CheckAllTable.vue'),
+          component: () => import('../../pages/system/k8up/CheckList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upCheckTable',
-          component: () => import('../../components/k8up/CheckTable.vue'),
+          component: () => import('../../pages/system/k8up/CheckList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upCheckView',
-          component: () => import('../../components/k8up/CheckView.vue'),
+          component: () => import('../../pages/system/k8up/CheckView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upCheckEdit',
-          component: () => import('../../components/k8up/CheckEdit.vue'),
+          component: () => import('../../pages/system/k8up/CheckEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upCheckCreate',
-          component: () => import('../../components/k8up/CheckNew.vue'),
+          component: () => import('../../pages/system/k8up/CheckNew.vue'),
         }
       ]
     },
     {
-      path: 'prebackuppods',
-      name: 'k8upPreBackupPods',
+      path: 'PreBackupPod',
+      name: 'k8upPreBackupPod',
       children: [
         {
           path: '',
           name: 'k8upPreBackupPodAllTable',
-          component: () => import('../../components/k8up/PreBackupPodAllTable.vue'),
+          component: () => import('../../pages/system/k8up/PreBackupPodList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upPreBackupPodTable',
-          component: () => import('../../components/k8up/PreBackupPodTable.vue'),
+          component: () => import('../../pages/system/k8up/PreBackupPodList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upPreBackupPodView',
-          component: () => import('../../components/k8up/PreBackupPodView.vue'),
+          component: () => import('../../pages/system/k8up/PreBackupPodView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upPreBackupPodEdit',
-          component: () => import('../../components/k8up/PreBackupPodEdit.vue'),
+          component: () => import('../../pages/system/k8up/PreBackupPodEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upPreBackupPodCreate',
-          component: () => import('../../components/k8up/PreBackupPodNew.vue'),
+          component: () => import('../../pages/system/k8up/PreBackupPodNew.vue'),
         }
       ]
     },
     {
-      path: 'prunes',
-      name: 'k8upPrunes',
+      path: 'Prune',
+      name: 'k8upPrune',
       children: [
         {
           path: '',
           name: 'k8upPruneAllTable',
-          component: () => import('../../components/k8up/PruneAllTable.vue'),
+          component: () => import('../../pages/system/k8up/PruneList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upPruneTable',
-          component: () => import('../../components/k8up/PruneTable.vue'),
+          component: () => import('../../pages/system/k8up/PruneList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upPruneView',
-          component: () => import('../../components/k8up/PruneView.vue'),
+          component: () => import('../../pages/system/k8up/PruneView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upPruneEdit',
-          component: () => import('../../components/k8up/PruneEdit.vue'),
+          component: () => import('../../pages/system/k8up/PruneEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upPruneCreate',
-          component: () => import('../../components/k8up/PruneNew.vue'),
+          component: () => import('../../pages/system/k8up/PruneNew.vue'),
         }
       ]
     },
     {
-      path: 'restores',
-      name: 'k8upRestores',
+      path: 'Restore',
+      name: 'k8upRestore',
       children: [
         {
           path: '',
           name: 'k8upRestoreAllTable',
-          component: () => import('../../components/k8up/RestoreAllTable.vue'),
+          component: () => import('../../pages/system/k8up/RestoreList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upRestoreTable',
-          component: () => import('../../components/k8up/RestoreTable.vue'),
+          component: () => import('../../pages/system/k8up/RestoreList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upRestoreView',
-          component: () => import('../../components/k8up/RestoreView.vue'),
+          component: () => import('../../pages/system/k8up/RestoreView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upRestoreEdit',
-          component: () => import('../../components/k8up/RestoreEdit.vue'),
+          component: () => import('../../pages/system/k8up/RestoreEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upRestoreCreate',
-          component: () => import('../../components/k8up/RestoreNew.vue'),
+          component: () => import('../../pages/system/k8up/RestoreNew.vue'),
         }
       ]
     },
     {
-      path: 'schedules',
-      name: 'k8upSchedules',
+      path: 'Schedule',
+      name: 'k8upSchedule',
       children: [
         {
           path: '',
           name: 'k8upScheduleAllTable',
-          component: () => import('../../components/k8up/ScheduleAllTable.vue'),
+          component: () => import('../../pages/system/k8up/ScheduleList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upScheduleTable',
-          component: () => import('../../components/k8up/ScheduleTable.vue'),
+          component: () => import('../../pages/system/k8up/ScheduleList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upScheduleView',
-          component: () => import('../../components/k8up/ScheduleView.vue'),
+          component: () => import('../../pages/system/k8up/ScheduleView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upScheduleEdit',
-          component: () => import('../../components/k8up/ScheduleEdit.vue'),
+          component: () => import('../../pages/system/k8up/ScheduleEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upScheduleCreate',
-          component: () => import('../../components/k8up/ScheduleNew.vue'),
+          component: () => import('../../pages/system/k8up/ScheduleNew.vue'),
         }
       ]
     },
     {
-      path: 'snapshots',
-      name: 'k8upSnapshots',
+      path: 'Snapshot',
+      name: 'k8upSnapshot',
       children: [
         {
           path: '',
           name: 'k8upSnapshotAllTable',
-          component: () => import('../../components/k8up/SnapshotAllTable.vue'),
+          component: () => import('../../pages/system/k8up/SnapshotList.vue'),
         },
         {
           path: ':namespace',
           name: 'k8upSnapshotTable',
-          component: () => import('../../components/k8up/SnapshotTable.vue'),
+          component: () => import('../../pages/system/k8up/SnapshotList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'k8upSnapshotView',
-          component: () => import('../../components/k8up/SnapshotView.vue'),
+          component: () => import('../../pages/system/k8up/SnapshotView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'k8upSnapshotEdit',
-          component: () => import('../../components/k8up/SnapshotEdit.vue'),
+          component: () => import('../../pages/system/k8up/SnapshotEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'k8upSnapshotCreate',
-          component: () => import('../../components/k8up/SnapshotNew.vue'),
+          component: () => import('../../pages/system/k8up/SnapshotNew.vue'),
         }
       ]
     },

@@ -1,0 +1,13 @@
+mutation projectcalicoIPPool($name: String!, $spec: JSONObject) {
+  projectcalicoIPPoolPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

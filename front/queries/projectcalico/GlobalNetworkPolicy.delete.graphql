@@ -1,0 +1,13 @@
+mutation projectcalicoGlobalNetworkPolicy($name: String!) {
+  projectcalicoGlobalNetworkPolicyDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

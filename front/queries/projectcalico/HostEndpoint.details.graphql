@@ -1,0 +1,12 @@
+query projectcalicoHostEndpointQuery($obj: queryParameters,) {
+    projectcalicoHostEndpoint(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

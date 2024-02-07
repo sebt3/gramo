@@ -1,0 +1,15 @@
+query k8upPreBackupPodQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8upPreBackupPod(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+  }
+}

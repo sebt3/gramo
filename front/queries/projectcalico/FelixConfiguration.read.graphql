@@ -1,0 +1,12 @@
+query projectcalicoFelixConfigurationQuery($obj: queryParameters,) {
+    projectcalicoFelixConfiguration(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

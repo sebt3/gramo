@@ -1,0 +1,28 @@
+query k8sPodDisruptionBudgetQuery($namespace: queryParameters, $obj: queryParameters,, $parentCluster: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sPodDisruptionBudget(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      parentCluster(params: $parentCluster) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      spec
+      status
+    }
+  }
+}

@@ -3,7 +3,7 @@ query GramoConfig {
     defaultNamespace
     defaultRoute
   }
-  namespaces {
+  k8sNamespace {
     metadata {
       name
     }
@@ -18,32 +18,10 @@ query GramoConfig {
       }
     }
   }
-  customResourceDefinitions {
+  k8sCustomResourceDefinition {
     metadata {
       name
     }
-    group
-    names {
-      plural
-      categories
-      kind
-      listKind
-      shortNames
-      singular
-    }
-    versions {
-      name
-      served
-      deprecated
-      deprecationWarning
-      additionalPrinterColumns {
-        description
-        jsonPath
-        name
-        priority
-        type
-        format
-      }
-    }
+    status
   }
 }

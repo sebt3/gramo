@@ -1,0 +1,15 @@
+query k8sEndpointsQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8sEndpoints(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      subsets
+    }
+  }
+}

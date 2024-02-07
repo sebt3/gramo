@@ -1,0 +1,14 @@
+mutation fluxcdImagePolicy($namespace: String!, $name: String!, $spec: JSONObject) {
+  fluxcdImagePolicyCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

@@ -1,0 +1,163 @@
+query fluxcdQuery($namespace: queryParameters, $Kustomization: queryParameters, $Receiver: queryParameters, $Alert: queryParameters, $Provider: queryParameters, $GitRepository: queryParameters, $Bucket: queryParameters, $HelmChart: queryParameters, $HelmRepository: queryParameters, $OCIRepository: queryParameters, $ImageUpdateAutomation: queryParameters, $ImagePolicy: queryParameters, $ImageRepository: queryParameters, $HelmRelease: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    fluxcdKustomization(params: $Kustomization) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdReceiver(params: $Receiver) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdAlert(params: $Alert) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdProvider(params: $Provider) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdGitRepository(params: $GitRepository) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdBucket(params: $Bucket) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdHelmChart(params: $HelmChart) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdHelmRepository(params: $HelmRepository) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdOCIRepository(params: $OCIRepository) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdImageUpdateAutomation(params: $ImageUpdateAutomation) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdImagePolicy(params: $ImagePolicy) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdImageRepository(params: $ImageRepository) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    fluxcdHelmRelease(params: $HelmRelease) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

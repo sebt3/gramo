@@ -1,0 +1,13 @@
+query k8sCertificateSigningRequestQuery($obj: queryParameters,) {
+    k8sCertificateSigningRequest(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

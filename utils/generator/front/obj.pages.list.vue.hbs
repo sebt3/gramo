@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
+import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
+import {{ group }}{{ short }}List from '@/components/{{ group }}/{{ short }}List.vue';
+import { useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const { deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();
+const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
+  "obj": {
+    "filters": [],
+    "excludes": {{ short }}ListExcludes
+  },
+  "namespace": {
+    "filters": isNamespaced()?[
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentNamespace
+      }
+    ]:[]
+  }
+}, { pollInterval: 2000 });
+{{else}}
+const { actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler } = use{{ short }}();
+const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
+  "obj": {}
+}, { pollInterval: 2000 });
+{{/if}}
+const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
+onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
+</script>
+<template>
+{{#if namespaced}}
+  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="true"
+    v-if="result !== undefined && result['k8sNamespace'] !== undefined"
+    :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
+  />
+{{else}}
+  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="true"
+    v-if="result !== undefined && result['{{ group }}{{ short }}'] !== undefined"
+    :model="result.{{ group }}{{ short }}"
+  />
+{{/if}}
+</template>

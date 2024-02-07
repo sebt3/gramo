@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import * as d3 from "d3";
-import {chartSizeOptions,chartMarginOptions} from "../core"
+import {chartSizeOptions,chartMarginOptions} from "../../libs/core"
 import {onlyUnique,uid,getSizeOptions,getMarginOptions} from "./commonTools"
 const props = defineProps<{
   options?: chartSizeOptions&chartMarginOptions

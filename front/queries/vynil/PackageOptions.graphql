@@ -1,6 +1,0 @@
-query VynilPackageOptions($distrib: String!, $category: String!, $name: String!) {
-  vynilPackage(distrib: $distrib, category: $category, name: $name) {
-    name
-    options
-  }
-}

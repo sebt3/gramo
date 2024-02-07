@@ -1,0 +1,13 @@
+query k8sVolumeAttachmentQuery($obj: queryParameters,) {
+    k8sVolumeAttachment(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

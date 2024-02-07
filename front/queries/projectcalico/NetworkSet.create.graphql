@@ -1,0 +1,13 @@
+mutation projectcalicoNetworkSet($namespace: String!, $name: String!, $spec: JSONObject) {
+  projectcalicoNetworkSetCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

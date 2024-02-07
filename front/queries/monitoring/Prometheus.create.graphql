@@ -1,0 +1,14 @@
+mutation monitoringPrometheus($namespace: String!, $name: String!, $spec: JSONObject) {
+  monitoringPrometheusCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

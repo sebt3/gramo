@@ -1,0 +1,13 @@
+mutation k8sPodTemplate($namespace: String!, $name: String!, $template: JSONObject) {
+  k8sPodTemplatePatch(namespace: $namespace, name: $name, template: $template) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      template
+  }
+}

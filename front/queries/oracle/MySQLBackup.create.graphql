@@ -1,0 +1,14 @@
+mutation oracleMySQLBackup($namespace: String!, $name: String!, $spec: JSONObject) {
+  oracleMySQLBackupCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

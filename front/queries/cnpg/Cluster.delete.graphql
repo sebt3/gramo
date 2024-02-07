@@ -1,0 +1,14 @@
+mutation cnpgCluster($namespace: String!, $name: String!) {
+  cnpgClusterDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

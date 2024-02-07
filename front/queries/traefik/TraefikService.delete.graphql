@@ -1,0 +1,13 @@
+mutation traefikTraefikService($namespace: String!, $name: String!) {
+  traefikTraefikServiceDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

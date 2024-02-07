@@ -1,0 +1,14 @@
+mutation fluxcdImageUpdateAutomation($namespace: String!, $name: String!) {
+  fluxcdImageUpdateAutomationDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

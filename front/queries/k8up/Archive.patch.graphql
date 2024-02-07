@@ -1,0 +1,14 @@
+mutation k8upArchive($namespace: String!, $name: String!, $spec: JSONObject) {
+  k8upArchivePatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

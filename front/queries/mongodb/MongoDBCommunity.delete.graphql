@@ -1,0 +1,14 @@
+mutation mongodbMongoDBCommunity($namespace: String!, $name: String!) {
+  mongodbMongoDBCommunityDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

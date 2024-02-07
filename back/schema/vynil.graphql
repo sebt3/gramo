@@ -1,102 +1,27 @@
-type vynilCategory {
-  name: String!
-  packages: [vynilPackage!]
-}
-type vynilPackage {
-  name: String!
-  commit_id: ID!
-  description: String
-  category: vynilCategory!
-  distribution: vynilDistrib!
-  options: JSONObject!
-}
-
-type vynilDistribStatus {
-  components: JSONObject!
-  errors: [String]
-  last_updated: String!
-}
-input vynilDistribSpecLoginGit_credentials {
-  key: String!
-  name: String!
-}
-input vynilDistribSpecLoginSsh_key {
-  key: String!
-  name: String!
-}
-input vynilDistribSpecLogin {
-  git_credentials: vynilDistribSpecLoginGit_credentials
-  ssh_key: vynilDistribSpecLoginSsh_key
-}
-input vynilDistribSpec {
-  branch: String
-  insecure: Boolean
-  login: vynilDistribSpecLogin
-  schedule: String!
-  url: String!
-}
-type vynilDistribLoginGit_credentials {
-  key: String!
-  name: String!
-}
-type vynilDistribLoginSsh_key {
-  key: String!
-  name: String!
-}
-type vynilDistribLogin {
-  git_credentials: vynilDistribLoginGit_credentials
-  ssh_key: vynilDistribLoginSsh_key
-}
 type vynilDistrib {
-  metadata: metadata
-  branch: String
-  insecure: Boolean
-  login: vynilDistribLogin
-  schedule: String!
-  url: String!
-  status: vynilDistribStatus
-  packages: [vynilPackage!]
-}
-
-type vynilInstallStatus {
-  commit_id: String!
-  digest: String!
-  errors: [String]
-  last_updated: String!
-  plan: JSONObject
-  status: String!
-  tfstate: JSONObject
-}
-input vynilInstallSpec {
-  auto_upgrade: Boolean
-  category: String!
-  component: String!
-  distrib: String!
-  options: JSONObject
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    providePackage(params: queryParameters): [vynilPackage]
+    provideCategory(params: queryParameters): [vynilCategory]
+    usedByInstall(params: queryParameters): [vynilInstall]
 }
 type vynilInstall {
-  metadata: metadata
-  auto_upgrade: Boolean
-  category: vynilCategory
-  component: vynilPackage
-  distrib: vynilDistrib
-  options: JSONObject
-  status: vynilInstallStatus
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    usePackage(params: queryParameters): [vynilPackage]
+    useDistrib(params: queryParameters): [vynilDistrib]
+    useCategory(params: queryParameters): [vynilCategory]
 }
-
 type Query {
-  vynilCategories: [vynilCategory]
-  vynilPackages: [vynilPackage]
-  vynilPackage(distrib: String!, category: String!, name: String!): vynilPackage
-  vynilDistribs: [vynilDistrib]
-  vynilDistrib(name: String!): vynilDistrib
-  vynilInstall(namespace: String!, name: String!): vynilInstall
+    vynilDistrib(params: queryParameters): [vynilDistrib]
 }
 type Mutation {
-  createVynilDistrib(name: String!, spec: vynilDistribSpec!): vynilDistrib
-  patchVynilDistrib(name: String!, spec: vynilDistribSpec!): vynilDistrib
-  deleteVynilDistrib(name: String!): vynilDistrib
-  createVynilInstall(namespace: String!, name: String!, spec: vynilInstallSpec!): vynilInstall
-  patchVynilInstall(namespace: String!, name: String!, spec: vynilInstallSpec!): vynilInstall
-  deleteVynilInstall(namespace: String!, name: String!): vynilInstall
+    vynilDistribCreate(name: String!, spec: JSONObject, metadata: metadataMore): vynilDistrib
+    vynilDistribPatch(name: String!, spec: JSONObject, metadata: metadataMore): vynilDistrib
+    vynilDistribDelete(name: String!): vynilDistrib
+    vynilInstallCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): vynilInstall
+    vynilInstallPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): vynilInstall
+    vynilInstallDelete(namespace: String!, name: String!): vynilInstall
 }

@@ -1,0 +1,40 @@
+query opentelemetryQuery($namespace: queryParameters, $obj: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    opentelemetryInstrumentation(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    opentelemetryOpAMPBridge(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    opentelemetryOpenTelemetryCollector(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

@@ -1,0 +1,13 @@
+mutation monitoringAlertmanagerConfig($namespace: String!, $name: String!) {
+  monitoringAlertmanagerConfigDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

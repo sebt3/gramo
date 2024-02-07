@@ -1,0 +1,12 @@
+query projectcalicoBGPPeerQuery($obj: queryParameters,) {
+    projectcalicoBGPPeer(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

@@ -12,129 +12,45 @@ type GramoConfig {
   limitNamespaceHave: String!
 }
 
-type label {
+input Label {
   name: String!
   value: String!
+}
+input Filter {
+  path: String!
+  op: String!
+  value: JSON
+}
+input ExcludeInclude {
+  path: String!
+  include: Boolean
+}
+input queryParameters {
+  filters: [Filter!]
+  excludes: [ExcludeInclude!]
+}
+input metadataMore {
+  labels: [Label!]
+  annotations: [Label!]
+}
+type ownerReference {
+  apiVersion: String!
+  blockOwnerDeletion: Boolean
+  controller: Boolean
+  kind: String!
+  name: String!
+  uid: String!
 }
 
 type metadata {
   name: String!
   namespace: String
-  annotations: [label!]!
-  labels: [label!]!
-  obj: JSONObject
-}
-
-type namespaceStatus {
-  phase: String
-}
-type namespace {
-  metadata: metadata
-  vynilInstalls: [vynilInstall]
-  fluxcdGitRepositorys: [fluxcdGitRepository]
-  fluxcdBuckets: [fluxcdBucket]
-  fluxcdHelmCharts: [fluxcdHelmChart]
-  fluxcdHelmRepositorys: [fluxcdHelmRepository]
-  fluxcdOCIRepositorys: [fluxcdOCIRepository]
-  fluxcdReceivers: [fluxcdReceiver]
-  fluxcdAlerts: [fluxcdAlert]
-  fluxcdProviders: [fluxcdProvider]
-  fluxcdKustomizations: [fluxcdKustomization]
-  fluxcdImagePolicys: [fluxcdImagePolicy]
-  fluxcdImageRepositorys: [fluxcdImageRepository]
-  fluxcdImageUpdateAutomations: [fluxcdImageUpdateAutomation]
-  fluxcdHelmReleases: [fluxcdHelmRelease]
-  secretgeneratorBasicAuths: [secretgeneratorBasicAuth]
-  secretgeneratorSSHKeyPairs: [secretgeneratorSSHKeyPair]
-  secretgeneratorStringSecrets: [secretgeneratorStringSecret]
-  k8upArchives: [k8upArchive]
-  k8upBackups: [k8upBackup]
-  k8upChecks: [k8upCheck]
-  k8upPreBackupPods: [k8upPreBackupPod]
-  k8upPrunes: [k8upPrune]
-  k8upRestores: [k8upRestore]
-  k8upSchedules: [k8upSchedule]
-  k8upSnapshots: [k8upSnapshot]
-  mariadbBackups: [mariadbBackup]
-  mariadbConnections: [mariadbConnection]
-  mariadbDatabases: [mariadbDatabase]
-  mariadbGrants: [mariadbGrant]
-  mariadbMariaDBs: [mariadbMariaDB]
-  mariadbRestores: [mariadbRestore]
-  mariadbSqlJobs: [mariadbSqlJob]
-  mariadbUsers: [mariadbUser]
-  mongodbcommunityMongoDBCommunitys: [mongodbcommunityMongoDBCommunity]
-  monitoringAlertmanagers: [monitoringAlertmanager]
-  monitoringAlertmanagerConfigs: [monitoringAlertmanagerConfig]
-  monitoringPodMonitors: [monitoringPodMonitor]
-  monitoringProbes: [monitoringProbe]
-  monitoringPrometheuss: [monitoringPrometheus]
-  monitoringPrometheusAgents: [monitoringPrometheusAgent]
-  monitoringPrometheusRules: [monitoringPrometheusRule]
-  monitoringServiceMonitors: [monitoringServiceMonitor]
-  monitoringThanosRulers: [monitoringThanosRuler]
-  postgresqlBackups: [postgresqlBackup]
-  postgresqlClusters: [postgresqlCluster]
-  postgresqlPoolers: [postgresqlPooler]
-  postgresqlScheduledBackups: [postgresqlScheduledBackup]
-  redisRediss: [redisRedis]
-  redisRedisClusters: [redisRedisCluster]
-  redisRedisReplications: [redisRedisReplication]
-  redisRedisSentinels: [redisRedisSentinel]
-  rabbitmqRabbitmqClusters: [rabbitmqRabbitmqCluster]
-  mysqlInnoDBClusters: [mysqlInnoDBCluster]
-  mysqlMySQLBackups: [mysqlMySQLBackup]
-  projectcalicoNetworkPolicys: [projectcalicoNetworkPolicy]
-  projectcalicoNetworkSets: [projectcalicoNetworkSet]
-
-  permissions: permissionReview
-  status: namespaceStatus
-}
-
-type apiVersion {
-  name: String
-  versions: [apiVersionVersion]
-  preferredVersion: apiVersionVersion
-}
-type apiVersionVersion {
-  groupVersion: String
-  version: String
-}
-type customResourceDefinitionName {
-  categories: [String]
-  listKind: String
-  kind: String
-  plural: String
-  singular: String
-  shortNames: [String]
-}
-type customResourceDefinitionColumn {
-  name: String!
-  type: String!
-  jsonPath: String!
-  description: String
-  format: String
-  priority: Float
-}
-type customResourceDefinitionSchema {
-  openAPIV3Schema: JSONObject
-}
-type customResourceDefinitionVersion {
-  name: String!
-  served: Boolean!
-  storage: Boolean!
-  additionalPrinterColumns: [customResourceDefinitionColumn]
-  deprecated: Boolean
-  deprecationWarning: String
-  schema: customResourceDefinitionSchema
-}
-type customResourceDefinition {
-  metadata: metadata
-  group: String!
-  scope: String!
-  names: customResourceDefinitionName
-  versions: [customResourceDefinitionVersion]
-  acceptedNames: customResourceDefinitionName
+  annotations: JSONObject
+  labels: JSONObject
+  creationTimestamp: String
+  ownerReferences: [ownerReference]
+  resourceVersion: String
+  uid: String
 }
 
 type permissionReviewNonResourceRules {
@@ -153,13 +69,21 @@ type permissionReview {
   nonResourceRules: [permissionReviewNonResourceRules]
   resourceRules: [permissionReviewResourceRules]
 }
+type vynilCategory {
+  name: String!
+  providePackage(params: queryParameters): [vynilPackage!]
+}
+type vynilPackage {
+  name: String!
+  commit_id: ID!
+  description: String
+  providedByCategory: vynilCategory!
+  providedByDistrib: vynilDistrib!
+  options: JSONObject!
+}
 type Query {
   gramoConfig: GramoConfig
-  namespaces: [namespace]
-  namespace(name: String!): namespace
-  permissions(group: String, resource: String, subresource: String, namespace: String, name: String, verb: String, version: String): Boolean
-  apiVersions: [apiVersion]
-  permissionReview(namespace: String!): permissionReview
-  customResourceDefinitions: [customResourceDefinition]
-  customResourceDefinition(name: String!): customResourceDefinition
+  vynilCategory(params: queryParameters): [vynilCategory]
+  vynilPackage(params: queryParameters): [vynilPackage]
 }
+

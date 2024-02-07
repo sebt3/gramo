@@ -1,0 +1,79 @@
+query k8sJobQuery($namespace: queryParameters, $obj: queryParameters,, $parentCronJob: queryParameters, $childPod: queryParameters, $usePersistentVolumeClaim: queryParameters, $useSecret: queryParameters, $useConfigMap: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sJob(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      parentCronJob(params: $parentCronJob) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      childPod(params: $childPod) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usePersistentVolumeClaim(params: $usePersistentVolumeClaim) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      useSecret(params: $useSecret) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        data
+        immutable
+        stringData
+        type
+      }
+      useConfigMap(params: $useConfigMap) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        binaryData
+        data
+        immutable
+      }
+      spec
+      status
+    }
+  }
+}

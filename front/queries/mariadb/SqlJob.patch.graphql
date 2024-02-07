@@ -1,0 +1,14 @@
+mutation mariadbSqlJob($namespace: String!, $name: String!, $spec: JSONObject) {
+  mariadbSqlJobPatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

@@ -1,0 +1,14 @@
+mutation k8sClusterRole($name: String!) {
+  k8sClusterRoleDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      aggregationRule
+      rules
+  }
+}

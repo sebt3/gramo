@@ -1,0 +1,13 @@
+query k8sClusterRoleQuery($obj: queryParameters,) {
+    k8sClusterRole(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      aggregationRule
+      rules
+    }
+}

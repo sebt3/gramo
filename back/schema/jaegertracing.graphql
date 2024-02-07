@@ -1,0 +1,10 @@
+type jaegertracingJaeger {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type Mutation {
+    jaegertracingJaegerCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): jaegertracingJaeger
+    jaegertracingJaegerPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): jaegertracingJaeger
+    jaegertracingJaegerDelete(namespace: String!, name: String!): jaegertracingJaeger
+}

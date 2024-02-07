@@ -1,0 +1,28 @@
+query k8sIngressQuery($namespace: queryParameters, $obj: queryParameters,, $useService: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sIngress(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      useService(params: $useService) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      spec
+      status
+    }
+  }
+}

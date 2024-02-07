@@ -1,0 +1,103 @@
+query mariadbQuery($namespace: queryParameters, $Backup: queryParameters, $Connection: queryParameters, $Database: queryParameters, $Grant: queryParameters, $MariaDB: queryParameters, $Restore: queryParameters, $SqlJob: queryParameters, $User: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    mariadbBackup(params: $Backup) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbConnection(params: $Connection) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbDatabase(params: $Database) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbGrant(params: $Grant) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbMariaDB(params: $MariaDB) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbRestore(params: $Restore) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbSqlJob(params: $SqlJob) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    mariadbUser(params: $User) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

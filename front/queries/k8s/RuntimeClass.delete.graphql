@@ -1,0 +1,15 @@
+mutation k8sRuntimeClass($name: String!) {
+  k8sRuntimeClassDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      handler
+      overhead
+      scheduling
+  }
+}

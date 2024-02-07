@@ -1,0 +1,13 @@
+query vynilDistribQuery($obj: queryParameters,) {
+    vynilDistrib(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

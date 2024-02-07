@@ -1,0 +1,14 @@
+mutation oracleMySQLBackup($namespace: String!, $name: String!) {
+  oracleMySQLBackupDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

@@ -1,405 +1,405 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'system';
-const iconAlertmanager = 'album';
-const iconPodMonitor = 'album';
-const iconProbe = 'album';
-const iconPrometheus = 'album';
-const iconPrometheusRule = 'album';
-const iconServiceMonitor = 'album';
-const iconThanosRuler = 'album';
-const iconAlertmanagerConfig = 'album';
-const iconPrometheusAgent = 'album';
+import { iconAlertmanager, iconPodMonitor, iconProbe, iconPrometheus, iconPrometheusRule, iconServiceMonitor, iconThanosRuler, iconAlertmanagerConfig, iconPrometheusAgent,  monitoringIcon, monitoringTitle }from '../../libs/monitoring/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  name: 'monitoring',
-  title: 'Monitoring', icon: iconPrometheus,
-  link: `/${cat}/monitoring/prometheusrules/`,
+  name: 'systemmonitoring',
+  title: monitoringTitle, icon: monitoringIcon,
+  link: '/system/monitoring/',
   level: 1,
   children: [
-  {
-    name: 'monitoringPrometheuss',
-    title: 'Prometheus', caption: 'List prometheus', icon: iconPrometheus,
-    link: `/${cat}/monitoring/prometheuses/`, level: 2, children: []
-  },
-  {
+  crds['alertmanagers.monitoring.coreos.com'] == undefined?[]:[{
     name: 'monitoringAlertmanagers',
-    title: 'Alertmanager', caption: 'List alertmanager', icon: iconAlertmanager,
-    link: `/${cat}/monitoring/alertmanagers/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringPrometheusAgents',
-    title: 'PrometheusAgent', caption: 'List prometheusAgent', icon: iconPrometheusAgent,
-    link: `/${cat}/monitoring/prometheusagents/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringPrometheusRules',
-    title: 'PrometheusRule', caption: 'List prometheusRule', icon: iconPrometheusRule,
-    link: `/${cat}/monitoring/prometheusrules/`, level: 2, children: []
-  },
-  {
-    name: 'monitoringServiceMonitors',
-    title: 'ServiceMonitor', caption: 'List serviceMonitor', icon: iconServiceMonitor,
-    link: `/${cat}/monitoring/servicemonitors/`, level: 2, children: []
-  },
-  {
+    title: 'Alertmanager', caption: 'List Alertmanager', icon: iconAlertmanager,
+    link: '/system/monitoring/Alertmanager/', level: 2, children: []
+  }],
+  crds['podmonitors.monitoring.coreos.com'] == undefined?[]:[{
     name: 'monitoringPodMonitors',
-    title: 'PodMonitor', caption: 'List podMonitor', icon: iconPodMonitor,
-    link: `/${cat}/monitoring/podmonitors/`, level: 2, children: []
-  },
-  {
+    title: 'PodMonitor', caption: 'List PodMonitor', icon: iconPodMonitor,
+    link: '/system/monitoring/PodMonitor/', level: 2, children: []
+  }],
+  crds['probes.monitoring.coreos.com'] == undefined?[]:[{
     name: 'monitoringProbes',
-    title: 'Probe', caption: 'List probe', icon: iconProbe,
-    link: `/${cat}/monitoring/probes/`, level: 2, children: []
-  },
-  {
+    title: 'Probe', caption: 'List Probe', icon: iconProbe,
+    link: '/system/monitoring/Probe/', level: 2, children: []
+  }],
+  crds['prometheuses.monitoring.coreos.com'] == undefined?[]:[{
+    name: 'monitoringPrometheuss',
+    title: 'Prometheus', caption: 'List Prometheus', icon: iconPrometheus,
+    link: '/system/monitoring/Prometheus/', level: 2, children: []
+  }],
+  crds['prometheusrules.monitoring.coreos.com'] == undefined?[]:[{
+    name: 'monitoringPrometheusRules',
+    title: 'PrometheusRule', caption: 'List PrometheusRule', icon: iconPrometheusRule,
+    link: '/system/monitoring/PrometheusRule/', level: 2, children: []
+  }],
+  crds['servicemonitors.monitoring.coreos.com'] == undefined?[]:[{
+    name: 'monitoringServiceMonitors',
+    title: 'ServiceMonitor', caption: 'List ServiceMonitor', icon: iconServiceMonitor,
+    link: '/system/monitoring/ServiceMonitor/', level: 2, children: []
+  }],
+  crds['thanosrulers.monitoring.coreos.com'] == undefined?[]:[{
     name: 'monitoringThanosRulers',
-    title: 'ThanosRuler', caption: 'List thanosRuler', icon: iconThanosRuler,
-    link: `/${cat}/monitoring/thanosrulers/`, level: 2, children: []
-  },
-  {
+    title: 'ThanosRuler', caption: 'List ThanosRuler', icon: iconThanosRuler,
+    link: '/system/monitoring/ThanosRuler/', level: 2, children: []
+  }],
+  crds['alertmanagerconfigs.monitoring.coreos.com'] == undefined?[]:[{
     name: 'monitoringAlertmanagerConfigs',
-    title: 'AlertmanagerConfig', caption: 'List alertmanagerConfig', icon: iconAlertmanagerConfig,
-    link: `/${cat}/monitoring/alertmanagerconfigs/`, level: 2, children: []
-  },
-  ]
+    title: 'AlertmanagerConfig', caption: 'List AlertmanagerConfig', icon: iconAlertmanagerConfig,
+    link: '/system/monitoring/AlertmanagerConfig/', level: 2, children: []
+  }],
+  crds['prometheusagents.monitoring.coreos.com'] == undefined?[]:[{
+    name: 'monitoringPrometheusAgents',
+    title: 'PrometheusAgent', caption: 'List PrometheusAgent', icon: iconPrometheusAgent,
+    link: '/system/monitoring/PrometheusAgent/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  monitoring:                {breadcrumb: 'Monitoring', icon: iconAlertmanager, ns: false},
-  monitoringAlertmanagers:        {breadcrumb: 'Alertmanager', icon: iconAlertmanager, ns: false},
+  systemmonitoring:                {breadcrumb: monitoringTitle, icon: monitoringIcon, ns: false},
+  systemmonitoringDashboard:       {breadcrumb: 'Dashboard', icon: monitoringIcon, ns: false},
+  monitoringAlertmanager:        {breadcrumb: 'Alertmanager', icon: iconAlertmanager, ns: false},
   monitoringAlertmanagerAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringAlertmanagerTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringAlertmanagerView:     {breadcrumb: 'View', icon: iconAlertmanager, ns: true},
-  monitoringAlertmanagerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringAlertmanagerCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringPodMonitors:        {breadcrumb: 'PodMonitor', icon: iconPodMonitor, ns: false},
+  monitoringAlertmanagerTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringAlertmanagerView:     {breadcrumb: 'View', icon: iconAlertmanager, ns: true },
+  monitoringAlertmanagerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringAlertmanagerCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringPodMonitor:        {breadcrumb: 'PodMonitor', icon: iconPodMonitor, ns: false},
   monitoringPodMonitorAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringPodMonitorTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringPodMonitorView:     {breadcrumb: 'View', icon: iconPodMonitor, ns: true},
-  monitoringPodMonitorEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringPodMonitorCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringProbes:        {breadcrumb: 'Probe', icon: iconProbe, ns: false},
+  monitoringPodMonitorTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringPodMonitorView:     {breadcrumb: 'View', icon: iconPodMonitor, ns: true },
+  monitoringPodMonitorEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringPodMonitorCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringProbe:        {breadcrumb: 'Probe', icon: iconProbe, ns: false},
   monitoringProbeAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringProbeTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringProbeView:     {breadcrumb: 'View', icon: iconProbe, ns: true},
-  monitoringProbeEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringProbeCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringPrometheuss:        {breadcrumb: 'Prometheus', icon: iconPrometheus, ns: false},
+  monitoringProbeTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringProbeView:     {breadcrumb: 'View', icon: iconProbe, ns: true },
+  monitoringProbeEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringProbeCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringPrometheus:        {breadcrumb: 'Prometheus', icon: iconPrometheus, ns: false},
   monitoringPrometheusAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringPrometheusTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringPrometheusView:     {breadcrumb: 'View', icon: iconPrometheus, ns: true},
-  monitoringPrometheusEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringPrometheusCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringPrometheusRules:        {breadcrumb: 'PrometheusRule', icon: iconPrometheusRule, ns: false},
+  monitoringPrometheusTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringPrometheusView:     {breadcrumb: 'View', icon: iconPrometheus, ns: true },
+  monitoringPrometheusEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringPrometheusCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringPrometheusRule:        {breadcrumb: 'PrometheusRule', icon: iconPrometheusRule, ns: false},
   monitoringPrometheusRuleAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringPrometheusRuleTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringPrometheusRuleView:     {breadcrumb: 'View', icon: iconPrometheusRule, ns: true},
-  monitoringPrometheusRuleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringPrometheusRuleCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringServiceMonitors:        {breadcrumb: 'ServiceMonitor', icon: iconServiceMonitor, ns: false},
+  monitoringPrometheusRuleTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringPrometheusRuleView:     {breadcrumb: 'View', icon: iconPrometheusRule, ns: true },
+  monitoringPrometheusRuleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringPrometheusRuleCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringServiceMonitor:        {breadcrumb: 'ServiceMonitor', icon: iconServiceMonitor, ns: false},
   monitoringServiceMonitorAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringServiceMonitorTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringServiceMonitorView:     {breadcrumb: 'View', icon: iconServiceMonitor, ns: true},
-  monitoringServiceMonitorEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringServiceMonitorCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringThanosRulers:        {breadcrumb: 'ThanosRuler', icon: iconThanosRuler, ns: false},
+  monitoringServiceMonitorTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringServiceMonitorView:     {breadcrumb: 'View', icon: iconServiceMonitor, ns: true },
+  monitoringServiceMonitorEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringServiceMonitorCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringThanosRuler:        {breadcrumb: 'ThanosRuler', icon: iconThanosRuler, ns: false},
   monitoringThanosRulerAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringThanosRulerTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringThanosRulerView:     {breadcrumb: 'View', icon: iconThanosRuler, ns: true},
-  monitoringThanosRulerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringThanosRulerCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringAlertmanagerConfigs:        {breadcrumb: 'AlertmanagerConfig', icon: iconAlertmanagerConfig, ns: false},
+  monitoringThanosRulerTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringThanosRulerView:     {breadcrumb: 'View', icon: iconThanosRuler, ns: true },
+  monitoringThanosRulerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringThanosRulerCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringAlertmanagerConfig:        {breadcrumb: 'AlertmanagerConfig', icon: iconAlertmanagerConfig, ns: false},
   monitoringAlertmanagerConfigAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringAlertmanagerConfigTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringAlertmanagerConfigView:     {breadcrumb: 'View', icon: iconAlertmanagerConfig, ns: true},
-  monitoringAlertmanagerConfigEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringAlertmanagerConfigCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  monitoringPrometheusAgents:        {breadcrumb: 'PrometheusAgent', icon: iconPrometheusAgent, ns: false},
+  monitoringAlertmanagerConfigTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringAlertmanagerConfigView:     {breadcrumb: 'View', icon: iconAlertmanagerConfig, ns: true },
+  monitoringAlertmanagerConfigEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringAlertmanagerConfigCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
+  monitoringPrometheusAgent:        {breadcrumb: 'PrometheusAgent', icon: iconPrometheusAgent, ns: false},
   monitoringPrometheusAgentAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  monitoringPrometheusAgentTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  monitoringPrometheusAgentView:     {breadcrumb: 'View', icon: iconPrometheusAgent, ns: true},
-  monitoringPrometheusAgentEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  monitoringPrometheusAgentCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  monitoringPrometheusAgentTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  monitoringPrometheusAgentView:     {breadcrumb: 'View', icon: iconPrometheusAgent, ns: true },
+  monitoringPrometheusAgentEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  monitoringPrometheusAgentCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'monitoring',
-  name: 'monitoring',
+  name: 'systemmonitoring',
   redirect: {path: link.link as string},
   children: [
     {
-      path: 'alertmanagers',
-      name: 'monitoringAlertmanagers',
+      path: '',
+      name: 'systemmonitoringDashboard',
+      component: () => import('../../pages/system/monitoring/Dashboard.vue'),
+    },
+    {
+      path: 'Alertmanager',
+      name: 'monitoringAlertmanager',
       children: [
         {
           path: '',
           name: 'monitoringAlertmanagerAllTable',
-          component: () => import('../../components/monitoring/AlertmanagerAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringAlertmanagerTable',
-          component: () => import('../../components/monitoring/AlertmanagerTable.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringAlertmanagerView',
-          component: () => import('../../components/monitoring/AlertmanagerView.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringAlertmanagerEdit',
-          component: () => import('../../components/monitoring/AlertmanagerEdit.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringAlertmanagerCreate',
-          component: () => import('../../components/monitoring/AlertmanagerNew.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerNew.vue'),
         }
       ]
     },
     {
-      path: 'podmonitors',
-      name: 'monitoringPodMonitors',
+      path: 'PodMonitor',
+      name: 'monitoringPodMonitor',
       children: [
         {
           path: '',
           name: 'monitoringPodMonitorAllTable',
-          component: () => import('../../components/monitoring/PodMonitorAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/PodMonitorList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringPodMonitorTable',
-          component: () => import('../../components/monitoring/PodMonitorTable.vue'),
+          component: () => import('../../pages/system/monitoring/PodMonitorList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringPodMonitorView',
-          component: () => import('../../components/monitoring/PodMonitorView.vue'),
+          component: () => import('../../pages/system/monitoring/PodMonitorView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringPodMonitorEdit',
-          component: () => import('../../components/monitoring/PodMonitorEdit.vue'),
+          component: () => import('../../pages/system/monitoring/PodMonitorEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringPodMonitorCreate',
-          component: () => import('../../components/monitoring/PodMonitorNew.vue'),
+          component: () => import('../../pages/system/monitoring/PodMonitorNew.vue'),
         }
       ]
     },
     {
-      path: 'probes',
-      name: 'monitoringProbes',
+      path: 'Probe',
+      name: 'monitoringProbe',
       children: [
         {
           path: '',
           name: 'monitoringProbeAllTable',
-          component: () => import('../../components/monitoring/ProbeAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/ProbeList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringProbeTable',
-          component: () => import('../../components/monitoring/ProbeTable.vue'),
+          component: () => import('../../pages/system/monitoring/ProbeList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringProbeView',
-          component: () => import('../../components/monitoring/ProbeView.vue'),
+          component: () => import('../../pages/system/monitoring/ProbeView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringProbeEdit',
-          component: () => import('../../components/monitoring/ProbeEdit.vue'),
+          component: () => import('../../pages/system/monitoring/ProbeEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringProbeCreate',
-          component: () => import('../../components/monitoring/ProbeNew.vue'),
+          component: () => import('../../pages/system/monitoring/ProbeNew.vue'),
         }
       ]
     },
     {
-      path: 'prometheuses',
-      name: 'monitoringPrometheuss',
+      path: 'Prometheus',
+      name: 'monitoringPrometheus',
       children: [
         {
           path: '',
           name: 'monitoringPrometheusAllTable',
-          component: () => import('../../components/monitoring/PrometheusAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringPrometheusTable',
-          component: () => import('../../components/monitoring/PrometheusTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringPrometheusView',
-          component: () => import('../../components/monitoring/PrometheusView.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringPrometheusEdit',
-          component: () => import('../../components/monitoring/PrometheusEdit.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringPrometheusCreate',
-          component: () => import('../../components/monitoring/PrometheusNew.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusNew.vue'),
         }
       ]
     },
     {
-      path: 'prometheusrules',
-      name: 'monitoringPrometheusRules',
+      path: 'PrometheusRule',
+      name: 'monitoringPrometheusRule',
       children: [
         {
           path: '',
           name: 'monitoringPrometheusRuleAllTable',
-          component: () => import('../../components/monitoring/PrometheusRuleAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusRuleList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringPrometheusRuleTable',
-          component: () => import('../../components/monitoring/PrometheusRuleTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusRuleList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringPrometheusRuleView',
-          component: () => import('../../components/monitoring/PrometheusRuleView.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusRuleView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringPrometheusRuleEdit',
-          component: () => import('../../components/monitoring/PrometheusRuleEdit.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusRuleEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringPrometheusRuleCreate',
-          component: () => import('../../components/monitoring/PrometheusRuleNew.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusRuleNew.vue'),
         }
       ]
     },
     {
-      path: 'servicemonitors',
-      name: 'monitoringServiceMonitors',
+      path: 'ServiceMonitor',
+      name: 'monitoringServiceMonitor',
       children: [
         {
           path: '',
           name: 'monitoringServiceMonitorAllTable',
-          component: () => import('../../components/monitoring/ServiceMonitorAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/ServiceMonitorList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringServiceMonitorTable',
-          component: () => import('../../components/monitoring/ServiceMonitorTable.vue'),
+          component: () => import('../../pages/system/monitoring/ServiceMonitorList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringServiceMonitorView',
-          component: () => import('../../components/monitoring/ServiceMonitorView.vue'),
+          component: () => import('../../pages/system/monitoring/ServiceMonitorView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringServiceMonitorEdit',
-          component: () => import('../../components/monitoring/ServiceMonitorEdit.vue'),
+          component: () => import('../../pages/system/monitoring/ServiceMonitorEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringServiceMonitorCreate',
-          component: () => import('../../components/monitoring/ServiceMonitorNew.vue'),
+          component: () => import('../../pages/system/monitoring/ServiceMonitorNew.vue'),
         }
       ]
     },
     {
-      path: 'thanosrulers',
-      name: 'monitoringThanosRulers',
+      path: 'ThanosRuler',
+      name: 'monitoringThanosRuler',
       children: [
         {
           path: '',
           name: 'monitoringThanosRulerAllTable',
-          component: () => import('../../components/monitoring/ThanosRulerAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/ThanosRulerList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringThanosRulerTable',
-          component: () => import('../../components/monitoring/ThanosRulerTable.vue'),
+          component: () => import('../../pages/system/monitoring/ThanosRulerList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringThanosRulerView',
-          component: () => import('../../components/monitoring/ThanosRulerView.vue'),
+          component: () => import('../../pages/system/monitoring/ThanosRulerView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringThanosRulerEdit',
-          component: () => import('../../components/monitoring/ThanosRulerEdit.vue'),
+          component: () => import('../../pages/system/monitoring/ThanosRulerEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringThanosRulerCreate',
-          component: () => import('../../components/monitoring/ThanosRulerNew.vue'),
+          component: () => import('../../pages/system/monitoring/ThanosRulerNew.vue'),
         }
       ]
     },
     {
-      path: 'alertmanagerconfigs',
-      name: 'monitoringAlertmanagerConfigs',
+      path: 'AlertmanagerConfig',
+      name: 'monitoringAlertmanagerConfig',
       children: [
         {
           path: '',
           name: 'monitoringAlertmanagerConfigAllTable',
-          component: () => import('../../components/monitoring/AlertmanagerConfigAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerConfigList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringAlertmanagerConfigTable',
-          component: () => import('../../components/monitoring/AlertmanagerConfigTable.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerConfigList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringAlertmanagerConfigView',
-          component: () => import('../../components/monitoring/AlertmanagerConfigView.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerConfigView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringAlertmanagerConfigEdit',
-          component: () => import('../../components/monitoring/AlertmanagerConfigEdit.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerConfigEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringAlertmanagerConfigCreate',
-          component: () => import('../../components/monitoring/AlertmanagerConfigNew.vue'),
+          component: () => import('../../pages/system/monitoring/AlertmanagerConfigNew.vue'),
         }
       ]
     },
     {
-      path: 'prometheusagents',
-      name: 'monitoringPrometheusAgents',
+      path: 'PrometheusAgent',
+      name: 'monitoringPrometheusAgent',
       children: [
         {
           path: '',
           name: 'monitoringPrometheusAgentAllTable',
-          component: () => import('../../components/monitoring/PrometheusAgentAllTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusAgentList.vue'),
         },
         {
           path: ':namespace',
           name: 'monitoringPrometheusAgentTable',
-          component: () => import('../../components/monitoring/PrometheusAgentTable.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusAgentList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'monitoringPrometheusAgentView',
-          component: () => import('../../components/monitoring/PrometheusAgentView.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusAgentView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'monitoringPrometheusAgentEdit',
-          component: () => import('../../components/monitoring/PrometheusAgentEdit.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusAgentEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'monitoringPrometheusAgentCreate',
-          component: () => import('../../components/monitoring/PrometheusAgentNew.vue'),
+          component: () => import('../../pages/system/monitoring/PrometheusAgentNew.vue'),
         }
       ]
     },

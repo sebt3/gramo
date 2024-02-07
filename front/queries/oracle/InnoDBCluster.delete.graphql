@@ -1,0 +1,14 @@
+mutation oracleInnoDBCluster($namespace: String!, $name: String!) {
+  oracleInnoDBClusterDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

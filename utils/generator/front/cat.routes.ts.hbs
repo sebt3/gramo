@@ -1,0 +1,36 @@
+import {menuLinksProps} from '../interfaces';
+import { RouteRecordRaw } from 'vue-router'
+import { {{ category }}Icon, {{ category }}Title, {{ category }}Desc } from '../custom.js';
+const linkChildren:Array<menuLinksProps> = [];
+const routeChildren:Array<RouteRecordRaw> = [];
+const linkRedirect = {path:''};
+
+{{#each groups}}
+import { route as {{ this.name }}Route, link as {{ this.name }}Link, descriptions as {{ this.name }}Descriptions } from './{{ this.name }}'
+if (Array.isArray({{ this.name }}Link.children) && {{ this.name }}Link.children.length>0) {
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:{{ this.name }}Route['redirect']!=undefined?{{ this.name }}Route['redirect'].path:'/{{ category }}/{{ lower this.name }}'
+  linkChildren.push({{ this.name }}Link)
+  routeChildren.push({{ this.name }}Route)
+}
+{{/each}}
+
+export const descriptions = {
+  {{ category }}:      {breadcrumb: {{ category }}Title, icon: {{ category }}Icon, ns: false},
+{{#each groups}}
+  ...{{ this.name }}Descriptions,
+{{/each}}
+}
+
+export const link:menuLinksProps = {
+  title: {{ category }}Title, caption: {{ category }}Desc, icon: {{ category }}Icon,
+  link: linkRedirect.path,
+  level: 0,
+  children: linkChildren
+}
+export const route = {
+  path: '{{ lower category }}',
+  name: '{{ category }}',
+  redirect: linkRedirect,
+  children: routeChildren
+}
+export default route

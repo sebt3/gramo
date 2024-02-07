@@ -1,0 +1,55 @@
+query cnpgQuery($namespace: queryParameters, $Backup: queryParameters, $Cluster: queryParameters, $Pooler: queryParameters, $ScheduledBackup: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    cnpgBackup(params: $Backup) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    cnpgCluster(params: $Cluster) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    cnpgPooler(params: $Pooler) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    cnpgScheduledBackup(params: $ScheduledBackup) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

@@ -1,0 +1,14 @@
+mutation mariadbDatabase($namespace: String!, $name: String!) {
+  mariadbDatabaseDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

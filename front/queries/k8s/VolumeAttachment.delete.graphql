@@ -1,0 +1,14 @@
+mutation k8sVolumeAttachment($name: String!) {
+  k8sVolumeAttachmentDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

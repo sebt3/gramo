@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import OpenApiItemEdit from './OpenApiItemEdit.vue';
+//import OpenApiItemEdit from './OpenApiItemEdit.vue';
 import { ref, computed, watch } from 'vue'
-import {getProperties,getItems,getType} from './openapiSetup';
+import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
 const props = withDefaults(defineProps<{
   name: string

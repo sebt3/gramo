@@ -1,0 +1,15 @@
+query projectcalicoNetworkSetQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    projectcalicoNetworkSet(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+  }
+}

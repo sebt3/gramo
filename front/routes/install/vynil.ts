@@ -1,107 +1,105 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'install';
+import { iconDistrib, iconInstall,  vynilIcon, vynilTitle }from '../../libs/vynil/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  title: 'Vynil', icon: 'album',
-  link: `/${cat}/vynil/installs/`,
-  name: 'vynil',
+  name: 'installvynil',
+  title: vynilTitle, icon: vynilIcon,
+  link: '/install/vynil/',
   level: 1,
   children: [
-  {
-    name: 'vynilInstalls',
-    title: 'Installations', caption: 'List installed packages', icon: 'album',
-    link: `/${cat}/vynil/installs/`, level: 2, children: []
-  },
-  {
+  crds['distribs.vynil.solidite.fr'] == undefined?[]:[{
     name: 'vynilDistribs',
-    title: 'Distributions', caption: 'List available distributions', icon: 'collections',
-    link: `/${cat}/vynil/dists/`, level: 2, children: []
-  },
-  ]
+    title: 'Distrib', caption: 'List Distrib', icon: iconDistrib,
+    link: '/install/vynil/Distrib/', level: 2, children: []
+  }],
+  crds['installs.vynil.solidite.fr'] == undefined?[]:[{
+    name: 'vynilInstalls',
+    title: 'Install', caption: 'List Install', icon: iconInstall,
+    link: '/install/vynil/Install/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  vynil:                {breadcrumb: 'Vynil', icon: 'album', ns: false},
-  vynilDashboard:       {breadcrumb: 'Dashboard', icon: 'album', ns: false},
-  vynilInstalls:        {breadcrumb: 'Installation', icon: 'album', ns: false},
+  installvynil:                {breadcrumb: vynilTitle, icon: vynilIcon, ns: false},
+  installvynilDashboard:       {breadcrumb: 'Dashboard', icon: vynilIcon, ns: false},
+  vynilDistrib:        {breadcrumb: 'Distrib', icon: iconDistrib, ns: false},
+  vynilDistribTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  vynilDistribView:     {breadcrumb: 'View', icon: iconDistrib, ns: false },
+  vynilDistribEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  vynilDistribCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  vynilInstall:        {breadcrumb: 'Install', icon: iconInstall, ns: false},
   vynilInstallAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  vynilInstallTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  vynilInstallView:     {breadcrumb: 'View', icon: 'album', ns: true},
-  vynilInstallEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  vynilInstallCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  vynilDistribs:        {breadcrumb: 'Distribution', icon: 'collections', ns: false},
-  vynilDistribTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  vynilDistribView:     {breadcrumb: 'View', icon: 'collections', ns: false},
-  vynilPackageView:     {breadcrumb: 'View package', icon: 'inventory', ns: false},
-  vynilDistribEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  vynilDistribCreate:   {breadcrumb: 'Create', icon: 'add', ns: false}
+  vynilInstallTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  vynilInstallView:     {breadcrumb: 'View', icon: iconInstall, ns: true },
+  vynilInstallEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  vynilInstallCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'vynil',
-  name: 'vynil',
+  name: 'installvynil',
+  redirect: {path: link.link as string},
   children: [
     {
       path: '',
-      name: 'vynilDashboard',
-      component: () => import('../../components/vynil/DashBoard.vue'),
+      name: 'installvynilDashboard',
+      component: () => import('../../pages/install/vynil/Dashboard.vue'),
     },
     {
-      path: 'installs',
-      name: 'vynilInstalls',
-      children: [
-        {
-          path: '',
-          name: 'vynilInstallAllTable',
-          component: () => import('../../components/vynil/InstallAllTable.vue'),
-        },
-        {
-          path: ':namespace',
-          name: 'vynilInstallTable',
-          component: () => import('../../components/vynil/InstallTable.vue'),
-        },
-        {
-          path: ':namespace/view/:name',
-          name: 'vynilInstallView',
-          component: () => import('../../components/vynil/InstallView.vue'),
-        },
-        {
-          path: ':namespace/edit/:name',
-          name: 'vynilInstallEdit',
-          component: () => import('../../components/vynil/InstallEdit.vue'),
-        },
-        {
-          path: ':namespace/create',
-          name: 'vynilInstallCreate',
-          component: () => import('../../components/vynil/InstallNew.vue'),
-        }
-      ]
-    },
-    {
-      path: 'dists',
-      name: 'vynilDistribs',
+      path: 'Distrib',
+      name: 'vynilDistrib',
       children: [
         {
           path: '',
           name: 'vynilDistribTable',
-          component: () => import('../../components/vynil/DistribTable.vue'),
+          component: () => import('../../pages/install/vynil/DistribList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'vynilDistribView',
-          component: () => import('../../components/vynil/DistribView.vue'),
+          component: () => import('../../pages/install/vynil/DistribView.vue'),
         },
-        /*{
-          path: ':name/view/:cat/:comp',
-          name: 'vynilPackageView',
-          component: () => import('../../components/vynil/PackageView.vue'),
-        },*/
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'vynilDistribEdit',
-          component: () => import('../../components/vynil/DistribEdit.vue'),
+          component: () => import('../../pages/install/vynil/DistribEdit.vue'),
         },
         {
           path: 'create',
           name: 'vynilDistribCreate',
-          component: () => import('../../components/vynil/DistribNew.vue'),
+          component: () => import('../../pages/install/vynil/DistribNew.vue'),
+        }
+      ]
+    },
+    {
+      path: 'Install',
+      name: 'vynilInstall',
+      children: [
+        {
+          path: '',
+          name: 'vynilInstallAllTable',
+          component: () => import('../../pages/install/vynil/InstallList.vue'),
+        },
+        {
+          path: ':namespace',
+          name: 'vynilInstallTable',
+          component: () => import('../../pages/install/vynil/InstallList.vue'),
+        },
+        {
+          path: ':namespace/view/:name',
+          name: 'vynilInstallView',
+          component: () => import('../../pages/install/vynil/InstallView.vue'),
+        },
+        {
+          path: ':namespace/edit/:name',
+          name: 'vynilInstallEdit',
+          component: () => import('../../pages/install/vynil/InstallEdit.vue'),
+        },
+        {
+          path: ':namespace/create',
+          name: 'vynilInstallCreate',
+          component: () => import('../../pages/install/vynil/InstallNew.vue'),
         }
       ]
     },

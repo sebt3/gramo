@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMBlock($name: String!, $spec: JSONObject) {
+  projectcalicoIPAMBlockPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

@@ -1,0 +1,25 @@
+query k8sClusterRoleQuery($obj: queryParameters,, $providedToClusterRoleBinding: queryParameters) {
+    k8sClusterRole(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      providedToClusterRoleBinding(params: $providedToClusterRoleBinding) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        roleRef
+        subjects
+      }
+      aggregationRule
+      rules
+    }
+}

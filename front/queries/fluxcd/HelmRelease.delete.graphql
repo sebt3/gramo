@@ -1,0 +1,14 @@
+mutation fluxcdHelmRelease($namespace: String!, $name: String!) {
+  fluxcdHelmReleaseDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

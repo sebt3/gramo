@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMHandle($name: String!, $spec: JSONObject) {
+  projectcalicoIPAMHandlePatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

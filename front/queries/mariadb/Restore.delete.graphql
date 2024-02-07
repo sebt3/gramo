@@ -1,0 +1,14 @@
+mutation mariadbRestore($namespace: String!, $name: String!) {
+  mariadbRestoreDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

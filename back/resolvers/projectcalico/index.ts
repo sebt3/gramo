@@ -1,38 +1,21 @@
-
-import { queries as BGPConfigurationQueries } from './query.BGPConfiguration.js';
-import { mutations as BGPConfigurationMutations } from './mutation.BGPConfiguration.js';
-import { queries as BGPPeerQueries } from './query.BGPPeer.js';
-import { mutations as BGPPeerMutations } from './mutation.BGPPeer.js';
-import { queries as BlockAffinityQueries } from './query.BlockAffinity.js';
-import { mutations as BlockAffinityMutations } from './mutation.BlockAffinity.js';
-import { queries as CalicoNodeStatusQueries } from './query.CalicoNodeStatus.js';
-import { mutations as CalicoNodeStatusMutations } from './mutation.CalicoNodeStatus.js';
-import { queries as ClusterInformationQueries } from './query.ClusterInformation.js';
-import { mutations as ClusterInformationMutations } from './mutation.ClusterInformation.js';
-import { queries as FelixConfigurationQueries } from './query.FelixConfiguration.js';
-import { mutations as FelixConfigurationMutations } from './mutation.FelixConfiguration.js';
-import { queries as GlobalNetworkPolicyQueries } from './query.GlobalNetworkPolicy.js';
-import { mutations as GlobalNetworkPolicyMutations } from './mutation.GlobalNetworkPolicy.js';
-import { queries as GlobalNetworkSetQueries } from './query.GlobalNetworkSet.js';
-import { mutations as GlobalNetworkSetMutations } from './mutation.GlobalNetworkSet.js';
-import { queries as HostEndpointQueries } from './query.HostEndpoint.js';
-import { mutations as HostEndpointMutations } from './mutation.HostEndpoint.js';
-import { queries as IPAMBlockQueries } from './query.IPAMBlock.js';
-import { mutations as IPAMBlockMutations } from './mutation.IPAMBlock.js';
-import { queries as IPAMConfigQueries } from './query.IPAMConfig.js';
-import { mutations as IPAMConfigMutations } from './mutation.IPAMConfig.js';
-import { queries as IPAMHandleQueries } from './query.IPAMHandle.js';
-import { mutations as IPAMHandleMutations } from './mutation.IPAMHandle.js';
-import { queries as IPPoolQueries } from './query.IPPool.js';
-import { mutations as IPPoolMutations } from './mutation.IPPool.js';
-import { queries as IPReservationQueries } from './query.IPReservation.js';
-import { mutations as IPReservationMutations } from './mutation.IPReservation.js';
-import { queries as KubeControllersConfigurationQueries } from './query.KubeControllersConfiguration.js';
-import { mutations as KubeControllersConfigurationMutations } from './mutation.KubeControllersConfiguration.js';
-import { queries as NetworkPolicyQueries } from './query.NetworkPolicy.js';
-import { mutations as NetworkPolicyMutations } from './mutation.NetworkPolicy.js';
-import { queries as NetworkSetQueries } from './query.NetworkSet.js';
-import { mutations as NetworkSetMutations } from './mutation.NetworkSet.js';
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+import { mutations as BGPConfigurationMutations, resolvers as BGPConfigurationResolvers, queries as BGPConfigurationQueries } from './BGPConfiguration.js';
+import { mutations as BGPPeerMutations, resolvers as BGPPeerResolvers, queries as BGPPeerQueries } from './BGPPeer.js';
+import { mutations as BlockAffinityMutations, resolvers as BlockAffinityResolvers, queries as BlockAffinityQueries } from './BlockAffinity.js';
+import { mutations as CalicoNodeStatusMutations, resolvers as CalicoNodeStatusResolvers, queries as CalicoNodeStatusQueries } from './CalicoNodeStatus.js';
+import { mutations as ClusterInformationMutations, resolvers as ClusterInformationResolvers, queries as ClusterInformationQueries } from './ClusterInformation.js';
+import { mutations as FelixConfigurationMutations, resolvers as FelixConfigurationResolvers, queries as FelixConfigurationQueries } from './FelixConfiguration.js';
+import { mutations as GlobalNetworkPolicyMutations, resolvers as GlobalNetworkPolicyResolvers, queries as GlobalNetworkPolicyQueries } from './GlobalNetworkPolicy.js';
+import { mutations as GlobalNetworkSetMutations, resolvers as GlobalNetworkSetResolvers, queries as GlobalNetworkSetQueries } from './GlobalNetworkSet.js';
+import { mutations as HostEndpointMutations, resolvers as HostEndpointResolvers, queries as HostEndpointQueries } from './HostEndpoint.js';
+import { mutations as IPAMBlockMutations, resolvers as IPAMBlockResolvers, queries as IPAMBlockQueries } from './IPAMBlock.js';
+import { mutations as IPAMConfigMutations, resolvers as IPAMConfigResolvers, queries as IPAMConfigQueries } from './IPAMConfig.js';
+import { mutations as IPAMHandleMutations, resolvers as IPAMHandleResolvers, queries as IPAMHandleQueries } from './IPAMHandle.js';
+import { mutations as IPPoolMutations, resolvers as IPPoolResolvers, queries as IPPoolQueries } from './IPPool.js';
+import { mutations as IPReservationMutations, resolvers as IPReservationResolvers, queries as IPReservationQueries } from './IPReservation.js';
+import { mutations as KubeControllersConfigurationMutations, resolvers as KubeControllersConfigurationResolvers, queries as KubeControllersConfigurationQueries } from './KubeControllersConfiguration.js';
+import { mutations as NetworkPolicyMutations, resolvers as NetworkPolicyResolvers } from './NetworkPolicy.js';
+import { mutations as NetworkSetMutations, resolvers as NetworkSetResolvers } from './NetworkSet.js';
 export const queries = {
     ...BGPConfigurationQueries,
     ...BGPPeerQueries,
@@ -49,11 +32,28 @@ export const queries = {
     ...IPPoolQueries,
     ...IPReservationQueries,
     ...KubeControllersConfigurationQueries,
-    ...NetworkPolicyQueries,
-    ...NetworkSetQueries,
+    ...customQueries
 };
 
 export const resolvers = {
+    ...BGPConfigurationResolvers,
+    ...BGPPeerResolvers,
+    ...BlockAffinityResolvers,
+    ...CalicoNodeStatusResolvers,
+    ...ClusterInformationResolvers,
+    ...FelixConfigurationResolvers,
+    ...GlobalNetworkPolicyResolvers,
+    ...GlobalNetworkSetResolvers,
+    ...HostEndpointResolvers,
+    ...IPAMBlockResolvers,
+    ...IPAMConfigResolvers,
+    ...IPAMHandleResolvers,
+    ...IPPoolResolvers,
+    ...IPReservationResolvers,
+    ...KubeControllersConfigurationResolvers,
+    ...NetworkPolicyResolvers,
+    ...NetworkSetResolvers,
+    ...customResolvers
 };
 
 export const mutations = {
@@ -74,4 +74,5 @@ export const mutations = {
     ...KubeControllersConfigurationMutations,
     ...NetworkPolicyMutations,
     ...NetworkSetMutations,
+    ...customMutations
 };

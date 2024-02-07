@@ -1,0 +1,14 @@
+mutation fluxcdGitRepository($namespace: String!, $name: String!) {
+  fluxcdGitRepositoryDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

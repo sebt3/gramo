@@ -1,0 +1,125 @@
+import { QTableColumn } from 'quasar'
+import { ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
+export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
+export { {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes } from './custom.js'
+import { extra{{short}}Columns } from './custom.js'
+import { stringify, parse } from 'yaml'
+
+export const {{short}}Columns:Array<QTableColumn> = ([
+  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
+] as Array<QTableColumn>).concat(extra{{short}}Columns).concat([
+  {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
+]);
+{{#if namespaced}}
+export const {{short}}AllColumns = ([
+  {name: 'Namespace', label: 'Namespace', field: row => row.metadata.namespace, sortable: true, align: tableColumnAlign.left}
+] as Array<QTableColumn>).concat({{short}}Columns);
+{{/if}}
+
+export const {{short}}Definition = {{toJson definition}};
+
+export function use{{ short }}() {
+  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking{{#if namespaced}}, isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute{{/if}} } = useCore();
+  const viewer = ref({
+      tab: 'simple',
+      full: '',
+      props: {
+{{#each writeProperties}}
+        "{{this}}": '',
+{{/each}}
+      }
+  });
+  const editor = ref({
+      tab: 'simple',
+      yaml: '',
+      obj: {},
+      setKey: (key, o) => {editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)},
+      ready: false,
+      setYaml: (y) => {editor.value.yaml = y;editor.value.obj = parse(y);},
+//      updateFromQuery: (res: object, obj: object) => {editor.value.ready=false;if(!res['loading']){editor.value.setSpec(obj);editor.value.ready=true;}},
+  });
+  return {
+    editor, viewer, viewerUpdate: (obj) => {
+      viewer.value.full=gqlDataToYaml(obj)
+{{#each writeProperties}}
+      viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
+{{/each}}
+    },
+    navigation: useNavigationStoreRef(),
+    onlyReadProperties: (obj) => {
+      const res = {}
+      Object.keys(obj).forEach(k=>{
+        if ({{toJson readProperties}}.includes(k)||k=='metadata')
+          res[k] = obj[k];
+      })
+      return res
+    },
+    onlyWriteProperties: (obj) => {
+      const res = {}
+      Object.keys(obj).forEach(k=>{
+        if ({{toJson writeProperties}}.includes(k))
+          res[k] = obj[k];
+      })
+      return res
+    },
+{{#if namespaced}}
+    isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute,
+{{/if}}
+    router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    onNot{{ short }}Found: (res) => {
+{{#if namespaced}}
+    if ( !res.loading && res.data.k8sNamespace[0].{{group}}{{short}} == null) {
+{{else}}
+    if ( !res.loading && res.data.{{group}}{{short}} == null) {
+{{/if}}
+        const matched = router.currentRoute.value.matched
+        notifyError('{{ short }} not found');
+        router.push({
+          path: matched[matched.length>1?matched.length-2:matched.length-1].path,
+          replace: true
+        })
+      }
+    },
+{{#if namespaced}}
+    toView: (namespace, name) => router.push({ name: '{{group}}{{short}}View', params: {name, namespace}}),
+    toViewReloaded: async (namespace, name) => {await router.push({ name: '{{group}}{{short}}View', params: {name, namespace}});router.go(0);},
+    toEdit: (namespace, name) => router.push({ name: '{{group}}{{short}}Edit', params: {name, namespace}}),
+{{else}}
+    toView: (name) => router.push({ name: '{{group}}{{short}}View', params: {name}}),
+    toViewReloaded: async (name) => {await router.push({ name: '{{group}}{{short}}View', params: {name}});router.go(0);},
+    toEdit: (name) => router.push({ name: '{{group}}{{short}}Edit', params: {name}}),
+{{/if}}
+    deleteDone: () => notifySuccess('Deletion proceded'),
+    deleteError: (err) => {
+      notifyError('Deletion failed');
+      console.log('deletion error',err);
+    },
+    patchDone: () => {
+      notifySuccess('Modification applied');
+      router.go(-1);
+    },
+    patchError: (err) => {
+      notifyError('Modification failed');
+      console.log('mutation error', err)
+    },
+{{#if namespaced}}
+    actionNew: (namespace)    => router.push({ name: '{{group}}{{short}}Create', params: {namespace}}),
+{{else}}
+    actionNew: ()    => router.push({ name: '{{group}}{{short}}Create'}),
+{{/if}}
+    actionDelete: (deletor, meta) => {
+      $q.dialog({
+        title: 'Confirm <span class="text-red">delete</span>',
+        message: `<em>You are</em> about to <span class="text-red">delete</span> {{ short }} <strong>${meta.name}</strong>`,
+        persistent: true, cancel: true, html: true, ok: {color: 'negative'}
+      }).onOk(() => {
+        notifyWorking('Delete in progress');
+{{#if namespaced}}
+        deletor({"name": meta.name, "namespace":meta.namespace});
+{{else}}
+        deletor({"name": meta.name});
+{{/if}}
+      })
+    },
+  }
+}

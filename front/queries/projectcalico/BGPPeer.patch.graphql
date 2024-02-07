@@ -1,0 +1,13 @@
+mutation projectcalicoBGPPeer($name: String!, $spec: JSONObject) {
+  projectcalicoBGPPeerPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

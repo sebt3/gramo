@@ -1,0 +1,55 @@
+query redisQuery($namespace: queryParameters, $Redis: queryParameters, $RedisCluster: queryParameters, $RedisReplication: queryParameters, $RedisSentinel: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    redisRedis(params: $Redis) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    redisRedisCluster(params: $RedisCluster) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    redisRedisReplication(params: $RedisReplication) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    redisRedisSentinel(params: $RedisSentinel) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

@@ -1,0 +1,13 @@
+query projectcalicoCalicoNodeStatusQuery($obj: queryParameters,) {
+    projectcalicoCalicoNodeStatus(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

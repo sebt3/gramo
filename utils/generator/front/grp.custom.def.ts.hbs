@@ -1,0 +1,47 @@
+import { QTableColumn } from 'quasar'
+import { tableColumnAlign } from '../core'
+export const {{ name }}Icon = 'apps';
+export const {{ name }}Title = '{{ name }}';
+{{#each objects}}
+export const icon{{ short }} = 'album';
+export const color{{ short }} = '';
+export const description{{ short }} = '';
+export const short{{ short }} = '{{ short }}';
+{{/each}}
+{{#each objects}}
+export const extra{{short}}Columns:Array<QTableColumn> = [
+{{#if (defined additionalColumns)}}
+  {{#each additionalColumns}}
+    {{#unless (contain jsonPath '[')}}
+  {name: '{{name}}', label: '{{name}}', field: row => row{{jsonPath}}, sortable: true, align: tableColumnAlign.left},
+    {{/unless}}
+  {{/each}}
+{{else}}
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+{{/if}}
+];
+{{/each}}
+{{#each objects}}
+export const {{ short }}ListExcludes = [
+{{#if (defined additionalColumns)}}
+  {{#each additionalColumns}}
+    {{#unless (contain jsonPath '[')}}
+  { path: '{{json2path jsonPath}}', include: true },
+    {{/unless}}
+  {{/each}}
+{{/if}}
+{{#each listExcludes}}
+  { path: '{{path}}'{{#if (defined include)}}, include: {{include}}{{/if}} },
+{{/each}}
+];
+export const {{ short }}ReadExcludes = [
+{{#each readExcludes}}
+  { path: '{{path}}'{{#if (defined include)}}, include: {{include}}{{/if}} },
+{{/each}}
+];
+export const {{ short }}SimpleExcludes = [
+{{#each simpleExcludes}}
+  { path: '{{path}}'{{#if (defined include)}}, include: {{include}}{{/if}} },
+{{/each}}
+];
+{{/each}}

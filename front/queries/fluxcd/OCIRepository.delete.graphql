@@ -1,0 +1,14 @@
+mutation fluxcdOCIRepository($namespace: String!, $name: String!) {
+  fluxcdOCIRepositoryDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

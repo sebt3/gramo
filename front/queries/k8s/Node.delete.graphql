@@ -1,0 +1,14 @@
+mutation k8sNode($name: String!) {
+  k8sNodeDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

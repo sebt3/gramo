@@ -7,4 +7,6 @@
 /back/schema/gen.*
 /front/components/*/gen.*
 /front/queries/*/gen.*
-/front/routes/gen.*
+/front/routes/*/gen.*
+/front/pages/*/*/gen.*
+/front/libs/*/gen.*

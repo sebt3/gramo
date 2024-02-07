@@ -1,0 +1,13 @@
+mutation k8sEndpoints($namespace: String!, $name: String!, $subsets: [JSONObject]) {
+  k8sEndpointsPatch(namespace: $namespace, name: $name, subsets: $subsets) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      subsets
+  }
+}

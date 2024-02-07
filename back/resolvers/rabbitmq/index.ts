@@ -1,13 +1,15 @@
-
-import { queries as RabbitmqClusterQueries } from './query.RabbitmqCluster.js';
-import { mutations as RabbitmqClusterMutations } from './mutation.RabbitmqCluster.js';
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+import { mutations as RabbitmqClusterMutations, resolvers as RabbitmqClusterResolvers } from './RabbitmqCluster.js';
 export const queries = {
-    ...RabbitmqClusterQueries,
+    ...customQueries
 };
 
 export const resolvers = {
+    ...RabbitmqClusterResolvers,
+    ...customResolvers
 };
 
 export const mutations = {
     ...RabbitmqClusterMutations,
+    ...customMutations
 };

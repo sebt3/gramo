@@ -1,0 +1,35 @@
+{{#if (and (eq type 'use') (defined path))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            const spec = getByPath(parent, '{{path}}');
+            const cms = spec['containers']
+                        .filter(c=>Array.isArray(c['env'])&&c['env'].filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined).length>0)
+                        .map(c=>c['env']
+                            .filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined)
+                            .map(e=>e['valueFrom']['configMapKeyRef']['name'])
+                        ).flat()
+                    .concat(spec['containers']
+                        .filter(c=>Array.isArray(c['envFrom'])&&c['envFrom'].filter(e=>e['configMapRef']!=undefined).length>0)
+                        .map(c=>c['envFrom'].filter(e=>e['configMapRef']!=undefined).map(e=>e['configMapRef']['name'])).flat())
+                    .concat(Array.isArray(spec['volumes'])?spec['volumes']
+                        .filter(v=>v['configMap']!=undefined)
+                        .map(v=>v['configMap']['name']):[])
+            if (cms.length<1) return null;
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+            return lst.filter(s=>cms.includes(s['metadata']['name']))
+        },
+{{/if}}
+{{#if (and (eq type 'usedBy') (defined path))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+            return lst.filter(w=>{
+                const spec = getByPath(w, '{{path}}');
+                return spec['containers'].filter(c=>Array.isArray(c['env'])&&c['env'].filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined && e['valueFrom']['configMapKeyRef']==parent['metadata']['name']).length>0).length>0 ||
+                        spec['containers'].filter(c=>Array.isArray(c['envFrom'])&&c['envFrom'].filter(e=>e['configMapRef']!=undefined && e['configMapRef']['name']==parent['metadata']['name']).length>0).length>0 ||
+                        (Array.isArray(spec['volumes']) &&
+                            spec['volumes'].filter(v=>
+                                v['configMap']!=undefined &&
+                                v['configMap']['name']==parent['metadata']['name']
+                            ).length>0)
+            })
+        },
+{{/if}}

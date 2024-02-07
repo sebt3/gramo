@@ -1,0 +1,14 @@
+mutation opentelemetryOpAMPBridge($namespace: String!, $name: String!) {
+  opentelemetryOpAMPBridgeDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

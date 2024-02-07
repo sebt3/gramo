@@ -1,0 +1,14 @@
+mutation fluxcdBucket($namespace: String!, $name: String!) {
+  fluxcdBucketDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

@@ -1,0 +1,51 @@
+query k8sRoleQuery($namespace: queryParameters, $obj: queryParameters,, $parentCluster: queryParameters, $parentPooler: queryParameters, $providedToRoleBinding: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sRole(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      parentCluster(params: $parentCluster) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentPooler(params: $parentPooler) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      providedToRoleBinding(params: $providedToRoleBinding) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        roleRef
+        subjects
+      }
+      rules
+    }
+  }
+}

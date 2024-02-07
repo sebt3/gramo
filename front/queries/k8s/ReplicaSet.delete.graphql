@@ -1,0 +1,14 @@
+mutation k8sReplicaSet($namespace: String!, $name: String!) {
+  k8sReplicaSetDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

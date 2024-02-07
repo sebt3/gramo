@@ -1,0 +1,55 @@
+query k8sQuery($namespace: queryParameters, $Endpoints: queryParameters, $Service: queryParameters, $Ingress: queryParameters, $EndpointSlice: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    k8sEndpoints(params: $Endpoints) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      subsets
+    }
+    k8sService(params: $Service) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    k8sIngress(params: $Ingress) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    k8sEndpointSlice(params: $EndpointSlice) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      addressType
+      endpoints
+      ports
+    }
+  }
+}

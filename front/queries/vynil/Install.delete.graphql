@@ -1,0 +1,14 @@
+mutation vynilInstall($namespace: String!, $name: String!) {
+  vynilInstallDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

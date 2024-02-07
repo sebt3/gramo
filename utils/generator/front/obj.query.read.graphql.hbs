@@ -1,0 +1,61 @@
+{{#if namespaced}}
+query {{ group }}{{ short }}Query($namespace: queryParameters, $obj: queryParameters,{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
+  k8sNamespace(params: $namespace) {
+{{else}}
+query {{ group }}{{ short }}Query($obj: queryParameters,{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
+{{/if}}
+    {{ group }}{{ short }}(params: $obj) {
+      metadata {
+        name
+{{#if namespaced}}
+        namespace
+{{/if}}
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+{{#if detailed}}
+  {{#each resolvers}}
+      {{name}}(params: ${{name}}) {
+    {{#if (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category')))}}
+      {{#if (eq resultShort 'Package')}}
+        name
+        commit_id
+        description
+        providedByCategory {
+          name
+        }
+        providedByDistrib {
+          metadata {
+            name
+          }
+        }
+        options
+      {{else}}
+        name
+      {{/if}}
+    {{else}}
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+      {{#each properties}}
+        {{this}}
+      {{/each}}
+    {{/if}}
+      }
+  {{/each}}
+{{/if}}
+{{#each readProperties}}
+      {{this}}
+{{/each}}
+    }
+{{#if namespaced}}
+  }
+{{/if}}
+}

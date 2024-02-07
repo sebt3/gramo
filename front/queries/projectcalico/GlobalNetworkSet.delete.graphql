@@ -1,0 +1,13 @@
+mutation projectcalicoGlobalNetworkSet($name: String!) {
+  projectcalicoGlobalNetworkSetDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

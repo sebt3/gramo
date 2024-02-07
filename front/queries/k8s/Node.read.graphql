@@ -1,0 +1,13 @@
+query k8sNodeQuery($obj: queryParameters,) {
+    k8sNode(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

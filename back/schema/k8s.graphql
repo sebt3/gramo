@@ -1,0 +1,473 @@
+type k8sConfigMap {
+    binaryData: JSONObject
+    data: JSONObject
+    immutable: Boolean
+    metadata: metadata!
+    parentPrometheus(params: queryParameters): [monitoringPrometheus]
+    usedByPod(params: queryParameters): [k8sPod]
+    usedByReplicaSet(params: queryParameters): [k8sReplicaSet]
+    usedByJob(params: queryParameters): [k8sJob]
+    usedByCronJob(params: queryParameters): [k8sCronJob]
+    usedByDeployment(params: queryParameters): [k8sDeployment]
+    usedByDaemonSet(params: queryParameters): [k8sDaemonSet]
+    usedByPodTemplate(params: queryParameters): [k8sPodTemplate]
+}
+type k8sEndpoints {
+    metadata: metadata!
+    subsets: [JSONObject]
+}
+type k8sLimitRange {
+    metadata: metadata!
+    spec: JSONObject
+}
+type k8sNode {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    usedByPod(params: queryParameters): [k8sPod]
+}
+type k8sPersistentVolume {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    providedToStorageClass(params: queryParameters): [k8sStorageClass]
+    usedByPersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+}
+type k8sPersistentVolumeClaim {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentCluster(params: queryParameters): [cnpgCluster]
+    parentStatefulSet(params: queryParameters): [k8sStatefulSet]
+    providedToStorageClass(params: queryParameters): [k8sStorageClass]
+    usePersistentVolume(params: queryParameters): [k8sPersistentVolume]
+    usedByPod(params: queryParameters): [k8sPod]
+    usedByReplicaSet(params: queryParameters): [k8sReplicaSet]
+    usedByJob(params: queryParameters): [k8sJob]
+    usedByCronJob(params: queryParameters): [k8sCronJob]
+    usedByDeployment(params: queryParameters): [k8sDeployment]
+    usedByDaemonSet(params: queryParameters): [k8sDaemonSet]
+    usedByPodTemplate(params: queryParameters): [k8sPodTemplate]
+}
+type k8sPod {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentReplicaSet(params: queryParameters): [k8sReplicaSet]
+    parentStatefulSet(params: queryParameters): [k8sStatefulSet]
+    parentDaemonSet(params: queryParameters): [k8sDaemonSet]
+    parentJob(params: queryParameters): [k8sJob]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    useNode(params: queryParameters): [k8sNode]
+    useServiceAccount(params: queryParameters): [k8sServiceAccount]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+    usedByService(params: queryParameters): [k8sService]
+}
+type k8sPodTemplate {
+    metadata: metadata!
+    template: JSONObject
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+    usedByService(params: queryParameters): [k8sService]
+}
+type k8sReplicationController {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sResourceQuota {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sSecret {
+    data: JSONObject
+    immutable: Boolean
+    metadata: metadata!
+    stringData: JSONObject
+    type: String
+    parentBasicAuth(params: queryParameters): [secretgeneratorBasicAuth]
+    parentSSHKeyPair(params: queryParameters): [secretgeneratorSSHKeyPair]
+    parentStringSecret(params: queryParameters): [secretgeneratorStringSecret]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    parentMongoDBCommunity(params: queryParameters): [mongodbMongoDBCommunity]
+    usedByPod(params: queryParameters): [k8sPod]
+    usedByReplicaSet(params: queryParameters): [k8sReplicaSet]
+    usedByJob(params: queryParameters): [k8sJob]
+    usedByCronJob(params: queryParameters): [k8sCronJob]
+    usedByDeployment(params: queryParameters): [k8sDeployment]
+    usedByDaemonSet(params: queryParameters): [k8sDaemonSet]
+    usedByPodTemplate(params: queryParameters): [k8sPodTemplate]
+}
+type k8sService {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentMongoDBCommunity(params: queryParameters): [mongodbMongoDBCommunity]
+    parentRedis(params: queryParameters): [redisRedis]
+    parentPooler(params: queryParameters): [cnpgPooler]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    parentPrometheus(params: queryParameters): [monitoringPrometheus]
+    parentAlertmanager(params: queryParameters): [monitoringAlertmanager]
+    childEndpointSlice(params: queryParameters): [k8sEndpointSlice]
+    usePod(params: queryParameters): [k8sPod]
+    useReplicaSet(params: queryParameters): [k8sReplicaSet]
+    useDeployment(params: queryParameters): [k8sDeployment]
+    useDaemonSet(params: queryParameters): [k8sDaemonSet]
+    usePodTemplate(params: queryParameters): [k8sPodTemplate]
+    usedByIngress(params: queryParameters): [k8sIngress]
+}
+type k8sServiceAccount {
+    automountServiceAccountToken: Boolean
+    imagePullSecrets: [JSONObject]
+    metadata: metadata!
+    secrets: [JSONObject]
+    parentPooler(params: queryParameters): [cnpgPooler]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    provideRoleBinding(params: queryParameters): [k8sRoleBinding]
+    provideClusterRoleBinding(params: queryParameters): [k8sClusterRoleBinding]
+    usedByPod(params: queryParameters): [k8sPod]
+}
+type k8sAPIService {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    provideCustomResourceDefinition(params: queryParameters): [k8sCustomResourceDefinition]
+}
+type k8sDaemonSet {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    childPod(params: queryParameters): [k8sPod]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+    usedByService(params: queryParameters): [k8sService]
+}
+type k8sDeployment {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentPooler(params: queryParameters): [cnpgPooler]
+    childReplicaSet(params: queryParameters): [k8sReplicaSet]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+    usedByService(params: queryParameters): [k8sService]
+}
+type k8sReplicaSet {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentDeployment(params: queryParameters): [k8sDeployment]
+    childPod(params: queryParameters): [k8sPod]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+    usedByService(params: queryParameters): [k8sService]
+}
+type k8sStatefulSet {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentMongoDBCommunity(params: queryParameters): [mongodbMongoDBCommunity]
+    parentRedis(params: queryParameters): [redisRedis]
+    parentPrometheus(params: queryParameters): [monitoringPrometheus]
+    parentAlertmanager(params: queryParameters): [monitoringAlertmanager]
+    childPod(params: queryParameters): [k8sPod]
+    childPersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+}
+type k8sHorizontalPodAutoscaler {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sJob {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentCronJob(params: queryParameters): [k8sCronJob]
+    childPod(params: queryParameters): [k8sPod]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+}
+type k8sCronJob {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    childJob(params: queryParameters): [k8sJob]
+    usePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+    useSecret(params: queryParameters): [k8sSecret]
+    useConfigMap(params: queryParameters): [k8sConfigMap]
+}
+type k8sCertificateSigningRequest {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sIngress {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    useService(params: queryParameters): [k8sService]
+}
+type k8sNetworkPolicy {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sPodDisruptionBudget {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    parentCluster(params: queryParameters): [cnpgCluster]
+}
+type k8sRole {
+    metadata: metadata!
+    rules: [JSONObject]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    parentPooler(params: queryParameters): [cnpgPooler]
+    providedToRoleBinding(params: queryParameters): [k8sRoleBinding]
+}
+type k8sClusterRoleBinding {
+    metadata: metadata!
+    roleRef: JSONObject
+    subjects: [JSONObject]
+    provideClusterRole(params: queryParameters): [k8sClusterRole]
+    providedToServiceAccount(params: queryParameters): [k8sServiceAccount]
+}
+type k8sRoleBinding {
+    metadata: metadata!
+    roleRef: JSONObject
+    subjects: [JSONObject]
+    parentCluster(params: queryParameters): [cnpgCluster]
+    parentPooler(params: queryParameters): [cnpgPooler]
+    provideRole(params: queryParameters): [k8sRole]
+    providedToServiceAccount(params: queryParameters): [k8sServiceAccount]
+}
+type k8sClusterRole {
+    aggregationRule: JSONObject
+    metadata: metadata!
+    rules: [JSONObject]
+    providedToClusterRoleBinding(params: queryParameters): [k8sClusterRoleBinding]
+}
+type k8sStorageClass {
+    allowVolumeExpansion: Boolean
+    allowedTopologies: [JSONObject]
+    metadata: metadata!
+    mountOptions: [String]
+    parameters: JSONObject
+    provisioner: String
+    reclaimPolicy: String
+    volumeBindingMode: String
+    providePersistentVolume(params: queryParameters): [k8sPersistentVolume]
+    providePersistentVolumeClaim(params: queryParameters): [k8sPersistentVolumeClaim]
+}
+type k8sCSIDriver {
+    metadata: metadata!
+    spec: JSONObject
+}
+type k8sCSINode {
+    metadata: metadata!
+    spec: JSONObject
+}
+type k8sCSIStorageCapacity {
+    capacity: JSONObject
+    maximumVolumeSize: JSONObject
+    metadata: metadata!
+    nodeTopology: JSONObject
+    storageClassName: String
+}
+type k8sVolumeAttachment {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type k8sMutatingWebhookConfiguration {
+    metadata: metadata!
+    webhooks: [JSONObject]
+}
+type k8sValidatingWebhookConfiguration {
+    metadata: metadata!
+    webhooks: [JSONObject]
+}
+type k8sCustomResourceDefinition {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    providedToAPIService(params: queryParameters): [k8sAPIService]
+}
+type k8sPriorityClass {
+    description: String
+    globalDefault: Boolean
+    metadata: metadata!
+    preemptionPolicy: String
+    value: Int
+}
+type k8sLease {
+    metadata: metadata!
+    spec: JSONObject
+}
+type k8sRuntimeClass {
+    handler: String
+    metadata: metadata!
+    overhead: JSONObject
+    scheduling: JSONObject
+}
+type k8sEndpointSlice {
+    addressType: String
+    endpoints: [JSONObject]
+    metadata: metadata!
+    ports: [JSONObject]
+    parentService(params: queryParameters): [k8sService]
+}
+type Query {
+    k8sNamespace(params: queryParameters): [k8sNamespace]
+    k8sNode(params: queryParameters): [k8sNode]
+    k8sPersistentVolume(params: queryParameters): [k8sPersistentVolume]
+    k8sAPIService(params: queryParameters): [k8sAPIService]
+    k8sCertificateSigningRequest(params: queryParameters): [k8sCertificateSigningRequest]
+    k8sClusterRoleBinding(params: queryParameters): [k8sClusterRoleBinding]
+    k8sClusterRole(params: queryParameters): [k8sClusterRole]
+    k8sStorageClass(params: queryParameters): [k8sStorageClass]
+    k8sCSIDriver(params: queryParameters): [k8sCSIDriver]
+    k8sCSINode(params: queryParameters): [k8sCSINode]
+    k8sVolumeAttachment(params: queryParameters): [k8sVolumeAttachment]
+    k8sMutatingWebhookConfiguration(params: queryParameters): [k8sMutatingWebhookConfiguration]
+    k8sValidatingWebhookConfiguration(params: queryParameters): [k8sValidatingWebhookConfiguration]
+    k8sCustomResourceDefinition(params: queryParameters): [k8sCustomResourceDefinition]
+    k8sPriorityClass(params: queryParameters): [k8sPriorityClass]
+    k8sRuntimeClass(params: queryParameters): [k8sRuntimeClass]
+}
+type Mutation {
+    k8sConfigMapCreate(namespace: String!, name: String!, binaryData: JSONObject, data: JSONObject, immutable: Boolean, metadata: metadataMore): k8sConfigMap
+    k8sConfigMapPatch(namespace: String!, name: String!, binaryData: JSONObject, data: JSONObject, immutable: Boolean, metadata: metadataMore): k8sConfigMap
+    k8sConfigMapDelete(namespace: String!, name: String!): k8sConfigMap
+    k8sEndpointsCreate(namespace: String!, name: String!, subsets: [JSONObject], metadata: metadataMore): k8sEndpoints
+    k8sEndpointsPatch(namespace: String!, name: String!, subsets: [JSONObject], metadata: metadataMore): k8sEndpoints
+    k8sEndpointsDelete(namespace: String!, name: String!): k8sEndpoints
+    k8sLimitRangeCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sLimitRange
+    k8sLimitRangePatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sLimitRange
+    k8sLimitRangeDelete(namespace: String!, name: String!): k8sLimitRange
+    k8sNamespaceCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sNamespace
+    k8sNamespacePatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sNamespace
+    k8sNamespaceDelete(name: String!): k8sNamespace
+    k8sNodeCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sNode
+    k8sNodePatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sNode
+    k8sNodeDelete(name: String!): k8sNode
+    k8sPersistentVolumeCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sPersistentVolume
+    k8sPersistentVolumePatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sPersistentVolume
+    k8sPersistentVolumeDelete(name: String!): k8sPersistentVolume
+    k8sPersistentVolumeClaimCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPersistentVolumeClaim
+    k8sPersistentVolumeClaimPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPersistentVolumeClaim
+    k8sPersistentVolumeClaimDelete(namespace: String!, name: String!): k8sPersistentVolumeClaim
+    k8sPodCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPod
+    k8sPodPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPod
+    k8sPodDelete(namespace: String!, name: String!): k8sPod
+    k8sPodTemplateCreate(namespace: String!, name: String!, template: JSONObject, metadata: metadataMore): k8sPodTemplate
+    k8sPodTemplatePatch(namespace: String!, name: String!, template: JSONObject, metadata: metadataMore): k8sPodTemplate
+    k8sPodTemplateDelete(namespace: String!, name: String!): k8sPodTemplate
+    k8sReplicationControllerCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sReplicationController
+    k8sReplicationControllerPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sReplicationController
+    k8sReplicationControllerDelete(namespace: String!, name: String!): k8sReplicationController
+    k8sResourceQuotaCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sResourceQuota
+    k8sResourceQuotaPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sResourceQuota
+    k8sResourceQuotaDelete(namespace: String!, name: String!): k8sResourceQuota
+    k8sSecretCreate(namespace: String!, name: String!, data: JSONObject, immutable: Boolean, stringData: JSONObject, type: String, metadata: metadataMore): k8sSecret
+    k8sSecretPatch(namespace: String!, name: String!, data: JSONObject, immutable: Boolean, stringData: JSONObject, type: String, metadata: metadataMore): k8sSecret
+    k8sSecretDelete(namespace: String!, name: String!): k8sSecret
+    k8sServiceCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sService
+    k8sServicePatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sService
+    k8sServiceDelete(namespace: String!, name: String!): k8sService
+    k8sServiceAccountCreate(namespace: String!, name: String!, automountServiceAccountToken: Boolean, imagePullSecrets: [JSONObject], secrets: [JSONObject], metadata: metadataMore): k8sServiceAccount
+    k8sServiceAccountPatch(namespace: String!, name: String!, automountServiceAccountToken: Boolean, imagePullSecrets: [JSONObject], secrets: [JSONObject], metadata: metadataMore): k8sServiceAccount
+    k8sServiceAccountDelete(namespace: String!, name: String!): k8sServiceAccount
+    k8sAPIServiceCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sAPIService
+    k8sAPIServicePatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sAPIService
+    k8sAPIServiceDelete(name: String!): k8sAPIService
+    k8sDaemonSetCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sDaemonSet
+    k8sDaemonSetPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sDaemonSet
+    k8sDaemonSetDelete(namespace: String!, name: String!): k8sDaemonSet
+    k8sDeploymentCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sDeployment
+    k8sDeploymentPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sDeployment
+    k8sDeploymentDelete(namespace: String!, name: String!): k8sDeployment
+    k8sReplicaSetCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sReplicaSet
+    k8sReplicaSetPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sReplicaSet
+    k8sReplicaSetDelete(namespace: String!, name: String!): k8sReplicaSet
+    k8sStatefulSetCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sStatefulSet
+    k8sStatefulSetPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sStatefulSet
+    k8sStatefulSetDelete(namespace: String!, name: String!): k8sStatefulSet
+    k8sHorizontalPodAutoscalerCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sHorizontalPodAutoscaler
+    k8sHorizontalPodAutoscalerPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sHorizontalPodAutoscaler
+    k8sHorizontalPodAutoscalerDelete(namespace: String!, name: String!): k8sHorizontalPodAutoscaler
+    k8sJobCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sJob
+    k8sJobPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sJob
+    k8sJobDelete(namespace: String!, name: String!): k8sJob
+    k8sCronJobCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sCronJob
+    k8sCronJobPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sCronJob
+    k8sCronJobDelete(namespace: String!, name: String!): k8sCronJob
+    k8sCertificateSigningRequestCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sCertificateSigningRequest
+    k8sCertificateSigningRequestPatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sCertificateSigningRequest
+    k8sCertificateSigningRequestDelete(name: String!): k8sCertificateSigningRequest
+    k8sIngressCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sIngress
+    k8sIngressPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sIngress
+    k8sIngressDelete(namespace: String!, name: String!): k8sIngress
+    k8sNetworkPolicyCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sNetworkPolicy
+    k8sNetworkPolicyPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sNetworkPolicy
+    k8sNetworkPolicyDelete(namespace: String!, name: String!): k8sNetworkPolicy
+    k8sPodDisruptionBudgetCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPodDisruptionBudget
+    k8sPodDisruptionBudgetPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sPodDisruptionBudget
+    k8sPodDisruptionBudgetDelete(namespace: String!, name: String!): k8sPodDisruptionBudget
+    k8sRoleCreate(namespace: String!, name: String!, rules: [JSONObject], metadata: metadataMore): k8sRole
+    k8sRolePatch(namespace: String!, name: String!, rules: [JSONObject], metadata: metadataMore): k8sRole
+    k8sRoleDelete(namespace: String!, name: String!): k8sRole
+    k8sClusterRoleBindingCreate(name: String!, roleRef: JSONObject, subjects: [JSONObject], metadata: metadataMore): k8sClusterRoleBinding
+    k8sClusterRoleBindingPatch(name: String!, roleRef: JSONObject, subjects: [JSONObject], metadata: metadataMore): k8sClusterRoleBinding
+    k8sClusterRoleBindingDelete(name: String!): k8sClusterRoleBinding
+    k8sRoleBindingCreate(namespace: String!, name: String!, roleRef: JSONObject, subjects: [JSONObject], metadata: metadataMore): k8sRoleBinding
+    k8sRoleBindingPatch(namespace: String!, name: String!, roleRef: JSONObject, subjects: [JSONObject], metadata: metadataMore): k8sRoleBinding
+    k8sRoleBindingDelete(namespace: String!, name: String!): k8sRoleBinding
+    k8sClusterRoleCreate(name: String!, aggregationRule: JSONObject, rules: [JSONObject], metadata: metadataMore): k8sClusterRole
+    k8sClusterRolePatch(name: String!, aggregationRule: JSONObject, rules: [JSONObject], metadata: metadataMore): k8sClusterRole
+    k8sClusterRoleDelete(name: String!): k8sClusterRole
+    k8sStorageClassCreate(name: String!, allowVolumeExpansion: Boolean, allowedTopologies: [JSONObject], mountOptions: [String], parameters: JSONObject, provisioner: String, reclaimPolicy: String, volumeBindingMode: String, metadata: metadataMore): k8sStorageClass
+    k8sStorageClassPatch(name: String!, allowVolumeExpansion: Boolean, allowedTopologies: [JSONObject], mountOptions: [String], parameters: JSONObject, provisioner: String, reclaimPolicy: String, volumeBindingMode: String, metadata: metadataMore): k8sStorageClass
+    k8sStorageClassDelete(name: String!): k8sStorageClass
+    k8sCSIDriverCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sCSIDriver
+    k8sCSIDriverPatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sCSIDriver
+    k8sCSIDriverDelete(name: String!): k8sCSIDriver
+    k8sCSINodeCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sCSINode
+    k8sCSINodePatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sCSINode
+    k8sCSINodeDelete(name: String!): k8sCSINode
+    k8sCSIStorageCapacityCreate(namespace: String!, name: String!, capacity: JSONObject, maximumVolumeSize: JSONObject, nodeTopology: JSONObject, storageClassName: String, metadata: metadataMore): k8sCSIStorageCapacity
+    k8sCSIStorageCapacityPatch(namespace: String!, name: String!, capacity: JSONObject, maximumVolumeSize: JSONObject, nodeTopology: JSONObject, storageClassName: String, metadata: metadataMore): k8sCSIStorageCapacity
+    k8sCSIStorageCapacityDelete(namespace: String!, name: String!): k8sCSIStorageCapacity
+    k8sVolumeAttachmentCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sVolumeAttachment
+    k8sVolumeAttachmentPatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sVolumeAttachment
+    k8sVolumeAttachmentDelete(name: String!): k8sVolumeAttachment
+    k8sMutatingWebhookConfigurationCreate(name: String!, webhooks: [JSONObject], metadata: metadataMore): k8sMutatingWebhookConfiguration
+    k8sMutatingWebhookConfigurationPatch(name: String!, webhooks: [JSONObject], metadata: metadataMore): k8sMutatingWebhookConfiguration
+    k8sMutatingWebhookConfigurationDelete(name: String!): k8sMutatingWebhookConfiguration
+    k8sValidatingWebhookConfigurationCreate(name: String!, webhooks: [JSONObject], metadata: metadataMore): k8sValidatingWebhookConfiguration
+    k8sValidatingWebhookConfigurationPatch(name: String!, webhooks: [JSONObject], metadata: metadataMore): k8sValidatingWebhookConfiguration
+    k8sValidatingWebhookConfigurationDelete(name: String!): k8sValidatingWebhookConfiguration
+    k8sCustomResourceDefinitionCreate(name: String!, spec: JSONObject, metadata: metadataMore): k8sCustomResourceDefinition
+    k8sCustomResourceDefinitionPatch(name: String!, spec: JSONObject, metadata: metadataMore): k8sCustomResourceDefinition
+    k8sCustomResourceDefinitionDelete(name: String!): k8sCustomResourceDefinition
+    k8sPriorityClassCreate(name: String!, description: String, globalDefault: Boolean, preemptionPolicy: String, value: Int, metadata: metadataMore): k8sPriorityClass
+    k8sPriorityClassPatch(name: String!, description: String, globalDefault: Boolean, preemptionPolicy: String, value: Int, metadata: metadataMore): k8sPriorityClass
+    k8sPriorityClassDelete(name: String!): k8sPriorityClass
+    k8sLeaseCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sLease
+    k8sLeasePatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): k8sLease
+    k8sLeaseDelete(namespace: String!, name: String!): k8sLease
+    k8sRuntimeClassCreate(name: String!, handler: String, overhead: JSONObject, scheduling: JSONObject, metadata: metadataMore): k8sRuntimeClass
+    k8sRuntimeClassPatch(name: String!, handler: String, overhead: JSONObject, scheduling: JSONObject, metadata: metadataMore): k8sRuntimeClass
+    k8sRuntimeClassDelete(name: String!): k8sRuntimeClass
+    k8sEndpointSliceCreate(namespace: String!, name: String!, addressType: String, endpoints: [JSONObject], ports: [JSONObject], metadata: metadataMore): k8sEndpointSlice
+    k8sEndpointSlicePatch(namespace: String!, name: String!, addressType: String, endpoints: [JSONObject], ports: [JSONObject], metadata: metadataMore): k8sEndpointSlice
+    k8sEndpointSliceDelete(namespace: String!, name: String!): k8sEndpointSlice
+}

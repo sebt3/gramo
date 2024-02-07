@@ -1,0 +1,51 @@
+{{#with ctx}}
+    {{group}}{{short}}Patch: async (_parent, args: object) => {
+        const request = {
+            apiVersion: '{{apiGroup}}/{{apiVersion}}',
+            kind: '{{name}}',
+{{#if namespaced}}
+            metadata: getMetaNS(args),
+{{else}}
+            metadata: getMeta(args),
+{{/if}}
+        }
+{{#each writeProperties}}
+        if (args['{{this}}'] != undefined && args['{{this}}'] != null)
+            request["{{this}}"] =  args['{{this}}'];
+{{/each}}
+        try {
+{{#if (defined crd)}}
+  {{#if namespaced}}
+            const resGet = await k8sApi.getNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'])
+  {{else}}
+            const resGet = await k8sApi.getClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'])
+  {{/if}}
+{{else}}
+  {{#if namespaced}}
+            const resGet = await k8sApi.readNamespaced{{ short }}(args['namespace'], args['name'])
+  {{else}}
+            const resGet = await k8sApi.read{{ short }}(args['name'])
+  {{/if}}
+{{/if}}
+            const payload = rfc6902.createPatch(resGet.body,request).filter(rule => !rule.path.startsWith('/status') && !['/metadata/creationTimestamp', '/metadata/finalizers', '/metadata/generation', '/metadata/managedFields', '/metadata/resourceVersion','/metadata/uid'].includes(rule.path) )
+            const options = { "headers": { "Content-type": k8s.PatchUtils.PATCH_FORMAT_JSON_PATCH}};
+{{#if (defined crd)}}
+  {{#if namespaced}}
+            const res = await k8sApi.patchNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'], payload, undefined, undefined, undefined, options)
+  {{else}}
+            const res = await k8sApi.patchClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'], payload, undefined, undefined, undefined, options)
+  {{/if}}
+{{else}}
+  {{#if namespaced}}
+            const res = await k8sApi.patchNamespaced{{ short }}(args['namespace'], args['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
+  {{else}}
+            const res = await k8sApi.patch{{ short }}(args['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
+  {{/if}}
+{{/if}}
+            return res.body
+        } catch (err) {
+            console.error((err as object)['body']);
+        }
+        return null
+    },
+{{/with}}

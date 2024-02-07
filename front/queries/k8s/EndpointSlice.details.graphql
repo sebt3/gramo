@@ -1,0 +1,29 @@
+query k8sEndpointSliceQuery($namespace: queryParameters, $obj: queryParameters,, $parentService: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    k8sEndpointSlice(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      parentService(params: $parentService) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      addressType
+      endpoints
+      ports
+    }
+  }
+}

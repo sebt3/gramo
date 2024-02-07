@@ -1,0 +1,53 @@
+query monitoringPrometheusQuery($namespace: queryParameters, $obj: queryParameters,, $childService: queryParameters, $childStatefulSet: queryParameters, $childConfigMap: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    monitoringPrometheus(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      childService(params: $childService) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      childStatefulSet(params: $childStatefulSet) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      childConfigMap(params: $childConfigMap) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        binaryData
+        data
+        immutable
+      }
+      spec
+      status
+    }
+  }
+}

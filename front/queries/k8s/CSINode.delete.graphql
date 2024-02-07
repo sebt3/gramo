@@ -1,0 +1,13 @@
+mutation k8sCSINode($name: String!) {
+  k8sCSINodeDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

@@ -1,0 +1,14 @@
+query k8sRuntimeClassQuery($obj: queryParameters,) {
+    k8sRuntimeClass(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      handler
+      overhead
+      scheduling
+    }
+}

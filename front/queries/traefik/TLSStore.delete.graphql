@@ -1,0 +1,13 @@
+mutation traefikTLSStore($namespace: String!, $name: String!) {
+  traefikTLSStoreDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

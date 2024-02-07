@@ -1,0 +1,125 @@
+<script setup lang="ts">
+import k8sCustomResourceDefinitionQuery from '@/queries/k8s/CustomResourceDefinition.read.graphql'
+import CustomResourceDefinitionEdit from '@/queries/k8s/CustomResourceDefinition.patch.graphql'
+import k8sCustomResourceDefinitionMeta from '@/components/k8s/CustomResourceDefinitionMeta.vue';
+import k8sCustomResourceDefinitionEdit from '@/components/k8s/CustomResourceDefinitionEdit.vue';
+import k8sCustomResourceDefinitionStatus from '@/components/k8s/CustomResourceDefinitionStatus.vue';
+import { useQuery, useMutation, useCustomResourceDefinition, CustomResourceDefinitionSimpleExcludes } from '../../../libs/k8s/CustomResourceDefinition.js'
+const { onErrorHandler, notifySuccess, notifyError, onNotCustomResourceDefinitionFound, navigation, setItemFromRoute } = useCustomResourceDefinition();setItemFromRoute();
+const { result, loading, onResult, onError } = useQuery(k8sCustomResourceDefinitionQuery, {
+  "obj": {
+    "filters": [
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentItem
+      }
+    ], "excludes": CustomResourceDefinitionSimpleExcludes
+  },
+});onError(onErrorHandler); onResult(res => {onNotCustomResourceDefinitionFound(res)});
+const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(CustomResourceDefinitionDelete);
+onDeleteDone(() => {
+  notifySuccess('Deletion proceded');
+})
+onDeleteError((err) => {
+  notifyError('Deletion failed');
+  console.log('deletion error',err);
+})
+</script>
+
+
+
+<script setup lang="ts">
+import k8sCustomResourceDefinitionQuery from '@/queries/k8s/CustomResourceDefinition.read.graphql'
+import CustomResourceDefinitionEdit from '@/queries/k8s/CustomResourceDefinition.patch.graphql'
+import MetadataView from '@/components/core/MetadataView.vue';
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
+import { ref, useQuery, useMutation, useCustomResourceDefinition, sanitizeData, getProperties } from '../../../libs/k8s/CustomResourceDefinition.js'
+const spec  = ref({});
+const { editor, patchDone, patchError, notifyWorking, onNotCustomResourceDefinitionFound, setItemFromRoute, navigation, onErrorHandler } = useCustomResourceDefinition();setItemFromRoute();
+const { result, loading, onResult, onError } = useQuery(k8sCustomResourceDefinitionQuery, {"name": navigation.currentItem}, { pollInterval: 500 });
+const { mutate: patchCustomResourceDefinition, onDone: onPatchCustomResourceDefinition, onError: onPatchError } = useMutation(CustomResourceDefinitionEdit);
+function onSubmit() {
+  notifyWorking('Update in progress');
+  patchCustomResourceDefinition({ "name": result.value.k8sCustomResourceDefinition.metadata.name, "spec": sanitizeData(spec.value) });
+}
+onError(onErrorHandler);onResult(res => {onNotCustomResourceDefinitionFound(res);editor.value.updateFromQuery(res, res.loading?{}:{spec: res.data.k8sCustomResourceDefinition.metadata.obj.spec})});onPatchCustomResourceDefinition(patchDone);onPatchError(patchError);
+</script>
+
+
+
+
+<template>
+  <div class="row q-mb-sm q-ml-sm">
+    <div class="col-md-6">
+      <k8sCustomResourceDefinitionMeta :deletor="deletor" :useActions="true"
+        v-if="!loading && result!=undefined && result.k8sCustomResourceDefinition[0]!=undefined && result.k8sCustomResourceDefinition[0]!=null"
+        :model="result.k8sCustomResourceDefinition[0]"
+       />
+      <k8sCustomResourceDefinitionStatus
+        v-if="!loading && result!=undefined && result.k8sCustomResourceDefinition[0]!=undefined && result.k8sCustomResourceDefinition[0]!=null"
+        :model="result.k8sCustomResourceDefinition[0]"
+       />
+    </div><div class="col-md-6">
+      <k8sCustomResourceDefinitionView
+        v-if="!loading && result!=undefined && result.k8sCustomResourceDefinition[0]!=undefined && result.k8sCustomResourceDefinition[0]!=null"
+        :model="result.k8sCustomResourceDefinition[0]"
+       />
+    </div>
+  </div>
+</template>
+
+
+
+<template>
+  <div class="row q-mb-sm q-ml-sm">
+    <div class="col-sm-8 col-md-6">
+      <q-card bordered v-if="!loading && result.k8sCustomResourceDefinition!=null" class="q-ma-sm">
+        <q-card-section>
+          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">CustomResourceDefinition</div>
+        </q-card-section>
+        <q-card-section>
+          <MetadataView :metadata="result.k8sCustomResourceDefinition.metadata" />
+        </q-card-section>
+      </q-card>
+    </div><div class="col-sm-4 col-md-6">
+      <q-card bordered v-if="!loading && result.k8sCustomResourceDefinition!=null" class="q-ma-sm">
+        <q-card-section>
+          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
+        </q-card-section>
+        <q-card-section v-if="!loading && result.k8sCustomResourceDefinition!=null && result.k8sCustomResourceDefinition.status != null">
+          <DefaultStatusView :status="result.k8sCustomResourceDefinition.status" />
+        </q-card-section>
+      </q-card>
+    </div>
+  </div>
+  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
+    <q-card bordered v-if="!loading && editor.ready && result.k8sCustomResourceDefinition!=null" class="q-ma-sm">
+      <q-tabs v-model="editor.tab" class="bg-primary text-white">
+        <q-tab label="Editor" name="simple" />
+        <q-tab label="Yaml" name="spec" />
+      </q-tabs>
+      <q-tab-panels v-model="editor.tab" animated>
+        <q-tab-panel name="simple">
+          <OpenApiEdit
+          :in="Object.keys(editor.spec).includes('spec')?editor.spec['spec']:{}"
+          @update:out="v=>{ spec=v;editor.setspecSpec({ spec: v})}"
+          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+            />
+        </q-tab-panel>
+        <q-tab-panel name="spec">
+          <MonacoEditor
+          :text="editor.yamlspec" :key="editor.yamlspec"
+          @update:text="v=>editor.setspecYaml(v)"
+          :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
+          />
+        </q-tab-panel>
+      </q-tab-panels>
+      <q-card-actions>
+        <q-btn label="Submit" type="submit" color="primary"/>
+      </q-card-actions>
+    </q-card>
+  </q-form>
+</template>

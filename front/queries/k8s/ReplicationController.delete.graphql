@@ -1,0 +1,14 @@
+mutation k8sReplicationController($namespace: String!, $name: String!) {
+  k8sReplicationControllerDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

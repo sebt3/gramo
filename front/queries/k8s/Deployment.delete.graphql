@@ -1,0 +1,14 @@
+mutation k8sDeployment($namespace: String!, $name: String!) {
+  k8sDeploymentDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

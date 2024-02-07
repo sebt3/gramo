@@ -1,0 +1,14 @@
+mutation k8sClusterRoleBinding($name: String!) {
+  k8sClusterRoleBindingDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      roleRef
+      subjects
+  }
+}

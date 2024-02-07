@@ -1,0 +1,13 @@
+mutation projectcalicoNetworkPolicy($namespace: String!, $name: String!) {
+  projectcalicoNetworkPolicyDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

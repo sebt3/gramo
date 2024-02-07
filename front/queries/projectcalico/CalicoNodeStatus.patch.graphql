@@ -1,0 +1,14 @@
+mutation projectcalicoCalicoNodeStatus($name: String!, $spec: JSONObject) {
+  projectcalicoCalicoNodeStatusPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

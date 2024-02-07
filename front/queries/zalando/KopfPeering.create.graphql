@@ -1,0 +1,13 @@
+mutation zalandoKopfPeering($namespace: String!, $name: String!) {
+  zalandoKopfPeeringCreate(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      status
+  }
+}

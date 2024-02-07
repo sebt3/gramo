@@ -1,0 +1,37 @@
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import {menuLinksProps} from './interfaces.js';
+import { useConfigStore } from '../stores'
+export * from './interfaces.js'
+const { defaultRoute } = useConfigStore()
+const routeChildren:Array<RouteRecordRaw> = [];
+const linkRedirect = {path:''};
+export const links:Array<menuLinksProps> = [];
+
+{{#each categories}}
+import { route as {{this}}Route, link as {{this}}Link, descriptions as {{this}}Descriptions } from './{{this}}'
+if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
+  routeChildren.push({{this}}Route);
+  links.push({{this}}Link)
+  linkRedirect.path = linkRedirect.path!=''?linkRedirect.path:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.path:'/{{this}}'
+}
+{{/each}}
+
+export const descriptions = {
+  root:      {breadcrumb: '', icon: 'home', ns: false},
+{{#each categories}}
+  ...{{this}}Descriptions,
+{{/each}}
+}
+export const router = createRouter({
+  history: createWebHistory('/'),
+  routes: [
+    {
+      path: '/',
+      name: 'root',
+      redirect: defaultRoute!=''?{path:defaultRoute}:linkRedirect,
+      children: routeChildren
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../components/navigation/PageNotFound.vue') },
+  ]
+})
+export default router

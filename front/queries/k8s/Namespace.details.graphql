@@ -1,0 +1,13 @@
+query k8sNamespaceQuery($obj: queryParameters,) {
+    k8sNamespace(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

@@ -1,0 +1,12 @@
+query zalandoClusterKopfPeeringQuery($obj: queryParameters,) {
+    zalandoClusterKopfPeering(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      status
+    }
+}

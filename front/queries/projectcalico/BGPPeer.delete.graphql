@@ -1,0 +1,13 @@
+mutation projectcalicoBGPPeer($name: String!) {
+  projectcalicoBGPPeerDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

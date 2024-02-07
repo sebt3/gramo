@@ -1,4 +1,4 @@
-import {chartSizeOptions,chartMarginOptions} from "../core"
+import {chartSizeOptions,chartMarginOptions} from "../../libs/core"
 export function getSizeOptions(defaultWidth:number,defaultHeight:number,options?:chartSizeOptions) {
   return {
     width: options!=undefined&&options.width!==undefined?options.width:defaultWidth,

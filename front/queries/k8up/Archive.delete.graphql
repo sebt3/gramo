@@ -1,0 +1,14 @@
+mutation k8upArchive($namespace: String!, $name: String!) {
+  k8upArchiveDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

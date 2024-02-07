@@ -1,0 +1,19 @@
+query jaegertracingQuery($namespace: queryParameters, $Jaeger: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    jaegertracingJaeger(params: $Jaeger) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

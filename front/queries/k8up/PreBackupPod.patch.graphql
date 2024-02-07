@@ -1,0 +1,13 @@
+mutation k8upPreBackupPod($namespace: String!, $name: String!, $spec: JSONObject) {
+  k8upPreBackupPodPatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

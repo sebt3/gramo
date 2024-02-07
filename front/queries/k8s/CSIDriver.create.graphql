@@ -1,0 +1,13 @@
+mutation k8sCSIDriver($name: String!, $spec: JSONObject) {
+  k8sCSIDriverCreate(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

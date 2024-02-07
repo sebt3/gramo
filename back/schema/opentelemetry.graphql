@@ -1,0 +1,26 @@
+type opentelemetryInstrumentation {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type opentelemetryOpAMPBridge {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type opentelemetryOpenTelemetryCollector {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+}
+type Mutation {
+    opentelemetryInstrumentationCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryInstrumentation
+    opentelemetryInstrumentationPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryInstrumentation
+    opentelemetryInstrumentationDelete(namespace: String!, name: String!): opentelemetryInstrumentation
+    opentelemetryOpAMPBridgeCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryOpAMPBridge
+    opentelemetryOpAMPBridgePatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryOpAMPBridge
+    opentelemetryOpAMPBridgeDelete(namespace: String!, name: String!): opentelemetryOpAMPBridge
+    opentelemetryOpenTelemetryCollectorCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryOpenTelemetryCollector
+    opentelemetryOpenTelemetryCollectorPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): opentelemetryOpenTelemetryCollector
+    opentelemetryOpenTelemetryCollectorDelete(namespace: String!, name: String!): opentelemetryOpenTelemetryCollector
+}

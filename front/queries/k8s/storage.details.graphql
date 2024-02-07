@@ -1,0 +1,198 @@
+query k8sQuery($namespace: queryParameters, $PersistentVolume: queryParameters, $PersistentVolumeClaim: queryParameters, $StorageClass: queryParameters, $CSIDriver: queryParameters, $CSINode: queryParameters, $CSIStorageCapacity: queryParameters, $VolumeAttachment: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    k8sPersistentVolumeClaim(params: $PersistentVolumeClaim) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+      parentCluster {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentStatefulSet {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByPod {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByReplicaSet {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByJob {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByCronJob {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByDeployment {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByDaemonSet {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByPodTemplate {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        template
+      }
+    }
+    k8sCSIStorageCapacity(params: $CSIStorageCapacity) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      capacity
+      maximumVolumeSize
+      nodeTopology
+      storageClassName
+    }
+  }
+  k8sPersistentVolume(params: $PersistentVolume) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+  k8sStorageClass(params: $StorageClass) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    allowVolumeExpansion
+    allowedTopologies
+    mountOptions
+    parameters
+    provisioner
+    reclaimPolicy
+    volumeBindingMode
+  }
+  k8sCSIDriver(params: $CSIDriver) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+  }
+  k8sCSINode(params: $CSINode) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+  }
+  k8sVolumeAttachment(params: $VolumeAttachment) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+}

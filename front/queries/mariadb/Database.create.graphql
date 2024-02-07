@@ -1,0 +1,14 @@
+mutation mariadbDatabase($namespace: String!, $name: String!, $spec: JSONObject) {
+  mariadbDatabaseCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

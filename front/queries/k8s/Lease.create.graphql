@@ -1,0 +1,13 @@
+mutation k8sLease($namespace: String!, $name: String!, $spec: JSONObject) {
+  k8sLeaseCreate(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

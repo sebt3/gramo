@@ -1,0 +1,13 @@
+mutation projectcalicoIPAMConfig($name: String!) {
+  projectcalicoIPAMConfigDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

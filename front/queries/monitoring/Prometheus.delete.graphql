@@ -1,0 +1,14 @@
+mutation monitoringPrometheus($namespace: String!, $name: String!) {
+  monitoringPrometheusDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

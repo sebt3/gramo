@@ -1,0 +1,13 @@
+mutation traefikTLSOption($namespace: String!, $name: String!) {
+  traefikTLSOptionDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

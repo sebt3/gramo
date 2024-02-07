@@ -1,0 +1,14 @@
+mutation k8upPrune($namespace: String!, $name: String!) {
+  k8upPruneDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

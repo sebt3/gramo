@@ -1,853 +1,108 @@
-query FluxcdOverview {
- namespaces {
-  fluxcdAlerts {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    eventSeverity
-    eventSources {
-      apiVersion
-      kind
-      name
-      namespace
-    }
-    exclusionList
-    inclusionList
-    providerRef {
-      name
-    }
-    summary
-    suspend
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedGeneration
-    }
-  }
-  fluxcdBuckets {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    bucketName
-    endpoint
-    ignore
-    insecure
-    interval
-    provider
-    region
-    secretRef {
-      name
-    }
-    suspend
-    timeout
-    status {
-      artifact {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedGeneration
-      observedIgnore
-      url
-    }
-  }
-  fluxcdGitRepositorys {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    ignore
-    include {
-      fromPath
-      repository {
-        name
-      }
-      toPath
-    }
-    interval
-    recurseSubmodules
-    ref {
-      branch
-      commit
-      name
-      semver
-      tag
-    }
-    secretRef {
-      name
-    }
-    suspend
-    timeout
-    url
-    verify {
-      mode
-      secretRef {
-        name
-      }
-    }
-    status {
-      artifact {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      includedArtifacts {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      lastHandledReconcileAt
-      observedGeneration
-      observedIgnore
-      observedInclude {
-        fromPath
-        repository {
-          name
-        }
-        toPath
-      }
-      observedRecurseSubmodules
-    }
-  }
-  fluxcdHelmCharts {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    chart
-    interval
-    reconcileStrategy
-    sourceRef {
-      apiVersion
-      kind
-      name
-    }
-    suspend
-    valuesFile
-    valuesFiles
-    verify {
-      provider
-      secretRef {
-        name
-      }
-    }
-    version
-    status {
-      artifact {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedChartName
-      observedGeneration
-      observedSourceArtifactRevision
-      url
-    }
-  }
-  fluxcdHelmReleases {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    chart {
-      spec {
-        chart
-        interval
-        reconcileStrategy
-        sourceRef {
-          apiVersion
-          kind
-          name
-          namespace
-        }
-        valuesFile
-        valuesFiles
-        verify {
-          provider
-          secretRef {
-            name
-          }
-        }
-        version
-      }
-    }
-    dependsOn {
-      name
-      namespace
-    }
-    install {
-      crds
-      createNamespace
-      disableHooks
-      disableOpenAPIValidation
-      disableWait
-      disableWaitForJobs
-      remediation {
-        ignoreTestFailures
-        remediateLastFailure
-        retries
-      }
-      replace
-      skipCRDs
-      timeout
-    }
-    interval
-    kubeConfig {
-      secretRef {
-        key
-        name
-      }
-    }
-    maxHistory
-    persistentClient
-    postRenderers {
-      kustomize {
-        images {
-          digest
-          name
-          newName
-          newTag
-        }
-        patches {
-          patch
-          target {
-            annotationSelector
-            group
-            kind
-            labelSelector
-            name
-            namespace
-            version
-          }
-        }
-        patchesJson6902 {
-          patch {
-            from
-            op
-            path
-          }
-          target {
-            annotationSelector
-            group
-            kind
-            labelSelector
-            name
-            namespace
-            version
-          }
-        }
-        patchesStrategicMerge
-      }
-    }
-    releaseName
-    rollback {
-      cleanupOnFail
-      disableHooks
-      disableWait
-      disableWaitForJobs
-      force
-      recreate
-      timeout
-    }
-    serviceAccountName
-    storageNamespace
-    suspend
-    targetNamespace
-    test {
-      enable
-      ignoreFailures
-      timeout
-    }
-    timeout
-    uninstall {
-      disableHooks
-      disableWait
-      keepHistory
-      timeout
-    }
-    upgrade {
-      cleanupOnFail
-      crds
-      disableHooks
-      disableOpenAPIValidation
-      disableWait
-      disableWaitForJobs
-      force
-      preserveValues
-      remediation {
-        ignoreTestFailures
-        remediateLastFailure
-        retries
-        strategy
-      }
-      timeout
-    }
-    valuesFrom {
-      kind
-      name
-      optional
-      targetPath
-      valuesKey
-    }
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      failures
-      helmChart
-      installFailures
-      lastAppliedRevision
-      lastAttemptedRevision
-      lastAttemptedValuesChecksum
-      lastHandledReconcileAt
-      lastReleaseRevision
-      observedGeneration
-      upgradeFailures
-    }
-  }
-  fluxcdHelmRepositorys {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    interval
-    passCredentials
-    provider
-    secretRef {
-      name
-    }
-    suspend
-    timeout
-    type
-    url
-    status {
-      artifact {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedGeneration
-      url
-    }
-  }
-  fluxcdImagePolicys {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    filterTags {
-      extract
-      pattern
-    }
-    imageRepositoryRef {
-      name
-      namespace
-    }
-    policy {
-      alphabetical {
-        order
-      }
-      numerical {
-        order
-      }
-      semver {
-        range
-      }
-    }
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      latestImage
-      observedGeneration
-      observedPreviousImage
-    }
-  }
-  fluxcdImageRepositorys {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    certSecretRef {
-      name
-    }
-    exclusionList
-    image
-    interval
-    provider
-    secretRef {
-      name
-    }
-    serviceAccountName
-    suspend
-    timeout
-    status {
-      canonicalImageName
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      lastScanResult {
-        latestTags
-        scanTime
-        tagCount
-      }
-      observedExclusionList
-      observedGeneration
-    }
-  }
-  fluxcdImageUpdateAutomations {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    git {
-      checkout {
-        ref {
-          branch
-          commit
-          name
-          semver
-          tag
-        }
-      }
-      commit {
-        author {
-          email
-          name
-        }
-        messageTemplate
-        signingKey {
-          secretRef {
-            name
-          }
-        }
-      }
-      push {
-        branch
-      }
-    }
-    interval
-    sourceRef {
-      apiVersion
-      kind
-      name
-      namespace
-    }
-    suspend
-    update {
-      path
-      strategy
-    }
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastAutomationRunTime
-      lastHandledReconcileAt
-      lastPushCommit
-      lastPushTime
-      observedGeneration
-    }
-  }
-  fluxcdKustomizations {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    components
-    decryption {
-      provider
-      secretRef {
-        name
-      }
-    }
-    dependsOn {
-      name
-      namespace
-    }
-    force
-    healthChecks {
-      apiVersion
-      kind
-      name
-      namespace
-    }
-    images {
-      digest
-      name
-      newName
-      newTag
-    }
-    interval
-    kubeConfig {
-      secretRef {
-        key
-        name
-      }
-    }
-    patches {
-      patch
-      target {
-        annotationSelector
-        group
-        kind
-        labelSelector
+query FluxcdOverview($namespace: queryParameters, $obj: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    fluxcdAlert(params: $obj) {
+      metadata {
         name
         namespace
-        version
       }
+      spec
+      status
     }
-    path
-    postBuild {
-      substituteFrom {
-        kind
+    fluxcdBucket(params: $obj) {
+      metadata {
         name
-        optional
+        namespace
       }
+      spec
+      status
     }
-    prune
-    retryInterval
-    serviceAccountName
-    sourceRef {
-      apiVersion
-      kind
-      name
-      namespace
+    fluxcdGitRepository(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
     }
-    suspend
-    targetNamespace
-    timeout
-    wait
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
+    fluxcdHelmChart(params: $obj) {
+      metadata {
+        name
+        namespace
       }
-      inventory {
-        entries {
-          id
-          v
-        }
+      spec
+      status
+    }
+    fluxcdHelmRelease(params: $obj) {
+      metadata {
+        name
+        namespace
       }
-      lastAppliedRevision
-      lastAttemptedRevision
-      lastHandledReconcileAt
-      observedGeneration
+      spec
+      status
+    }
+    fluxcdHelmRepository(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdImagePolicy(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdImageRepository(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdImageUpdateAutomation(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdKustomization(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdOCIRepository(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdProvider(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
+    }
+    fluxcdReceiver(params: $obj) {
+      metadata {
+        name
+        namespace
+      }
+      spec
+      status
     }
   }
-  fluxcdOCIRepositorys {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    certSecretRef {
-      name
-    }
-    ignore
-    insecure
-    interval
-    layerSelector {
-      mediaType
-      operation
-    }
-    provider
-    ref {
-      digest
-      semver
-      tag
-    }
-    secretRef {
-      name
-    }
-    serviceAccountName
-    suspend
-    timeout
-    url
-    verify {
-      provider
-      secretRef {
-        name
-      }
-    }
-    status {
-      artifact {
-        digest
-        lastUpdateTime
-        path
-        revision
-        size
-        url
-      }
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      contentConfigChecksum
-      lastHandledReconcileAt
-      observedGeneration
-      observedIgnore
-      observedLayerSelector {
-        mediaType
-        operation
-      }
-      url
-    }
-  }
-  fluxcdProviders {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    address
-    certSecretRef {
-      name
-    }
-    channel
-    interval
-    proxy
-    secretRef {
-      name
-    }
-    suspend
-    timeout
-    type
-    username
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedGeneration
-    }
-  }
-  fluxcdReceivers {
-    metadata {
-      annotations {
-        name
-        value
-      }
-      labels {
-        name
-        value
-      }
-      name
-      namespace
-    }
-    events
-    interval
-    resources {
-      apiVersion
-      kind
-      name
-      namespace
-    }
-    secretRef {
-      name
-    }
-    suspend
-    type
-    status {
-      conditions {
-        lastTransitionTime
-        message
-        observedGeneration
-        reason
-        status
-        type
-      }
-      lastHandledReconcileAt
-      observedGeneration
-      webhookPath
-    }
-  }
- }
 }

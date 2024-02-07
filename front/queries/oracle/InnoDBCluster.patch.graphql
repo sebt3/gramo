@@ -1,0 +1,14 @@
+mutation oracleInnoDBCluster($namespace: String!, $name: String!, $spec: JSONObject) {
+  oracleInnoDBClusterPatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

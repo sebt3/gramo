@@ -1,0 +1,14 @@
+mutation mariadbGrant($namespace: String!, $name: String!) {
+  mariadbGrantDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

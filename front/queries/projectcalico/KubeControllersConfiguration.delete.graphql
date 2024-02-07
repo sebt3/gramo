@@ -1,0 +1,14 @@
+mutation projectcalicoKubeControllersConfiguration($name: String!) {
+  projectcalicoKubeControllersConfigurationDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

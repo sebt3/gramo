@@ -1,0 +1,13 @@
+mutation k8sLease($namespace: String!, $name: String!) {
+  k8sLeaseDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

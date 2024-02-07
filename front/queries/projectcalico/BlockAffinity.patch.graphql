@@ -1,0 +1,13 @@
+mutation projectcalicoBlockAffinity($name: String!, $spec: JSONObject) {
+  projectcalicoBlockAffinityPatch(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+  }
+}

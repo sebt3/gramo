@@ -1,5 +1,6 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
+
 export const useNavigationStore = defineStore('navigation', () => {
   const nss_local:Array<string> = []
   const namespaces = ref(nss_local)

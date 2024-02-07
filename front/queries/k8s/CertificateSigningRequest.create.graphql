@@ -1,0 +1,14 @@
+mutation k8sCertificateSigningRequest($name: String!, $spec: JSONObject) {
+  k8sCertificateSigningRequestCreate(name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

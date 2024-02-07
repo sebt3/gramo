@@ -1,0 +1,14 @@
+mutation vynilDistrib($name: String!) {
+  vynilDistribDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

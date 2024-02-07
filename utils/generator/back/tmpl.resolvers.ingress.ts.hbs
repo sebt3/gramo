@@ -1,0 +1,31 @@
+{{#if (eq type 'use')}}
+        {{type}}{{targetShort}}: async (ing, args: object) => {
+            if (!Array.isArray(ing['spec']['rules'])) return null;
+            const svcs = ing['spec']['rules']
+                            .filter(r=>
+                                r['http'] != undefined &&
+                                Array.isArray(r['http']['paths']) &&
+                                r['http']['paths'].filter(p=>p['backend'] != undefined && p['backend']['service'] != undefined).length>0
+                            ).map(r=>r['http']['paths']
+                                .filter(p=>p['backend'] != undefined && p['backend']['service'] != undefined)
+                                .map(p=>p['backend']['service']['name'])
+                            ).flat()
+            if (svcs.length<1) return null;
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(ing, {namespace: ing['metadata']['namespace'], ...args})
+            return lst.filter(svc=>svcs.includes(svc['metadata']['name']))
+        },
+{{/if}}
+{{#if (eq type 'usedBy')}}
+        {{type}}{{targetShort}}: async (svc, args: object) => {
+            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(svc, {namespace: svc['metadata']['namespace'], ...args})
+            return lst.filter(ing=>Array.isArray(ing['spec']['rules']) && ing['spec']['rules'].filter(r=>
+                r['http'] != undefined &&
+                Array.isArray(r['http']['paths']) &&
+                r['http']['paths'].filter(p=>
+                    p['backend'] != undefined &&
+                    p['backend']['service'] != undefined &&
+                    p['backend']['service']['name'] == svc['metadata']['name']
+                ).length>0
+            ))
+        },
+{{/if}}

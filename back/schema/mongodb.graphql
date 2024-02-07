@@ -1,0 +1,13 @@
+type mongodbMongoDBCommunity {
+    metadata: metadata!
+    spec: JSONObject
+    status: JSONObject
+    childSecret(params: queryParameters): [k8sSecret]
+    childService(params: queryParameters): [k8sService]
+    childStatefulSet(params: queryParameters): [k8sStatefulSet]
+}
+type Mutation {
+    mongodbMongoDBCommunityCreate(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): mongodbMongoDBCommunity
+    mongodbMongoDBCommunityPatch(namespace: String!, name: String!, spec: JSONObject, metadata: metadataMore): mongodbMongoDBCommunity
+    mongodbMongoDBCommunityDelete(namespace: String!, name: String!): mongodbMongoDBCommunity
+}

@@ -1,0 +1,14 @@
+mutation cnpgPooler($namespace: String!, $name: String!) {
+  cnpgPoolerDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

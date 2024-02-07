@@ -1,0 +1,13 @@
+mutation k8sMutatingWebhookConfiguration($name: String!) {
+  k8sMutatingWebhookConfigurationDelete(name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      webhooks
+  }
+}

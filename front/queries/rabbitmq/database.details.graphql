@@ -1,0 +1,19 @@
+query rabbitmqQuery($namespace: queryParameters, $RabbitmqCluster: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    rabbitmqRabbitmqCluster(params: $RabbitmqCluster) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+  }
+}

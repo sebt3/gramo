@@ -1,0 +1,52 @@
+<script setup lang="ts">
+import { onMounted } from "vue";
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoViewer from '@/components/core/MonacoViewer.vue';
+import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const { onlyReadProperties, viewer, viewerUpdate, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+{{else}}
+const { onlyReadProperties, viewer, viewerUpdate, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+{{/if}}
+const props = defineProps<{model: object}>();
+onMounted(() => {
+  viewerUpdate(onlyReadProperties(props.model));
+})
+</script>
+<template>
+  <q-card bordered class="q-ma-sm">
+    <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
+      <q-tab label="Simple" name="simple" />
+{{#each writeProperties}}
+  {{#if (isJsonObject this ../gqlDefs)}}
+      <q-tab label="{{this}}" name="{{this}}" v-if="model['{{this}}']!=null" />
+  {{/if}}
+{{/each}}
+      <q-tab label="full Yaml" name="yaml" />
+    </q-tabs>
+    <q-tab-panels v-model="viewer.tab" animated>
+      <q-tab-panel name="simple">
+{{#each writeProperties}}
+  {{#if (isJsonObject this ../gqlDefs)}}
+        <OpenApiEdit
+          :in="model['{{this}}']"
+          :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
+          :read-only="true"
+          :show-default="false"
+        />
+  {{/if}}
+{{/each}}
+      </q-tab-panel>
+{{#each writeProperties}}
+  {{#if (isJsonObject this ../gqlDefs)}}
+      <q-tab-panel name="{{this}}" v-if="model['{{this}}']!=null">
+        <MonacoViewer :text="viewer.props.{{this}}" :key="viewer.props.{{this}}" />
+      </q-tab-panel>
+  {{/if}}
+{{/each}}
+      <q-tab-panel name="yaml">
+        <MonacoViewer :text="viewer.full" :key="viewer.full" />
+      </q-tab-panel>
+    </q-tab-panels>
+  </q-card>
+</template>

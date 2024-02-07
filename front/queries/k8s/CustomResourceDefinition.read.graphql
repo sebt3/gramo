@@ -1,0 +1,13 @@
+query k8sCustomResourceDefinitionQuery($obj: queryParameters,) {
+    k8sCustomResourceDefinition(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

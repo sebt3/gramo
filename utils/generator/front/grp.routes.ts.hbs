@@ -1,0 +1,86 @@
+import {menuLinksProps} from '../interfaces';
+import { {{#each objects}}icon{{ this.short }}, {{/each}} {{ name }}Icon, {{ name }}Title }from '../../libs/{{ name }}/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
+export const link:menuLinksProps = {
+  name: '{{ category }}{{ name }}',
+  title: {{ name }}Title, icon: {{ name }}Icon,
+  link: '/{{ category}}/{{  name }}/',
+  level: 1,
+  children: [
+{{#each objects}}
+  {{#if (defined crd)}}
+  crds['{{crd.metadata.name}}'] == undefined?[]:[{
+  {{else}}
+  [{
+  {{/if}}
+    name: '{{ this.group }}{{ this.short }}s',
+    title: '{{ this.short }}', caption: 'List {{ this.short }}', icon: icon{{ this.short }},
+    link: '/{{category}}/{{ this.group }}/{{ this.short }}/', level: 2, children: []
+  }],
+{{/each}}
+  ].flat()
+}
+export const descriptions = {
+  {{ category }}{{ name }}:                {breadcrumb: {{ name }}Title, icon: {{ name }}Icon, ns: false},
+  {{ category }}{{ name }}Dashboard:       {breadcrumb: 'Dashboard', icon: {{ name }}Icon, ns: false},
+{{#each objects}}
+  {{ this.group }}{{ this.short }}:        {breadcrumb: '{{ this.short }}', icon: icon{{ this.short }}, ns: false},
+ {{#if this.namespaced}}
+  {{ this.group }}{{ this.short }}AllTable: {breadcrumb: 'All', icon: 'list', ns: false},
+ {{/if}}
+  {{ this.group }}{{ this.short }}Table:    {breadcrumb: 'List', icon: 'list', ns: {{toJson this.namespaced}} },
+  {{ this.group }}{{ this.short }}View:     {breadcrumb: 'View', icon: icon{{ this.short }}, ns: {{toJson this.namespaced}} },
+  {{ this.group }}{{ this.short }}Edit:     {breadcrumb: 'Edit', icon: 'visibility', ns: {{toJson this.namespaced}} },
+  {{ this.group }}{{ this.short }}Create:   {breadcrumb: 'Create', icon: 'add', ns: {{toJson this.namespaced}} },
+{{/each}}
+}
+export const route = {
+  path: '{{ name }}',
+  name: '{{ category }}{{ name }}',
+  redirect: {path: link.link as string},
+  children: [
+    {
+      path: '',
+      name: '{{ category }}{{ name }}Dashboard',
+      component: () => import('../../pages/{{category}}/{{ name }}/Dashboard.vue'),
+    },
+{{#each objects}}
+    {
+      path: '{{ this.short }}',
+      name: '{{ this.group }}{{ this.short }}',
+      children: [
+  {{#if this.namespaced}}
+        {
+          path: '',
+          name: '{{ this.group }}{{ this.short }}AllTable',
+          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}List.vue'),
+        },
+  {{/if}}
+        {
+          path: '{{#if this.namespaced}}:namespace{{/if}}',
+          name: '{{ this.group }}{{ this.short }}Table',
+          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}List.vue'),
+        },
+        {
+          path: '{{#if this.namespaced}}:namespace/{{/if}}view/:name',
+          name: '{{ this.group }}{{ this.short }}View',
+          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}View.vue'),
+        },
+        {
+          path: '{{#if this.namespaced}}:namespace/{{/if}}edit/:name',
+          name: '{{ this.group }}{{ this.short }}Edit',
+          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}Edit.vue'),
+        },
+        {
+          path: '{{#if this.namespaced}}:namespace/{{/if}}create',
+          name: '{{ this.group }}{{ this.short }}Create',
+          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}New.vue'),
+        }
+      ]
+    },
+{{/each}}
+  ],
+}
+export default route

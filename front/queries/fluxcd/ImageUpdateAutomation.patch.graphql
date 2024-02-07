@@ -1,0 +1,14 @@
+mutation fluxcdImageUpdateAutomation($namespace: String!, $name: String!, $spec: JSONObject) {
+  fluxcdImageUpdateAutomationPatch(namespace: $namespace, name: $name, spec: $spec) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

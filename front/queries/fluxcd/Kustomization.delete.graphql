@@ -1,0 +1,14 @@
+mutation fluxcdKustomization($namespace: String!, $name: String!) {
+  fluxcdKustomizationDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+  }
+}

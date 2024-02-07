@@ -1,0 +1,14 @@
+mutation k8sControllerRevision($namespace: String!, $name: String!) {
+  k8sControllerRevisionDelete(namespace: $namespace, name: $name) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      data
+      revision
+  }
+}

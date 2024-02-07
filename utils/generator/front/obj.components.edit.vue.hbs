@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { onMounted } from "vue";
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
+import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const { onlyReadProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+{{else}}
+const { onlyReadProperties, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+{{/if}}
+const emit = defineEmits(['update:model'])
+const props = defineProps<{model: object}>();
+</script>
+<template>
+  <q-card bordered class="q-ma-sm">
+    <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
+      <q-tab label="Simple" name="simple" />
+      <q-tab label="full Yaml" name="yaml" />
+    </q-tabs>
+    <q-tab-panels v-model="viewer.tab" animated>
+      <q-tab-panel name="simple">
+{{#each writeProperties}}
+  {{#if (isJsonObject this ../gqlDefs)}}
+        <OpenApiEdit
+          :in="model['{{this}}']"
+          @update:out="v=>{ {{this}}=v;editor.setkey({{this}}, v)}"
+          :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
+        />
+  {{/if}}
+{{/each}}
+      </q-tab-panel>
+      <q-tab-panel name="yaml">
+          <MonacoEditor
+            :text="editor.yaml" :key="editor.yaml"
+            @update:text="v=>editor.setYaml(v)"
+            :properties="getProperties({properties: Object.fromEntries(Object.entries(Object{{ ../short }}Definition).filter(([n])=>!['metadata','status'].include(n)))"
+            />
+      </q-tab-panel>
+    </q-tab-panels>
+  </q-card>
+</template>

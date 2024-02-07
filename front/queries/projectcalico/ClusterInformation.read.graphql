@@ -1,0 +1,12 @@
+query projectcalicoClusterInformationQuery($obj: queryParameters,) {
+    projectcalicoClusterInformation(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+    }
+}

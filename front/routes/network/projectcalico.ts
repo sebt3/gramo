@@ -1,659 +1,609 @@
 import {menuLinksProps} from '../interfaces';
-const cat = 'network';
-const iconBGPConfiguration = 'album';
-const iconBGPPeer = 'album';
-const iconBlockAffinity = 'album';
-const iconCalicoNodeStatus = 'album';
-const iconClusterInformation = 'album';
-const iconFelixConfiguration = 'album';
-const iconGlobalNetworkPolicy = 'album';
-const iconGlobalNetworkSet = 'album';
-const iconHostEndpoint = 'album';
-const iconIPAMBlock = 'album';
-const iconIPAMConfig = 'album';
-const iconIPAMHandle = 'album';
-const iconIPPool = 'album';
-const iconIPReservation = 'album';
-const iconKubeControllersConfiguration = 'album';
-const iconNetworkPolicy = 'album';
-const iconNetworkSet = 'album';
+import { iconBGPConfiguration, iconBGPPeer, iconBlockAffinity, iconCalicoNodeStatus, iconClusterInformation, iconFelixConfiguration, iconGlobalNetworkPolicy, iconGlobalNetworkSet, iconHostEndpoint, iconIPAMBlock, iconIPAMConfig, iconIPAMHandle, iconIPPool, iconIPReservation, iconKubeControllersConfiguration, iconNetworkSet,  projectcalicoIcon, projectcalicoTitle }from '../../libs/projectcalico/custom.js'
+import {  } from '../custom.js';
+import { useCRDStore } from '../../stores'
+const crds = useCRDStore().crds;
 export const link:menuLinksProps = {
-  name: 'projectcalico',
-  title: 'Projectcalico', icon: iconBGPConfiguration,
-  link: `/${cat}/projectcalico/clusterinformations/`,
+  name: 'networkprojectcalico',
+  title: projectcalicoTitle, icon: projectcalicoIcon,
+  link: '/network/projectcalico/',
   level: 1,
   children: [
-  {
+  crds['bgpconfigurations.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoBGPConfigurations',
-    title: 'BGPConfiguration', caption: 'List bGPConfiguration', icon: iconBGPConfiguration,
-    link: `/${cat}/projectcalico/bgpconfigurations/`, level: 2, children: []
-  },
-  {
+    title: 'BGPConfiguration', caption: 'List BGPConfiguration', icon: iconBGPConfiguration,
+    link: '/network/projectcalico/BGPConfiguration/', level: 2, children: []
+  }],
+  crds['bgppeers.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoBGPPeers',
-    title: 'BGPPeer', caption: 'List bGPPeer', icon: iconBGPPeer,
-    link: `/${cat}/projectcalico/bgppeers/`, level: 2, children: []
-  },
-  {
+    title: 'BGPPeer', caption: 'List BGPPeer', icon: iconBGPPeer,
+    link: '/network/projectcalico/BGPPeer/', level: 2, children: []
+  }],
+  crds['blockaffinities.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoBlockAffinitys',
-    title: 'BlockAffinity', caption: 'List blockAffinity', icon: iconBlockAffinity,
-    link: `/${cat}/projectcalico/blockaffinities/`, level: 2, children: []
-  },
-  {
+    title: 'BlockAffinity', caption: 'List BlockAffinity', icon: iconBlockAffinity,
+    link: '/network/projectcalico/BlockAffinity/', level: 2, children: []
+  }],
+  crds['caliconodestatuses.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoCalicoNodeStatuss',
-    title: 'CalicoNodeStatus', caption: 'List calicoNodeStatus', icon: iconCalicoNodeStatus,
-    link: `/${cat}/projectcalico/caliconodestatuses/`, level: 2, children: []
-  },
-  {
+    title: 'CalicoNodeStatus', caption: 'List CalicoNodeStatus', icon: iconCalicoNodeStatus,
+    link: '/network/projectcalico/CalicoNodeStatus/', level: 2, children: []
+  }],
+  crds['clusterinformations.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoClusterInformations',
-    title: 'ClusterInformation', caption: 'List clusterInformation', icon: iconClusterInformation,
-    link: `/${cat}/projectcalico/clusterinformations/`, level: 2, children: []
-  },
-  {
+    title: 'ClusterInformation', caption: 'List ClusterInformation', icon: iconClusterInformation,
+    link: '/network/projectcalico/ClusterInformation/', level: 2, children: []
+  }],
+  crds['felixconfigurations.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoFelixConfigurations',
-    title: 'FelixConfiguration', caption: 'List felixConfiguration', icon: iconFelixConfiguration,
-    link: `/${cat}/projectcalico/felixconfigurations/`, level: 2, children: []
-  },
-  {
+    title: 'FelixConfiguration', caption: 'List FelixConfiguration', icon: iconFelixConfiguration,
+    link: '/network/projectcalico/FelixConfiguration/', level: 2, children: []
+  }],
+  crds['globalnetworkpolicies.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoGlobalNetworkPolicys',
-    title: 'GlobalNetworkPolicy', caption: 'List globalNetworkPolicy', icon: iconGlobalNetworkPolicy,
-    link: `/${cat}/projectcalico/globalnetworkpolicies/`, level: 2, children: []
-  },
-  {
+    title: 'GlobalNetworkPolicy', caption: 'List GlobalNetworkPolicy', icon: iconGlobalNetworkPolicy,
+    link: '/network/projectcalico/GlobalNetworkPolicy/', level: 2, children: []
+  }],
+  crds['globalnetworksets.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoGlobalNetworkSets',
-    title: 'GlobalNetworkSet', caption: 'List globalNetworkSet', icon: iconGlobalNetworkSet,
-    link: `/${cat}/projectcalico/globalnetworksets/`, level: 2, children: []
-  },
-  {
+    title: 'GlobalNetworkSet', caption: 'List GlobalNetworkSet', icon: iconGlobalNetworkSet,
+    link: '/network/projectcalico/GlobalNetworkSet/', level: 2, children: []
+  }],
+  crds['hostendpoints.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoHostEndpoints',
-    title: 'HostEndpoint', caption: 'List hostEndpoint', icon: iconHostEndpoint,
-    link: `/${cat}/projectcalico/hostendpoints/`, level: 2, children: []
-  },
-  {
+    title: 'HostEndpoint', caption: 'List HostEndpoint', icon: iconHostEndpoint,
+    link: '/network/projectcalico/HostEndpoint/', level: 2, children: []
+  }],
+  crds['ipamblocks.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoIPAMBlocks',
-    title: 'IPAMBlock', caption: 'List iPAMBlock', icon: iconIPAMBlock,
-    link: `/${cat}/projectcalico/ipamblocks/`, level: 2, children: []
-  },
-  {
+    title: 'IPAMBlock', caption: 'List IPAMBlock', icon: iconIPAMBlock,
+    link: '/network/projectcalico/IPAMBlock/', level: 2, children: []
+  }],
+  crds['ipamconfigs.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoIPAMConfigs',
-    title: 'IPAMConfig', caption: 'List iPAMConfig', icon: iconIPAMConfig,
-    link: `/${cat}/projectcalico/ipamconfigs/`, level: 2, children: []
-  },
-  {
+    title: 'IPAMConfig', caption: 'List IPAMConfig', icon: iconIPAMConfig,
+    link: '/network/projectcalico/IPAMConfig/', level: 2, children: []
+  }],
+  crds['ipamhandles.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoIPAMHandles',
-    title: 'IPAMHandle', caption: 'List iPAMHandle', icon: iconIPAMHandle,
-    link: `/${cat}/projectcalico/ipamhandles/`, level: 2, children: []
-  },
-  {
+    title: 'IPAMHandle', caption: 'List IPAMHandle', icon: iconIPAMHandle,
+    link: '/network/projectcalico/IPAMHandle/', level: 2, children: []
+  }],
+  crds['ippools.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoIPPools',
-    title: 'IPPool', caption: 'List iPPool', icon: iconIPPool,
-    link: `/${cat}/projectcalico/ippools/`, level: 2, children: []
-  },
-  {
+    title: 'IPPool', caption: 'List IPPool', icon: iconIPPool,
+    link: '/network/projectcalico/IPPool/', level: 2, children: []
+  }],
+  crds['ipreservations.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoIPReservations',
-    title: 'IPReservation', caption: 'List iPReservation', icon: iconIPReservation,
-    link: `/${cat}/projectcalico/ipreservations/`, level: 2, children: []
-  },
-  {
+    title: 'IPReservation', caption: 'List IPReservation', icon: iconIPReservation,
+    link: '/network/projectcalico/IPReservation/', level: 2, children: []
+  }],
+  crds['kubecontrollersconfigurations.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoKubeControllersConfigurations',
-    title: 'KubeControllersConfiguration', caption: 'List kubeControllersConfiguration', icon: iconKubeControllersConfiguration,
-    link: `/${cat}/projectcalico/kubecontrollersconfigurations/`, level: 2, children: []
-  },
-  {
-    name: 'projectcalicoNetworkPolicys',
-    title: 'NetworkPolicy', caption: 'List networkPolicy', icon: iconNetworkPolicy,
-    link: `/${cat}/projectcalico/networkpolicies/`, level: 2, children: []
-  },
-  {
+    title: 'KubeControllersConfiguration', caption: 'List KubeControllersConfiguration', icon: iconKubeControllersConfiguration,
+    link: '/network/projectcalico/KubeControllersConfiguration/', level: 2, children: []
+  }],
+  crds['networksets.crd.projectcalico.org'] == undefined?[]:[{
     name: 'projectcalicoNetworkSets',
-    title: 'NetworkSet', caption: 'List networkSet', icon: iconNetworkSet,
-    link: `/${cat}/projectcalico/networksets/`, level: 2, children: []
-  },
-  ]
+    title: 'NetworkSet', caption: 'List NetworkSet', icon: iconNetworkSet,
+    link: '/network/projectcalico/NetworkSet/', level: 2, children: []
+  }],
+  ].flat()
 }
 export const descriptions = {
-  projectcalico:                {breadcrumb: 'Projectcalico', icon: iconBGPConfiguration, ns: false},
-  projectcalicoBGPConfigurations:        {breadcrumb: 'BGPConfiguration', icon: iconBGPConfiguration, ns: false},
-  projectcalicoBGPConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoBGPConfigurationView:     {breadcrumb: 'View', icon: iconBGPConfiguration, ns: false},
-  projectcalicoBGPConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoBGPConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoBGPPeers:        {breadcrumb: 'BGPPeer', icon: iconBGPPeer, ns: false},
-  projectcalicoBGPPeerTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoBGPPeerView:     {breadcrumb: 'View', icon: iconBGPPeer, ns: false},
-  projectcalicoBGPPeerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoBGPPeerCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoBlockAffinitys:        {breadcrumb: 'BlockAffinity', icon: iconBlockAffinity, ns: false},
-  projectcalicoBlockAffinityTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoBlockAffinityView:     {breadcrumb: 'View', icon: iconBlockAffinity, ns: false},
-  projectcalicoBlockAffinityEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoBlockAffinityCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoCalicoNodeStatuss:        {breadcrumb: 'CalicoNodeStatus', icon: iconCalicoNodeStatus, ns: false},
-  projectcalicoCalicoNodeStatusTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoCalicoNodeStatusView:     {breadcrumb: 'View', icon: iconCalicoNodeStatus, ns: false},
-  projectcalicoCalicoNodeStatusEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoCalicoNodeStatusCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoClusterInformations:        {breadcrumb: 'ClusterInformation', icon: iconClusterInformation, ns: false},
-  projectcalicoClusterInformationTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoClusterInformationView:     {breadcrumb: 'View', icon: iconClusterInformation, ns: false},
-  projectcalicoClusterInformationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoClusterInformationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoFelixConfigurations:        {breadcrumb: 'FelixConfiguration', icon: iconFelixConfiguration, ns: false},
-  projectcalicoFelixConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoFelixConfigurationView:     {breadcrumb: 'View', icon: iconFelixConfiguration, ns: false},
-  projectcalicoFelixConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoFelixConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoGlobalNetworkPolicys:        {breadcrumb: 'GlobalNetworkPolicy', icon: iconGlobalNetworkPolicy, ns: false},
-  projectcalicoGlobalNetworkPolicyTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoGlobalNetworkPolicyView:     {breadcrumb: 'View', icon: iconGlobalNetworkPolicy, ns: false},
-  projectcalicoGlobalNetworkPolicyEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoGlobalNetworkPolicyCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoGlobalNetworkSets:        {breadcrumb: 'GlobalNetworkSet', icon: iconGlobalNetworkSet, ns: false},
-  projectcalicoGlobalNetworkSetTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoGlobalNetworkSetView:     {breadcrumb: 'View', icon: iconGlobalNetworkSet, ns: false},
-  projectcalicoGlobalNetworkSetEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoGlobalNetworkSetCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoHostEndpoints:        {breadcrumb: 'HostEndpoint', icon: iconHostEndpoint, ns: false},
-  projectcalicoHostEndpointTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoHostEndpointView:     {breadcrumb: 'View', icon: iconHostEndpoint, ns: false},
-  projectcalicoHostEndpointEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoHostEndpointCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoIPAMBlocks:        {breadcrumb: 'IPAMBlock', icon: iconIPAMBlock, ns: false},
-  projectcalicoIPAMBlockTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoIPAMBlockView:     {breadcrumb: 'View', icon: iconIPAMBlock, ns: false},
-  projectcalicoIPAMBlockEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoIPAMBlockCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoIPAMConfigs:        {breadcrumb: 'IPAMConfig', icon: iconIPAMConfig, ns: false},
-  projectcalicoIPAMConfigTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoIPAMConfigView:     {breadcrumb: 'View', icon: iconIPAMConfig, ns: false},
-  projectcalicoIPAMConfigEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoIPAMConfigCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoIPAMHandles:        {breadcrumb: 'IPAMHandle', icon: iconIPAMHandle, ns: false},
-  projectcalicoIPAMHandleTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoIPAMHandleView:     {breadcrumb: 'View', icon: iconIPAMHandle, ns: false},
-  projectcalicoIPAMHandleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoIPAMHandleCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoIPPools:        {breadcrumb: 'IPPool', icon: iconIPPool, ns: false},
-  projectcalicoIPPoolTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoIPPoolView:     {breadcrumb: 'View', icon: iconIPPool, ns: false},
-  projectcalicoIPPoolEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoIPPoolCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoIPReservations:        {breadcrumb: 'IPReservation', icon: iconIPReservation, ns: false},
-  projectcalicoIPReservationTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoIPReservationView:     {breadcrumb: 'View', icon: iconIPReservation, ns: false},
-  projectcalicoIPReservationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoIPReservationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoKubeControllersConfigurations:        {breadcrumb: 'KubeControllersConfiguration', icon: iconKubeControllersConfiguration, ns: false},
-  projectcalicoKubeControllersConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false},
-  projectcalicoKubeControllersConfigurationView:     {breadcrumb: 'View', icon: iconKubeControllersConfiguration, ns: false},
-  projectcalicoKubeControllersConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false},
-  projectcalicoKubeControllersConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false},
-  projectcalicoNetworkPolicys:        {breadcrumb: 'NetworkPolicy', icon: iconNetworkPolicy, ns: false},
-  projectcalicoNetworkPolicyAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  projectcalicoNetworkPolicyTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  projectcalicoNetworkPolicyView:     {breadcrumb: 'View', icon: iconNetworkPolicy, ns: true},
-  projectcalicoNetworkPolicyEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  projectcalicoNetworkPolicyCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
-  projectcalicoNetworkSets:        {breadcrumb: 'NetworkSet', icon: iconNetworkSet, ns: false},
+  networkprojectcalico:                {breadcrumb: projectcalicoTitle, icon: projectcalicoIcon, ns: false},
+  networkprojectcalicoDashboard:       {breadcrumb: 'Dashboard', icon: projectcalicoIcon, ns: false},
+  projectcalicoBGPConfiguration:        {breadcrumb: 'BGPConfiguration', icon: iconBGPConfiguration, ns: false},
+  projectcalicoBGPConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoBGPConfigurationView:     {breadcrumb: 'View', icon: iconBGPConfiguration, ns: false },
+  projectcalicoBGPConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoBGPConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoBGPPeer:        {breadcrumb: 'BGPPeer', icon: iconBGPPeer, ns: false},
+  projectcalicoBGPPeerTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoBGPPeerView:     {breadcrumb: 'View', icon: iconBGPPeer, ns: false },
+  projectcalicoBGPPeerEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoBGPPeerCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoBlockAffinity:        {breadcrumb: 'BlockAffinity', icon: iconBlockAffinity, ns: false},
+  projectcalicoBlockAffinityTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoBlockAffinityView:     {breadcrumb: 'View', icon: iconBlockAffinity, ns: false },
+  projectcalicoBlockAffinityEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoBlockAffinityCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoCalicoNodeStatus:        {breadcrumb: 'CalicoNodeStatus', icon: iconCalicoNodeStatus, ns: false},
+  projectcalicoCalicoNodeStatusTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoCalicoNodeStatusView:     {breadcrumb: 'View', icon: iconCalicoNodeStatus, ns: false },
+  projectcalicoCalicoNodeStatusEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoCalicoNodeStatusCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoClusterInformation:        {breadcrumb: 'ClusterInformation', icon: iconClusterInformation, ns: false},
+  projectcalicoClusterInformationTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoClusterInformationView:     {breadcrumb: 'View', icon: iconClusterInformation, ns: false },
+  projectcalicoClusterInformationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoClusterInformationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoFelixConfiguration:        {breadcrumb: 'FelixConfiguration', icon: iconFelixConfiguration, ns: false},
+  projectcalicoFelixConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoFelixConfigurationView:     {breadcrumb: 'View', icon: iconFelixConfiguration, ns: false },
+  projectcalicoFelixConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoFelixConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoGlobalNetworkPolicy:        {breadcrumb: 'GlobalNetworkPolicy', icon: iconGlobalNetworkPolicy, ns: false},
+  projectcalicoGlobalNetworkPolicyTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoGlobalNetworkPolicyView:     {breadcrumb: 'View', icon: iconGlobalNetworkPolicy, ns: false },
+  projectcalicoGlobalNetworkPolicyEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoGlobalNetworkPolicyCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoGlobalNetworkSet:        {breadcrumb: 'GlobalNetworkSet', icon: iconGlobalNetworkSet, ns: false},
+  projectcalicoGlobalNetworkSetTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoGlobalNetworkSetView:     {breadcrumb: 'View', icon: iconGlobalNetworkSet, ns: false },
+  projectcalicoGlobalNetworkSetEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoGlobalNetworkSetCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoHostEndpoint:        {breadcrumb: 'HostEndpoint', icon: iconHostEndpoint, ns: false},
+  projectcalicoHostEndpointTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoHostEndpointView:     {breadcrumb: 'View', icon: iconHostEndpoint, ns: false },
+  projectcalicoHostEndpointEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoHostEndpointCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoIPAMBlock:        {breadcrumb: 'IPAMBlock', icon: iconIPAMBlock, ns: false},
+  projectcalicoIPAMBlockTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoIPAMBlockView:     {breadcrumb: 'View', icon: iconIPAMBlock, ns: false },
+  projectcalicoIPAMBlockEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoIPAMBlockCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoIPAMConfig:        {breadcrumb: 'IPAMConfig', icon: iconIPAMConfig, ns: false},
+  projectcalicoIPAMConfigTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoIPAMConfigView:     {breadcrumb: 'View', icon: iconIPAMConfig, ns: false },
+  projectcalicoIPAMConfigEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoIPAMConfigCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoIPAMHandle:        {breadcrumb: 'IPAMHandle', icon: iconIPAMHandle, ns: false},
+  projectcalicoIPAMHandleTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoIPAMHandleView:     {breadcrumb: 'View', icon: iconIPAMHandle, ns: false },
+  projectcalicoIPAMHandleEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoIPAMHandleCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoIPPool:        {breadcrumb: 'IPPool', icon: iconIPPool, ns: false},
+  projectcalicoIPPoolTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoIPPoolView:     {breadcrumb: 'View', icon: iconIPPool, ns: false },
+  projectcalicoIPPoolEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoIPPoolCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoIPReservation:        {breadcrumb: 'IPReservation', icon: iconIPReservation, ns: false},
+  projectcalicoIPReservationTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoIPReservationView:     {breadcrumb: 'View', icon: iconIPReservation, ns: false },
+  projectcalicoIPReservationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoIPReservationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoKubeControllersConfiguration:        {breadcrumb: 'KubeControllersConfiguration', icon: iconKubeControllersConfiguration, ns: false},
+  projectcalicoKubeControllersConfigurationTable:    {breadcrumb: 'List', icon: 'list', ns: false },
+  projectcalicoKubeControllersConfigurationView:     {breadcrumb: 'View', icon: iconKubeControllersConfiguration, ns: false },
+  projectcalicoKubeControllersConfigurationEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: false },
+  projectcalicoKubeControllersConfigurationCreate:   {breadcrumb: 'Create', icon: 'add', ns: false },
+  projectcalicoNetworkSet:        {breadcrumb: 'NetworkSet', icon: iconNetworkSet, ns: false},
   projectcalicoNetworkSetAllTable: {breadcrumb: 'All', icon: 'list', ns: false},
-  projectcalicoNetworkSetTable:    {breadcrumb: 'List', icon: 'list', ns: true},
-  projectcalicoNetworkSetView:     {breadcrumb: 'View', icon: iconNetworkSet, ns: true},
-  projectcalicoNetworkSetEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true},
-  projectcalicoNetworkSetCreate:   {breadcrumb: 'Create', icon: 'add', ns: true},
+  projectcalicoNetworkSetTable:    {breadcrumb: 'List', icon: 'list', ns: true },
+  projectcalicoNetworkSetView:     {breadcrumb: 'View', icon: iconNetworkSet, ns: true },
+  projectcalicoNetworkSetEdit:     {breadcrumb: 'Edit', icon: 'visibility', ns: true },
+  projectcalicoNetworkSetCreate:   {breadcrumb: 'Create', icon: 'add', ns: true },
 }
 export const route = {
   path: 'projectcalico',
-  name: 'projectcalico',
+  name: 'networkprojectcalico',
   redirect: {path: link.link as string},
   children: [
     {
-      path: 'bgpconfigurations',
-      name: 'projectcalicoBGPConfigurations',
+      path: '',
+      name: 'networkprojectcalicoDashboard',
+      component: () => import('../../pages/network/projectcalico/Dashboard.vue'),
+    },
+    {
+      path: 'BGPConfiguration',
+      name: 'projectcalicoBGPConfiguration',
       children: [
         {
           path: '',
           name: 'projectcalicoBGPConfigurationTable',
-          component: () => import('../../components/projectcalico/BGPConfigurationTable.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPConfigurationList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoBGPConfigurationView',
-          component: () => import('../../components/projectcalico/BGPConfigurationView.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPConfigurationView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoBGPConfigurationEdit',
-          component: () => import('../../components/projectcalico/BGPConfigurationEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPConfigurationEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoBGPConfigurationCreate',
-          component: () => import('../../components/projectcalico/BGPConfigurationNew.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPConfigurationNew.vue'),
         }
       ]
     },
     {
-      path: 'bgppeers',
-      name: 'projectcalicoBGPPeers',
+      path: 'BGPPeer',
+      name: 'projectcalicoBGPPeer',
       children: [
         {
           path: '',
           name: 'projectcalicoBGPPeerTable',
-          component: () => import('../../components/projectcalico/BGPPeerTable.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPPeerList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoBGPPeerView',
-          component: () => import('../../components/projectcalico/BGPPeerView.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPPeerView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoBGPPeerEdit',
-          component: () => import('../../components/projectcalico/BGPPeerEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPPeerEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoBGPPeerCreate',
-          component: () => import('../../components/projectcalico/BGPPeerNew.vue'),
+          component: () => import('../../pages/network/projectcalico/BGPPeerNew.vue'),
         }
       ]
     },
     {
-      path: 'blockaffinities',
-      name: 'projectcalicoBlockAffinitys',
+      path: 'BlockAffinity',
+      name: 'projectcalicoBlockAffinity',
       children: [
         {
           path: '',
           name: 'projectcalicoBlockAffinityTable',
-          component: () => import('../../components/projectcalico/BlockAffinityTable.vue'),
+          component: () => import('../../pages/network/projectcalico/BlockAffinityList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoBlockAffinityView',
-          component: () => import('../../components/projectcalico/BlockAffinityView.vue'),
+          component: () => import('../../pages/network/projectcalico/BlockAffinityView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoBlockAffinityEdit',
-          component: () => import('../../components/projectcalico/BlockAffinityEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/BlockAffinityEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoBlockAffinityCreate',
-          component: () => import('../../components/projectcalico/BlockAffinityNew.vue'),
+          component: () => import('../../pages/network/projectcalico/BlockAffinityNew.vue'),
         }
       ]
     },
     {
-      path: 'caliconodestatuses',
-      name: 'projectcalicoCalicoNodeStatuss',
+      path: 'CalicoNodeStatus',
+      name: 'projectcalicoCalicoNodeStatus',
       children: [
         {
           path: '',
           name: 'projectcalicoCalicoNodeStatusTable',
-          component: () => import('../../components/projectcalico/CalicoNodeStatusTable.vue'),
+          component: () => import('../../pages/network/projectcalico/CalicoNodeStatusList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoCalicoNodeStatusView',
-          component: () => import('../../components/projectcalico/CalicoNodeStatusView.vue'),
+          component: () => import('../../pages/network/projectcalico/CalicoNodeStatusView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoCalicoNodeStatusEdit',
-          component: () => import('../../components/projectcalico/CalicoNodeStatusEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/CalicoNodeStatusEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoCalicoNodeStatusCreate',
-          component: () => import('../../components/projectcalico/CalicoNodeStatusNew.vue'),
+          component: () => import('../../pages/network/projectcalico/CalicoNodeStatusNew.vue'),
         }
       ]
     },
     {
-      path: 'clusterinformations',
-      name: 'projectcalicoClusterInformations',
+      path: 'ClusterInformation',
+      name: 'projectcalicoClusterInformation',
       children: [
         {
           path: '',
           name: 'projectcalicoClusterInformationTable',
-          component: () => import('../../components/projectcalico/ClusterInformationTable.vue'),
+          component: () => import('../../pages/network/projectcalico/ClusterInformationList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoClusterInformationView',
-          component: () => import('../../components/projectcalico/ClusterInformationView.vue'),
+          component: () => import('../../pages/network/projectcalico/ClusterInformationView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoClusterInformationEdit',
-          component: () => import('../../components/projectcalico/ClusterInformationEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/ClusterInformationEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoClusterInformationCreate',
-          component: () => import('../../components/projectcalico/ClusterInformationNew.vue'),
+          component: () => import('../../pages/network/projectcalico/ClusterInformationNew.vue'),
         }
       ]
     },
     {
-      path: 'felixconfigurations',
-      name: 'projectcalicoFelixConfigurations',
+      path: 'FelixConfiguration',
+      name: 'projectcalicoFelixConfiguration',
       children: [
         {
           path: '',
           name: 'projectcalicoFelixConfigurationTable',
-          component: () => import('../../components/projectcalico/FelixConfigurationTable.vue'),
+          component: () => import('../../pages/network/projectcalico/FelixConfigurationList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoFelixConfigurationView',
-          component: () => import('../../components/projectcalico/FelixConfigurationView.vue'),
+          component: () => import('../../pages/network/projectcalico/FelixConfigurationView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoFelixConfigurationEdit',
-          component: () => import('../../components/projectcalico/FelixConfigurationEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/FelixConfigurationEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoFelixConfigurationCreate',
-          component: () => import('../../components/projectcalico/FelixConfigurationNew.vue'),
+          component: () => import('../../pages/network/projectcalico/FelixConfigurationNew.vue'),
         }
       ]
     },
     {
-      path: 'globalnetworkpolicies',
-      name: 'projectcalicoGlobalNetworkPolicys',
+      path: 'GlobalNetworkPolicy',
+      name: 'projectcalicoGlobalNetworkPolicy',
       children: [
         {
           path: '',
           name: 'projectcalicoGlobalNetworkPolicyTable',
-          component: () => import('../../components/projectcalico/GlobalNetworkPolicyTable.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkPolicyList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoGlobalNetworkPolicyView',
-          component: () => import('../../components/projectcalico/GlobalNetworkPolicyView.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkPolicyView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoGlobalNetworkPolicyEdit',
-          component: () => import('../../components/projectcalico/GlobalNetworkPolicyEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkPolicyEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoGlobalNetworkPolicyCreate',
-          component: () => import('../../components/projectcalico/GlobalNetworkPolicyNew.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkPolicyNew.vue'),
         }
       ]
     },
     {
-      path: 'globalnetworksets',
-      name: 'projectcalicoGlobalNetworkSets',
+      path: 'GlobalNetworkSet',
+      name: 'projectcalicoGlobalNetworkSet',
       children: [
         {
           path: '',
           name: 'projectcalicoGlobalNetworkSetTable',
-          component: () => import('../../components/projectcalico/GlobalNetworkSetTable.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkSetList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoGlobalNetworkSetView',
-          component: () => import('../../components/projectcalico/GlobalNetworkSetView.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkSetView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoGlobalNetworkSetEdit',
-          component: () => import('../../components/projectcalico/GlobalNetworkSetEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkSetEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoGlobalNetworkSetCreate',
-          component: () => import('../../components/projectcalico/GlobalNetworkSetNew.vue'),
+          component: () => import('../../pages/network/projectcalico/GlobalNetworkSetNew.vue'),
         }
       ]
     },
     {
-      path: 'hostendpoints',
-      name: 'projectcalicoHostEndpoints',
+      path: 'HostEndpoint',
+      name: 'projectcalicoHostEndpoint',
       children: [
         {
           path: '',
           name: 'projectcalicoHostEndpointTable',
-          component: () => import('../../components/projectcalico/HostEndpointTable.vue'),
+          component: () => import('../../pages/network/projectcalico/HostEndpointList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoHostEndpointView',
-          component: () => import('../../components/projectcalico/HostEndpointView.vue'),
+          component: () => import('../../pages/network/projectcalico/HostEndpointView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoHostEndpointEdit',
-          component: () => import('../../components/projectcalico/HostEndpointEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/HostEndpointEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoHostEndpointCreate',
-          component: () => import('../../components/projectcalico/HostEndpointNew.vue'),
+          component: () => import('../../pages/network/projectcalico/HostEndpointNew.vue'),
         }
       ]
     },
     {
-      path: 'ipamblocks',
-      name: 'projectcalicoIPAMBlocks',
+      path: 'IPAMBlock',
+      name: 'projectcalicoIPAMBlock',
       children: [
         {
           path: '',
           name: 'projectcalicoIPAMBlockTable',
-          component: () => import('../../components/projectcalico/IPAMBlockTable.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMBlockList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoIPAMBlockView',
-          component: () => import('../../components/projectcalico/IPAMBlockView.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMBlockView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoIPAMBlockEdit',
-          component: () => import('../../components/projectcalico/IPAMBlockEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMBlockEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoIPAMBlockCreate',
-          component: () => import('../../components/projectcalico/IPAMBlockNew.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMBlockNew.vue'),
         }
       ]
     },
     {
-      path: 'ipamconfigs',
-      name: 'projectcalicoIPAMConfigs',
+      path: 'IPAMConfig',
+      name: 'projectcalicoIPAMConfig',
       children: [
         {
           path: '',
           name: 'projectcalicoIPAMConfigTable',
-          component: () => import('../../components/projectcalico/IPAMConfigTable.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMConfigList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoIPAMConfigView',
-          component: () => import('../../components/projectcalico/IPAMConfigView.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMConfigView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoIPAMConfigEdit',
-          component: () => import('../../components/projectcalico/IPAMConfigEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMConfigEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoIPAMConfigCreate',
-          component: () => import('../../components/projectcalico/IPAMConfigNew.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMConfigNew.vue'),
         }
       ]
     },
     {
-      path: 'ipamhandles',
-      name: 'projectcalicoIPAMHandles',
+      path: 'IPAMHandle',
+      name: 'projectcalicoIPAMHandle',
       children: [
         {
           path: '',
           name: 'projectcalicoIPAMHandleTable',
-          component: () => import('../../components/projectcalico/IPAMHandleTable.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMHandleList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoIPAMHandleView',
-          component: () => import('../../components/projectcalico/IPAMHandleView.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMHandleView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoIPAMHandleEdit',
-          component: () => import('../../components/projectcalico/IPAMHandleEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMHandleEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoIPAMHandleCreate',
-          component: () => import('../../components/projectcalico/IPAMHandleNew.vue'),
+          component: () => import('../../pages/network/projectcalico/IPAMHandleNew.vue'),
         }
       ]
     },
     {
-      path: 'ippools',
-      name: 'projectcalicoIPPools',
+      path: 'IPPool',
+      name: 'projectcalicoIPPool',
       children: [
         {
           path: '',
           name: 'projectcalicoIPPoolTable',
-          component: () => import('../../components/projectcalico/IPPoolTable.vue'),
+          component: () => import('../../pages/network/projectcalico/IPPoolList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoIPPoolView',
-          component: () => import('../../components/projectcalico/IPPoolView.vue'),
+          component: () => import('../../pages/network/projectcalico/IPPoolView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoIPPoolEdit',
-          component: () => import('../../components/projectcalico/IPPoolEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/IPPoolEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoIPPoolCreate',
-          component: () => import('../../components/projectcalico/IPPoolNew.vue'),
+          component: () => import('../../pages/network/projectcalico/IPPoolNew.vue'),
         }
       ]
     },
     {
-      path: 'ipreservations',
-      name: 'projectcalicoIPReservations',
+      path: 'IPReservation',
+      name: 'projectcalicoIPReservation',
       children: [
         {
           path: '',
           name: 'projectcalicoIPReservationTable',
-          component: () => import('../../components/projectcalico/IPReservationTable.vue'),
+          component: () => import('../../pages/network/projectcalico/IPReservationList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoIPReservationView',
-          component: () => import('../../components/projectcalico/IPReservationView.vue'),
+          component: () => import('../../pages/network/projectcalico/IPReservationView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoIPReservationEdit',
-          component: () => import('../../components/projectcalico/IPReservationEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/IPReservationEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoIPReservationCreate',
-          component: () => import('../../components/projectcalico/IPReservationNew.vue'),
+          component: () => import('../../pages/network/projectcalico/IPReservationNew.vue'),
         }
       ]
     },
     {
-      path: 'kubecontrollersconfigurations',
-      name: 'projectcalicoKubeControllersConfigurations',
+      path: 'KubeControllersConfiguration',
+      name: 'projectcalicoKubeControllersConfiguration',
       children: [
         {
           path: '',
           name: 'projectcalicoKubeControllersConfigurationTable',
-          component: () => import('../../components/projectcalico/KubeControllersConfigurationTable.vue'),
+          component: () => import('../../pages/network/projectcalico/KubeControllersConfigurationList.vue'),
         },
         {
-          path: ':name/view',
+          path: 'view/:name',
           name: 'projectcalicoKubeControllersConfigurationView',
-          component: () => import('../../components/projectcalico/KubeControllersConfigurationView.vue'),
+          component: () => import('../../pages/network/projectcalico/KubeControllersConfigurationView.vue'),
         },
         {
-          path: ':name/edit',
+          path: 'edit/:name',
           name: 'projectcalicoKubeControllersConfigurationEdit',
-          component: () => import('../../components/projectcalico/KubeControllersConfigurationEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/KubeControllersConfigurationEdit.vue'),
         },
         {
           path: 'create',
           name: 'projectcalicoKubeControllersConfigurationCreate',
-          component: () => import('../../components/projectcalico/KubeControllersConfigurationNew.vue'),
+          component: () => import('../../pages/network/projectcalico/KubeControllersConfigurationNew.vue'),
         }
       ]
     },
     {
-      path: 'networkpolicies',
-      name: 'projectcalicoNetworkPolicys',
-      children: [
-        {
-          path: '',
-          name: 'projectcalicoNetworkPolicyAllTable',
-          component: () => import('../../components/projectcalico/NetworkPolicyAllTable.vue'),
-        },
-        {
-          path: ':namespace',
-          name: 'projectcalicoNetworkPolicyTable',
-          component: () => import('../../components/projectcalico/NetworkPolicyTable.vue'),
-        },
-        {
-          path: ':namespace/view/:name',
-          name: 'projectcalicoNetworkPolicyView',
-          component: () => import('../../components/projectcalico/NetworkPolicyView.vue'),
-        },
-        {
-          path: ':namespace/edit/:name',
-          name: 'projectcalicoNetworkPolicyEdit',
-          component: () => import('../../components/projectcalico/NetworkPolicyEdit.vue'),
-        },
-        {
-          path: ':namespace/create',
-          name: 'projectcalicoNetworkPolicyCreate',
-          component: () => import('../../components/projectcalico/NetworkPolicyNew.vue'),
-        }
-      ]
-    },
-    {
-      path: 'networksets',
-      name: 'projectcalicoNetworkSets',
+      path: 'NetworkSet',
+      name: 'projectcalicoNetworkSet',
       children: [
         {
           path: '',
           name: 'projectcalicoNetworkSetAllTable',
-          component: () => import('../../components/projectcalico/NetworkSetAllTable.vue'),
+          component: () => import('../../pages/network/projectcalico/NetworkSetList.vue'),
         },
         {
           path: ':namespace',
           name: 'projectcalicoNetworkSetTable',
-          component: () => import('../../components/projectcalico/NetworkSetTable.vue'),
+          component: () => import('../../pages/network/projectcalico/NetworkSetList.vue'),
         },
         {
           path: ':namespace/view/:name',
           name: 'projectcalicoNetworkSetView',
-          component: () => import('../../components/projectcalico/NetworkSetView.vue'),
+          component: () => import('../../pages/network/projectcalico/NetworkSetView.vue'),
         },
         {
           path: ':namespace/edit/:name',
           name: 'projectcalicoNetworkSetEdit',
-          component: () => import('../../components/projectcalico/NetworkSetEdit.vue'),
+          component: () => import('../../pages/network/projectcalico/NetworkSetEdit.vue'),
         },
         {
           path: ':namespace/create',
           name: 'projectcalicoNetworkSetCreate',
-          component: () => import('../../components/projectcalico/NetworkSetNew.vue'),
+          component: () => import('../../pages/network/projectcalico/NetworkSetNew.vue'),
         }
       ]
     },

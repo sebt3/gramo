@@ -1,0 +1,172 @@
+query k8sQuery($namespace: queryParameters, $ServiceAccount: queryParameters, $CertificateSigningRequest: queryParameters, $NetworkPolicy: queryParameters, $Role: queryParameters, $ClusterRoleBinding: queryParameters, $RoleBinding: queryParameters, $ClusterRole: queryParameters) {
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+    }
+    k8sServiceAccount(params: $ServiceAccount) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      automountServiceAccountToken
+      imagePullSecrets
+      secrets
+      parentPooler {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentCluster {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      usedByPod {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+    }
+    k8sNetworkPolicy(params: $NetworkPolicy) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+    k8sRole(params: $Role) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      rules
+      parentCluster {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentPooler {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+    }
+    k8sRoleBinding(params: $RoleBinding) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      roleRef
+      subjects
+      parentCluster {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      parentPooler {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+    }
+  }
+  k8sCertificateSigningRequest(params: $CertificateSigningRequest) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+  k8sClusterRoleBinding(params: $ClusterRoleBinding) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    roleRef
+    subjects
+  }
+  k8sClusterRole(params: $ClusterRole) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    aggregationRule
+    rules
+  }
+}

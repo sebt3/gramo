@@ -1,0 +1,13 @@
+query k8sAPIServiceQuery($obj: queryParameters,) {
+    k8sAPIService(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      spec
+      status
+    }
+}

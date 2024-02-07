@@ -1,0 +1,26 @@
+import { queries as customQueries, resolvers as customResolvers, mutations as customMutations } from './custom.js';
+{{#each objects}}
+import { mutations as {{this.short}}Mutations, resolvers as {{this.short}}Resolvers{{#unless this.namespaced}}, queries as {{this.short}}Queries{{/unless}} } from './{{this.short}}.js';
+{{/each}}
+export const queries = {
+{{#each objects}}
+  {{#unless this.namespaced}}
+    ...{{this.short}}Queries,
+  {{/unless}}
+{{/each}}
+    ...customQueries
+};
+
+export const resolvers = {
+{{#each objects}}
+    ...{{this.short}}Resolvers,
+{{/each}}
+    ...customResolvers
+};
+
+export const mutations = {
+{{#each objects}}
+    ...{{this.short}}Mutations,
+{{/each}}
+    ...customMutations
+};

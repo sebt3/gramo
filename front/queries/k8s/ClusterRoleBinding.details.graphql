@@ -1,0 +1,38 @@
+query k8sClusterRoleBindingQuery($obj: queryParameters,, $provideClusterRole: queryParameters, $providedToServiceAccount: queryParameters) {
+    k8sClusterRoleBinding(params: $obj) {
+      metadata {
+        name
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      provideClusterRole(params: $provideClusterRole) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        aggregationRule
+        rules
+      }
+      providedToServiceAccount(params: $providedToServiceAccount) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        automountServiceAccountToken
+        imagePullSecrets
+        secrets
+      }
+      roleRef
+      subjects
+    }
+}

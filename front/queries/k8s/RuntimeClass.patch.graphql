@@ -1,0 +1,15 @@
+mutation k8sRuntimeClass($name: String!, $handler: String, $overhead: JSONObject, $scheduling: JSONObject) {
+  k8sRuntimeClassPatch(name: $name, handler: $handler, overhead: $overhead, scheduling: $scheduling) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      handler
+      overhead
+      scheduling
+  }
+}

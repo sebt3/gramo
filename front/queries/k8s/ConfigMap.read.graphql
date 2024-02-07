@@ -1,0 +1,17 @@
+query k8sConfigMapQuery($namespace: queryParameters, $obj: queryParameters,) {
+  k8sNamespace(params: $namespace) {
+    k8sConfigMap(params: $obj) {
+      metadata {
+        name
+        namespace
+        annotations
+        labels
+        creationTimestamp
+        uid
+      }
+      binaryData
+      data
+      immutable
+    }
+  }
+}

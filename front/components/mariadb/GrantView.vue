@@ -1,74 +1,36 @@
 <script setup lang="ts">
-import mariadbGrantQuery from '@/queries/mariadb/GrantView.graphql'
-import grantDelete from '@/queries/mariadb/GrantDelete.graphql'
-import MetadataView from '../core/MetadataView.vue';
-import OpenApiEdit from '../core/OpenApiEdit.vue';
-import DefaultStatusView from '../core/DefaultStatusView.vue';
-import MonacoViewer from '../core/MonacoViewer.vue';
-import { useQuery, useMutation, useGrant, getProperties } from './Grant.js'
-const { editor, viewer, viewerUpdate, onErrorHandler, notifySuccess, notifyError, onNotGrantFound, navigation, setNamespacedItemFromRoute, toEdit, actionDelete } = useGrant();setNamespacedItemFromRoute();
-const { result, loading, onResult, onError } = useQuery(mariadbGrantQuery, {"namespace": navigation.currentNamespace, "name": navigation.currentItem }, { pollInterval: 500 });onError(onErrorHandler); onResult(res => {onNotGrantFound(res);viewerUpdate(res, res.loading?{}:res.data.mariadbGrant.metadata.obj)});
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(grantDelete);
-onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
-})
-onDeleteError((err) => {
-  notifyError('Deletion failed');
-  console.log('deletion error',err);
+import { onMounted } from "vue";
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoViewer from '@/components/core/MonacoViewer.vue';
+import { useGrant, getProperties, GrantDefinition } from '../../libs/mariadb/Grant.js'
+const { onlyReadProperties, viewer, viewerUpdate, setNamespacedItemFromRoute } = useGrant();setNamespacedItemFromRoute();
+const props = defineProps<{model: object}>();
+onMounted(() => {
+  viewerUpdate(onlyReadProperties(props.model));
 })
 </script>
 <template>
-  <div class="row q-mb-sm q-ml-sm">
-    <div class="col-md-6">
-      <q-card bordered v-if="!loading && result!=undefined && result.mariadbGrant!=undefined && result.mariadbGrant!=null" class="q-ma-sm">
-        <q-card-section class="bg-primary text-grey-4">
-          <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">Grant
-            <q-btn-group push class="float-right text-capitalize shadow-3">
-              <q-btn icon="edit" @click="toEdit(result.mariadbGrant.metadata.namespace, result.mariadbGrant.metadata.name)">
-                <q-tooltip>Edit</q-tooltip>
-              </q-btn>
-              <q-btn icon="delete" @click="actionDelete(deletor, result.mariadbGrant)">
-                <q-tooltip>Delete</q-tooltip>
-              </q-btn>
-            </q-btn-group>
-          </div>
-        </q-card-section>
-        <q-card-section>
-          <MetadataView :metadata="result.mariadbGrant.metadata" />
-        </q-card-section>
-      </q-card>
-      <q-card bordered v-if="!loading && result!=undefined && result.mariadbGrant!=undefined && result.mariadbGrant!=null" class="q-ma-sm">
-        <q-card-section>
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
-        </q-card-section>
-        <q-card-section v-if="!loading && result.mariadbGrant!=null && result.mariadbGrant.status != null">
-          <DefaultStatusView :status="result.mariadbGrant.status" />
-        </q-card-section>
-      </q-card>
-    </div><div class="col-md-6">
-      <q-card bordered v-if="!loading && result!=undefined && result.mariadbGrant!=undefined && result.mariadbGrant!=null" class="q-ma-sm">
-        <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
-          <q-tab label="Options" name="simple" />
-          <q-tab label="Specifications" name="spec" />
-          <q-tab label="full Yaml" name="yaml" />
-        </q-tabs>
-        <q-tab-panels v-model="viewer.tab" animated>
-          <q-tab-panel name="simple">
-            <OpenApiEdit
-              :in="result.mariadbGrant"
-              :properties="getProperties(result.customResourceDefinition.versions.filter(v => v.served)[0].schema.openAPIV3Schema.properties.spec)"
-              :read-only="true"
-              :show-default="false"
-            />
-          </q-tab-panel>
-          <q-tab-panel name="spec">
-            <MonacoViewer :text="viewer.spec" :key="viewer.spec" />
-          </q-tab-panel>
-          <q-tab-panel name="yaml">
-            <MonacoViewer :text="viewer.full" :key="viewer.spec" />
-          </q-tab-panel>
-        </q-tab-panels>
-      </q-card>
-    </div>
-  </div>
+  <q-card bordered class="q-ma-sm">
+    <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
+      <q-tab label="Simple" name="simple" />
+      <q-tab label="spec" name="spec" v-if="model['spec']!=null" />
+      <q-tab label="full Yaml" name="yaml" />
+    </q-tabs>
+    <q-tab-panels v-model="viewer.tab" animated>
+      <q-tab-panel name="simple">
+        <OpenApiEdit
+          :in="model['spec']"
+          :properties="getProperties(GrantDefinition.properties.spec)"
+          :read-only="true"
+          :show-default="false"
+        />
+      </q-tab-panel>
+      <q-tab-panel name="spec" v-if="model['spec']!=null">
+        <MonacoViewer :text="viewer.props.spec" :key="viewer.props.spec" />
+      </q-tab-panel>
+      <q-tab-panel name="yaml">
+        <MonacoViewer :text="viewer.full" :key="viewer.full" />
+      </q-tab-panel>
+    </q-tab-panels>
+  </q-card>
 </template>

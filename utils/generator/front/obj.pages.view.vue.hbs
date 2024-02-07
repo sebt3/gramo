@@ -1,0 +1,98 @@
+<script setup lang="ts">
+import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.details.graphql'
+import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
+import {{ group }}{{ short }}Meta from '@/components/{{ group }}/{{ short }}Meta.vue';
+import {{ group }}{{ short }}View from '@/components/{{ group }}/{{ short }}View.vue';
+{{#if (contain readProperties 'status')}}
+import {{ group }}{{ short }}Status from '@/components/{{ group }}/{{ short }}Status.vue';
+{{/if}}
+{{#each resolvers}}
+import { {{ resultShort }}ListExcludes } from '../../../libs/{{ resultGroup }}/custom.js'
+  {{#if (or (eq type 'parent') (or (eq resultShort 'Node') (eq resultShort 'ServiceAccount')))}}
+import {{ resultGroup }}{{ resultShort }}Meta from '@/components/{{ resultGroup }}/{{ resultShort }}Meta.vue';
+  {{else}}
+import {{ resultGroup }}{{ resultShort }}List from '@/components/{{ resultGroup }}/{{ resultShort }}List.vue';
+  {{/if}}
+{{/each}}
+import { useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+{{else}}
+const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+{{/if}}
+const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
+  "obj": {
+    "filters": [
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentItem
+      }
+    ], "excludes": {{ short }}ReadExcludes
+  },
+{{#each resolvers}}
+  "{{ name }}": {"filters": [], "excludes": {{ resultShort }}ListExcludes},
+{{/each}}
+{{#if namespaced}}
+  "namespace": {
+    "filters": [
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentNamespace
+      }
+    ]
+  }
+{{/if}}
+}, { pollInterval: 2000 });onError(onErrorHandler); onResult(res => {onNot{{ short }}Found(res)});
+const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
+onDeleteDone(() => {
+  notifySuccess('Deletion proceded');
+})
+onDeleteError((err) => {
+  notifyError('Deletion failed');
+  console.log('deletion error',err);
+})
+</script>
+<template>
+  <div class="row q-mb-sm q-ml-sm">
+    <div class="col-md-{{#if (contain readProperties 'status')}}6{{else}}3{{/if}}">
+      <{{ group }}{{ short }}Meta :deletor="deletor" :useActions="true"
+        v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
+        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+       />
+    </div>
+{{#if (contain readProperties 'status')}}
+    <div class="col-md-6">
+      <{{ group }}{{ short }}Status
+        v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
+        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+       />
+    </div>
+{{/if}}
+{{#each resolvers}}
+  {{#if (or (eq type 'parent') (or (eq resultShort 'Node') (eq resultShort 'ServiceAccount')))}}
+    <div class="col-md-3" v-if="!loading && result!=undefined{{#if ../namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=undefined && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}.length>0">
+      <{{ resultGroup }}{{ resultShort }}Meta
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}[0]"
+       />
+    </div>
+  {{/if}}
+{{/each}}
+{{#each resolvers}}
+  {{#unless (or (eq type 'parent') (or (eq resultShort 'Node') (eq resultShort 'ServiceAccount')))}}
+    <div class="col-md-3" v-if="!loading && result!=undefined{{#if ../namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=undefined && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0]!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}!=null && result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}.length>0">
+      <{{ resultGroup }}{{ resultShort }}List
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+       />
+    </div>
+  {{/unless}}
+{{/each}}
+    <div class="col-md-12">
+      <{{ group }}{{ short }}View class="q-ma-sm"
+        v-if="!loading && result!=undefined{{#if namespaced}} && result.k8sNamespace!=undefined {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
+        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        />
+    </div>
+  </div>
+</template>

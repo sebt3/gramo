@@ -1,0 +1,8 @@
+{{#each groups}}
+import { resolvers as {{this.name}}NSresolvers } from './nsResolvers.{{this.name}}.js';
+{{/each}}
+export const resolvers = {
+{{#each groups}}
+    ...{{this.name}}NSresolvers,
+{{/each}}
+};
