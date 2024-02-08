@@ -3,6 +3,7 @@ WORKDIR /usr/src
 COPY package.json yarn.lock ./
 RUN yarn install
 COPY . ./
+RUN yarn gen
 RUN yarn build
 
 FROM node:18-slim as target

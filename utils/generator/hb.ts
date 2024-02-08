@@ -43,6 +43,13 @@ export const loadCompile = (file:string) => {
         }
     }
 }
+export const removeGenerated = (dirname:string, filename:string) => {
+    if (fs.existsSync(path.resolve(dirname, filename)) && fs.readFileSync(path.resolve(dirname, filename)).toLocaleString().includes('noGramoGenerator')) {
+        fs.unlink(path.resolve(dirname, `${unsure}${filename}`), (e)=> e && console.error(e));
+    } else {
+        fs.unlink(path.resolve(dirname, filename), (e)=> e && console.error(e));
+    }
+}
 export const loadPartial = (name: string, file:string) => {
     HB.registerPartial(name, fs.readFileSync(file).toLocaleString());
 }

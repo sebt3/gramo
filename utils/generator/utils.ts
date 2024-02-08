@@ -27,6 +27,13 @@ export function mkdir(directory:string){
         fs.mkdirSync(directory, { recursive: true });
     }
 }
+export function saveTo(filename:string,content:any){
+    fs.writeFileSync(filename, JSON.stringify(content));
+}
+export function LoadFrom(filename:string){
+    return JSON.parse(fs.readFileSync(filename).toLocaleString())
+}
+
 function getSub(n) {
     return n=='rbac'?'rbacAuthorization':n
 }
