@@ -111,6 +111,7 @@ new Promise((resolve) => {
         grpCustom(path.resolve(path_front, 'libs', g.name),`custom.ts`, g)
         allCategories.filter(c=> g.objects.filter(o=>o.category==c).length>0).forEach(c=>{
             grpRoutes(path.resolve(path_front, 'routes', c), `${g.name}.ts`, {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
+            mkdir(path.resolve(path_front, 'pages', c, g.name))
             grpPageList(path.resolve(path_front, 'pages', c, g.name), 'Dashboard.vue', {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
             grpQueryRead(path.resolve(path_front, 'queries', g.name), `${c}.read.graphql`, {...g, detailed: false, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)})
             grpQueryRead(path.resolve(path_front, 'queries', g.name), `${c}.details.graphql`, {...g, detailed: true, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)})
