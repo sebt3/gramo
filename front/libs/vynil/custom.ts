@@ -1,9 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const vynilIcon = 'apps';
+export const vynilIcon = 'album';
 export const vynilTitle = 'Vynil';
-export const iconDistrib = 'album';
+export const iconDistrib = 'speaker_group';
 export const colorDistrib = '';
 export const descriptionDistrib = '';
 export const shortDistrib = '';

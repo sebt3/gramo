@@ -16,7 +16,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
 // and group them according to their defined apiGroup and final super group
     // Group all swagger definitions marked as a kubernetes object into their apiGroup,
     // add its CRD if found and start to refine the object properties
-    const definitions = replaceRefWithDef(Object.entries((data_in as openapi).definitions).filter(e => e[1].properties!=undefined && e[1].properties['items']==undefined))
+    const definitions = replaceRefWithDef(Object.entries((data_in as openapi).definitions))//.filter(e => e[1].properties!=undefined && e[1].properties['items']==undefined))
     const known_data = ((apis_in as object)['groups'] as Array<object>).map(i => { return {
         name: i['name'],
         ...getShort(i['name']),
@@ -29,7 +29,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
         })})
     }});
     // List the remaining objects not matched in a defined apiGroup (they belong to the group '' which is kubernetes main objects)
-    const excluded_objects = Object.entries((data_in as openapi).definitions).filter(([n, i]) =>
+    const excluded_objects = Object.entries(definitions).filter(([n, i]) =>
         Object.keys(i).includes('x-kubernetes-group-version-kind') && i['x-kubernetes-group-version-kind'].length==1 &&
         !known_data.map(d=>d.name).includes(i['x-kubernetes-group-version-kind'][0]['group']) &&
         !/List$/.test(n) && !/^io.k8s.apimachinery.pkg.apis/.test(n)
@@ -46,7 +46,6 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
     // Deduplicate same objects in distinct apiGroup and mark the alternative options
     return subgroups.map(s=>s.group).filter(uniq).map(g => { return {
         name: g,
-        subs: subgroups.filter(s=>s.group==g && s.objects.length>0),
         objects: subgroups.filter(s=>s.group==g && s.objects.length>0).map(s=>s.objects).flat().map(o=>o.short).filter(uniq).map((short) => {return {
             alternatives: subgroups.filter(s=>s.group==g && s.objects.length>0).map(s=>s.objects.filter(o=>o.short==short)).flat()
         }}).map(tmp=>{return finalizeObject({...tmp,...tmp.alternatives.sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]} as k8sObject,allObjects)})

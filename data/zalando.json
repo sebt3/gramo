@@ -1,1 +1,2177 @@
-{"name":"zalando","subs":[{"name":"acid.zalan.do","group":"zalando","sub":"acid","objects":[{"name":"do.zalan.acid.v1.postgresql","definition":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{},"volumeSource":{"x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{},"initContainers":{},"init_containers":{"description":"deprecated"},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{}},"usersWithInPlaceSecretRotation":{},"usersWithSecretRotation":{},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}},"x-kubernetes-group-version-kind":[{"group":"acid.zalan.do","kind":"postgresql","version":"v1"}]},"crd":{"metadata":{"name":"postgresqls.acid.zalan.do","uid":"2ad1a541-c3a4-49e7-bb1b-da93a4f193a9","resourceVersion":"2176","generation":1,"creationTimestamp":"2023-06-29T06:18:16Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"postgres-operator","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"acid.zalan.do","names":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"type":"string","enum":["acid.zalan.do/v1"]},"kind":{"type":"string","enum":["postgresql"]},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{"type":"array","items":{"type":"string"},"nullable":true},"volumeSource":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{"type":"array","items":{"type":"string","pattern":"^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\/(\\d|[1-2]\\d|3[0-2])$"},"nullable":true},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"initContainers":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"init_containers":{"description":"deprecated","type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","oneOf":[{"required":["s3_wal_path"]},{"required":["gs_wal_path"]},{"required":["standby_host"]}],"properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","enum":["bypassrls","BYPASSRLS","nobypassrls","NOBYPASSRLS","createdb","CREATEDB","nocreatedb","NOCREATEDB","createrole","CREATEROLE","nocreaterole","NOCREATEROLE","inherit","INHERIT","noinherit","NOINHERIT","login","LOGIN","nologin","NOLOGIN","replication","REPLICATION","noreplication","NOREPLICATION","superuser","SUPERUSER","nosuperuser","NOSUPERUSER"]},"nullable":true}},"usersWithInPlaceSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"usersWithSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}}}},"subresources":{"status":{}},"additionalPrinterColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}]}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"storedVersions":["v1"]}},"additionalColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}],"short":"postgresql","apiGroup":"acid.zalan.do","apiKind":"postgresql","apiVersion":"v1","readProperties":["spec","status"],"writeProperties":["spec"],"group":"zalando","sub":"acid","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","spec":"JSONObject","status":"JSONObject"},"namespaced":true}]},{"name":"zalando.org","group":"zalando","sub":"zalando","objects":[{"name":"org.zalando.v1.ClusterKopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"ClusterKopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"clusterkopfpeerings.zalando.org","uid":"db255947-d5ac-431f-bf01-f4cebc7e5527","resourceVersion":"104674813","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"scope":"Cluster","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"storedVersions":["v1"]}},"short":"ClusterKopfPeering","apiGroup":"zalando.org","apiKind":"ClusterKopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":false},{"name":"org.zalando.v1.KopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"KopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"kopfpeerings.zalando.org","uid":"a331063c-7e02-4081-9deb-e4f16139e917","resourceVersion":"104674814","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"storedVersions":["v1"]}},"short":"KopfPeering","apiGroup":"zalando.org","apiKind":"KopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":true}]}],"objects":[{"alternatives":[{"name":"do.zalan.acid.v1.postgresql","definition":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{},"volumeSource":{"x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{},"initContainers":{},"init_containers":{"description":"deprecated"},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{}},"usersWithInPlaceSecretRotation":{},"usersWithSecretRotation":{},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}},"x-kubernetes-group-version-kind":[{"group":"acid.zalan.do","kind":"postgresql","version":"v1"}]},"crd":{"metadata":{"name":"postgresqls.acid.zalan.do","uid":"2ad1a541-c3a4-49e7-bb1b-da93a4f193a9","resourceVersion":"2176","generation":1,"creationTimestamp":"2023-06-29T06:18:16Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"postgres-operator","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"acid.zalan.do","names":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"type":"string","enum":["acid.zalan.do/v1"]},"kind":{"type":"string","enum":["postgresql"]},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{"type":"array","items":{"type":"string"},"nullable":true},"volumeSource":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{"type":"array","items":{"type":"string","pattern":"^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\/(\\d|[1-2]\\d|3[0-2])$"},"nullable":true},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"initContainers":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"init_containers":{"description":"deprecated","type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","oneOf":[{"required":["s3_wal_path"]},{"required":["gs_wal_path"]},{"required":["standby_host"]}],"properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","enum":["bypassrls","BYPASSRLS","nobypassrls","NOBYPASSRLS","createdb","CREATEDB","nocreatedb","NOCREATEDB","createrole","CREATEROLE","nocreaterole","NOCREATEROLE","inherit","INHERIT","noinherit","NOINHERIT","login","LOGIN","nologin","NOLOGIN","replication","REPLICATION","noreplication","NOREPLICATION","superuser","SUPERUSER","nosuperuser","NOSUPERUSER"]},"nullable":true}},"usersWithInPlaceSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"usersWithSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}}}},"subresources":{"status":{}},"additionalPrinterColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}]}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"storedVersions":["v1"]}},"additionalColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}],"short":"postgresql","apiGroup":"acid.zalan.do","apiKind":"postgresql","apiVersion":"v1","readProperties":["spec","status"],"writeProperties":["spec"],"group":"zalando","sub":"acid","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","spec":"JSONObject","status":"JSONObject"},"namespaced":true}],"name":"do.zalan.acid.v1.postgresql","definition":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{},"volumeSource":{"x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{},"initContainers":{},"init_containers":{"description":"deprecated"},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{}},"usersWithInPlaceSecretRotation":{},"usersWithSecretRotation":{},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}},"x-kubernetes-group-version-kind":[{"group":"acid.zalan.do","kind":"postgresql","version":"v1"}]},"crd":{"metadata":{"name":"postgresqls.acid.zalan.do","uid":"2ad1a541-c3a4-49e7-bb1b-da93a4f193a9","resourceVersion":"2176","generation":1,"creationTimestamp":"2023-06-29T06:18:16Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"postgres-operator","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2023-06-29T06:18:16Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:categories":{},"f:kind":{},"f:listKind":{},"f:plural":{},"f:shortNames":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"acid.zalan.do","names":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","required":["kind","apiVersion","spec"],"properties":{"apiVersion":{"type":"string","enum":["acid.zalan.do/v1"]},"kind":{"type":"string","enum":["postgresql"]},"spec":{"type":"object","required":["numberOfInstances","teamId","postgresql","volume"],"properties":{"additionalVolumes":{"type":"array","items":{"type":"object","required":["name","mountPath","volumeSource"],"properties":{"mountPath":{"type":"string"},"name":{"type":"string"},"subPath":{"type":"string"},"targetContainers":{"type":"array","items":{"type":"string"},"nullable":true},"volumeSource":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}},"allowedSourceRanges":{"type":"array","items":{"type":"string","pattern":"^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\/(\\d|[1-2]\\d|3[0-2])$"},"nullable":true},"clone":{"type":"object","required":["cluster"],"properties":{"cluster":{"type":"string"},"s3_access_key_id":{"type":"string"},"s3_endpoint":{"type":"string"},"s3_force_path_style":{"type":"boolean"},"s3_secret_access_key":{"type":"string"},"s3_wal_path":{"type":"string"},"timestamp":{"type":"string","pattern":"^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"},"uid":{"type":"string","format":"uuid"}}},"connectionPooler":{"type":"object","properties":{"dockerImage":{"type":"string"},"maxDBConnections":{"type":"integer"},"mode":{"type":"string","enum":["session","transaction"]},"numberOfInstances":{"type":"integer","minimum":1},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schema":{"type":"string"},"user":{"type":"string"}}},"databases":{"type":"object","additionalProperties":{"type":"string"}},"dockerImage":{"type":"string"},"enableConnectionPooler":{"type":"boolean"},"enableLogicalBackup":{"type":"boolean"},"enableMasterLoadBalancer":{"type":"boolean"},"enableMasterPoolerLoadBalancer":{"type":"boolean"},"enableReplicaConnectionPooler":{"type":"boolean"},"enableReplicaLoadBalancer":{"type":"boolean"},"enableReplicaPoolerLoadBalancer":{"type":"boolean"},"enableShmVolume":{"type":"boolean"},"env":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"initContainers":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"init_containers":{"description":"deprecated","type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"logicalBackupSchedule":{"type":"string","pattern":"^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"},"maintenanceWindows":{"type":"array","items":{"type":"string","pattern":"^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"}},"nodeAffinity":{"type":"object","properties":{"preferredDuringSchedulingIgnoredDuringExecution":{"type":"array","items":{"type":"object","required":["preference","weight"],"properties":{"preference":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}},"weight":{"type":"integer","format":"int32"}}}},"requiredDuringSchedulingIgnoredDuringExecution":{"type":"object","required":["nodeSelectorTerms"],"properties":{"nodeSelectorTerms":{"type":"array","items":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}},"matchFields":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string"},"values":{"type":"array","items":{"type":"string"}}}}}}}}}}}},"numberOfInstances":{"type":"integer","minimum":0},"patroni":{"type":"object","properties":{"failsafe_mode":{"type":"boolean"},"initdb":{"type":"object","additionalProperties":{"type":"string"}},"loop_wait":{"type":"integer"},"maximum_lag_on_failover":{"type":"integer"},"pg_hba":{"type":"array","items":{"type":"string"}},"retry_timeout":{"type":"integer"},"slots":{"type":"object","additionalProperties":{"type":"object","additionalProperties":{"type":"string"}}},"synchronous_mode":{"type":"boolean"},"synchronous_mode_strict":{"type":"boolean"},"synchronous_node_count":{"type":"integer"},"ttl":{"type":"integer"}}},"podAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"podPriorityClassName":{"type":"string"},"pod_priority_class_name":{"description":"deprecated","type":"string"},"postgresql":{"type":"object","required":["version"],"properties":{"parameters":{"type":"object","additionalProperties":{"type":"string"}},"version":{"type":"string","enum":["10","11","12","13","14","15"]}}},"preparedDatabases":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultUsers":{"type":"boolean"},"extensions":{"type":"object","additionalProperties":{"type":"string"}},"schemas":{"type":"object","additionalProperties":{"type":"object","properties":{"defaultRoles":{"type":"boolean"},"defaultUsers":{"type":"boolean"}}}},"secretNamespace":{"type":"string"}}}},"replicaLoadBalancer":{"description":"deprecated","type":"boolean"},"resources":{"type":"object","properties":{"limits":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}},"requests":{"type":"object","properties":{"cpu":{"type":"string","pattern":"^(\\d+m|\\d+(\\.\\d{1,3})?)$"},"memory":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"}}}}},"schedulerName":{"type":"string"},"serviceAnnotations":{"type":"object","additionalProperties":{"type":"string"}},"sidecars":{"type":"array","items":{"type":"object","x-kubernetes-preserve-unknown-fields":true},"nullable":true},"spiloFSGroup":{"type":"integer"},"spiloRunAsGroup":{"type":"integer"},"spiloRunAsUser":{"type":"integer"},"standby":{"type":"object","oneOf":[{"required":["s3_wal_path"]},{"required":["gs_wal_path"]},{"required":["standby_host"]}],"properties":{"gs_wal_path":{"type":"string"},"s3_wal_path":{"type":"string"},"standby_host":{"type":"string"},"standby_port":{"type":"string"}}},"streams":{"type":"array","items":{"type":"object","required":["applicationId","database","tables"],"properties":{"applicationId":{"type":"string"},"batchSize":{"type":"integer"},"database":{"type":"string"},"filter":{"type":"object","additionalProperties":{"type":"string"}},"tables":{"type":"object","additionalProperties":{"type":"object","required":["eventType"],"properties":{"eventType":{"type":"string"},"idColumn":{"type":"string"},"payloadColumn":{"type":"string"}}}}}}},"teamId":{"type":"string"},"tls":{"type":"object","required":["secretName"],"properties":{"caFile":{"type":"string"},"caSecretName":{"type":"string"},"certificateFile":{"type":"string"},"privateKeyFile":{"type":"string"},"secretName":{"type":"string"}}},"tolerations":{"type":"array","items":{"type":"object","properties":{"effect":{"type":"string","enum":["NoExecute","NoSchedule","PreferNoSchedule"]},"key":{"type":"string"},"operator":{"type":"string","enum":["Equal","Exists"]},"tolerationSeconds":{"type":"integer"},"value":{"type":"string"}}}},"useLoadBalancer":{"description":"deprecated","type":"boolean"},"users":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","enum":["bypassrls","BYPASSRLS","nobypassrls","NOBYPASSRLS","createdb","CREATEDB","nocreatedb","NOCREATEDB","createrole","CREATEROLE","nocreaterole","NOCREATEROLE","inherit","INHERIT","noinherit","NOINHERIT","login","LOGIN","nologin","NOLOGIN","replication","REPLICATION","noreplication","NOREPLICATION","superuser","SUPERUSER","nosuperuser","NOSUPERUSER"]},"nullable":true}},"usersWithInPlaceSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"usersWithSecretRotation":{"type":"array","items":{"type":"string"},"nullable":true},"volume":{"type":"object","required":["size"],"properties":{"iops":{"type":"integer"},"selector":{"type":"object","properties":{"matchExpressions":{"type":"array","items":{"type":"object","required":["key","operator"],"properties":{"key":{"type":"string"},"operator":{"type":"string","enum":["DoesNotExist","Exists","In","NotIn"]},"values":{"type":"array","items":{"type":"string"}}}}},"matchLabels":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}},"size":{"type":"string","pattern":"^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"},"storageClass":{"type":"string"},"subPath":{"type":"string"},"throughput":{"type":"integer"}}}}},"status":{"type":"object","additionalProperties":{"type":"string"}}}}},"subresources":{"status":{}},"additionalPrinterColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}]}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2023-06-29T06:18:16Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"postgresqls","singular":"postgresql","shortNames":["pg"],"kind":"postgresql","listKind":"postgresqlList","categories":["all"]},"storedVersions":["v1"]}},"additionalColumns":[{"name":"Team","type":"string","description":"Team responsible for Postgres cluster","jsonPath":".spec.teamId"},{"name":"Version","type":"string","description":"PostgreSQL version","jsonPath":".spec.postgresql.version"},{"name":"Pods","type":"integer","description":"Number of Pods per Postgres cluster","jsonPath":".spec.numberOfInstances"},{"name":"Volume","type":"string","description":"Size of the bound volume","jsonPath":".spec.volume.size"},{"name":"CPU-Request","type":"string","description":"Requested CPU for Postgres containers","jsonPath":".spec.resources.requests.cpu"},{"name":"Memory-Request","type":"string","description":"Requested memory for Postgres containers","jsonPath":".spec.resources.requests.memory"},{"name":"Age","type":"date","jsonPath":".metadata.creationTimestamp"},{"name":"Status","type":"string","description":"Current sync status of postgresql resource","jsonPath":".status.PostgresClusterStatus"}],"short":"postgresql","apiGroup":"acid.zalan.do","apiKind":"postgresql","apiVersion":"v1","readProperties":["spec","status"],"writeProperties":["spec"],"group":"zalando","sub":"acid","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","spec":"JSONObject","status":"JSONObject"},"namespaced":true,"category":"database"},{"alternatives":[{"name":"org.zalando.v1.ClusterKopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"ClusterKopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"clusterkopfpeerings.zalando.org","uid":"db255947-d5ac-431f-bf01-f4cebc7e5527","resourceVersion":"104674813","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"scope":"Cluster","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"storedVersions":["v1"]}},"short":"ClusterKopfPeering","apiGroup":"zalando.org","apiKind":"ClusterKopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":false}],"name":"org.zalando.v1.ClusterKopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"ClusterKopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"clusterkopfpeerings.zalando.org","uid":"db255947-d5ac-431f-bf01-f4cebc7e5527","resourceVersion":"104674813","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"scope":"Cluster","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"clusterkopfpeerings","singular":"clusterkopfpeering","kind":"ClusterKopfPeering","listKind":"ClusterKopfPeeringList"},"storedVersions":["v1"]}},"short":"ClusterKopfPeering","apiGroup":"zalando.org","apiKind":"ClusterKopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":false,"category":"database"},{"alternatives":[{"name":"org.zalando.v1.KopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"KopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"kopfpeerings.zalando.org","uid":"a331063c-7e02-4081-9deb-e4f16139e917","resourceVersion":"104674814","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"storedVersions":["v1"]}},"short":"KopfPeering","apiGroup":"zalando.org","apiKind":"KopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":true}],"name":"org.zalando.v1.KopfPeering","definition":{"type":"object","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"status":{"x-kubernetes-preserve-unknown-fields":true}},"x-kubernetes-group-version-kind":[{"group":"zalando.org","kind":"KopfPeering","version":"v1"}]},"crd":{"metadata":{"name":"kopfpeerings.zalando.org","uid":"a331063c-7e02-4081-9deb-e4f16139e917","resourceVersion":"104674814","generation":1,"creationTimestamp":"2024-01-18T17:34:17Z","managedFields":[{"manager":"kube-apiserver","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:acceptedNames":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:conditions":{"k:{\"type\":\"Established\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"NamesAccepted\"}":{".":{},"f:lastTransitionTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}}}},"subresource":"status"},{"manager":"kubectl-create","operation":"Update","apiVersion":"apiextensions.k8s.io/v1","time":"2024-01-18T17:34:17Z","fieldsType":"FieldsV1","fieldsV1":{"f:spec":{"f:conversion":{".":{},"f:strategy":{}},"f:group":{},"f:names":{"f:kind":{},"f:listKind":{},"f:plural":{},"f:singular":{}},"f:scope":{},"f:versions":{}}}}]},"spec":{"group":"zalando.org","names":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"scope":"Namespaced","versions":[{"name":"v1","served":true,"storage":true,"schema":{"openAPIV3Schema":{"type":"object","properties":{"status":{"type":"object","x-kubernetes-preserve-unknown-fields":true}}}}}],"conversion":{"strategy":"None"}},"status":{"conditions":[{"type":"NamesAccepted","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"NoConflicts","message":"no conflicts found"},{"type":"Established","status":"True","lastTransitionTime":"2024-01-18T17:34:17Z","reason":"InitialNamesAccepted","message":"the initial names have been accepted"}],"acceptedNames":{"plural":"kopfpeerings","singular":"kopfpeering","kind":"KopfPeering","listKind":"KopfPeeringList"},"storedVersions":["v1"]}},"short":"KopfPeering","apiGroup":"zalando.org","apiKind":"KopfPeering","apiVersion":"v1","readProperties":["status"],"writeProperties":[],"group":"zalando","sub":"zalando","listExcludes":[],"readExcludes":[],"simpleExcludes":[],"autoResolvers":[],"resolvers":[],"gqlDefs":{"metadata":"metadata!","status":"JSONObject"},"namespaced":true,"category":"database"}]}
+{
+  "name": "zalando",
+  "objects": [
+    {
+      "alternatives": [],
+      "name": "do.zalan.acid.v1.postgresql",
+      "definition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "apiVersion",
+          "spec"
+        ],
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "spec": {
+            "type": "object",
+            "required": [
+              "numberOfInstances",
+              "teamId",
+              "postgresql",
+              "volume"
+            ],
+            "properties": {
+              "additionalVolumes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "mountPath",
+                    "volumeSource"
+                  ],
+                  "properties": {
+                    "mountPath": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "subPath": {
+                      "type": "string"
+                    },
+                    "targetContainers": {},
+                    "volumeSource": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              },
+              "allowedSourceRanges": {},
+              "clone": {
+                "type": "object",
+                "required": [
+                  "cluster"
+                ],
+                "properties": {
+                  "cluster": {
+                    "type": "string"
+                  },
+                  "s3_access_key_id": {
+                    "type": "string"
+                  },
+                  "s3_endpoint": {
+                    "type": "string"
+                  },
+                  "s3_force_path_style": {
+                    "type": "boolean"
+                  },
+                  "s3_secret_access_key": {
+                    "type": "string"
+                  },
+                  "s3_wal_path": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "pattern": "^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"
+                  },
+                  "uid": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "connectionPooler": {
+                "type": "object",
+                "properties": {
+                  "dockerImage": {
+                    "type": "string"
+                  },
+                  "maxDBConnections": {
+                    "type": "integer"
+                  },
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "session",
+                      "transaction"
+                    ]
+                  },
+                  "numberOfInstances": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "resources": {
+                    "type": "object",
+                    "properties": {
+                      "limits": {
+                        "type": "object",
+                        "properties": {
+                          "cpu": {
+                            "type": "string",
+                            "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                          },
+                          "memory": {
+                            "type": "string",
+                            "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                          }
+                        }
+                      },
+                      "requests": {
+                        "type": "object",
+                        "properties": {
+                          "cpu": {
+                            "type": "string",
+                            "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                          },
+                          "memory": {
+                            "type": "string",
+                            "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "schema": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              },
+              "databases": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "dockerImage": {
+                "type": "string"
+              },
+              "enableConnectionPooler": {
+                "type": "boolean"
+              },
+              "enableLogicalBackup": {
+                "type": "boolean"
+              },
+              "enableMasterLoadBalancer": {
+                "type": "boolean"
+              },
+              "enableMasterPoolerLoadBalancer": {
+                "type": "boolean"
+              },
+              "enableReplicaConnectionPooler": {
+                "type": "boolean"
+              },
+              "enableReplicaLoadBalancer": {
+                "type": "boolean"
+              },
+              "enableReplicaPoolerLoadBalancer": {
+                "type": "boolean"
+              },
+              "enableShmVolume": {
+                "type": "boolean"
+              },
+              "env": {},
+              "initContainers": {},
+              "init_containers": {
+                "description": "deprecated"
+              },
+              "logicalBackupSchedule": {
+                "type": "string",
+                "pattern": "^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"
+              },
+              "maintenanceWindows": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"
+                }
+              },
+              "nodeAffinity": {
+                "type": "object",
+                "properties": {
+                  "preferredDuringSchedulingIgnoredDuringExecution": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "preference",
+                        "weight"
+                      ],
+                      "properties": {
+                        "preference": {
+                          "type": "object",
+                          "properties": {
+                            "matchExpressions": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "key",
+                                  "operator"
+                                ],
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "operator": {
+                                    "type": "string"
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "matchFields": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "key",
+                                  "operator"
+                                ],
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "operator": {
+                                    "type": "string"
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "weight": {
+                          "type": "integer",
+                          "format": "int32"
+                        }
+                      }
+                    }
+                  },
+                  "requiredDuringSchedulingIgnoredDuringExecution": {
+                    "type": "object",
+                    "required": [
+                      "nodeSelectorTerms"
+                    ],
+                    "properties": {
+                      "nodeSelectorTerms": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "matchExpressions": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "key",
+                                  "operator"
+                                ],
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "operator": {
+                                    "type": "string"
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "matchFields": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "key",
+                                  "operator"
+                                ],
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "operator": {
+                                    "type": "string"
+                                  },
+                                  "values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "numberOfInstances": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "patroni": {
+                "type": "object",
+                "properties": {
+                  "failsafe_mode": {
+                    "type": "boolean"
+                  },
+                  "initdb": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "loop_wait": {
+                    "type": "integer"
+                  },
+                  "maximum_lag_on_failover": {
+                    "type": "integer"
+                  },
+                  "pg_hba": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "retry_timeout": {
+                    "type": "integer"
+                  },
+                  "slots": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "synchronous_mode": {
+                    "type": "boolean"
+                  },
+                  "synchronous_mode_strict": {
+                    "type": "boolean"
+                  },
+                  "synchronous_node_count": {
+                    "type": "integer"
+                  },
+                  "ttl": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "podAnnotations": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "podPriorityClassName": {
+                "type": "string"
+              },
+              "pod_priority_class_name": {
+                "description": "deprecated",
+                "type": "string"
+              },
+              "postgresql": {
+                "type": "object",
+                "required": [
+                  "version"
+                ],
+                "properties": {
+                  "parameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "version": {
+                    "type": "string",
+                    "enum": [
+                      "10",
+                      "11",
+                      "12",
+                      "13",
+                      "14",
+                      "15"
+                    ]
+                  }
+                }
+              },
+              "preparedDatabases": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "defaultUsers": {
+                      "type": "boolean"
+                    },
+                    "extensions": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "schemas": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "defaultRoles": {
+                            "type": "boolean"
+                          },
+                          "defaultUsers": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "secretNamespace": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "replicaLoadBalancer": {
+                "description": "deprecated",
+                "type": "boolean"
+              },
+              "resources": {
+                "type": "object",
+                "properties": {
+                  "limits": {
+                    "type": "object",
+                    "properties": {
+                      "cpu": {
+                        "type": "string",
+                        "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                      },
+                      "memory": {
+                        "type": "string",
+                        "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                      }
+                    }
+                  },
+                  "requests": {
+                    "type": "object",
+                    "properties": {
+                      "cpu": {
+                        "type": "string",
+                        "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                      },
+                      "memory": {
+                        "type": "string",
+                        "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                      }
+                    }
+                  }
+                }
+              },
+              "schedulerName": {
+                "type": "string"
+              },
+              "serviceAnnotations": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "sidecars": {},
+              "spiloFSGroup": {
+                "type": "integer"
+              },
+              "spiloRunAsGroup": {
+                "type": "integer"
+              },
+              "spiloRunAsUser": {
+                "type": "integer"
+              },
+              "standby": {
+                "type": "object",
+                "properties": {
+                  "gs_wal_path": {
+                    "type": "string"
+                  },
+                  "s3_wal_path": {
+                    "type": "string"
+                  },
+                  "standby_host": {
+                    "type": "string"
+                  },
+                  "standby_port": {
+                    "type": "string"
+                  }
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "applicationId",
+                    "database",
+                    "tables"
+                  ],
+                  "properties": {
+                    "applicationId": {
+                      "type": "string"
+                    },
+                    "batchSize": {
+                      "type": "integer"
+                    },
+                    "database": {
+                      "type": "string"
+                    },
+                    "filter": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "tables": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "eventType"
+                        ],
+                        "properties": {
+                          "eventType": {
+                            "type": "string"
+                          },
+                          "idColumn": {
+                            "type": "string"
+                          },
+                          "payloadColumn": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "teamId": {
+                "type": "string"
+              },
+              "tls": {
+                "type": "object",
+                "required": [
+                  "secretName"
+                ],
+                "properties": {
+                  "caFile": {
+                    "type": "string"
+                  },
+                  "caSecretName": {
+                    "type": "string"
+                  },
+                  "certificateFile": {
+                    "type": "string"
+                  },
+                  "privateKeyFile": {
+                    "type": "string"
+                  },
+                  "secretName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "tolerations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "effect": {
+                      "type": "string",
+                      "enum": [
+                        "NoExecute",
+                        "NoSchedule",
+                        "PreferNoSchedule"
+                      ]
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "operator": {
+                      "type": "string",
+                      "enum": [
+                        "Equal",
+                        "Exists"
+                      ]
+                    },
+                    "tolerationSeconds": {
+                      "type": "integer"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "useLoadBalancer": {
+                "description": "deprecated",
+                "type": "boolean"
+              },
+              "users": {
+                "type": "object",
+                "additionalProperties": {}
+              },
+              "usersWithInPlaceSecretRotation": {},
+              "usersWithSecretRotation": {},
+              "volume": {
+                "type": "object",
+                "required": [
+                  "size"
+                ],
+                "properties": {
+                  "iops": {
+                    "type": "integer"
+                  },
+                  "selector": {
+                    "type": "object",
+                    "properties": {
+                      "matchExpressions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "key",
+                            "operator"
+                          ],
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "operator": {
+                              "type": "string",
+                              "enum": [
+                                "DoesNotExist",
+                                "Exists",
+                                "In",
+                                "NotIn"
+                              ]
+                            },
+                            "values": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "matchLabels": {
+                        "x-kubernetes-preserve-unknown-fields": true
+                      }
+                    }
+                  },
+                  "size": {
+                    "type": "string",
+                    "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                  },
+                  "storageClass": {
+                    "type": "string"
+                  },
+                  "subPath": {
+                    "type": "string"
+                  },
+                  "throughput": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "acid.zalan.do",
+            "kind": "postgresql",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "postgresqls.acid.zalan.do",
+          "uid": "2ad1a541-c3a4-49e7-bb1b-da93a4f193a9",
+          "resourceVersion": "2176",
+          "generation": 1,
+          "creationTimestamp": "2023-06-29T06:18:16Z",
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-06-29T06:18:16Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "postgres-operator",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-06-29T06:18:16Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "acid.zalan.do",
+          "names": {
+            "plural": "postgresqls",
+            "singular": "postgresql",
+            "shortNames": [
+              "pg"
+            ],
+            "kind": "postgresql",
+            "listKind": "postgresqlList",
+            "categories": [
+              "all"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "apiVersion",
+                    "spec"
+                  ],
+                  "properties": {
+                    "apiVersion": {
+                      "type": "string",
+                      "enum": [
+                        "acid.zalan.do/v1"
+                      ]
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "postgresql"
+                      ]
+                    },
+                    "spec": {
+                      "type": "object",
+                      "required": [
+                        "numberOfInstances",
+                        "teamId",
+                        "postgresql",
+                        "volume"
+                      ],
+                      "properties": {
+                        "additionalVolumes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "mountPath",
+                              "volumeSource"
+                            ],
+                            "properties": {
+                              "mountPath": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "subPath": {
+                                "type": "string"
+                              },
+                              "targetContainers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "nullable": true
+                              },
+                              "volumeSource": {
+                                "type": "object",
+                                "x-kubernetes-preserve-unknown-fields": true
+                              }
+                            }
+                          }
+                        },
+                        "allowedSourceRanges": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\/(\\d|[1-2]\\d|3[0-2])$"
+                          },
+                          "nullable": true
+                        },
+                        "clone": {
+                          "type": "object",
+                          "required": [
+                            "cluster"
+                          ],
+                          "properties": {
+                            "cluster": {
+                              "type": "string"
+                            },
+                            "s3_access_key_id": {
+                              "type": "string"
+                            },
+                            "s3_endpoint": {
+                              "type": "string"
+                            },
+                            "s3_force_path_style": {
+                              "type": "boolean"
+                            },
+                            "s3_secret_access_key": {
+                              "type": "string"
+                            },
+                            "s3_wal_path": {
+                              "type": "string"
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "pattern": "^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\\.[0-9]+)?(([+-]([01][0-9]|2[0-3]):[0-5][0-9]))$"
+                            },
+                            "uid": {
+                              "type": "string",
+                              "format": "uuid"
+                            }
+                          }
+                        },
+                        "connectionPooler": {
+                          "type": "object",
+                          "properties": {
+                            "dockerImage": {
+                              "type": "string"
+                            },
+                            "maxDBConnections": {
+                              "type": "integer"
+                            },
+                            "mode": {
+                              "type": "string",
+                              "enum": [
+                                "session",
+                                "transaction"
+                              ]
+                            },
+                            "numberOfInstances": {
+                              "type": "integer",
+                              "minimum": 1
+                            },
+                            "resources": {
+                              "type": "object",
+                              "properties": {
+                                "limits": {
+                                  "type": "object",
+                                  "properties": {
+                                    "cpu": {
+                                      "type": "string",
+                                      "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                                    },
+                                    "memory": {
+                                      "type": "string",
+                                      "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                                    }
+                                  }
+                                },
+                                "requests": {
+                                  "type": "object",
+                                  "properties": {
+                                    "cpu": {
+                                      "type": "string",
+                                      "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                                    },
+                                    "memory": {
+                                      "type": "string",
+                                      "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "schema": {
+                              "type": "string"
+                            },
+                            "user": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "databases": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "dockerImage": {
+                          "type": "string"
+                        },
+                        "enableConnectionPooler": {
+                          "type": "boolean"
+                        },
+                        "enableLogicalBackup": {
+                          "type": "boolean"
+                        },
+                        "enableMasterLoadBalancer": {
+                          "type": "boolean"
+                        },
+                        "enableMasterPoolerLoadBalancer": {
+                          "type": "boolean"
+                        },
+                        "enableReplicaConnectionPooler": {
+                          "type": "boolean"
+                        },
+                        "enableReplicaLoadBalancer": {
+                          "type": "boolean"
+                        },
+                        "enableReplicaPoolerLoadBalancer": {
+                          "type": "boolean"
+                        },
+                        "enableShmVolume": {
+                          "type": "boolean"
+                        },
+                        "env": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "nullable": true
+                        },
+                        "initContainers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "nullable": true
+                        },
+                        "init_containers": {
+                          "description": "deprecated",
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "nullable": true
+                        },
+                        "logicalBackupSchedule": {
+                          "type": "string",
+                          "pattern": "^(\\d+|\\*)(/\\d+)?(\\s+(\\d+|\\*)(/\\d+)?){4}$"
+                        },
+                        "maintenanceWindows": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^\\ *((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))-((Mon|Tue|Wed|Thu|Fri|Sat|Sun):(2[0-3]|[01]?\\d):([0-5]?\\d)|(2[0-3]|[01]?\\d):([0-5]?\\d))\\ *$"
+                          }
+                        },
+                        "nodeAffinity": {
+                          "type": "object",
+                          "properties": {
+                            "preferredDuringSchedulingIgnoredDuringExecution": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "preference",
+                                  "weight"
+                                ],
+                                "properties": {
+                                  "preference": {
+                                    "type": "object",
+                                    "properties": {
+                                      "matchExpressions": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "required": [
+                                            "key",
+                                            "operator"
+                                          ],
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "operator": {
+                                              "type": "string"
+                                            },
+                                            "values": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "matchFields": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "required": [
+                                            "key",
+                                            "operator"
+                                          ],
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "operator": {
+                                              "type": "string"
+                                            },
+                                            "values": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "weight": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                  }
+                                }
+                              }
+                            },
+                            "requiredDuringSchedulingIgnoredDuringExecution": {
+                              "type": "object",
+                              "required": [
+                                "nodeSelectorTerms"
+                              ],
+                              "properties": {
+                                "nodeSelectorTerms": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "matchExpressions": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "required": [
+                                            "key",
+                                            "operator"
+                                          ],
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "operator": {
+                                              "type": "string"
+                                            },
+                                            "values": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "matchFields": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "required": [
+                                            "key",
+                                            "operator"
+                                          ],
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "operator": {
+                                              "type": "string"
+                                            },
+                                            "values": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "numberOfInstances": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "patroni": {
+                          "type": "object",
+                          "properties": {
+                            "failsafe_mode": {
+                              "type": "boolean"
+                            },
+                            "initdb": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "string"
+                              }
+                            },
+                            "loop_wait": {
+                              "type": "integer"
+                            },
+                            "maximum_lag_on_failover": {
+                              "type": "integer"
+                            },
+                            "pg_hba": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "retry_timeout": {
+                              "type": "integer"
+                            },
+                            "slots": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "synchronous_mode": {
+                              "type": "boolean"
+                            },
+                            "synchronous_mode_strict": {
+                              "type": "boolean"
+                            },
+                            "synchronous_node_count": {
+                              "type": "integer"
+                            },
+                            "ttl": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "podAnnotations": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "podPriorityClassName": {
+                          "type": "string"
+                        },
+                        "pod_priority_class_name": {
+                          "description": "deprecated",
+                          "type": "string"
+                        },
+                        "postgresql": {
+                          "type": "object",
+                          "required": [
+                            "version"
+                          ],
+                          "properties": {
+                            "parameters": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "string"
+                              }
+                            },
+                            "version": {
+                              "type": "string",
+                              "enum": [
+                                "10",
+                                "11",
+                                "12",
+                                "13",
+                                "14",
+                                "15"
+                              ]
+                            }
+                          }
+                        },
+                        "preparedDatabases": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "defaultUsers": {
+                                "type": "boolean"
+                              },
+                              "extensions": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              },
+                              "schemas": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "object",
+                                  "properties": {
+                                    "defaultRoles": {
+                                      "type": "boolean"
+                                    },
+                                    "defaultUsers": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              },
+                              "secretNamespace": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "replicaLoadBalancer": {
+                          "description": "deprecated",
+                          "type": "boolean"
+                        },
+                        "resources": {
+                          "type": "object",
+                          "properties": {
+                            "limits": {
+                              "type": "object",
+                              "properties": {
+                                "cpu": {
+                                  "type": "string",
+                                  "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                                },
+                                "memory": {
+                                  "type": "string",
+                                  "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                                }
+                              }
+                            },
+                            "requests": {
+                              "type": "object",
+                              "properties": {
+                                "cpu": {
+                                  "type": "string",
+                                  "pattern": "^(\\d+m|\\d+(\\.\\d{1,3})?)$"
+                                },
+                                "memory": {
+                                  "type": "string",
+                                  "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "schedulerName": {
+                          "type": "string"
+                        },
+                        "serviceAnnotations": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "sidecars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "nullable": true
+                        },
+                        "spiloFSGroup": {
+                          "type": "integer"
+                        },
+                        "spiloRunAsGroup": {
+                          "type": "integer"
+                        },
+                        "spiloRunAsUser": {
+                          "type": "integer"
+                        },
+                        "standby": {
+                          "type": "object",
+                          "oneOf": [
+                            {
+                              "required": [
+                                "s3_wal_path"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "gs_wal_path"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "standby_host"
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "gs_wal_path": {
+                              "type": "string"
+                            },
+                            "s3_wal_path": {
+                              "type": "string"
+                            },
+                            "standby_host": {
+                              "type": "string"
+                            },
+                            "standby_port": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "streams": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "applicationId",
+                              "database",
+                              "tables"
+                            ],
+                            "properties": {
+                              "applicationId": {
+                                "type": "string"
+                              },
+                              "batchSize": {
+                                "type": "integer"
+                              },
+                              "database": {
+                                "type": "string"
+                              },
+                              "filter": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              },
+                              "tables": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "object",
+                                  "required": [
+                                    "eventType"
+                                  ],
+                                  "properties": {
+                                    "eventType": {
+                                      "type": "string"
+                                    },
+                                    "idColumn": {
+                                      "type": "string"
+                                    },
+                                    "payloadColumn": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "teamId": {
+                          "type": "string"
+                        },
+                        "tls": {
+                          "type": "object",
+                          "required": [
+                            "secretName"
+                          ],
+                          "properties": {
+                            "caFile": {
+                              "type": "string"
+                            },
+                            "caSecretName": {
+                              "type": "string"
+                            },
+                            "certificateFile": {
+                              "type": "string"
+                            },
+                            "privateKeyFile": {
+                              "type": "string"
+                            },
+                            "secretName": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "tolerations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "effect": {
+                                "type": "string",
+                                "enum": [
+                                  "NoExecute",
+                                  "NoSchedule",
+                                  "PreferNoSchedule"
+                                ]
+                              },
+                              "key": {
+                                "type": "string"
+                              },
+                              "operator": {
+                                "type": "string",
+                                "enum": [
+                                  "Equal",
+                                  "Exists"
+                                ]
+                              },
+                              "tolerationSeconds": {
+                                "type": "integer"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "useLoadBalancer": {
+                          "description": "deprecated",
+                          "type": "boolean"
+                        },
+                        "users": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "bypassrls",
+                                "BYPASSRLS",
+                                "nobypassrls",
+                                "NOBYPASSRLS",
+                                "createdb",
+                                "CREATEDB",
+                                "nocreatedb",
+                                "NOCREATEDB",
+                                "createrole",
+                                "CREATEROLE",
+                                "nocreaterole",
+                                "NOCREATEROLE",
+                                "inherit",
+                                "INHERIT",
+                                "noinherit",
+                                "NOINHERIT",
+                                "login",
+                                "LOGIN",
+                                "nologin",
+                                "NOLOGIN",
+                                "replication",
+                                "REPLICATION",
+                                "noreplication",
+                                "NOREPLICATION",
+                                "superuser",
+                                "SUPERUSER",
+                                "nosuperuser",
+                                "NOSUPERUSER"
+                              ]
+                            },
+                            "nullable": true
+                          }
+                        },
+                        "usersWithInPlaceSecretRotation": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "nullable": true
+                        },
+                        "usersWithSecretRotation": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "nullable": true
+                        },
+                        "volume": {
+                          "type": "object",
+                          "required": [
+                            "size"
+                          ],
+                          "properties": {
+                            "iops": {
+                              "type": "integer"
+                            },
+                            "selector": {
+                              "type": "object",
+                              "properties": {
+                                "matchExpressions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "required": [
+                                      "key",
+                                      "operator"
+                                    ],
+                                    "properties": {
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "operator": {
+                                        "type": "string",
+                                        "enum": [
+                                          "DoesNotExist",
+                                          "Exists",
+                                          "In",
+                                          "NotIn"
+                                        ]
+                                      },
+                                      "values": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "matchLabels": {
+                                  "type": "object",
+                                  "x-kubernetes-preserve-unknown-fields": true
+                                }
+                              }
+                            },
+                            "size": {
+                              "type": "string",
+                              "pattern": "^(\\d+(e\\d+)?|\\d+(\\.\\d+)?(e\\d+)?[EPTGMK]i?)$"
+                            },
+                            "storageClass": {
+                              "type": "string"
+                            },
+                            "subPath": {
+                              "type": "string"
+                            },
+                            "throughput": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Team",
+                  "type": "string",
+                  "description": "Team responsible for Postgres cluster",
+                  "jsonPath": ".spec.teamId"
+                },
+                {
+                  "name": "Version",
+                  "type": "string",
+                  "description": "PostgreSQL version",
+                  "jsonPath": ".spec.postgresql.version"
+                },
+                {
+                  "name": "Pods",
+                  "type": "integer",
+                  "description": "Number of Pods per Postgres cluster",
+                  "jsonPath": ".spec.numberOfInstances"
+                },
+                {
+                  "name": "Volume",
+                  "type": "string",
+                  "description": "Size of the bound volume",
+                  "jsonPath": ".spec.volume.size"
+                },
+                {
+                  "name": "CPU-Request",
+                  "type": "string",
+                  "description": "Requested CPU for Postgres containers",
+                  "jsonPath": ".spec.resources.requests.cpu"
+                },
+                {
+                  "name": "Memory-Request",
+                  "type": "string",
+                  "description": "Requested memory for Postgres containers",
+                  "jsonPath": ".spec.resources.requests.memory"
+                },
+                {
+                  "name": "Age",
+                  "type": "date",
+                  "jsonPath": ".metadata.creationTimestamp"
+                },
+                {
+                  "name": "Status",
+                  "type": "string",
+                  "description": "Current sync status of postgresql resource",
+                  "jsonPath": ".status.PostgresClusterStatus"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2023-06-29T06:18:16Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2023-06-29T06:18:16Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "postgresqls",
+            "singular": "postgresql",
+            "shortNames": [
+              "pg"
+            ],
+            "kind": "postgresql",
+            "listKind": "postgresqlList",
+            "categories": [
+              "all"
+            ]
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "Team",
+          "type": "string",
+          "description": "Team responsible for Postgres cluster",
+          "jsonPath": ".spec.teamId"
+        },
+        {
+          "name": "Version",
+          "type": "string",
+          "description": "PostgreSQL version",
+          "jsonPath": ".spec.postgresql.version"
+        },
+        {
+          "name": "Pods",
+          "type": "integer",
+          "description": "Number of Pods per Postgres cluster",
+          "jsonPath": ".spec.numberOfInstances"
+        },
+        {
+          "name": "Volume",
+          "type": "string",
+          "description": "Size of the bound volume",
+          "jsonPath": ".spec.volume.size"
+        },
+        {
+          "name": "CPU-Request",
+          "type": "string",
+          "description": "Requested CPU for Postgres containers",
+          "jsonPath": ".spec.resources.requests.cpu"
+        },
+        {
+          "name": "Memory-Request",
+          "type": "string",
+          "description": "Requested memory for Postgres containers",
+          "jsonPath": ".spec.resources.requests.memory"
+        },
+        {
+          "name": "Age",
+          "type": "date",
+          "jsonPath": ".metadata.creationTimestamp"
+        },
+        {
+          "name": "Status",
+          "type": "string",
+          "description": "Current sync status of postgresql resource",
+          "jsonPath": ".status.PostgresClusterStatus"
+        }
+      ],
+      "short": "postgresql",
+      "apiGroup": "acid.zalan.do",
+      "apiKind": "postgresql",
+      "apiVersion": "v1",
+      "readProperties": [
+        "spec",
+        "status"
+      ],
+      "writeProperties": [
+        "spec"
+      ],
+      "group": "zalando",
+      "sub": "acid",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "autoResolvers": [],
+      "resolvers": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true,
+      "category": "database"
+    },
+    {
+      "alternatives": [],
+      "name": "org.zalando.v1.ClusterKopfPeering",
+      "definition": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "status": {
+            "x-kubernetes-preserve-unknown-fields": true
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "zalando.org",
+            "kind": "ClusterKopfPeering",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "clusterkopfpeerings.zalando.org",
+          "uid": "db255947-d5ac-431f-bf01-f4cebc7e5527",
+          "resourceVersion": "104674813",
+          "generation": 1,
+          "creationTimestamp": "2024-01-18T17:34:17Z",
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-01-18T17:34:17Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-01-18T17:34:17Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "zalando.org",
+          "names": {
+            "plural": "clusterkopfpeerings",
+            "singular": "clusterkopfpeering",
+            "kind": "ClusterKopfPeering",
+            "listKind": "ClusterKopfPeeringList"
+          },
+          "scope": "Cluster",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "object",
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-01-18T17:34:17Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-01-18T17:34:17Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "clusterkopfpeerings",
+            "singular": "clusterkopfpeering",
+            "kind": "ClusterKopfPeering",
+            "listKind": "ClusterKopfPeeringList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "ClusterKopfPeering",
+      "apiGroup": "zalando.org",
+      "apiKind": "ClusterKopfPeering",
+      "apiVersion": "v1",
+      "readProperties": [
+        "status"
+      ],
+      "writeProperties": [],
+      "group": "zalando",
+      "sub": "zalando",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "autoResolvers": [],
+      "resolvers": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "status": "JSONObject"
+      },
+      "namespaced": false,
+      "category": "database"
+    },
+    {
+      "alternatives": [],
+      "name": "org.zalando.v1.KopfPeering",
+      "definition": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "status": {
+            "x-kubernetes-preserve-unknown-fields": true
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "zalando.org",
+            "kind": "KopfPeering",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "kopfpeerings.zalando.org",
+          "uid": "a331063c-7e02-4081-9deb-e4f16139e917",
+          "resourceVersion": "104674814",
+          "generation": 1,
+          "creationTimestamp": "2024-01-18T17:34:17Z",
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-01-18T17:34:17Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-01-18T17:34:17Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "zalando.org",
+          "names": {
+            "plural": "kopfpeerings",
+            "singular": "kopfpeering",
+            "kind": "KopfPeering",
+            "listKind": "KopfPeeringList"
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "object",
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-01-18T17:34:17Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-01-18T17:34:17Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "kopfpeerings",
+            "singular": "kopfpeering",
+            "kind": "KopfPeering",
+            "listKind": "KopfPeeringList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "KopfPeering",
+      "apiGroup": "zalando.org",
+      "apiKind": "KopfPeering",
+      "apiVersion": "v1",
+      "readProperties": [
+        "status"
+      ],
+      "writeProperties": [],
+      "group": "zalando",
+      "sub": "zalando",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "autoResolvers": [],
+      "resolvers": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "status": "JSONObject"
+      },
+      "namespaced": true,
+      "category": "database"
+    }
+  ]
+}

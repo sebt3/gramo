@@ -32,8 +32,8 @@ export function rmdir(directory:string){
         fs.rmdirSync(directory)
     }
 }
-export function saveTo(filename:string,content:any){
-    fs.writeFileSync(filename, JSON.stringify(content));
+export function saveTo(filename:string,content:object){
+    fs.writeFileSync(filename, JSON.stringify(content, null, 2));
 }
 export function LoadFrom(filename:string){
     return JSON.parse(fs.readFileSync(filename).toLocaleString())
@@ -119,6 +119,7 @@ export const enhenceObject = (group:string, obj:unspeciedObject) => {
 export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
     return {
         ...obj,
+        alternatives: obj['alternatives'].length>1?obj['alternatives']:[],
         category: categoryMappingShort[obj.short]!=undefined?categoryMappingShort[obj.short]:categoryMappingGroup[obj.group]!=undefined?categoryMappingGroup[obj.group]:'varia',
         resolvers: obj.resolvers.map(r=>{return {...r, properties: all.filter(o=>o.group==r['resultGroup']&&o.short==r['resultShort']).map(o=>o.readProperties)[0]}})
     }
@@ -126,28 +127,18 @@ export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
 export const getObjFQN = (c: k8sDefinitionProperties) => c.spec.group.split('.').reverse().join('.')+'.'+getTargetVersion(c.spec.versions)+'.'+c.spec.names.kind
 
 export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
-    const excluded = [
-        'io.k8s.apimachinery.pkg.apis.meta.v1.Time',
-        'io.k8s.apimachinery.pkg.util.intstr.IntOrString',
-        'io.k8s.apimachinery.pkg.api.resource.Quantity',
-        'io.k8s.api.core.v1.ConfigMapVolumeSource',
-        'io.k8s.api.core.v1.ConfigMapProjection',
-        'io.k8s.api.core.v1.DownwardAPIVolumeSource',
-        'io.k8s.api.core.v1.DownwardAPIProjection',
-        'io.k8s.api.core.v1.SecretProjection',
-        'io.k8s.api.core.v1.SecretVolumeSource',
-        'io.k8s.apimachinery.pkg.apis.meta.v1.MicroTime',
-        'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresourceStatus',
-        'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps']
+    const excluded: string[] = [
+        'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps'
+    ]
     const queue = structuredClone(defs);
     const ret:Map<string, openapiDefinitionPropertiesDef> = new Map();
     const deref = (data) => {
         const res = structuredClone(data);
-        for (const [key, val] of Object.entries(data.properties as HashMap<openapiDefinitionPropertiesDef>)) {
-            if (val['$ref'] != undefined && !excluded.includes(val['$ref'].split('/')[2])) {
+        if (data.properties != undefined) {for (const [key, val] of Object.entries(data.properties as HashMap<openapiDefinitionPropertiesDef>)) {
+            if (val['$ref'] != undefined && val['$ref'].split('/').length>2 && !excluded.includes(val['$ref'].split('/')[2])) {
                 res.properties[key] = ret[val['$ref'].split('/')[2]]
             }
-            if (val['type'] == 'array' && val['items'] != undefined && val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2])) {
+            if (val['type'] == 'array' && val['items'] != undefined && val['items']['$ref'] != undefined && val['items']['$ref'].split('/').length>2 && !excluded.includes(val['items']['$ref'].split('/')[2])) {
                 res.properties[key]['items'] = ret[val['items']['$ref'].split('/')[2]]
             }
             if (val['type'] == 'object' && val.properties != undefined) {
@@ -157,7 +148,7 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
                     }
                 }
             }
-        }
+        }}
         return res
     }
     let counter=0;
@@ -165,29 +156,40 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
         const item = queue.shift();
         if (item===undefined) continue;
         let missing = false;
-        for (const [key, val] of Object.entries(item[1].properties)) {
+        if (item[1].properties != undefined) {for (const [key, val] of Object.entries(item[1].properties)) {
             missing = missing || (val['$ref'] != undefined && key !='metadata' && !excluded.includes(val['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['$ref'].split('/')[2]));
+            //if ((val['$ref'] != undefined && key !='metadata' && !excluded.includes(val['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['$ref'].split('/')[2]))) console.log('missing',val['$ref'].split('/')[2])
             if (val['type'] == 'array') {
                 missing = missing || (val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['items']['$ref'].split('/')[2]));
+                //if (val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['items']['$ref'].split('/')[2])) console.log('missing',val['items']['$ref'].split('/')[2])
             }
             if (val['type'] == 'object' && typeof val.properties == 'object') {
                 for (const [, v2] of Object.entries(val.properties)) {
                     missing = missing || ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2]) && !Object.keys(ret).includes((v2 as object)['$ref'].split('/')[2]));
+                    //if ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2]) && !Object.keys(ret).includes((v2 as object)['$ref'].split('/')[2]))console.log('missing',(v2 as object)['$ref'].split('/')[2]);
                 }
             }
             if (missing) break;
-        }
+        }}
         if (missing) {
             queue.push(item)
             counter++;
             if (counter>queue.length) {
+                console.log('leaving with',
+                    Object.fromEntries(queue.map(([n,v])=>[n,
+                        Object.fromEntries(
+                                    Object.entries(v['properties']).filter(([_,val])=>val['$ref']!=null).map(([name,val])=>[name,val['$ref']])
+                            .concat(Object.entries(v['properties']).filter(([_,val])=>val['type'] == 'array'&& val['items'] != null && val['items']['$ref']!=null).map(([name,val])=>[name,val['items']['$ref']]))
+                        )
+                    ])),
+                    queue.length)
                 break;
             }
-            //console.log(queue.length,Object.keys(ret).length)
             continue;
         }
         counter=0;
         ret[item[0]] = deref(item[1])
+        //if (item[0]=='io.k8s.api.core.v1.ServiceSpec') console.log(ret[item[0]]["properties"])
     }
     return ret
 }

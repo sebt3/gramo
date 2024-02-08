@@ -47,7 +47,7 @@ onResult((res) => {
 })
 </script>
 <template>
-  <div class="row q-mb-sm q-ml-sm" v-if="isNamespaced()">
+  <div class="row q-mb-sm q-ml-sm" v-if="!isNamespaced()">
 {{#each objects}}
 {{#if namespaced}}
     <div class="col-lg-4" v-if="ready && {{ short }}ByTs.length>1" >

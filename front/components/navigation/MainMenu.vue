@@ -52,7 +52,7 @@ function toggleLeftDrawer() {
   <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="miniState" :width="400" :breakpoint="500" @mouseover="miniState = false" @mouseout="miniState = true" mini-to-overlay>
     <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: '0' }">
       <q-list padding v-if="router.currentRoute.value.matched.length>1">
-        <MainMenuLinks
+        <MainMenuLinks class="q-mr-xs"
           v-for="link in links"
           :key="`${link.title}-${router.currentRoute.value.matched[router.currentRoute.value.matched.length-1].path}`"
           v-bind="link">

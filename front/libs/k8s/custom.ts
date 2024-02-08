@@ -1,13 +1,13 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const k8sIcon = 'apps';
+export const k8sIcon = 'fas fa-dharmachakra';
 export const k8sTitle = 'Standard';
-export const iconConfigMap = 'album';
+export const iconConfigMap = 'settings_suggest';
 export const colorConfigMap = '';
 export const descriptionConfigMap = '';
 export const shortConfigMap = '';
-export const iconEndpoints = 'album';
+export const iconEndpoints = 'fas fa-network-wired';
 export const colorEndpoints = '';
 export const descriptionEndpoints = '';
 export const shortEndpoints = '';
@@ -15,7 +15,7 @@ export const iconLimitRange = 'album';
 export const colorLimitRange = '';
 export const descriptionLimitRange = '';
 export const shortLimitRange = '';
-export const iconNamespace = 'album';
+export const iconNamespace = 'fas fa-object-ungroup';
 export const colorNamespace = '';
 export const descriptionNamespace = '';
 export const shortNamespace = '';
@@ -63,6 +63,10 @@ export const iconAPIService = 'album';
 export const colorAPIService = '';
 export const descriptionAPIService = '';
 export const shortAPIService = '';
+export const iconControllerRevision = 'album';
+export const colorControllerRevision = '';
+export const descriptionControllerRevision = '';
+export const shortControllerRevision = 'ControllerRevision';
 export const iconDaemonSet = 'album';
 export const colorDaemonSet = '';
 export const descriptionDaemonSet = '';
@@ -214,6 +218,9 @@ export const extraServiceAccountColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraAPIServiceColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraControllerRevisionColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDaemonSetColumns:Array<QTableColumn> = [
@@ -386,6 +393,12 @@ export const APIServiceListExcludes = [
 export const APIServiceReadExcludes = [
 ];
 export const APIServiceSimpleExcludes = [
+];
+export const ControllerRevisionListExcludes = [
+];
+export const ControllerRevisionReadExcludes = [
+];
+export const ControllerRevisionSimpleExcludes = [
 ];
 export const DaemonSetListExcludes = [
 ];
