@@ -1,12 +1,13 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const jaegertracingIcon = 'apps';
+import { systemColor, systemIcon, } from '../../routes/custom';
+export const jaegertracingIcon = systemIcon;
 export const jaegertracingTitle = 'Tracing';
-export const iconJaeger = 'album';
-export const colorJaeger = '';
+export const iconJaeger = 'apps';
+export const colorJaeger = systemColor;
 export const descriptionJaeger = '';
-export const shortJaeger = '';
+export const shortJaeger = 'Jaeger';
 export const extraJaegerColumns:Array<QTableColumn> = [
   {name: 'Status', label: 'Status', field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
   {name: 'Version', label: 'Version', field: row => row.status.version, sortable: true, align: tableColumnAlign.left},

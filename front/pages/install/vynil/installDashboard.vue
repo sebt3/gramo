@@ -8,8 +8,6 @@ import { DistribSimpleExcludes } from '../../../libs/vynil/Distrib.js'
 import vynilInstallList from '@/components/vynil/InstallList.vue';
 import { InstallSimpleExcludes } from '../../../libs/vynil/Install.js'
 import { ref, useCore, useNavigationStoreRef, useQuery } from '../../../libs/core';
-import { isArrayBufferView } from 'util/types';
-import { argumentsObjectFromField } from '@apollo/client/utilities';
 const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
 const ready = ref(false);
 const InstallByTs = ref([]);
@@ -93,7 +91,7 @@ onResult((res) => {
     :model="result.vynilDistrib"
   />
   <vynilInstallList @refresh="refetch()" :useAction="false"
-    v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['vynilInstall']).flat().length>0"
+    v-if="result !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['vynilInstall']).flat().length>0"
     :model="result.k8sNamespace.map(x=>x.vynilInstall).flat()"
   />
 </template>

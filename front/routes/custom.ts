@@ -35,3 +35,16 @@ export const securityDesc = '';
 export const storageDesc = '';
 export const systemDesc = '';
 export const workloadDesc = '';
+/*
+export const iconBasicAuth = 'fas fa-user-secret';
+export const iconSSHKeyPair = 'fab fa-keycdn';
+export const iconStringSecret = 'key';
+export const monitoringIcon = 'supervised_user_circle';
+export const iconBackup = 'backup';
+export const iconConnection = 'link';
+export const iconRestore = 'cloud_download';
+export const iconUser = 'fas fa-user';
+export const iconAlert = 'notifications';
+export const iconBucket = 'storage';
+export const iconImageRepository = 'fab fa-docker';
+ */

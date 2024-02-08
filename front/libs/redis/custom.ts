@@ -1,24 +1,25 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const redisIcon = 'apps';
+import { databaseColor, databaseIcon, installIcon } from '../../routes/custom';
+export const redisIcon = databaseIcon;
 export const redisTitle = 'Redis';
-export const iconRedis = 'album';
-export const colorRedis = '';
+export const iconRedis = databaseIcon;
+export const colorRedis = databaseColor;
 export const descriptionRedis = '';
-export const shortRedis = '';
-export const iconRedisCluster = 'album';
-export const colorRedisCluster = '';
+export const shortRedis = 'Redis';
+export const iconRedisCluster = databaseIcon;
+export const colorRedisCluster = databaseColor;
 export const descriptionRedisCluster = '';
-export const shortRedisCluster = '';
-export const iconRedisReplication = 'album';
-export const colorRedisReplication = '';
+export const shortRedisCluster = 'RedisCluster';
+export const iconRedisReplication = databaseIcon;
+export const colorRedisReplication = databaseColor;
 export const descriptionRedisReplication = '';
-export const shortRedisReplication = '';
-export const iconRedisSentinel = 'album';
-export const colorRedisSentinel = '';
+export const shortRedisReplication = 'RedisReplication';
+export const iconRedisSentinel = installIcon;
+export const colorRedisSentinel = databaseColor;
 export const descriptionRedisSentinel = '';
-export const shortRedisSentinel = '';
+export const shortRedisSentinel = 'RedisSentinel';
 export const extraRedisColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];

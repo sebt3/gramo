@@ -1,20 +1,21 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { configColor } from '../../routes/custom';
 export const secretgeneratorIcon = 'key';
 export const secretgeneratorTitle = 'Secrets generator';
 export const iconBasicAuth = 'fas fa-user-secret';
-export const colorBasicAuth = '';
-export const descriptionBasicAuth = '';
-export const shortBasicAuth = '';
 export const iconSSHKeyPair = 'fab fa-keycdn';
-export const colorSSHKeyPair = '';
-export const descriptionSSHKeyPair = '';
-export const shortSSHKeyPair = '';
 export const iconStringSecret = 'key';
-export const colorStringSecret = '';
+export const colorBasicAuth = configColor;
+export const descriptionBasicAuth = '';
+export const shortBasicAuth = 'BasicAuth';
+export const colorSSHKeyPair = configColor;
+export const descriptionSSHKeyPair = '';
+export const shortSSHKeyPair = 'SSHKeyPair';
+export const colorStringSecret = configColor;
 export const descriptionStringSecret = '';
-export const shortStringSecret = '';
+export const shortStringSecret = 'StringSecret';
 export const extraBasicAuthColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];

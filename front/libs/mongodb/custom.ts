@@ -1,12 +1,13 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const mongodbIcon = 'apps';
+import { databaseColor, databaseIcon, } from '../../routes/custom';
+export const mongodbIcon = databaseIcon;
 export const mongodbTitle = 'MongoDB';
-export const iconMongoDBCommunity = 'album';
-export const colorMongoDBCommunity = '';
+export const iconMongoDBCommunity = databaseIcon;
+export const colorMongoDBCommunity = databaseColor;
 export const descriptionMongoDBCommunity = '';
-export const shortMongoDBCommunity = '';
+export const shortMongoDBCommunity = 'MongoDBCommunity';
 export const extraMongoDBCommunityColumns:Array<QTableColumn> = [
   {name: 'Phase', label: 'Phase', field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
   {name: 'Version', label: 'Version', field: row => row.status.version, sortable: true, align: tableColumnAlign.left},

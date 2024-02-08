@@ -1,20 +1,21 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { systemColor, systemIcon, installIcon, configIcon} from '../../routes/custom';
 export const opentelemetryIcon = 'apps';
 export const opentelemetryTitle = 'Telemetry';
-export const iconInstrumentation = 'album';
-export const colorInstrumentation = '';
+export const iconInstrumentation = configIcon;
+export const colorInstrumentation = systemColor;
 export const descriptionInstrumentation = '';
-export const shortInstrumentation = '';
-export const iconOpAMPBridge = 'album';
-export const colorOpAMPBridge = '';
+export const shortInstrumentation = 'Instrumentation';
+export const iconOpAMPBridge = systemIcon;
+export const colorOpAMPBridge = systemColor;
 export const descriptionOpAMPBridge = '';
-export const shortOpAMPBridge = '';
-export const iconOpenTelemetryCollector = 'album';
-export const colorOpenTelemetryCollector = '';
+export const shortOpAMPBridge = 'OpAMPBridge';
+export const iconOpenTelemetryCollector = installIcon;
+export const colorOpenTelemetryCollector = systemColor;
 export const descriptionOpenTelemetryCollector = '';
-export const shortOpenTelemetryCollector = '';
+export const shortOpenTelemetryCollector = 'OpenTelemetryCollector';
 export const extraInstrumentationColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
   {name: 'Endpoint', label: 'Endpoint', field: row => row.spec.exporter.endpoint, sortable: true, align: tableColumnAlign.left},

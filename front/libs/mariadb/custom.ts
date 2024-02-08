@@ -1,40 +1,41 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { databaseColor, databaseIcon, } from '../../routes/custom';
 export const iconBackup = 'backup';
 export const iconConnection = 'link';
-export const iconDatabase = 'fas fa-database';
-export const iconGrant = 'album';
-export const iconMariaDB = 'group_work';
 export const iconRestore = 'cloud_download';
-export const iconSqlJob = 'album';
 export const iconUser = 'fas fa-user';
-export const mariadbIcon = 'apps';
+export const mariadbIcon = databaseIcon;
 export const mariadbTitle = 'MariaDB';
-export const colorBackup = '';
+export const colorBackup = databaseColor;
 export const descriptionBackup = '';
-export const shortBackup = '';
-export const colorConnection = '';
+export const shortBackup = 'Backup';
+export const colorConnection = databaseColor;
 export const descriptionConnection = '';
-export const shortConnection = '';
-export const colorDatabase = '';
+export const shortConnection = 'Connection';
+export const iconDatabase = databaseIcon;
+export const colorDatabase = databaseColor;
 export const descriptionDatabase = '';
-export const shortDatabase = '';
-export const colorGrant = '';
+export const shortDatabase = 'Database';
+export const iconGrant = 'album';
+export const colorGrant = databaseColor;
 export const descriptionGrant = '';
-export const shortGrant = '';
-export const colorMariaDB = '';
+export const shortGrant = 'Grant';
+export const iconMariaDB = 'group_work';
+export const colorMariaDB = databaseColor;
 export const descriptionMariaDB = '';
-export const shortMariaDB = '';
-export const colorRestore = '';
+export const shortMariaDB = 'MariaDB';
+export const colorRestore = databaseColor;
 export const descriptionRestore = '';
-export const shortRestore = '';
-export const colorSqlJob = '';
+export const shortRestore = 'Restore';
+export const iconSqlJob = 'album';
+export const colorSqlJob = databaseColor;
 export const descriptionSqlJob = '';
-export const shortSqlJob = '';
-export const colorUser = '';
+export const shortSqlJob = 'SqlJob';
+export const colorUser = databaseColor;
 export const descriptionUser = '';
-export const shortUser = '';
+export const shortUser = 'User';
 
 export const extraBackupColumns:Array<QTableColumn> = [
   {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},

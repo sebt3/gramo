@@ -1,32 +1,33 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const certmanagerIcon = 'apps';
+import { networkColor, networkIcon } from '../../routes/custom';
+export const certmanagerIcon = networkIcon;
 export const certmanagerTitle = 'cert-manager';
-export const iconChallenge = 'album';
-export const colorChallenge = '';
+export const iconChallenge = networkIcon;
+export const colorChallenge = networkColor;
 export const descriptionChallenge = '';
-export const shortChallenge = '';
-export const iconOrder = 'album';
-export const colorOrder = '';
+export const shortChallenge = 'Challenge';
+export const iconOrder = networkIcon;
+export const colorOrder = networkColor;
 export const descriptionOrder = '';
-export const shortOrder = '';
-export const iconCertificate = 'album';
-export const colorCertificate = '';
+export const shortOrder = 'Order';
+export const iconCertificate = networkIcon;
+export const colorCertificate = networkColor;
 export const descriptionCertificate = '';
-export const shortCertificate = '';
-export const iconCertificateRequest = 'album';
-export const colorCertificateRequest = '';
+export const shortCertificate = 'Certificate';
+export const iconCertificateRequest = networkIcon;
+export const colorCertificateRequest = networkColor;
 export const descriptionCertificateRequest = '';
-export const shortCertificateRequest = '';
-export const iconClusterIssuer = 'album';
-export const colorClusterIssuer = '';
+export const shortCertificateRequest = 'CertificateRequest';
+export const iconClusterIssuer = networkIcon;
+export const colorClusterIssuer = networkColor;
 export const descriptionClusterIssuer = '';
-export const shortClusterIssuer = '';
-export const iconIssuer = 'album';
-export const colorIssuer = '';
+export const shortClusterIssuer = 'ClusterIssuer';
+export const iconIssuer = networkIcon;
+export const colorIssuer = networkColor;
 export const descriptionIssuer = '';
-export const shortIssuer = '';
+export const shortIssuer = 'Issuer';
 export const extraChallengeColumns:Array<QTableColumn> = [
   {name: 'State', label: 'State', field: row => row.status.state, sortable: true, align: tableColumnAlign.left},
   {name: 'Domain', label: 'Domain', field: row => row.spec.dnsName, sortable: true, align: tableColumnAlign.left},

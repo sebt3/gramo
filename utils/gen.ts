@@ -1,7 +1,7 @@
 #!/usr/bin/env -S npx ts-node-esm
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {LoadFrom,mkdir,rmdir} from './generator/utils.js'
+import {LoadFrom,mkdir,rmdir,uniq} from './generator/utils.js'
 import {loadCompile,loadPartial} from './generator/hb.js'
 import {allCategories} from './generator/config.js'
 import * as fs from 'fs';
@@ -111,7 +111,7 @@ new Promise((resolve) => {
         if (!deleteFiles) mkdir(path.resolve(path_front, 'queries', g.name));
         if (!deleteFiles) mkdir(path.resolve(path_front, 'components', g.name));
         if (!deleteFiles) mkdir(path.resolve(path_front, 'libs', g.name));
-        grpCustom(path.resolve(path_front, 'libs', g.name),`custom.ts`, g)
+        grpCustom(path.resolve(path_front, 'libs', g.name),`custom.ts`, {...g, categories: g.objects.map(o=>o.category).filter(uniq)})
         allCategories.filter(c=> g.objects.filter(o=>o.category==c).length>0).forEach(c=>{
             grpRoutes(path.resolve(path_front, 'routes', c), `${g.name}.ts`, {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
             if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', c, g.name))

@@ -1,24 +1,25 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const cnpgIcon = 'apps';
+import { databaseColor, databaseIcon, } from '../../routes/custom';
+export const cnpgIcon = databaseIcon;
 export const cnpgTitle = 'PostgreSQL';
-export const iconBackup = 'album';
-export const colorBackup = '';
+export const iconBackup = 'backup';
+export const colorBackup = databaseColor;
 export const descriptionBackup = '';
-export const shortBackup = '';
-export const iconCluster = 'album';
-export const colorCluster = '';
+export const shortBackup = 'Backup';
+export const iconCluster = databaseIcon;
+export const colorCluster = databaseColor;
 export const descriptionCluster = '';
-export const shortCluster = '';
-export const iconPooler = 'album';
-export const colorPooler = '';
+export const shortCluster = 'Cluster';
+export const iconPooler = databaseIcon;
+export const colorPooler = databaseColor;
 export const descriptionPooler = '';
-export const shortPooler = '';
-export const iconScheduledBackup = 'album';
-export const colorScheduledBackup = '';
+export const shortPooler = 'Pooler';
+export const iconScheduledBackup = iconBackup;
+export const colorScheduledBackup = databaseColor;
 export const descriptionScheduledBackup = '';
-export const shortScheduledBackup = '';
+export const shortScheduledBackup = 'ScheduledBackup';
 export const extraBackupColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
   {name: 'Cluster', label: 'Cluster', field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},

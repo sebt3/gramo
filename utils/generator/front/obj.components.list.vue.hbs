@@ -2,6 +2,7 @@
 import TableHeader from '@/components/core/TableHeader.vue';
 import { ref, use{{ short }}, {{ short }}Columns{{#if namespaced}}, {{ short }}AllColumns{{/if}} } from '../../libs/{{ group }}/{{ short }}.js'
 const { actionNew, toEdit, actionDelete, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
+import { color{{ short }} } from '../../libs/{{ group }}/custom.js'
 let filter = ref('');
 defineEmits(['refresh']);
 withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean}>(),{
@@ -11,7 +12,7 @@ withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean}>(),
 </script>
 <template>
   <q-card class="q-ma-sm" bordered>
-    <TableHeader title="{{ group }} {{ short }}s" :usecreate="useAction" :userefresh="useAction" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
+    <TableHeader title="{{ group }} {{ short }}s" :class="`bg-${ color{{ short }} }`" :usecreate="useAction" :userefresh="useAction" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
     <q-card-section class="q-pa-none">
     <q-table :rows="model" :columns="{{#if namespaced}}!isNamespaced()?{{ short }}AllColumns:{{/if}}{{ short }}Columns.filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
 {{#if namespaced}}

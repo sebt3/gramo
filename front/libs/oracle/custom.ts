@@ -1,16 +1,17 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const oracleIcon = 'apps';
+import { databaseColor, databaseIcon, } from '../../routes/custom';
+export const oracleIcon = databaseIcon;
 export const oracleTitle = 'Oracle';
-export const iconInnoDBCluster = 'album';
-export const colorInnoDBCluster = '';
+export const iconInnoDBCluster = databaseIcon;
+export const colorInnoDBCluster = databaseColor;
 export const descriptionInnoDBCluster = '';
-export const shortInnoDBCluster = '';
-export const iconMySQLBackup = 'album';
-export const colorMySQLBackup = '';
+export const shortInnoDBCluster = 'InnoDBCluster';
+export const iconMySQLBackup = databaseIcon;
+export const colorMySQLBackup = databaseColor;
 export const descriptionMySQLBackup = '';
-export const shortMySQLBackup = '';
+export const shortMySQLBackup = 'MySQLBackup';
 export const extraInnoDBClusterColumns:Array<QTableColumn> = [
   {name: 'Status', label: 'Status', field: row => row.status.cluster.status, sortable: true, align: tableColumnAlign.left},
   {name: 'Online', label: 'Online', field: row => row.status.cluster.onlineInstances, sortable: true, align: tableColumnAlign.left},

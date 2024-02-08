@@ -18,4 +18,12 @@ export interface metadataType {
     labels?: Array<dataEntry>
 }
 
+export interface HierarchyObject {
+    short:string,
+    catColor:string,
+    itemColor?:string,
+    properties:{},
+    items:{}[]
+}
+
 export default dataEntry

@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import MonacoViewer from '@/components/core/MonacoViewer.vue';
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+import { color{{ short }} } from '../../libs/{{ group }}/custom.js'
 {{#if namespaced}}
 const { onlyReadProperties, viewer, viewerUpdate, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
@@ -15,7 +16,7 @@ onMounted(() => {
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
-    <q-tabs v-model="viewer.tab" class="bg-primary text-grey-4" active-color="white">
+    <q-tabs v-model="viewer.tab" :class="`bg-primary text-grey-4`" active-color="white">
       <q-tab label="Simple" name="simple" />
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}

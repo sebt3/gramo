@@ -1,10 +1,11 @@
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { {{#each categories}}{{this}}Color, {{this}}Icon,{{/each}} } from '../../routes/custom';
 export const {{ name }}Icon = 'apps';
 export const {{ name }}Title = '{{ name }}';
 {{#each objects}}
-export const icon{{ short }} = 'album';
-export const color{{ short }} = '';
+export const icon{{ short }} = {{category}}Icon;
+export const color{{ short }} = {{category}}Color;
 export const description{{ short }} = '';
 export const short{{ short }} = '{{ short }}';
 {{/each}}

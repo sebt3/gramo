@@ -15,7 +15,7 @@ withDefaults(defineProps<{
 </script>
 <template>
     <q-card-section>
-      <div class="text-h6 text-grey-8">
+      <div class="text-h6 text-white">
         {{ title }}
         <q-btn-group push class="float-right text-capitalize shadow-3">
           <q-input v-if="show_filter" :model-value="modelFilter" @update:model-value="v=>$emit('update:modelFilter', v)" filled borderless dense debounce="300" placeholder="Search">

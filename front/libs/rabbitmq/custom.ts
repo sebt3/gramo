@@ -1,12 +1,13 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const rabbitmqIcon = 'apps';
+import { databaseColor, databaseIcon, } from '../../routes/custom';
+export const rabbitmqIcon = databaseIcon;
 export const rabbitmqTitle = 'RabbitMQ';
-export const iconRabbitmqCluster = 'album';
-export const colorRabbitmqCluster = '';
+export const iconRabbitmqCluster = databaseIcon;
+export const colorRabbitmqCluster = databaseColor;
 export const descriptionRabbitmqCluster = '';
-export const shortRabbitmqCluster = '';
+export const shortRabbitmqCluster = 'RabbitmqCluster';
 export const extraRabbitmqClusterColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];

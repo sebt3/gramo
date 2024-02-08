@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
 import { menuLinksProps } from '../../routes';
+import { elude } from '../../libs/core';
 import { useRouter } from 'vue-router'
 const router = useRouter();
-
+const maxCaptionLength= 25;
 const props = withDefaults(defineProps<menuLinksProps>(), {
   caption: '',
   link: '#',
@@ -25,7 +26,7 @@ const props = withDefaults(defineProps<menuLinksProps>(), {
           </q-item-section>
           <q-item-section>
             <q-item-section>{{title}}</q-item-section>
-            <q-item-label v-if="caption != ''" caption>{{caption}}</q-item-label>
+            <q-item-label v-if="caption != ''" caption>{{elude(caption, maxCaptionLength)}}</q-item-label>
           </q-item-section>
         </template>
         <div v-if="router.currentRoute.value.matched.length>1">
@@ -43,7 +44,7 @@ const props = withDefaults(defineProps<menuLinksProps>(), {
           </q-item-section>
           <q-item-section>
             <q-item-section>{{title}}</q-item-section>
-            <q-item-label v-if="caption != ''" caption>{{caption}}</q-item-label>
+            <q-item-label v-if="caption != ''" caption>{{elude(caption, maxCaptionLength)}}</q-item-label>
           </q-item-section>
       </q-item>
     </div>

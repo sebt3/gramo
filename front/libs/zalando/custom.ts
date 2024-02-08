@@ -1,20 +1,21 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const zalandoIcon = 'apps';
+import { databaseColor, databaseIcon, } from '../../routes/custom';
+export const zalandoIcon = databaseIcon;
 export const zalandoTitle = 'Zalando PG';
-export const iconpostgresql = 'album';
-export const colorpostgresql = '';
+export const iconpostgresql = databaseIcon;
+export const colorpostgresql = databaseColor;
 export const descriptionpostgresql = '';
-export const shortpostgresql = '';
-export const iconClusterKopfPeering = 'album';
-export const colorClusterKopfPeering = '';
+export const shortpostgresql = 'postgresql';
+export const iconClusterKopfPeering = databaseIcon;
+export const colorClusterKopfPeering = databaseColor;
 export const descriptionClusterKopfPeering = '';
-export const shortClusterKopfPeering = '';
-export const iconKopfPeering = 'album';
-export const colorKopfPeering = '';
+export const shortClusterKopfPeering = 'ClusterKopfPeering';
+export const iconKopfPeering = databaseIcon;
+export const colorKopfPeering = databaseColor;
 export const descriptionKopfPeering = '';
-export const shortKopfPeering = '';
+export const shortKopfPeering = 'KopfPeering';
 export const extrapostgresqlColumns:Array<QTableColumn> = [
   {name: 'Team', label: 'Team', field: row => row.spec.teamId, sortable: true, align: tableColumnAlign.left},
   {name: 'Version', label: 'Version', field: row => row.spec.postgresql.version, sortable: true, align: tableColumnAlign.left},

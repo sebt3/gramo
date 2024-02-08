@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MetadataView from '@/components/core/MetadataView.vue';
 import { ref, use{{ short }} } from '../../libs/{{ group }}/{{ short }}.js'
+import { color{{ short }} } from '../../libs/{{ group }}/custom.js'
 const { actionNew, toEdit, actionDelete } = use{{ short }}();
 const to=ref({})
 withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean}>(), {
@@ -10,7 +11,7 @@ withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean}>(), 
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
-    <q-card-section class="bg-primary text-grey-4">
+    <q-card-section :class="`bg-${ color{{ short }} } text-grey-4`">
       <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">{{ short }}
         <q-btn-group push class="float-right text-capitalize shadow-3" v-if="useActions">
           <q-btn icon="edit" @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)">

@@ -1,40 +1,41 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-export const k8upIcon = 'apps';
+import { systemColor, systemIcon, } from '../../routes/custom';
+export const iconBackup = 'backup';
+export const iconRestore = 'cloud_download';
+export const k8upIcon = iconBackup;
 export const k8upTitle = 'K8up';
-export const iconArchive = 'album';
-export const colorArchive = '';
+export const iconArchive = systemIcon;
+export const colorArchive = systemColor;
 export const descriptionArchive = '';
-export const shortArchive = '';
-export const iconBackup = 'album';
-export const colorBackup = '';
+export const shortArchive = 'Archive';
+export const colorBackup = systemColor;
 export const descriptionBackup = '';
-export const shortBackup = '';
-export const iconCheck = 'album';
-export const colorCheck = '';
+export const shortBackup = 'Backup';
+export const iconCheck = systemIcon;
+export const colorCheck = systemColor;
 export const descriptionCheck = '';
-export const shortCheck = '';
-export const iconPreBackupPod = 'album';
-export const colorPreBackupPod = '';
+export const shortCheck = 'Check';
+export const iconPreBackupPod = systemIcon;
+export const colorPreBackupPod = systemColor;
 export const descriptionPreBackupPod = '';
-export const shortPreBackupPod = '';
-export const iconPrune = 'album';
-export const colorPrune = '';
+export const shortPreBackupPod = 'PreBackupPod';
+export const iconPrune = systemIcon;
+export const colorPrune = systemColor;
 export const descriptionPrune = '';
-export const shortPrune = '';
-export const iconRestore = 'album';
-export const colorRestore = '';
+export const shortPrune = 'Prune';
+export const colorRestore = systemColor;
 export const descriptionRestore = '';
-export const shortRestore = '';
-export const iconSchedule = 'album';
-export const colorSchedule = '';
+export const shortRestore = 'Restore';
+export const iconSchedule = iconBackup;
+export const colorSchedule = systemColor;
 export const descriptionSchedule = '';
-export const shortSchedule = '';
-export const iconSnapshot = 'album';
-export const colorSnapshot = '';
+export const shortSchedule = 'Schedule';
+export const iconSnapshot = systemIcon;
+export const colorSnapshot = systemColor;
 export const descriptionSnapshot = '';
-export const shortSnapshot = '';
+export const shortSnapshot = 'Snapshot';
 export const extraArchiveColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
