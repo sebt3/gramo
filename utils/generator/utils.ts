@@ -27,6 +27,11 @@ export function mkdir(directory:string){
         fs.mkdirSync(directory, { recursive: true });
     }
 }
+export function rmdir(directory:string){
+    if (fs.existsSync(directory) && fs.readdirSync(directory).length<1){
+        fs.rmdirSync(directory)
+    }
+}
 export function saveTo(filename:string,content:any){
     fs.writeFileSync(filename, JSON.stringify(content));
 }

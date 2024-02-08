@@ -33,21 +33,16 @@ HB.registerHelper('genParameterQuery', (obj)=>new HB.SafeString(
         .map(([name,value])=> `${name}: ${value}`).join(', ')
 ));
 const unsure = 'gen.';
-export const loadCompile = (file:string) => {
+export const loadCompile = (shouldDelete:boolean, file:string) => {
     const tmpl = HB.compile(fs.readFileSync(file).toLocaleString(), {noEscape: true, preventIndent: true})
     return (dirname:string, filename:string,  cfg) => {
         if (fs.existsSync(path.resolve(dirname, filename)) && fs.readFileSync(path.resolve(dirname, filename)).toLocaleString().includes('noGramoGenerator')) {
-            fs.writeFileSync(path.resolve(dirname, `${unsure}${filename}`), tmpl(cfg));
+            if (shouldDelete) {if (fs.existsSync(path.resolve(dirname, `${unsure}${filename}`)))fs.unlink(path.resolve(dirname, `${unsure}${filename}`), (e)=> e && console.error(e))}
+            else fs.writeFileSync(path.resolve(dirname, `${unsure}${filename}`), tmpl(cfg));
         } else {
-            fs.writeFileSync(path.resolve(dirname, filename), tmpl(cfg));
+            if (shouldDelete) {if (fs.existsSync(path.resolve(dirname, filename)))fs.unlink(path.resolve(dirname, filename), (e)=> e && console.error(e))}
+            else fs.writeFileSync(path.resolve(dirname, filename), tmpl(cfg));
         }
-    }
-}
-export const removeGenerated = (dirname:string, filename:string) => {
-    if (fs.existsSync(path.resolve(dirname, filename)) && fs.readFileSync(path.resolve(dirname, filename)).toLocaleString().includes('noGramoGenerator')) {
-        fs.unlink(path.resolve(dirname, `${unsure}${filename}`), (e)=> e && console.error(e));
-    } else {
-        fs.unlink(path.resolve(dirname, filename), (e)=> e && console.error(e));
     }
 }
 export const loadPartial = (name: string, file:string) => {

@@ -44,7 +44,7 @@ export const route = {
     {
       path: '',
       name: '{{ category }}{{ name }}Dashboard',
-      component: () => import('../../pages/{{category}}/{{ name }}/Dashboard.vue'),
+      component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Dashboard.vue'),
     },
 {{#each objects}}
     {

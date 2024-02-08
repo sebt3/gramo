@@ -1,11 +1,13 @@
 #!/usr/bin/env -S npx ts-node-esm
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {LoadFrom,mkdir} from './generator/utils.js'
+import {LoadFrom,mkdir,rmdir} from './generator/utils.js'
 import {loadCompile,loadPartial} from './generator/hb.js'
 import {allCategories} from './generator/config.js'
 import * as fs from 'fs';
 
+const args = process.argv.slice(2);
+const deleteFiles = args.includes('-d') || args.includes('--delete');
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const path_data = path.resolve(__dirname, '..', 'data');
 const path_back = path.resolve(__dirname, '..', 'back');
@@ -44,14 +46,14 @@ new Promise((resolve) => {
 //// Generate the backend
 ///
 // Use the defined templates with the generated enhenced data to build the backend
-    const allBackIndex      = loadCompile(path.resolve(path_lib, 'back', 'all.resolvers.index.ts.hbs'))
-    const allBackResolvers  = loadCompile(path.resolve(path_lib, 'back', 'all.resolvers.ns.resolvers.ts.hbs'))
-    const allBackSchemaNS   = loadCompile(path.resolve(path_lib, 'back', 'all.schema.ns.graphql.hbs'))
-    const grpBackSchema     = loadCompile(path.resolve(path_lib, 'back', 'grp.schema.graphql.hbs'))
-    const grpBackCustom     = loadCompile(path.resolve(path_lib, 'back', 'grp.resolvers.custom.ts.hbs'))
-    const grpBackIndex      = loadCompile(path.resolve(path_lib, 'back', 'grp.resolvers.index.ts.hbs'))
-    const grpBackResolvers  = loadCompile(path.resolve(path_lib, 'back', 'grp.resolvers.ns.resolvers.ts.hbs'))
-    const objBackNsResolver = loadCompile(path.resolve(path_lib, 'back', 'obj.resolvers.ts.hbs'))
+    const allBackIndex      = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.resolvers.index.ts.hbs'))
+    const allBackResolvers  = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.resolvers.ns.resolvers.ts.hbs'))
+    const allBackSchemaNS   = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.schema.ns.graphql.hbs'))
+    const grpBackSchema     = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'grp.schema.graphql.hbs'))
+    const grpBackCustom     = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'grp.resolvers.custom.ts.hbs'))
+    const grpBackIndex      = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'grp.resolvers.index.ts.hbs'))
+    const grpBackResolvers  = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'grp.resolvers.ns.resolvers.ts.hbs'))
+    const objBackNsResolver = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'obj.resolvers.ts.hbs'))
 
     mkdir(path.resolve(path_back, 'schema'));
     mkdir(path.resolve(path_back, 'resolvers', 'k8s'));
@@ -61,13 +63,14 @@ new Promise((resolve) => {
     allBackSchemaNS(path.resolve(path_back, 'schema'), `k8sNamespace.graphql`,{groups: current});
     current.forEach(g => {
         grpBackSchema(path.resolve(path_back, 'schema'), `${g.name}.graphql`, g);
-        mkdir(path.resolve(path_back, 'resolvers', g.name));
+        if (!deleteFiles) mkdir(path.resolve(path_back, 'resolvers', g.name));
         grpBackCustom(path.resolve(path_back, 'resolvers', g.name), 'custom.ts', g);
         grpBackIndex(path.resolve(path_back, 'resolvers', g.name), 'index.ts', g);
         grpBackResolvers(path.resolve(path_back, 'resolvers', 'k8s'), `nsResolvers.${g.name}.ts`, g);
         g.objects.forEach(o => {
             objBackNsResolver(path.resolve(path_back, 'resolvers', g.name), `${o.short}.ts`, o)
         })
+        if (deleteFiles) rmdir(path.resolve(path_back, 'resolvers', g.name));
     })
     return data
 }).then(data => {
@@ -75,29 +78,29 @@ new Promise((resolve) => {
 //// Generate the Frontend
 ///
 // Exact same strategy and data as for the backend, using diffrent templates
-    const objQueryMutation  = loadCompile(path.resolve(path_lib, 'front', 'obj.query.mutation.graphql.hbs'))
-    const objQueryRead      = loadCompile(path.resolve(path_lib, 'front', 'obj.query.read.graphql.hbs'))
-    const grpQueryRead      = loadCompile(path.resolve(path_lib, 'front', 'grp.query.read.graphql.hbs'))
-    const allRoutes         = loadCompile(path.resolve(path_lib, 'front', 'all.routes.ts.hbs'))
-    const catRoutes         = loadCompile(path.resolve(path_lib, 'front', 'cat.routes.ts.hbs'))
-    const grpPageList       = loadCompile(path.resolve(path_lib, 'front', 'grp.pages.list.vue.hbs'))
-    const grpRoutes         = loadCompile(path.resolve(path_lib, 'front', 'grp.routes.ts.hbs'))
-    const grpCustom         = loadCompile(path.resolve(path_lib, 'front', 'grp.custom.def.ts.hbs'))
-    const objCompEdit       = loadCompile(path.resolve(path_lib, 'front', 'obj.components.edit.vue.hbs'))
-    const objCompMeta       = loadCompile(path.resolve(path_lib, 'front', 'obj.components.meta.vue.hbs'))
-    const objCompStatus     = loadCompile(path.resolve(path_lib, 'front', 'obj.components.status.vue.hbs'))
-    const objCompList       = loadCompile(path.resolve(path_lib, 'front', 'obj.components.list.vue.hbs'))
-    const objCompView       = loadCompile(path.resolve(path_lib, 'front', 'obj.components.view.vue.hbs'))
-    const objPageEdit       = loadCompile(path.resolve(path_lib, 'front', 'obj.pages.edit.vue.hbs'))
-    const objPageList       = loadCompile(path.resolve(path_lib, 'front', 'obj.pages.list.vue.hbs'))
-    const objPageNew        = loadCompile(path.resolve(path_lib, 'front', 'obj.pages.new.vue.hbs'))
-    const objPageView       = loadCompile(path.resolve(path_lib, 'front', 'obj.pages.view.vue.hbs'))
-    const objLib            = loadCompile(path.resolve(path_lib, 'front', 'obj.lib.ts.hbs'))
+    const objQueryMutation  = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.query.mutation.graphql.hbs'))
+    const objQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.query.read.graphql.hbs'))
+    const grpQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.query.read.graphql.hbs'))
+    const allRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.routes.ts.hbs'))
+    const catRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'cat.routes.ts.hbs'))
+    const grpPageList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.pages.list.vue.hbs'))
+    const grpRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.routes.ts.hbs'))
+    const grpCustom         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.custom.def.ts.hbs'))
+    const objCompEdit       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.edit.vue.hbs'))
+    const objCompMeta       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.meta.vue.hbs'))
+    const objCompStatus     = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.status.vue.hbs'))
+    const objCompList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.list.vue.hbs'))
+    const objCompView       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.view.vue.hbs'))
+    const objPageEdit       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.edit.vue.hbs'))
+    const objPageList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.list.vue.hbs'))
+    const objPageNew        = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.new.vue.hbs'))
+    const objPageView       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.view.vue.hbs'))
+    const objLib            = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.lib.ts.hbs'))
 
     const current = data as {name:string,objects:{short:string, category:string, readProperties:string[]}[]}[];
     allRoutes(path.resolve(path_front, 'routes'), `index.ts`, {groups: current, categories: allCategories})
     allCategories.forEach(c=>{
-        mkdir(path.resolve(path_front, 'routes', c));
+        if (!deleteFiles) mkdir(path.resolve(path_front, 'routes', c));
         const groups = current.map(g=>{return{
             ...g,
             objects: g.objects.filter(o=>o.category==c)
@@ -105,16 +108,17 @@ new Promise((resolve) => {
         catRoutes(path.resolve(path_front, 'routes', c), 'index.ts',{category: c, groups: groups})
     })
     current.forEach(g => {
-        mkdir(path.resolve(path_front, 'queries', g.name));
-        mkdir(path.resolve(path_front, 'components', g.name));
-        mkdir(path.resolve(path_front, 'libs', g.name));
+        if (!deleteFiles) mkdir(path.resolve(path_front, 'queries', g.name));
+        if (!deleteFiles) mkdir(path.resolve(path_front, 'components', g.name));
+        if (!deleteFiles) mkdir(path.resolve(path_front, 'libs', g.name));
         grpCustom(path.resolve(path_front, 'libs', g.name),`custom.ts`, g)
         allCategories.filter(c=> g.objects.filter(o=>o.category==c).length>0).forEach(c=>{
             grpRoutes(path.resolve(path_front, 'routes', c), `${g.name}.ts`, {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
-            mkdir(path.resolve(path_front, 'pages', c, g.name))
-            grpPageList(path.resolve(path_front, 'pages', c, g.name), 'Dashboard.vue', {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
+            if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', c, g.name))
+            grpPageList(path.resolve(path_front, 'pages', c, g.name), `${c}Dashboard.vue`, {...g, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)});
             grpQueryRead(path.resolve(path_front, 'queries', g.name), `${c}.read.graphql`, {...g, detailed: false, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)})
             grpQueryRead(path.resolve(path_front, 'queries', g.name), `${c}.details.graphql`, {...g, detailed: true, category: c, plural: g.objects.filter(o=>o.category==c)[0].short,objects: g.objects.filter(o=>o.category==c)})
+            if (deleteFiles) rmdir(path.resolve(path_front, 'pages', c, g.name))
         })
         g.objects.forEach(o => {
             objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.create.graphql`, {...o, mutationType: 'Create'})
@@ -128,13 +132,20 @@ new Promise((resolve) => {
             if (o.readProperties.includes('status'))
                 objCompStatus(path.resolve(path_front, 'components', g.name),`${o.short}Status.vue`, o);
             objCompView(path.resolve(path_front, 'components', g.name),`${o.short}View.vue`, o)
-            mkdir(path.resolve(path_front, 'pages', o['category'], g.name));
+            if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', o['category'], g.name));
             objPageEdit(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}Edit.vue`, o)
             objPageList(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}List.vue`, o)
             objPageView(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}View.vue`, o)
             objPageNew(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}New.vue`, o)
             objLib(path.resolve(path_front, 'libs', g.name),`${o.short}.ts`, o)
+            if (deleteFiles) rmdir(path.resolve(path_front, 'pages', o['category'], g.name));
         })
+        if (deleteFiles) rmdir(path.resolve(path_front, 'queries', g.name));
+        if (deleteFiles) rmdir(path.resolve(path_front, 'components', g.name));
+        if (deleteFiles) rmdir(path.resolve(path_front, 'libs', g.name));
+    })
+    if (deleteFiles) allCategories.forEach(c=>{
+        rmdir(path.resolve(path_front, 'routes', c));
     })
     return data
 })

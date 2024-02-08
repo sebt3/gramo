@@ -30,7 +30,7 @@
 !/front/libs/*/custom.ts
 !/front/libs/core/*
 /front/pages/*/*/*
-!/front/pages/automation/fluxcd/Dashboard.vue
+!/front/pages/automation/fluxcd/automationDashboard.vue
 !/front/pages/install/vynil/DistribView.vue
 !/front/pages/install/vynil/InstallView.vue
-!/front/pages/install/vynil/Dashboard.vue
+!/front/pages/install/vynil/installDashboard.vue
