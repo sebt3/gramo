@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter,minimizeFirstLetter} from './utils.js'
+import {capitalizeFirstLetter,minimizeFirstLetter, getByPath} from './utils.js'
 import {excludedWriteNames} from './config.js'
 import HB from 'handlebars';
 import * as fs from 'fs';
@@ -10,7 +10,7 @@ import path from 'path';
 HB.registerHelper('defined', v => v!=null&&v!=undefined);
 HB.registerHelper('not', v => !v);
 HB.registerHelper('eq', (left,right) => left == right);
-HB.registerHelper('ne', (left,right) => left == right);
+HB.registerHelper('ne', (left,right) => left != right);
 HB.registerHelper('and', (left,right) => left && right);
 HB.registerHelper('or', (left,right) => left || right);
 HB.registerHelper('json2path', (str) => str.split('.').filter(v=>v!='').join('/'));
@@ -22,6 +22,7 @@ HB.registerHelper('isJsonObject', (grp,lst)=>(lst[grp]=='JSONObject'));
 HB.registerHelper('isCustomTyped', (grp,name)=>(grp=='k8s' && name=='Namespace'));
 HB.registerHelper('isNamespace', (grp,name)=>(grp=='k8s' && name=='Namespace'));
 HB.registerHelper('haveQueries', (objects)=>(objects.filter(o=>!o['namespaced']).length>0));
+HB.registerHelper('getByPath', (obj, path)=>new HB.SafeString(getByPath(obj, path)))
 HB.registerHelper('capitalizeFirstLetter', (str)=>new HB.SafeString(capitalizeFirstLetter(str)))
 HB.registerHelper('lower', (str)=>new HB.SafeString(str.toLowerCase()))
 HB.registerHelper('minimizeFirstLetter', (str)=>new HB.SafeString(minimizeFirstLetter(str)))

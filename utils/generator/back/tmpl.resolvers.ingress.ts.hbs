@@ -15,7 +15,7 @@
             return lst.filter(svc=>svcs.includes(svc['metadata']['name']))
         },
 {{/if}}
-{{#if (eq type 'usedBy')}}
+{{#if (eq type 'users')}}
         {{type}}{{targetShort}}: async (svc, args: object) => {
             const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(svc, {namespace: svc['metadata']['namespace'], ...args})
             return lst.filter(ing=>Array.isArray(ing['spec']['rules']) && ing['spec']['rules'].filter(r=>

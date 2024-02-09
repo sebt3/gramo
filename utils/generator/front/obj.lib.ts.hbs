@@ -21,7 +21,7 @@ export const {{short}}Definition = {{toJson definition}};
 export function use{{ short }}() {
   const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking{{#if namespaced}}, isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute{{/if}} } = useCore();
   const viewer = ref({
-      tab: 'simple',
+      tab: 'meta',
       full: '',
       props: {
 {{#each writeProperties}}

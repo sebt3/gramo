@@ -1,0 +1,79 @@
+{{#if (eq (getByPath properties 'status/properties/conditions/type') 'array')}}
+        <q-field label="Conditions" stack-label borderless>
+          <template v-slot:prepend><q-icon name="grading" /></template>
+          <template v-slot:control><div class="self-center full-width no-outline" tabindex="0" v-if="Array.isArray(model.status['conditions'])">
+            <span v-for="cond in model.status['conditions'].filter(c=>c.type!='ArtifactInStorage')" v-bind:key="cond.message">
+              <q-badge align="middle" :label="elude(Object.keys(cond).includes('message')?cond.message:cond.type, 50)"  :color="getConditionColor(cond)" class="q-mb-sm q-mr-sm" />
+            </span>
+          </div></template>
+        </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/artifact/properties/revision') 'string')}}
+          <q-field label="Revision" stack-label borderless>
+            <template v-slot:prepend><q-icon name="change_circle" /></template>
+            <template v-slot:control><div class="self-center full-width no-outline" tabindex="0" v-if="Object.keys(model.status).includes('artifact') && typeof model.status['artifact'] === 'object' && Object.keys(model.status['artifact']).includes('revision')"> \{{ model.status['artifact']['revision'] }}
+            </div></template>
+          </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/phase/type') 'string')}}
+      <q-field label="Phase" stack-label borderless>
+        <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> \{{ model.status['phase'] }}
+        </div></template>
+      </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/latestImage/type') 'string')}}
+      <q-field label="latestImage" stack-label borderless>
+        <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> \{{ model.status['latestImage'] }}
+        </div></template>
+      </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/lastPushCommit/type') 'string')}}
+      <q-field label="lastPushCommit" stack-label borderless>
+        <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> \{{ model.status['lastPushCommit'] }}
+        </div></template>
+      </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/lastPushTime/type') 'string')}}
+      <q-field label="lastAppliedRevision" stack-label borderless>
+        <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> \{{ model.status['lastAppliedRevision'] }}
+        </div></template>
+      </q-field>
+{{/if}}
+{{#if (eq (getByPath properties 'status/properties/lastAppliedRevision/type') 'string')}}
+      <q-field label="lastAppliedRevision" stack-label borderless>
+        <template v-slot:prepend><q-icon name="far fa-chart-bar" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0"> \{{ model.status['lastAppliedRevision'] }}
+        </div></template>
+      </q-field>
+{{/if}}
+{{#if (eq (getByPath crd 'spec/versions/0/schema/openAPIV3Schema/properties/status/properties/errors/items/type') 'string')}}
+  {{#if (eq (getByPath crd 'spec/versions/0/schema/openAPIV3Schema/properties/status/properties/status/type') 'string')}}
+      <q-field label="Status" stack-label borderless>
+        <template v-slot:prepend><q-icon name="done" /></template>
+        <template v-slot:control>
+          <q-chip class="float-right text-white text-capitalize" :label="model.status.status" color="warning" v-if="['planning','installing'].includes(model.status.status)"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" :label="model.status.status" color="positive" v-if="model.status.status=='installed'"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" :label="model.status.status" color="negative" v-if="model.status.status=='errors'"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" :label="model.status.status" color="info" v-if="!['installed','planning','installing','errors'].includes(model.status.status)"></q-chip>
+        </template>
+      </q-field>
+  {{else}}
+      <q-field label="Status" stack-label borderless>
+        <template v-slot:prepend><q-icon name="done" /></template>
+        <template v-slot:control>
+          <q-chip class="float-right text-white text-capitalize" label="Ok" color="positive" v-if="model.status.errors.length==0"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" label="Errors" color="negative" v-if="model.status.errors.length>0"></q-chip>
+        </template>
+      </q-field>
+  {{/if}}
+      <q-field label="Errors" stack-label borderless v-if="model.status.errors.length>0">
+        <template v-slot:prepend><q-icon name="error" /></template>
+        <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
+          <div v-for="err in model.status.errors" v-bind:key="err">{{ err }}</div>
+        </div></template>
+      </q-field>
+{{/if}}

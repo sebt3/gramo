@@ -18,7 +18,7 @@
             return lst.filter(s=>cms.includes(s['metadata']['name']))
         },
 {{/if}}
-{{#if (and (eq type 'usedBy') (defined path))}}
+{{#if (and (eq type 'users') (defined path))}}
         {{type}}{{targetShort}}: async (parent, args: object) => {
             const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(w=>{

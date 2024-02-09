@@ -7,16 +7,12 @@ export const excludes = [
     {group: 'vynil', short: 'Install', for: ['list', 'simple'], values: [{path:'status/tfstate'}, {path:'status/plan'}]},
 ];
 const uses = [
-    {algo: 'vynil', group: 'vynil', short: 'Install', usedGroup: 'vynil', usedShort: 'Package', path: null},
-    {algo: 'vynil', group: 'vynil', short: 'Install', usedGroup: 'vynil', usedShort: 'Distrib', path: null},
-    {algo: 'vynil', group: 'vynil', short: 'Install', usedGroup: 'vynil', usedShort: 'Category', path: null},
-    {algo: 'nodeName',  group: 'k8s', short: 'Pod', usedGroup: 'k8s', usedShort: 'Node', path: null},
-    {algo: 'serviceAccount',  group: 'k8s', short: 'Pod', usedGroup: 'k8s', usedShort: 'ServiceAccount', path: null},
     {algo: 'ingress',  group: 'k8s', short: 'Ingress', usedGroup: 'k8s', usedShort: 'Service', path: null},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'Pod', path: 'metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'ReplicaSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'Deployment', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'DaemonSet', path: 'spec/template/metadata'},
+    {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'StatefulSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'PodTemplate', path: 'template/metadata'},
     {algo: 'pvc',  group: 'k8s', short: 'PersistentVolumeClaim', usedGroup: 'k8s', usedShort: 'PersistentVolume', path: null},
     {algo: 'pvc',  group: 'k8s', short: 'Pod', path: 'spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
@@ -31,6 +27,7 @@ const uses = [
     {algo: 'secret',  group: 'k8s', short: 'Job', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
     {algo: 'secret',  group: 'k8s', short: 'CronJob', path: 'spec/jobTemplate/spec/template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
     {algo: 'secret',  group: 'k8s', short: 'Deployment', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
+    {algo: 'secret',  group: 'k8s', short: 'StatefulSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
     {algo: 'secret',  group: 'k8s', short: 'DaemonSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
     {algo: 'secret',  group: 'k8s', short: 'PodTemplate', path: 'template/spec', usedGroup: 'k8s', usedShort: 'Secret'},
     {algo: 'configMap',  group: 'k8s', short: 'Pod', path: 'spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
@@ -38,20 +35,31 @@ const uses = [
     {algo: 'configMap',  group: 'k8s', short: 'Job', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'configMap',  group: 'k8s', short: 'CronJob', path: 'spec/jobTemplate/spec/template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'configMap',  group: 'k8s', short: 'Deployment', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
+    {algo: 'configMap',  group: 'k8s', short: 'StatefulSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'configMap',  group: 'k8s', short: 'DaemonSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'configMap',  group: 'k8s', short: 'PodTemplate', path: 'template/spec', usedGroup: 'k8s', usedShort: 'ConfigMap'},
+    {algo: 'role',         group: 'k8s', short: 'RoleBinding', usedGroup: 'k8s', usedShort: 'Role'},
+    {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'RoleBinding'},
+    {algo: 'role',         group: 'k8s', short: 'ClusterRoleBinding', usedGroup: 'k8s', usedShort: 'ClusterRole'},
+    {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
 ];
 const provides = [
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Category'},
+    {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Install'},
+    {algo: 'vynil', group: 'vynil', short: 'Package', providedGroup: 'vynil', providedShort: 'Install'},
+    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Install'},
 //    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Package'},
+    {algo: 'nodeName',  group: 'k8s', short: 'Node', providedGroup: 'k8s', providedShort: 'Pod'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'Pod', path: 'spec'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'ReplicaSet', path: 'spec/template/spec'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'Deployment', path: 'spec/template/spec'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'DaemonSet', path: 'spec/template/spec'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'StatefulSet', path: 'spec/template/spec'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'PodTemplate', path: 'spec/template/spec'},
     {algo: 'storageClass', group: 'k8s', short: 'StorageClass', providedGroup: 'k8s', providedShort: 'PersistentVolume'},
     {algo: 'storageClass', group: 'k8s', short: 'StorageClass', providedGroup: 'k8s', providedShort: 'PersistentVolumeClaim'},
     {algo: 'apiService',   group: 'k8s', short: 'APIService', providedGroup: 'k8s', providedShort: 'CustomResourceDefinition'},
-    {algo: 'role',         group: 'k8s', short: 'RoleBinding', providedGroup: 'k8s', providedShort: 'Role'},
-    {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'RoleBinding'},
-    {algo: 'role',         group: 'k8s', short: 'ClusterRoleBinding', providedGroup: 'k8s', providedShort: 'ClusterRole'},
-    {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'ClusterRoleBinding'},
 ];
 const children = [
     {algo: 'k8s', group: 'k8s', short: 'ReplicaSet', parentGroup: 'k8s', parentShort: 'Deployment'},
@@ -93,15 +101,15 @@ const children = [
 ];
 type autoResolver = {algo: string,type: string,group: string,short: string,targetGroup: string,targetShort: string, path?: string|null}
 export const autoResolvers = ([] as autoResolver[]).concat(
-    children.map(c=>{return {type: 'parent', group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo}}),
-    children.map(c=>{return {type: 'child', group: c.parentGroup, short: c.parentShort, targetGroup: c.group, targetShort: c.short, algo: c.algo}}),
-    provides.map(c=>{return {type: 'provide', group: c.group, short: c.short, targetGroup: c.providedGroup, targetShort: c.providedShort, algo: c.algo}}),
-    provides.map(c=>{return {type: 'providedTo', group: c.providedGroup, short: c.providedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo}}),
+    children.map(c=>{return {type: 'parent',  group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo, path: null}}),
+    children.map(c=>{return {type: 'child', group: c.parentGroup, short: c.parentShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: null}}),
+    provides.map(c=>{return {type: 'provide', group: c.group, short: c.short, targetGroup: c.providedGroup, targetShort: c.providedShort, algo: c.algo, path: c.path}}),
+    provides.map(c=>{return {type: 'consume', group: c.providedGroup, short: c.providedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'use', group: c.group, short: c.short, targetGroup: c.usedGroup, targetShort: c.usedShort, algo: c.algo, path: c.path}}),
-    uses.map(c=>{return {type: 'usedBy', group: c.usedGroup, short: c.usedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
+    uses.map(c=>{return {type: 'users', group: c.usedGroup, short: c.usedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
 )
 export const extraResolvers = autoResolvers.map(a=>{return {
-    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: `[${a.targetGroup}${a.targetShort}]`
+    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
 }}).concat ()
 
 const categoryOrder = [

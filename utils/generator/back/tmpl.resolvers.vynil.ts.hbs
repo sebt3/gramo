@@ -1,54 +1,61 @@
-{{#if (and (eq type 'use') (eq targetShort 'Category'))}}
+{{#if (and (eq type 'consume') (eq targetShort 'Category'))}}
         {{type}}{{targetShort}}: async (parent, args: object) => {
-            return [{
+            return {
                 name: parent.spec.category,
-            }];
+            };
         },
 {{/if}}
-{{#if (and (eq type 'use') (eq targetShort 'Package'))}}
+{{#if (and (eq type 'consume') (eq targetShort 'Package'))}}
         {{type}}{{targetShort}}: async (parent, args: object) => {
             const packages = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args)
             const lstPkg = packages.filter((pck) => pck['name'] == parent.spec.component && pck['category']  == parent.spec.category && pck['distrib']  == parent.spec.distrib);
-            if (lstPkg.length>0) return lstPkg;
+            if (lstPkg.length>0) return lstPkg[0];
             return null;
         },
 {{/if}}
-{{#if (and (eq type 'use') (eq targetShort 'Distrib'))}}
+{{#if (and (eq type 'consume') (eq targetShort 'Distrib'))}}
         {{type}}{{targetShort}}: async (parent, args: object) => {
             const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{})).filter((i) => i.metadata.name == parent.spec.distrib)
-            if (lst.length>0) return lst;
-            return [{
+            if (lst.length>0) return lst[0];
+            return {
                 metadata: {
                     name: parent.spec.distrib,
                 },
-            }];
+            };
         },
 {{/if}}
-{{#if (and (eq type 'usedBy') (eq targetShort 'Install'))}}
+{{#if (and (eq type 'provide') (eq targetShort 'Install'))}}
         {{type}}{{targetShort}}: async (dist, args: object) => {
             const nss = await listNamespace.k8sNamespace(dist, args)
-            return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+            console.log('{{type}}{{targetShort}}',nss)
+            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
                 const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, {namespace: ns, ...args})
                 return lst.filter(r=>r['spec']['distrib']==dist['metadata']['name'])
-            }))).flat().filter((v)=>v!=null)
+            })))
+            console.log('{{type}}{{targetShort}}',res)
+            return res.flat().filter((v)=>v!=null)
         },
 {{/if}}
 {{#if (and (eq type 'provide') (eq targetShort 'Category'))}}
         {{type}}{{targetShort}}: async (dist, args: object) => {
-            return (await listPackage.vynilPackage(dist, args)).filter(pkg => {
+            const res = (await listPackage.vynilPackage(dist, args)).filter(pkg => {
                 if ((gramoConfig.limitVynilDistrib != ""  && pkg['distrib'] != gramoConfig.limitVynilDistrib) ||
                     (gramoConfig.limitVynilCategory != "" && pkg['category'] != gramoConfig.limitVynilCategory)) return false;
                 return pkg['distrib'] === dist['metadata']['name']
             }).map(p=>p.category).filter((v,i,a)=>a.indexOf(v) === i).map(name=>{return {name:name} })
+            //console.log('{{type}}{{targetShort}}',res)
+            return res
         },
 {{/if}}
 {{#if (and (eq type 'provide') (eq targetShort 'Package'))}}
         {{type}}{{targetShort}}: async (dist, args: object) => {
             const packages = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, args)
-            return packages.filter(pkg => {
+            const res = packages.filter(pkg => {
                 if ((gramoConfig.limitVynilDistrib != ""  && pkg['distrib'] != gramoConfig.limitVynilDistrib) ||
                     (gramoConfig.limitVynilCategory != "" && pkg['category'] != gramoConfig.limitVynilCategory)) return false;
                 return pkg['distrib'] === dist['metadata']['name']
             });
+            //console.log('{{type}}{{targetShort}}',res)
+            return res
         },
 {{/if}}

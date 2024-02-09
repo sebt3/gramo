@@ -1,4 +1,4 @@
-{{#if (eq type 'usedBy')}}
+{{#if (eq type 'provide')}}
         {{type}}{{targetShort}}: async (node, args: object) => {
             const nss = await listNamespace.k8sNamespace(node, args)
             return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
@@ -7,9 +7,11 @@
             }))).flat()
         },
 {{/if}}
-{{#if (eq type 'use')}}
+{{#if (eq type 'consume')}}
         {{type}}{{targetShort}}: async (pod, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(pod, args)
-            return lst.filter(node=>pod['spec']['nodeName']==node['metadata']['name'])
+            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(pod, args))
+                .filter(node=>pod['spec']['nodeName']==node['metadata']['name'])
+            if (lst.length<1) return null
+            return lst[0]
         },
 {{/if}}

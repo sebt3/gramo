@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
+import { getConditionColor, elude } from "../../libs/core/"
+import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 defineProps<{model: object}>();
 </script>
 <template>
   <q-card bordered v-if="model.status != null" class="q-ma-sm">
-    <q-card-section>
-      <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
+    <q-card-section :class="`bg-${ color{{ short }} } text-white`">
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
     </q-card-section>
-    <q-card-section>
-      <DefaultStatusView :status="model.status" />
+    <q-card-section  :class="`bg-${ color{{ short }} }-2`">
+      <div class="q-gutter-md">
+{{> vueStatusFields properties=definition.properties crd=crd }}
+      </div>
     </q-card-section>
   </q-card>
 </template>

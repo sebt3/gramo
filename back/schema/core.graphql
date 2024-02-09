@@ -77,8 +77,8 @@ type vynilPackage {
   name: String!
   commit_id: ID!
   description: String
-  providedByCategory: vynilCategory!
-  providedByDistrib: vynilDistrib!
+  consumeCategory: vynilCategory!
+  consumeDistrib: vynilDistrib!
   options: JSONObject!
 }
 type Query {

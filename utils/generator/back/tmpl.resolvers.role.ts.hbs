@@ -1,10 +1,10 @@
-{{#if (eq type 'providedTo')}}
+{{#if (eq type 'users')}}
         {{type}}{{targetShort}}: async (used, args: object) => {
             const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(used,{namespace: used['metadata']['namespace'], ...args})
             return lst.filter(r=>r['roleRef']['name']==used['metadata']['name'])
         },
 {{/if}}
-{{#if (eq type 'provide')}}
+{{#if (eq type 'use')}}
         {{type}}{{targetShort}}: async (user, args: object) => {
             if (user['roleRef']['kind'] != '{{targetShort}}') return null;
             const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(user,{namespace: user['metadata']['namespace'], ...args})

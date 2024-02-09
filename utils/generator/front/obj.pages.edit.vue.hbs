@@ -54,8 +54,12 @@ onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value
 
 <template>
   <div class="row q-mb-sm q-ml-sm">
+{{#if (contain readProperties 'status')}}
     <div class="col-md-6">
-      <{{ group }}{{ short }}Meta :deletor="deletor" :useActions="true"
+{{else}}
+    <div class="col-md-12">
+{{/if}}
+      <{{ group }}{{ short }}Meta :deletor="deletor" :useActions="false" :showStatus="false"
         v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
        />

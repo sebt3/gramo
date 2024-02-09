@@ -30,6 +30,9 @@ loadPartial('createResolver', path.resolve(path_lib, 'back', 'tmpl.create.resolv
 loadPartial('deleteResolver', path.resolve(path_lib, 'back', 'tmpl.delete.resolver.ts.hbs'));
 loadPartial('patchResolver', path.resolve(path_lib, 'back', 'tmpl.patch.resolver.ts.hbs'));
 loadPartial('listResolver', path.resolve(path_lib, 'back', 'tmpl.list.resolver.ts.hbs'));
+loadPartial('vueStatusFields', path.resolve(path_lib, 'front', 'tmpl.status.fields.vue.hbs'));
+loadPartial('vueLabelFields', path.resolve(path_lib, 'front', 'tmpl.labels.fields.vue.hbs'));
+loadPartial('vueNameFields', path.resolve(path_lib, 'front', 'tmpl.name.fields.vue.hbs'));
 
 ////////////////////////////////////
 //// Load the data

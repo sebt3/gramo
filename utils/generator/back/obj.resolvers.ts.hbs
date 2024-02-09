@@ -3,16 +3,16 @@ import rfc6902  from 'rfc6902';
 import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
 {{#each autoResolvers}}
 import { lists as list{{this.targetShort}} } from '../{{this.targetGroup}}/{{this.targetShort}}.js';
-{{#if (and (and (eq this.type 'provide') (eq this.algo 'roleBinding')) (not (startWith this.targetShort 'Cluster')))}}
+{{#if (and (and (eq this.type 'use') (eq this.algo 'roleBinding')) (not (startWith this.targetShort 'Cluster')))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
 {{/if}}
 {{#if (and (and (eq this.type 'provide') (eq this.algo 'storageClass')) (eq this.targetShort 'PersistentVolumeClaim'))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
 {{/if}}
-{{#if (and (and (eq this.type 'usedBy') (eq this.algo 'nodeName')) (eq this.targetShort 'Pod'))}}
+{{#if (and (and (eq this.type 'provide') (eq this.algo 'nodeName')) (eq this.targetShort 'Pod'))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
 {{/if}}
-{{#if (and (eq this.algo 'vynil') (and (eq type 'usedBy') (eq targetShort 'Install')))}}
+{{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Install')))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
 {{/if}}
 {{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Package')))}}

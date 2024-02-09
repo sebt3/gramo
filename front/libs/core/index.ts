@@ -97,3 +97,16 @@ export function gqlDataToYaml(o: object) {
     if (typeof o !== 'object') return o;
     return stringify(deepRemoveType(JSON.parse(JSON.stringify(o))));
 }
+
+export function getColor(name) {
+    const vynil = /^vynil.solidite.fr/;
+    const k8s = /kubernetes.io/;
+    if (k8s.test(name)) return 'primary'
+    if (vynil.test(name)) return 'secondary'
+    return 'info'
+}
+export function getConditionColor(cond) {
+    if (cond.type == "Ready") return cond.status=='True'?'positive':'negative'
+    return 'info' // 'warning'
+  }
+  

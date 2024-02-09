@@ -38,10 +38,10 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
         name
         commit_id
         description
-        providedByCategory {
+        consumeCategory {
           name
         }
-        providedByDistrib {
+        consumeDistrib {
           metadata {
             name
           }

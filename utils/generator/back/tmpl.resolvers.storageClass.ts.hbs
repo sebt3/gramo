@@ -12,9 +12,11 @@
         {{/if}}
         },
 {{/if}}
-{{#if (eq type 'providedTo')}}
+{{#if (eq type 'consume')}}
         {{type}}{{targetShort}}: async (used, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args)
-            return lst.filter(r=>r['metadata']['name']==used['spec']['storageClassName'])
+            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args))
+                .filter(r=>r['metadata']['name']==used['spec']['storageClassName'])
+            if (lst.length<1) return null
+            return lst[0]
         },
 {{/if}}

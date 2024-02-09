@@ -22,8 +22,6 @@
 !/front/components/core/*
 !/front/components/navigation/*
 !/front/components/charts/*
-!/front/components/vynil/DistribStatus.vue
-!/front/components/vynil/InstallStatus.vue
 !/front/components/vynil/InstallView.vue
 !/front/components/vynil/PackageList.vue
 !/front/components/vynil/CategoryList.vue

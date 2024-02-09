@@ -1,32 +1,59 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
+import MetadataView from '@/components/core/MetadataView.vue';
+{{#if (contain readProperties 'status')}}
+import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
+{{/if}}
+import { elude, getColor, getConditionColor} from "../../libs/core/"
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import MonacoViewer from '@/components/core/MonacoViewer.vue';
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 {{#if namespaced}}
-const { onlyReadProperties, viewer, viewerUpdate, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { onlyReadProperties, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onlyReadProperties, viewer, viewerUpdate, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { onlyReadProperties, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
-const props = defineProps<{model: object}>();
+const props = withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean}>(), {
+  deletor: ()=>null,
+  useActions: false
+});
 onMounted(() => {
   viewerUpdate(onlyReadProperties(props.model));
 })
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
-    <q-tabs v-model="viewer.tab" :class="`bg-primary text-grey-4`" active-color="white">
-      <q-tab label="Simple" name="simple" />
+    <q-tabs v-model="viewer.tab" :class="`bg-${ color{{ short }} } text-grey-2`" active-color="white" align="justify">
+      <q-avatar :icon="icon{{ short }}" />
+      <q-tab label="{{ short }}" name="meta" />
+      <q-tab label="Configuration" name="simple" />
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
       <q-tab label="{{this}}" name="{{this}}" v-if="model['{{this}}']!=null" />
   {{/if}}
 {{/each}}
       <q-tab label="full Yaml" name="yaml" />
+      <q-btn-group push class="float-right text-capitalize shadow-3 q-mr-sm" v-if="useActions">
+        <q-btn icon="edit" @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)">
+          <q-tooltip>Edit</q-tooltip>
+        </q-btn>
+        <q-btn icon="delete" @click="actionDelete(deletor, model)">
+          <q-tooltip>Delete</q-tooltip>
+        </q-btn>
+      </q-btn-group>
     </q-tabs>
     <q-tab-panels v-model="viewer.tab" animated>
-      <q-tab-panel name="simple">
+      <q-tab-panel name="meta" :class="`bg-${ color{{ short }} }-1`">
+      <div class="q-gutter-md">
+{{> vueNameFields namespaced=namespaced group=group short=short }}
+{{#if (contain readProperties 'status')}}
+{{> vueStatusFields properties=definition.properties crd=crd }}
+{{/if}}
+{{> vueLabelFields }}
+      </div>
+      </q-tab-panel>
+      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-1`">
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
         <OpenApiEdit
@@ -45,7 +72,7 @@ onMounted(() => {
       </q-tab-panel>
   {{/if}}
 {{/each}}
-      <q-tab-panel name="yaml">
+      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-1`">
         <MonacoViewer :text="viewer.full" :key="viewer.full" />
       </q-tab-panel>
     </q-tab-panels>

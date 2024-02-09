@@ -1,4 +1,4 @@
-{{#if (eq type 'providedTo')}}
+{{#if (eq type 'users')}}
         {{type}}{{targetShort}}: async (used, args: object) => {
             if (used['subjects']==null) return null;
             const ret = (await Promise.all(used['subjects'].filter(s=>s['kind']=='{{targetShort}}').map(s=>s['namespace']).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
@@ -10,7 +10,7 @@
             return ret
         },
 {{/if}}
-{{#if (eq type 'provide')}}
+{{#if (eq type 'use')}}
         {{type}}{{targetShort}}: async (user, args: object) => {
         {{#if (startWith targetShort 'Cluster')}}
             const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(user, args)

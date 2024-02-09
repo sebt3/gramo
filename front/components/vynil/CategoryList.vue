@@ -16,9 +16,9 @@ withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean}>(),
 </script>
 <template>
   <q-card class="q-ma-sm" bordered v-if="model.length>1">
-    <TableHeader title="Categories" :usecreate="false" :userefresh="useAction" itemtype='vynil Category' v-model:model-filter="filter" @refresh="$emit('refresh')" />
+    <TableHeader title="Categories" class="bg-teal" :usecreate="false" :userefresh="useAction" itemtype='vynil Category' v-model:model-filter="filter" @refresh="$emit('refresh')" />
     <q-card-section class="q-pa-none">
-    <q-table :rows="model" :columns="DistribColumns" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
+    <q-table :rows="model" class="bg-teal-1 no-shadow" hide-header :columns="DistribColumns" v-model:pagination="pagination" :filter="filter" hide-bottom>
         <template v-slot:body-cell-Name="props">
           <q-td :props="props">
             {{ props.row.name }}
@@ -28,15 +28,15 @@ withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean}>(),
     </q-card-section>
   </q-card>
   <q-card bordered class="q-ma-sm" v-else>
-    <q-card-section class="bg-primary text-grey-4">
+    <q-card-section class="bg-teal text-grey-2">
       <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">Category
       </div>
     </q-card-section>
-    <q-card-section>
+    <q-card-section  class="bg-teal-2">
         <q-field label="Name" stack-label borderless>
         <template v-slot:prepend><q-icon name="smart_button" /></template>
         <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">{{ model[0].name }}</div>
+          <div class="self-center full-width no-outline" tabindex="0">{{ model.name }}</div>
         </template>
       </q-field>
     </q-card-section>

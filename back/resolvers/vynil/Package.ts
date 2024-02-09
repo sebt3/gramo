@@ -42,12 +42,12 @@ export const queries = {
 
 export const resolvers = {
     vynilPackage: {
-        providedByCategory: async (parent) => {
+        consumeCategory: async (parent) => {
             return {
                 name: parent.category,
             };
         },
-        providedByDistrib: async (parent) => {
+        consumeDistrib: async (parent) => {
             const lst = (await distribQueries.vynilDistrib(parent,{})).filter((i) => i.metadata.name == parent.distrib)
             if (lst.length>0) return lst[0];
             return {

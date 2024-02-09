@@ -16,6 +16,9 @@ export function getBaseName(key:string) {
 export function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+export function getByPath(obj, path) {
+    return path.split("/").reduce((res,cur) => res==null?null:res[cur.replaceAll('~1','/')],obj)
+}
 export function minimizeFirstLetter(str: string): string {
     return str.charAt(0).toLowerCase() + str.slice(1);
 }

@@ -1,8 +1,8 @@
 {{#if namespaced}}
-query {{ group }}{{ short }}Query($namespace: queryParameters, $obj: queryParameters,{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
+query {{ group }}{{ short }}Query($namespace: queryParameters, $obj: queryParameters{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
   k8sNamespace(params: $namespace) {
 {{else}}
-query {{ group }}{{ short }}Query($obj: queryParameters,{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
+query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each resolvers}}, ${{name}}: queryParameters{{/each}}{{/if}}) {
 {{/if}}
     {{ group }}{{ short }}(params: $obj) {
       metadata {
@@ -23,10 +23,10 @@ query {{ group }}{{ short }}Query($obj: queryParameters,{{#if detailed}}{{#each 
         name
         commit_id
         description
-        providedByCategory {
+        consumeCategory {
           name
         }
-        providedByDistrib {
+        consumeDistrib {
           metadata {
             name
           }

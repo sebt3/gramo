@@ -1135,7 +1135,8 @@
           "short": "MongoDBCommunity",
           "targetGroup": "k8s",
           "targetShort": "Secret",
-          "algo": "k8s"
+          "algo": "k8s",
+          "path": null
         },
         {
           "type": "child",
@@ -1143,7 +1144,8 @@
           "short": "MongoDBCommunity",
           "targetGroup": "k8s",
           "targetShort": "Service",
-          "algo": "k8s"
+          "algo": "k8s",
+          "path": null
         },
         {
           "type": "child",
@@ -1151,7 +1153,8 @@
           "short": "MongoDBCommunity",
           "targetGroup": "k8s",
           "targetShort": "StatefulSet",
-          "algo": "k8s"
+          "algo": "k8s",
+          "path": null
         }
       ],
       "resolvers": [

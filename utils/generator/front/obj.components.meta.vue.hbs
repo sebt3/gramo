@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import MetadataView from '@/components/core/MetadataView.vue';
 import { ref, use{{ short }} } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }} } from '../../libs/{{ group }}/custom.js'
-const { actionNew, toEdit, actionDelete } = use{{ short }}();
-const to=ref({})
-withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean}>(), {
+import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { elude, getColor, getConditionColor } from "../../libs/core/"
+const { toEdit, actionDelete } = use{{ short }}();
+const props = withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean, showLink?:boolean, showLabels?:boolean, showStatus?: boolean}>(), {
   deletor: ()=>null,
-  useActions: false
+  useActions: false,
+  showLabels: false,
+  showStatus: true,
+  showLink: true,
 });
+console.log(props.model.metadata)
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
-    <q-card-section :class="`bg-${ color{{ short }} } text-grey-4`">
-      <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">{{ short }}
+    <q-card-section :class="`bg-${ color{{ short }} } text-white`">
+      <div class="text-subtitle1 q-mt-none q-mb-none q-pt-none q-pb-none">
+        <q-icon :name="icon{{ short }}" class="q-mr-sm" />{{ short }}
         <q-btn-group push class="float-right text-capitalize shadow-3" v-if="useActions">
           <q-btn icon="edit" @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)">
             <q-tooltip>Edit</q-tooltip>
@@ -23,18 +27,16 @@ withDefaults(defineProps<{model: object, deletor?:any, useActions?:boolean}>(), 
         </q-btn-group>
       </div>
     </q-card-section>
-    <q-card-section  v-if="useActions">
-      <MetadataView
-        :metadata="model.metadata"
-        :to="{ name: '{{ group }}{{ short }}Table', params: { {{#if namespaced}}namespace: model.metadata.namespace{{/if}} } }"
-        />
-    </q-card-section>
-    <q-card-section  v-else>
-      <MetadataView
-        :metadata="model.metadata"
-        :to="{ name: '{{ group }}{{ short }}Table', params: { {{#if namespaced}}namespace: model.metadata.namespace{{/if}} } }"
-        :nameTo="{ name: '{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: model.metadata.namespace,{{/if}} name: model.metadata.name } }"
-        />
+    <q-card-section :class="`bg-${ color{{ short }} }-2`">
+      <div class="q-gutter-md">
+{{> vueNameFields namespaced=namespaced group=group short=short }}
+        <div v-if="showStatus">
+{{> vueStatusFields properties=definition.properties crd=crd }}
+        </div>
+        <div v-if="showLabels">
+{{> vueLabelFields }}
+        </div>
+      </div>
     </q-card-section>
   </q-card>
 </template>

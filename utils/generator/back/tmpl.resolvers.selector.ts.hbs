@@ -13,7 +13,7 @@
             })
         },
 {{/if}}
-{{#if (and (eq type 'usedBy') (defined path))}}
+{{#if (and (eq type 'users') (defined path))}}
         {{type}}{{targetShort}}: async (parent, args: object) => {
             const meta = getByPath(parent, '{{path}}');
             if (meta['labels'] == undefined || Object.keys(meta['labels']).length<1) return null;
