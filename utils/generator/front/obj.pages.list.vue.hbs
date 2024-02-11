@@ -31,7 +31,7 @@ onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
 </script>
 <template>
 {{#if namespaced}}
-  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="true"
+  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="isNamespaced()"
     v-if="result !== undefined && result['k8sNamespace'] !== undefined"
     :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
   />

@@ -44,12 +44,16 @@ const uses = [
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
 ];
 const provides = [
+// Broken somehow
+//    {algo: 'fluxcd', group: 'fluxcd', short: 'ImageRepository', providedGroup: 'fluxcd', providedShort: 'ImagePolicy'},
+//    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'ImageUpdateAutomation'},
+//    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'Kustomization'},
+//    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Category'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Install'},
     {algo: 'vynil', group: 'vynil', short: 'Package', providedGroup: 'vynil', providedShort: 'Install'},
     {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Install'},
-//    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'nodeName',  group: 'k8s', short: 'Node', providedGroup: 'k8s', providedShort: 'Pod'},
     {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'Pod', path: 'spec'},
     {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'k8s', providedShort: 'ReplicaSet', path: 'spec/template/spec'},

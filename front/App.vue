@@ -8,9 +8,7 @@ import BreadCrumbs from './components/navigation/BreadCrumbs.vue';
     <q-page-container>
       <BreadCrumbs />
       <router-view v-slot="{ Component, route }">
-        <transition name="fade">
-          <component :is="Component" :key="route.path" />
-        </transition>
+          <component :is="Component" :key="route.name" />
       </router-view>
     </q-page-container>
   </q-layout>

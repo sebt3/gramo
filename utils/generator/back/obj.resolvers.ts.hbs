@@ -18,6 +18,9 @@ import { lists as listNamespace } from '../k8s/Namespace.js';
 {{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Package')))}}
 import { gramoConfig } from '../../config.js'
 {{/if}}
+{{#if (and (eq this.algo 'fluxcd') (and (eq type 'provide') (or (eq targetShort 'ImagePolicy') (eq targetShort 'Kustomization'))))}}
+import { lists as listNamespace } from '../k8s/Namespace.js';
+{{/if}}
 {{/each}}
 
 {{#if (defined crd)}}
@@ -43,6 +46,9 @@ export const resolvers = {
 {{#if autoResolvers}}
     {{group}}{{short}}: {
   {{#each autoResolvers}}
+    {{#if (eq algo 'fluxcd')}}
+{{> resolversFluxCD algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'vynil')}}
 {{> resolversVynil algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}

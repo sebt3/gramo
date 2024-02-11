@@ -1,8 +1,12 @@
 {{#with ctx}}
     {{group}}{{short}}Patch: async (_parent, args: object) => {
         const request = {
+{{#if (ne apiGroup '')}}
             apiVersion: '{{apiGroup}}/{{apiVersion}}',
-            kind: '{{name}}',
+{{else}}
+            apiVersion: '{{apiVersion}}',
+{{/if}}
+            kind: '{{short}}',
 {{#if namespaced}}
             metadata: getMetaNS(args),
 {{else}}

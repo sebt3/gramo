@@ -2,7 +2,6 @@ import { useQuasar } from 'quasar'
 import { setupTableWidget } from './tableSetup.js'
 import { setupItem } from './itemSetup.js'
 import { stringify } from 'yaml'
-import { descriptions } from '../../routes'
 import { useRouter, useRoute } from 'vue-router'
 
 export * from './itemSetup.js'
@@ -38,8 +37,8 @@ export function useCore() {
         }),
         isNamespaced: () => {
             const route = useRoute();
-            if (route.name != undefined && descriptions[route.name] != undefined) {
-              return descriptions[route.name].ns
+            if (route.meta != undefined) {
+              return route.meta.ns||false
             }
             return false
         },

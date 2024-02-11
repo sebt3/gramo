@@ -140,7 +140,7 @@ onDeleteError((err) => {
     <div class="col-md-3" v-if="!loading && sectionCounts.users>0">
 {{#each resolvers}}
   {{#if (eq type 'users')}}
-      <{{ resultGroup }}{{ resultShort }}List
+      <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
        />
@@ -156,7 +156,7 @@ onDeleteError((err) => {
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">
 {{#each resolvers}}
   {{#if (eq type 'use')}}
-      <{{ resultGroup }}{{ resultShort }}List
+      <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
        />
@@ -166,7 +166,7 @@ onDeleteError((err) => {
 {{#each resolvers}}
   {{#if (or (eq type 'child') (eq type 'provide'))}}
     <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['{{name}}'](result)">
-      <{{ resultGroup }}{{ resultShort }}List
+      <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
        />
     </div>

@@ -25,6 +25,7 @@ loadPartial('resolversRoleBinding', path.resolve(path_lib, 'back', 'tmpl.resolve
 loadPartial('resolversApiService', path.resolve(path_lib, 'back', 'tmpl.resolvers.apiService.ts.hbs'));
 loadPartial('resolversStorageClass', path.resolve(path_lib, 'back', 'tmpl.resolvers.storageClass.ts.hbs'));
 loadPartial('resolversSecret', path.resolve(path_lib, 'back', 'tmpl.resolvers.secret.ts.hbs'));
+loadPartial('resolversFluxCD', path.resolve(path_lib, 'back', 'tmpl.resolvers.fluxcd.ts.hbs'));
 loadPartial('resolversConfigMap', path.resolve(path_lib, 'back', 'tmpl.resolvers.configMap.ts.hbs'));
 loadPartial('createResolver', path.resolve(path_lib, 'back', 'tmpl.create.resolver.ts.hbs'));
 loadPartial('deleteResolver', path.resolve(path_lib, 'back', 'tmpl.delete.resolver.ts.hbs'));

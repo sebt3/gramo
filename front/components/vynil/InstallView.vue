@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import MetadataView from '@/components/core/MetadataView.vue';
-import DefaultStatusView from '@/components/core/DefaultStatusView.vue';
 import { elude, getColor, getConditionColor} from "../../libs/core/"
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import MonacoViewer from '@/components/core/MonacoViewer.vue';
@@ -28,7 +26,7 @@ onMounted(() => {
         <q-btn icon="edit" @click="toEdit(model.metadata.namespace, model.metadata.name)">
           <q-tooltip>Edit</q-tooltip>
         </q-btn>
-        <q-btn icon="delete" @click="actionDelete(deletor, model)">
+        <q-btn icon="delete" @click="actionDelete(deletor, model.metadata)">
           <q-tooltip>Delete</q-tooltip>
         </q-btn>
       </q-btn-group>
@@ -93,8 +91,8 @@ onMounted(() => {
       </q-tab-panel>
       <q-tab-panel name="simple" :class="`bg-${ colorInstall }-1`">
         <OpenApiEdit
-        :in="model['spec']['options']"
-          :properties="new Map(Object.entries(model.consumePackage.options))"
+          :in="model['spec']"
+          :properties="getProperties(InstallDefinition.properties.spec)"
           :read-only="true"
           :show-default="false"
         />

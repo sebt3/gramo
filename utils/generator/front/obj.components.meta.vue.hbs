@@ -21,7 +21,7 @@ console.log(props.model.metadata)
           <q-btn icon="edit" @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)">
             <q-tooltip>Edit</q-tooltip>
           </q-btn>
-          <q-btn icon="delete" @click="actionDelete(deletor, model)">
+          <q-btn icon="delete" @click="actionDelete(deletor, model.metadata)">
             <q-tooltip>Delete</q-tooltip>
           </q-btn>
         </q-btn-group>

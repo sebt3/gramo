@@ -27,12 +27,10 @@
 {{#if (and (eq type 'provide') (eq targetShort 'Install'))}}
         {{type}}{{targetShort}}: async (dist, args: object) => {
             const nss = await listNamespace.k8sNamespace(dist, args)
-            console.log('{{type}}{{targetShort}}',nss)
             const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
                 const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, {namespace: ns, ...args})
                 return lst.filter(r=>r['spec']['distrib']==dist['metadata']['name'])
             })))
-            console.log('{{type}}{{targetShort}}',res)
             return res.flat().filter((v)=>v!=null)
         },
 {{/if}}

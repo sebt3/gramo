@@ -1,7 +1,7 @@
 import k8s from '@kubernetes/client-node';
 import NodeCache from 'node-cache';
 export const kc = new k8s.KubeConfig();
-export const cache = new NodeCache();
+export const cache = new NodeCache({ stdTTL: 2, useClones: false, deleteOnExpire: true, checkperiod: 60 });
 
 kc.loadFromCluster();
 export function getMetaNS(args: object) {

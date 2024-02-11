@@ -8,11 +8,7 @@
         const res = await k8sApi.deleteClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'])
   {{/if}}
 {{else}}
-  {{#if namespaced}}
-        const res = await k8sApi.deleteNamespaced{{ short }}(args['namespace'], args['name'])
-  {{else}}
-        const res = await k8sApi.delete{{ short }}(args['name'])
-  {{/if}}
+        const res = await k8sApi.delete{{#if namespaced}}Namespaced{{/if}}{{ short }}(args['name']{{#if namespaced}}, args['namespace']{{/if}})
 {{/if}}
         return res.body
     } catch (err) {

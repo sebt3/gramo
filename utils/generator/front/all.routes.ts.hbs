@@ -8,7 +8,7 @@ const linkRedirect = {path:''};
 export const links:Array<menuLinksProps> = [];
 
 {{#each categories}}
-import { route as {{this}}Route, link as {{this}}Link, descriptions as {{this}}Descriptions } from './{{this}}'
+import { route as {{this}}Route, link as {{this}}Link } from './{{this}}'
 if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
   routeChildren.push({{this}}Route);
   links.push({{this}}Link)
@@ -16,18 +16,13 @@ if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
 }
 {{/each}}
 
-export const descriptions = {
-  root:      {breadcrumb: '', icon: 'home', ns: false},
-{{#each categories}}
-  ...{{this}}Descriptions,
-{{/each}}
-}
 export const router = createRouter({
   history: createWebHistory('/'),
   routes: [
     {
       path: '/',
       name: 'root',
+      meta:      {breadcrumb: '', icon: 'home', ns: false},
       redirect: defaultRoute!=''?{path:defaultRoute}:linkRedirect,
       children: routeChildren
     },

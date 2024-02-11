@@ -3,17 +3,17 @@ import MainMenuLinks from './MainMenuLinks.vue';
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useNavigationStoreRef } from '../../stores'
-import { descriptions, links } from '../../routes'
+import { links } from '../../routes'
 
 const route = useRoute();
 const router = useRouter();
 const navigation = useNavigationStoreRef()
 const model = navigation.currentNamespace
-const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(true)
 const miniState = ref(true)
 const isNamespaced = computed(() => {
-  if (route.name != undefined && descriptions[route.name] != undefined) {
-    return descriptions[route.name].ns
+  if (route.meta != undefined) {
+    return route.meta.ns
   }
   return false
 })
@@ -29,8 +29,17 @@ function onChangeNamespace() {
     })
   }
 }
+function handleMini(evt) {
+  if (miniState.value) {
+    miniState.value = false
+    evt.preventDefault();
+    evt.stopPropagation();
+    console.log('should stop')
+    return true
+  }
+}
 function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+  miniState.value = !miniState.value
 }
 </script>
 <template>
@@ -49,12 +58,12 @@ function toggleLeftDrawer() {
     </q-toolbar>
   </q-header>
 
-  <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="miniState" :width="400" :breakpoint="500" @mouseover="miniState = false" @mouseout="miniState = true" mini-to-overlay>
+  <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="miniState" :width="400" :breakpoint="300" :mini-to-overlay="false" @click.capture="handleMini">
     <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: '0' }">
       <q-list padding v-if="router.currentRoute.value.matched.length>1">
         <MainMenuLinks class="q-mr-sm"
           v-for="link in links"
-          :key="`${link.title}-${router.currentRoute.value.matched[router.currentRoute.value.matched.length-1].path}`"
+          :key="`${link.title}`"
           v-bind="link">
         </MainMenuLinks>
       </q-list>

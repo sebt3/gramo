@@ -1,7 +1,7 @@
 {{#if (eq (getByPath properties 'status/properties/conditions/type') 'array')}}
         <q-field label="Conditions" stack-label borderless>
           <template v-slot:prepend><q-icon name="grading" /></template>
-          <template v-slot:control><div class="self-center full-width no-outline" tabindex="0" v-if="Array.isArray(model.status['conditions'])">
+          <template v-slot:control><div class="self-center full-width no-outline" tabindex="0" v-if="model.status!=null&&Array.isArray(model.status['conditions'])">
             <span v-for="cond in model.status['conditions'].filter(c=>c.type!='ArtifactInStorage')" v-bind:key="cond.message">
               <q-badge align="middle" :label="elude(Object.keys(cond).includes('message')?cond.message:cond.type, 50)"  :color="getConditionColor(cond)" class="q-mb-sm q-mr-sm" />
             </span>
