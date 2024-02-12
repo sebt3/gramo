@@ -1,0 +1,22 @@
+query InstallPrepare {
+  vynilDistrib {
+    metadata {
+      name
+    }
+  }
+  vynilCategory {
+    name
+  }
+  vynilPackage {
+    name
+    consumeDistrib {
+      metadata {
+        name
+      }
+    }
+    consumeCategory {
+      name
+    }
+    options
+  }
+}
