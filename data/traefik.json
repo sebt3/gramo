@@ -665,8 +665,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRoute",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRoute",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -1327,8 +1347,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRoute",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRoute",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -1997,8 +2037,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRoute",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRoute",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -2568,8 +2632,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteTCP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteTCP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -3128,8 +3212,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteTCP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteTCP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -3696,8 +3800,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRouteTCP",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRouteTCP",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -4029,8 +4157,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteUDP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteUDP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -4351,8 +4499,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteUDP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "IngressRouteUDP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -4681,8 +4849,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRouteUDP",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "IngressRouteUDP",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -6596,8 +6788,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -8500,8 +8712,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -10412,8 +10644,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "Middleware",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "Middleware",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -10677,8 +10933,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "MiddlewareTCP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "MiddlewareTCP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -10939,8 +11215,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "MiddlewareTCP",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "MiddlewareTCP",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -11201,8 +11497,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "MiddlewareTCP",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "MiddlewareTCP",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -11578,8 +11898,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "ServersTransport",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "ServersTransport",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -11952,8 +12292,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "ServersTransport",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "ServersTransport",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -12326,8 +12686,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "ServersTransport",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "ServersTransport",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -12665,8 +13049,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSOption",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSOption",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -13001,8 +13405,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSOption",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSOption",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -13337,8 +13761,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "TLSOption",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "TLSOption",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -13668,8 +14116,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSStore",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSStore",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -13996,8 +14464,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSStore",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TLSStore",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -14324,8 +14812,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "TLSStore",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "TLSStore",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
@@ -15213,8 +15725,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TraefikService",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TraefikService",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -16075,8 +16607,28 @@
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [],
-          "resolvers": [],
+          "autoResolvers": [
+            {
+              "group": "traefik",
+              "short": "TraefikService",
+              "algo": "vynil",
+              "type": "parent",
+              "targetGroup": "vynil",
+              "targetShort": "Install"
+            }
+          ],
+          "resolvers": [
+            {
+              "group": "traefik",
+              "short": "TraefikService",
+              "type": "parent",
+              "name": "parentInstall",
+              "args": "(params: queryParameters)",
+              "resultGroup": "vynil",
+              "resultShort": "Install",
+              "result": "vynilInstall"
+            }
+          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -16961,8 +17513,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "traefik",
+          "short": "TraefikService",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "traefik",
+          "short": "TraefikService",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"

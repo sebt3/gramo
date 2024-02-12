@@ -397,6 +397,14 @@
           "targetGroup": "vynil",
           "targetShort": "Install",
           "algo": "vynil"
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
         }
       ],
       "resolvers": [
@@ -429,6 +437,20 @@
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "[vynilInstall]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
           "properties": [
             "spec",
             "status"
@@ -876,6 +898,14 @@
           "targetGroup": "vynil",
           "targetShort": "Category",
           "algo": "vynil"
+        },
+        {
+          "group": "vynil",
+          "short": "Install",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
         }
       ],
       "resolvers": [
@@ -912,6 +942,20 @@
           "resultGroup": "vynil",
           "resultShort": "Category",
           "result": "vynilCategory"
+        },
+        {
+          "group": "vynil",
+          "short": "Install",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
         }
       ],
       "gqlDefs": {

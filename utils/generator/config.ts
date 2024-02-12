@@ -104,6 +104,7 @@ const children = [
     {algo: 'k8s', group: 'k8s', short: 'PersistentVolumeClaim', parentGroup: 'k8s', parentShort: 'StatefulSet'},
 ];
 type autoResolver = {algo: string,type: string,group: string,short: string,targetGroup: string,targetShort: string, path?: string|null}
+type autoAllResolver = {algo: string,type: string,targetGroup: string,targetShort: string, path?: string|null}
 export const autoResolvers = ([] as autoResolver[]).concat(
     children.map(c=>{return {type: 'parent',  group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo, path: null}}),
     children.map(c=>{return {type: 'child', group: c.parentGroup, short: c.parentShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: null}}),
@@ -111,9 +112,15 @@ export const autoResolvers = ([] as autoResolver[]).concat(
     provides.map(c=>{return {type: 'consume', group: c.providedGroup, short: c.providedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'use', group: c.group, short: c.short, targetGroup: c.usedGroup, targetShort: c.usedShort, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'users', group: c.usedGroup, short: c.usedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
-)
+);
+export const autoAllResolvers = ([
+    {algo: 'vynil', type: 'parent', targetGroup: 'vynil', targetShort: 'Install'},
+] as autoAllResolver[]);
 export const extraResolvers = autoResolvers.map(a=>{return {
     group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
+}}).concat ()
+export const extraAllResolvers = autoAllResolvers.map(a=>{return {
+    type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
 }}).concat ()
 
 const categoryOrder = [

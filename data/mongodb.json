@@ -1155,6 +1155,14 @@
           "targetShort": "StatefulSet",
           "algo": "k8s",
           "path": null
+        },
+        {
+          "group": "mongodb",
+          "short": "MongoDBCommunity",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
         }
       ],
       "resolvers": [
@@ -1197,6 +1205,20 @@
           "resultGroup": "k8s",
           "resultShort": "StatefulSet",
           "result": "[k8sStatefulSet]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "mongodb",
+          "short": "MongoDBCommunity",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
           "properties": [
             "spec",
             "status"

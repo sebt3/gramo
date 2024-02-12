@@ -1,0 +1,98 @@
+<script setup lang="ts">
+// noGramoGenerator
+import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
+import InstallNew from '@/queries/vynil/Install.create.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
+import MetadataNew from '@/components/core/MetadataNew.vue';
+import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
+import { ref, useMutation, useInstall, InstallDefinition, useQuery, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
+const { onlyWriteProperties, editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
+const { mutate, onDone, onError } = useMutation(InstallNew);
+const { result, loading, onResult } = useQuery(installPrepare);
+const name = ref('');
+const form = ref(null);
+const stepper = ref(null);
+const step = ref(1);
+const category = ref("");
+const component = ref("");
+const distrib = ref("");
+const obj  = ref({});
+onResult(res => {
+  if ( !res.loading ) {
+    //editor.value.updateFromQuery(onlyWriteProperties(res.data));
+  }
+});
+const setkey = (key:string, v) => editor.value.setKey(key, v)
+const setYaml = (v) => editor.value.setYaml(v)
+onDone(() => {
+  notifySuccess('Creation proceded');
+  router.go(-1);
+})
+onError((err) => {
+  notifyError('Creation failed');
+  console.log('mutation error',err);
+})
+function onFinalSubmit() {
+  notifyWorking('Create in progress');
+  mutate({
+    "namespace": navigation.currentNamespace.value,
+    "name": name.value,
+    "spec": sanitizeData(editor.value.obj.spec),
+  });
+}
+function startStep2() {
+  if (result.value.vynilPackage.filter(p => p.name == component.value && p.consumeDistrib.metadata.name == distrib.value && p.consumeCategory.name == category.value).length>0) {
+    editor.value.updateFromQuery({spec:{category:category.value, distrib: distrib.value, component:component.value, options:{}}})
+    stepper.value.next();
+    console.log(result.value.vynilPackage.filter(p => p.name == component.value && p.consumeDistrib.metadata.name == distrib.value && p.consumeCategory.name == category.value)[0].options)
+  } else {
+    notifyError(`Package ${component.value} in ${category.value} from ${distrib.value} doesnt exist`);
+  }
+}
+</script>
+<template>
+  <q-form ref="form" @submit="onFinalSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
+    <q-card bordered class="q-ma-sm">
+      <q-card-section  :class="`bg-${ colorInstall } text-grey-2`">
+        <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
+      </q-card-section>
+      <q-card-section :class="`bg-${ colorInstall }-1`">
+        <MetadataNew v-model:name="name" :namespaced="true" />
+      </q-card-section>
+    </q-card>
+    <q-stepper v-model="step"  class="q-ma-sm" bordered ref="stepper" color="primary" animated v-if="!loading"  :class="`bg-${ colorInstall }`" >
+      <q-step :name="1" title="Specifications" icon="settings" :done="step > 1" :class="`bg-${ colorInstall }-2`">
+        <div  class="q-gutter-md">
+          <q-select filled v-model="distrib" :options="result.vynilDistrib.map(d=>d.metadata.name)" label="Distribution" stack-label />
+          <q-select filled v-model="category" :options="result.vynilCategory.map(c=>c.name)" label="Category" stack-label />
+          <q-select filled v-if="distrib!=''&&category!=''" :key="`${distrib}-${category}`" v-model="component" :options="result.vynilPackage.filter(p=>p.consumeDistrib.metadata.name==distrib&&p.consumeCategory.name==category).map(p=>p.name)" label="Package" stack-label />
+        </div>
+      </q-step>
+
+      <q-step :name="2" title="Configure" caption="Selected package" icon="settings_suggest" :done="step > 2" :class="`bg-${ colorInstall }-2`">
+        <OpenApiEdit v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category).length>0"
+          @update:out="(v)=>setkey('spec', {category, distrib, component, options:sanitizeData(v)})"
+          :in="editor.obj['spec']['options']"
+          :key="`${distrib}-${category}-${component}`"
+          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category)[0].options})"
+        />
+      </q-step>
+      <q-step :name="3" title="Full YAML" caption="optional" icon="settings_suggest" :done="step > 3" :class="`bg-${ colorInstall }-2`">
+        <MonacoEditor v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category).length>0"
+          :text="editor.yaml" :key="`${distrib}-${category}-${component}-${editor.yaml}`"
+          @update:text="v=>setYaml(v)"
+          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category)[0].options})"
+          />
+      </q-step>
+      <template v-slot:navigation>
+        <q-stepper-navigation :class="`bg-${ colorInstall }-2`">
+          <q-btn v-if="step < 2" @click="startStep2()" color="primary" label="Next" :disable="component==''" />
+          <q-btn v-if="step > 1" flat color="primary" @click="stepper.previous()" label="Back" class="q-ml-sm" />
+          <q-btn v-if="step > 1" label="Submit" class="q-ml-sm" type="submit" color="primary"/>
+          <q-btn v-if="step > 1 && step <3 " flat color="primary" @click="stepper.next()" label="View YAML" class="q-ml-sm" />
+        </q-stepper-navigation>
+      </template>
+    </q-stepper>
+  </q-form>
+</template>

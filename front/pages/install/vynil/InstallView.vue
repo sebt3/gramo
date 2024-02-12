@@ -4,9 +4,11 @@ import vynilInstallQuery from '@/queries/vynil/Install.details.graphql'
 import InstallDelete from '@/queries/vynil/Install.delete.graphql'
 import vynilInstallView from '@/components/vynil/InstallView.vue';
 import { DistribListExcludes } from '../../../libs/vynil/custom.js'
-import vynilDistribMeta from '@/components/vynil/DistribMeta.vue';
-import vynilPackageMeta from '@/components/vynil/PackageList.vue';
-import vynilCategoryMeta from '@/components/vynil/CategoryList.vue';
+import { PackageListExcludes } from '../../../libs/vynil/custom.js'
+import vynilPackageMeta from '@/components/vynil/PackageMeta.vue';
+import { CategoryListExcludes } from '../../../libs/vynil/custom.js'
+import { InstallListExcludes } from '../../../libs/vynil/custom.js'
+import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
 import { ref, useQuery, useMutation, useInstall, InstallReadExcludes } from '../../../libs/vynil/Install.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotInstallFound, navigation, setNamespacedItemFromRoute } = useInstall();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
@@ -20,8 +22,9 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
     ], "excludes": InstallReadExcludes
   },
   "consumeDistrib": {"filters": [], "excludes": DistribListExcludes},
-  "consumePackage": {"filters": [], "excludes": []},
-  "consumeCategory": {"filters": [], "excludes": []},
+  "consumePackage": {"filters": [], "excludes": PackageListExcludes},
+  "consumeCategory": {"filters": [], "excludes": CategoryListExcludes},
+  "parentInstall": {"filters": [], "excludes": InstallListExcludes},
   "namespace": {
     "filters": [
       {
@@ -35,6 +38,7 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(InstallDelete);
 const conditions = ref({
   "consumePackage": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['consumePackage']!=null).reduce((acc,cur)=>acc||cur,false),
+  "parentInstall": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['parentInstall']!=null).reduce((acc,cur)=>acc||cur,false),
 });
 const sectionCounts = ref({
   consumeLeft: 0,
@@ -48,7 +52,7 @@ onResult(res => {
   onNotInstallFound(res);
   if ( !res.loading ) {
     sectionCounts.value.uses += conditions.value["consumePackage"](res.data)?1:0;
-    console.log(sectionCounts.value)
+    sectionCounts.value.parent += conditions.value["parentInstall"](res.data)?1:0;
   }
 });
 onDeleteDone(() => {
@@ -60,6 +64,19 @@ onDeleteError((err) => {
 })
 </script>
 <template>
+  <div class="row q-mb-sm q-ml-sm">
+    <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
+    </div>
+    <div :class="`col-md-${4-(sectionCounts.consumeLeft>0?3:0)}`" v-if="!loading && sectionCounts.parent+sectionCounts.consumeRight>0"></div>
+    <div class="col-md-4" v-if="!loading && conditions['parentInstall'](result)">
+      <vynilInstallMeta :showStatus="false"
+        :model="result.k8sNamespace[0].vynilInstall[0].parentInstall"
+       />
+    </div>
+    <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
+    <div class="col-md-3" v-if="!loading && sectionCounts.consumeRight>0">
+    </div>
+  </div>
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-3" v-if="!loading && sectionCounts.users>0">
     </div>

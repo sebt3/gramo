@@ -12836,8 +12836,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "rabbitmq",
+          "short": "RabbitmqCluster",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "rabbitmq",
+          "short": "RabbitmqCluster",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",

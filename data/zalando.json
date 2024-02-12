@@ -1809,8 +1809,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "zalando",
+          "short": "postgresql",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "zalando",
+          "short": "postgresql",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -1987,8 +2011,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "zalando",
+          "short": "ClusterKopfPeering",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "zalando",
+          "short": "ClusterKopfPeering",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "status": "JSONObject"
@@ -2164,8 +2212,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "zalando",
+          "short": "KopfPeering",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "zalando",
+          "short": "KopfPeering",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "status": "JSONObject"

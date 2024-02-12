@@ -13,6 +13,8 @@ export const colorInstall = installColor;
 export const descriptionInstall = '';
 export const shortInstall = 'Install';
 
+export const PackageListExcludes = [];
+export const CategoryListExcludes = [];
 export const extraDistribColumns:Array<QTableColumn> = [
   {name: 'url', label: 'url', field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
   {name: 'last_updated', label: 'last_updated', field: row => row.status.last_updated, sortable: true, align: tableColumnAlign.left},

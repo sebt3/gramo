@@ -4951,8 +4951,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "Backup",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "Backup",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -5607,8 +5631,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "Connection",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "Connection",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -6129,8 +6177,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "Database",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "Database",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -6690,8 +6762,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "Grant",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "Grant",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -22853,8 +22949,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "MariaDB",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "MariaDB",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -27443,8 +27563,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "Restore",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "Restore",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -29580,8 +29724,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "SqlJob",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "SqlJob",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -30131,8 +30299,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "mariadb",
+          "short": "User",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "mariadb",
+          "short": "User",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",

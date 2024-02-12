@@ -48,11 +48,16 @@ export function use{{ short }}() {
   const editor = ref({
       tab: 'simple',
       yaml: '',
-      obj: {},
-      setKey: (key, o) => {editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)},
+      obj: ref({}),
+      setKey: (key:string, o) => {editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)},
       ready: false,
-      setYaml: (y) => {editor.value.yaml = y;editor.value.obj = parse(y);},
-      updateFromQuery: (res: object, obj: object) => {editor.value.ready=false;if(!res['loading']){editor.value.obj = onlyWriteProperties(obj);editor.value.yaml = stringify(editor.value.obj);editor.value.ready=true;}},
+      setYaml: (y) => {editor.value.yaml = y;const tmp = parse(y);Object.keys(tmp).forEach(k=>editor.value.obj[k]=tmp[k]);},
+      updateFromQuery: (obj: object) => {
+        editor.value.ready=false;
+        editor.value.obj = onlyWriteProperties(obj);
+        editor.value.yaml = stringify(editor.value.obj);
+        editor.value.ready=true;
+      },
   });
   return {
     onlyReadProperties, onlyWriteProperties, editor, viewer, viewerUpdate: (obj) => {
@@ -84,11 +89,13 @@ export function use{{ short }}() {
     toView: (namespace, name) => router.push({ name: '{{group}}{{short}}View', params: {name, namespace}}),
     toViewReloaded: async (namespace, name) => {await router.push({ name: '{{group}}{{short}}View', params: {name, namespace}});router.go(0);},
     toEdit: (namespace, name) => router.push({ name: '{{group}}{{short}}Edit', params: {name, namespace}}),
+    toList: (namespace) => router.push({ name: '{{group}}{{short}}Table', params: {namespace}}),
 {{else}}
     toView: (name) => router.push({ name: '{{group}}{{short}}View', params: {name}}),
     toViewReloaded: async (name) => {await router.push({ name: '{{group}}{{short}}View', params: {name}});router.go(0);},
     toEdit: (name) => router.push({ name: '{{group}}{{short}}Edit', params: {name}}),
 {{/if}}
+    toParentView: (group,short,name,namespace) => router.push({ name: `${group}${short}View`, params: {name,namespace}}),
     deleteDone: () => notifySuccess('Deletion proceded'),
     deleteError: (err) => {
       notifyError('Deletion failed');
@@ -107,7 +114,7 @@ export function use{{ short }}() {
 {{else}}
     actionNew: ()    => router.push({ name: '{{group}}{{short}}Create'}),
 {{/if}}
-    actionDelete: (deletor, meta) => {
+    actionDelete: (deletor:(o:object)=>any, meta:object) => {
       $q.dialog({
         title: 'Confirm <span class="text-red">delete</span>',
         message: `<em>You are</em> about to <span class="text-red">delete</span> {{ short }} <strong>${meta.name}</strong>`,

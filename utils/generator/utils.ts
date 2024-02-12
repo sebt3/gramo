@@ -1,6 +1,6 @@
 import {HashMap,openapiDefinition} from './types.js'
 import {k8sDefinitionProperties, k8sDefinitionPropertiesVersion, openapiDefinitionPropertiesDef, unspeciedObject, k8sObject} from './types.js'
-import {excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
+import {extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
 import * as fs from 'fs';
 
 export function getTargetVersion(versions: Array<k8sDefinitionPropertiesVersion>) {
@@ -98,8 +98,8 @@ export const enhenceObject = (group:string, obj:unspeciedObject) => {
         listExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('list')).map(r=>r.values).flat(),
         readExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('read')).map(r=>r.values).flat(),
         simpleExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('simple')).map(r=>r.values).flat(),
-        autoResolvers: autoResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]),
-        resolvers: extraResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]).concat(defaultResolvers),
+        autoResolvers: autoResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]).concat(autoAllResolvers.map(a=>{return {group:getShort(group).group, short: obj.name.split('.').reverse()[0],...a}})),
+        resolvers: extraResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]).concat(defaultResolvers).concat(extraAllResolvers.map(a=>{return {group:getShort(group).group, short: obj.name.split('.').reverse()[0],...a}})),
         gqlDefs: Object.fromEntries(Object.entries(obj.definition['properties']).filter(([n])=>!['apiVersion','kind'].includes(n)).map(([n,v])=>{return [
             n,
             (n=='metadata'?'metadata':

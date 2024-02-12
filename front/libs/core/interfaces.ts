@@ -25,5 +25,4 @@ export interface HierarchyObject {
     properties:{},
     items:{}[]
 }
-
 export default dataEntry

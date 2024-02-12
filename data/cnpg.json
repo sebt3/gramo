@@ -882,8 +882,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "cnpg",
+          "short": "Backup",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "cnpg",
+          "short": "Backup",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
@@ -8650,6 +8674,14 @@
           "targetShort": "PersistentVolumeClaim",
           "algo": "k8s",
           "path": null
+        },
+        {
+          "group": "cnpg",
+          "short": "Cluster",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
         }
       ],
       "resolvers": [
@@ -8762,6 +8794,20 @@
           "resultGroup": "k8s",
           "resultShort": "PersistentVolumeClaim",
           "result": "[k8sPersistentVolumeClaim]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "Cluster",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
           "properties": [
             "spec",
             "status"
@@ -21248,6 +21294,14 @@
           "targetShort": "RoleBinding",
           "algo": "k8s",
           "path": null
+        },
+        {
+          "group": "cnpg",
+          "short": "Pooler",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
         }
       ],
       "resolvers": [
@@ -21319,6 +21373,20 @@
           "properties": [
             "roleRef",
             "subjects"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "Pooler",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
           ]
         }
       ],
@@ -21700,8 +21768,32 @@
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [],
-      "resolvers": [],
+      "autoResolvers": [
+        {
+          "group": "cnpg",
+          "short": "ScheduledBackup",
+          "algo": "vynil",
+          "type": "parent",
+          "targetGroup": "vynil",
+          "targetShort": "Install"
+        }
+      ],
+      "resolvers": [
+        {
+          "group": "cnpg",
+          "short": "ScheduledBackup",
+          "type": "parent",
+          "name": "parentInstall",
+          "args": "(params: queryParameters)",
+          "resultGroup": "vynil",
+          "resultShort": "Install",
+          "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        }
+      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",

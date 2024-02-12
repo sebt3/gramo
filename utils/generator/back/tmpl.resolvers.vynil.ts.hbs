@@ -57,3 +57,11 @@
             return res
         },
 {{/if}}
+{{#if (eq type 'parent')}}
+        {{type}}{{targetShort}}: async (obj: object, args: object) => {
+            if (obj['metadata']['labels'] == null || obj['metadata']['labels']['vynil.solidite.fr/owner-name'] == null || obj['metadata']['labels']['vynil.solidite.fr/owner-namespace'] == null) return null;
+            const insts = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(obj, {namespace: obj['metadata']['labels']['vynil.solidite.fr/owner-namespace'], ...args})).filter(inst=>inst['metadata']['name']==obj['metadata']['labels']['vynil.solidite.fr/owner-name']);
+            if (Array.isArray(insts) && insts.length>0) return insts[0]
+            return null
+        },
+{{/if}}

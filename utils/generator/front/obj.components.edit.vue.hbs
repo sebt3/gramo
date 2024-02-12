@@ -2,40 +2,73 @@
 import { onMounted } from "vue";
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
 import MonacoEditor from '@/components/core/MonacoEditor.vue';
-import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+import { use{{ short }}, sanitizeData, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 {{#if namespaced}}
-const { onlyReadProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { onlyWriteProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onlyReadProperties, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { onlyWriteProperties, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
-const emit = defineEmits(['update:model'])
+const emit = defineEmits(['on-submit'])
 const props = defineProps<{model: object}>();
+onMounted(() => {
+  editor.value.updateFromQuery(onlyWriteProperties(props.model));
+})
+function onSubmit() {
+  emit('on-submit', {
+{{#each writeProperties}}
+    "{{this}}": sanitizeData(editor.value.obj.{{this}}),
+{{/each}}
+  });
+}
+const setkey = (key:string, v) => editor.value.setKey(key, v)
+const setYaml = (v) => editor.value.setYaml(v)
 </script>
 <template>
+  <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
   <q-card bordered class="q-ma-sm">
-    <q-tabs v-model="editor.tab" class="bg-primary text-grey-4" active-color="white">
+    <q-tabs v-model="editor.tab" :class="`bg-${ color{{ short }} } text-grey-2`" active-color="white" :align="'justify'">
       <q-tab label="Simple" name="simple" />
       <q-tab label="full Yaml" name="yaml" />
+      <q-btn-group push class="float-right text-capitalize shadow-3 q-mr-sm">
+        <q-btn type="submit" icon="save" label="confirm">
+          <q-tooltip>Submit</q-tooltip>
+        </q-btn>
+      </q-btn-group>
     </q-tabs>
     <q-tab-panels v-model="editor.tab" animated>
-      <q-tab-panel name="simple">
+      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-1`">
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
-        <OpenApiEdit
-          :in="model['{{this}}']"
-          @update:out="(v)=>editor.setkey('{{this}}', v)"
+        <OpenApiEdit v-if="editor.ready"
+{{#if (and (eq ../group 'vynil') (eq ../short 'Install'))}}
+          @update:out="(v)=>setkey('{{this}}', {...model['{{this}}'],options:sanitizeData(v)})"
+          :in="editor.obj['{{this}}']['options']"
+          :properties="new Map(Object.entries(model.consumePackage.options))"
+{{else}}
+          @update:out="(v)=>setkey('{{this}}', sanitizeData(v))"
+          :in="editor.obj['{{this}}']"
           :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
+{{/if}}
         />
   {{/if}}
 {{/each}}
       </q-tab-panel>
-      <q-tab-panel name="yaml">
+      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-1`">
           <MonacoEditor
             :text="editor.yaml" :key="editor.yaml"
-            @update:text="v=>editor.setYaml(v)"
+            @update:text="v=>setYaml(v)"
+{{#if (and (eq ../group 'vynil') (eq ../short 'Install'))}}
+            :properties="getProperties({properties: model.consumePackage.options})"
+{{else}}
             :properties="getProperties({properties: Object.fromEntries(Object.entries({{ short }}Definition).filter(([n])=>!['metadata','status'].includes(n)))})"
+{{/if}}
             />
       </q-tab-panel>
     </q-tab-panels>
+      <q-card-actions :class="`bg-${ color{{ short }} }-1`">
+        <q-btn label="Submit" icon="save" type="submit" color="primary"/>
+      </q-card-actions>
   </q-card>
+  </q-form>
 </template>

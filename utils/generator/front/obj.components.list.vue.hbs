@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import TableHeader from '@/components/core/TableHeader.vue';
 import { ref, use{{ short }}, {{ short }}Columns{{#if namespaced}}, {{ short }}AllColumns{{/if}} } from '../../libs/{{ group }}/{{ short }}.js'
-const { actionNew, toEdit, actionDelete, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
+const { actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 let filter = ref('');
-defineEmits(['refresh']);
-withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean, useRefresh?: boolean}>(),{
-  deletor: ()=>null,
+defineEmits(['refresh','on-delete']);
+withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean}>(),{
   useAction: false,
   useRefresh: true
 });
@@ -30,11 +29,20 @@ withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean, use
         </template>
         <template v-slot:body-cell-Action="props" v-if="useAction">
           <q-td :props="props">
-            <q-btn icon="edit" size="sm" class="q-ml-sm" flat dense @click="toEdit({{#if namespaced}}props.row.metadata.namespace, {{/if}}props.row.metadata.name)">
+            <q-btn icon="edit" size="sm" class="q-ml-sm" flat dense
+              @click="toEdit({{#if namespaced}}props.row.metadata.namespace, {{/if}}props.row.metadata.name)"
+              v-if="props.row.parentReference==null">
               <q-tooltip>Edit {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
             </q-btn>
-            <q-btn icon="delete" size="sm" class="q-ml-sm" flat dense @click="actionDelete(deletor,props.row.metadata)">
+            <q-btn icon="delete" size="sm" class="q-ml-sm" flat dense
+              @click="$emit('on-delete', props.row.metadata)"
+              v-if="props.row.parentReference==null">
               <q-tooltip>Delete {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
+            </q-btn>
+            <q-btn icon="arrow_upward" size="sm" class="q-ml-sm" flat dense
+              @click="toParentView(props.row.parentReference.group, props.row.parentReference.short, props.row.parentReference.name, props.row.parentReference.namespace)"
+              v-if="props.row.parentReference!=null">
+              <q-tooltip>View parent \{{ props.row.parentReference.short }} \{{ props.row.parentReference.name }}</q-tooltip>
             </q-btn>
           </q-td>
         </template>

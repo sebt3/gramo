@@ -4,7 +4,7 @@ import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
 import {{ group }}{{ short }}List from '@/components/{{ group }}/{{ short }}List.vue';
 import { useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
-const { deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();
+const { actionDelete, deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
     "filters": [],
@@ -31,14 +31,16 @@ onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
 </script>
 <template>
 {{#if namespaced}}
-  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="isNamespaced()"
+  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="isNamespaced()"
     v-if="result !== undefined && result['k8sNamespace'] !== undefined"
     :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
+    @on-delete="(meta)=>{actionDelete(deletor, meta)}"
   />
 {{else}}
-  <{{ group }}{{ short }}List @refresh="refetch()" :deletor="deletor" :useAction="true"
+  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="true"
     v-if="result !== undefined && result['{{ group }}{{ short }}'] !== undefined"
     :model="result.{{ group }}{{ short }}"
+    @on-delete="(meta)=>{actionDelete(deletor, meta)}"
   />
 {{/if}}
 </template>

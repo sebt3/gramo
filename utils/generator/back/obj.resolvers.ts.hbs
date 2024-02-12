@@ -2,7 +2,9 @@ import k8s from '@kubernetes/client-node';
 import rfc6902  from 'rfc6902';
 import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
 {{#each autoResolvers}}
+{{#unless (and (eq this.algo 'vynil') (and (eq type 'parent') (eq short 'Distrib')))}}
 import { lists as list{{this.targetShort}} } from '../{{this.targetGroup}}/{{this.targetShort}}.js';
+{{/unless}}
 {{#if (and (and (eq this.type 'use') (eq this.algo 'roleBinding')) (not (startWith this.targetShort 'Cluster')))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
 {{/if}}
@@ -42,10 +44,8 @@ export const queries = {
     {{group}}{{short}}: lists.{{group}}{{short}},
 };
 {{/unless}}
-export const resolvers = {
-{{#if autoResolvers}}
-    {{group}}{{short}}: {
-  {{#each autoResolvers}}
+const localResolvers = {
+{{#each autoResolvers}}
     {{#if (eq algo 'fluxcd')}}
 {{> resolversFluxCD algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}
@@ -88,9 +88,29 @@ export const resolvers = {
     {{#if (eq algo 'pvc')}}
 {{> resolversPVC algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}
+{{/each}}
+};
+export const resolvers = {
+    {{group}}{{short}}: {
+        parentReference: async (obj, args: object) => {
+{{#if autoResolvers}}
+            let res = null;
+  {{#each autoResolvers}}
+    {{#if (eq type 'parent')}}
+            res = await localResolvers.{{type}}{{targetShort}}(obj,args);
+            if (res!=null) return {
+                group: '{{targetGroup}}',
+                short: '{{targetShort}}',
+                name: res['metadata']['name'],
+                namespace: res['metadata']['namespace']
+            };
+    {{/if}}
   {{/each}}
-    }
 {{/if}}
+            return null
+        },
+        ...localResolvers
+    }
 };
 {{#if namespaced}}
 export const nsResolver = {

@@ -12,9 +12,9 @@ import {{ resultGroup }}{{ resultShort }}List from '@/components/{{ resultGroup 
 {{/each}}
 import { ref, useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
@@ -93,7 +93,6 @@ onResult(res => {
     sectionCounts.value.bellow += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
 {{/each}}
-    console.log(sectionCounts.value)
   }
 });
 onDeleteDone(() => {
@@ -148,9 +147,10 @@ onDeleteError((err) => {
 {{/each}}
     </div>
     <div :class="`col-md-${6+(sectionCounts.uses<1?3:0)+(sectionCounts.users<1?3:0)}`">
-      <{{ group }}{{ short }}View :deletor="deletor" :useActions="true"
+      <{{ group }}{{ short }}View :useActions="true"
         v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        @on-delete="(meta)=>{actionDelete(deletor, meta)}"
         />
     </div>
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">

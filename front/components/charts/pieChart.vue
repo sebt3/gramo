@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import * as d3 from "d3";
 import {dataEntry,chartSizeOptions,chartMarginOptions} from "../../libs/core"
 import {arcDirection,entryKey,getSizeOptions,getMarginOptions} from "./commonTools"
+const emit = defineEmits(['on-click'])
 const props = withDefaults(defineProps<{
   options?: chartSizeOptions&chartMarginOptions
   datum: Array<dataEntry>
@@ -18,6 +19,7 @@ const svgRoot = ref(null);
 const outerRadius = Math.min(options.value.height, options.value.width-2*options.value.marginLegend) / 2 - options.value.margin;
 const pie = d3.pie().sort(null).value(d => d.value);
 const arc = d3.arc().outerRadius(outerRadius * 0.8).innerRadius(outerRadius * 0.4);
+const arcLarge = d3.arc().outerRadius(outerRadius * 0.85).innerRadius(outerRadius * 0.35);
 const targetArc = d3.arc().outerRadius(outerRadius * 0.8).innerRadius(outerRadius * 0.6);
 const outerArc = d3.arc().innerRadius(outerRadius * 0.9).outerRadius(outerRadius * 0.9);
 const colors = d3.scaleOrdinal(props.colorScheme);
@@ -38,16 +40,27 @@ const valueTranslate = d => {
 }
 onMounted(() => {
     const svg = d3.select(svgRoot.value);
+    const mouseEnter = (_,d)=>{
+      svg.select(`.slices path#${d.data.name}Arc`).transition().duration('200').attr('d', arcLarge)
+      svg.select(`.labels text#${d.data.name}Text`).transition().duration('200').style('font-weight', 'bold')
+    }
+    const mouseLeave = (_,d)=>{
+      svg.select(`.slices path#${d.data.name}Arc`).transition().duration('70').attr('d', arc)
+      svg.select(`.labels text#${d.data.name}Text`).transition().duration('70').style('font-weight', 'normal')
+    }
     colors.domain(props.datum.map(d => d.name));
     const pieData = pie(props.datum);
-    svg.select(".slices").selectAll("path").data(pieData, entryKey).join("path")
-      .attr('d', arc).style("fill", d => colors(entryKey(d)));
+    svg.select(".slices").selectAll("path").data(pieData, entryKey).join("path").attr('id',d => `${d.data.name}Arc`)
+      .attr('d', arc).style("fill", d => colors(entryKey(d))).style('cursor', 'pointer')
+      .on('click',(_,d)=>emit('on-click',d.data.name)).on('mouseenter',mouseEnter).on('mouseleave',mouseLeave);
     svg.select(".lines").selectAll("polyline").data(pieData, entryKey).join("polyline")
       .attr('points', linePoints);
-    svg.select(".labels").selectAll("text").data(pieData, entryKey).join("text")
-      .attr("dy", ".35em").attr('transform', labelTranslate).style('text-anchor', labelAnchor).text(d => d.data.name);
-    svg.select(".values").selectAll("text").data(pieData, entryKey).join("text")
-      .attr("dy", ".35em").attr('transform', valueTranslate).text(d => d.data.value);
+    svg.select(".labels").selectAll("text").data(pieData, entryKey).join("text").attr('id',d => `${d.data.name}Text`).style('cursor', 'pointer')
+      .attr("dy", ".35em").attr('transform', labelTranslate).style('text-anchor', labelAnchor).text(d => d.data.name)
+      .on('click',(_,d)=>emit('on-click',d.data.name)).on('mouseenter',mouseEnter).on('mouseleave',mouseLeave);
+    svg.select(".values").selectAll("text").data(pieData, entryKey).join("text").style('cursor', 'pointer')
+      .attr("dy", ".35em").attr('transform', valueTranslate).text(d => d.data.value)
+      .on('click',(_,d)=>emit('on-click',d.data.name)).on('mouseenter',mouseEnter).on('mouseleave',mouseLeave);
 })
 </script>
 <template>

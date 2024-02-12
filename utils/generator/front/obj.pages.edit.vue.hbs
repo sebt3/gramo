@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import {{ group }}{{ short }}Meta from '@/components/{{ group }}/{{ short }}Meta.vue';
 import {{ group }}{{ short }}Edit from '@/components/{{ group }}/{{ short }}Edit.vue';
 {{#if (contain readProperties 'status')}}
 import {{ group }}{{ short }}Status from '@/components/{{ group }}/{{ short }}Status.vue';
 {{/if}}
-import { useQuery, useMutation, sanitizeData, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+import { useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
-const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
@@ -37,21 +35,18 @@ const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Qu
 {{/if}}
 });
 const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
-function onSubmit() {
+function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patch{{ short }}({
-    "name": result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.name,
+    "name": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.name,
 {{#if namespaced}}
-    "namespace": result.k8sNamespace[0].{{ group }}{{ short }}[0].metadata.namespace,
+    "namespace": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.namespace,
 {{/if}}
-{{#each writeProperties}}
-    "{{this}}": sanitizeData(editor.value.obj['{{this}}']),
-{{/each}}
+    ...obj
   });
 }
-onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value.updateFromQuery(res, res.loading?{}:res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0])});onPatch{{ short }}(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onResult(onNot{{ short }}Found);onPatch{{ short }}(patchDone);onPatchError(patchError);
 </script>
-
 <template>
   <div class="row q-mb-sm q-ml-sm">
 {{#if (contain readProperties 'status')}}
@@ -59,7 +54,7 @@ onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value
 {{else}}
     <div class="col-md-12">
 {{/if}}
-      <{{ group }}{{ short }}Meta :deletor="deletor" :useActions="false" :showStatus="false"
+      <{{ group }}{{ short }}Meta :useActions="false" :showStatus="false"
         v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
        />
@@ -76,6 +71,7 @@ onError(onErrorHandler);onResult(res => {onNot{{ short }}Found(res);editor.value
       <{{ group }}{{ short }}Edit
         v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
         :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        @on-submit="onSubmit"
        />
     </div>
   </div>

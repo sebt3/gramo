@@ -15,6 +15,7 @@
 !/back/schema/core.graphql
 /front/queries/**/*.graphql
 !/front/queries/core/*
+!/front/queries/vynil/InstallPrepare.graphql
 /front/routes/index.ts
 /front/routes/*/*
 /front/components/**/*.ts
@@ -22,9 +23,10 @@
 !/front/components/core/*
 !/front/components/navigation/*
 !/front/components/charts/*
-!/front/components/vynil/InstallView.vue
 !/front/components/vynil/PackageList.vue
 !/front/components/vynil/CategoryList.vue
+!/front/components/vynil/PackageMeta.vue
+!/front/components/vynil/CategoryMeta.vue
 /front/libs/**/*.ts
 !/front/libs/*/custom.ts
 !/front/libs/core/*
@@ -32,4 +34,6 @@
 !/front/pages/automation/fluxcd/automationDashboard.vue
 !/front/pages/install/vynil/DistribView.vue
 !/front/pages/install/vynil/InstallView.vue
+!/front/pages/install/vynil/InstallEdit.vue
+!/front/pages/install/vynil/InstallNew.vue
 !/front/pages/install/vynil/installDashboard.vue

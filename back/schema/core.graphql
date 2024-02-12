@@ -53,6 +53,13 @@ type metadata {
   uid: String
 }
 
+type parentRef {
+  name: String!
+  namespace: String
+  group: String!
+  short: String!
+}
+
 type permissionReviewNonResourceRules {
   nonResourceURLs: [String]
   verbs: [String]

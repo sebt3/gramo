@@ -8,7 +8,7 @@ import BreadCrumbs from './components/navigation/BreadCrumbs.vue';
     <q-page-container>
       <BreadCrumbs />
       <router-view v-slot="{ Component, route }">
-          <component :is="Component" :key="route.name" />
+          <component :is="Component" :key="`${route.name}-${route.params.name}`" />
       </router-view>
     </q-page-container>
   </q-layout>

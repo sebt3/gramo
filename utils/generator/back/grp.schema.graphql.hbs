@@ -4,6 +4,7 @@ type {{../name}}{{this.short}} {
   {{#each this.gqlDefs}}
     {{@key}}: {{this}}
   {{/each}}
+    parentReference: parentRef
   {{#each this.resolvers}}
     {{this.name}}{{this.args}}: {{this.result}}
   {{/each}}

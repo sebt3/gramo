@@ -34,7 +34,6 @@ function handleMini(evt) {
     miniState.value = false
     evt.preventDefault();
     evt.stopPropagation();
-    console.log('should stop')
     return true
   }
 }
