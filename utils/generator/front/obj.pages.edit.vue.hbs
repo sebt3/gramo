@@ -38,11 +38,11 @@ const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchEr
 function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patch{{ short }}({
+    ...obj,
     "name": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.name,
 {{#if namespaced}}
     "namespace": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.namespace,
 {{/if}}
-    ...obj
   });
 }
 onError(onErrorHandler);onResult(onNot{{ short }}Found);onPatch{{ short }}(patchDone);onPatchError(patchError);

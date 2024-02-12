@@ -1,7 +1,9 @@
 import { OpenAPIV3 } from "openapi-types";
-export function getProperties(val) {
-    if (val != undefined && val['properties'] != undefined)
+export function getProperties(val, filter=undefined) {
+    if (val != undefined && val['properties'] != undefined && filter == undefined)
         return new Map(Object.entries(val.properties));
+    if (val != undefined && val['properties'] != undefined && filter != undefined)
+        return new Map(Object.entries(val.properties).filter(filter));
     return new Map()
 }
 export function getItems(val) {

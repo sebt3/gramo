@@ -6,9 +6,9 @@ import MonacoViewer from '@/components/core/MonacoViewer.vue';
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 {{#if namespaced}}
-const { onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 defineEmits(['on-delete']);
 const showLink = false;
@@ -60,21 +60,17 @@ onMounted(() => {
       </div>
       </q-tab-panel>
       <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-1`">
-{{#each writeProperties}}
-  {{#if (isJsonObject this ../gqlDefs)}}
         <OpenApiEdit
-{{#if (and (eq ../group 'vynil') (eq ../short 'Install'))}}
-          :in="model['{{this}}']['options']"
+{{#if (and (eq group 'vynil') (eq short 'Install'))}}
+          :in="model['spec']['options']"
           :properties="getProperties({properties: model.consumePackage.options})"
 {{else}}
-          :in="model['{{this}}']"
-          :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
+          :in="model"
+          :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
 {{/if}}
           :read-only="true"
           :show-default="false"
         />
-  {{/if}}
-{{/each}}
       </q-tab-panel>
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}

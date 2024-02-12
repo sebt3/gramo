@@ -17,7 +17,7 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
 </script>
 <template>
   <q-field :label="name" stack-label borderless :label-color="isDefault?'':'secondary'">
-    <template v-if="['name', 'namespace', 'app-group', 'enable', 'domain', 'domain-name', 'issuer', 'ingress-class', 'pullPolicy', 'registry', 'repository', 'tag', 'key', 'engine', 'username', 'dbname'].includes(name)" v-slot:prepend>
+    <template v-slot:prepend>
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>
     <template v-slot:control>

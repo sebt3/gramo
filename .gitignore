@@ -37,3 +37,5 @@
 !/front/pages/install/vynil/InstallEdit.vue
 !/front/pages/install/vynil/InstallNew.vue
 !/front/pages/install/vynil/installDashboard.vue
+!/front/pages/config/k8s/SecretView.vue
+!/front/pages/config/k8s/SecretEdit.vue

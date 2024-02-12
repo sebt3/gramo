@@ -18,7 +18,7 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
 <template>
   <div v-if="readOnly">
     <q-field :label="name" stack-label borderless :label-color="isDefault?'':'secondary'">
-    <template v-if="['name', 'namespace', 'app-group', 'enable', 'domain', 'domain-name', 'issuer', 'ingress-class', 'pullPolicy', 'registry', 'repository', 'tag', 'key', 'engine', 'username', 'dbname'].includes(name)" v-slot:prepend>
+    <template v-slot:prepend>
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>
     <template v-slot:control>
@@ -27,8 +27,8 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
   </q-field>
   </div>
   <div v-else>
-    <q-input v-model="value" :label="name" :label-color="isDefault?'':'secondary'">
-    <template v-if="['name', 'namespace', 'app-group', 'enable', 'domain', 'domain-name', 'issuer', 'ingress-class', 'pullPolicy', 'registry', 'repository', 'tag', 'key', 'engine', 'username', 'dbname'].includes(name)" v-slot:prepend>
+    <q-input v-model="value" :label="name" :label-color="isDefault?'':'secondary'" :type="'number'">
+    <template v-slot:prepend>
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>
   </q-input>

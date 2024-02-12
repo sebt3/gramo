@@ -49,7 +49,14 @@ export function use{{ short }}() {
       tab: 'simple',
       yaml: '',
       obj: ref({}),
-      setKey: (key:string, o) => {editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)},
+      setKey: (key:string, o:object) => {
+        if (key!=null) {
+          editor.value.obj[key] = o;editor.value.yaml = stringify(editor.value.obj)
+        } else {
+          Object.keys(o).forEach(key=>{editor.value.obj[key] = o[key]})
+          editor.value.yaml = stringify(editor.value.obj)
+        }
+      },
       ready: false,
       setYaml: (y) => {editor.value.yaml = y;const tmp = parse(y);Object.keys(tmp).forEach(k=>editor.value.obj[k]=tmp[k]);},
       updateFromQuery: (obj: object) => {
@@ -66,6 +73,8 @@ export function use{{ short }}() {
       viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
 {{/each}}
     },
+    readProperties: {{toJson readProperties}},
+    writeProperties: {{toJson writeProperties}},
     navigation: useNavigationStoreRef(),
 {{#if namespaced}}
     isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute,

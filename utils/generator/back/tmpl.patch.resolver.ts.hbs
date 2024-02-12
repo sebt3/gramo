@@ -26,7 +26,7 @@
   {{/if}}
 {{else}}
   {{#if namespaced}}
-            const resGet = await k8sApi.readNamespaced{{ short }}(args['namespace'], args['name'])
+            const resGet = await k8sApi.readNamespaced{{ short }}(args['name'], args['namespace'])
   {{else}}
             const resGet = await k8sApi.read{{ short }}(args['name'])
   {{/if}}
@@ -41,7 +41,7 @@
   {{/if}}
 {{else}}
   {{#if namespaced}}
-            const res = await k8sApi.patchNamespaced{{ short }}(args['namespace'], args['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
+            const res = await k8sApi.patchNamespaced{{ short }}(args['name'], args['namespace'], payload, undefined, undefined, undefined, undefined, undefined, options)
   {{else}}
             const res = await k8sApi.patch{{ short }}(args['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
   {{/if}}

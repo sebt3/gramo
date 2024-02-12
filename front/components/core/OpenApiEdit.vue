@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OpenApiEditObject from './OpenApiEditObject.vue';
 import OpenApiEditArray from './OpenApiEditArray.vue';
+import OpenApiEditUndefObject from './OpenApiEditUndefObject.vue';
 import OpenApiEditBoolean from './OpenApiEditBoolean.vue';
 import OpenApiEditString from './OpenApiEditString.vue';
 import OpenApiEditNumber from './OpenApiEditNumber.vue';
@@ -28,8 +29,11 @@ const isDefault = (key) => (props.properties.has(key) && props.properties.get(ke
 <template>
   <div class="q-gutter-md column">
     <div v-for="[key, value] in new Map([...properties.entries()].filter(([key]) => showDefault || !isDefault(key)))" v-bind:key="key" :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
-      <div v-if="value.type == 'object'" :key="key">
+      <div v-if="value.type == 'object' && value.properties != undefined && Object.keys(value.properties).length>0" :key="`${key}-obj`">
         <OpenApiEditObject v-model:data="data[key]" :name="key" :defaultdata="value.default" :properties="getProperties(value)" :read-only="readOnly" />
+      </div>
+      <div v-if="value.type == 'object' && (value.properties == undefined || Object.keys(value.properties).length<1)" :key="`${key}-unknown`">
+        <OpenApiEditUndefObject v-model:data="data[key]" :name="key" :defaultdata="value.default" :properties="getProperties(value)" :read-only="readOnly" />
       </div>
       <div v-else-if="value.type == 'array'">
         <OpenApiEditArray v-model:data="data[key]" :name="key" :defaultdata="value.default" :items="getItems(value)" :read-only="readOnly" />
