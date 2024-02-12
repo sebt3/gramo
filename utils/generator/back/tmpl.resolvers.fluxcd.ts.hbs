@@ -1,0 +1,39 @@
+{{#if (and (eq type 'consume') (eq targetShort 'ImageRepository'))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            const ns = typeof parent['spec']['imageRepositoryRef']['namespace'] == 'string' ? parent['spec']['imageRepositoryRef']['namespace']:parent['metadata']['namespace']
+            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
+                .filter((i) => i.metadata.name == parent['spec']['imageRepositoryRef']['name'])
+            if (lst.length<1) return null;
+            return lst[0]
+        },
+{{/if}}
+{{#if (and (eq type 'provide') (eq short 'ImageRepository'))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            const nss = await listNamespace.k8sNamespace(parent, args)
+            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+                const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+                return lst.filter(r=>r['spec']['imageRepositoryRef']['name']==parent['metadata']['name']&&(r['spec']['imageRepositoryRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof parent['spec']['imageRepositoryRef']['namespace'] != 'string')))
+            })))
+            return res.flat().filter((v)=>v!=null)
+        },
+{{/if}}
+{{#if (and (eq type 'consume') (eq targetShort 'GitRepository'))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            if (parent['spec']['sourceRef']['kind']!='GitRepository') return null;
+            const ns = typeof parent['spec']['sourceRef']['namespace'] == 'string' ? parent['spec']['sourceRef']['namespace']:parent['metadata']['namespace']
+            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
+                .filter((i) => i.metadata.name == parent['spec']['sourceRef']['name'])
+            if (lst.length<1) return null;
+            return lst[0]
+        },
+{{/if}}
+{{#if (and (eq type 'provide') (eq short 'GitRepository'))}}
+        {{type}}{{targetShort}}: async (parent, args: object) => {
+            const nss = await listNamespace.k8sNamespace(parent, args)
+            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+                const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+                return lst.filter(r=>r['spec']['sourceRef']['kind']=='GitRepository'&&r['spec']['sourceRef']['name']==parent['metadata']['name']&&(r['spec']['sourceRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof parent['spec']['sourceRef']['namespace'] != 'string')))
+            })))
+            return res.flat().filter((v)=>v!=null)
+        },
+{{/if}}
