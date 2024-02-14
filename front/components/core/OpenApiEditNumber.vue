@@ -4,7 +4,7 @@ import OpenApiNamedIcon from './OpenApiNamedIcon.vue';
 import { ref, computed, watch } from 'vue'
 const props = withDefaults(defineProps<{
   name: string
-  data: number|null
+  data: number|string|null
   defaultdata?: number,
   readOnly?: boolean
 }>(), {
@@ -27,7 +27,7 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
   </q-field>
   </div>
   <div v-else>
-    <q-input v-model="value" :label="name" :label-color="isDefault?'':'secondary'" :type="'number'">
+    <q-input v-model="value" :label="name" :label-color="isDefault?'':'secondary'" type="number">
     <template v-slot:prepend>
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>

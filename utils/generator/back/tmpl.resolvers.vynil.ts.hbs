@@ -1,21 +1,21 @@
 {{#if (and (eq type 'consume') (eq targetShort 'Category'))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
             return {
                 name: parent.spec.category,
             };
         },
 {{/if}}
 {{#if (and (eq type 'consume') (eq targetShort 'Package'))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const packages = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args)
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const packages = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args)
             const lstPkg = packages.filter((pck) => pck['name'] == parent.spec.component && pck['category']  == parent.spec.category && pck['distrib']  == parent.spec.distrib);
             if (lstPkg.length>0) return lstPkg[0];
             return null;
         },
 {{/if}}
 {{#if (and (eq type 'consume') (eq targetShort 'Distrib'))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{})).filter((i) => i.metadata.name == parent.spec.distrib)
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{})).filter((i) => i.metadata.name == parent.spec.distrib)
             if (lst.length>0) return lst[0];
             return {
                 metadata: {
@@ -25,43 +25,75 @@
         },
 {{/if}}
 {{#if (and (eq type 'provide') (eq targetShort 'Install'))}}
-        {{type}}{{targetShort}}: async (dist, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (dist, args: object) => {
             const nss = await listNamespace.k8sNamespace(dist, args)
             const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, {namespace: ns, ...args})
+                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, {namespace: ns, ...args})
                 return lst.filter(r=>r['spec']['distrib']==dist['metadata']['name'])
             })))
             return res.flat().filter((v)=>v!=null)
         },
 {{/if}}
 {{#if (and (eq type 'provide') (eq targetShort 'Category'))}}
-        {{type}}{{targetShort}}: async (dist, args: object) => {
-            const res = (await listPackage.vynilPackage(dist, args)).filter(pkg => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (dist, args: object) => {
+            const res = (await listvynilPackage.vynilPackage(dist, args)).filter(pkg => {
                 if ((gramoConfig.limitVynilDistrib != ""  && pkg['distrib'] != gramoConfig.limitVynilDistrib) ||
                     (gramoConfig.limitVynilCategory != "" && pkg['category'] != gramoConfig.limitVynilCategory)) return false;
                 return pkg['distrib'] === dist['metadata']['name']
             }).map(p=>p.category).filter((v,i,a)=>a.indexOf(v) === i).map(name=>{return {name:name} })
-            //console.log('{{type}}{{targetShort}}',res)
             return res
         },
 {{/if}}
 {{#if (and (eq type 'provide') (eq targetShort 'Package'))}}
-        {{type}}{{targetShort}}: async (dist, args: object) => {
-            const packages = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, args)
+        {{type}}{{targetGroup}}{{targetShort}}: async (dist, args: object) => {
+            const packages = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(dist, args)
             const res = packages.filter(pkg => {
                 if ((gramoConfig.limitVynilDistrib != ""  && pkg['distrib'] != gramoConfig.limitVynilDistrib) ||
                     (gramoConfig.limitVynilCategory != "" && pkg['category'] != gramoConfig.limitVynilCategory)) return false;
                 return pkg['distrib'] === dist['metadata']['name']
             });
-            //console.log('{{type}}{{targetShort}}',res)
             return res
         },
 {{/if}}
 {{#if (eq type 'parent')}}
-        {{type}}{{targetShort}}: async (obj: object, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (obj: object, args: object) => {
             if (obj['metadata']['labels'] == null || obj['metadata']['labels']['vynil.solidite.fr/owner-name'] == null || obj['metadata']['labels']['vynil.solidite.fr/owner-namespace'] == null) return null;
-            const insts = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(obj, {namespace: obj['metadata']['labels']['vynil.solidite.fr/owner-namespace'], ...args})).filter(inst=>inst['metadata']['name']==obj['metadata']['labels']['vynil.solidite.fr/owner-name']);
+            const insts = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(obj, {namespace: obj['metadata']['labels']['vynil.solidite.fr/owner-namespace'], ...args})).filter(inst=>inst['metadata']['name']==obj['metadata']['labels']['vynil.solidite.fr/owner-name']);
             if (Array.isArray(insts) && insts.length>0) return insts[0]
             return null
+        },
+{{/if}}
+{{#if (and (eq type 'users') (eq targetShort 'Distrib'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
+            if (used['metadata']['namespace']!=gramoConfig.vynilNamespace || used['metadata']['name'].match(/-clone/)==null ) return null;
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args)
+{{#if (eq short 'CronJob')}}
+            return lst.filter(dist=>used['metadata']['name'] == dist['metadata']['name']+'-clone')
+{{else}}
+            return lst.filter(dist=>used['metadata']['name'].startsWith(dist['metadata']['name']+'-clone'))
+{{/if}}
+        },
+{{/if}}
+{{#if (and (eq type 'use') (eq short 'Distrib'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (dist, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(dist,{namespace: gramoConfig.vynilNamespace, ...args})
+{{#if (eq short 'CronJob')}}
+            return lst.filter(used=>used['metadata']['name'] == dist['metadata']['name']+'-clone')
+{{else}}
+            return lst.filter(used=>used['metadata']['name'].startsWith(dist['metadata']['name']+'-clone'))
+{{/if}}
+        },
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'Install') (eq short 'Job')))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
+            if (used['metadata']['namespace']!=gramoConfig.vynilNamespace || used['metadata']['name'].split('--').length!=3 ) return null;
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,{namespace: used['metadata']['name'].split('--')[0], ...args})
+            return lst.filter(inst=>inst['metadata']['name'] == used['metadata']['name'].split('--')[1])
+        },
+{{/if}}
+{{#if (and (eq type 'use') (and (eq short 'Install') (eq targetShort 'Job')))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (inst, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(inst,{namespace: gramoConfig.vynilNamespace, ...args})
+            return lst.filter(job=>job['metadata']['name'].split('--').length==3 && inst['metadata']['name'] == job['metadata']['name'].split('--')[1])
         },
 {{/if}}

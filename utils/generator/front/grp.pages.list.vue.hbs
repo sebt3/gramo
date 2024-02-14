@@ -61,7 +61,7 @@ onResult((res) => {
         <q-card-section class="text-center">
           <pieChart
             :datum="{{ short }}ByTs"
-            @on-click="(name)=>{console.log(name);to{{ short }}List(name)}"
+            @on-click="(name)=>{to{{ short }}List(name)}"
             />
         </q-card-section>
       </q-card>

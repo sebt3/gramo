@@ -890,6 +890,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "cnpg",
+          "short": "Backup",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -897,11 +905,25 @@
           "group": "cnpg",
           "short": "Backup",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "Backup",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -914,6 +936,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     },
     {
@@ -8682,6 +8714,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "cnpg",
+          "short": "Cluster",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -8689,7 +8729,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childPod",
+          "name": "childk8sPod",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Pod",
@@ -8703,7 +8743,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childSecret",
+          "name": "childk8sSecret",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Secret",
@@ -8719,7 +8759,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childService",
+          "name": "childk8sService",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Service",
@@ -8733,7 +8773,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childServiceAccount",
+          "name": "childk8sServiceAccount",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "ServiceAccount",
@@ -8748,7 +8788,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childPodDisruptionBudget",
+          "name": "childk8sPodDisruptionBudget",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "PodDisruptionBudget",
@@ -8762,7 +8802,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childRole",
+          "name": "childk8sRole",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Role",
@@ -8775,7 +8815,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childRoleBinding",
+          "name": "childk8sRoleBinding",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "RoleBinding",
@@ -8789,7 +8829,7 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "child",
-          "name": "childPersistentVolumeClaim",
+          "name": "childk8sPersistentVolumeClaim",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "PersistentVolumeClaim",
@@ -8803,11 +8843,25 @@
           "group": "cnpg",
           "short": "Cluster",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "Cluster",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -8820,6 +8874,48 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "k8s",
+          "name": "Pod"
+        },
+        {
+          "group": "k8s",
+          "name": "Secret"
+        },
+        {
+          "group": "k8s",
+          "name": "Service"
+        },
+        {
+          "group": "k8s",
+          "name": "ServiceAccount"
+        },
+        {
+          "group": "k8s",
+          "name": "PodDisruptionBudget"
+        },
+        {
+          "group": "k8s",
+          "name": "Role"
+        },
+        {
+          "group": "k8s",
+          "name": "RoleBinding"
+        },
+        {
+          "group": "k8s",
+          "name": "PersistentVolumeClaim"
+        },
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     },
     {
@@ -21302,6 +21398,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "cnpg",
+          "short": "Pooler",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -21309,7 +21413,7 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "child",
-          "name": "childService",
+          "name": "childk8sService",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Service",
@@ -21323,7 +21427,7 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "child",
-          "name": "childServiceAccount",
+          "name": "childk8sServiceAccount",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "ServiceAccount",
@@ -21338,7 +21442,7 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "child",
-          "name": "childDeployment",
+          "name": "childk8sDeployment",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Deployment",
@@ -21352,7 +21456,7 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "child",
-          "name": "childRole",
+          "name": "childk8sRole",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "Role",
@@ -21365,7 +21469,7 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "child",
-          "name": "childRoleBinding",
+          "name": "childk8sRoleBinding",
           "args": "(params: queryParameters)",
           "resultGroup": "k8s",
           "resultShort": "RoleBinding",
@@ -21379,11 +21483,25 @@
           "group": "cnpg",
           "short": "Pooler",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "Pooler",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -21396,6 +21514,36 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "k8s",
+          "name": "Service"
+        },
+        {
+          "group": "k8s",
+          "name": "ServiceAccount"
+        },
+        {
+          "group": "k8s",
+          "name": "Deployment"
+        },
+        {
+          "group": "k8s",
+          "name": "Role"
+        },
+        {
+          "group": "k8s",
+          "name": "RoleBinding"
+        },
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     },
     {
@@ -21776,6 +21924,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "cnpg",
+          "short": "ScheduledBackup",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -21783,11 +21939,25 @@
           "group": "cnpg",
           "short": "ScheduledBackup",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "cnpg",
+          "short": "ScheduledBackup",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -21800,6 +21970,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     }
   ]

@@ -1,28 +1,28 @@
 {{#if (and (eq type 'use') (not (defined path)))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args)
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args)
             return lst.filter(o=>parent['spec']['volumeName']==o['metadata']['name'])
         },
 {{/if}}
 {{#if (and (eq type 'users') (not (defined path)))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
             if(parent['spec']['claimRef']['kind']!='{{targetShort}}') return null;
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['spec']['claimRef']['namespace'], ...args})
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['spec']['claimRef']['namespace'], ...args})
             return lst.filter(r=>r['metadata']['name']==parent['spec']['claimRef']['name'])
         },
 {{/if}}
 {{#if (and (eq type 'use') (defined path))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
             const spec = getByPath(parent, '{{path}}')
             if (!Array.isArray(spec['volumes']) || spec['volumes'].filter(v=>v['persistentVolumeClaim']!=undefined).length<1) return null;
             const claims = spec['volumes'].filter(v=>v['persistentVolumeClaim']!=undefined).map(v=>v['persistentVolumeClaim']['claimName'])
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(o=>claims.includes(o['metadata']['name']))
         },
 {{/if}}
 {{#if (and (eq type 'users') (defined path))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(w=>
                     Array.isArray(getByPath(w, '{{path}}')['volumes']) &&
                     getByPath(w, '{{path}}')['volumes'].filter(v=>

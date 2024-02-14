@@ -2145,6 +2145,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "oracle",
+          "short": "InnoDBCluster",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -2152,11 +2160,25 @@
           "group": "oracle",
           "short": "InnoDBCluster",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "oracle",
+          "short": "InnoDBCluster",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -2169,6 +2191,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     },
     {
@@ -2646,6 +2678,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "oracle",
+          "short": "MySQLBackup",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -2653,11 +2693,25 @@
           "group": "oracle",
           "short": "MySQLBackup",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "oracle",
+          "short": "MySQLBackup",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -2670,6 +2724,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     }
   ]

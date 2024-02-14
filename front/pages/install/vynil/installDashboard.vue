@@ -6,7 +6,8 @@ import radialLineChart from '@/components/charts/radialLineChart.vue';
 import vynilDistribList from '@/components/vynil/DistribList.vue';
 import { DistribSimpleExcludes } from '../../../libs/vynil/Distrib.js'
 import vynilInstallList from '@/components/vynil/InstallList.vue';
-import { InstallSimpleExcludes } from '../../../libs/vynil/Install.js'
+import { InstallSimpleExcludes, useInstall } from '../../../libs/vynil/Install.js'
+const {toList: toInstallList}  = useInstall();
 import { ref, useCore, useNavigationStoreRef, useQuery } from '../../../libs/core';
 const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
 const ready = ref(false);
@@ -71,7 +72,7 @@ onResult((res) => {
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Install per namespace</div>
         </q-card-section>
         <q-card-section class="text-center">
-          <pieChart v-model:datum="InstallByTs"></pieChart>
+          <pieChart v-model:datum="InstallByTs" @on-click="(name)=>{toInstallList(name)}" />
         </q-card-section>
       </q-card>
     </div>
@@ -81,7 +82,7 @@ onResult((res) => {
           <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Install with errors per namespace</div>
         </q-card-section>
         <q-card-section class="text-center">
-          <pieChart v-model:datum="ErrorsByTs"></pieChart>
+          <pieChart v-model:datum="ErrorsByTs" @on-click="(name)=>{toInstallList(name)}" />
         </q-card-section>
       </q-card>
     </div>

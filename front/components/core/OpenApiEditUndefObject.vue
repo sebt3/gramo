@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import OpenApiEditObject from './OpenApiEditObject.vue';
-import OpenApiEditArray from './OpenApiEditArray.vue';
-import OpenApiEditBoolean from './OpenApiEditBoolean.vue';
 import OpenApiEditString from './OpenApiEditString.vue';
-import OpenApiEditNumber from './OpenApiEditNumber.vue';
-
 import { ref, watch } from 'vue'
-import {getProperties,getItems,getType, getFullData} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
 const prompt = ref(false);
 const newName = ref('');
@@ -16,13 +10,14 @@ const props = withDefaults(defineProps<{
   defaultdata?: object
   properties: Map<string, OpenAPIV3.SchemaObject>
   readOnly?: boolean
-  showDefault?: boolean
+  showdefault?: boolean
+  level?: number
 }>(), {
+  level: 0,
   readOnly: false,
-  showDefault: true
+  showdefault: true
 });
 const out_handler= props.data;
-getFullData(props.properties,out_handler,props.data);
 const out = ref(out_handler)
 const emit = defineEmits(['update:data'])
 watch(out,(newValue) => emit('update:data', newValue),{ deep: true })
@@ -50,7 +45,7 @@ function onAdd() {
       </q-card-actions>
     </q-card>
   </q-dialog>
-   <q-expansion-item :label="name" :default-opened="name=='stringData' && !readOnly">
+   <q-expansion-item :label="name" :default-opened="level<2" v-if="showdefault||!readOnly||(data!=undefined&&Object.keys(data).length>0)">
     <template v-slot:header="{expanded}">
       <q-item-section>
         {{name}}
@@ -61,10 +56,9 @@ function onAdd() {
         </q-btn>
       </q-item-section>
     </template>
-    <div class="q-gutter-md column q-ml-sm" :key="`${Object.keys(out)}`">
-      <div v-for="[key, value] in new Map(Object.entries(out))" v-bind:key="key"
-        :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
-        <OpenApiEditString v-if="out[key]!=undefined" v-model:data="out[key]" :name="key" :read-only="readOnly" :use-delete="!readOnly" @delete="(k)=>{out[k]=undefined;console.log(k,out[k])}" />
+    <div class="q-gutter-md column q-ml-sm" :key="`${Object.keys(out)}`" v-if="out!=undefined">
+      <div v-for="[key] in new Map(Object.entries(out))" v-bind:key="key">
+        <OpenApiEditString v-if="out[key]!=undefined && typeof out[key] === 'string'" v-model:data="out[key]" :name="key" :read-only="readOnly" :use-delete="!readOnly" @delete="(k)=>{out[k]=undefined;console.log(k,out[k])}" />
       </div>
     </div>
   </q-expansion-item>

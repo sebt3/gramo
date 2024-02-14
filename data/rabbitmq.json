@@ -12844,6 +12844,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "rabbitmq",
+          "short": "RabbitmqCluster",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -12851,11 +12859,25 @@
           "group": "rabbitmq",
           "short": "RabbitmqCluster",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "rabbitmq",
+          "short": "RabbitmqCluster",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -12868,6 +12890,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "database"
     }
   ]

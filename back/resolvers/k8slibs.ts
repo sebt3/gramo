@@ -3,7 +3,8 @@ import NodeCache from 'node-cache';
 export const kc = new k8s.KubeConfig();
 export const cache = new NodeCache({ stdTTL: 2, useClones: false, deleteOnExpire: true, checkperiod: 60 });
 
-kc.loadFromCluster();
+if (process.env['NODE_ENV']=='dev') kc.loadFromDefault();
+else kc.loadFromCluster();
 export function getMetaNS(args: object) {
     return {
         namespace: args['namespace'],

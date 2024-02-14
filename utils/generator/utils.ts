@@ -1,6 +1,6 @@
 import {HashMap,openapiDefinition} from './types.js'
 import {k8sDefinitionProperties, k8sDefinitionPropertiesVersion, openapiDefinitionPropertiesDef, unspeciedObject, k8sObject} from './types.js'
-import {extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
+import {toExtraResolvers, autoTargetResolvers, extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
 import * as fs from 'fs';
 
 export function getTargetVersion(versions: Array<k8sDefinitionPropertiesVersion>) {
@@ -120,11 +120,17 @@ export const enhenceObject = (group:string, obj:unspeciedObject) => {
     }
 }
 export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
+    const autoResolvers = obj.autoResolvers.concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>all.map(o=>{return {
+        algo: r.algo, type: r.type, group: obj.group, short: obj.short, targetGroup: o.group, targetShort: o.short, path: r.path
+    }})).flat())
     return {
         ...obj,
         alternatives: obj['alternatives'].length>1?obj['alternatives']:[],
+        autoResolvers,
+        listTargets: autoResolvers.map(r=>`${r['targetGroup']}##${r['targetShort']}`).filter(uniq).map(s=>s.split('##')).map(([group,name])=>{return{group,name}}),
         category: categoryMappingShort[obj.short]!=undefined?categoryMappingShort[obj.short]:categoryMappingGroup[obj.group]!=undefined?categoryMappingGroup[obj.group]:'varia',
         resolvers: obj.resolvers.map(r=>{return {...r, properties: all.filter(o=>o.group==r['resultGroup']&&o.short==r['resultShort']).map(o=>o.readProperties)[0]}})
+            .concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>toExtraResolvers(r,all)).flat())
     }
 }
 export const getObjFQN = (c: k8sDefinitionProperties) => c.spec.group.split('.').reverse().join('.')+'.'+getTargetVersion(c.spec.versions)+'.'+c.spec.names.kind

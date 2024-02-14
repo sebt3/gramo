@@ -1,5 +1,5 @@
-{{#if (eq type 'use')}}
-        {{type}}{{targetShort}}: async (ing, args: object) => {
+{{#if (and (eq type 'use') (eq targetShort 'Service'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (ing, args: object) => {
             if (!Array.isArray(ing['spec']['rules'])) return null;
             const svcs = ing['spec']['rules']
                             .filter(r=>
@@ -11,13 +11,13 @@
                                 .map(p=>p['backend']['service']['name'])
                             ).flat()
             if (svcs.length<1) return null;
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(ing, {namespace: ing['metadata']['namespace'], ...args})
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(ing, {namespace: ing['metadata']['namespace'], ...args})
             return lst.filter(svc=>svcs.includes(svc['metadata']['name']))
         },
 {{/if}}
-{{#if (eq type 'users')}}
-        {{type}}{{targetShort}}: async (svc, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(svc, {namespace: svc['metadata']['namespace'], ...args})
+{{#if (and (eq type 'users') (eq short 'Service'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (svc, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(svc, {namespace: svc['metadata']['namespace'], ...args})
             return lst.filter(ing=>Array.isArray(ing['spec']['rules']) && ing['spec']['rules'].filter(r=>
                 r['http'] != undefined &&
                 Array.isArray(r['http']['paths']) &&
@@ -27,5 +27,32 @@
                     p['backend']['service']['name'] == svc['metadata']['name']
                 ).length>0
             ).length>0)
+        },
+{{/if}}
+{{#if (and (eq type 'use') (eq targetShort 'Secret'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (ing, args: object) => {
+            if (!Array.isArray(ing['spec']['tls'])) return null;
+            const svcs = ing['spec']['tls'].map(r=>r['secretName'])
+            if (svcs.length<1) return null;
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(ing, {namespace: ing['metadata']['namespace'], ...args})
+            return lst.filter(svc=>svcs.includes(svc['metadata']['name']))
+        },
+{{/if}}
+{{#if (and (eq type 'users') (eq short 'Secret'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (svc, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(svc, {namespace: svc['metadata']['namespace'], ...args})
+            return lst.filter(ing=>Array.isArray(ing['spec']['tls']) && ing['spec']['tls'].filter(r=>r['secretName']==svc['metadata']['name']).length>0)
+        },
+{{/if}}
+{{#if (and (eq type 'users') (eq short 'Ingress'))}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (ing, args: object) => {
+            if (!Array.isArray(ing['spec']['rules'])) return null;
+            const res = ing['spec']['rules'].filter(r=>r['http'] != undefined && Array.isArray(r['http']['paths']))
+                .map(r=>r['http']['paths'].map(p=>{return {path:p.path, host:r.host} })).flat()
+            const tlsHosts = !Array.isArray(ing['spec']['tls'])?[]:ing['spec']['tls'].filter(t=>Array.isArray(t['hosts'])).map(t=>t['hosts']).flat();
+            return res.map(r=>{ return {
+                ...r,
+                proto: tlsHosts.includes(r.host)?'https':'http'
+            } })
         },
 {{/if}}

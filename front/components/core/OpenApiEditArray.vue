@@ -1,5 +1,6 @@
 <script setup lang="ts">
-//import OpenApiItemEdit from './OpenApiItemEdit.vue';
+import OpenApiEditUndefObject from './OpenApiEditUndefObject.vue';
+import OpenApiEditObject from './OpenApiEditObject.vue';
 import { ref, computed, watch } from 'vue'
 import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
@@ -9,32 +10,56 @@ const props = withDefaults(defineProps<{
   defaultdata?: Array<any>
   items?: OpenAPIV3.SchemaObject
   readOnly?: boolean
-  showDefault?: boolean
+  showdefault?: boolean
+  level?: number
 }>(), {
+  level: 0,
   readOnly: false,
-  showDefault: true
+  showdefault: false
 });
-// TODO ....
+const out = ref(Object.assign([], props.data))
+const emit = defineEmits(['update:data'])
+watch(out,(newValue) => emit('update:data', newValue),{ deep: true })
+// TODO support for write/add/delete....
+function handleAdd(evt){
+  out.value.push(props.items?.type == 'object'?{}:'')
+  evt.preventDefault();
+  evt.stopPropagation();
+}
+function handleDelete(key){
+  out.value.splice(key,1)
+}
 </script>
 <template>
-  <div class="text-overline q-mb-md">{{ name }}</div>
-  <div v-if="items != undefined && items.type == 'object'" class="q-gutter-md">
-<!--    <q-card v-for="item in value" v-bind:key="item">
-      <q-card-section>
-        <div class="q-gutter-md column" v-if="items.properties != undefined">
-          <div v-for="[key, value] in getProperties(items)" v-bind:key="key" :style="value.type=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':value.type=='boolean'?'order: 1':value.type=='array'?'order: 5':'order: 4'">
-            <OpenApiItemEdit
-              :key="key"
-              :name="key"
-              :data="item[key]"
-              :defaultdata="value.default"
-              :apitype="value.type"
-              :properties="getProperties(value)"
-              :items="getItems(value)"
-            />
-          </div>
-        </div>
-      </q-card-section>
-    </q-card>-->
+  <div v-if="items != undefined" class="q-gutter-sm">
+    <q-expansion-item header-style="border: 1px solid rgba(0, 0, 0, 0.12);" :label="name"  :default-opened="level<2" v-if="showdefault||!readOnly||(Array.isArray(data)&&data.length>0)">
+      <template v-slot:header="{expanded}">
+      <q-item-section>
+        {{name}}
+      </q-item-section>
+      <q-item-section v-if="expanded && !readOnly" side>
+        <q-btn icon="add" flat @click="handleAdd">
+          <q-tooltip>add</q-tooltip>
+        </q-btn>
+      </q-item-section>
+    </template>
+    <q-list bordered separator>
+      <q-item v-for="(item, key) in data" v-bind:key="item">
+        <q-item-section v-if="!readOnly"  side :key="`${key}-icon`">
+          <q-btn icon="delete" flat @click="handleDelete(key)"><q-tooltip>delete</q-tooltip></q-btn>
+        </q-item-section>
+        <q-item-section v-if="items.type == 'object' && items.properties != undefined && Object.keys(items.properties).length>0">
+          <OpenApiEditObject v-model:data="out[key]" name="" :level="level+1" :defaultdata="items.default" :properties="getProperties(items)" :read-only="readOnly" :showdefault="showdefault" />
+        </q-item-section>
+        <q-item-section v-if="items.type == 'object' && (items.properties == undefined || Object.keys(items.properties).length<1)">
+          <OpenApiEditUndefObject v-model:data="out[key]" name="" :level="level+1" :defaultdata="items.default" :properties="getProperties(items)" :read-only="readOnly" />
+        </q-item-section>
+        <q-item-section v-if="['string','number'].includes(items.type as string)&&readOnly">{{item}}</q-item-section>
+        <q-item-section v-if="['string','number'].includes(items.type as string)&&!readOnly" :key="`${key}-edit`">
+          <q-input v-model="out[key]" type="text" />
+        </q-item-section>
+      </q-item>
+    </q-list>
+    </q-expansion-item>
   </div>
 </template>

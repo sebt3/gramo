@@ -9,12 +9,12 @@ query InstallPrepare {
   }
   vynilPackage {
     name
-    consumeDistrib {
+    consumevynilDistrib {
       metadata {
         name
       }
     }
-    consumeCategory {
+    consumevynilCategory {
       name
     }
     options

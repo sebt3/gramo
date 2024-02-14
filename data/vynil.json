@@ -399,12 +399,38 @@
           "algo": "vynil"
         },
         {
+          "type": "use",
+          "group": "vynil",
+          "short": "Distrib",
+          "targetGroup": "k8s",
+          "targetShort": "Job",
+          "algo": "vynil",
+          "path": null
+        },
+        {
+          "type": "use",
+          "group": "vynil",
+          "short": "Distrib",
+          "targetGroup": "k8s",
+          "targetShort": "CronJob",
+          "algo": "vynil",
+          "path": null
+        },
+        {
           "group": "vynil",
           "short": "Distrib",
           "algo": "vynil",
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -412,7 +438,7 @@
           "group": "vynil",
           "short": "Distrib",
           "type": "provide",
-          "name": "providePackage",
+          "name": "providevynilPackage",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Package",
@@ -422,7 +448,7 @@
           "group": "vynil",
           "short": "Distrib",
           "type": "provide",
-          "name": "provideCategory",
+          "name": "providevynilCategory",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Category",
@@ -432,7 +458,7 @@
           "group": "vynil",
           "short": "Distrib",
           "type": "provide",
-          "name": "provideInstall",
+          "name": "providevynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
@@ -445,12 +471,54 @@
         {
           "group": "vynil",
           "short": "Distrib",
+          "type": "use",
+          "name": "usek8sJob",
+          "args": "(params: queryParameters)",
+          "resultGroup": "k8s",
+          "resultShort": "Job",
+          "result": "[k8sJob]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
+          "type": "use",
+          "name": "usek8sCronJob",
+          "args": "(params: queryParameters)",
+          "resultGroup": "k8s",
+          "resultShort": "CronJob",
+          "result": "[k8sCronJob]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Distrib",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -463,6 +531,32 @@
         "status": "JSONObject"
       },
       "namespaced": false,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Package"
+        },
+        {
+          "group": "vynil",
+          "name": "Category"
+        },
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "k8s",
+          "name": "Job"
+        },
+        {
+          "group": "k8s",
+          "name": "CronJob"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "install"
     },
     {
@@ -900,12 +994,29 @@
           "algo": "vynil"
         },
         {
+          "type": "use",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Job",
+          "algo": "vynil",
+          "path": null
+        },
+        {
           "group": "vynil",
           "short": "Install",
           "algo": "vynil",
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "vynil",
+          "short": "Install",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -913,7 +1024,7 @@
           "group": "vynil",
           "short": "Install",
           "type": "consume",
-          "name": "consumeDistrib",
+          "name": "consumevynilDistrib",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Distrib",
@@ -927,7 +1038,7 @@
           "group": "vynil",
           "short": "Install",
           "type": "consume",
-          "name": "consumePackage",
+          "name": "consumevynilPackage",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Package",
@@ -937,7 +1048,7 @@
           "group": "vynil",
           "short": "Install",
           "type": "consume",
-          "name": "consumeCategory",
+          "name": "consumevynilCategory",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Category",
@@ -946,12 +1057,40 @@
         {
           "group": "vynil",
           "short": "Install",
+          "type": "use",
+          "name": "usek8sJob",
+          "args": "(params: queryParameters)",
+          "resultGroup": "k8s",
+          "resultShort": "Job",
+          "result": "[k8sJob]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Install",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "vynil",
+          "short": "Install",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -964,6 +1103,32 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Distrib"
+        },
+        {
+          "group": "vynil",
+          "name": "Package"
+        },
+        {
+          "group": "vynil",
+          "name": "Category"
+        },
+        {
+          "group": "k8s",
+          "name": "Job"
+        },
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "install"
     }
   ]

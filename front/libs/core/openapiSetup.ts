@@ -20,8 +20,8 @@ export function getFullData(properties: Map<string, OpenAPIV3.SchemaObject>, oup
     for (const [key, val] of properties) {
         if (data != undefined && data[key] != undefined && data[key] != null) {
             ouput[key] = data[key]
-        } else if (val.default != undefined) {
-            ouput[key] = val.default
+        /*} else if (val.default != undefined) {
+            ouput[key] = val.default*/
         } else {
             switch (val.type) {
                 case "array":

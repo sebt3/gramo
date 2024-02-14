@@ -44442,6 +44442,14 @@
           "type": "parent",
           "targetGroup": "vynil",
           "targetShort": "Install"
+        },
+        {
+          "group": "jaegertracing",
+          "short": "Jaeger",
+          "algo": "fluxcd",
+          "type": "parent",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization"
         }
       ],
       "resolvers": [
@@ -44449,11 +44457,25 @@
           "group": "jaegertracing",
           "short": "Jaeger",
           "type": "parent",
-          "name": "parentInstall",
+          "name": "parentvynilInstall",
           "args": "(params: queryParameters)",
           "resultGroup": "vynil",
           "resultShort": "Install",
           "result": "vynilInstall",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
+        {
+          "group": "jaegertracing",
+          "short": "Jaeger",
+          "type": "parent",
+          "name": "parentfluxcdKustomization",
+          "args": "(params: queryParameters)",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization",
+          "result": "fluxcdKustomization",
           "properties": [
             "spec",
             "status"
@@ -44466,6 +44488,16 @@
         "status": "JSONObject"
       },
       "namespaced": true,
+      "listTargets": [
+        {
+          "group": "vynil",
+          "name": "Install"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Kustomization"
+        }
+      ],
       "category": "system"
     }
   ]

@@ -1,36 +1,18 @@
 import k8s from '@kubernetes/client-node';
 import rfc6902  from 'rfc6902';
 import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
-{{#each autoResolvers}}
-{{#unless (and (eq this.algo 'vynil') (and (eq type 'parent') (eq short 'Distrib')))}}
-import { lists as list{{this.targetShort}} } from '../{{this.targetGroup}}/{{this.targetShort}}.js';
-{{/unless}}
-{{#if (and (and (eq this.type 'use') (eq this.algo 'roleBinding')) (not (startWith this.targetShort 'Cluster')))}}
 import { lists as listNamespace } from '../k8s/Namespace.js';
-{{/if}}
-{{#if (and (and (eq this.type 'provide') (eq this.algo 'storageClass')) (eq this.targetShort 'PersistentVolumeClaim'))}}
-import { lists as listNamespace } from '../k8s/Namespace.js';
-{{/if}}
-{{#if (and (and (eq this.type 'provide') (eq this.algo 'nodeName')) (eq this.targetShort 'Pod'))}}
-import { lists as listNamespace } from '../k8s/Namespace.js';
-{{/if}}
-{{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Install')))}}
-import { lists as listNamespace } from '../k8s/Namespace.js';
-{{/if}}
-{{#if (and (eq this.algo 'vynil') (and (eq type 'provide') (eq targetShort 'Package')))}}
 import { gramoConfig } from '../../config.js'
-{{/if}}
-{{#if (and (eq this.algo 'fluxcd') (and (eq type 'provide') (or (eq targetShort 'ImagePolicy') (eq targetShort 'Kustomization'))))}}
-import { lists as listNamespace } from '../k8s/Namespace.js';
-{{/if}}
+{{#each listTargets}}
+{{#unless (eq name 'Url')}}
+import { lists as list{{group}}{{name}} } from '../{{group}}/{{name}}.js';
+{{/unless}}
 {{/each}}
-
 {{#if (defined crd)}}
 const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
 {{else}}
 const k8sApi = kc.makeApiClient(k8s.{{capitalizeFirstLetter sub}}{{capitalizeFirstLetter apiVersion}}Api);
 {{/if}}
-
 export const mutations = {
 {{> createResolver ctx=. }}
 {{> deleteResolver ctx=. }}
@@ -97,7 +79,7 @@ export const resolvers = {
             let res = null;
   {{#each autoResolvers}}
     {{#if (eq type 'parent')}}
-            res = await localResolvers.{{type}}{{targetShort}}(obj,args);
+            res = await localResolvers.{{type}}{{targetGroup}}{{targetShort}}(obj,args);
             if (res!=null) return {
                 group: '{{targetGroup}}',
                 short: '{{targetShort}}',

@@ -42,10 +42,10 @@ function onFinalSubmit() {
   });
 }
 function startStep2() {
-  if (result.value.vynilPackage.filter(p => p.name == component.value && p.consumeDistrib.metadata.name == distrib.value && p.consumeCategory.name == category.value).length>0) {
+  if (result.value.vynilPackage.filter(p => p.name == component.value && p.consumevynilDistrib.metadata.name == distrib.value && p.consumevynilCategory.name == category.value).length>0) {
     editor.value.updateFromQuery({spec:{category:category.value, distrib: distrib.value, component:component.value, options:{}}})
     stepper.value.next();
-    console.log(result.value.vynilPackage.filter(p => p.name == component.value && p.consumeDistrib.metadata.name == distrib.value && p.consumeCategory.name == category.value)[0].options)
+    console.log(result.value.vynilPackage.filter(p => p.name == component.value && p.consumevynilDistrib.metadata.name == distrib.value && p.consumevynilCategory.name == category.value)[0].options)
   } else {
     notifyError(`Package ${component.value} in ${category.value} from ${distrib.value} doesnt exist`);
   }
@@ -66,23 +66,23 @@ function startStep2() {
         <div  class="q-gutter-md">
           <q-select filled v-model="distrib" :options="result.vynilDistrib.map(d=>d.metadata.name)" label="Distribution" stack-label />
           <q-select filled v-model="category" :options="result.vynilCategory.map(c=>c.name)" label="Category" stack-label />
-          <q-select filled v-if="distrib!=''&&category!=''" :key="`${distrib}-${category}`" v-model="component" :options="result.vynilPackage.filter(p=>p.consumeDistrib.metadata.name==distrib&&p.consumeCategory.name==category).map(p=>p.name)" label="Package" stack-label />
+          <q-select filled v-if="distrib!=''&&category!=''" :key="`${distrib}-${category}`" v-model="component" :options="result.vynilPackage.filter(p=>p.consumevynilDistrib.metadata.name==distrib&&p.consumevynilCategory.name==category).map(p=>p.name)" label="Package" stack-label />
         </div>
       </q-step>
 
       <q-step :name="2" title="Configure" caption="Selected package" icon="settings_suggest" :done="step > 2" :class="`bg-${ colorInstall }-2`">
-        <OpenApiEdit v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category).length>0"
+        <OpenApiEdit v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category).length>0"
           @update:out="(v)=>setkey('spec', {category, distrib, component, options:sanitizeData(v)})"
           :in="editor.obj['spec']['options']"
           :key="`${distrib}-${category}-${component}`"
-          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category)[0].options})"
+          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category)[0].options})"
         />
       </q-step>
       <q-step :name="3" title="Full YAML" caption="optional" icon="settings_suggest" :done="step > 3" :class="`bg-${ colorInstall }-2`">
-        <MonacoEditor v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category).length>0"
+        <MonacoEditor v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category).length>0"
           :text="editor.yaml" :key="`${distrib}-${category}-${component}-${editor.yaml}`"
           @update:text="v=>setYaml(v)"
-          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumeDistrib.metadata.name == distrib && p.consumeCategory.name == category)[0].options})"
+          :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category)[0].options})"
           />
       </q-step>
       <template v-slot:navigation>

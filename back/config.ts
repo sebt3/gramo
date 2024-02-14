@@ -6,6 +6,7 @@ const envMapping = [
     {name: 'limitNamespaceHave',     key: "GRAMO_LIMIT_NAMESPACE_HAVE"},
     {name: 'limitVynilDistrib',      key: "GRAMO_LIMIT_VYNIL_DISTRIB"},
     {name: 'limitVynilCategory',     key: "GRAMO_LIMIT_VYNIL_CATEGORY"},
+    {name: 'vynilNamespace',         key: "GRAMO_VYNIL_NAMESPACE"},
 // Frontend config
     {name: 'defaultNamespace',       key: "GRAMO_DEFAULT_NAMESPACE"},
     {name: 'defaultRoute',           key: "GRAMO_DEFAULT_ROUTE"},
@@ -17,6 +18,7 @@ export const defaultConfig = {
     limitNamespaceKey: "",
     limitNamespaceValue: "",
     limitNamespaceHave: "",
+    vynilNamespace: "vynil",
     defaultNamespace: "default",
     defaultRoute: "",
 };

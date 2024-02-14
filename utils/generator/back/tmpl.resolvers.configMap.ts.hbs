@@ -1,5 +1,5 @@
 {{#if (and (eq type 'use') (defined path))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
             const spec = getByPath(parent, '{{path}}');
             const cms = spec['containers']
                         .filter(c=>Array.isArray(c['env'])&&c['env'].filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined).length>0)
@@ -14,13 +14,13 @@
                         .filter(v=>v['configMap']!=undefined)
                         .map(v=>v['configMap']['name']):[])
             if (cms.length<1) return null;
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(s=>cms.includes(s['metadata']['name']))
         },
 {{/if}}
 {{#if (and (eq type 'users') (defined path))}}
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const lst = await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(w=>{
                 const spec = getByPath(w, '{{path}}');
                 return spec['containers'].filter(c=>Array.isArray(c['env'])&&c['env'].filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined && e['valueFrom']['configMapKeyRef']==parent['metadata']['name']).length>0).length>0 ||

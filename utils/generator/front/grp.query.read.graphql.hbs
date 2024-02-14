@@ -33,22 +33,28 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
       {{#each resolvers}}
         {{#unless (containShort ../../objects resultShort) }}
       {{name}} {
-        {{#if (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category')))}}
+        {{#if (or (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (and (eq resultGroup 'core') (eq resultShort 'Url')))}}
           {{#if (eq resultShort 'Package')}}
         name
         commit_id
         description
-        consumeCategory {
+        consumevynilCategory {
           name
         }
-        consumeDistrib {
+        consumevynilDistrib {
           metadata {
             name
           }
         }
         options
-          {{else}}
+          {{/if}}
+          {{#if (eq resultShort 'Category')}}
         name
+          {{/if}}
+          {{#if (eq resultShort 'Url')}}
+        proto
+        host
+        path
           {{/if}}
         {{else}}
         metadata {

@@ -1,5 +1,5 @@
-        {{type}}{{targetShort}}: async (parent, args: object) => {
-            const lst = (await list{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args))
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+            const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args))
                 .filter(o=>parent['spec']['group']==o['spec']['group'])
 {{#if (eq type 'consume')}}
             if (lst.length<1) return null;

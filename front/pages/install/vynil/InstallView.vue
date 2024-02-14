@@ -9,6 +9,8 @@ import vynilPackageMeta from '@/components/vynil/PackageMeta.vue';
 import { CategoryListExcludes } from '../../../libs/vynil/custom.js'
 import { InstallListExcludes } from '../../../libs/vynil/custom.js'
 import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
+import { JobListExcludes } from '../../../libs/k8s/custom.js'
+import k8sJobList from '@/components/k8s/JobList.vue';
 import { ref, useQuery, useMutation, useInstall, InstallReadExcludes } from '../../../libs/vynil/Install.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotInstallFound, navigation, setNamespacedItemFromRoute } = useInstall();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
@@ -21,10 +23,11 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
       }
     ], "excludes": InstallReadExcludes
   },
-  "consumeDistrib": {"filters": [], "excludes": DistribListExcludes},
-  "consumePackage": {"filters": [], "excludes": PackageListExcludes},
-  "consumeCategory": {"filters": [], "excludes": CategoryListExcludes},
-  "parentInstall": {"filters": [], "excludes": InstallListExcludes},
+  "consumevynilDistrib": {"filters": [], "excludes": DistribListExcludes},
+  "consumevynilPackage": {"filters": [], "excludes": PackageListExcludes},
+  "consumevynilCategory": {"filters": [], "excludes": CategoryListExcludes},
+  "usek8sJob": {"filters": [], "excludes": JobListExcludes},
+  "parentvynilInstall": {"filters": [], "excludes": InstallListExcludes},
   "namespace": {
     "filters": [
       {
@@ -37,8 +40,9 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
 }, { pollInterval: 2000 });onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(InstallDelete);
 const conditions = ref({
-  "consumePackage": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['consumePackage']!=null).reduce((acc,cur)=>acc||cur,false),
-  "parentInstall": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['parentInstall']!=null).reduce((acc,cur)=>acc||cur,false),
+  "consumevynilPackage": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['consumevynilPackage']!=null).reduce((acc,cur)=>acc||cur,false),
+  "usek8sJob": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['usek8sJob']).flat().filter(o=>o!=null).length>0,
+  "parentvynilInstall": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['parentvynilInstall']!=null).reduce((acc,cur)=>acc||cur,false),
 });
 const sectionCounts = ref({
   consumeLeft: 0,
@@ -51,8 +55,9 @@ const sectionCounts = ref({
 onResult(res => {
   onNotInstallFound(res);
   if ( !res.loading ) {
-    sectionCounts.value.uses += conditions.value["consumePackage"](res.data)?1:0;
-    sectionCounts.value.parent += conditions.value["parentInstall"](res.data)?1:0;
+    sectionCounts.value.uses += conditions.value["consumevynilPackage"](res.data)?1:0;
+    sectionCounts.value.parent += conditions.value["parentvynilInstall"](res.data)?1:0;
+    sectionCounts.value.uses += conditions.value["usek8sJob"](res.data)?1:0;
   }
 });
 onDeleteDone(() => {
@@ -68,9 +73,9 @@ onDeleteError((err) => {
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
     </div>
     <div :class="`col-md-${4-(sectionCounts.consumeLeft>0?3:0)}`" v-if="!loading && sectionCounts.parent+sectionCounts.consumeRight>0"></div>
-    <div class="col-md-4" v-if="!loading && conditions['parentInstall'](result)">
+    <div class="col-md-4" v-if="!loading && conditions['parentvynilInstall'](result)">
       <vynilInstallMeta :showStatus="false"
-        :model="result.k8sNamespace[0].vynilInstall[0].parentInstall"
+        :model="result.k8sNamespace[0].vynilInstall[0].parentvynilInstall"
        />
     </div>
     <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
@@ -87,8 +92,12 @@ onDeleteError((err) => {
         />
     </div>
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">
-      <vynilPackageMeta v-if="!loading && conditions['consumePackage'](result)"
-        :model="result.k8sNamespace[0].vynilInstall[0].consumePackage"
+      <vynilPackageMeta v-if="!loading && conditions['consumevynilPackage'](result)"
+        :model="result.k8sNamespace[0].vynilInstall[0].consumevynilPackage"
+       />
+      <k8sJobList :useRefresh="false"
+        v-if="!loading && conditions['usek8sJob'](result)"
+        :model="result.k8sNamespace[0].vynilInstall[0].usek8sJob"
        />
     </div>
   </div>

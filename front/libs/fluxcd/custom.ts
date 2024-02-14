@@ -106,28 +106,24 @@ export const extraHelmReleaseColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const KustomizationListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const KustomizationReadExcludes = [
 ];
 export const KustomizationSimpleExcludes = [
 ];
 export const ReceiverListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ReceiverReadExcludes = [
 ];
 export const ReceiverSimpleExcludes = [
 ];
 export const AlertListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const AlertReadExcludes = [
 ];
 export const AlertSimpleExcludes = [
 ];
 export const ProviderListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ProviderReadExcludes = [
 ];
@@ -135,7 +131,6 @@ export const ProviderSimpleExcludes = [
 ];
 export const GitRepositoryListExcludes = [
   { path: 'spec/url', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const GitRepositoryReadExcludes = [
 ];
@@ -143,7 +138,6 @@ export const GitRepositorySimpleExcludes = [
 ];
 export const BucketListExcludes = [
   { path: 'spec/endpoint', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const BucketReadExcludes = [
 ];
@@ -154,7 +148,6 @@ export const HelmChartListExcludes = [
   { path: 'spec/version', include: true },
   { path: 'spec/sourceRef/kind', include: true },
   { path: 'spec/sourceRef/name', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const HelmChartReadExcludes = [
 ];
@@ -162,7 +155,6 @@ export const HelmChartSimpleExcludes = [
 ];
 export const HelmRepositoryListExcludes = [
   { path: 'spec/url', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const HelmRepositoryReadExcludes = [
 ];
@@ -170,36 +162,30 @@ export const HelmRepositorySimpleExcludes = [
 ];
 export const OCIRepositoryListExcludes = [
   { path: 'spec/url', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const OCIRepositoryReadExcludes = [
 ];
 export const OCIRepositorySimpleExcludes = [
 ];
 export const ImageUpdateAutomationListExcludes = [
-  { path: 'status/lastAutomationRunTime', include: true },
 ];
 export const ImageUpdateAutomationReadExcludes = [
 ];
 export const ImageUpdateAutomationSimpleExcludes = [
 ];
 export const ImagePolicyListExcludes = [
-  { path: 'status/latestImage', include: true },
 ];
 export const ImagePolicyReadExcludes = [
 ];
 export const ImagePolicySimpleExcludes = [
 ];
 export const ImageRepositoryListExcludes = [
-  { path: 'status/lastScanResult/scanTime', include: true },
-  { path: 'status/lastScanResult/tagCount', include: true },
 ];
 export const ImageRepositoryReadExcludes = [
 ];
 export const ImageRepositorySimpleExcludes = [
 ];
 export const HelmReleaseListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const HelmReleaseReadExcludes = [
 ];

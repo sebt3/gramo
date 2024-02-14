@@ -25,7 +25,7 @@ export const queries = {
 };
 export const resolvers = {
     vynilCategory: {
-        providePackage: async (parent) =>  {
+        providevynilPackage: async (parent) =>  {
             const packages = await packageQueries.vynilPackage(null, {})
             return packages.filter(pkg => {
                 if (gramoConfig.limitVynilDistrib != "" && pkg['distrib'] != gramoConfig.limitVynilDistrib) return false;

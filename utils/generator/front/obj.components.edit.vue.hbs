@@ -38,11 +38,17 @@ const setYaml = (v) => editor.value.setYaml(v)
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
           @update:out="(v)=>setkey('spec', {...model['spec'],options:sanitizeData(v)})"
           :in="editor.obj['spec']['options']"
-          :properties="new Map(Object.entries(model.consumePackage.options))"
+          :properties="new Map(Object.entries(model.consumevynilPackage.options))"
 {{else}}
+  {{#if (and (eq (length writeProperties) 1) (contain writeProperties 'spec'))}}
+          @update:out="(v)=>setkey('spec', sanitizeData(v))"
+          :in="editor.obj['spec']"
+          :properties="getProperties({{ short }}Definition.properties.spec)"
+  {{else}}
           @update:out="(v)=>setkey(null, sanitizeData(v))"
           :in="editor.obj"
           :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
+  {{/if}}
 {{/if}}
         />
       </q-tab-panel>
@@ -51,7 +57,7 @@ const setYaml = (v) => editor.value.setYaml(v)
             :text="editor.yaml" :key="editor.yaml"
             @update:text="v=>setYaml(v)"
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
-            :properties="getProperties({properties: model.consumePackage.options})"
+            :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
             :properties="getProperties({properties: Object.fromEntries(Object.entries({{ short }}Definition).filter(([n])=>!['metadata','status'].includes(n)))})"
 {{/if}}

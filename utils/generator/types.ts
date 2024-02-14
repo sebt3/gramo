@@ -9,6 +9,7 @@ export interface k8sObject extends unspeciedObject {
     sub: string
     readProperties: string[]
     resolvers: object[]
+    autoResolvers: object[]
 }
 export interface HashMap<T> { [key: string]: T }
 

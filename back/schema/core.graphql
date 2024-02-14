@@ -78,14 +78,19 @@ type permissionReview {
 }
 type vynilCategory {
   name: String!
-  providePackage(params: queryParameters): [vynilPackage!]
+  providevynilPackage(params: queryParameters): [vynilPackage!]
+}
+type coreUrl {
+  proto: String
+  host: String
+  path: String
 }
 type vynilPackage {
   name: String!
   commit_id: ID!
   description: String
-  consumeCategory: vynilCategory!
-  consumeDistrib: vynilDistrib!
+  consumevynilCategory: vynilCategory!
+  consumevynilDistrib: vynilDistrib!
   options: JSONObject!
 }
 type Query {
@@ -93,4 +98,3 @@ type Query {
   vynilCategory(params: queryParameters): [vynilCategory]
   vynilPackage(params: queryParameters): [vynilPackage]
 }
-

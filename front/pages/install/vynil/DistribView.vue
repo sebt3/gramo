@@ -7,6 +7,10 @@ import vynilPackageList from '@/components/vynil/PackageList.vue';
 import vynilCategoryList from '@/components/vynil/CategoryList.vue';
 import { InstallSimpleExcludes } from '../../../libs/vynil/custom.js'
 import vynilInstallList from '@/components/vynil/InstallList.vue';
+import { JobListExcludes } from '../../../libs/k8s/custom.js'
+import k8sJobList from '@/components/k8s/JobList.vue';
+import { CronJobListExcludes } from '../../../libs/k8s/custom.js'
+import k8sCronJobList from '@/components/k8s/CronJobList.vue';
 import { ref, useQuery, useMutation, useDistrib, DistribReadExcludes } from '../../../libs/vynil/Distrib.js'
 const { onErrorHandler, notifySuccess, notifyError, onNotDistribFound, navigation, setItemFromRoute } = useDistrib();setItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilDistribQuery, {
@@ -19,15 +23,21 @@ const { result, loading, onResult, onError } = useQuery(vynilDistribQuery, {
       }
     ], "excludes": DistribReadExcludes
   },
-  "providePackage": {"filters": [], "excludes": []},
-  "provideCategory": {"filters": [], "excludes": []},
-  "provideInstall": {"filters": [], "excludes": InstallSimpleExcludes},
+  "parentvynilInstall": {"filters": [], "excludes": InstallSimpleExcludes},
+  "usek8sJob": {"filters": [], "excludes": JobListExcludes},
+  "usek8sCronJob": {"filters": [], "excludes": CronJobListExcludes},
+  "providevynilPackage": {"filters": [], "excludes": []},
+  "providevynilCategory": {"filters": [], "excludes": []},
+  "providevynilInstall": {"filters": [], "excludes": InstallSimpleExcludes},
 }, { pollInterval: 2000 });onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(DistribDelete);
 const conditions = ref({
-  "providePackage": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['providePackage']).flat().length>0,
-  "provideCategory": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['provideCategory']).flat().length>0,
-  "provideInstall": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['provideInstall']).flat().length>0,
+  "providevynilPackage": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['providevynilPackage']).flat().length>0,
+  "providevynilCategory": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['providevynilCategory']).flat().length>0,
+  "providevynilInstall": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['providevynilInstall']).flat().length>0,
+  "usek8sJob": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['usek8sJob']).flat().filter(o=>o!=null).length>0,
+  "usek8sCronJob": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['usek8sCronJob']).flat().filter(o=>o!=null).length>0,
+  "parentvynilInstall": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['parentvynilInstall']!=null).reduce((acc,cur)=>acc||cur,false),
 });
 const sectionCounts = ref({
   consumeLeft: 0,
@@ -40,10 +50,12 @@ const sectionCounts = ref({
 onResult(res => {
   onNotDistribFound(res);
   if ( !res.loading ) {
-    sectionCounts.value.bellow += conditions.value["providePackage"](res.data)?1:0;
-    sectionCounts.value.uses += conditions.value["provideCategory"](res.data)?1:0;
-    sectionCounts.value.bellow += conditions.value["provideInstall"](res.data)?1:0;
-    console.log(sectionCounts.value)
+    sectionCounts.value.bellow += conditions.value["providevynilPackage"](res.data)?1:0;
+    sectionCounts.value.uses += conditions.value["providevynilCategory"](res.data)?1:0;
+    sectionCounts.value.bellow += conditions.value["providevynilInstall"](res.data)?1:0;
+    sectionCounts.value.consumeRight += conditions.value["usek8sJob"](res.data)?1:0;
+    sectionCounts.value.consumeLeft += conditions.value["usek8sCronJob"](res.data)?1:0;
+    sectionCounts.value.parent += conditions.value["parentvynilInstall"](res.data)?1:0;
   }
 });
 onDeleteDone(() => {
@@ -57,10 +69,23 @@ onDeleteError((err) => {
 <template>
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
+      <k8sCronJobList :useRefresh="false"
+        v-if="!loading && conditions['usek8sCronJob'](result)"
+        :model="result.vynilDistrib[0].usek8sCronJob"
+       />
     </div>
     <div :class="`col-md-${4-(sectionCounts.consumeLeft>0?3:0)}`" v-if="!loading && sectionCounts.parent+sectionCounts.consumeRight>0"></div>
+    <div class="col-md-4" v-if="!loading && conditions['parentvynilInstall'](result)">
+      <vynilInstallMeta :showStatus="false"
+        :model="result.vynilDistrib[0].parentvynilInstall"
+       />
+    </div>
     <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeRight>0">
+      <k8sJobList :useRefresh="false"
+        v-if="!loading && conditions['usek8sJob'](result)"
+        :model="result.vynilDistrib[0].usek8sJob"
+       />
     </div>
   </div>
   <div class="row q-mb-sm q-ml-sm">
@@ -73,20 +98,20 @@ onDeleteError((err) => {
         />
     </div>
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">
-      <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['provideCategory'](result)">
+      <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['providevynilCategory'](result)">
         <vynilCategoryList
-          :model="result.vynilDistrib[0].provideCategory"
+          :model="result.vynilDistrib[0].providevynilCategory"
         />
       </div>
     </div>
-    <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['providePackage'](result)">
+    <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['providevynilPackage'](result)">
       <vynilPackageList
-        :model="result.vynilDistrib[0].providePackage"
+        :model="result.vynilDistrib[0].providevynilPackage"
        />
     </div>
-    <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['provideInstall'](result)">
+    <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['providevynilInstall'](result)">
       <vynilInstallList
-        :model="result.vynilDistrib[0].provideInstall"
+        :model="result.vynilDistrib[0].providevynilInstall"
        />
     </div>
   </div>

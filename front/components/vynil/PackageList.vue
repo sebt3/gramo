@@ -6,7 +6,7 @@ import { ref, useCore, tableColumnAlign } from '../../libs/core'
 const { pagination } = useCore();
 const DistribColumns:Array<QTableColumn> = [
     {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
-    {name: 'Category', label: 'Category', field: row => row.consumeCategory.name, sortable: true, align: tableColumnAlign.left},
+    {name: 'Category', label: 'Category', field: row => row.consumevynilCategory.name, sortable: true, align: tableColumnAlign.left},
     {name: 'Description', label: 'Description', field: row => row.description, sortable: true, align: tableColumnAlign.left}
 ] as QTableColumn[];
 const filter = ref('');

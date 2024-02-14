@@ -1,3 +1,4 @@
+import { k8sObject } from "./types.js";
 import { uniq } from "./utils.js";
 
 export const excludedWriteNames = ['metadata','kind','status', 'apiVersion']
@@ -7,7 +8,12 @@ export const excludes = [
     {group: 'vynil', short: 'Install', for: ['list', 'simple'], values: [{path:'status/tfstate'}, {path:'status/plan'}]},
 ];
 const uses = [
+    {algo: 'vynil',    group: 'vynil', short: 'Install', usedGroup: 'k8s', usedShort: 'Job', path: null},
+    {algo: 'vynil',    group: 'vynil', short: 'Distrib', usedGroup: 'k8s', usedShort: 'Job', path: null},
+    {algo: 'vynil',    group: 'vynil', short: 'Distrib', usedGroup: 'k8s', usedShort: 'CronJob', path: null},
     {algo: 'ingress',  group: 'k8s', short: 'Ingress', usedGroup: 'k8s', usedShort: 'Service', path: null},
+    {algo: 'ingress',  group: 'k8s', short: 'Ingress', usedGroup: 'k8s', usedShort: 'Secret', path: null},
+    {algo: 'ingress',  group: 'core', short: 'Url',    usedGroup: 'k8s', usedShort: 'Ingress', path: null},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'Pod', path: 'metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'ReplicaSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'Deployment', path: 'spec/template/metadata'},
@@ -44,10 +50,9 @@ const uses = [
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
 ];
 const provides = [
-// Broken somehow
-//    {algo: 'fluxcd', group: 'fluxcd', short: 'ImageRepository', providedGroup: 'fluxcd', providedShort: 'ImagePolicy'},
-//    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'ImageUpdateAutomation'},
-//    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'Kustomization'},
+    {algo: 'fluxcd', group: 'fluxcd', short: 'ImageRepository', providedGroup: 'fluxcd', providedShort: 'ImagePolicy'},
+    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'ImageUpdateAutomation'},
+    {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'Kustomization'},
 //    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Category'},
@@ -104,6 +109,7 @@ const children = [
     {algo: 'k8s', group: 'k8s', short: 'PersistentVolumeClaim', parentGroup: 'k8s', parentShort: 'StatefulSet'},
 ];
 type autoResolver = {algo: string,type: string,group: string,short: string,targetGroup: string,targetShort: string, path?: string|null}
+type autoTargetResolver = {algo: string,type: string,group: string,short: string, path?: string|null}
 type autoAllResolver = {algo: string,type: string,targetGroup: string,targetShort: string, path?: string|null}
 export const autoResolvers = ([] as autoResolver[]).concat(
     children.map(c=>{return {type: 'parent',  group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo, path: null}}),
@@ -113,15 +119,26 @@ export const autoResolvers = ([] as autoResolver[]).concat(
     uses.map(c=>{return {type: 'use', group: c.group, short: c.short, targetGroup: c.usedGroup, targetShort: c.usedShort, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'users', group: c.usedGroup, short: c.usedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
 );
+export const autoTargetResolvers = ([
+//    {algo: 'vynil',type: 'child',group: 'vynil',short: 'Install', path: null},
+    {algo: 'fluxcd',type: 'child',group: 'fluxcd', short: 'Kustomization', path: null},
+] as autoTargetResolver[]);
 export const autoAllResolvers = ([
     {algo: 'vynil', type: 'parent', targetGroup: 'vynil', targetShort: 'Install'},
+    {algo: 'fluxcd', type: 'parent', targetGroup: 'fluxcd', targetShort: 'Kustomization'},
 ] as autoAllResolver[]);
 export const extraResolvers = autoResolvers.map(a=>{return {
-    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
-}}).concat ()
+    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
+}}).concat()
 export const extraAllResolvers = autoAllResolvers.map(a=>{return {
-    type: a.type, name: `${a.type}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
+    type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
 }}).concat ()
+export function toExtraResolvers(r:autoTargetResolver, all:k8sObject[]) {
+    return all.map(o=>{return{
+        args: "(params: queryParameters)", result: `[${o.group}${o.short}]`, properties: o.readProperties,
+        group: r.group, short: r.short, type: r.type, name: `${r.type}${o.group}${o.short}`, resultGroup: o.group, resultShort: o.short,
+    }})
+}
 
 const categoryOrder = [
     'install',

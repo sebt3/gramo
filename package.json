@@ -1,13 +1,13 @@
 {
   "name": "gramo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Kubernetes front-end",
   "main": "index.js",
   "scripts": {
     "lint": "eslint front/ back/ utils/",
     "lint:schema": "graphql-schema-linter $(ls --ignore='gen.*' back/schema/|grep -E 'graphql$'|sed 's#^#back/schema/#')",
     "gen": "node --loader ts-node/esm utils/gen.ts",
-    "dev": "ts-node-esm back/dev.ts",
+    "dev": "NODE_ENV=dev ts-node-esm back/dev.ts",
     "prebuild": "NODE_ENV=production vite build --emptyOutDir",
     "build": "tsc -b",
     "ps": "for i in $(ls -1 /proc);do if [ $(($i+1)) -gt 1 ];then echo -n \"$i\\t\\t\";cat /proc/$i/cmdline;echo;fi;done",

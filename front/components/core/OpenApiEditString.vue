@@ -23,8 +23,8 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>
     <template v-slot:control>
-      <div class="self-center full-width no-outline" v-if="value?.includes('\n')"><pre>{{ value }}</pre></div>
-      <div class="self-center full-width no-outline" v-else>{{ value }}</div>
+      <div class="self-center full-width no-outline" v-if="value!=null && value.includes('\n')"><pre>{{ value }}</pre></div>
+      <div class="self-center full-width no-outline" v-else-if="value!=null">{{ value }}</div>
     </template>
   </q-field>
   </div>

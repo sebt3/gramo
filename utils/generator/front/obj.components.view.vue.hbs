@@ -63,13 +63,18 @@ onMounted(() => {
         <OpenApiEdit
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
           :in="model['spec']['options']"
-          :properties="getProperties({properties: model.consumePackage.options})"
+          :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
+  {{#if (and (eq (length writeProperties) 1) (contain writeProperties 'spec'))}}
+          :in="model['spec']"
+          :properties="getProperties({{ short }}Definition.properties.spec)"
+  {{else}}
           :in="model"
           :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
+  {{/if}}
 {{/if}}
           :read-only="true"
-          :show-default="false"
+          :showdefault="false"
         />
       </q-tab-panel>
 {{#each writeProperties}}

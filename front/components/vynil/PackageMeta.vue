@@ -6,7 +6,7 @@ import { ref, useCore, tableColumnAlign } from '../../libs/core'
 const { pagination } = useCore();
 const DistribColumns:Array<QTableColumn> = [
     {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
-    {name: 'Category', label: 'Category', field: row => row.consumeCategory.name, sortable: true, align: tableColumnAlign.left},
+    {name: 'Category', label: 'Category', field: row => row.consumevynilCategory.name, sortable: true, align: tableColumnAlign.left},
     {name: 'Description', label: 'Description', field: row => row.description, sortable: true, align: tableColumnAlign.left}
 ] as QTableColumn[];
 const filter = ref('');
@@ -26,12 +26,12 @@ withDefaults(defineProps<{model: object, deletor?:any, useAction?:boolean}>(),{
         <q-field label="Distribution" stack-label borderless>
           <template v-slot:prepend><q-icon name="alt_route" /></template>
           <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
-            <router-link :to="{ name: 'vynilDistribView', params: {  name: model.consumeDistrib.metadata.name } }">{{ model.consumeDistrib.metadata.name }}</router-link>
+            <router-link :to="{ name: 'vynilDistribView', params: {  name: model.consumevynilDistrib.metadata.name } }">{{ model.consumevynilDistrib.metadata.name }}</router-link>
           </div></template>
         </q-field>
         <q-field label="Category" stack-label borderless>
           <template v-slot:prepend><q-icon name="category" /></template>
-          <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ model.consumeCategory.name }}</div></template>
+          <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ model.consumevynilCategory.name }}</div></template>
         </q-field>
         <q-field label="Name" stack-label borderless>
         <template v-slot:prepend><q-icon name="smart_button" /></template>
