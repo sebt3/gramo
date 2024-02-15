@@ -3,27 +3,12 @@
 import k8sSecretQuery from '@/queries/k8s/Secret.details.graphql'
 import SecretDelete from '@/queries/k8s/Secret.delete.graphql'
 import k8sSecretView from '@/components/k8s/SecretView.vue';
-import { BasicAuthListExcludes as secretgeneratorBasicAuthListExcludes } from '../../../libs/secretgenerator/custom.js'
-import { SSHKeyPairListExcludes as secretgeneratorSSHKeyPairListExcludes } from '../../../libs/secretgenerator/custom.js'
-import { StringSecretListExcludes as secretgeneratorStringSecretListExcludes } from '../../../libs/secretgenerator/custom.js'
-import { ClusterListExcludes as cnpgClusterListExcludes } from '../../../libs/cnpg/custom.js'
-import { MongoDBCommunityListExcludes as mongodbMongoDBCommunityListExcludes } from '../../../libs/mongodb/custom.js'
-import { IngressListExcludes as k8sIngressListExcludes } from '../../../libs/k8s/custom.js'
-import { PodListExcludes as k8sPodListExcludes } from '../../../libs/k8s/custom.js'
-import { ReplicaSetListExcludes as k8sReplicaSetListExcludes } from '../../../libs/k8s/custom.js'
-import { JobListExcludes as k8sJobListExcludes } from '../../../libs/k8s/custom.js'
-import { CronJobListExcludes as k8sCronJobListExcludes } from '../../../libs/k8s/custom.js'
-import { DeploymentListExcludes as k8sDeploymentListExcludes } from '../../../libs/k8s/custom.js'
-import { StatefulSetListExcludes as k8sStatefulSetListExcludes } from '../../../libs/k8s/custom.js'
-import { DaemonSetListExcludes as k8sDaemonSetListExcludes } from '../../../libs/k8s/custom.js'
-import { PodTemplateListExcludes as k8sPodTemplateListExcludes } from '../../../libs/k8s/custom.js'
-import { InstallListExcludes as vynilInstallListExcludes } from '../../../libs/vynil/custom.js'
-import { KustomizationListExcludes as fluxcdKustomizationListExcludes } from '../../../libs/fluxcd/custom.js'
+import cnpgClusterMeta from '@/components/cnpg/ClusterMeta.vue';
+import mongodbMongoDBCommunityMeta from '@/components/mongodb/MongoDBCommunityMeta.vue';
+import certmanagerCertificateMeta from '@/components/certmanager/CertificateMeta.vue';
 import secretgeneratorBasicAuthMeta from '@/components/secretgenerator/BasicAuthMeta.vue';
 import secretgeneratorSSHKeyPairMeta from '@/components/secretgenerator/SSHKeyPairMeta.vue';
 import secretgeneratorStringSecretMeta from '@/components/secretgenerator/StringSecretMeta.vue';
-import cnpgClusterMeta from '@/components/cnpg/ClusterMeta.vue';
-import mongodbMongoDBCommunityMeta from '@/components/mongodb/MongoDBCommunityMeta.vue';
 import k8sIngressList from '@/components/k8s/IngressList.vue';
 import k8sPodList from '@/components/k8s/PodList.vue';
 import k8sReplicaSetList from '@/components/k8s/ReplicaSetList.vue';
@@ -35,7 +20,24 @@ import k8sDaemonSetList from '@/components/k8s/DaemonSetList.vue';
 import k8sPodTemplateList from '@/components/k8s/PodTemplateList.vue';
 import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
 import fluxcdKustomizationMeta from '@/components/fluxcd/KustomizationMeta.vue';
-import { ref, useQuery, useMutation, useSecret, SecretReadExcludes } from '../../../libs/k8s/Secret.js'
+import { ClusterListExcludes as cnpgClusterListExcludes } from '../../../libs/cnpg/custom.js'
+import { MongoDBCommunityListExcludes as mongodbMongoDBCommunityListExcludes } from '../../../libs/mongodb/custom.js'
+import { CertificateListExcludes as certmanagerCertificateListExcludes } from '../../../libs/certmanager/custom.js'
+import { BasicAuthListExcludes as secretgeneratorBasicAuthListExcludes } from '../../../libs/secretgenerator/custom.js'
+import { SSHKeyPairListExcludes as secretgeneratorSSHKeyPairListExcludes } from '../../../libs/secretgenerator/custom.js'
+import { StringSecretListExcludes as secretgeneratorStringSecretListExcludes } from '../../../libs/secretgenerator/custom.js'
+import { IngressListExcludes as k8sIngressListExcludes } from '../../../libs/k8s/custom.js'
+import { PodListExcludes as k8sPodListExcludes } from '../../../libs/k8s/custom.js'
+import { ReplicaSetListExcludes as k8sReplicaSetListExcludes } from '../../../libs/k8s/custom.js'
+import { JobListExcludes as k8sJobListExcludes } from '../../../libs/k8s/custom.js'
+import { CronJobListExcludes as k8sCronJobListExcludes } from '../../../libs/k8s/custom.js'
+import { DeploymentListExcludes as k8sDeploymentListExcludes } from '../../../libs/k8s/custom.js'
+import { StatefulSetListExcludes as k8sStatefulSetListExcludes } from '../../../libs/k8s/custom.js'
+import { DaemonSetListExcludes as k8sDaemonSetListExcludes } from '../../../libs/k8s/custom.js'
+import { PodTemplateListExcludes as k8sPodTemplateListExcludes } from '../../../libs/k8s/custom.js'
+import { InstallListExcludes as vynilInstallListExcludes } from '../../../libs/vynil/custom.js'
+import { KustomizationListExcludes as fluxcdKustomizationListExcludes } from '../../../libs/fluxcd/custom.js'
+import { ref, sanitizeData, useQuery, useMutation, useSecret, SecretReadExcludes } from '../../../libs/k8s/Secret.js'
 const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNotSecretFound, navigation, setNamespacedItemFromRoute } = useSecret();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(k8sSecretQuery, {
   "obj": {
@@ -47,11 +49,12 @@ const { result, loading, onResult, onError } = useQuery(k8sSecretQuery, {
       }
     ], "excludes": SecretReadExcludes
   },
+  "parentcnpgCluster": {"filters": [], "excludes": cnpgClusterListExcludes},
+  "parentmongodbMongoDBCommunity": {"filters": [], "excludes": mongodbMongoDBCommunityListExcludes},
+  "parentcertmanagerCertificate": {"filters": [], "excludes": certmanagerCertificateListExcludes},
   "parentsecretgeneratorBasicAuth": {"filters": [], "excludes": secretgeneratorBasicAuthListExcludes},
   "parentsecretgeneratorSSHKeyPair": {"filters": [], "excludes": secretgeneratorSSHKeyPairListExcludes},
   "parentsecretgeneratorStringSecret": {"filters": [], "excludes": secretgeneratorStringSecretListExcludes},
-  "parentcnpgCluster": {"filters": [], "excludes": cnpgClusterListExcludes},
-  "parentmongodbMongoDBCommunity": {"filters": [], "excludes": mongodbMongoDBCommunityListExcludes},
   "usersk8sIngress": {"filters": [], "excludes": k8sIngressListExcludes},
   "usersk8sPod": {"filters": [], "excludes": k8sPodListExcludes},
   "usersk8sReplicaSet": {"filters": [], "excludes": k8sReplicaSetListExcludes},
@@ -75,11 +78,12 @@ const { result, loading, onResult, onError } = useQuery(k8sSecretQuery, {
 }, { pollInterval: 2000 });onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(SecretDelete);
 const conditions = ref({
+  "parentcnpgCluster": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentcnpgCluster']!=null).reduce((acc,cur)=>acc||cur,false),
+  "parentmongodbMongoDBCommunity": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentmongodbMongoDBCommunity']!=null).reduce((acc,cur)=>acc||cur,false),
+  "parentcertmanagerCertificate": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentcertmanagerCertificate']!=null).reduce((acc,cur)=>acc||cur,false),
   "parentsecretgeneratorBasicAuth": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentsecretgeneratorBasicAuth']!=null).reduce((acc,cur)=>acc||cur,false),
   "parentsecretgeneratorSSHKeyPair": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentsecretgeneratorSSHKeyPair']!=null).reduce((acc,cur)=>acc||cur,false),
   "parentsecretgeneratorStringSecret": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentsecretgeneratorStringSecret']!=null).reduce((acc,cur)=>acc||cur,false),
-  "parentcnpgCluster": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentcnpgCluster']!=null).reduce((acc,cur)=>acc||cur,false),
-  "parentmongodbMongoDBCommunity": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['parentmongodbMongoDBCommunity']!=null).reduce((acc,cur)=>acc||cur,false),
   "usersk8sIngress": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['usersk8sIngress']).flat().filter(o=>o!=null).length>0,
   "usersk8sPod": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['usersk8sPod']).flat().filter(o=>o!=null).length>0,
   "usersk8sReplicaSet": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().map(obj=>obj['usersk8sReplicaSet']).flat().filter(o=>o!=null).length>0,
@@ -106,7 +110,6 @@ onResult(res => {
   if ( !res.loading ) {
     if (Array.isArray(res.data.k8sNamespace) && res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().length>0) {
       secret.value = {...secret.value, ...res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0], data: JSON.parse(JSON.stringify(res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0]['data']))};
-      console.log(secret.value, secret.value['data'])
       secret.value['stringData'] = secret.value['stringData']==undefined?{}:secret.value['stringData'];
       if (typeof secret.value['data'] === 'object') Object.keys(secret.value['data']).forEach(key=>{
         try {
@@ -117,11 +120,12 @@ onResult(res => {
         }
       })
     }
+    sectionCounts.value.parent += conditions.value["parentcnpgCluster"](res.data)?1:0;
+    sectionCounts.value.parent += conditions.value["parentmongodbMongoDBCommunity"](res.data)?1:0;
+    sectionCounts.value.parent += conditions.value["parentcertmanagerCertificate"](res.data)?1:0;
     sectionCounts.value.parent += conditions.value["parentsecretgeneratorBasicAuth"](res.data)?1:0;
     sectionCounts.value.parent += conditions.value["parentsecretgeneratorSSHKeyPair"](res.data)?1:0;
     sectionCounts.value.parent += conditions.value["parentsecretgeneratorStringSecret"](res.data)?1:0;
-    sectionCounts.value.parent += conditions.value["parentcnpgCluster"](res.data)?1:0;
-    sectionCounts.value.parent += conditions.value["parentmongodbMongoDBCommunity"](res.data)?1:0;
     sectionCounts.value.users += conditions.value["usersk8sIngress"](res.data)?1:0;
     sectionCounts.value.users += conditions.value["usersk8sPod"](res.data)?1:0;
     sectionCounts.value.users += conditions.value["usersk8sReplicaSet"](res.data)?1:0;
@@ -148,40 +152,47 @@ onDeleteError((err) => {
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
     </div>
     <div :class="`col-md-${4-(sectionCounts.consumeLeft>0?3:0)}`" v-if="!loading && sectionCounts.parent+sectionCounts.consumeRight>0"></div>
-    <div class="col-md-4" v-if="!loading && conditions['parentsecretgeneratorBasicAuth'](result)">
-      <secretgeneratorBasicAuthMeta :showStatus="false"
-        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorBasicAuth"
-       />
-    </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentsecretgeneratorSSHKeyPair'](result)">
-      <secretgeneratorSSHKeyPairMeta :showStatus="false"
-        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorSSHKeyPair"
-       />
-    </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentsecretgeneratorStringSecret'](result)">
-      <secretgeneratorStringSecretMeta :showStatus="false"
-        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorStringSecret"
-       />
-    </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentcnpgCluster'](result)">
+    <div class="col-md-4" v-if="!loading && sectionCounts.parent>0">
+    <div v-if="!loading && conditions['parentcnpgCluster'](result)">
       <cnpgClusterMeta :showStatus="false"
         :model="result.k8sNamespace[0].k8sSecret[0].parentcnpgCluster"
        />
     </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentmongodbMongoDBCommunity'](result)">
+    <div v-if="!loading && conditions['parentmongodbMongoDBCommunity'](result)">
       <mongodbMongoDBCommunityMeta :showStatus="false"
         :model="result.k8sNamespace[0].k8sSecret[0].parentmongodbMongoDBCommunity"
        />
     </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentvynilInstall'](result)">
+    <div v-if="!loading && conditions['parentcertmanagerCertificate'](result)">
+      <certmanagerCertificateMeta :showStatus="false"
+        :model="result.k8sNamespace[0].k8sSecret[0].parentcertmanagerCertificate"
+       />
+    </div>
+    <div v-if="!loading && conditions['parentsecretgeneratorBasicAuth'](result)">
+      <secretgeneratorBasicAuthMeta :showStatus="false"
+        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorBasicAuth"
+       />
+    </div>
+    <div v-if="!loading && conditions['parentsecretgeneratorSSHKeyPair'](result)">
+      <secretgeneratorSSHKeyPairMeta :showStatus="false"
+        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorSSHKeyPair"
+       />
+    </div>
+    <div v-if="!loading && conditions['parentsecretgeneratorStringSecret'](result)">
+      <secretgeneratorStringSecretMeta :showStatus="false"
+        :model="result.k8sNamespace[0].k8sSecret[0].parentsecretgeneratorStringSecret"
+       />
+    </div>
+    <div v-if="!loading && conditions['parentvynilInstall'](result)">
       <vynilInstallMeta :showStatus="false"
         :model="result.k8sNamespace[0].k8sSecret[0].parentvynilInstall"
        />
     </div>
-    <div class="col-md-4" v-if="!loading && conditions['parentfluxcdKustomization'](result)">
+    <div v-if="!loading && conditions['parentfluxcdKustomization'](result)">
       <fluxcdKustomizationMeta :showStatus="false"
         :model="result.k8sNamespace[0].k8sSecret[0].parentfluxcdKustomization"
        />
+    </div>
     </div>
     <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeRight>0">
@@ -228,11 +239,11 @@ onDeleteError((err) => {
        />
     </div>
     <div :class="`col-md-${6+(sectionCounts.uses<1?2:0)+(sectionCounts.users<1?2:0)}`">
-      <k8sSecretView :useActions="true"
-        v-if="!loading && result!=undefined && Array.isArray(result.k8sNamespace)  && result.k8sNamespace[0].k8sSecret[0]!=undefined && result.k8sNamespace[0].k8sSecret[0]!=null"
-        :model="result.k8sNamespace[0].k8sSecret[0]"
+      <div><k8sSecretView :useActions="true"
+        v-if="!loading && secret['metadata']!=null"
+        :model="sanitizeData(secret)"
         @on-delete="(meta)=>{actionDelete(deletor, meta)}"
-        />
+        /></div>
     </div>
     <div class="col-md-1" v-if="!loading && sectionCounts.uses==0"></div>
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">

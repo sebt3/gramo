@@ -28,6 +28,12 @@ export const queries = {
 {{/unless}}
 const localResolvers = {
 {{#each autoResolvers}}
+    {{#if (eq algo 'traefik')}}
+{{> resolversTraefik algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'certmanager')}}
+{{> resolversCertManager algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'fluxcd')}}
 {{> resolversFluxCD algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}

@@ -8,6 +8,7 @@ export const excludes = [
     {group: 'vynil', short: 'Install', for: ['list', 'simple'], values: [{path:'status/tfstate'}, {path:'status/plan'}]},
 ];
 const uses = [
+    {algo: 'traefik',  group: 'k8s', short: 'Ingress', usedGroup: 'traefik', usedShort: 'Middleware', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Install', usedGroup: 'k8s', usedShort: 'Job', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Distrib', usedGroup: 'k8s', usedShort: 'Job', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Distrib', usedGroup: 'k8s', usedShort: 'CronJob', path: null},
@@ -20,7 +21,6 @@ const uses = [
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'DaemonSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'StatefulSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'PodTemplate', path: 'template/metadata'},
-    {algo: 'pvc',  group: 'k8s', short: 'PersistentVolumeClaim', usedGroup: 'k8s', usedShort: 'PersistentVolume', path: null},
     {algo: 'pvc',  group: 'k8s', short: 'Pod', path: 'spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
     {algo: 'pvc',  group: 'k8s', short: 'ReplicaSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
     {algo: 'pvc',  group: 'k8s', short: 'Job', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
@@ -50,6 +50,10 @@ const uses = [
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
 ];
 const provides = [
+    {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'Certificate'},
+    {algo: 'certmanager', group: 'certmanager', short: 'ClusterIssuer', providedGroup: 'certmanager', providedShort: 'Certificate'},
+    {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'CertificateRequest'},
+    {algo: 'certmanager', group: 'certmanager', short: 'ClusterIssuer', providedGroup: 'certmanager', providedShort: 'CertificateRequest'},
     {algo: 'fluxcd', group: 'fluxcd', short: 'ImageRepository', providedGroup: 'fluxcd', providedShort: 'ImagePolicy'},
     {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'ImageUpdateAutomation'},
     {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'Kustomization'},
@@ -70,7 +74,15 @@ const provides = [
     {algo: 'storageClass', group: 'k8s', short: 'StorageClass', providedGroup: 'k8s', providedShort: 'PersistentVolumeClaim'},
     {algo: 'apiService',   group: 'k8s', short: 'APIService', providedGroup: 'k8s', providedShort: 'CustomResourceDefinition'},
 ];
+const equity = [
+    {algo: 'certmanager', group: 'k8s', short: 'Secret', parentGroup: 'certmanager', parentShort: 'Certificate'},
+    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'BasicAuth'},
+    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'SSHKeyPair'},
+    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'StringSecret'},
+    {algo: 'pvc', group: 'k8s', short: 'PersistentVolume', parentGroup: 'k8s', parentShort: 'PersistentVolumeClaim'},
+];
 const children = [
+    {algo: 'certmanager', group: 'certmanager', short: 'CertificateRequest', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'k8s', group: 'k8s', short: 'ReplicaSet', parentGroup: 'k8s', parentShort: 'Deployment'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'ReplicaSet'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'StatefulSet'},
@@ -80,9 +92,6 @@ const children = [
 //    {algo: 'k8s', group: 'k8s', short: 'ControllerRevision', parentGroup: 'k8s', parentShort: 'DaemonSet'},
 //    {algo: 'k8s', group: 'k8s', short: 'ControllerRevision', parentGroup: 'k8s', parentShort: 'StatefulSet'},
     {algo: 'k8s', group: 'k8s', short: 'Job', parentGroup: 'k8s', parentShort: 'CronJob'},
-    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'BasicAuth'},
-    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'SSHKeyPair'},
-    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'StringSecret'},
     {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'cnpg', parentShort: 'Cluster'},
     {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'mongodb', parentShort: 'MongoDBCommunity'},
     {algo: 'k8s', group: 'k8s', short: 'Service', parentGroup: 'mongodb', parentShort: 'MongoDBCommunity'},
@@ -114,13 +123,15 @@ type autoAllResolver = {algo: string,type: string,targetGroup: string,targetShor
 export const autoResolvers = ([] as autoResolver[]).concat(
     children.map(c=>{return {type: 'parent',  group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo, path: null}}),
     children.map(c=>{return {type: 'child', group: c.parentGroup, short: c.parentShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: null}}),
+    equity.map(c=>{return {type: 'parent',  group: c.group, short: c.short, targetGroup: c.parentGroup, targetShort: c.parentShort, algo: c.algo, path: null}}),
+    equity.map(c=>{return {type: 'equity', group: c.parentGroup, short: c.parentShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: null}}),
     provides.map(c=>{return {type: 'provide', group: c.group, short: c.short, targetGroup: c.providedGroup, targetShort: c.providedShort, algo: c.algo, path: c.path}}),
     provides.map(c=>{return {type: 'consume', group: c.providedGroup, short: c.providedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'use', group: c.group, short: c.short, targetGroup: c.usedGroup, targetShort: c.usedShort, algo: c.algo, path: c.path}}),
     uses.map(c=>{return {type: 'users', group: c.usedGroup, short: c.usedShort, targetGroup: c.group, targetShort: c.short, algo: c.algo, path: c.path}}),
 );
 export const autoTargetResolvers = ([
-//    {algo: 'vynil',type: 'child',group: 'vynil',short: 'Install', path: null},
+    {algo: 'vynil',type: 'child',group: 'vynil',short: 'Install', path: null},
     {algo: 'fluxcd',type: 'child',group: 'fluxcd', short: 'Kustomization', path: null},
 ] as autoTargetResolver[]);
 export const autoAllResolvers = ([
@@ -128,10 +139,10 @@ export const autoAllResolvers = ([
     {algo: 'fluxcd', type: 'parent', targetGroup: 'fluxcd', targetShort: 'Kustomization'},
 ] as autoAllResolver[]);
 export const extraResolvers = autoResolvers.map(a=>{return {
-    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
+    group: a.group, short: a.short, type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume','equity'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
 }}).concat()
 export const extraAllResolvers = autoAllResolvers.map(a=>{return {
-    type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
+    type: a.type, name: `${a.type}${a.targetGroup}${a.targetShort}`, args: "(params: queryParameters)", resultGroup: a.targetGroup, resultShort: a.targetShort, result: ['parent','consume','equity'].includes(a.type)?`${a.targetGroup}${a.targetShort}`:`[${a.targetGroup}${a.targetShort}]`
 }}).concat ()
 export function toExtraResolvers(r:autoTargetResolver, all:k8sObject[]) {
     return all.map(o=>{return{

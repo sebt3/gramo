@@ -27,6 +27,8 @@ const { result, loading, onResult, onError } = useQuery(k8sSecretQuery, {
   }
 });
 const { mutate: patchSecret, onDone: onPatchSecret, onError: onPatchError } = useMutation(SecretEdit);
+const secret = ref({stringData:{}})
+onError(onErrorHandler);onPatchSecret(patchDone);onPatchError(patchError);
 function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patchSecret({
@@ -35,14 +37,11 @@ function onSubmit(obj:object) {
     ...obj
   });
 }
-onError(onErrorHandler);
-const secret = ref({stringData:{}})
 onResult(res => {
   onNotSecretFound(res);
   if ( !res.loading ) {
     if (Array.isArray(res.data.k8sNamespace) && res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().length>0) {
       secret.value = {...secret.value, ...res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0], data: JSON.parse(JSON.stringify(res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0]['data']))};
-      console.log(secret.value, secret.value['data'])
       secret.value['stringData'] = secret.value['stringData']==undefined?{}:secret.value['stringData'];
       if (typeof secret.value['data'] === 'object') Object.keys(secret.value['data']).forEach(key=>{
         try {
@@ -55,7 +54,6 @@ onResult(res => {
     }
   }
 });
-onPatchSecret(patchDone);onPatchError(patchError);
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">

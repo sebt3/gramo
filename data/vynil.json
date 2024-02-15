@@ -1017,6 +1017,1239 @@
           "type": "parent",
           "targetGroup": "fluxcd",
           "targetShort": "Kustomization"
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ConfigMap",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Secret",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ServiceAccount",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Endpoints",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "LimitRange",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Namespace",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Node",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "PersistentVolume",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "PersistentVolumeClaim",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ResourceQuota",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Service",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Pod",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "PodTemplate",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ReplicationController",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "APIService",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ControllerRevision",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "DaemonSet",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Deployment",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ReplicaSet",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "StatefulSet",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "HorizontalPodAutoscaler",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Job",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CronJob",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CertificateSigningRequest",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Ingress",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "NetworkPolicy",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "PodDisruptionBudget",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Role",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ClusterRoleBinding",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "RoleBinding",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ClusterRole",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "StorageClass",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CSIDriver",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CSINode",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CSIStorageCapacity",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "VolumeAttachment",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "MutatingWebhookConfiguration",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "ValidatingWebhookConfiguration",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "CustomResourceDefinition",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "PriorityClass",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "Lease",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "RuntimeClass",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8s",
+          "targetShort": "EndpointSlice",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "zalando",
+          "targetShort": "postgresql",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "Challenge",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "Order",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "Certificate",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "CertificateRequest",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "ClusterIssuer",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "certmanager",
+          "targetShort": "Issuer",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "BGPConfiguration",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "BGPPeer",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "BlockAffinity",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "CalicoNodeStatus",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "ClusterInformation",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "FelixConfiguration",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "GlobalNetworkPolicy",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "GlobalNetworkSet",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "HostEndpoint",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "IPAMBlock",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "IPAMConfig",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "IPAMHandle",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "IPPool",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "IPReservation",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "KubeControllersConfiguration",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "NetworkPolicy",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "projectcalico",
+          "targetShort": "NetworkSet",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "jaegertracing",
+          "targetShort": "Jaeger",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Archive",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Backup",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Check",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "PreBackupPod",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Prune",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Restore",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Schedule",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "k8up",
+          "targetShort": "Snapshot",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "Kustomization",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mongodb",
+          "targetShort": "MongoDBCommunity",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "Alertmanager",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "PodMonitor",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "Probe",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "Prometheus",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "PrometheusRule",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "ServiceMonitor",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "ThanosRuler",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "AlertmanagerConfig",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "monitoring",
+          "targetShort": "PrometheusAgent",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "Receiver",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "Alert",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "Provider",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "cnpg",
+          "targetShort": "Backup",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "cnpg",
+          "targetShort": "Cluster",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "cnpg",
+          "targetShort": "Pooler",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "cnpg",
+          "targetShort": "ScheduledBackup",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "GitRepository",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "Bucket",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "HelmChart",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "HelmRepository",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "OCIRepository",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "vynil",
+          "targetShort": "Distrib",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "vynil",
+          "targetShort": "Install",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "zalando",
+          "targetShort": "ClusterKopfPeering",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "zalando",
+          "targetShort": "KopfPeering",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "Backup",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "Connection",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "Database",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "Grant",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "MariaDB",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "Restore",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "SqlJob",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "mariadb",
+          "targetShort": "User",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "opentelemetry",
+          "targetShort": "Instrumentation",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "opentelemetry",
+          "targetShort": "OpAMPBridge",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "opentelemetry",
+          "targetShort": "OpenTelemetryCollector",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "secretgenerator",
+          "targetShort": "BasicAuth",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "secretgenerator",
+          "targetShort": "SSHKeyPair",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "secretgenerator",
+          "targetShort": "StringSecret",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "IngressRoute",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "IngressRouteTCP",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "IngressRouteUDP",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "Middleware",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "MiddlewareTCP",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "ServersTransport",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "TLSOption",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "TLSStore",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "traefik",
+          "targetShort": "TraefikService",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "ImageUpdateAutomation",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "ImagePolicy",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "ImageRepository",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "rabbitmq",
+          "targetShort": "RabbitmqCluster",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "redis",
+          "targetShort": "Redis",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "redis",
+          "targetShort": "RedisCluster",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "redis",
+          "targetShort": "RedisReplication",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "redis",
+          "targetShort": "RedisSentinel",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "oracle",
+          "targetShort": "InnoDBCluster",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "oracle",
+          "targetShort": "MySQLBackup",
+          "path": null
+        },
+        {
+          "algo": "vynil",
+          "type": "child",
+          "group": "vynil",
+          "short": "Install",
+          "targetGroup": "fluxcd",
+          "targetShort": "HelmRelease",
+          "path": null
         }
       ],
       "resolvers": [
@@ -1095,6 +2328,1898 @@
             "spec",
             "status"
           ]
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sConfigMap]",
+          "properties": [
+            "binaryData",
+            "data",
+            "immutable"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sConfigMap",
+          "resultGroup": "k8s",
+          "resultShort": "ConfigMap"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sSecret]",
+          "properties": [
+            "data",
+            "immutable",
+            "stringData",
+            "type"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sSecret",
+          "resultGroup": "k8s",
+          "resultShort": "Secret"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sServiceAccount]",
+          "properties": [
+            "automountServiceAccountToken",
+            "imagePullSecrets",
+            "secrets"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sServiceAccount",
+          "resultGroup": "k8s",
+          "resultShort": "ServiceAccount"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sEndpoints]",
+          "properties": [
+            "subsets"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sEndpoints",
+          "resultGroup": "k8s",
+          "resultShort": "Endpoints"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sLimitRange]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sLimitRange",
+          "resultGroup": "k8s",
+          "resultShort": "LimitRange"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sNamespace]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sNamespace",
+          "resultGroup": "k8s",
+          "resultShort": "Namespace"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sNode]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sNode",
+          "resultGroup": "k8s",
+          "resultShort": "Node"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPersistentVolume]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPersistentVolume",
+          "resultGroup": "k8s",
+          "resultShort": "PersistentVolume"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPersistentVolumeClaim]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPersistentVolumeClaim",
+          "resultGroup": "k8s",
+          "resultShort": "PersistentVolumeClaim"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sResourceQuota]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sResourceQuota",
+          "resultGroup": "k8s",
+          "resultShort": "ResourceQuota"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sService]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sService",
+          "resultGroup": "k8s",
+          "resultShort": "Service"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPod]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPod",
+          "resultGroup": "k8s",
+          "resultShort": "Pod"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPodTemplate]",
+          "properties": [
+            "template"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPodTemplate",
+          "resultGroup": "k8s",
+          "resultShort": "PodTemplate"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sReplicationController]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sReplicationController",
+          "resultGroup": "k8s",
+          "resultShort": "ReplicationController"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sAPIService]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sAPIService",
+          "resultGroup": "k8s",
+          "resultShort": "APIService"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sControllerRevision]",
+          "properties": [
+            "data",
+            "revision"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sControllerRevision",
+          "resultGroup": "k8s",
+          "resultShort": "ControllerRevision"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sDaemonSet]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sDaemonSet",
+          "resultGroup": "k8s",
+          "resultShort": "DaemonSet"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sDeployment]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sDeployment",
+          "resultGroup": "k8s",
+          "resultShort": "Deployment"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sReplicaSet]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sReplicaSet",
+          "resultGroup": "k8s",
+          "resultShort": "ReplicaSet"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sStatefulSet]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sStatefulSet",
+          "resultGroup": "k8s",
+          "resultShort": "StatefulSet"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sHorizontalPodAutoscaler]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sHorizontalPodAutoscaler",
+          "resultGroup": "k8s",
+          "resultShort": "HorizontalPodAutoscaler"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sJob]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sJob",
+          "resultGroup": "k8s",
+          "resultShort": "Job"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCronJob]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCronJob",
+          "resultGroup": "k8s",
+          "resultShort": "CronJob"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCertificateSigningRequest]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCertificateSigningRequest",
+          "resultGroup": "k8s",
+          "resultShort": "CertificateSigningRequest"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sIngress]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sIngress",
+          "resultGroup": "k8s",
+          "resultShort": "Ingress"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sNetworkPolicy]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sNetworkPolicy",
+          "resultGroup": "k8s",
+          "resultShort": "NetworkPolicy"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPodDisruptionBudget]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPodDisruptionBudget",
+          "resultGroup": "k8s",
+          "resultShort": "PodDisruptionBudget"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sRole]",
+          "properties": [
+            "rules"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sRole",
+          "resultGroup": "k8s",
+          "resultShort": "Role"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sClusterRoleBinding]",
+          "properties": [
+            "roleRef",
+            "subjects"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sClusterRoleBinding",
+          "resultGroup": "k8s",
+          "resultShort": "ClusterRoleBinding"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sRoleBinding]",
+          "properties": [
+            "roleRef",
+            "subjects"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sRoleBinding",
+          "resultGroup": "k8s",
+          "resultShort": "RoleBinding"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sClusterRole]",
+          "properties": [
+            "aggregationRule",
+            "rules"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sClusterRole",
+          "resultGroup": "k8s",
+          "resultShort": "ClusterRole"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sStorageClass]",
+          "properties": [
+            "allowVolumeExpansion",
+            "allowedTopologies",
+            "mountOptions",
+            "parameters",
+            "provisioner",
+            "reclaimPolicy",
+            "volumeBindingMode"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sStorageClass",
+          "resultGroup": "k8s",
+          "resultShort": "StorageClass"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCSIDriver]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCSIDriver",
+          "resultGroup": "k8s",
+          "resultShort": "CSIDriver"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCSINode]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCSINode",
+          "resultGroup": "k8s",
+          "resultShort": "CSINode"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCSIStorageCapacity]",
+          "properties": [
+            "capacity",
+            "maximumVolumeSize",
+            "nodeTopology",
+            "storageClassName"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCSIStorageCapacity",
+          "resultGroup": "k8s",
+          "resultShort": "CSIStorageCapacity"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sVolumeAttachment]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sVolumeAttachment",
+          "resultGroup": "k8s",
+          "resultShort": "VolumeAttachment"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sMutatingWebhookConfiguration]",
+          "properties": [
+            "webhooks"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sMutatingWebhookConfiguration",
+          "resultGroup": "k8s",
+          "resultShort": "MutatingWebhookConfiguration"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sValidatingWebhookConfiguration]",
+          "properties": [
+            "webhooks"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sValidatingWebhookConfiguration",
+          "resultGroup": "k8s",
+          "resultShort": "ValidatingWebhookConfiguration"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sCustomResourceDefinition]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sCustomResourceDefinition",
+          "resultGroup": "k8s",
+          "resultShort": "CustomResourceDefinition"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sPriorityClass]",
+          "properties": [
+            "description",
+            "globalDefault",
+            "preemptionPolicy",
+            "value"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sPriorityClass",
+          "resultGroup": "k8s",
+          "resultShort": "PriorityClass"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sLease]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sLease",
+          "resultGroup": "k8s",
+          "resultShort": "Lease"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sRuntimeClass]",
+          "properties": [
+            "handler",
+            "overhead",
+            "scheduling"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sRuntimeClass",
+          "resultGroup": "k8s",
+          "resultShort": "RuntimeClass"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8sEndpointSlice]",
+          "properties": [
+            "addressType",
+            "endpoints",
+            "ports"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8sEndpointSlice",
+          "resultGroup": "k8s",
+          "resultShort": "EndpointSlice"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[zalandopostgresql]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childzalandopostgresql",
+          "resultGroup": "zalando",
+          "resultShort": "postgresql"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerChallenge]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerChallenge",
+          "resultGroup": "certmanager",
+          "resultShort": "Challenge"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerOrder]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerOrder",
+          "resultGroup": "certmanager",
+          "resultShort": "Order"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerCertificate]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerCertificate",
+          "resultGroup": "certmanager",
+          "resultShort": "Certificate"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerCertificateRequest]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerCertificateRequest",
+          "resultGroup": "certmanager",
+          "resultShort": "CertificateRequest"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerClusterIssuer]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerClusterIssuer",
+          "resultGroup": "certmanager",
+          "resultShort": "ClusterIssuer"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[certmanagerIssuer]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcertmanagerIssuer",
+          "resultGroup": "certmanager",
+          "resultShort": "Issuer"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoBGPConfiguration]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoBGPConfiguration",
+          "resultGroup": "projectcalico",
+          "resultShort": "BGPConfiguration"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoBGPPeer]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoBGPPeer",
+          "resultGroup": "projectcalico",
+          "resultShort": "BGPPeer"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoBlockAffinity]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoBlockAffinity",
+          "resultGroup": "projectcalico",
+          "resultShort": "BlockAffinity"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoCalicoNodeStatus]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoCalicoNodeStatus",
+          "resultGroup": "projectcalico",
+          "resultShort": "CalicoNodeStatus"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoClusterInformation]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoClusterInformation",
+          "resultGroup": "projectcalico",
+          "resultShort": "ClusterInformation"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoFelixConfiguration]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoFelixConfiguration",
+          "resultGroup": "projectcalico",
+          "resultShort": "FelixConfiguration"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoGlobalNetworkPolicy]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoGlobalNetworkPolicy",
+          "resultGroup": "projectcalico",
+          "resultShort": "GlobalNetworkPolicy"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoGlobalNetworkSet]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoGlobalNetworkSet",
+          "resultGroup": "projectcalico",
+          "resultShort": "GlobalNetworkSet"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoHostEndpoint]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoHostEndpoint",
+          "resultGroup": "projectcalico",
+          "resultShort": "HostEndpoint"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoIPAMBlock]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoIPAMBlock",
+          "resultGroup": "projectcalico",
+          "resultShort": "IPAMBlock"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoIPAMConfig]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoIPAMConfig",
+          "resultGroup": "projectcalico",
+          "resultShort": "IPAMConfig"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoIPAMHandle]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoIPAMHandle",
+          "resultGroup": "projectcalico",
+          "resultShort": "IPAMHandle"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoIPPool]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoIPPool",
+          "resultGroup": "projectcalico",
+          "resultShort": "IPPool"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoIPReservation]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoIPReservation",
+          "resultGroup": "projectcalico",
+          "resultShort": "IPReservation"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoKubeControllersConfiguration]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoKubeControllersConfiguration",
+          "resultGroup": "projectcalico",
+          "resultShort": "KubeControllersConfiguration"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoNetworkPolicy]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoNetworkPolicy",
+          "resultGroup": "projectcalico",
+          "resultShort": "NetworkPolicy"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[projectcalicoNetworkSet]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childprojectcalicoNetworkSet",
+          "resultGroup": "projectcalico",
+          "resultShort": "NetworkSet"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[jaegertracingJaeger]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childjaegertracingJaeger",
+          "resultGroup": "jaegertracing",
+          "resultShort": "Jaeger"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upArchive]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upArchive",
+          "resultGroup": "k8up",
+          "resultShort": "Archive"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upBackup]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upBackup",
+          "resultGroup": "k8up",
+          "resultShort": "Backup"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upCheck]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upCheck",
+          "resultGroup": "k8up",
+          "resultShort": "Check"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upPreBackupPod]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upPreBackupPod",
+          "resultGroup": "k8up",
+          "resultShort": "PreBackupPod"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upPrune]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upPrune",
+          "resultGroup": "k8up",
+          "resultShort": "Prune"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upRestore]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upRestore",
+          "resultGroup": "k8up",
+          "resultShort": "Restore"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upSchedule]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upSchedule",
+          "resultGroup": "k8up",
+          "resultShort": "Schedule"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[k8upSnapshot]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childk8upSnapshot",
+          "resultGroup": "k8up",
+          "resultShort": "Snapshot"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdKustomization]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdKustomization",
+          "resultGroup": "fluxcd",
+          "resultShort": "Kustomization"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mongodbMongoDBCommunity]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmongodbMongoDBCommunity",
+          "resultGroup": "mongodb",
+          "resultShort": "MongoDBCommunity"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringAlertmanager]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringAlertmanager",
+          "resultGroup": "monitoring",
+          "resultShort": "Alertmanager"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringPodMonitor]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringPodMonitor",
+          "resultGroup": "monitoring",
+          "resultShort": "PodMonitor"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringProbe]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringProbe",
+          "resultGroup": "monitoring",
+          "resultShort": "Probe"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringPrometheus]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringPrometheus",
+          "resultGroup": "monitoring",
+          "resultShort": "Prometheus"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringPrometheusRule]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringPrometheusRule",
+          "resultGroup": "monitoring",
+          "resultShort": "PrometheusRule"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringServiceMonitor]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringServiceMonitor",
+          "resultGroup": "monitoring",
+          "resultShort": "ServiceMonitor"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringThanosRuler]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringThanosRuler",
+          "resultGroup": "monitoring",
+          "resultShort": "ThanosRuler"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringAlertmanagerConfig]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringAlertmanagerConfig",
+          "resultGroup": "monitoring",
+          "resultShort": "AlertmanagerConfig"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[monitoringPrometheusAgent]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmonitoringPrometheusAgent",
+          "resultGroup": "monitoring",
+          "resultShort": "PrometheusAgent"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdReceiver]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdReceiver",
+          "resultGroup": "fluxcd",
+          "resultShort": "Receiver"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdAlert]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdAlert",
+          "resultGroup": "fluxcd",
+          "resultShort": "Alert"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdProvider]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdProvider",
+          "resultGroup": "fluxcd",
+          "resultShort": "Provider"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[cnpgBackup]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcnpgBackup",
+          "resultGroup": "cnpg",
+          "resultShort": "Backup"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[cnpgCluster]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcnpgCluster",
+          "resultGroup": "cnpg",
+          "resultShort": "Cluster"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[cnpgPooler]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcnpgPooler",
+          "resultGroup": "cnpg",
+          "resultShort": "Pooler"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[cnpgScheduledBackup]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childcnpgScheduledBackup",
+          "resultGroup": "cnpg",
+          "resultShort": "ScheduledBackup"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdGitRepository]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdGitRepository",
+          "resultGroup": "fluxcd",
+          "resultShort": "GitRepository"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdBucket]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdBucket",
+          "resultGroup": "fluxcd",
+          "resultShort": "Bucket"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdHelmChart]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdHelmChart",
+          "resultGroup": "fluxcd",
+          "resultShort": "HelmChart"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdHelmRepository]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdHelmRepository",
+          "resultGroup": "fluxcd",
+          "resultShort": "HelmRepository"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdOCIRepository]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdOCIRepository",
+          "resultGroup": "fluxcd",
+          "resultShort": "OCIRepository"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[vynilDistrib]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childvynilDistrib",
+          "resultGroup": "vynil",
+          "resultShort": "Distrib"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[vynilInstall]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childvynilInstall",
+          "resultGroup": "vynil",
+          "resultShort": "Install"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[zalandoClusterKopfPeering]",
+          "properties": [
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childzalandoClusterKopfPeering",
+          "resultGroup": "zalando",
+          "resultShort": "ClusterKopfPeering"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[zalandoKopfPeering]",
+          "properties": [
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childzalandoKopfPeering",
+          "resultGroup": "zalando",
+          "resultShort": "KopfPeering"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbBackup]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbBackup",
+          "resultGroup": "mariadb",
+          "resultShort": "Backup"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbConnection]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbConnection",
+          "resultGroup": "mariadb",
+          "resultShort": "Connection"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbDatabase]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbDatabase",
+          "resultGroup": "mariadb",
+          "resultShort": "Database"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbGrant]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbGrant",
+          "resultGroup": "mariadb",
+          "resultShort": "Grant"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbMariaDB]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbMariaDB",
+          "resultGroup": "mariadb",
+          "resultShort": "MariaDB"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbRestore]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbRestore",
+          "resultGroup": "mariadb",
+          "resultShort": "Restore"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbSqlJob]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbSqlJob",
+          "resultGroup": "mariadb",
+          "resultShort": "SqlJob"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[mariadbUser]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childmariadbUser",
+          "resultGroup": "mariadb",
+          "resultShort": "User"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[opentelemetryInstrumentation]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childopentelemetryInstrumentation",
+          "resultGroup": "opentelemetry",
+          "resultShort": "Instrumentation"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[opentelemetryOpAMPBridge]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childopentelemetryOpAMPBridge",
+          "resultGroup": "opentelemetry",
+          "resultShort": "OpAMPBridge"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[opentelemetryOpenTelemetryCollector]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childopentelemetryOpenTelemetryCollector",
+          "resultGroup": "opentelemetry",
+          "resultShort": "OpenTelemetryCollector"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[secretgeneratorBasicAuth]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childsecretgeneratorBasicAuth",
+          "resultGroup": "secretgenerator",
+          "resultShort": "BasicAuth"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[secretgeneratorSSHKeyPair]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childsecretgeneratorSSHKeyPair",
+          "resultGroup": "secretgenerator",
+          "resultShort": "SSHKeyPair"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[secretgeneratorStringSecret]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childsecretgeneratorStringSecret",
+          "resultGroup": "secretgenerator",
+          "resultShort": "StringSecret"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikIngressRoute]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikIngressRoute",
+          "resultGroup": "traefik",
+          "resultShort": "IngressRoute"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikIngressRouteTCP]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikIngressRouteTCP",
+          "resultGroup": "traefik",
+          "resultShort": "IngressRouteTCP"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikIngressRouteUDP]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikIngressRouteUDP",
+          "resultGroup": "traefik",
+          "resultShort": "IngressRouteUDP"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikMiddleware]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikMiddleware",
+          "resultGroup": "traefik",
+          "resultShort": "Middleware"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikMiddlewareTCP]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikMiddlewareTCP",
+          "resultGroup": "traefik",
+          "resultShort": "MiddlewareTCP"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikServersTransport]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikServersTransport",
+          "resultGroup": "traefik",
+          "resultShort": "ServersTransport"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikTLSOption]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikTLSOption",
+          "resultGroup": "traefik",
+          "resultShort": "TLSOption"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikTLSStore]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikTLSStore",
+          "resultGroup": "traefik",
+          "resultShort": "TLSStore"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[traefikTraefikService]",
+          "properties": [
+            "spec"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childtraefikTraefikService",
+          "resultGroup": "traefik",
+          "resultShort": "TraefikService"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdImageUpdateAutomation]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdImageUpdateAutomation",
+          "resultGroup": "fluxcd",
+          "resultShort": "ImageUpdateAutomation"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdImagePolicy]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdImagePolicy",
+          "resultGroup": "fluxcd",
+          "resultShort": "ImagePolicy"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdImageRepository]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdImageRepository",
+          "resultGroup": "fluxcd",
+          "resultShort": "ImageRepository"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[rabbitmqRabbitmqCluster]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childrabbitmqRabbitmqCluster",
+          "resultGroup": "rabbitmq",
+          "resultShort": "RabbitmqCluster"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[redisRedis]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childredisRedis",
+          "resultGroup": "redis",
+          "resultShort": "Redis"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[redisRedisCluster]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childredisRedisCluster",
+          "resultGroup": "redis",
+          "resultShort": "RedisCluster"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[redisRedisReplication]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childredisRedisReplication",
+          "resultGroup": "redis",
+          "resultShort": "RedisReplication"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[redisRedisSentinel]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childredisRedisSentinel",
+          "resultGroup": "redis",
+          "resultShort": "RedisSentinel"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[oracleInnoDBCluster]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childoracleInnoDBCluster",
+          "resultGroup": "oracle",
+          "resultShort": "InnoDBCluster"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[oracleMySQLBackup]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childoracleMySQLBackup",
+          "resultGroup": "oracle",
+          "resultShort": "MySQLBackup"
+        },
+        {
+          "args": "(params: queryParameters)",
+          "result": "[fluxcdHelmRelease]",
+          "properties": [
+            "spec",
+            "status"
+          ],
+          "group": "vynil",
+          "short": "Install",
+          "type": "child",
+          "name": "childfluxcdHelmRelease",
+          "resultGroup": "fluxcd",
+          "resultShort": "HelmRelease"
         }
       ],
       "gqlDefs": {
@@ -1127,6 +4252,538 @@
         {
           "group": "fluxcd",
           "name": "Kustomization"
+        },
+        {
+          "group": "k8s",
+          "name": "ConfigMap"
+        },
+        {
+          "group": "k8s",
+          "name": "Secret"
+        },
+        {
+          "group": "k8s",
+          "name": "ServiceAccount"
+        },
+        {
+          "group": "k8s",
+          "name": "Endpoints"
+        },
+        {
+          "group": "k8s",
+          "name": "LimitRange"
+        },
+        {
+          "group": "k8s",
+          "name": "Namespace"
+        },
+        {
+          "group": "k8s",
+          "name": "Node"
+        },
+        {
+          "group": "k8s",
+          "name": "PersistentVolume"
+        },
+        {
+          "group": "k8s",
+          "name": "PersistentVolumeClaim"
+        },
+        {
+          "group": "k8s",
+          "name": "ResourceQuota"
+        },
+        {
+          "group": "k8s",
+          "name": "Service"
+        },
+        {
+          "group": "k8s",
+          "name": "Pod"
+        },
+        {
+          "group": "k8s",
+          "name": "PodTemplate"
+        },
+        {
+          "group": "k8s",
+          "name": "ReplicationController"
+        },
+        {
+          "group": "k8s",
+          "name": "APIService"
+        },
+        {
+          "group": "k8s",
+          "name": "ControllerRevision"
+        },
+        {
+          "group": "k8s",
+          "name": "DaemonSet"
+        },
+        {
+          "group": "k8s",
+          "name": "Deployment"
+        },
+        {
+          "group": "k8s",
+          "name": "ReplicaSet"
+        },
+        {
+          "group": "k8s",
+          "name": "StatefulSet"
+        },
+        {
+          "group": "k8s",
+          "name": "HorizontalPodAutoscaler"
+        },
+        {
+          "group": "k8s",
+          "name": "CronJob"
+        },
+        {
+          "group": "k8s",
+          "name": "CertificateSigningRequest"
+        },
+        {
+          "group": "k8s",
+          "name": "Ingress"
+        },
+        {
+          "group": "k8s",
+          "name": "NetworkPolicy"
+        },
+        {
+          "group": "k8s",
+          "name": "PodDisruptionBudget"
+        },
+        {
+          "group": "k8s",
+          "name": "Role"
+        },
+        {
+          "group": "k8s",
+          "name": "ClusterRoleBinding"
+        },
+        {
+          "group": "k8s",
+          "name": "RoleBinding"
+        },
+        {
+          "group": "k8s",
+          "name": "ClusterRole"
+        },
+        {
+          "group": "k8s",
+          "name": "StorageClass"
+        },
+        {
+          "group": "k8s",
+          "name": "CSIDriver"
+        },
+        {
+          "group": "k8s",
+          "name": "CSINode"
+        },
+        {
+          "group": "k8s",
+          "name": "CSIStorageCapacity"
+        },
+        {
+          "group": "k8s",
+          "name": "VolumeAttachment"
+        },
+        {
+          "group": "k8s",
+          "name": "MutatingWebhookConfiguration"
+        },
+        {
+          "group": "k8s",
+          "name": "ValidatingWebhookConfiguration"
+        },
+        {
+          "group": "k8s",
+          "name": "CustomResourceDefinition"
+        },
+        {
+          "group": "k8s",
+          "name": "PriorityClass"
+        },
+        {
+          "group": "k8s",
+          "name": "Lease"
+        },
+        {
+          "group": "k8s",
+          "name": "RuntimeClass"
+        },
+        {
+          "group": "k8s",
+          "name": "EndpointSlice"
+        },
+        {
+          "group": "zalando",
+          "name": "postgresql"
+        },
+        {
+          "group": "certmanager",
+          "name": "Challenge"
+        },
+        {
+          "group": "certmanager",
+          "name": "Order"
+        },
+        {
+          "group": "certmanager",
+          "name": "Certificate"
+        },
+        {
+          "group": "certmanager",
+          "name": "CertificateRequest"
+        },
+        {
+          "group": "certmanager",
+          "name": "ClusterIssuer"
+        },
+        {
+          "group": "certmanager",
+          "name": "Issuer"
+        },
+        {
+          "group": "projectcalico",
+          "name": "BGPConfiguration"
+        },
+        {
+          "group": "projectcalico",
+          "name": "BGPPeer"
+        },
+        {
+          "group": "projectcalico",
+          "name": "BlockAffinity"
+        },
+        {
+          "group": "projectcalico",
+          "name": "CalicoNodeStatus"
+        },
+        {
+          "group": "projectcalico",
+          "name": "ClusterInformation"
+        },
+        {
+          "group": "projectcalico",
+          "name": "FelixConfiguration"
+        },
+        {
+          "group": "projectcalico",
+          "name": "GlobalNetworkPolicy"
+        },
+        {
+          "group": "projectcalico",
+          "name": "GlobalNetworkSet"
+        },
+        {
+          "group": "projectcalico",
+          "name": "HostEndpoint"
+        },
+        {
+          "group": "projectcalico",
+          "name": "IPAMBlock"
+        },
+        {
+          "group": "projectcalico",
+          "name": "IPAMConfig"
+        },
+        {
+          "group": "projectcalico",
+          "name": "IPAMHandle"
+        },
+        {
+          "group": "projectcalico",
+          "name": "IPPool"
+        },
+        {
+          "group": "projectcalico",
+          "name": "IPReservation"
+        },
+        {
+          "group": "projectcalico",
+          "name": "KubeControllersConfiguration"
+        },
+        {
+          "group": "projectcalico",
+          "name": "NetworkPolicy"
+        },
+        {
+          "group": "projectcalico",
+          "name": "NetworkSet"
+        },
+        {
+          "group": "jaegertracing",
+          "name": "Jaeger"
+        },
+        {
+          "group": "k8up",
+          "name": "Archive"
+        },
+        {
+          "group": "k8up",
+          "name": "Backup"
+        },
+        {
+          "group": "k8up",
+          "name": "Check"
+        },
+        {
+          "group": "k8up",
+          "name": "PreBackupPod"
+        },
+        {
+          "group": "k8up",
+          "name": "Prune"
+        },
+        {
+          "group": "k8up",
+          "name": "Restore"
+        },
+        {
+          "group": "k8up",
+          "name": "Schedule"
+        },
+        {
+          "group": "k8up",
+          "name": "Snapshot"
+        },
+        {
+          "group": "mongodb",
+          "name": "MongoDBCommunity"
+        },
+        {
+          "group": "monitoring",
+          "name": "Alertmanager"
+        },
+        {
+          "group": "monitoring",
+          "name": "PodMonitor"
+        },
+        {
+          "group": "monitoring",
+          "name": "Probe"
+        },
+        {
+          "group": "monitoring",
+          "name": "Prometheus"
+        },
+        {
+          "group": "monitoring",
+          "name": "PrometheusRule"
+        },
+        {
+          "group": "monitoring",
+          "name": "ServiceMonitor"
+        },
+        {
+          "group": "monitoring",
+          "name": "ThanosRuler"
+        },
+        {
+          "group": "monitoring",
+          "name": "AlertmanagerConfig"
+        },
+        {
+          "group": "monitoring",
+          "name": "PrometheusAgent"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Receiver"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Alert"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Provider"
+        },
+        {
+          "group": "cnpg",
+          "name": "Backup"
+        },
+        {
+          "group": "cnpg",
+          "name": "Cluster"
+        },
+        {
+          "group": "cnpg",
+          "name": "Pooler"
+        },
+        {
+          "group": "cnpg",
+          "name": "ScheduledBackup"
+        },
+        {
+          "group": "fluxcd",
+          "name": "GitRepository"
+        },
+        {
+          "group": "fluxcd",
+          "name": "Bucket"
+        },
+        {
+          "group": "fluxcd",
+          "name": "HelmChart"
+        },
+        {
+          "group": "fluxcd",
+          "name": "HelmRepository"
+        },
+        {
+          "group": "fluxcd",
+          "name": "OCIRepository"
+        },
+        {
+          "group": "zalando",
+          "name": "ClusterKopfPeering"
+        },
+        {
+          "group": "zalando",
+          "name": "KopfPeering"
+        },
+        {
+          "group": "mariadb",
+          "name": "Backup"
+        },
+        {
+          "group": "mariadb",
+          "name": "Connection"
+        },
+        {
+          "group": "mariadb",
+          "name": "Database"
+        },
+        {
+          "group": "mariadb",
+          "name": "Grant"
+        },
+        {
+          "group": "mariadb",
+          "name": "MariaDB"
+        },
+        {
+          "group": "mariadb",
+          "name": "Restore"
+        },
+        {
+          "group": "mariadb",
+          "name": "SqlJob"
+        },
+        {
+          "group": "mariadb",
+          "name": "User"
+        },
+        {
+          "group": "opentelemetry",
+          "name": "Instrumentation"
+        },
+        {
+          "group": "opentelemetry",
+          "name": "OpAMPBridge"
+        },
+        {
+          "group": "opentelemetry",
+          "name": "OpenTelemetryCollector"
+        },
+        {
+          "group": "secretgenerator",
+          "name": "BasicAuth"
+        },
+        {
+          "group": "secretgenerator",
+          "name": "SSHKeyPair"
+        },
+        {
+          "group": "secretgenerator",
+          "name": "StringSecret"
+        },
+        {
+          "group": "traefik",
+          "name": "IngressRoute"
+        },
+        {
+          "group": "traefik",
+          "name": "IngressRouteTCP"
+        },
+        {
+          "group": "traefik",
+          "name": "IngressRouteUDP"
+        },
+        {
+          "group": "traefik",
+          "name": "Middleware"
+        },
+        {
+          "group": "traefik",
+          "name": "MiddlewareTCP"
+        },
+        {
+          "group": "traefik",
+          "name": "ServersTransport"
+        },
+        {
+          "group": "traefik",
+          "name": "TLSOption"
+        },
+        {
+          "group": "traefik",
+          "name": "TLSStore"
+        },
+        {
+          "group": "traefik",
+          "name": "TraefikService"
+        },
+        {
+          "group": "fluxcd",
+          "name": "ImageUpdateAutomation"
+        },
+        {
+          "group": "fluxcd",
+          "name": "ImagePolicy"
+        },
+        {
+          "group": "fluxcd",
+          "name": "ImageRepository"
+        },
+        {
+          "group": "rabbitmq",
+          "name": "RabbitmqCluster"
+        },
+        {
+          "group": "redis",
+          "name": "Redis"
+        },
+        {
+          "group": "redis",
+          "name": "RedisCluster"
+        },
+        {
+          "group": "redis",
+          "name": "RedisReplication"
+        },
+        {
+          "group": "redis",
+          "name": "RedisSentinel"
+        },
+        {
+          "group": "oracle",
+          "name": "InnoDBCluster"
+        },
+        {
+          "group": "oracle",
+          "name": "MySQLBackup"
+        },
+        {
+          "group": "fluxcd",
+          "name": "HelmRelease"
         }
       ],
       "category": "install"

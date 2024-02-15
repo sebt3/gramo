@@ -1,0 +1,50 @@
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+          try{
+{{#if (eq type 'provide')}}
+  {{#if (startWith short 'Cluster')}}
+            const nss = await listNamespace.k8sNamespace(parent, args);
+            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+  {{else}}
+            const ns = parent['metadata']['namespace'];
+  {{/if}}
+              const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
+                  .filter(r=>r['spec']!=undefined && r['spec']['issuerRef']!=undefined).filter(r=>r['spec']['issuerRef']['kind']=='{{short}}'&&r['spec']['issuerRef']['name']==parent['metadata']['name'])
+  {{#if (startWith short 'Cluster')}}
+              return res
+            }))).flat().filter(v=>v!=null)
+  {{/if}}
+            if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (eq type 'consume')}}
+            if (parent['spec']==undefined||parent['spec']['issuerRef']==undefined||parent['spec']['issuerRef']['kind']!='{{ targetShort }}') return null;
+            const issuers = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {{#if (startWith targetShort 'Cluster')}}args{{else}}{namespace: parent['metadata']['namespace'], ...args}{{/if}})).filter(issuer=>issuer['metadata']['name']==parent['spec']['issuerRef']['name']);
+            if (Array.isArray(issuers) && issuers.length>0) return issuers[0]
+{{/if}}
+{{#if (eq type 'equity')}}
+            if (parent['spec']==undefined||parent['spec']['secretName']==undefined||parent['spec']['secretName']=='') return null;
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(r=>r['metadata']['name']==parent['spec']['secretName'])
+            if (Array.isArray(res) && res.length>0) return res[0];
+{{/if}}
+{{#if (and (eq type 'parent') (eq short 'Secret'))}}
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(r=>r['spec']!=undefined && r['spec']['secretName']==parent['metadata']['name'])
+            if (Array.isArray(res) && res.length>0) return res[0];
+{{/if}}
+{{#if (and (eq type 'parent') (eq short 'CertificateRequest'))}}
+            if (parent['metadata']['annotations']==undefined || parent['metadata']['annotations']['cert-manager.io/certificate-name']==undefined) return null;
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(r=>r['metadata']['name']==parent['metadata']['annotations']['cert-manager.io/certificate-name'])
+            if (Array.isArray(res) && res.length>0) return res[0];
+{{/if}}
+{{#if (eq type 'child')}}
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(r=>r['metadata']['annotations']!=undefined)
+                .filter(r=>parent['metadata']['name']==r['metadata']['annotations']['cert-manager.io/certificate-name'])
+            if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+          } catch (err) {
+            console.error(err)
+          }
+          return null
+        },

@@ -1,5 +1,6 @@
-{{#if (and (eq type 'use') (defined path))}}
         {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+          try{
+{{#if (and (eq type 'use') (defined path))}}
             const spec = getByPath(parent, '{{path}}');
             const cms = spec['containers']
                         .filter(c=>Array.isArray(c['env'])&&c['env'].filter(e=>e['valueFrom']!=undefined&&e['valueFrom']['configMapKeyRef']!=undefined).length>0)
@@ -16,10 +17,8 @@
             if (cms.length<1) return null;
             const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(s=>cms.includes(s['metadata']['name']))
-        },
 {{/if}}
 {{#if (and (eq type 'users') (defined path))}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
             const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
             return lst.filter(w=>{
                 const spec = getByPath(w, '{{path}}');
@@ -31,5 +30,9 @@
                                 v['configMap']['name']==parent['metadata']['name']
                             ).length>0)
             })
-        },
 {{/if}}
+          } catch (err) {
+            console.error(err)
+          }
+          return null
+        },

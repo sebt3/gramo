@@ -63,6 +63,47 @@
             return null
         },
 {{/if}}
+{{#if (eq type 'child')}}
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent: object, args: object) => {
+            if (parent['status']==undefined || parent['status']['tfstate']==undefined || !Array.isArray(parent['status']['tfstate']['resources'])) return null;
+            /*console.log(parent['status']['tfstate']['resources']
+                .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/hashicorp/kubernetes"]')
+                .map(r=>r.instances.map(i=>{return {name: i.attributes.metadata[0].name, namespace: i.attributes.metadata[0].namespace} })).flat().flat()
+            )*/
+            const list = parent['status']['tfstate']['resources']
+                    .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/gavinbunney/kubectl"]')
+                    .map(r=>r.instances).flat().flat()
+                    .filter(i=>i.attributes.kind=='{{targetShort}}')
+                    .map(i=>{return {namespace: i.attributes.namespace, name:i.attributes.name} })
+                .concat(parent['status']['tfstate']['resources']
+                    .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/kbst/kustomization"]')
+                    .map(r=>r.instances).flat().map(r=>r.index_key.split('/')).map(([_,short,namespace,name])=>{return {short,namespace,name} })
+                    .filter(f=>f.short=='{{targetShort}}').map(f=>{return {namespace:f.namespace,name:f.name} }))
+    {{#if (eq targetShort 'Secret')}}
+                .concat(parent['status']['tfstate']['resources']
+                    .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/hashicorp/kubernetes"]' && r.type=='kubernetes_secret_v1')
+                    .map(r=>r.instances.map(i=>{return {name: i.attributes.metadata[0].name, namespace: i.attributes.metadata[0].namespace} })).flat().flat())
+    {{/if}}
+    {{#if (eq targetShort 'ConfigMap')}}
+                .concat(parent['status']['tfstate']['resources']
+                    .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/hashicorp/kubernetes"]' && r.type=='kubernetes_config_map_v1')
+                    .map(r=>r.instances.map(i=>{return {name: i.attributes.metadata[0].name, namespace: i.attributes.metadata[0].namespace} })).flat().flat())
+    {{/if}}
+    {{#if (eq targetShort 'Namespace')}}
+                .concat(parent['status']['tfstate']['resources']
+                    .filter(r=>r.mode=='managed'&&r.provider=='provider["registry.terraform.io/hashicorp/kubernetes"]' && r.type=='kubernetes_namespace_v1')
+                    .map(r=>r.instances.map(i=>{return {name: i.attributes.metadata[0].name, namespace: i.attributes.metadata[0].namespace} })).flat().flat())
+    {{/if}}
+            if (list.length<1) return null;
+            const res = (await Promise.all(list.map(i=>i.namespace).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
+                const names=list.filter(o=>o.namespace==ns).map(o=>o.name)
+                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+                return lst.filter(r=>names.includes(r['metadata']['name']))
+            }))).flat()
+            if (Array.isArray(res) && res.length>0) return res;
+            return null
+        },
+{{/if}}
 {{#if (and (eq type 'users') (eq targetShort 'Distrib'))}}
         {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
             if (used['metadata']['namespace']!=gramoConfig.vynilNamespace || used['metadata']['name'].match(/-clone/)==null ) return null;

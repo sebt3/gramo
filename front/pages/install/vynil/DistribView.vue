@@ -9,6 +9,7 @@ import { InstallSimpleExcludes } from '../../../libs/vynil/custom.js'
 import vynilInstallList from '@/components/vynil/InstallList.vue';
 import { JobListExcludes } from '../../../libs/k8s/custom.js'
 import k8sJobList from '@/components/k8s/JobList.vue';
+import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
 import { CronJobListExcludes } from '../../../libs/k8s/custom.js'
 import k8sCronJobList from '@/components/k8s/CronJobList.vue';
 import { ref, useQuery, useMutation, useDistrib, DistribReadExcludes } from '../../../libs/vynil/Distrib.js'

@@ -95,10 +95,13 @@ export function applyFieldSelection(obj,args) {
     const strategyAdd = excludes.reduce((acc,cur:fieldRule)=>acc || (cur.include!=undefined&&cur.include),false)
     if (strategyAdd) {
         const res = {
-            metadata: obj['metadata']
+            metadata: JSON.parse(JSON.stringify(obj['metadata']))
         }
         // treat data add before deletes
-        excludes.filter(rule=>rule.include!=undefined&&rule.include).forEach(rule=> addByPath(res,rule.path, JSON.parse(JSON.stringify(getByPath(obj, rule.path)))))
+        excludes.filter(rule=>rule.include!=undefined&&rule.include).forEach(rule=> {
+            const data = getByPath(obj, rule.path);
+            addByPath(res,rule.path, (data != undefined)?JSON.parse(JSON.stringify(data)):null);
+        })
         // then delete the rest
         excludes.filter(rule=>rule.include==undefined||!rule.include).forEach(rule=> deleteByPath(res,rule.path))
         return res

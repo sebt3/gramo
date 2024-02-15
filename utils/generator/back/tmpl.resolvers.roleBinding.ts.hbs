@@ -1,26 +1,28 @@
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+          try {
 {{#if (eq type 'users')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
-            if (used['subjects']==null) return null;
-            const ret = (await Promise.all(used['subjects'].filter(s=>s['kind']=='{{targetShort}}').map(s=>s['namespace']).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used, {namespace: ns, ...args})
-                const subs = used['subjects'].filter(s=>s['kind']=='{{targetShort}}' && s['namespace']==ns).map(s=>s['name'])
+            if (parent['subjects']==null) return null;
+            const ret = (await Promise.all(parent['subjects'].filter(s=>s['kind']=='{{targetShort}}').map(s=>s['namespace']).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
+                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+                const subs = parent['subjects'].filter(s=>s['kind']=='{{targetShort}}' && s['namespace']==ns).map(s=>s['name'])
                 return lst.filter(r=>subs.includes(r['metadata']['name']))
             }))).flat().filter((v)=>v!=null)
-            if(ret.length==0) return null;
-            return ret
-        },
+            if(ret.length>0) return ret;
 {{/if}}
 {{#if (eq type 'use')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (user, args: object) => {
-        {{#if (startWith targetShort 'Cluster')}}
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, args)
-            return lst.filter(r=>r['subjects']!=null&&r['subjects'].filter(s=>s['kind']=='{{../short}}'&&s['name']==user['metadata']['name'] && s['namespace']==user['metadata']['namespace']).length>0)
-        {{else}}
-            const nss = await listNamespace.k8sNamespace(user, args)
+    {{#if (startWith targetShort 'Cluster')}}
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args)
+            return lst.filter(r=>Array.isArray(r['subjects'])&&r['subjects'].filter(s=>s['kind']=='{{short}}'&&s['name']==parent['metadata']['name'] && s['namespace']==parent['metadata']['namespace']).length>0)
+    {{else}}
+            const nss = await listNamespace.k8sNamespace(parent, args)
             return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, {namespace: ns, ...args})
-                return lst.filter(r=>r['subjects']!=null&&r['subjects'].filter(s=>s['kind']=='{{../short}}'&&s['name']==user['metadata']['name'] && s['namespace']==user['metadata']['namespace']).length>0)
+                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+                return lst.filter(r=>r['subjects']!=null&&r['subjects'].filter(s=>s['kind']=='{{short}}'&&s['name']==parent['metadata']['name'] && s['namespace']==parent['metadata']['namespace']).length>0)
             }))).flat().filter((v)=>v!=null)
-        {{/if}}
-        },
+    {{/if}}
 {{/if}}
+          } catch (err) {
+            console.error(err)
+          }
+          return null
+        },

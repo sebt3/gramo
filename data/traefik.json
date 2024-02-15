@@ -6994,6 +6994,15 @@
           "simpleExcludes": [],
           "autoResolvers": [
             {
+              "type": "users",
+              "group": "traefik",
+              "short": "Middleware",
+              "targetGroup": "k8s",
+              "targetShort": "Ingress",
+              "algo": "traefik",
+              "path": null
+            },
+            {
               "group": "traefik",
               "short": "Middleware",
               "algo": "vynil",
@@ -7011,6 +7020,16 @@
             }
           ],
           "resolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "type": "users",
+              "name": "usersk8sIngress",
+              "args": "(params: queryParameters)",
+              "resultGroup": "k8s",
+              "resultShort": "Ingress",
+              "result": "[k8sIngress]"
+            },
             {
               "group": "traefik",
               "short": "Middleware",
@@ -8936,6 +8955,15 @@
           "simpleExcludes": [],
           "autoResolvers": [
             {
+              "type": "users",
+              "group": "traefik",
+              "short": "Middleware",
+              "targetGroup": "k8s",
+              "targetShort": "Ingress",
+              "algo": "traefik",
+              "path": null
+            },
+            {
               "group": "traefik",
               "short": "Middleware",
               "algo": "vynil",
@@ -8953,6 +8981,16 @@
             }
           ],
           "resolvers": [
+            {
+              "group": "traefik",
+              "short": "Middleware",
+              "type": "users",
+              "name": "usersk8sIngress",
+              "args": "(params: queryParameters)",
+              "resultGroup": "k8s",
+              "resultShort": "Ingress",
+              "result": "[k8sIngress]"
+            },
             {
               "group": "traefik",
               "short": "Middleware",
@@ -10886,6 +10924,15 @@
       "simpleExcludes": [],
       "autoResolvers": [
         {
+          "type": "users",
+          "group": "traefik",
+          "short": "Middleware",
+          "targetGroup": "k8s",
+          "targetShort": "Ingress",
+          "algo": "traefik",
+          "path": null
+        },
+        {
           "group": "traefik",
           "short": "Middleware",
           "algo": "vynil",
@@ -10903,6 +10950,20 @@
         }
       ],
       "resolvers": [
+        {
+          "group": "traefik",
+          "short": "Middleware",
+          "type": "users",
+          "name": "usersk8sIngress",
+          "args": "(params: queryParameters)",
+          "resultGroup": "k8s",
+          "resultShort": "Ingress",
+          "result": "[k8sIngress]",
+          "properties": [
+            "spec",
+            "status"
+          ]
+        },
         {
           "group": "traefik",
           "short": "Middleware",
@@ -10938,6 +10999,10 @@
       },
       "namespaced": true,
       "listTargets": [
+        {
+          "group": "k8s",
+          "name": "Ingress"
+        },
         {
           "group": "vynil",
           "name": "Install"

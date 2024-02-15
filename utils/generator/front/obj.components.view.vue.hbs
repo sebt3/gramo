@@ -11,9 +11,9 @@ const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate,
 const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 defineEmits(['on-delete']);
-const showLink = false;
-const props = withDefaults(defineProps<{model: object, useActions?:boolean}>(), {
-  useActions: false
+const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean}>(), {
+  useActions: false,
+  showLink: false,
 });
 onMounted(() => {
   viewerUpdate(onlyReadProperties(props.model));

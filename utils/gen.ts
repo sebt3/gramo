@@ -22,6 +22,8 @@ loadPartial('resolversServiceAccount', path.resolve(path_lib, 'back', 'tmpl.reso
 loadPartial('resolversNodeName', path.resolve(path_lib, 'back', 'tmpl.resolvers.nodeName.ts.hbs'));
 loadPartial('resolversRole', path.resolve(path_lib, 'back', 'tmpl.resolvers.role.ts.hbs'));
 loadPartial('resolversRoleBinding', path.resolve(path_lib, 'back', 'tmpl.resolvers.roleBinding.ts.hbs'));
+loadPartial('resolversCertManager', path.resolve(path_lib, 'back', 'tmpl.resolvers.certmanager.ts.hbs'));
+loadPartial('resolversTraefik', path.resolve(path_lib, 'back', 'tmpl.resolvers.traefik.ts.hbs'));
 loadPartial('resolversApiService', path.resolve(path_lib, 'back', 'tmpl.resolvers.apiService.ts.hbs'));
 loadPartial('resolversStorageClass', path.resolve(path_lib, 'back', 'tmpl.resolvers.storageClass.ts.hbs'));
 loadPartial('resolversSecret', path.resolve(path_lib, 'back', 'tmpl.resolvers.secret.ts.hbs'));

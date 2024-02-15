@@ -27,7 +27,10 @@
                 cache.set('{{short}}', lst, 2);
   {{/if}}
             } catch (err) {
-                console.error((err as object)['body']);
+                if (typeof err === 'object') {
+                  if ((err as object)['body'] ==undefined || (err as object)['body']['reason']!='Forbidden')
+                    console.error((err as object)['body']);
+                } else {console.error(err)}
                 return []
             }
         }

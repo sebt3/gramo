@@ -56,6 +56,13 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
           creationTimestamp
           uid
         }
+      {{#if (and (or (eq short 'Install') (eq short 'Kustomize')) (eq resultShort 'Ingress'))}}
+        userscoreUrl {
+          proto
+          host
+          path
+        }
+      {{/if}}
       {{#each properties}}
         {{this}}
       {{/each}}

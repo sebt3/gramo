@@ -5,18 +5,19 @@ const { actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigatio
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 let filter = ref('');
 defineEmits(['refresh','on-delete']);
-withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean}>(),{
+withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean}>(),{
   useAction: false,
-  useRefresh: true
+  useRefresh: true,
+  showNamespace: false,
 });
 </script>
 <template>
   <q-card class="q-ma-sm" bordered>
     <TableHeader title="{{ short }}" :icon="icon{{ short }}" :class="`bg-${ color{{ short }} }`" :usecreate="useAction" :userefresh="useRefresh" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
     <q-card-section class="q-pa-none">
-    <q-table :rows="model" :class="`bg-${ color{{ short }} }-1`" :columns="{{#if namespaced}}!isNamespaced()?{{ short }}AllColumns:{{/if}}{{ short }}Columns.filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
+    <q-table :rows="model" :class="`bg-${ color{{ short }} }-1`" :columns="{{#if namespaced}}(showNamespace||!isNamespaced())?{{ short }}AllColumns:{{/if}}{{ short }}Columns.filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
 {{#if namespaced}}
-        <template v-slot:body-cell-Namespace="props" v-if="!isNamespaced()">
+        <template v-slot:body-cell-Namespace="props" v-if="showNamespace||!isNamespaced()">
           <q-td :props="props">
             <router-link :to="{ name: '{{ group }}{{ short }}Table', params: { namespace: props.row.metadata.namespace }}">\{{ props.row.metadata.namespace }}</router-link>
           </q-td>

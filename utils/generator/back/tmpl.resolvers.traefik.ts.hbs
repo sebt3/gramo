@@ -1,0 +1,21 @@
+        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+          try{
+{{#if (eq type 'use')}}
+            if (parent['metadata']==undefined || parent['metadata']['annotations']==undefined || parent['metadata']['annotations']['traefik.ingress.kubernetes.io/router.middlewares']==undefined) return null;
+            const targets = parent['metadata']['annotations']['traefik.ingress.kubernetes.io/router.middlewares'].split(',')
+                .map(m=>m.match(new RegExp(`^${parent['metadata']['namespace']}-(.*)@kubernetescrd$`))).filter(r=>r.length>1).map(r=>r[1])
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(s=>targets.includes(s['metadata']['name']))
+            if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (eq type 'users')}}
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+                .filter(i=>i['metadata']!=undefined && i['metadata']['annotations']!=undefined && i['metadata']['annotations']['traefik.ingress.kubernetes.io/router.middlewares']!=undefined)
+                .filter(i=>i['metadata']['annotations']['traefik.ingress.kubernetes.io/router.middlewares'].split(',').includes(`${parent['metadata']['namespace']}-${parent['metadata']['name']}@kubernetescrd`))
+            if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+          } catch (err) {
+            console.error(err)
+          }
+          return null
+        },

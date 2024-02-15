@@ -1,10 +1,14 @@
         {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
-            const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args))
+          try {
+            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, args))
                 .filter(o=>parent['spec']['group']==o['spec']['group'])
 {{#if (eq type 'consume')}}
-            if (lst.length<1) return null;
-            return lst[0]
+            if (Array.isArray(res) && res.length>0) return res[0];
 {{else}}
-            return lst
+            if (Array.isArray(res) && res.length>0) return res;
 {{/if}}
+          } catch (err) {
+            console.error(err)
+          }
+          return null
         },

@@ -60,7 +60,6 @@ export const ChallengeListExcludes = [
   { path: 'status/state', include: true },
   { path: 'spec/dnsName', include: true },
   { path: 'status/reason', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ChallengeReadExcludes = [
 ];
@@ -68,9 +67,8 @@ export const ChallengeSimpleExcludes = [
 ];
 export const OrderListExcludes = [
   { path: 'status/state', include: true },
-  { path: 'spec/issuerRef/name', include: true },
+  { path: 'spec/issuerRef', include: true },
   { path: 'status/reason', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const OrderReadExcludes = [
 ];
@@ -78,31 +76,27 @@ export const OrderSimpleExcludes = [
 ];
 export const CertificateListExcludes = [
   { path: 'spec/secretName', include: true },
-  { path: 'spec/issuerRef/name', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
+  { path: 'spec/issuerRef', include: true },
 ];
 export const CertificateReadExcludes = [
 ];
 export const CertificateSimpleExcludes = [
 ];
 export const CertificateRequestListExcludes = [
-  { path: 'spec/issuerRef/name', include: true },
+  { path: 'spec/issuerRef', include: true },
   { path: 'spec/username', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const CertificateRequestReadExcludes = [
 ];
 export const CertificateRequestSimpleExcludes = [
 ];
 export const ClusterIssuerListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ClusterIssuerReadExcludes = [
 ];
 export const ClusterIssuerSimpleExcludes = [
 ];
 export const IssuerListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const IssuerReadExcludes = [
 ];
