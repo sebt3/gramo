@@ -3075,83 +3075,24 @@
       "apiGroup": "acme.cert-manager.io",
       "apiKind": "Challenge",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "certmanager",
-          "short": "Challenge",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "Challenge",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "Challenge",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Challenge",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -3735,83 +3676,24 @@
       "apiGroup": "acme.cert-manager.io",
       "apiKind": "Order",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "certmanager",
-          "short": "Order",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "Order",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "Order",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Order",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -4917,191 +4799,24 @@
       "apiGroup": "cert-manager.io",
       "apiKind": "Certificate",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "child",
-          "group": "certmanager",
-          "short": "Certificate",
-          "targetGroup": "certmanager",
-          "targetShort": "CertificateRequest",
-          "algo": "certmanager",
-          "path": null
-        },
-        {
-          "type": "equity",
-          "group": "certmanager",
-          "short": "Certificate",
-          "targetGroup": "k8s",
-          "targetShort": "Secret",
-          "algo": "certmanager",
-          "path": null
-        },
-        {
-          "type": "consume",
-          "group": "certmanager",
-          "short": "Certificate",
-          "targetGroup": "certmanager",
-          "targetShort": "Issuer",
-          "algo": "certmanager"
-        },
-        {
-          "type": "consume",
-          "group": "certmanager",
-          "short": "Certificate",
-          "targetGroup": "certmanager",
-          "targetShort": "ClusterIssuer",
-          "algo": "certmanager"
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "child",
-          "name": "childcertmanagerCertificateRequest",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "CertificateRequest",
-          "result": "[certmanagerCertificateRequest]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "equity",
-          "name": "equityk8sSecret",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Secret",
-          "result": "k8sSecret",
-          "properties": [
-            "data",
-            "immutable",
-            "stringData",
-            "type"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "consume",
-          "name": "consumecertmanagerIssuer",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "Issuer",
-          "result": "certmanagerIssuer",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "consume",
-          "name": "consumecertmanagerClusterIssuer",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "ClusterIssuer",
-          "result": "certmanagerClusterIssuer",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Certificate",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "certmanager",
-          "name": "CertificateRequest"
-        },
-        {
-          "group": "k8s",
-          "name": "Secret"
-        },
-        {
-          "group": "certmanager",
-          "name": "Issuer"
-        },
-        {
-          "group": "certmanager",
-          "name": "ClusterIssuer"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -5731,162 +5446,24 @@
       "apiGroup": "cert-manager.io",
       "apiKind": "CertificateRequest",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "parent",
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "targetGroup": "certmanager",
-          "targetShort": "Certificate",
-          "algo": "certmanager",
-          "path": null
-        },
-        {
-          "type": "consume",
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "targetGroup": "certmanager",
-          "targetShort": "Issuer",
-          "algo": "certmanager"
-        },
-        {
-          "type": "consume",
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "targetGroup": "certmanager",
-          "targetShort": "ClusterIssuer",
-          "algo": "certmanager"
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "type": "parent",
-          "name": "parentcertmanagerCertificate",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "Certificate",
-          "result": "certmanagerCertificate",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "type": "consume",
-          "name": "consumecertmanagerIssuer",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "Issuer",
-          "result": "certmanagerIssuer",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "type": "consume",
-          "name": "consumecertmanagerClusterIssuer",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "ClusterIssuer",
-          "result": "certmanagerClusterIssuer",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "CertificateRequest",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "certmanager",
-          "name": "Certificate"
-        },
-        {
-          "group": "certmanager",
-          "name": "Issuer"
-        },
-        {
-          "group": "certmanager",
-          "name": "ClusterIssuer"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -9644,135 +9221,24 @@
       "apiGroup": "cert-manager.io",
       "apiKind": "ClusterIssuer",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "provide",
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "targetGroup": "certmanager",
-          "targetShort": "Certificate",
-          "algo": "certmanager"
-        },
-        {
-          "type": "provide",
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "targetGroup": "certmanager",
-          "targetShort": "CertificateRequest",
-          "algo": "certmanager"
-        },
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "type": "provide",
-          "name": "providecertmanagerCertificate",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "Certificate",
-          "result": "[certmanagerCertificate]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "type": "provide",
-          "name": "providecertmanagerCertificateRequest",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "CertificateRequest",
-          "result": "[certmanagerCertificateRequest]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "ClusterIssuer",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": false,
-      "listTargets": [
-        {
-          "group": "certmanager",
-          "name": "Certificate"
-        },
-        {
-          "group": "certmanager",
-          "name": "CertificateRequest"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": false
     },
     {
       "alternatives": [],
@@ -13530,135 +12996,24 @@
       "apiGroup": "cert-manager.io",
       "apiKind": "Issuer",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "certmanager",
       "sub": "certmanager",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "provide",
-          "group": "certmanager",
-          "short": "Issuer",
-          "targetGroup": "certmanager",
-          "targetShort": "Certificate",
-          "algo": "certmanager"
-        },
-        {
-          "type": "provide",
-          "group": "certmanager",
-          "short": "Issuer",
-          "targetGroup": "certmanager",
-          "targetShort": "CertificateRequest",
-          "algo": "certmanager"
-        },
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "type": "provide",
-          "name": "providecertmanagerCertificate",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "Certificate",
-          "result": "[certmanagerCertificate]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "type": "provide",
-          "name": "providecertmanagerCertificateRequest",
-          "args": "(params: queryParameters)",
-          "resultGroup": "certmanager",
-          "resultShort": "CertificateRequest",
-          "result": "[certmanagerCertificateRequest]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "certmanager",
-          "short": "Issuer",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "certmanager",
-          "name": "Certificate"
-        },
-        {
-          "group": "certmanager",
-          "name": "CertificateRequest"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     }
   ]
 }

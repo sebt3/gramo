@@ -28,6 +28,8 @@ HB.registerHelper('capitalizeFirstLetter', (str)=>new HB.SafeString(capitalizeFi
 HB.registerHelper('lower', (str)=>new HB.SafeString(str.toLowerCase()))
 HB.registerHelper('minimizeFirstLetter', (str)=>new HB.SafeString(minimizeFirstLetter(str)))
 HB.registerHelper('toJson', v => new HB.SafeString(JSON.stringify(v, null,2)));
+HB.registerHelper('toJsonKeys', v => new HB.SafeString(JSON.stringify(Object.keys(v), null,2)));
+
 HB.registerHelper('getGQLType', (name,obj)=>new HB.SafeString(Object.entries(obj).filter(([n])=>name==n).map(([_,v])=>v)[0] as string))
 HB.registerHelper('genParameterQuery', (obj)=>new HB.SafeString(
     Object.entries(obj['gqlDefs'])

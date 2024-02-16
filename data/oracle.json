@@ -2125,83 +2125,24 @@
       "apiGroup": "mysql.oracle.com",
       "apiKind": "InnoDBCluster",
       "apiVersion": "v2",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "oracle",
       "sub": "oracle",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "oracle",
-          "short": "InnoDBCluster",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "oracle",
-          "short": "InnoDBCluster",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "oracle",
-          "short": "InnoDBCluster",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "oracle",
-          "short": "InnoDBCluster",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -2658,83 +2599,24 @@
       "apiGroup": "mysql.oracle.com",
       "apiKind": "MySQLBackup",
       "apiVersion": "v2",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "oracle",
       "sub": "oracle",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "oracle",
-          "short": "MySQLBackup",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "oracle",
-          "short": "MySQLBackup",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "oracle",
-          "short": "MySQLBackup",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "oracle",
-          "short": "MySQLBackup",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     }
   ]
 }

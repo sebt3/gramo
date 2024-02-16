@@ -7,9 +7,19 @@ import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import MetadataNew from '@/components/core/MetadataNew.vue';
 import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
 import { ref, useMutation, useInstall, InstallDefinition, useQuery, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
+import { addByPath, getByPath } from '../../../libs/core';
 const { onlyWriteProperties, editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
 const { mutate, onDone, onError } = useMutation(InstallNew);
-const { result, loading, onResult } = useQuery(installPrepare);
+const { result, loading, onResult } = useQuery(installPrepare,{
+  "namespace": {
+    "filters": [{
+      "op": "eq",
+      "path": "metadata/name",
+      "value": navigation.currentNamespace
+    }]
+  }
+});
+const options = ref({});
 const name = ref('');
 const form = ref(null);
 const stepper = ref(null);
@@ -17,12 +27,11 @@ const step = ref(1);
 const category = ref("");
 const component = ref("");
 const distrib = ref("");
-const obj  = ref({});
-onResult(res => {
+/*onResult(res => {
   if ( !res.loading ) {
-    //editor.value.updateFromQuery(onlyWriteProperties(res.data));
+
   }
-});
+});*/
 const setkey = (key:string, v) => editor.value.setKey(key, v)
 const setYaml = (v) => editor.value.setYaml(v)
 onDone(() => {
@@ -43,9 +52,20 @@ function onFinalSubmit() {
 }
 function startStep2() {
   if (result.value.vynilPackage.filter(p => p.name == component.value && p.consumevynilDistrib.metadata.name == distrib.value && p.consumevynilCategory.name == category.value).length>0) {
-    editor.value.updateFromQuery({spec:{category:category.value, distrib: distrib.value, component:component.value, options:{}}})
+    if (Array.isArray(result.value.k8sNamespace) && result.value.k8sNamespace.map(n=>n.metadata!=undefined&&n.metadata.annotations!=undefined?Object.keys(n.metadata.annotations).filter(k=>k.startsWith('default.vynil.solidite.fr/')):[]).flat().length>0) {
+      // compute the initial values based on namespace annotations and package parameters
+      options.value = {}
+      const properties = result.value.vynilPackage.filter(p => p.name == component.value && p.consumevynilDistrib.metadata.name == distrib.value && p.consumevynilCategory.name == category.value)[0].options;
+      result.value.k8sNamespace.filter(n=>n.metadata!=undefined&&n.metadata.annotations!=undefined)
+        .map(n=>Object.entries(n.metadata.annotations).filter(([k])=>k.startsWith('default.vynil.solidite.fr/'))).flat()
+        .map(([k,v])=>{return {path: k.split('/')[1].replaceAll('.','/'),value:v}})
+        .forEach(p => {
+          const prop = getByPath(properties,p.path.replaceAll('/','/properties/'))
+          if (prop!=undefined&&prop!=null) addByPath(options.value,p.path,p.value);
+        });
+    }
+    editor.value.updateFromQuery({spec:{category:category.value, distrib: distrib.value, component:component.value, options:options.value}})
     stepper.value.next();
-    console.log(result.value.vynilPackage.filter(p => p.name == component.value && p.consumevynilDistrib.metadata.name == distrib.value && p.consumevynilCategory.name == category.value)[0].options)
   } else {
     notifyError(`Package ${component.value} in ${category.value} from ${distrib.value} doesnt exist`);
   }

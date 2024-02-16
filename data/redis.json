@@ -3452,137 +3452,24 @@
       "apiGroup": "redis.redis.opstreelabs.in",
       "apiKind": "Redis",
       "apiVersion": "v1beta1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "redis",
       "sub": "redis",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "child",
-          "group": "redis",
-          "short": "Redis",
-          "targetGroup": "k8s",
-          "targetShort": "Service",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "redis",
-          "short": "Redis",
-          "targetGroup": "k8s",
-          "targetShort": "StatefulSet",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "group": "redis",
-          "short": "Redis",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "redis",
-          "short": "Redis",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "redis",
-          "short": "Redis",
-          "type": "child",
-          "name": "childk8sService",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Service",
-          "result": "[k8sService]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "Redis",
-          "type": "child",
-          "name": "childk8sStatefulSet",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "StatefulSet",
-          "result": "[k8sStatefulSet]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "Redis",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "Redis",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "k8s",
-          "name": "Service"
-        },
-        {
-          "group": "k8s",
-          "name": "StatefulSet"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -8768,83 +8655,24 @@
       "apiGroup": "redis.redis.opstreelabs.in",
       "apiKind": "RedisCluster",
       "apiVersion": "v1beta1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "redis",
       "sub": "redis",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "redis",
-          "short": "RedisCluster",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "redis",
-          "short": "RedisCluster",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "redis",
-          "short": "RedisCluster",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "RedisCluster",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -14959,83 +14787,24 @@
       "apiGroup": "redis.redis.opstreelabs.in",
       "apiKind": "RedisReplication",
       "apiVersion": "v1beta1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "redis",
       "sub": "redis",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "redis",
-          "short": "RedisReplication",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "redis",
-          "short": "RedisReplication",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "redis",
-          "short": "RedisReplication",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "RedisReplication",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -17804,83 +17573,24 @@
       "apiGroup": "redis.redis.opstreelabs.in",
       "apiKind": "RedisSentinel",
       "apiVersion": "v1beta1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "redis",
       "sub": "redis",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "redis",
-          "short": "RedisSentinel",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "redis",
-          "short": "RedisSentinel",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "redis",
-          "short": "RedisSentinel",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "redis",
-          "short": "RedisSentinel",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     }
   ]
 }

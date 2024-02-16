@@ -1,30 +1,30 @@
 {{#if (and (eq type 'use') (defined path))}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (svc, args: object) => {
-            if (svc['spec']['selector'] == undefined || Object.keys(svc['spec']['selector']).length<1) return null;
-            const targetCnt = Object.keys(svc['spec']['selector']).length;
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(svc,{namespace: svc['metadata']['namespace'], ...args})
-            return lst.filter(w=>{
-                const meta = getByPath(w, '{{path}}');
-                if (meta['labels'] == undefined || Object.keys(meta['labels']).length<1) return false;
-                return targetCnt == Object.entries(svc['spec']['selector'])
-                    .reduce((acc,[name, value]) =>acc+Object.entries(meta['labels']).reduce(
-                        (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
-                    ,0),0)
-            })
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (svc, args: object) => {
+        if (svc['spec']['selector'] == undefined || Object.keys(svc['spec']['selector']).length<1) return null;
+        const targetCnt = Object.keys(svc['spec']['selector']).length;
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(svc,{namespace: svc['metadata']['namespace'], ...args})
+        return lst.filter(w=>{
+            const meta = getByPath(w, '{{path}}');
+            if (meta['labels'] == undefined || Object.keys(meta['labels']).length<1) return false;
+            return targetCnt == Object.entries(svc['spec']['selector'])
+                .reduce((acc,[name, value]) =>acc+Object.entries(meta['labels']).reduce(
+                    (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
+                ,0),0)
+        })
+    },
 {{/if}}
 {{#if (and (eq type 'users') (defined path))}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
-            const meta = getByPath(parent, '{{path}}');
-            if (meta['labels'] == undefined || Object.keys(meta['labels']).length<1) return null;
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})
-            return lst.filter(svc=>{
-                if (svc['spec']['selector'] == undefined || Object.keys(svc['spec']['selector']).length<1) return false;
-                const targetCnt = Object.keys(svc['spec']['selector']).length;
-                return targetCnt == Object.entries(svc['spec']['selector'])
-                    .reduce((acc,[name, value]) =>acc+Object.entries(meta['labels']).reduce(
-                        (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
-                    ,0),0)
-            })
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+        const meta = getByPath(parent, '{{path}}');
+        if (meta['labels'] == undefined || Object.keys(meta['labels']).length<1) return null;
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(svc=>{
+            if (svc['spec']['selector'] == undefined || Object.keys(svc['spec']['selector']).length<1) return false;
+            const targetCnt = Object.keys(svc['spec']['selector']).length;
+            return targetCnt == Object.entries(svc['spec']['selector'])
+                .reduce((acc,[name, value]) =>acc+Object.entries(meta['labels']).reduce(
+                    (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
+                ,0),0)
+        })
+    },
 {{/if}}

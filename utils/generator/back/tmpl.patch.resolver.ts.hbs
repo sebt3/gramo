@@ -15,7 +15,7 @@
         }
 {{#each writeProperties}}
         if (args['{{this}}'] != undefined && args['{{this}}'] != null)
-            request["{{this}}"] =  args['{{this}}'];
+            request["{{@key}}"] =  args['{{this}}'];
 {{/each}}
         try {
 {{#if (defined crd)}}

@@ -3716,83 +3716,24 @@
       "apiGroup": "opentelemetry.io",
       "apiKind": "Instrumentation",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "opentelemetry",
       "sub": "opentelemetry",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "Instrumentation",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "opentelemetry",
-          "short": "Instrumentation",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "Instrumentation",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "opentelemetry",
-          "short": "Instrumentation",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "system"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -9728,83 +9669,24 @@
       "apiGroup": "opentelemetry.io",
       "apiKind": "OpAMPBridge",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "opentelemetry",
       "sub": "opentelemetry",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "OpAMPBridge",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "opentelemetry",
-          "short": "OpAMPBridge",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "OpAMPBridge",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "opentelemetry",
-          "short": "OpAMPBridge",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "system"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -25243,83 +25125,24 @@
       "apiGroup": "opentelemetry.io",
       "apiKind": "OpenTelemetryCollector",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "opentelemetry",
       "sub": "opentelemetry",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "OpenTelemetryCollector",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "opentelemetry",
-          "short": "OpenTelemetryCollector",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "opentelemetry",
-          "short": "OpenTelemetryCollector",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "opentelemetry",
-          "short": "OpenTelemetryCollector",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "system"
+      "namespaced": true
     }
   ]
 }

@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import OpenApiNamedIcon from './OpenApiNamedIcon.vue';
-
+import { elude } from "../../libs/core/"
 import { ref, computed, watch } from 'vue'
 const props = withDefaults(defineProps<{
   name: string
-  data: number|string|null
+  data: number|string|null|undefined
   defaultdata?: number,
+  description?: string,
   readOnly?: boolean
 }>(), {
   readOnly: false
 });
+const max_len=150;
 const value=ref(props.data)
 const emit = defineEmits(['update:data'])
 watch(value,(newValue) => emit('update:data', newValue))
@@ -27,7 +29,10 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
   </q-field>
   </div>
   <div v-else>
-    <q-input v-model="value" :label="name" :label-color="isDefault?'':'secondary'" type="number">
+    <q-input v-model="value" :label="name" :bottom-slots="description?true:false" :placeholder="defaultdata" :label-color="isDefault?'':'secondary'" type="number">
+    <template v-slot:hint v-if="description">
+      <div>{{ description?elude(description,max_len):'---' }}<q-tooltip v-if="description&&description.length>max_len"><div v-html="description.replaceAll('\n','<br>')"></div></q-tooltip></div>
+    </template>
     <template v-slot:prepend>
       <OpenApiNamedIcon :name="name" :is-default="isDefault" />
     </template>

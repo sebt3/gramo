@@ -92,16 +92,14 @@ export const enhenceObject = (group:string, obj:unspeciedObject) => {
         apiGroup: obj.definition['x-kubernetes-group-version-kind'][0]['group'],
         apiKind: obj.definition['x-kubernetes-group-version-kind'][0]['kind'],
         apiVersion: obj.definition['x-kubernetes-group-version-kind'][0]['version'],
-        readProperties: Object.entries(obj.definition['properties']).map(([n,])=>n).filter(p=>!excludedReadNames.includes(p)),
-        writeProperties: Object.entries(obj.definition['properties']).map(([n,])=>n).filter(p=>!excludedWriteNames.includes(p)),
+        readProperties:  Object.fromEntries(Object.entries(obj.definition['properties']).map(([n,])=>n).filter(p=>!excludedReadNames.includes(p)).map(p=>{return [p,p.replaceAll('-','_')]})),
+        writeProperties: Object.fromEntries(Object.entries(obj.definition['properties']).map(([n,])=>n).filter(p=>!excludedWriteNames.includes(p)).map(p=>{return [p,p.replaceAll('-','_')]})),
         ...getShort(group),
         listExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('list')).map(r=>r.values).flat(),
         readExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('read')).map(r=>r.values).flat(),
         simpleExcludes: excludes.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]&&r.for.includes('simple')).map(r=>r.values).flat(),
-        autoResolvers: autoResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]).concat(autoAllResolvers.map(a=>{return {group:getShort(group).group, short: obj.name.split('.').reverse()[0],...a}})),
-        resolvers: extraResolvers.filter(r=>r.group==getShort(group).group&&r.short==obj.name.split('.').reverse()[0]).concat(defaultResolvers).concat(extraAllResolvers.map(a=>{return {group:getShort(group).group, short: obj.name.split('.').reverse()[0],...a}})),
         gqlDefs: Object.fromEntries(Object.entries(obj.definition['properties']).filter(([n])=>!['apiVersion','kind'].includes(n)).map(([n,v])=>{return [
-            n,
+            n.replaceAll('-','_'),
             (n=='metadata'?'metadata':
                 (v as openapiDefinitionPropertiesDef).type=='string'?'String':
                 (v as openapiDefinitionPropertiesDef).type=='boolean'?'Boolean':
@@ -120,16 +118,21 @@ export const enhenceObject = (group:string, obj:unspeciedObject) => {
     }
 }
 export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
-    const autoResolvers = obj.autoResolvers.concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>all.map(o=>{return {
+    const autos = autoResolvers.filter(r=>r.group==obj.group&&r.short==obj.short)
+        .concat(autoAllResolvers.map(a=>{return {group:obj.group, short: obj.short,...a}}))
+        .concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>all.map(o=>{return {
         algo: r.algo, type: r.type, group: obj.group, short: obj.short, targetGroup: o.group, targetShort: o.short, path: r.path
     }})).flat())
     return {
         ...obj,
         alternatives: obj['alternatives'].length>1?obj['alternatives']:[],
-        autoResolvers,
-        listTargets: autoResolvers.map(r=>`${r['targetGroup']}##${r['targetShort']}`).filter(uniq).map(s=>s.split('##')).map(([group,name])=>{return{group,name}}),
+        autoResolvers: autos,
+        listTargets: autos.map(r=>`${r['targetGroup']}##${r['targetShort']}`).filter(uniq).map(s=>s.split('##')).map(([group,name])=>{return{group,name}}),
         category: categoryMappingShort[obj.short]!=undefined?categoryMappingShort[obj.short]:categoryMappingGroup[obj.group]!=undefined?categoryMappingGroup[obj.group]:'varia',
-        resolvers: obj.resolvers.map(r=>{return {...r, properties: all.filter(o=>o.group==r['resultGroup']&&o.short==r['resultShort']).map(o=>o.readProperties)[0]}})
+        resolvers: extraResolvers.filter(r=>r.group==obj.group&&r.short==obj.short)
+            .concat(defaultResolvers)
+            .concat(extraAllResolvers.map(a=>{return {group:obj.group, short: obj.short,...a}}))
+            .map(r=>{return {...r, properties: all.filter(o=>o.group==r['resultGroup']&&o.short==r['resultShort']).map(o=>o.readProperties)[0]}})
             .concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>toExtraResolvers(r,all)).flat())
     }
 }

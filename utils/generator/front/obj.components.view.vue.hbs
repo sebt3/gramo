@@ -65,9 +65,11 @@ onMounted(() => {
           :in="model['spec']['options']"
           :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
-  {{#if (and (eq (length writeProperties) 1) (contain writeProperties 'spec'))}}
-          :in="model['spec']"
-          :properties="getProperties({{ short }}Definition.properties.spec)"
+  {{#if (eq (length writeProperties) 1)}}
+    {{#each writeProperties}}
+          :in="model['{{this}}']"
+          :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
+    {{/each}}
   {{else}}
           :in="model"
           :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"

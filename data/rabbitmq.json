@@ -12824,83 +12824,24 @@
       "apiGroup": "rabbitmq.com",
       "apiKind": "RabbitmqCluster",
       "apiVersion": "v1beta1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "rabbitmq",
       "sub": "rabbitmq",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "rabbitmq",
-          "short": "RabbitmqCluster",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "rabbitmq",
-          "short": "RabbitmqCluster",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "rabbitmq",
-          "short": "RabbitmqCluster",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "rabbitmq",
-          "short": "RabbitmqCluster",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     }
   ]
 }

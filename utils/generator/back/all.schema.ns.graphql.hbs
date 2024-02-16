@@ -3,6 +3,9 @@ type k8sNamespace {
   spec: JSONObject
   status: JSONObject
   permissions: permissionReview
+  parentReference: parentRef
+  parentvynilInstall(params: queryParameters): vynilInstall
+  parentfluxcdKustomization(params: queryParameters): fluxcdKustomization
 {{#each groups}}
   {{#each this.objects}}
     {{#if this.namespaced}}

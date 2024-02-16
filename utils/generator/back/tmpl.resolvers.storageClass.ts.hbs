@@ -1,22 +1,22 @@
 {{#if (eq type 'provide')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (user, args: object) => {
-        {{#if (eq this.targetShort 'PersistentVolumeClaim')}}
-            const nss = await listNamespace.k8sNamespace(user, args)
-            return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, {namespace: ns, ...args})
-                return lst.filter(r=>r['spec']['storageClassName']==user['metadata']['name'])
-            }))).flat().filter((v)=>v!=null)
-        {{else}}
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, args)
+    {{type}}{{targetGroup}}{{targetShort}}: async (user, args: object) => {
+    {{#if (eq this.targetShort 'PersistentVolumeClaim')}}
+        const nss = await listNamespace.k8sNamespace(user, args)
+        return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, {namespace: ns, ...args})
             return lst.filter(r=>r['spec']['storageClassName']==user['metadata']['name'])
-        {{/if}}
-        },
+        }))).flat().filter((v)=>v!=null)
+    {{else}}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user, args)
+        return lst.filter(r=>r['spec']['storageClassName']==user['metadata']['name'])
+    {{/if}}
+    },
 {{/if}}
 {{#if (eq type 'consume')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
-            const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args))
-                .filter(r=>r['metadata']['name']==used['spec']['storageClassName'])
-            if (lst.length<1) return null
-            return lst[0]
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,args))
+            .filter(r=>r['metadata']['name']==used['spec']['storageClassName'])
+        if (lst.length<1) return null
+        return lst[0]
+    },
 {{/if}}

@@ -41,15 +41,14 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
         sub: '',
         objects: excluded_objects.map(([name, def]) => {return enhenceObject('core',{ name: name, definition: def, crd: null})}).filter(o=>o.namespaced!=null)
     }].concat(known_data.map(d=>{return {...d, objects: d.objects.filter(o=>o.namespaced!=null)}}));
-    const allObjects = subgroups.map(s=>(s.objects as unknown as k8sObject)).flat();
-    const allUniqObjects = allObjects.filter(obj=>allObjects.filter(o=>o.group==obj.group&&o.short==obj.short).indexOf(obj)==0)
     // Finally merge all the apiGroups the should go toghether into "groups" finising the objects refinment in the process
     // Deduplicate same objects in distinct apiGroup and mark the alternative options
     return subgroups.map(s=>s.group).filter(uniq).map(g => { return {
         name: g,
         objects: subgroups.filter(s=>s.group==g && s.objects.length>0).map(s=>s.objects).flat().map(o=>o.short).filter(uniq).map((short) => {return {
             alternatives: subgroups.filter(s=>s.group==g && s.objects.length>0).map(s=>s.objects.filter(o=>o.short==short)).flat()
-        }}).map(tmp=>{return finalizeObject({...tmp,...tmp.alternatives.sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]} as k8sObject,allUniqObjects)})
+        }}).map(tmp=>{return {...tmp,...tmp.alternatives.sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]}})
+        .map(tmp=>{return {...tmp, alternatives: tmp.alternatives.length<2?[]:tmp.alternatives}})
     }})
 }).then(data => {
 ////////////////////////////////////

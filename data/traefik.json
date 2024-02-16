@@ -654,57 +654,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "IngressRoute",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -1354,57 +1314,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "IngressRoute",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRoute",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -2062,81 +1982,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "IngressRoute",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRoute",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRoute",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRoute",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRoute",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -2689,57 +2550,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "IngressRouteTCP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -3287,57 +3108,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "IngressRouteTCP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteTCP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -3893,81 +3674,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "IngressRouteTCP",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRouteTCP",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRouteTCP",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRouteTCP",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRouteTCP",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -4282,57 +4004,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "IngressRouteUDP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -4642,57 +4324,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "IngressRouteUDP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "IngressRouteUDP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -5010,81 +4652,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "IngressRouteUDP",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRouteUDP",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRouteUDP",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "IngressRouteUDP",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "IngressRouteUDP",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -6981,76 +6564,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "Middleware",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "type": "users",
-              "group": "traefik",
-              "short": "Middleware",
-              "targetGroup": "k8s",
-              "targetShort": "Ingress",
-              "algo": "traefik",
-              "path": null
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "users",
-              "name": "usersk8sIngress",
-              "args": "(params: queryParameters)",
-              "resultGroup": "k8s",
-              "resultShort": "Ingress",
-              "result": "[k8sIngress]"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -8942,76 +8466,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "Middleware",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "type": "users",
-              "group": "traefik",
-              "short": "Middleware",
-              "targetGroup": "k8s",
-              "targetShort": "Ingress",
-              "algo": "traefik",
-              "path": null
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "users",
-              "name": "usersk8sIngress",
-              "args": "(params: queryParameters)",
-              "resultGroup": "k8s",
-              "resultShort": "Ingress",
-              "result": "[k8sIngress]"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "Middleware",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -10911,108 +10376,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "Middleware",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "users",
-          "group": "traefik",
-          "short": "Middleware",
-          "targetGroup": "k8s",
-          "targetShort": "Ingress",
-          "algo": "traefik",
-          "path": null
-        },
-        {
-          "group": "traefik",
-          "short": "Middleware",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "Middleware",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "Middleware",
-          "type": "users",
-          "name": "usersk8sIngress",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Ingress",
-          "result": "[k8sIngress]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "Middleware",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "Middleware",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "k8s",
-          "name": "Ingress"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -11259,57 +10638,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "MiddlewareTCP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -11559,57 +10898,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "MiddlewareTCP",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "MiddlewareTCP",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -11859,81 +11158,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "MiddlewareTCP",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "MiddlewareTCP",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "MiddlewareTCP",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "MiddlewareTCP",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "MiddlewareTCP",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -12292,57 +11532,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "ServersTransport",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -12704,57 +11904,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "ServersTransport",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "ServersTransport",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -13116,81 +12276,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "ServersTransport",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "ServersTransport",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "ServersTransport",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "ServersTransport",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "ServersTransport",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -13511,57 +12612,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "TLSOption",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -13885,57 +12946,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "TLSOption",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSOption",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -14259,81 +13280,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "TLSOption",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "TLSOption",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "TLSOption",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "TLSOption",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "TLSOption",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -14646,57 +13608,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "TLSStore",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -15012,57 +13934,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "TLSStore",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TLSStore",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -15378,81 +14260,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "TLSStore",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "TLSStore",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "TLSStore",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "TLSStore",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "TLSStore",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     },
     {
       "alternatives": [
@@ -16323,57 +15146,17 @@
           "apiGroup": "traefik.io",
           "apiKind": "TraefikService",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -17223,57 +16006,17 @@
           "apiGroup": "traefik.containo.us",
           "apiKind": "TraefikService",
           "apiVersion": "v1alpha1",
-          "readProperties": [
-            "spec"
-          ],
-          "writeProperties": [
-            "spec"
-          ],
+          "readProperties": {
+            "spec": "spec"
+          },
+          "writeProperties": {
+            "spec": "spec"
+          },
           "group": "traefik",
           "sub": "traefik",
           "listExcludes": [],
           "readExcludes": [],
           "simpleExcludes": [],
-          "autoResolvers": [
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "algo": "vynil",
-              "type": "parent",
-              "targetGroup": "vynil",
-              "targetShort": "Install"
-            },
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "algo": "fluxcd",
-              "type": "parent",
-              "targetGroup": "fluxcd",
-              "targetShort": "Kustomization"
-            }
-          ],
-          "resolvers": [
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "type": "parent",
-              "name": "parentvynilInstall",
-              "args": "(params: queryParameters)",
-              "resultGroup": "vynil",
-              "resultShort": "Install",
-              "result": "vynilInstall"
-            },
-            {
-              "group": "traefik",
-              "short": "TraefikService",
-              "type": "parent",
-              "name": "parentfluxcdKustomization",
-              "args": "(params: queryParameters)",
-              "resultGroup": "fluxcd",
-              "resultShort": "Kustomization",
-              "result": "fluxcdKustomization"
-            }
-          ],
           "gqlDefs": {
             "metadata": "metadata!",
             "spec": "JSONObject"
@@ -18147,81 +16890,22 @@
       "apiGroup": "traefik.io",
       "apiKind": "TraefikService",
       "apiVersion": "v1alpha1",
-      "readProperties": [
-        "spec"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "traefik",
       "sub": "traefik",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "traefik",
-          "short": "TraefikService",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "traefik",
-          "short": "TraefikService",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "traefik",
-          "short": "TraefikService",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "traefik",
-          "short": "TraefikService",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "network"
+      "namespaced": true
     }
   ]
 }

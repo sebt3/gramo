@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
 import { menuLinksProps } from '../../routes/interfaces.js';
-import { elude } from '../../libs/core';
+import { elude, useCore } from '../../libs/core';
 import { useRouter } from 'vue-router'
 import { watch,onMounted, ref } from 'vue'
 import {installColor,automationColor,workloadColor,databaseColor,storageColor,configColor,networkColor,securityColor,systemColor} from '../../routes/custom'
-
+const { isNamespaced } = useCore();
 const expansionItem = ref(null);
 const router = useRouter();
 const maxCaptionLength= 25;
@@ -36,13 +36,16 @@ if (props.children != undefined && props.children.length > 0) onMounted(() => {
     else expansionItem.value.hide();
   })
 });
+const toNoNS = props.target!=undefined?{ name: props.target }:props.name!=undefined?{ name: props.name }:null
+const toNS = props.targetNS!=undefined?{ name: props.targetNS }:props.target!=undefined?{ name: props.target }:props.name!=undefined?{ name: props.name }:null
 </script>
 <template>
     <div v-if="children != undefined && children.length > 0"  :class="`${getLevel0Color(props.name)==''?'':'bg-'+getLevel0Color(props.name)+'-1'}`">
       <q-expansion-item ref="expansionItem"
           expand-separator
           :header-inset-level="level"
-          :to="target!=undefined?{ name: target }:name!=undefined?{ name }:null"
+          :key="`${isNamespaced()}-first`"
+          :to="isNamespaced()?toNS:toNoNS"
           :active="router.currentRoute.value.matched.map(f=>f.name).includes(props.name)"
           :default-opened="shouldOpen(router.currentRoute.value)">
         <template v-slot:header>
@@ -58,7 +61,8 @@ if (props.children != undefined && props.children.length > 0) onMounted(() => {
       </q-expansion-item>
     </div>
     <div v-else>
-      <q-item clickable v-ripple :inset-level="level" :to="target!=undefined?{ name: target }:name!=undefined?{ name }:null"
+      <q-item clickable v-ripple :inset-level="level" :to="isNamespaced()?toNS:toNoNS"
+          :key="`${isNamespaced()}-second`"
           :active="router.currentRoute.value.matched.map(f=>f.name).includes(props.name)">
         <q-item-section v-if="icon != ''" avatar>
           <q-avatar :icon="icon" />

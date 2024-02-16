@@ -174,6 +174,7 @@ export const categoryMappingGroup = {
     fluxcd: 'automation',
     traefik: 'network',
     certmanager: 'network',
+    cilium: 'network',
     projectcalico: 'network',
     monitoring: 'system',
     opentelemetry: 'system',
@@ -182,6 +183,7 @@ export const categoryMappingGroup = {
     k8s: 'system',
     secretgenerator: 'config',
     vynil: 'install',
+    cattle: 'install',
 }
 export const categoryMappingShort = {
     StatefulSet: 'workload',

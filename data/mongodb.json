@@ -1116,166 +1116,24 @@
       "apiGroup": "mongodbcommunity.mongodb.com",
       "apiKind": "MongoDBCommunity",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "mongodb",
       "sub": "mongodb",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "child",
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "targetGroup": "k8s",
-          "targetShort": "Secret",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "targetGroup": "k8s",
-          "targetShort": "Service",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "targetGroup": "k8s",
-          "targetShort": "StatefulSet",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "type": "child",
-          "name": "childk8sSecret",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Secret",
-          "result": "[k8sSecret]",
-          "properties": [
-            "data",
-            "immutable",
-            "stringData",
-            "type"
-          ]
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "type": "child",
-          "name": "childk8sService",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Service",
-          "result": "[k8sService]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "type": "child",
-          "name": "childk8sStatefulSet",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "StatefulSet",
-          "result": "[k8sStatefulSet]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "mongodb",
-          "short": "MongoDBCommunity",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "k8s",
-          "name": "Secret"
-        },
-        {
-          "group": "k8s",
-          "name": "Service"
-        },
-        {
-          "group": "k8s",
-          "name": "StatefulSet"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     }
   ]
 }

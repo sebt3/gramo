@@ -20,7 +20,12 @@
                 const res = await k8sApi.list{{ short }}()
   {{/if}}
 {{/if}}
-                lst = (res as object)['body']['items'] as Array<object>
+                lst = ((res as object)['body']['items'] as Array<object>)
+{{#each readProperties}}
+  {{#if (ne this @key)}}
+                      .map(obj=>Object.fromEntries(Object.entries(obj).map(([k,v])=>[k=='{{@key}}'?'{{this}}':k,v])))
+  {{/if}}
+{{/each}}
   {{#if namespaced}}
                 cache.set(`{{short}}.${args['namespace']}`, lst, 2);
   {{else}}

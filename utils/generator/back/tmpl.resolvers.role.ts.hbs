@@ -1,13 +1,13 @@
 {{#if (eq type 'users')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,{namespace: used['metadata']['namespace'], ...args})
-            return lst.filter(r=>r['roleRef']['name']==used['metadata']['name'])
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (used, args: object) => {
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(used,{namespace: used['metadata']['namespace'], ...args})
+        return lst.filter(r=>r['roleRef']['name']==used['metadata']['name'])
+    },
 {{/if}}
 {{#if (eq type 'use')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (user, args: object) => {
-            if (user['roleRef']['kind'] != '{{targetShort}}') return null;
-            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user,{namespace: user['metadata']['namespace'], ...args})
-            return lst.filter(r=>r['metadata']['name']==user['roleRef']['name'])
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (user, args: object) => {
+        if (user['roleRef']['kind'] != '{{targetShort}}') return null;
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(user,{namespace: user['metadata']['namespace'], ...args})
+        return lst.filter(r=>r['metadata']['name']==user['roleRef']['name'])
+    },
 {{/if}}

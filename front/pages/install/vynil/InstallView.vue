@@ -452,7 +452,7 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
 }, { pollInterval: 2000 });onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(InstallDelete);
 const conditions = ref({
-  "userscoreUrl": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(ns=>ns['childk8sIngress']).flat().map(obj=>obj['userscoreUrl']).flat().filter(o=>o!=null).length>0,
+  "userscoreUrl": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(ns=>ns['childk8sIngress']).flat().filter(x=>x!=null).map(obj=>obj['userscoreUrl']).flat().filter(o=>o!=null).length>0,
   "consumevynilPackage": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['consumevynilPackage']!=null).reduce((acc,cur)=>acc||cur,false),
   "usek8sJob": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['usek8sJob']).flat().filter(o=>o!=null).length>0,
   "parentvynilInstall": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(obj=>obj['parentvynilInstall']!=null).reduce((acc,cur)=>acc||cur,false),

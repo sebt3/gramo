@@ -1,19 +1,19 @@
 {{#with ctx}}
     {{group}}{{short}}Delete: async (_parent, args: object) => {
-    try {
+        try {
 {{#if (defined crd)}}
   {{#if namespaced}}
-        const res = await k8sApi.deleteNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'])
+            const res = await k8sApi.deleteNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'])
   {{else}}
-        const res = await k8sApi.deleteClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'])
+            const res = await k8sApi.deleteClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'])
   {{/if}}
 {{else}}
-        const res = await k8sApi.delete{{#if namespaced}}Namespaced{{/if}}{{ short }}(args['name']{{#if namespaced}}, args['namespace']{{/if}})
+            const res = await k8sApi.delete{{#if namespaced}}Namespaced{{/if}}{{ short }}(args['name']{{#if namespaced}}, args['namespace']{{/if}})
 {{/if}}
-        return res.body
-    } catch (err) {
-        console.error((err as object)['body']);
-    }
-    return null
-  },
+            return res.body
+        } catch (err) {
+            console.error((err as object)['body']);
+        }
+        return null
+    },
 {{/with}}

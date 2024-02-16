@@ -1,7 +1,14 @@
-query InstallPrepare {
+query InstallPrepare($namespace: queryParameters) {
   vynilDistrib {
     metadata {
       name
+    }
+  }
+  k8sNamespace(params: $namespace) {
+    metadata {
+      name
+      annotations
+      labels
     }
   }
   vynilCategory {

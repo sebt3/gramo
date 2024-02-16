@@ -1,0 +1,626 @@
+{
+  "name": "cattle",
+  "objects": [
+    {
+      "alternatives": [],
+      "name": "io.cattle.helm.v1.HelmChart",
+      "definition": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "spec": {
+            "x-kubernetes-preserve-unknown-fields": true
+          },
+          "status": {
+            "x-kubernetes-preserve-unknown-fields": true
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "helm.cattle.io",
+            "kind": "HelmChart",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "helmcharts.helm.cattle.io",
+          "uid": "847e2775-2708-487f-906b-d43dc1c1eea1",
+          "resourceVersion": "199",
+          "generation": 1,
+          "creationTimestamp": "2023-03-07T15:49:24Z",
+          "labels": {
+            "objectset.rio.cattle.io/hash": "29aa74e2abe5947484ef867c989a6921f51b1438"
+          },
+          "annotations": {
+            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5RTTY/TMBD9K2jOblG73W0biQNahEBIK8RHL4jDxJk0Jo5teezuoir/HU2SLlukLXCLxzNv3nt+OQIGs6PIxjso5EAPiZwced5ueG78y8MCFLTGVVDAbebku0/EPkdNb6g2ziSZVdBRwgoTQnEEdM4nlAuWoy9/kE5MaR6Nn2tMyZIgG4EE9ey9v3cUZ/tD+zw19eKDcdWrC7wugzvsCApoyHa6wZh4Lp+/2/4JgANqQYFegY40CP9iOuKEXYDCZWsVWCzJXrSjQW6ggOUWcb2iJZZ0vV2tV5sV1Zubtd5utnizXS7q60W5WF1tZNtf6fcKOJCWtfvoc5iazwQOEqRjeuR3ZLtbQQMFweaI9mwFKGDj9tlifFqXVSESUzzQV9c6f+/eGrIVQ1GjZVLA2gdhe3eyrAIFhzF8DMW340nOkDjWDXVDmnwg9/rj+93V58dSiD5QTGbkfVL4MGtzSdFRIp6duMzySGZWT2xSzCS2JEyZ/3OsV5B+DiLGRwSpDP3V2CG4PuKepoHvZ5tQawqJqrs/HH9q9BAi7yoz/T5jegSVqt2jWVLt+18BAAD//32jWoG/AwAA",
+            "objectset.rio.cattle.io/id": "",
+            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
+            "objectset.rio.cattle.io/owner-name": "helmcharts.helm.cattle.io",
+            "objectset.rio.cattle.io/owner-namespace": ""
+          },
+          "managedFields": [
+            {
+              "manager": "deploy@kydah-share",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/applied": {},
+                    "f:objectset.rio.cattle.io/id": {},
+                    "f:objectset.rio.cattle.io/owner-gvk": {},
+                    "f:objectset.rio.cattle.io/owner-name": {},
+                    "f:objectset.rio.cattle.io/owner-namespace": {}
+                  },
+                  "f:labels": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "k3s",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            }
+          ]
+        },
+        "spec": {
+          "group": "helm.cattle.io",
+          "names": {
+            "plural": "helmcharts",
+            "singular": "helmchart",
+            "kind": "HelmChart",
+            "listKind": "HelmChartList"
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "spec": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "status": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "helmcharts",
+            "singular": "helmchart",
+            "kind": "HelmChart",
+            "listKind": "HelmChartList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "HelmChart",
+      "apiGroup": "helm.cattle.io",
+      "apiKind": "HelmChart",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "cattle",
+      "sub": "cattle",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "io.cattle.helm.v1.HelmChartConfig",
+      "definition": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "spec": {
+            "x-kubernetes-preserve-unknown-fields": true
+          },
+          "status": {
+            "x-kubernetes-preserve-unknown-fields": true
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "helm.cattle.io",
+            "kind": "HelmChartConfig",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "helmchartconfigs.helm.cattle.io",
+          "uid": "5309c3cc-3577-4f51-ad7b-d4c8b44a807f",
+          "resourceVersion": "205",
+          "generation": 1,
+          "creationTimestamp": "2023-03-07T15:49:24Z",
+          "labels": {
+            "objectset.rio.cattle.io/hash": "2052208f1663688d05f513c2fa308fde31521d9d"
+          },
+          "annotations": {
+            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5RTTY8TMQz9K8jntPRDrcpIHFARAiGtEB+9IA5u4mnDZJIoTrqLqvnvyDPThQW2Wo7xx7Pf88sZMNodJbbBQyUPusvk5cnTZsNTG56f5qCgsd5ABdvCObQfiUNJml5Tbb3N0qugpYwGM0J1BvQ+ZJQEyzPsv5POTHmabJhqzNmRIFuBBPVoPtx6SpPDqXl8NfXsvfXm5ZW9roN7bAkqOJJr9RFT1sHX9sBTCfwqfhIMR9SCBZ0Cnain/9m2xBnbCJUvzilwuCd3VZQj8hEqWMxWi8VsU8/X6+V6szGzVb2aL/WixuVsUxtazleLuXlhZNoTSXQKOJKW4YcUShxbHtDsiUjFePC35NqtYG57TFAQXUno/jEOFLD1h+Iw/Z2V4TERUzrRF9/4cOvfWHKGoarRMSlgHaKwuLlIaUDBabAmQ/X1fKHZ+5H1kdreayGSf/Xh3W756T4UU4iUsh2YXDjfTZqyp+QpE08uu0zKsMykHrfJqZAIlTEX/s+2TkH+0ZMYjgsS6evNUCG4IeGBxoZvDyah1hQzmZs/bvC76L25gjd2/FyDqwSVzO5eLIl23c8AAAD//y6EtavdAwAA",
+            "objectset.rio.cattle.io/id": "",
+            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
+            "objectset.rio.cattle.io/owner-name": "helmchartconfigs.helm.cattle.io",
+            "objectset.rio.cattle.io/owner-namespace": ""
+          },
+          "managedFields": [
+            {
+              "manager": "deploy@kydah-share",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/applied": {},
+                    "f:objectset.rio.cattle.io/id": {},
+                    "f:objectset.rio.cattle.io/owner-gvk": {},
+                    "f:objectset.rio.cattle.io/owner-name": {},
+                    "f:objectset.rio.cattle.io/owner-namespace": {}
+                  },
+                  "f:labels": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "k3s",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            }
+          ]
+        },
+        "spec": {
+          "group": "helm.cattle.io",
+          "names": {
+            "plural": "helmchartconfigs",
+            "singular": "helmchartconfig",
+            "kind": "HelmChartConfig",
+            "listKind": "HelmChartConfigList"
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "spec": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "status": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "helmchartconfigs",
+            "singular": "helmchartconfig",
+            "kind": "HelmChartConfig",
+            "listKind": "HelmChartConfigList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "HelmChartConfig",
+      "apiGroup": "helm.cattle.io",
+      "apiKind": "HelmChartConfig",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "cattle",
+      "sub": "cattle",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "io.cattle.k3s.v1.Addon",
+      "definition": {
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "spec": {
+            "x-kubernetes-preserve-unknown-fields": true
+          },
+          "status": {
+            "x-kubernetes-preserve-unknown-fields": true
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "k3s.cattle.io",
+            "kind": "Addon",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "addons.k3s.cattle.io",
+          "uid": "9e93a14f-f7ca-49b2-bd0b-24e2d9ee12a7",
+          "resourceVersion": "196",
+          "generation": 1,
+          "creationTimestamp": "2023-03-07T15:49:24Z",
+          "labels": {
+            "objectset.rio.cattle.io/hash": "76092cd54ba63fc73cd7b8728426e6e5e7033ede"
+          },
+          "annotations": {
+            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5ST34/TMAzH/xXk52wc6902KvFwAiEhpBPix14QD27ibaFpEsXJ7tDU/x25XQecdBP3aNf++Otv3CNgtBtKbIOHWgJ6yOQl5Hm75rkNLw+vQEFrvYEa3hbOoftMHErS9I621tssvQo6ymgwI9RHQO9DRvnAEobmJ+nMlOfJhrnGnB0J2QoS1JPfw72nNNsd2qelqRcfrTdvLui6DPfYkdCNGbAV/6n4r16OqAUAvQKdaNj5q+2IM3YRal+cU+CwIXfRiT3yHmpYLa9eL7S5uW5wWW31qtJm1axXi/X1YklLuqHVVVWRIZl2SXmvgCNpmbhLoUSo4fFqg3gpOL3srXBAQXQloTuDQQFbvysO05QTekzElA70zbc+3Pv3lpxhqLfomBSwDlG03U0GGVBwGK+Mof5+nMQPp8V6T91wNiGSv/30YVN9OadiCpFStqPWaamHWVsaSp4y8WzSMiujmNn2pCanQuJExlz4mW29gvxrWGJ8MpDMUG/GCuGGhDs6Nfz4ZxJqTTGTuXvk8t8GDycTvLGn/2S8FaGS2ZzNkmzf/w4AAP//r7lyxagDAAA",
+            "objectset.rio.cattle.io/id": "",
+            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
+            "objectset.rio.cattle.io/owner-name": "addons.k3s.cattle.io",
+            "objectset.rio.cattle.io/owner-namespace": ""
+          },
+          "managedFields": [
+            {
+              "manager": "deploy@kydah-share",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/applied": {},
+                    "f:objectset.rio.cattle.io/id": {},
+                    "f:objectset.rio.cattle.io/owner-gvk": {},
+                    "f:objectset.rio.cattle.io/owner-name": {},
+                    "f:objectset.rio.cattle.io/owner-namespace": {}
+                  },
+                  "f:labels": {
+                    ".": {},
+                    "f:objectset.rio.cattle.io/hash": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "k3s",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-03-07T15:49:24Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            }
+          ]
+        },
+        "spec": {
+          "group": "k3s.cattle.io",
+          "names": {
+            "plural": "addons",
+            "singular": "addon",
+            "kind": "Addon",
+            "listKind": "AddonList"
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "spec": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "status": {
+                      "x-kubernetes-preserve-unknown-fields": true
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2023-03-07T15:49:24Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "addons",
+            "singular": "addon",
+            "kind": "Addon",
+            "listKind": "AddonList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "Addon",
+      "apiGroup": "k3s.cattle.io",
+      "apiKind": "Addon",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "cattle",
+      "sub": "cattle",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    }
+  ]
+}

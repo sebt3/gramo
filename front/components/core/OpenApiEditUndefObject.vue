@@ -6,8 +6,9 @@ const prompt = ref(false);
 const newName = ref('');
 const props = withDefaults(defineProps<{
   name: string
-  data: object
+  data: object|undefined
   defaultdata?: object
+  description?: string,
   properties: Map<string, OpenAPIV3.SchemaObject>
   readOnly?: boolean
   showdefault?: boolean

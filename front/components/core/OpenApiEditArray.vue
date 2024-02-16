@@ -6,8 +6,9 @@ import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
 const props = withDefaults(defineProps<{
   name: string
-  data: Array<any>
+  data: Array<any>|undefined
   defaultdata?: Array<any>
+  description?: string
   items?: OpenAPIV3.SchemaObject
   readOnly?: boolean
   showdefault?: boolean

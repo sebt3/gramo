@@ -34,6 +34,8 @@ const typeDefs = gqlWrapper(
   importGraphQL('certmanager.graphql'),
   importGraphQL('opentelemetry.graphql'),
   importGraphQL('jaegertracing.graphql'),
+  importGraphQL('cattle.graphql'),
+  importGraphQL('cilium.graphql'),
 );
 
 interface MyContext {

@@ -1,17 +1,17 @@
 {{#if (eq type 'provide')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (node, args: object) => {
-            const nss = await listNamespace.k8sNamespace(node, args)
-            return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(node, {namespace: ns, ...args})
-                return lst.filter(pod=> pod['spec']['nodeName']==node['metadata']['name'])
-            }))).flat()
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (node, args: object) => {
+        const nss = await listNamespace.k8sNamespace(node, args)
+        return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+            const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(node, {namespace: ns, ...args})
+            return lst.filter(pod=> pod['spec']['nodeName']==node['metadata']['name'])
+        }))).flat()
+    },
 {{/if}}
 {{#if (eq type 'consume')}}
-        {{type}}{{targetGroup}}{{targetShort}}: async (pod, args: object) => {
-            const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(pod, args))
-                .filter(node=>pod['spec']['nodeName']==node['metadata']['name'])
-            if (lst.length<1) return null
-            return lst[0]
-        },
+    {{type}}{{targetGroup}}{{targetShort}}: async (pod, args: object) => {
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(pod, args))
+            .filter(node=>pod['spec']['nodeName']==node['metadata']['name'])
+        if (lst.length<1) return null
+        return lst[0]
+    },
 {{/if}}

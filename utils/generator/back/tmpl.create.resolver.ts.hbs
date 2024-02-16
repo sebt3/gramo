@@ -13,7 +13,7 @@
             metadata: getMeta(args),
 {{/if}}
 {{#each writeProperties}}
-            "{{this}}": args['{{this}}'],
+            "{{@key}}": args['{{this}}'],
 {{/each}}
         }
         try {

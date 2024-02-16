@@ -1,10 +1,11 @@
 #!/usr/bin/env -S npx ts-node-esm
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {LoadFrom,mkdir,rmdir,uniq} from './generator/utils.js'
+import {LoadFrom,finalizeObject,mkdir,rmdir,uniq} from './generator/utils.js'
 import {loadCompile,loadPartial} from './generator/hb.js'
 import {allCategories} from './generator/config.js'
 import * as fs from 'fs';
+import { k8sObject } from './generator/types.js';
 
 const args = process.argv.slice(2);
 const deleteFiles = args.includes('-d') || args.includes('--delete');
@@ -47,6 +48,11 @@ new Promise((resolve) => {
             .filter(f=>fs.statSync(f).isFile() && f.match(/.*\.json$/))
             .map(f=>LoadFrom(f))
     );
+}).then(data => {
+    const allObjects = (data as object[]).map(s=>s['objects']).flat();
+    const allUniqObjects = allObjects.filter(obj=>allObjects.filter(o=>o.group==obj.group&&o.short==obj.short).indexOf(obj)==0)
+    return (data as object[]).map(g=>{return {name:g['name'], objects:(g['objects']).map(tmp=>{return finalizeObject({...tmp,...tmp.alternatives.sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]} as k8sObject,allUniqObjects)})
+    }})
 }).then(data => {
 ////////////////////////////////////
 //// Generate the backend
@@ -135,7 +141,7 @@ new Promise((resolve) => {
             objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)
             objCompList(path.resolve(path_front, 'components', g.name),`${o.short}List.vue`, o)
             objCompMeta(path.resolve(path_front, 'components', g.name),`${o.short}Meta.vue`, o)
-            if (o.readProperties.includes('status'))
+            if (Object.keys(o.readProperties).includes('status'))
                 objCompStatus(path.resolve(path_front, 'components', g.name),`${o.short}Status.vue`, o);
             objCompView(path.resolve(path_front, 'components', g.name),`${o.short}View.vue`, o)
             if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', o['category'], g.name));

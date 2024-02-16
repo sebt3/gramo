@@ -6,5 +6,6 @@ export interface menuLinksProps {
     active?: boolean
     name?: string
     target?: string
+    targetNS?: string
     children?: Array<menuLinksProps>
 }

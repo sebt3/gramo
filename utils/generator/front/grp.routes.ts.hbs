@@ -7,6 +7,7 @@ export const link:menuLinksProps = {
   name: '{{ category }}{{ name }}',
   title: {{ name }}Title, icon: {{ name }}Icon,
   target: '{{ category }}{{ name }}Dashboard',
+  targetNS: '{{ category }}{{ name }}NSDashboard',
   level: 1,
   children: [
 {{#each objects}}
@@ -17,6 +18,9 @@ export const link:menuLinksProps = {
   {{/if}}
     name: '{{ this.group }}{{ this.short }}',
     title: '{{ this.short }}', caption: 'List {{ this.short }}', icon: icon{{ this.short }},
+  {{#if this.namespaced}}
+    targetNS: '{{ this.group }}{{ this.short }}Table',
+  {{/if}}
     target: '{{ this.group }}{{ this.short }}{{#if this.namespaced}}All{{/if}}Table', level: 2, children: []
   }],
 {{/each}}

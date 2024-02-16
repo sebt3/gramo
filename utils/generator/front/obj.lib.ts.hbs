@@ -32,7 +32,7 @@ export function use{{ short }}() {
   const onlyReadProperties = (obj) => {
       const res = {}
       Object.keys(obj).forEach(k=>{
-        if ({{toJson readProperties}}.includes(k)||k=='metadata')
+        if ({{toJsonKeys readProperties}}.includes(k)||k=='metadata')
           res[k] = obj[k];
       })
       return res
@@ -40,7 +40,7 @@ export function use{{ short }}() {
   const onlyWriteProperties = (obj) => {
       const res = {}
       Object.keys(obj).forEach(k=>{
-        if ({{toJson writeProperties}}.includes(k))
+        if ({{toJsonKeys writeProperties}}.includes(k))
           res[k] = obj[k];
       })
       return res
@@ -73,8 +73,8 @@ export function use{{ short }}() {
       viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
 {{/each}}
     },
-    readProperties: {{toJson readProperties}},
-    writeProperties: {{toJson writeProperties}},
+    readProperties: {{toJsonKeys readProperties}},
+    writeProperties: {{toJsonKeys writeProperties}},
     navigation: useNavigationStoreRef(),
 {{#if namespaced}}
     isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute,

@@ -870,83 +870,24 @@
       "apiGroup": "postgresql.cnpg.io",
       "apiKind": "Backup",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "cnpg",
       "sub": "cnpg",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "cnpg",
-          "short": "Backup",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "cnpg",
-          "short": "Backup",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "cnpg",
-          "short": "Backup",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Backup",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -8622,301 +8563,24 @@
       "apiGroup": "postgresql.cnpg.io",
       "apiKind": "Cluster",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "cnpg",
       "sub": "cnpg",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "Pod",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "Secret",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "Service",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "ServiceAccount",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "PodDisruptionBudget",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "Role",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "RoleBinding",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Cluster",
-          "targetGroup": "k8s",
-          "targetShort": "PersistentVolumeClaim",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sPod",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Pod",
-          "result": "[k8sPod]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sSecret",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Secret",
-          "result": "[k8sSecret]",
-          "properties": [
-            "data",
-            "immutable",
-            "stringData",
-            "type"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sService",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Service",
-          "result": "[k8sService]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sServiceAccount",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "ServiceAccount",
-          "result": "[k8sServiceAccount]",
-          "properties": [
-            "automountServiceAccountToken",
-            "imagePullSecrets",
-            "secrets"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sPodDisruptionBudget",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "PodDisruptionBudget",
-          "result": "[k8sPodDisruptionBudget]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sRole",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Role",
-          "result": "[k8sRole]",
-          "properties": [
-            "rules"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sRoleBinding",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "RoleBinding",
-          "result": "[k8sRoleBinding]",
-          "properties": [
-            "roleRef",
-            "subjects"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "child",
-          "name": "childk8sPersistentVolumeClaim",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "PersistentVolumeClaim",
-          "result": "[k8sPersistentVolumeClaim]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Cluster",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "k8s",
-          "name": "Pod"
-        },
-        {
-          "group": "k8s",
-          "name": "Secret"
-        },
-        {
-          "group": "k8s",
-          "name": "Service"
-        },
-        {
-          "group": "k8s",
-          "name": "ServiceAccount"
-        },
-        {
-          "group": "k8s",
-          "name": "PodDisruptionBudget"
-        },
-        {
-          "group": "k8s",
-          "name": "Role"
-        },
-        {
-          "group": "k8s",
-          "name": "RoleBinding"
-        },
-        {
-          "group": "k8s",
-          "name": "PersistentVolumeClaim"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -21333,218 +20997,24 @@
       "apiGroup": "postgresql.cnpg.io",
       "apiKind": "Pooler",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "cnpg",
       "sub": "cnpg",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Pooler",
-          "targetGroup": "k8s",
-          "targetShort": "Service",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Pooler",
-          "targetGroup": "k8s",
-          "targetShort": "ServiceAccount",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Pooler",
-          "targetGroup": "k8s",
-          "targetShort": "Deployment",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Pooler",
-          "targetGroup": "k8s",
-          "targetShort": "Role",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "type": "child",
-          "group": "cnpg",
-          "short": "Pooler",
-          "targetGroup": "k8s",
-          "targetShort": "RoleBinding",
-          "algo": "k8s",
-          "path": null
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "child",
-          "name": "childk8sService",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Service",
-          "result": "[k8sService]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "child",
-          "name": "childk8sServiceAccount",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "ServiceAccount",
-          "result": "[k8sServiceAccount]",
-          "properties": [
-            "automountServiceAccountToken",
-            "imagePullSecrets",
-            "secrets"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "child",
-          "name": "childk8sDeployment",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Deployment",
-          "result": "[k8sDeployment]",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "child",
-          "name": "childk8sRole",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "Role",
-          "result": "[k8sRole]",
-          "properties": [
-            "rules"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "child",
-          "name": "childk8sRoleBinding",
-          "args": "(params: queryParameters)",
-          "resultGroup": "k8s",
-          "resultShort": "RoleBinding",
-          "result": "[k8sRoleBinding]",
-          "properties": [
-            "roleRef",
-            "subjects"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "Pooler",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "k8s",
-          "name": "Service"
-        },
-        {
-          "group": "k8s",
-          "name": "ServiceAccount"
-        },
-        {
-          "group": "k8s",
-          "name": "Deployment"
-        },
-        {
-          "group": "k8s",
-          "name": "Role"
-        },
-        {
-          "group": "k8s",
-          "name": "RoleBinding"
-        },
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     },
     {
       "alternatives": [],
@@ -21904,83 +21374,24 @@
       "apiGroup": "postgresql.cnpg.io",
       "apiKind": "ScheduledBackup",
       "apiVersion": "v1",
-      "readProperties": [
-        "spec",
-        "status"
-      ],
-      "writeProperties": [
-        "spec"
-      ],
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "cnpg",
       "sub": "cnpg",
       "listExcludes": [],
       "readExcludes": [],
       "simpleExcludes": [],
-      "autoResolvers": [
-        {
-          "group": "cnpg",
-          "short": "ScheduledBackup",
-          "algo": "vynil",
-          "type": "parent",
-          "targetGroup": "vynil",
-          "targetShort": "Install"
-        },
-        {
-          "group": "cnpg",
-          "short": "ScheduledBackup",
-          "algo": "fluxcd",
-          "type": "parent",
-          "targetGroup": "fluxcd",
-          "targetShort": "Kustomization"
-        }
-      ],
-      "resolvers": [
-        {
-          "group": "cnpg",
-          "short": "ScheduledBackup",
-          "type": "parent",
-          "name": "parentvynilInstall",
-          "args": "(params: queryParameters)",
-          "resultGroup": "vynil",
-          "resultShort": "Install",
-          "result": "vynilInstall",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        },
-        {
-          "group": "cnpg",
-          "short": "ScheduledBackup",
-          "type": "parent",
-          "name": "parentfluxcdKustomization",
-          "args": "(params: queryParameters)",
-          "resultGroup": "fluxcd",
-          "resultShort": "Kustomization",
-          "result": "fluxcdKustomization",
-          "properties": [
-            "spec",
-            "status"
-          ]
-        }
-      ],
       "gqlDefs": {
         "metadata": "metadata!",
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true,
-      "listTargets": [
-        {
-          "group": "vynil",
-          "name": "Install"
-        },
-        {
-          "group": "fluxcd",
-          "name": "Kustomization"
-        }
-      ],
-      "category": "database"
+      "namespaced": true
     }
   ]
 }

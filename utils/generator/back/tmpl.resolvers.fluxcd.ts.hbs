@@ -1,52 +1,52 @@
-        {{type}}{{targetGroup}}{{targetShort}}: async (parent: object, args: object) => {
-          try{
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent: object, args: object) => {
+      try {
 {{#if (and (eq type 'consume') (eq targetShort 'ImageRepository'))}}
-            if (parent['spec']['imageRepositoryRef']==undefined) return null;
-            const ns = typeof parent['spec']['imageRepositoryRef']['namespace'] == 'string' ? parent['spec']['imageRepositoryRef']['namespace']:parent['metadata']['namespace']
-            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
-                .filter((i) => i.metadata.name == parent['spec']['imageRepositoryRef']['name'])
-            if (Array.isArray(res) && res.length>0) return res[0];
+        if (parent['spec']['imageRepositoryRef']==undefined) return null;
+        const ns = typeof parent['spec']['imageRepositoryRef']['namespace'] == 'string' ? parent['spec']['imageRepositoryRef']['namespace']:parent['metadata']['namespace']
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
+            .filter((i) => i.metadata.name == parent['spec']['imageRepositoryRef']['name'])
+        if (Array.isArray(res) && res.length>0) return res[0];
 {{/if}}
 {{#if (and (eq type 'provide') (eq short 'ImageRepository'))}}
-            const nss = await listNamespace.k8sNamespace(parent, args)
-            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
-                return lst.filter(r=>r['spec']['imageRepositoryRef']!=undefined).filter(r=>r['spec']['imageRepositoryRef']['name']==parent['metadata']['name']&&(r['spec']['imageRepositoryRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof r['spec']['imageRepositoryRef']['namespace'] != 'string')))
-            }))).flat().filter((v)=>v!=null)
-            if (Array.isArray(res) && res.length>0) return res;
+        const nss = await listNamespace.k8sNamespace(parent, args)
+        const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+          const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+          return lst.filter(r=>r['spec']['imageRepositoryRef']!=undefined).filter(r=>r['spec']['imageRepositoryRef']['name']==parent['metadata']['name']&&(r['spec']['imageRepositoryRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof r['spec']['imageRepositoryRef']['namespace'] != 'string')))
+        }))).flat().filter((v)=>v!=null)
+        if (Array.isArray(res) && res.length>0) return res;
 {{/if}}
 {{#if (and (eq type 'consume') (eq targetShort 'GitRepository'))}}
-            if (parent['spec']['sourceRef']==undefined || parent['spec']['sourceRef']['kind']!='GitRepository') return null;
-            const ns = typeof parent['spec']['sourceRef']['namespace'] == 'string' ? parent['spec']['sourceRef']['namespace']:parent['metadata']['namespace']
-            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
-                .filter((i) => i.metadata.name == parent['spec']['sourceRef']['name'])
-            if (Array.isArray(res) && res.length>0) return res[0];
+        if (parent['spec']['sourceRef']==undefined || parent['spec']['sourceRef']['kind']!='GitRepository') return null;
+        const ns = typeof parent['spec']['sourceRef']['namespace'] == 'string' ? parent['spec']['sourceRef']['namespace']:parent['metadata']['namespace']
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: ns, ...args}))
+            .filter((i) => i.metadata.name == parent['spec']['sourceRef']['name'])
+        if (Array.isArray(res) && res.length>0) return res[0];
 {{/if}}
 {{#if (and (eq type 'provide') (eq short 'GitRepository'))}}
-            const nss = await listNamespace.k8sNamespace(parent, args)
-            const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
-                return lst.filter(r=>r['spec']!=undefined && r['spec']['sourceRef']!=undefined).filter(r=>r['spec']['sourceRef']['kind']=='GitRepository'&&r['spec']['sourceRef']['name']==parent['metadata']['name']&&(r['spec']['sourceRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof r['spec']['sourceRef']['namespace'] != 'string')))
-            }))).flat().filter((v)=>v!=null)
-            if (Array.isArray(res) && res.length>0) return res;
+        const nss = await listNamespace.k8sNamespace(parent, args)
+        const res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+          const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+          return lst.filter(r=>r['spec']!=undefined && r['spec']['sourceRef']!=undefined).filter(r=>r['spec']['sourceRef']['kind']=='GitRepository'&&r['spec']['sourceRef']['name']==parent['metadata']['name']&&(r['spec']['sourceRef']['namespace']==parent['metadata']['namespace']||(r['metadata']['namespace']==parent['metadata']['namespace']&&typeof r['spec']['sourceRef']['namespace'] != 'string')))
+        }))).flat().filter((v)=>v!=null)
+        if (Array.isArray(res) && res.length>0) return res;
 {{/if}}
 {{#if (and (eq type 'parent') (eq targetShort 'Kustomization'))}}
-            if (parent['metadata']['labels'] == null || parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/name'] == null || parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/namespace'] == null) return null;
-            const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/namespace'], ...args})).filter(inst=>inst['metadata']['name']==parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/name']);
-            if (Array.isArray(res) && res.length>0) return res[0];
+        if (parent['metadata']['labels'] == null || parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/name'] == null || parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/namespace'] == null) return null;
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/namespace'], ...args})).filter(inst=>inst['metadata']['name']==parent['metadata']['labels']['kustomize.toolkit.fluxcd.io/name']);
+        if (Array.isArray(res) && res.length>0) return res[0];
 {{/if}}
 {{#if (and (eq type 'child') (eq short 'Kustomization'))}}
-            if (parent['status']==undefined||parent['status']['inventory']==undefined||!Array.isArray(parent['status']['inventory']['entries'])) return null;
-            const childs = parent['status']['inventory']['entries'].map(e=>e['id'].split('_')).map(([ns,name,_,short])=>{ return {ns,name,short} }).filter(c=>c.short=='{{targetShort}}')
-            if (childs.length<1) return null;
-            const res = (await Promise.all(childs.map(c=>c.ns).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
-                const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
-                return lst.filter(obj=>childs.filter(c=>c.ns==ns).map(c=>c.name).includes(obj['metadata']['name']))
-            }))).flat().filter((v)=>v!=null)
-            if (Array.isArray(res) && res.length>0) return res;
+        if (parent['status']==undefined||parent['status']['inventory']==undefined||!Array.isArray(parent['status']['inventory']['entries'])) return null;
+        const childs = parent['status']['inventory']['entries'].map(e=>e['id'].split('_')).map(([ns,name,_,short])=>{ return {ns,name,short} }).filter(c=>c.short=='{{targetShort}}')
+        if (childs.length<1) return null;
+        const res = (await Promise.all(childs.map(c=>c.ns).filter((v,i,a)=>a.indexOf(v) === i).map(async (ns)=>{
+          const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+          return lst.filter(obj=>childs.filter(c=>c.ns==ns).map(c=>c.name).includes(obj['metadata']['name']))
+        }))).flat().filter((v)=>v!=null)
+        if (Array.isArray(res) && res.length>0) return res;
 {{/if}}
-          } catch (err) {
-            console.error(err)
-          }
-          return null
-        },
+      } catch (err) {
+        console.error(err)
+      }
+      return null
+    },

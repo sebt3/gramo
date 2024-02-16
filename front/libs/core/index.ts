@@ -107,5 +107,10 @@ export function getColor(name) {
 export function getConditionColor(cond) {
     if (cond.type == "Ready") return cond.status=='True'?'positive':'negative'
     return 'info' // 'warning'
-  }
-  
+}
+export function addByPath(target,path,data) {
+    path.split("/").slice(0,-1).reduce((res,cur) => {if (res[cur]==undefined) res[cur]={};return res[cur]},target)[path.split("/").slice(-1)[0]] = data
+}
+export function getByPath(obj, path) {
+    return path.split("/").reduce((res,cur) => res==null?null:res[cur.replaceAll('~1','/')],obj)
+}
