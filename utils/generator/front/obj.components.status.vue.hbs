@@ -4,7 +4,7 @@ import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom
 defineProps<{model: object}>();
 </script>
 <template>
-  <q-card bordered v-if="model.status != null" class="q-ma-sm">
+  <q-card bordered class="q-ma-sm" v-if="model.status != null">
     <q-card-section :class="`bg-${ color{{ short }} } text-white`">
       <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
     </q-card-section>

@@ -4,6 +4,7 @@ type k8sNamespace {
   status: JSONObject
   permissions: permissionReview
   parentReference: parentRef
+  getcoreEvent(params: queryParameters): [coreEvent]
   parentvynilInstall(params: queryParameters): vynilInstall
   parentfluxcdKustomization(params: queryParameters): fluxcdKustomization
 {{#each groups}}

@@ -1,27 +1,23 @@
 import {menuLinksProps} from '../interfaces';
-import { {{#each objects}}icon{{ this.short }}, {{/each}} {{ name }}Icon, {{ name }}Title }from '../../libs/{{ name }}/custom.js'
+import { {{#each objects}}icon{{ short }}, {{/each}} {{ name }}Icon, {{ name }}Title }from '../../libs/{{ name }}/custom.js'
 import {  } from '../custom.js';
-import { useCRDStore } from '../../stores'
+import { useCRDStore, usePermissionStore } from '../../stores'
 const crds = useCRDStore().crds;
+const havePermission = usePermissionStore().have;
 export const link:menuLinksProps = {
   name: '{{ category }}{{ name }}',
   title: {{ name }}Title, icon: {{ name }}Icon,
   target: '{{ category }}{{ name }}Dashboard',
   targetNS: '{{ category }}{{ name }}NSDashboard',
-  level: 1,
   children: [
 {{#each objects}}
-  {{#if (defined crd)}}
-  crds['{{crd.metadata.name}}'] == undefined?[]:[{
-  {{else}}
-  [{
+  {{#if (defined crd)}}crds['{{crd.metadata.name}}'] == undefined || {{/if}}!havePermission('{{group}}','{{ short }}')?[]:[{
+    name: '{{ group }}{{ short }}',
+    title: '{{ short }}', caption: 'List {{ short }}', icon: icon{{ short }},
+  {{#if namespaced}}
+    targetNS: '{{ group }}{{ short }}Table',
   {{/if}}
-    name: '{{ this.group }}{{ this.short }}',
-    title: '{{ this.short }}', caption: 'List {{ this.short }}', icon: icon{{ this.short }},
-  {{#if this.namespaced}}
-    targetNS: '{{ this.group }}{{ this.short }}Table',
-  {{/if}}
-    target: '{{ this.group }}{{ this.short }}{{#if this.namespaced}}All{{/if}}Table', level: 2, children: []
+    target: '{{ group }}{{ short }}{{#if namespaced}}All{{/if}}Table', children: []
   }],
 {{/each}}
   ].flat()
@@ -31,7 +27,7 @@ export const route = {
   name: '{{ category }}{{ name }}',
   redirect: {name: link.target as string},
   meta: {breadcrumb: {{ name }}Title, icon: {{ name }}Icon, ns: false},
-  children: [
+  children: [[
     {
       path: '',
       name: '{{ category }}{{ name }}Dashboard',
@@ -43,48 +39,48 @@ export const route = {
       name: '{{ category }}{{ name }}NSDashboard',
       component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Dashboard.vue'),
       meta: {breadcrumb: 'Dashboard', icon: {{ name }}Icon, ns: true},
-    },
+    }],
 {{#each objects}}
-    {
-      path: '{{ this.short }}',
-      name: '{{ this.group }}{{ this.short }}',
-      meta: {breadcrumb: '{{ this.short }}', icon: icon{{ this.short }}, ns: false},
+    {{#if (defined crd)}}crds['{{crd.metadata.name}}'] == undefined || {{/if}}!havePermission('{{group}}','{{ short }}')?[]:[{
+      path: '{{ short }}',
+      name: '{{ group }}{{ short }}',
+      meta: {breadcrumb: '{{ short }}', icon: icon{{ short }}, ns: false},
       children: [
-  {{#if this.namespaced}}
+  {{#if namespaced}}
         {
           path: '',
-          name: '{{ this.group }}{{ this.short }}AllTable',
-          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}List.vue'),
+          name: '{{ group }}{{ short }}AllTable',
+          component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}List.vue'),
           meta: {breadcrumb: 'All', icon: 'list', ns: false},
         },
   {{/if}}
         {
-          path: '{{#if this.namespaced}}:namespace{{/if}}',
-          name: '{{ this.group }}{{ this.short }}Table',
-          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}List.vue'),
-          meta: {breadcrumb: 'List', icon: 'list', ns: {{toJson this.namespaced}} },
+          path: '{{#if namespaced}}:namespace{{/if}}',
+          name: '{{ group }}{{ short }}Table',
+          component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}List.vue'),
+          meta: {breadcrumb: 'List', icon: 'list', ns: {{toJson namespaced}} },
         },
         {
-          path: '{{#if this.namespaced}}:namespace/{{/if}}view/:name',
-          name: '{{ this.group }}{{ this.short }}View',
-          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}View.vue'),
-          meta: {breadcrumb: 'View', icon: icon{{ this.short }}, ns: {{toJson this.namespaced}} },
+          path: '{{#if namespaced}}:namespace/{{/if}}view/:name',
+          name: '{{ group }}{{ short }}View',
+          component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}View.vue'),
+          meta: {breadcrumb: 'View', icon: icon{{ short }}, ns: {{toJson namespaced}} },
         },
         {
-          path: '{{#if this.namespaced}}:namespace/{{/if}}edit/:name',
-          name: '{{ this.group }}{{ this.short }}Edit',
-          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}Edit.vue'),
-          meta: {breadcrumb: 'Edit', icon: 'visibility', ns: {{toJson this.namespaced}} },
+          path: '{{#if namespaced}}:namespace/{{/if}}edit/:name',
+          name: '{{ group }}{{ short }}Edit',
+          component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}Edit.vue'),
+          meta: {breadcrumb: 'Edit', icon: 'visibility', ns: {{toJson namespaced}} },
         },
         {
-          path: '{{#if this.namespaced}}:namespace/{{/if}}create',
-          name: '{{ this.group }}{{ this.short }}Create',
-          component: () => import('../../pages/{{category}}/{{ this.group }}/{{ this.short }}New.vue'),
-          meta: {breadcrumb: 'Create', icon: 'add', ns: {{toJson this.namespaced}} },
+          path: '{{#if namespaced}}:namespace/{{/if}}create',
+          name: '{{ group }}{{ short }}Create',
+          component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}New.vue'),
+          meta: {breadcrumb: 'Create', icon: 'add', ns: {{toJson namespaced}} },
         }
       ]
-    },
+    }],
 {{/each}}
-  ],
+  ].flat(),
 }
 export default route

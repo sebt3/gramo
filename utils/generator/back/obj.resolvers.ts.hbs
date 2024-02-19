@@ -2,7 +2,12 @@ import k8s from '@kubernetes/client-node';
 import rfc6902  from 'rfc6902';
 import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
 import { lists as listNamespace } from '../k8s/Namespace.js';
+import { lists as listEvent } from '../core/Event.js';
 import { gramoConfig } from '../../config.js'
+import { knowledge } from '../knowledge.js'
+{{#if (and (eq group 'k8s') (eq short 'Namespace'))}}
+import { queries as permissionsQueries } from './permissions.js';
+{{/if}}
 {{#each listTargets}}
 {{#unless (eq name 'Url')}}
 import { lists as list{{group}}{{name}} } from '../{{group}}/{{name}}.js';
@@ -13,6 +18,7 @@ const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
 {{else}}
 const k8sApi = kc.makeApiClient(k8s.{{capitalizeFirstLetter sub}}{{capitalizeFirstLetter apiVersion}}Api);
 {{/if}}
+const short2plural = (short:string) => short.toLowerCase()+'s'
 export const mutations = {
 {{> createResolver ctx=. }}
 {{> deleteResolver ctx=. }}

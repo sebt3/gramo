@@ -34,7 +34,7 @@ const { result, refetch, onResult, onError } = useQuery({{ category }}Query, {
       }
     ]:[]
   }
-}, { pollInterval: 2000 });
+});
 onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {

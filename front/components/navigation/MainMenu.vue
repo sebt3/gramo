@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MainMenuLinks from './MainMenuLinks.vue';
+import RefreshRateSelector from './RefreshRateSelector.vue';
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useNavigationStoreRef } from '../../stores'
@@ -54,6 +55,7 @@ function toggleLeftDrawer() {
           <q-icon name="dashboard" />
         </template>
       </q-select>
+      <RefreshRateSelector />
     </q-toolbar>
   </q-header>
 

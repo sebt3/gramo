@@ -57,7 +57,7 @@ const toNS = props.targetNS!=undefined?{ name: props.targetNS }:props.target!=un
             <q-item-label v-if="caption != ''" caption>{{elude(caption, maxCaptionLength)}}</q-item-label>
           </q-item-section>
         </template>
-          <MainMenuLinks v-for="child in children" :key="`${child.title}`" v-bind="child" />
+          <MainMenuLinks v-for="child in children" :key="`${child.title}`" v-bind="child" :level="level+1" />
       </q-expansion-item>
     </div>
     <div v-else>

@@ -6,7 +6,7 @@
             .filter(o=>parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}'&&r.name==o['metadata']['name']).length>0)
         if (lst.length>0) return lst[0];
 {{/if}}
-{{#if (eq type 'child')}}
+{{#if (and (eq type 'child') (ne targetGroup 'core'))}}
         const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
         return lst.filter(r=>
             r.metadata['ownerReferences']!=null && r.metadata['ownerReferences']!=undefined &&
@@ -20,6 +20,37 @@
                 r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
         );
         if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (and (eq type 'child') (eq targetGroup 'core')) (eq targetShort 'Container'))}}
+        const lst = ((parent['spec'] == undefined || !Array.isArray(parent['spec']['containers']))?[]:parent['spec']['containers']
+                .map(spec=>{return {
+                        namespace: parent['metadata']['namespace'],
+                        pod_name: parent['metadata']['name'],
+                        name: spec['name'],
+                        init: false,
+                        spec,
+                        status: (parent['status'] == undefined || typeof spec['name'] != 'string' || !Array.isArray(parent['status']['containerStatuses']) || parent['status']['containerStatuses'].length<1)?{}:parent['status']['containerStatuses'].filter(s=>s['name']==spec['name'])[0]
+                } })
+            ).concat((parent['spec'] == undefined || !Array.isArray(parent['spec']['initContainers']))?[]:parent['spec']['initContainers']
+                .map(spec=>{return {
+                        namespace: parent['metadata']['namespace'],
+                        pod_name: parent['metadata']['name'],
+                        name: spec['name'],
+                        init: true,
+                        spec,
+                        status: (parent['status'] == undefined || typeof spec['name'] != 'string' || !Array.isArray(parent['status']['initContainerStatuses']) || parent['status']['initContainerStatuses'].length<1)?{}:parent['status']['initContainerStatuses'].filter(s=>s['name']==spec['name'])[0]
+                } })
+            )
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (and (eq type 'get') (eq targetGroup 'core')) (eq targetShort 'Event'))}}
+        const lst = (await listEvent.coreEvent(parent,{...args, namespace: null}))
+  {{#if (and (eq group 'k8s') (eq short 'Namespace'))}}
+             .concat(await listEvent.coreEvent(null,{namespace: parent['metadata']['name'], ...args}))
+  {{else}}
+             .filter(e=>e['involvedObject']['kind']=='{{short}}')
+  {{/if}}
+        if (lst.length>0) return lst;
 {{/if}}
       } catch (err) {
         console.error(err)

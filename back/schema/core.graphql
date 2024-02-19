@@ -28,6 +28,7 @@ input ExcludeInclude {
 input queryParameters {
   filters: [Filter!]
   excludes: [ExcludeInclude!]
+  maxLines: Int
 }
 input metadataMore {
   labels: [Label!]
@@ -80,11 +81,6 @@ type vynilCategory {
   name: String!
   providevynilPackage(params: queryParameters): [vynilPackage!]
 }
-type coreUrl {
-  proto: String
-  host: String
-  path: String
-}
 type vynilPackage {
   name: String!
   commit_id: ID!
@@ -93,8 +89,38 @@ type vynilPackage {
   consumevynilDistrib: vynilDistrib!
   options: JSONObject!
 }
+type coreUrl {
+  proto: String
+  host: String
+  path: String
+}
+type coreEvent {
+  metadata: metadata
+  source: JSONObject
+  involvedObject: JSONObject
+  type: String
+  action: String
+  count: Int
+  message: String
+  reason: String
+  reportingComponent: String
+  reportingInstance: String
+}
+type coreLog {
+  lines: [String]!
+}
+type coreContainer {
+  namespace: String!
+  pod_name: String!
+  name: String!
+  init: Boolean
+  spec: JSONObject
+  status: JSONObject
+  getcoreLog(params: queryParameters): coreLog
+}
 type Query {
   gramoConfig: GramoConfig
+  coreEvent(params: queryParameters): [coreEvent]
   vynilCategory(params: queryParameters): [vynilCategory]
   vynilPackage(params: queryParameters): [vynilPackage]
 }

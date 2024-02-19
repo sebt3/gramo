@@ -11,7 +11,11 @@ export const links:Array<menuLinksProps> = [];
 import { route as {{this}}Route, link as {{this}}Link } from './{{this}}'
 if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
   routeChildren.push({{this}}Route);
+  {{#if (eq this 'system')}}
+  if ({{this}}Route.children?.length>2) links.push({{this}}Link)
+  {{else}}
   links.push({{this}}Link)
+  {{/if}}
   linkRedirect.name = linkRedirect.name!=''?linkRedirect.name:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.name:''
 }
 {{/each}}

@@ -2,13 +2,14 @@
 import { onMounted } from "vue";
 import { elude, getColor, getConditionColor} from "../../libs/core/"
 import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import EventList from '@/components/core/EventList.vue';
 import MonacoViewer from '@/components/core/MonacoViewer.vue';
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 {{#if namespaced}}
-const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 defineEmits(['on-delete']);
 const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean}>(), {
@@ -24,6 +25,7 @@ onMounted(() => {
     <q-tabs v-model="viewer.tab" :class="`bg-${ color{{ short }} } text-grey-2`" active-color="white" align="justify">
       <q-avatar :icon="icon{{ short }}" />
       <q-tab label="{{ short }}" name="meta" />
+      <q-tab label="Events" name="events" v-if="Array.isArray(model['getcoreEvent'])" />
       <q-tab label="Configuration" name="simple" />
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
@@ -34,12 +36,12 @@ onMounted(() => {
       <q-btn-group push class="float-right text-capitalize shadow-3 q-mr-sm" v-if="useActions">
         <q-btn icon="edit"
           @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)"
-          v-if="model.parentReference==null">
+          v-if="model.parentReference==null && can('patch'{{#if namespaced}},model.metadata.namespace{{/if}})">
           <q-tooltip>Edit</q-tooltip>
         </q-btn>
         <q-btn icon="delete"
           @click="$emit('on-delete', model.metadata)"
-          v-if="model.parentReference==null">
+          v-if="model.parentReference==null && can('delete'{{#if namespaced}},model.metadata.namespace{{/if}})">
           <q-tooltip>Delete</q-tooltip>
         </q-btn>
         <q-btn icon="arrow_upward"
@@ -53,7 +55,7 @@ onMounted(() => {
       <q-tab-panel name="meta" :class="`bg-${ color{{ short }} }-1`">
       <div class="q-gutter-md">
 {{> vueNameFields namespaced=namespaced group=group short=short }}
-{{#if (contain readProperties 'status')}}
+{{#if (propertyContain readProperties 'status')}}
 {{> vueStatusFields properties=definition.properties crd=crd }}
 {{/if}}
 {{> vueLabelFields }}
@@ -65,7 +67,7 @@ onMounted(() => {
           :in="model['spec']['options']"
           :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
-  {{#if (eq (length writeProperties) 1)}}
+  {{#if (eq (propertyCount writeProperties) 1)}}
     {{#each writeProperties}}
           :in="model['{{this}}']"
           :properties="getProperties({{ ../short }}Definition.properties.{{this}})"
@@ -78,6 +80,10 @@ onMounted(() => {
           :read-only="true"
           :showdefault="false"
         />
+      </q-tab-panel>
+      <q-tab-panel name="events" :class="`bg-${ color{{ short }} }-1`" v-if="Array.isArray(model['getcoreEvent'])">
+        <EventList :model="model['getcoreEvent']"
+         />
       </q-tab-panel>
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}

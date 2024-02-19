@@ -40,7 +40,7 @@ const setYaml = (v) => editor.value.setYaml(v)
           :in="editor.obj['spec']['options']"
           :properties="new Map(Object.entries(model.consumevynilPackage.options))"
 {{else}}
-  {{#if (and (eq (length writeProperties) 1) (contain writeProperties 'spec'))}}
+  {{#if (and (eq (propertyCount writeProperties) 1) (propertyContain writeProperties 'spec'))}}
           @update:out="(v)=>setkey('spec', sanitizeData(v))"
           :in="editor.obj['spec']"
           :properties="getProperties({{ short }}Definition.properties.spec)"

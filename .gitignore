@@ -18,7 +18,6 @@
 !/front/queries/vynil/InstallPrepare.graphql
 /front/routes/index.ts
 /front/routes/*/*
-/front/components/**/*.ts
 /front/components/**/*.vue
 !/front/components/core/*
 !/front/components/navigation/*
@@ -37,5 +36,3 @@
 !/front/pages/install/vynil/InstallEdit.vue
 !/front/pages/install/vynil/InstallNew.vue
 !/front/pages/install/vynil/installDashboard.vue
-!/front/pages/config/k8s/SecretView.vue
-!/front/pages/config/k8s/SecretEdit.vue

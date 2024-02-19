@@ -1,9 +1,11 @@
 import { QTableColumn } from 'quasar'
+import { usePermissionStore } from '../../stores'
 import { ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
 export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
 export { {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes } from './custom.js'
 import { extra{{short}}Columns } from './custom.js'
 import { stringify, parse } from 'yaml'
+const can = usePermissionStore().can;
 
 export const {{short}}Columns:Array<QTableColumn> = ([
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
@@ -73,6 +75,7 @@ export function use{{ short }}() {
       viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
 {{/each}}
     },
+    can: (verb:string, namespace?:string) => can(verb, '{{group}}', '{{short}}', namespace),
     readProperties: {{toJsonKeys readProperties}},
     writeProperties: {{toJsonKeys writeProperties}},
     navigation: useNavigationStoreRef(),

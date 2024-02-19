@@ -3,10 +3,10 @@ import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
 import {{ group }}{{ short }}Meta from '@/components/{{ group }}/{{ short }}Meta.vue';
 import {{ group }}{{ short }}Edit from '@/components/{{ group }}/{{ short }}Edit.vue';
-{{#if (contain readProperties 'status')}}
+{{#if (propertyContain readProperties 'status')}}
 import {{ group }}{{ short }}Status from '@/components/{{ group }}/{{ short }}Status.vue';
 {{/if}}
-import { useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+import { ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
 const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
@@ -35,6 +35,75 @@ const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Qu
 {{/if}}
 });
 const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
+const model = ref({});
+onResult(res => {
+  if ( !res.loading ) {
+    onNot{{ short }}Found(res);
+    if (res.data!=undefined{{#if namespaced}} && Array.isArray(res.data.k8sNamespace) {{/if}} && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null) {
+      model.value = res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]
+    }
+    {{#if (eq group 'cattle')}}
+{{> cattleCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'certmanager')}}
+{{> certmanagerCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'cilium')}}
+{{> ciliumCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'jaegertracing')}}
+{{> jaegertracingCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'mariadb')}}
+{{> mariadbCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'mongodb')}}
+{{> mongodbCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'opentelemetry')}}
+{{> opentelemetryCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'oracle')}}
+{{> oracleCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'projectcalico')}}
+{{> projectcalicoCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'rabbitmq')}}
+{{> rabbitmqCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'zalando')}}
+{{> zalandoCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{/if}}
+  }
+});
 function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patch{{ short }}({
@@ -45,32 +114,34 @@ function onSubmit(obj:object) {
 {{/if}}
   });
 }
-onError(onErrorHandler);onResult(onNot{{ short }}Found);onPatch{{ short }}(patchDone);onPatchError(patchError);
+onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
 </script>
 <template>
-  <div class="row q-mb-sm q-ml-sm">
-{{#if (contain readProperties 'status')}}
+  <div class="row q-ml-sm">
+{{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">
 {{else}}
     <div class="col-md-12">
 {{/if}}
       <{{ group }}{{ short }}Meta :useActions="false" :showStatus="false"
-        v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
-        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        v-if="!loading && model['metadata'] != undefined"
+        :model="model"
        />
     </div>
-{{#if (contain readProperties 'status')}}
+{{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">
       <{{ group }}{{ short }}Status
-        v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
-        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        v-if="!loading && model['metadata'] != undefined"
+        :model="model"
        />
     </div>
 {{/if}}
+  </div>
+  <div class="row q-ml-sx">
     <div class="col-md-12">
       <{{ group }}{{ short }}Edit
-        v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
-        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        v-if="!loading && model['metadata'] != undefined"
+        :model="model"
         @on-submit="onSubmit"
        />
     </div>

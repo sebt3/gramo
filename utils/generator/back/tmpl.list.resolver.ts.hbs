@@ -1,10 +1,26 @@
 {{#with ctx}}
     {{group}}{{short}}: async (_parent, args: object) => {
   {{#if namespaced}}
-        let lst:Array<object>|undefined = cache.get(`{{short}}.${args['namespace']}`)
+        let lst:Array<object>|undefined = cache.get(`{{group}}{{short}}.${args['namespace']}`)
+        const perms = (cache.get(`permissions.${args['namespace']}`)) as { apiGroup: string, resource: string, verb: string }[];
   {{else}}
-        let lst:Array<object>|undefined = cache.get('{{short}}')
+        let lst:Array<object>|undefined = cache.get('{{group}}{{short}}')
+        const perms = (cache.get(`permissions`)) as { apiGroup: string, resource: string, verb: string }[];
   {{/if}}
+        if (perms!=undefined && lst==undefined) {
+          if(!perms.reduce((res,perm) => res||((perm.verb=='*'||perm.verb=='list')&&(
+            (perm.resource=='*' && perm.apiGroup=='*') ||
+            (perm.resource=='*' && knowledge.filter(o=>o.group=='{{group}}'&&o.short=='{{short}}'&&perm.apiGroup==o.apiGroup).length>0) ||
+            (knowledge.filter(o=>o.group=='{{group}}'&&o.short=='{{short}}'&&(perm.apiGroup=='*'||perm.apiGroup==o.apiGroup)).map(o=>short2plural(o.short)).includes(perm.resource))
+          )), false)) {
+  {{#if namespaced}}
+              cache.set(`{{group}}{{short}}.${args['namespace']}`, [], 60);
+  {{else}}
+              cache.set('{{group}}{{short}}', [], 60);
+  {{/if}}
+              return []
+          }
+        }
         if (lst==undefined) {
             try {
 {{#if (defined crd)}}
@@ -27,15 +43,35 @@
   {{/if}}
 {{/each}}
   {{#if namespaced}}
-                cache.set(`{{short}}.${args['namespace']}`, lst, 2);
+                cache.set(`{{group}}{{short}}.${args['namespace']}`, lst, 2);
   {{else}}
-                cache.set('{{short}}', lst, 2);
+    {{#if (and (eq group 'k8s') (eq short 'Namespace'))}}
+                // Limit the namespace list to the one the account have permissions into
+                const nsObject = knowledge.filter(o=>o.namespaced);
+                const shouldInclude = Object.fromEntries(await Promise.all(lst.map(n=>n['metadata']['name']).map(async (namespace)=>{
+                  const perms = await permissionsQueries.permissionReview(null, {namespace})
+                  const allPerms = perms['resourceRules'].map(r=>r.apiGroups.map(apiGroup=>r.resources.map(resource=>r.verbs.map(verb=>{return {apiGroup,resource,verb} })).flat()).flat()).flat()
+                          .filter(p=>!['authorization.k8s.io','authentication.k8s.io'].includes(p.apiGroup) && p.resource != 'selfsubjectaccessreviews').flat()
+                  const nsPerms = allPerms.filter(l=>l.apiGroup=='*'||l.resource=='*'||nsObject.filter(o=>o.apiGroup==l.apiGroup&&short2plural(o.short)==l.resource).length>0)
+                  cache.set(`permissions.${namespace}`, nsPerms, 7200);
+                  cache.set('permissions', allPerms.filter(l=>l.apiGroup=='*'||l.resource=='*'||nsObject.filter(o=>o.apiGroup==l.apiGroup&&short2plural(o.short)==l.resource).length<1), 7200);
+                  return [namespace, nsPerms.length>0]
+                })))
+                const final = lst.filter(n=>shouldInclude[n['metadata']['name']])
+                cache.set('{{group}}{{short}}', final, 2);
+                return final.filter(o=>applyFilter(o,args)).map(o=>applyFieldSelection(o,args))
+    {{else}}
+                cache.set('{{group}}{{short}}', lst, 2);
+    {{/if}}
   {{/if}}
             } catch (err) {
-                if (typeof err === 'object') {
-                  if ((err as object)['body'] ==undefined || (err as object)['body']['reason']!='Forbidden')
-                    console.error((err as object)['body']);
-                } else {console.error(err)}
+                if (typeof err === 'object' && (err as object)['body'] !=undefined) {
+                  if ((err as object)['body']['reason']!='Forbidden') {
+                    console.error('error', (err as object)['body']);
+                  } else {
+                    cache.set('{{group}}{{short}}', [], 2);
+                  }
+                } else {console.error('error', err)}
                 return []
             }
         }

@@ -1,0 +1,8 @@
+export const knowledge = [
+  { name: '', short: 'Event', category: 'system', group: 'core', apiGroup: '', namespaced: true, apiKind: 'Event', apiVersion: 'v1' },
+{{#each groups}}
+  {{#each objects}}
+  { name: '{{name}}', short: '{{short}}', category: '{{category}}', group: '{{group}}', apiGroup: '{{apiGroup}}', namespaced: {{toJson namespaced}}, apiKind: '{{apiKind}}', apiVersion: '{{apiVersion}}' },
+  {{/each}}
+{{/each}}
+];

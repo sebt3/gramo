@@ -24,7 +24,7 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
 {{#if detailed}}
   {{#each resolvers}}
       {{name}}(params: ${{name}}) {
-    {{#if (or (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (and (eq resultGroup 'core') (eq resultShort 'Url')))}}
+    {{#if (or (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
       {{#if (eq resultShort 'Package')}}
         name
         commit_id
@@ -46,6 +46,36 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
         proto
         host
         path
+      {{/if}}
+      {{#if (eq resultShort 'Container')}}
+        namespace
+        pod_name
+        name
+        init
+        spec
+        status
+        getcoreLog(params: $childcoreContainer) {
+          lines
+        }
+      {{/if}}
+      {{#if (eq resultShort 'Event')}}
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        source
+        involvedObject
+        type
+        action
+        count
+        message
+        reason
+        reportingComponent
+        reportingInstance
       {{/if}}
     {{else}}
         metadata {

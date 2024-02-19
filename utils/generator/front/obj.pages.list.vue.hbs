@@ -3,6 +3,7 @@ import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
 import {{ group }}{{ short }}List from '@/components/{{ group }}/{{ short }}List.vue';
 import { useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+import { watch } from 'vue';
 {{#if namespaced}}
 const { actionDelete, deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
@@ -19,12 +20,12 @@ const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
       }
     ]:[]
   }
-}, { pollInterval: 2000 });
+}, navigation.refreshOption);
 {{else}}
 const { actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler } = use{{ short }}();
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {}
-}, { pollInterval: 2000 });
+}, navigation.refreshOption);
 {{/if}}
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);

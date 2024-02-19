@@ -82,6 +82,7 @@ const equity = [
     {algo: 'pvc', group: 'k8s', short: 'PersistentVolume', parentGroup: 'k8s', parentShort: 'PersistentVolumeClaim'},
 ];
 const children = [
+    {algo: 'k8s', group: 'core', short: 'Container', parentGroup: 'k8s', parentShort: 'Pod'},
     {algo: 'certmanager', group: 'certmanager', short: 'CertificateRequest', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'k8s', group: 'k8s', short: 'ReplicaSet', parentGroup: 'k8s', parentShort: 'Deployment'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'ReplicaSet'},
@@ -135,6 +136,7 @@ export const autoTargetResolvers = ([
     {algo: 'fluxcd',type: 'child',group: 'fluxcd', short: 'Kustomization', path: null},
 ] as autoTargetResolver[]);
 export const autoAllResolvers = ([
+    {algo: 'k8s', type: 'get', targetGroup: 'core', targetShort: 'Event'},
     {algo: 'vynil', type: 'parent', targetGroup: 'vynil', targetShort: 'Install'},
     {algo: 'fluxcd', type: 'parent', targetGroup: 'fluxcd', targetShort: 'Kustomization'},
 ] as autoAllResolver[]);

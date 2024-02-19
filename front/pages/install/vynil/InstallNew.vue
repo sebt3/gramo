@@ -1,16 +1,28 @@
 <script setup lang="ts">
 // noGramoGenerator
-import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
 import InstallNew from '@/queries/vynil/Install.create.graphql'
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
 import MetadataNew from '@/components/core/MetadataNew.vue';
 import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
-import { ref, useMutation, useInstall, InstallDefinition, useQuery, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
-import { addByPath, getByPath } from '../../../libs/core';
-const { onlyWriteProperties, editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
+import { ref, useMutation, useInstall, InstallDefinition, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
+const name = ref('');
+const form = ref(null);
+const { editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
 const { mutate, onDone, onError } = useMutation(InstallNew);
-const { result, loading, onResult } = useQuery(installPrepare,{
+onDone(() => {
+  notifySuccess('Creation proceded');
+  router.go(-1);
+})
+onError((err) => {
+  notifyError('Creation failed');
+  console.log('mutation error',err);
+})
+
+import { useQuery } from '@/libs/vynil/Install.js'
+import { addByPath, getByPath } from '../../../libs/core';
+import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
+import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
+import MonacoEditor from '@/components/core/MonacoEditor.vue';
+const { result, loading } = useQuery(installPrepare,{
   "namespace": {
     "filters": [{
       "op": "eq",
@@ -20,28 +32,13 @@ const { result, loading, onResult } = useQuery(installPrepare,{
   }
 });
 const options = ref({});
-const name = ref('');
-const form = ref(null);
 const stepper = ref(null);
 const step = ref(1);
 const category = ref("");
 const component = ref("");
 const distrib = ref("");
-/*onResult(res => {
-  if ( !res.loading ) {
-
-  }
-});*/
 const setkey = (key:string, v) => editor.value.setKey(key, v)
 const setYaml = (v) => editor.value.setYaml(v)
-onDone(() => {
-  notifySuccess('Creation proceded');
-  router.go(-1);
-})
-onError((err) => {
-  notifyError('Creation failed');
-  console.log('mutation error',err);
-})
 function onFinalSubmit() {
   notifyWorking('Create in progress');
   mutate({

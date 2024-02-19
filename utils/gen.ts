@@ -37,7 +37,26 @@ loadPartial('listResolver', path.resolve(path_lib, 'back', 'tmpl.list.resolver.t
 loadPartial('vueStatusFields', path.resolve(path_lib, 'front', 'tmpl.status.fields.vue.hbs'));
 loadPartial('vueLabelFields', path.resolve(path_lib, 'front', 'tmpl.labels.fields.vue.hbs'));
 loadPartial('vueNameFields', path.resolve(path_lib, 'front', 'tmpl.name.fields.vue.hbs'));
-
+loadPartial('cattleCustom', path.resolve(path_lib, 'front', 'tmpl.customs.cattle.hbs'));
+loadPartial('certmanagerCustom', path.resolve(path_lib, 'front', 'tmpl.customs.certmanager.hbs'));
+loadPartial('ciliumCustom', path.resolve(path_lib, 'front', 'tmpl.customs.cilium.hbs'));
+loadPartial('cnpgCustom', path.resolve(path_lib, 'front', 'tmpl.customs.cnpg.hbs'));
+loadPartial('fluxcdCustom', path.resolve(path_lib, 'front', 'tmpl.customs.fluxcd.hbs'));
+loadPartial('jaegertracingCustom', path.resolve(path_lib, 'front', 'tmpl.customs.jaegertracing.hbs'));
+loadPartial('k8sCustom', path.resolve(path_lib, 'front', 'tmpl.customs.k8s.hbs'));
+loadPartial('k8upCustom', path.resolve(path_lib, 'front', 'tmpl.customs.k8up.hbs'));
+loadPartial('mariadbCustom', path.resolve(path_lib, 'front', 'tmpl.customs.mariadb.hbs'));
+loadPartial('mongodbCustom', path.resolve(path_lib, 'front', 'tmpl.customs.mongodb.hbs'));
+loadPartial('monitoringCustom', path.resolve(path_lib, 'front', 'tmpl.customs.monitoring.hbs'));
+loadPartial('opentelemetryCustom', path.resolve(path_lib, 'front', 'tmpl.customs.opentelemetry.hbs'));
+loadPartial('oracleCustom', path.resolve(path_lib, 'front', 'tmpl.customs.oracle.hbs'));
+loadPartial('projectcalicoCustom', path.resolve(path_lib, 'front', 'tmpl.customs.projectcalico.hbs'));
+loadPartial('rabbitmqCustom', path.resolve(path_lib, 'front', 'tmpl.customs.rabbitmq.hbs'));
+loadPartial('redisCustom', path.resolve(path_lib, 'front', 'tmpl.customs.redis.hbs'));
+loadPartial('secretgeneratorCustom', path.resolve(path_lib, 'front', 'tmpl.customs.secretgenerator.hbs'));
+loadPartial('traefikCustom', path.resolve(path_lib, 'front', 'tmpl.customs.traefik.hbs'));
+loadPartial('vynilCustom', path.resolve(path_lib, 'front', 'tmpl.customs.vynil.hbs'));
+loadPartial('zalandoCustom', path.resolve(path_lib, 'front', 'tmpl.customs.zalando.hbs'));
 ////////////////////////////////////
 //// Load the data
 ///
@@ -58,6 +77,7 @@ new Promise((resolve) => {
 //// Generate the backend
 ///
 // Use the defined templates with the generated enhenced data to build the backend
+    const allKnown          = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.known.ts.hbs'))
     const allBackIndex      = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.resolvers.index.ts.hbs'))
     const allBackResolvers  = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.resolvers.ns.resolvers.ts.hbs'))
     const allBackSchemaNS   = loadCompile(deleteFiles, path.resolve(path_lib, 'back', 'all.schema.ns.graphql.hbs'))
@@ -70,6 +90,7 @@ new Promise((resolve) => {
     mkdir(path.resolve(path_back, 'schema'));
     mkdir(path.resolve(path_back, 'resolvers', 'k8s'));
     const current = data as {name:string,objects:{short:string}[]}[];
+    allKnown(path.resolve(path_back, 'resolvers'), `knowledge.ts`, {groups: current})
     allBackIndex(path.resolve(path_back, 'resolvers'), 'index.ts',{groups: current});
     allBackResolvers(path.resolve(path_back, 'resolvers', 'k8s'), `nsResolvers.ts`,{groups: current});
     allBackSchemaNS(path.resolve(path_back, 'schema'), `k8sNamespace.graphql`,{groups: current});
@@ -93,6 +114,7 @@ new Promise((resolve) => {
     const objQueryMutation  = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.query.mutation.graphql.hbs'))
     const objQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.query.read.graphql.hbs'))
     const grpQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.query.read.graphql.hbs'))
+    const allKnown          = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.known.ts.hbs'))
     const allRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.routes.ts.hbs'))
     const catRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'cat.routes.ts.hbs'))
     const grpPageList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.pages.list.vue.hbs'))
@@ -110,6 +132,7 @@ new Promise((resolve) => {
     const objLib            = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.lib.ts.hbs'))
 
     const current = data as {name:string,objects:{short:string, category:string, readProperties:string[]}[]}[];
+    allKnown(path.resolve(path_front, 'libs'), `knowledge.ts`, {groups: current})
     allRoutes(path.resolve(path_front, 'routes'), `index.ts`, {groups: current, categories: allCategories})
     allCategories.forEach(c=>{
         if (!deleteFiles) mkdir(path.resolve(path_front, 'routes', c));

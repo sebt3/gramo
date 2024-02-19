@@ -449,7 +449,7 @@ const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {
       }
     ]
   }
-}, { pollInterval: 2000 });onError(onErrorHandler);
+}, navigation.refreshOption);onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(InstallDelete);
 const conditions = ref({
   "userscoreUrl": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['vynilInstall']).flat().map(ns=>ns['childk8sIngress']).flat().filter(x=>x!=null).map(obj=>obj['userscoreUrl']).flat().filter(o=>o!=null).length>0,

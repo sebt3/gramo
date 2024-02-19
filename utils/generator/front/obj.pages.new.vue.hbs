@@ -8,9 +8,9 @@ const name = ref('');
 const form = ref(null);
 const obj  = ref({});
 {{#if namespaced}}
-const { router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setNamespacedItemFromRoute();
+const { editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
-const { router, navigation, setItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setItemFromRoute();
+const { editor, router, navigation, setItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setItemFromRoute();
 {{/if}}
 const { mutate, onDone, onError } = useMutation({{ short }}New);
 onDone(() => {

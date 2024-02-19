@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TableHeader from '@/components/core/TableHeader.vue';
 import { ref, use{{ short }}, {{ short }}Columns{{#if namespaced}}, {{ short }}AllColumns{{/if}} } from '../../libs/{{ group }}/{{ short }}.js'
-const { actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
+const { can, actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 let filter = ref('');
 defineEmits(['refresh','on-delete']);
@@ -12,8 +12,8 @@ withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: bool
 });
 </script>
 <template>
-  <q-card class="q-ma-sm" bordered>
-    <TableHeader title="{{ short }}" :icon="icon{{ short }}" :class="`bg-${ color{{ short }} }`" :usecreate="useAction" :userefresh="useRefresh" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
+  <q-card bordered class="q-ma-sm">
+    <TableHeader title="{{ short }}" :icon="icon{{ short }}" :class="`bg-${ color{{ short }} }`" :usecreate="useAction&&can('create'{{#if namespaced}},navigation.currentNamespace.value{{/if}})" :userefresh="useRefresh" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
     <q-card-section class="q-pa-none">
     <q-table :rows="model" :class="`bg-${ color{{ short }} }-1`" :columns="{{#if namespaced}}(showNamespace||!isNamespaced())?{{ short }}AllColumns:{{/if}}{{ short }}Columns.filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
 {{#if namespaced}}
@@ -23,6 +23,66 @@ withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: bool
           </q-td>
         </template>
 {{/if}}
+    {{#if (eq group 'cattle')}}
+{{> cattleCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'certmanager')}}
+{{> certmanagerCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'cilium')}}
+{{> ciliumCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'jaegertracing')}}
+{{> jaegertracingCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'mariadb')}}
+{{> mariadbCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'mongodb')}}
+{{> mongodbCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'opentelemetry')}}
+{{> opentelemetryCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'oracle')}}
+{{> oracleCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'projectcalico')}}
+{{> projectcalicoCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'rabbitmq')}}
+{{> rabbitmqCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. operation='templateColumns'}}
+    {{/if}}
+    {{#if (eq group 'zalando')}}
+{{> zalandoCustom ctx=. operation='templateColumns'}}
+    {{/if}}
         <template v-slot:body-cell-Name="props">
           <q-td :props="props">
             <router-link :to="{ name: '{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: props.row.metadata.namespace, {{/if}}name: props.row.metadata.name }}">\{{ props.row.metadata.name }}</router-link>
@@ -32,12 +92,12 @@ withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: bool
           <q-td :props="props">
             <q-btn icon="edit" size="sm" class="q-ml-sm" flat dense
               @click="toEdit({{#if namespaced}}props.row.metadata.namespace, {{/if}}props.row.metadata.name)"
-              v-if="props.row.parentReference==null">
+              v-if="props.row.parentReference==null && can('patch'{{#if namespaced}},props.row.metadata.namespace{{/if}})">
               <q-tooltip>Edit {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
             </q-btn>
             <q-btn icon="delete" size="sm" class="q-ml-sm" flat dense
               @click="$emit('on-delete', props.row.metadata)"
-              v-if="props.row.parentReference==null">
+              v-if="props.row.parentReference==null && can('delete'{{#if namespaced}},props.row.metadata.namespace{{/if}})">
               <q-tooltip>Delete {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
             </q-btn>
             <q-btn icon="arrow_upward" size="sm" class="q-ml-sm" flat dense

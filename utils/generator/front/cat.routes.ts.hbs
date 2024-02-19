@@ -17,8 +17,7 @@ if (Array.isArray({{ this.name }}Link.children) && {{ this.name }}Link.children.
 export const link:menuLinksProps = {
   title: {{ category }}Title, caption: {{ category }}Desc, icon: {{ category }}Icon,
   name: '{{category}}',
-  level: 0,
-  children: linkChildren
+  children: linkChildren.length>1?linkChildren:linkChildren.length<1?[]:linkChildren[0].children
 }
 export const route = {
   path: '{{ lower category }}',

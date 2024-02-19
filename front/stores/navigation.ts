@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 
 export const useNavigationStore = defineStore('navigation', () => {
   const nss_local:Array<string> = []
+  const refreshOption = ref({pollInterval: 2000} as {pollInterval: number|undefined})
   const namespaces = ref(nss_local)
   const currentNamespace = ref('')
   const currentItem = ref('')
@@ -18,7 +19,10 @@ export const useNavigationStore = defineStore('navigation', () => {
   function setCurrentItem(name:string) {
     currentItem.value = name
   }
-  return { namespaces, currentNamespace, currentItem, namespace, item, setNamespaces, setCurrentNamespace, setCurrentItem }
+  function setPoolInterval(interval:number|undefined) {
+    refreshOption.value.pollInterval=interval
+  }
+  return { refreshOption, namespaces, currentNamespace, currentItem, namespace, item, setNamespaces, setCurrentNamespace, setCurrentItem, setPoolInterval}
 })
 export function useNavigationStoreRef() { return storeToRefs(useNavigationStore()) }
 export default useNavigationStore

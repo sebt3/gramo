@@ -108,7 +108,7 @@ const { result, refetch, onResult, onError } = useQuery(automationQuery, {
       }
     ]:[]
   }
-}, { pollInterval: 2000 });
+}, navigation.refreshOption);
 onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {

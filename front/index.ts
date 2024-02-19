@@ -69,13 +69,13 @@ apolloClient.query({query: GramoConfig}).then(res => {
     createApp().then((app) => {
         const {setConfig} = useConfigStore();
         const {setCurrentNamespace,setNamespaces} = useNavigationStore();
-        const {setPermissions} = usePermissionStore();
+        const {setPermissions, namespaces} = usePermissionStore();
         const {setCRDs} = useCRDStore();
         setConfig(res.data.gramoConfig)
         setPermissions(Object.fromEntries(res.data.k8sNamespace.map(ns => {return [ns.metadata.name, ns.permissions]})))
         setCurrentNamespace(res.data.gramoConfig.defaultNamespace)
         setCRDs(Object.fromEntries(res.data.k8sCustomResourceDefinition.map(crd => {return[crd.metadata.name, {group: crd.group, names:crd.names, versions:crd.versions}]})))
-        setNamespaces(res.data.k8sNamespace.map(ns => ns.metadata.name))
+        setNamespaces(namespaces())
         useRoute(app).then(app =>{app.mount('#app')});
     });
 });

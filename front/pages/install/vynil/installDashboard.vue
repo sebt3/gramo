@@ -34,7 +34,7 @@ const { result, refetch, onResult, onError } = useQuery(installQuery, {
       }
     ]:[]
   }
-}, { pollInterval: 2000 });
+});
 onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {
@@ -49,7 +49,6 @@ onResult((res) => {
                                       .map(d=> flat.map(l => l.category).filter((v,i,a)=>a.indexOf(v) === i)
                                         .map(c=>{return{category:c, distrib:d, value: flat.filter(i => i.category==c && i.distrib==d).length}}))
                                     .reduce((res, value) => res.concat(value), []))
-    console.log(CatDistCount.value)
     ready.value = true;
   }
 })

@@ -20,7 +20,7 @@ import { {{ name }}ReadExcludes as {{ group }}{{ name }}ListExcludes } from '../
 import { {{ name }}ListExcludes as {{ group }}{{ name }}ListExcludes } from '../../../libs/{{ group }}/custom.js'
   {{/if}}
 {{/each}}
-import { ref, useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+import { ref, sanitizeData, useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
 const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
@@ -50,7 +50,7 @@ const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Qu
     ]
   }
 {{/if}}
-}, { pollInterval: 2000 });onError(onErrorHandler);
+}, navigation.refreshOption);onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 const conditions = ref({
 {{#each resolvers}}
@@ -73,13 +73,78 @@ const sectionCounts = ref({
   consumeLeft: 0,
   parent: 0,
   consumeRight: 0,
+  gets: 0,
   users: 0,
   uses: 0,
   bellow: 0
 });
+const model = ref({});
 onResult(res => {
   onNot{{ short }}Found(res);
   if ( !res.loading ) {
+    if (res.data!=undefined{{#if namespaced}} && Array.isArray(res.data.k8sNamespace) {{/if}} && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null) {
+      model.value = res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]
+    }
+    {{#if (eq group 'cattle')}}
+{{> cattleCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'certmanager')}}
+{{> certmanagerCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'cilium')}}
+{{> ciliumCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'jaegertracing')}}
+{{> jaegertracingCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'mariadb')}}
+{{> mariadbCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'mongodb')}}
+{{> mongodbCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'opentelemetry')}}
+{{> opentelemetryCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'oracle')}}
+{{> oracleCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'projectcalico')}}
+{{> projectcalicoCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'rabbitmq')}}
+{{> rabbitmqCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
+    {{#if (eq group 'zalando')}}
+{{> zalandoCustom ctx=. page='view' operation='dataPrepare'}}
+    {{/if}}
 {{#each resolvers}}
   {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'Distrib')))}}
     sectionCounts.value.consumeLeft += conditions.value["{{name}}"](res.data)?1:0;
@@ -128,7 +193,7 @@ onDeleteError((err) => {
     <div class="col-md-4" v-if="!loading && sectionCounts.parent>0">
 {{#each resolvers}}
   {{#if (eq type 'parent')}}
-    <div v-if="!loading && conditions['{{name}}'](result)">
+    <div v-if="!loading && conditions['{{name}}'](result){{#if (eq resultShort 'Install')}}&&sectionCounts.parent==1{{/if}}">
       <{{ resultGroup }}{{ resultShort }}Meta :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
        />
@@ -161,8 +226,8 @@ onDeleteError((err) => {
     </div>
     <div :class="`col-md-${6+(sectionCounts.uses<1?2:0)+(sectionCounts.users<1?2:0)}`">
       <div><{{ group }}{{ short }}View :useActions="true"
-        v-if="!loading && result!=undefined{{#if namespaced}} && Array.isArray(result.k8sNamespace) {{/if}} && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null"
-        :model="result{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]"
+        v-if="!loading && model['metadata'] != undefined"
+        :model="sanitizeData(model)"
         @on-delete="(meta)=>{actionDelete(deletor, meta)}"
         /></div>
 {{#each resolvers}}

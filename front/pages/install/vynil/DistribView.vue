@@ -30,7 +30,7 @@ const { result, loading, onResult, onError } = useQuery(vynilDistribQuery, {
   "providevynilPackage": {"filters": [], "excludes": []},
   "providevynilCategory": {"filters": [], "excludes": []},
   "providevynilInstall": {"filters": [], "excludes": InstallSimpleExcludes},
-}, { pollInterval: 2000 });onError(onErrorHandler);
+}, navigation.refreshOption);onError(onErrorHandler);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(DistribDelete);
 const conditions = ref({
   "providevynilPackage": (data) => Array.isArray(data['vynilDistrib']) && data['vynilDistrib'].map(obj=>obj['providevynilPackage']).flat().length>0,
