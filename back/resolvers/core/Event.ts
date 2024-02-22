@@ -23,7 +23,7 @@ export const lists = {
     if (lst==undefined) {
       try {
         const res = await k8sApi.listEventForAllNamespaces()
-        lst = ((res as object)['body']['items'] as Array<object>)
+        lst = ((res as object)['body']['items'] as Array<object>).sort((a,b) => new Date(a['metadata']['creationTimestamp'])<new Date(b['metadata']['creationTimestamp'])?1:-1)
         cache.set('coreEvent', lst, 2);
       } catch (err) {
         if (typeof err === 'object' && (err as object)['body'] !=undefined) {
@@ -34,7 +34,7 @@ export const lists = {
               const nss = await listNamespace.k8sNamespace(parent, args)
               const lst = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
                 return (await k8sApi.listNamespacedEvent(ns)).body.items
-              }))).flat().filter((v)=>v!=null)
+              }))).flat().filter((v)=>v!=null).sort((a,b) => new Date((a['metadata'] as object)['creationTimestamp'])<new Date((b['metadata'] as object)['creationTimestamp'])?1:-1)
               cache.set('coreEvent', lst, 2);
               return lst.filter(o=>typeof parent != 'object' || parent==null || (
                           o['involvedObject']!=undefined && o['involvedObject']['name'] == parent['metadata']['name'] && o['involvedObject']['namespace'] == parent['metadata']['namespace']

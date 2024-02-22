@@ -32,7 +32,7 @@ function onAdd() {
 }
 </script>
 <template>
-  <q-dialog v-model="prompt" persistent>
+  <q-dialog v-model="prompt" persistent v-if="!readOnly">
     <q-card style="min-width: 350px">
       <q-card-section>
         <div class="text-subtitle">New property name</div>

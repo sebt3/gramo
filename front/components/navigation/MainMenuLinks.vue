@@ -41,7 +41,7 @@ const toNS = props.targetNS!=undefined?{ name: props.targetNS }:props.target!=un
 </script>
 <template>
     <div v-if="children != undefined && children.length > 0"  :class="`${getLevel0Color(props.name)==''?'':'bg-'+getLevel0Color(props.name)+'-1'}`">
-      <q-expansion-item ref="expansionItem"
+      <q-expansion-item ref="expansionItem" class="column"
           expand-separator
           :header-inset-level="level"
           :key="`${isNamespaced()}-first`"
@@ -57,7 +57,9 @@ const toNS = props.targetNS!=undefined?{ name: props.targetNS }:props.target!=un
             <q-item-label v-if="caption != ''" caption>{{elude(caption, maxCaptionLength)}}</q-item-label>
           </q-item-section>
         </template>
-          <MainMenuLinks v-for="child in children" :key="`${child.title}`" v-bind="child" :level="level+1" />
+        <div class="column">
+          <MainMenuLinks v-for="child in children" :key="`${child.title}`" v-bind="child" :level="level+1"  :style="child.order?`order: ${child.order}`:undefined" />
+        </div>
       </q-expansion-item>
     </div>
     <div v-else>

@@ -12,7 +12,7 @@ const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUp
 const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
 {{/if}}
 defineEmits(['on-delete']);
-const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean}>(), {
+const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean, origin?:string}>(), {
   useActions: false,
   showLink: false,
 });
@@ -36,7 +36,7 @@ onMounted(() => {
       <q-btn-group push class="float-right text-capitalize shadow-3 q-mr-sm" v-if="useActions">
         <q-btn icon="edit"
           @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)"
-          v-if="model.parentReference==null && can('patch'{{#if namespaced}},model.metadata.namespace{{/if}})">
+          v-if="(model.parentReference==null || (model['metadata']['annotations'] != undefined && model['metadata']['annotations']['gramo.solidite.fr/no-parent'] == 'true' )) && can('patch'{{#if namespaced}},model.metadata.namespace{{/if}})">
           <q-tooltip>Edit</q-tooltip>
         </q-btn>
         <q-btn icon="delete"

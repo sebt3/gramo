@@ -65,12 +65,12 @@
       <q-field label="Status" stack-label borderless>
         <template v-slot:prepend><q-icon name="done" /></template>
         <template v-slot:control>
-          <q-chip class="float-right text-white text-capitalize" label="Ok" color="positive" v-if="model.status.errors.length==0"></q-chip>
-          <q-chip class="float-right text-white text-capitalize" label="Errors" color="negative" v-if="model.status.errors.length>0"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" label="Ok" color="positive" v-if="model.status.errors && model.status.errors.length==0"></q-chip>
+          <q-chip class="float-right text-white text-capitalize" label="Errors" color="negative" v-if="model.status.errors && model.status.errors.length>0"></q-chip>
         </template>
       </q-field>
   {{/if}}
-      <q-field label="Errors" stack-label borderless v-if="model.status.errors.length>0">
+      <q-field label="Errors" stack-label borderless v-if="model.status.errors && model.status.errors.length>0">
         <template v-slot:prepend><q-icon name="error" /></template>
         <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
           <div v-for="err in model.status.errors" v-bind:key="err">{{ err }}</div>

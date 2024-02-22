@@ -12,7 +12,7 @@
           <template v-slot:prepend><q-icon name="smart_button" /></template>
           <template v-slot:control>
             <div class="self-center full-width no-outline" v-if="showLink">
-              <router-link :to="{ name: '{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: model.metadata.namespace,{{/if}} name: model.metadata.name } }">\{{ model.metadata.name }}</router-link>
+              <router-link :to="{ name: origin?`{{ group }}{{ short }}ViewFrom${origin}`:'{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: model.metadata.namespace,{{/if}} name: model.metadata.name } }">\{{ model.metadata.name }}</router-link>
             </div>
             <div class="self-center full-width no-outline" v-if="!showLink">\{{ model.metadata.name }}</div>
           </template>

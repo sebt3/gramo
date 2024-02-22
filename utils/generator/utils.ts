@@ -1,6 +1,6 @@
 import {HashMap,openapiDefinition} from './types.js'
 import {k8sDefinitionProperties, k8sDefinitionPropertiesVersion, openapiDefinitionPropertiesDef, unspeciedObject, k8sObject} from './types.js'
-import {toExtraResolvers, autoTargetResolvers, extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
+import {objectsOrder, toExtraResolvers, autoTargetResolvers, extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
 import * as fs from 'fs';
 
 export function getTargetVersion(versions: Array<k8sDefinitionPropertiesVersion>) {
@@ -121,14 +121,16 @@ export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
     const autos = autoResolvers.filter(r=>r.group==obj.group&&r.short==obj.short)
         .concat(autoAllResolvers.map(a=>{return {group:obj.group, short: obj.short,...a}}))
         .concat(autoTargetResolvers.filter(r=>r.group==obj.group&&r.short==obj.short).map(r=>all.map(o=>{return {
-        algo: r.algo, type: r.type, group: obj.group, short: obj.short, targetGroup: o.group, targetShort: o.short, path: r.path
+        algo: r.algo, type: r.type, inverse: r.inverse, group: obj.group, short: obj.short, targetGroup: o.group, targetShort: o.short, path: r.path
     }})).flat())
+    const category = categoryMappingShort[obj.short]!=undefined?categoryMappingShort[obj.short]:categoryMappingGroup[obj.group]!=undefined?categoryMappingGroup[obj.group]:'varia';
     return {
         ...obj,
         alternatives: obj['alternatives'].length>1?obj['alternatives']:[],
+        order: objectsOrder.filter(x=>x['category']==category&&x['group']==obj.group).length<1?null:objectsOrder.filter(x=>x['category']==category&&x['group']==obj.group)[0]['order'][obj.short],
         autoResolvers: autos,
         listTargets: autos.map(r=>`${r['targetGroup']}##${r['targetShort']}`).filter(uniq).map(s=>s.split('##')).map(([group,name])=>{return{group,name}}),
-        category: categoryMappingShort[obj.short]!=undefined?categoryMappingShort[obj.short]:categoryMappingGroup[obj.group]!=undefined?categoryMappingGroup[obj.group]:'varia',
+        category,
         resolvers: extraResolvers.filter(r=>r.group==obj.group&&r.short==obj.short)
             .concat(defaultResolvers)
             .concat(extraAllResolvers.map(a=>{return {group:obj.group, short: obj.short,...a}}))
@@ -201,7 +203,6 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
         }
         counter=0;
         ret[item[0]] = deref(item[1])
-        //if (item[0]=='io.k8s.api.core.v1.ServiceSpec') console.log(ret[item[0]]["properties"])
     }
     return ret
 }

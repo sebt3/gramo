@@ -53,32 +53,35 @@ onResult((res) => {
   }
 })
 </script>
-<template>
-  <div class="row q-mb-sm q-ml-sm">
+<template><div>
+  <div class="row q-mb-sm q-ml-sm" v-if="!isNamespaced()">
     <div class="col-lg-4">
       <q-card bordered v-if="ready" class="q-ma-sm">
         <q-card-section class="text-center">
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Distributions packages per categories</div>
+          <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#vynilDistrib">Distributions packages per categories</a></div>
         </q-card-section>
         <q-card-section class="text-center">
           <radialLineChart v-model:datum="CatDistCount" :axisX="function (d){return d!=undefined?d['category']:this.id}" :axisColor="function (d){return d!=undefined?d['distrib']:this.id}" :getVal="function (d){return d!=undefined?d['value']:this.id}" ></radialLineChart>
         </q-card-section>
       </q-card>
     </div>
-    <div class="col-lg-4" v-if="ready && InstallByTs.length>0" >
+    <div class="col-lg-4" v-if="ready && InstallByTs.length>1" >
       <q-card bordered class="q-ma-sm">
         <q-card-section class="text-center">
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Install per namespace</div>
+          <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#vynilInstall">Install per namespace</a></div>
         </q-card-section>
         <q-card-section class="text-center">
-          <pieChart v-model:datum="InstallByTs" @on-click="(name)=>{toInstallList(name)}" />
+          <pieChart
+            :datum="InstallByTs"
+            @on-click="(name)=>{toInstallList(name)}"
+            />
         </q-card-section>
       </q-card>
     </div>
     <div class="col-lg-4" v-if="ready && ErrorsByTs.length>0" >
       <q-card bordered class="q-ma-sm">
         <q-card-section class="text-center">
-          <div class="text-h6 text-grey-8 q-mt-none q-mb-none q-pt-none q-pb-none">Install with errors per namespace</div>
+          <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#vynilInstall">Install with errors per namespace</a></div>
         </q-card-section>
         <q-card-section class="text-center">
           <pieChart v-model:datum="ErrorsByTs" @on-click="(name)=>{toInstallList(name)}" />
@@ -86,12 +89,20 @@ onResult((res) => {
       </q-card>
     </div>
   </div>
+<div class="column">
+<div  >
+<a name="vynilDistrib" />
   <vynilDistribList @refresh="refetch()" :useAction="false"
     v-if="result !== undefined && Array.isArray(result['vynilDistrib']) && result['vynilDistrib'].length>0"
     :model="result.vynilDistrib"
   />
+</div>
+<div  >
+<a name="vynilInstall" />
   <vynilInstallList @refresh="refetch()" :useAction="false"
-    v-if="result !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['vynilInstall']).flat().length>0"
+    v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['vynilInstall']).flat().length>0"
     :model="result.k8sNamespace.map(x=>x.vynilInstall).flat()"
   />
-</template>
+</div>
+</div>
+</div></template>

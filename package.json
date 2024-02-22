@@ -1,7 +1,7 @@
 {
   "name": "gramo",
-  "version": "0.1.5",
-  "description": "A Kubernetes front-end",
+  "version": "0.1.6",
+  "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
     "lint": "eslint front/ back/ utils/",
@@ -48,6 +48,7 @@
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "@kubernetes/client-node": "^0.20.0",
+    "animate.css": "^4.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "graphql": "^16.8.1",

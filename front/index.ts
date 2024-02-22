@@ -6,6 +6,7 @@ import { useNavigationStore } from './stores/navigation'
 import { useConfigStore } from './stores/config'
 import { usePermissionStore } from './stores/permission'
 import { useCRDStore } from './stores/crds'
+import { beforeEach } from './stores/navigation'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
@@ -61,6 +62,7 @@ async function createApp() {
 }
 async function useRoute(app) {
     const { router } = await import('./routes/index')
+    router.beforeEach(beforeEach);
     app.use(router);
     return app;
 }

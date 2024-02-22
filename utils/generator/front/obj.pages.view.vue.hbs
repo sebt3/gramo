@@ -178,13 +178,14 @@ onDeleteError((err) => {
   console.log('deletion error',err);
 })
 </script>
-<template>
+<template><div>
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
 {{#each resolvers}}
   {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'Distrib')))}}
       <{{ resultGroup }}{{ resultShort }}Meta v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
   {{/if}}
 {{/each}}
@@ -196,6 +197,7 @@ onDeleteError((err) => {
     <div v-if="!loading && conditions['{{name}}'](result){{#if (eq resultShort 'Install')}}&&sectionCounts.parent==1{{/if}}">
       <{{ resultGroup }}{{ resultShort }}Meta :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
     </div>
   {{/if}}
@@ -207,6 +209,7 @@ onDeleteError((err) => {
   {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (ne resultShort 'Distrib')))}}
       <{{ resultGroup }}{{ resultShort }}Meta v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
   {{/if}}
 {{/each}}
@@ -220,6 +223,7 @@ onDeleteError((err) => {
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
   {{/if}}
 {{/each}}
@@ -236,6 +240,7 @@ onDeleteError((err) => {
       <{{ resultGroup }}{{ resultShort }}View :useActions="false" :showLink="true"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
     </div>
   {{/if}}
@@ -248,6 +253,7 @@ onDeleteError((err) => {
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
   {{/if}}
 {{/each}}
@@ -257,9 +263,10 @@ onDeleteError((err) => {
     <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['{{name}}'](result)">
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
        />
     </div>
   {{/if}}
 {{/each}}
   </div>
-</template>
+</div></template>

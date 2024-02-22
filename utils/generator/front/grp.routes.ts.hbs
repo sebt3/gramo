@@ -12,7 +12,7 @@ export const link:menuLinksProps = {
   children: [
 {{#each objects}}
   {{#if (defined crd)}}crds['{{crd.metadata.name}}'] == undefined || {{/if}}!havePermission('{{group}}','{{ short }}')?[]:[{
-    name: '{{ group }}{{ short }}',
+    name: '{{ group }}{{ short }}', {{#if order }}order: {{order}},{{/if}}
     title: '{{ short }}', caption: 'List {{ short }}', icon: icon{{ short }},
   {{#if namespaced}}
     targetNS: '{{ group }}{{ short }}Table',
@@ -65,6 +65,11 @@ export const route = {
           name: '{{ group }}{{ short }}View',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}View.vue'),
           meta: {breadcrumb: 'View', icon: icon{{ short }}, ns: {{toJson namespaced}} },
+          children: [
+{{#each resolvers}}
+            {name: '{{ ../group }}{{ ../short }}ViewFrom{{name}}', path: '{{name}}', redirect: to => { return {name: '{{ ../group }}{{ ../short }}View', params: to.params} }, meta: {animation: '{{type}}'} },
+{{/each}}
+          ]
         },
         {
           path: '{{#if namespaced}}:namespace/{{/if}}edit/:name',

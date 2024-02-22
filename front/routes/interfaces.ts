@@ -7,5 +7,6 @@ export interface menuLinksProps {
     name?: string
     target?: string
     targetNS?: string
+    order?: number
     children?: Array<menuLinksProps>
 }

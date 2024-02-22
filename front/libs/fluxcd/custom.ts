@@ -93,14 +93,14 @@ export const extraOCIRepositoryColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImageUpdateAutomationColumns:Array<QTableColumn> = [
-  {name: 'Last run', label: 'Last run', field: row => row.status.lastAutomationRunTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Last run', label: 'Last run', field: row => row.status?.lastAutomationRunTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImagePolicyColumns:Array<QTableColumn> = [
-  {name: 'LatestImage', label: 'LatestImage', field: row => row.status.latestImage, sortable: true, align: tableColumnAlign.left},
+  {name: 'LatestImage', label: 'LatestImage', field: row => row.status?.latestImage, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImageRepositoryColumns:Array<QTableColumn> = [
-  {name: 'Last scan', label: 'Last scan', field: row => row.status.lastScanResult.scanTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'Tags', label: 'Tags', field: row => row.status.lastScanResult.tagCount, sortable: true, align: tableColumnAlign.left},
+  {name: 'Last scan', label: 'Last scan', field: row => row.status.lastScanResult?.scanTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Tags', label: 'Tags', field: row => row.status?.lastScanResult?.tagCount, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHelmReleaseColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},

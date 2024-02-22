@@ -116,7 +116,7 @@ function onSubmit(obj:object) {
 }
 onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
 </script>
-<template>
+<template><div>
   <div class="row q-ml-sm">
 {{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">
@@ -146,5 +146,5 @@ onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
        />
     </div>
   </div>
-</template>
+</div></template>
 

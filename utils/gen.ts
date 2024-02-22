@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {LoadFrom,finalizeObject,mkdir,rmdir,uniq} from './generator/utils.js'
 import {loadCompile,loadPartial} from './generator/hb.js'
-import {allCategories} from './generator/config.js'
+import {allCategories, objectsOrder} from './generator/config.js'
 import * as fs from 'fs';
 import { k8sObject } from './generator/types.js';
 
@@ -70,7 +70,14 @@ new Promise((resolve) => {
 }).then(data => {
     const allObjects = (data as object[]).map(s=>s['objects']).flat();
     const allUniqObjects = allObjects.filter(obj=>allObjects.filter(o=>o.group==obj.group&&o.short==obj.short).indexOf(obj)==0)
-    return (data as object[]).map(g=>{return {name:g['name'], objects:(g['objects']).map(tmp=>{return finalizeObject({...tmp,...tmp.alternatives.sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]} as k8sObject,allUniqObjects)})
+    return (data as object[]).map(g=>{return {
+            name:g['name'],
+            objects:(g['objects']).map(tmp=>{
+                return finalizeObject({
+                    ...tmp, ...tmp.alternatives
+                        .sort((a,b)=>a.apiVersion.length>b.apiVersion.length?-1:a.apiVersion.length==b.apiVersion.length?a.apiVersion<b.apiVersion?-1:1:1).reverse()[0]
+            } as k8sObject,allUniqObjects)
+        })
     }})
 }).then(data => {
 ////////////////////////////////////
