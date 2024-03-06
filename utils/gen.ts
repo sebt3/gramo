@@ -160,6 +160,7 @@ new Promise((resolve) => {
     allRoutes(path.resolve(path_front, 'routes'), `index.ts`, {groups: current, categories: allCategories})
     allCategories.forEach(c=>{
         if (!deleteFiles) mkdir(path.resolve(path_front, 'routes', c));
+        if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', c));
         const groups = current.map(g=>{return{
             ...g,
             objects: g.objects.filter(o=>o.category==c)
