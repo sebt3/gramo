@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { onMounted } from "vue";
 import { elude, getColor, getConditionColor} from "../../libs/core/"
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import EventList from '@/components/core/EventList.vue';
-import MonacoViewer from '@/components/core/MonacoViewer.vue';
+const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const  EventList   = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
+const  MonacoViewer   = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 {{#if namespaced}}
 const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
@@ -52,7 +55,7 @@ onMounted(() => {
       </q-btn-group>
     </q-tabs>
     <q-tab-panels v-model="viewer.tab" animated>
-      <q-tab-panel name="meta" :class="`bg-${ color{{ short }} }-1`">
+      <q-tab-panel name="meta" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
       <div class="q-gutter-md">
 {{> vueNameFields namespaced=namespaced group=group short=short }}
 {{#if (propertyContain readProperties 'status')}}
@@ -61,7 +64,7 @@ onMounted(() => {
 {{> vueLabelFields }}
       </div>
       </q-tab-panel>
-      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-1`">
+      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
         <OpenApiEdit
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
           :in="model['spec']['options']"
@@ -81,18 +84,18 @@ onMounted(() => {
           :showdefault="false"
         />
       </q-tab-panel>
-      <q-tab-panel name="events" :class="`bg-${ color{{ short }} }-1`" v-if="Array.isArray(model['getcoreEvent'])">
+      <q-tab-panel name="events" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`" v-if="Array.isArray(model['getcoreEvent'])">
         <EventList :model="model['getcoreEvent']"
          />
       </q-tab-panel>
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
-      <q-tab-panel name="{{this}}" v-if="model['{{this}}']!=null" :class="`bg-${ color{{ ../short }} }-1`">
+      <q-tab-panel name="{{this}}" v-if="model['{{this}}']!=null" :class="`bg-${ color{{ ../short }} }-${$q.dark.isActive?'10':'1'}`">
         <MonacoViewer :text="viewer.props.{{this}}" :key="viewer.props.{{this}}" />
       </q-tab-panel>
   {{/if}}
 {{/each}}
-      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-1`">
+      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
         <MonacoViewer :text="viewer.full" :key="viewer.full" />
       </q-tab-panel>
     </q-tab-panels>

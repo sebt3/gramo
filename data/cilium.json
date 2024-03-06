@@ -5,11 +5,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumClusterwideNetworkPolicy",
       "definition": {
-        "description": "CiliumClusterwideNetworkPolicy is a Kubernetes third-party resource with an modified version of CiliumNetworkPolicy which is cluster scoped rather than namespace scoped.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -4112,6 +4107,11 @@
             }
           }
         },
+        "description": "CiliumClusterwideNetworkPolicy is a Kubernetes third-party resource with an modified version of CiliumNetworkPolicy which is cluster scoped rather than namespace scoped.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -8590,11 +8590,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumEndpoint",
       "definition": {
-        "description": "CiliumEndpoint is the status of a Cilium policy rule.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -9107,6 +9102,11 @@
             }
           }
         },
+        "description": "CiliumEndpoint is the status of a Cilium policy rule.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -9900,11 +9900,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumExternalWorkload",
       "definition": {
-        "description": "CiliumExternalWorkload is a Kubernetes Custom Resource that contains a specification for an external workload that can join the cluster.  The name of the CRD is the FQDN of the external workload, and it needs to match the name in the workload registration. The labels on the CRD object are the labels that will be used to allocate a Cilium Identity for the external workload. If 'io.kubernetes.pod.namespace' or 'io.kubernetes.pod.name' labels are not explicitly specified, they will be defaulted to 'default' and <workload name>, respectively. 'io.cilium.k8s.policy.cluster' will always be defined as the name of the current cluster, which defaults to \"default\".",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -9946,6 +9941,11 @@
             }
           }
         },
+        "description": "CiliumExternalWorkload is a Kubernetes Custom Resource that contains a specification for an external workload that can join the cluster.  The name of the CRD is the FQDN of the external workload, and it needs to match the name in the workload registration. The labels on the CRD object are the labels that will be used to allocate a Cilium Identity for the external workload. If 'io.kubernetes.pod.namespace' or 'io.kubernetes.pod.name' labels are not explicitly specified, they will be defaulted to 'default' and <workload name>, respectively. 'io.cilium.k8s.policy.cluster' will always be defined as the name of the current cluster, which defaults to \"default\".",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -10196,12 +10196,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumIdentity",
       "definition": {
-        "description": "CiliumIdentity is a CRD that represents an identity managed by Cilium. It is intended as a backing store for identity allocation, acting as the global coordination backend, and can be used in place of a KVStore (such as etcd). The name of the CRD is the numeric identity and the labels on the CRD object are the kubernetes sourced labels seen by cilium. This is currently the only label source possible when running under kubernetes. Non-kubernetes labels are filtered but all labels, from all sources, are places in the SecurityLabels field. These also include the source and are used to define the identity. The labels under metav1.ObjectMeta can be used when searching for CiliumIdentity instances that include particular labels. This can be done with invocations such as: \n \tkubectl get ciliumid -l 'foo=bar'",
-        "type": "object",
-        "required": [
-          "metadata",
-          "security-labels"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -10219,6 +10213,12 @@
             }
           }
         },
+        "description": "CiliumIdentity is a CRD that represents an identity managed by Cilium. It is intended as a backing store for identity allocation, acting as the global coordination backend, and can be used in place of a KVStore (such as etcd). The name of the CRD is the numeric identity and the labels on the CRD object are the kubernetes sourced labels seen by cilium. This is currently the only label source possible when running under kubernetes. Non-kubernetes labels are filtered but all labels, from all sources, are places in the SecurityLabels field. These also include the source and are used to define the identity. The labels under metav1.ObjectMeta can be used when searching for CiliumIdentity instances that include particular labels. This can be done with invocations such as: \n \tkubectl get ciliumid -l 'foo=bar'",
+        "type": "object",
+        "required": [
+          "metadata",
+          "security-labels"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -10448,11 +10448,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumLocalRedirectPolicy",
       "definition": {
-        "description": "CiliumLocalRedirectPolicy is a Kubernetes Custom Resource that contains a specification to redirect traffic locally within a node.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -10683,6 +10678,11 @@
             }
           }
         },
+        "description": "CiliumLocalRedirectPolicy is a Kubernetes Custom Resource that contains a specification to redirect traffic locally within a node.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -11128,11 +11128,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumNetworkPolicy",
       "definition": {
-        "description": "CiliumNetworkPolicy is a Kubernetes third-party resource with an extended version of NetworkPolicy.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -15235,6 +15230,11 @@
             }
           }
         },
+        "description": "CiliumNetworkPolicy is a Kubernetes third-party resource with an extended version of NetworkPolicy.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -19729,12 +19729,6 @@
       "alternatives": [],
       "name": "io.cilium.v2.CiliumNode",
       "definition": {
-        "description": "CiliumNode represents a node managed by Cilium. It contains a specification to control various node specific configuration aspects and a status section to represent the status of the node.",
-        "type": "object",
-        "required": [
-          "metadata",
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -20443,6 +20437,12 @@
             }
           }
         },
+        "description": "CiliumNode represents a node managed by Cilium. It contains a specification to control various node specific configuration aspects and a status section to represent the status of the node.",
+        "type": "object",
+        "required": [
+          "metadata",
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -21379,11 +21379,6 @@
       "alternatives": [],
       "name": "io.cilium.v2alpha1.CiliumCIDRGroup",
       "definition": {
-        "description": "CiliumCIDRGroup is a list of external CIDRs (i.e: CIDRs selecting peers outside the clusters) that can be referenced as a single entity from CiliumNetworkPolicies.",
-        "type": "object",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -21412,6 +21407,11 @@
             }
           }
         },
+        "description": "CiliumCIDRGroup is a list of external CIDRs (i.e: CIDRs selecting peers outside the clusters) that can be referenced as a single entity from CiliumNetworkPolicies.",
+        "type": "object",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -21620,11 +21620,6 @@
       "alternatives": [],
       "name": "io.cilium.v2alpha1.CiliumL2AnnouncementPolicy",
       "definition": {
-        "description": "CiliumL2AnnouncementPolicy is a Kubernetes third-party resource which is used to defined which nodes should announce what services on the L2 network.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -21823,6 +21818,11 @@
             }
           }
         },
+        "description": "CiliumL2AnnouncementPolicy is a Kubernetes third-party resource which is used to defined which nodes should announce what services on the L2 network.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -22220,11 +22220,6 @@
       "alternatives": [],
       "name": "io.cilium.v2alpha1.CiliumLoadBalancerIPPool",
       "definition": {
-        "description": "CiliumLoadBalancerIPPool is a Kubernetes third-party resource which is used to defined pools of IPs which the operator can use to to allocate and advertise IPs for Services of type LoadBalancer.",
-        "type": "object",
-        "required": [
-          "metadata"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -22382,6 +22377,11 @@
             }
           }
         },
+        "description": "CiliumLoadBalancerIPPool is a Kubernetes third-party resource which is used to defined pools of IPs which the operator can use to to allocate and advertise IPs for Services of type LoadBalancer.",
+        "type": "object",
+        "required": [
+          "metadata"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -22775,11 +22775,6 @@
       "alternatives": [],
       "name": "io.cilium.v2alpha1.CiliumNodeConfig",
       "definition": {
-        "description": "CiliumNodeConfig is a list of configuration key-value pairs. It is applied to nodes indicated by a label selector. \n If multiple overrides apply to the same node, they will be ordered by name with later Overrides overwriting any conflicting keys.",
-        "type": "object",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -22849,6 +22844,11 @@
             }
           }
         },
+        "description": "CiliumNodeConfig is a list of configuration key-value pairs. It is applied to nodes indicated by a label selector. \n If multiple overrides apply to the same node, they will be ordered by name with later Overrides overwriting any conflicting keys.",
+        "type": "object",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",
@@ -23090,11 +23090,6 @@
       "alternatives": [],
       "name": "io.cilium.v2alpha1.CiliumPodIPPool",
       "definition": {
-        "description": "CiliumPodIPPool defines an IP pool that can be used for pooled IPAM (i.e. the multi-pool IPAM mode).",
-        "type": "object",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -23162,6 +23157,11 @@
             }
           }
         },
+        "description": "CiliumPodIPPool defines an IP pool that can be used for pooled IPAM (i.e. the multi-pool IPAM mode).",
+        "type": "object",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "cilium.io",

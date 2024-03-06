@@ -62,7 +62,27 @@ async function createApp() {
 }
 async function useRoute(app) {
     const { router } = await import('./routes/index')
+    const DEFAULT_TITLE = "Gramo";
     router.beforeEach(beforeEach);
+    router.afterEach((to) => {
+      if (Object.keys(to.meta).includes('title') && typeof to.meta.title == 'function') {
+        if (Object.keys(to.meta).includes('useName')) {
+          if (to.meta.ns||false) {
+            document.title = to.meta.title(to.params.namespace, to.params.name)+` [${DEFAULT_TITLE}]`
+          } else {
+            document.title = to.meta.title(to.params.name)+` [${DEFAULT_TITLE}]`
+          }
+        } else {
+          if (to.meta.ns||false) {
+            document.title = to.meta.title(to.params.namespace)+` [${DEFAULT_TITLE}]`
+          } else {
+            document.title = to.meta.title()+` [${DEFAULT_TITLE}]`
+          }
+        }
+      } else {
+        document.title = DEFAULT_TITLE;
+      }
+    });
     app.use(router);
     return app;
 }

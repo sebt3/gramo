@@ -1,0 +1,4245 @@
+{
+  "name": "tekton",
+  "objects": [
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1.Pipeline",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "Pipeline",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "pipelines.tekton.dev",
+          "uid": "2aaaa09e-2202-4195-8c63-3dc8a2fadcdd",
+          "resourceVersion": "131118906",
+          "generation": 2,
+          "creationTimestamp": "2024-03-02T14:15:42Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"pipelines.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1beta1\",\"v1\"]}},\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"Pipeline\",\"plural\":\"pipelines\",\"singular\":\"pipeline\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:42Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:42Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "webhook",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:16:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {},
+                        "f:service": {
+                          "f:path": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:35Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "pipelines",
+            "singular": "pipeline",
+            "kind": "Pipeline",
+            "listKind": "PipelineList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "path": "/resource-conversion",
+                  "port": 443
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNwVENDQWt1Z0F3SUJBZ0lRUElsQmVjd2RiS051MlFHTjlWK3pqekFLQmdncWhrak9QUVFEQWpCSk1SUXcKRWdZRFZRUUtFd3RyYm1GMGFYWmxMbVJsZGpFeE1DOEdBMVVFQXhNb2RHVnJkRzl1TFhCcGNHVnNhVzVsY3kxMwpaV0pvYjI5ckxuWjVibWxzTFhSdmIyeHpMbk4yWXpBZUZ3MHlOREF6TURJeE5ERTJORFphRncweU5EQXpNRGt4Ck5ERTJORFphTUVreEZEQVNCZ05WQkFvVEMydHVZWFJwZG1VdVpHVjJNVEV3THdZRFZRUURFeWgwWld0MGIyNHQKY0dsd1pXeHBibVZ6TFhkbFltaHZiMnN1ZG5sdWFXd3RkRzl2YkhNdWMzWmpNRmt3RXdZSEtvWkl6ajBDQVFZSQpLb1pJemowREFRY0RRZ0FFdjFnS3NybHhCY3didVdNdFA2bklkSzQvNnBCZFJKSlJOTWhtUklyc2dBZGVTdjBKCjkxSTRTNlVlMzRUdDFLRG82SnlnT2dVUkpoVlo2UTRmSEhINDhxT0NBUk13Z2dFUE1BNEdBMVVkRHdFQi93UUUKQXdJQ2hEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVTdXQ3NCSXNaaDZHUVJFUEYrTjVuQ1FVd1ZnVXdnYTBHQTFVZEVRU0JwVENCCm9vSVlkR1ZyZEc5dUxYQnBjR1ZzYVc1bGN5MTNaV0pvYjI5cmdpUjBaV3QwYjI0dGNHbHdaV3hwYm1WekxYZGwKWW1odmIyc3Vkbmx1YVd3dGRHOXZiSE9DS0hSbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cApiQzEwYjI5c2N5NXpkbU9DTm5SbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cGJDMTBiMjlzCmN5NXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJEQUtCZ2dxaGtqT1BRUURBZ05JQURCRkFpRUF4MGNiS2M0eXhtU00KVjRXSEpIdTFOb3p2NW9nSFY1S3R5WDFiQ2RjT0VGZ0NJSDRPMUcrK0Q1azRrODkwM0pEdUlQTll5QzJNVlZJNwpIdUlIYUprQk55QTYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+              },
+              "conversionReviewVersions": [
+                "v1beta1",
+                "v1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:42Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:42Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "pipelines",
+            "singular": "pipeline",
+            "kind": "Pipeline",
+            "listKind": "PipelineList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "Pipeline",
+      "apiGroup": "tekton.dev",
+      "apiKind": "Pipeline",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1.PipelineRun",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "PipelineRun",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "pipelineruns.tekton.dev",
+          "uid": "32d34c26-5203-4122-bfcf-a25030bc2f41",
+          "resourceVersion": "131118899",
+          "generation": 2,
+          "creationTimestamp": "2024-03-02T14:15:40Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"pipelineruns.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1beta1\",\"v1\"]}},\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"PipelineRun\",\"plural\":\"pipelineruns\",\"shortNames\":[\"pr\",\"prs\"],\"singular\":\"pipelinerun\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.startTime\",\"name\":\"StartTime\",\"type\":\"date\"},{\"jsonPath\":\".status.completionTime\",\"name\":\"CompletionTime\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.startTime\",\"name\":\"StartTime\",\"type\":\"date\"},{\"jsonPath\":\".status.completionTime\",\"name\":\"CompletionTime\",\"type\":\"date\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:40Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:40Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "webhook",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:16:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {},
+                        "f:service": {
+                          "f:path": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:34Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "pipelineruns",
+            "singular": "pipelinerun",
+            "shortNames": [
+              "pr",
+              "prs"
+            ],
+            "kind": "PipelineRun",
+            "listKind": "PipelineRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "date",
+                  "jsonPath": ".status.startTime"
+                },
+                {
+                  "name": "CompletionTime",
+                  "type": "date",
+                  "jsonPath": ".status.completionTime"
+                }
+              ]
+            },
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "date",
+                  "jsonPath": ".status.startTime"
+                },
+                {
+                  "name": "CompletionTime",
+                  "type": "date",
+                  "jsonPath": ".status.completionTime"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "path": "/resource-conversion",
+                  "port": 443
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNwVENDQWt1Z0F3SUJBZ0lRUElsQmVjd2RiS051MlFHTjlWK3pqekFLQmdncWhrak9QUVFEQWpCSk1SUXcKRWdZRFZRUUtFd3RyYm1GMGFYWmxMbVJsZGpFeE1DOEdBMVVFQXhNb2RHVnJkRzl1TFhCcGNHVnNhVzVsY3kxMwpaV0pvYjI5ckxuWjVibWxzTFhSdmIyeHpMbk4yWXpBZUZ3MHlOREF6TURJeE5ERTJORFphRncweU5EQXpNRGt4Ck5ERTJORFphTUVreEZEQVNCZ05WQkFvVEMydHVZWFJwZG1VdVpHVjJNVEV3THdZRFZRUURFeWgwWld0MGIyNHQKY0dsd1pXeHBibVZ6TFhkbFltaHZiMnN1ZG5sdWFXd3RkRzl2YkhNdWMzWmpNRmt3RXdZSEtvWkl6ajBDQVFZSQpLb1pJemowREFRY0RRZ0FFdjFnS3NybHhCY3didVdNdFA2bklkSzQvNnBCZFJKSlJOTWhtUklyc2dBZGVTdjBKCjkxSTRTNlVlMzRUdDFLRG82SnlnT2dVUkpoVlo2UTRmSEhINDhxT0NBUk13Z2dFUE1BNEdBMVVkRHdFQi93UUUKQXdJQ2hEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVTdXQ3NCSXNaaDZHUVJFUEYrTjVuQ1FVd1ZnVXdnYTBHQTFVZEVRU0JwVENCCm9vSVlkR1ZyZEc5dUxYQnBjR1ZzYVc1bGN5MTNaV0pvYjI5cmdpUjBaV3QwYjI0dGNHbHdaV3hwYm1WekxYZGwKWW1odmIyc3Vkbmx1YVd3dGRHOXZiSE9DS0hSbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cApiQzEwYjI5c2N5NXpkbU9DTm5SbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cGJDMTBiMjlzCmN5NXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJEQUtCZ2dxaGtqT1BRUURBZ05JQURCRkFpRUF4MGNiS2M0eXhtU00KVjRXSEpIdTFOb3p2NW9nSFY1S3R5WDFiQ2RjT0VGZ0NJSDRPMUcrK0Q1azRrODkwM0pEdUlQTll5QzJNVlZJNwpIdUlIYUprQk55QTYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+              },
+              "conversionReviewVersions": [
+                "v1beta1",
+                "v1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:40Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:40Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "pipelineruns",
+            "singular": "pipelinerun",
+            "shortNames": [
+              "pr",
+              "prs"
+            ],
+            "kind": "PipelineRun",
+            "listKind": "PipelineRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "Succeeded",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+        },
+        {
+          "name": "StartTime",
+          "type": "date",
+          "jsonPath": ".status.startTime"
+        },
+        {
+          "name": "CompletionTime",
+          "type": "date",
+          "jsonPath": ".status.completionTime"
+        }
+      ],
+      "short": "PipelineRun",
+      "apiGroup": "tekton.dev",
+      "apiKind": "PipelineRun",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1.Task",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "Task",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "tasks.tekton.dev",
+          "uid": "b733cb07-f2af-4169-9909-d536a2c5d37f",
+          "resourceVersion": "131118925",
+          "generation": 2,
+          "creationTimestamp": "2024-03-02T14:15:46Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"tasks.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1beta1\",\"v1\"]}},\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"Task\",\"plural\":\"tasks\",\"singular\":\"task\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "webhook",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:16:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {},
+                        "f:service": {
+                          "f:path": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:36Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "tasks",
+            "singular": "task",
+            "kind": "Task",
+            "listKind": "TaskList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "path": "/resource-conversion",
+                  "port": 443
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNwVENDQWt1Z0F3SUJBZ0lRUElsQmVjd2RiS051MlFHTjlWK3pqekFLQmdncWhrak9QUVFEQWpCSk1SUXcKRWdZRFZRUUtFd3RyYm1GMGFYWmxMbVJsZGpFeE1DOEdBMVVFQXhNb2RHVnJkRzl1TFhCcGNHVnNhVzVsY3kxMwpaV0pvYjI5ckxuWjVibWxzTFhSdmIyeHpMbk4yWXpBZUZ3MHlOREF6TURJeE5ERTJORFphRncweU5EQXpNRGt4Ck5ERTJORFphTUVreEZEQVNCZ05WQkFvVEMydHVZWFJwZG1VdVpHVjJNVEV3THdZRFZRUURFeWgwWld0MGIyNHQKY0dsd1pXeHBibVZ6TFhkbFltaHZiMnN1ZG5sdWFXd3RkRzl2YkhNdWMzWmpNRmt3RXdZSEtvWkl6ajBDQVFZSQpLb1pJemowREFRY0RRZ0FFdjFnS3NybHhCY3didVdNdFA2bklkSzQvNnBCZFJKSlJOTWhtUklyc2dBZGVTdjBKCjkxSTRTNlVlMzRUdDFLRG82SnlnT2dVUkpoVlo2UTRmSEhINDhxT0NBUk13Z2dFUE1BNEdBMVVkRHdFQi93UUUKQXdJQ2hEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVTdXQ3NCSXNaaDZHUVJFUEYrTjVuQ1FVd1ZnVXdnYTBHQTFVZEVRU0JwVENCCm9vSVlkR1ZyZEc5dUxYQnBjR1ZzYVc1bGN5MTNaV0pvYjI5cmdpUjBaV3QwYjI0dGNHbHdaV3hwYm1WekxYZGwKWW1odmIyc3Vkbmx1YVd3dGRHOXZiSE9DS0hSbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cApiQzEwYjI5c2N5NXpkbU9DTm5SbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cGJDMTBiMjlzCmN5NXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJEQUtCZ2dxaGtqT1BRUURBZ05JQURCRkFpRUF4MGNiS2M0eXhtU00KVjRXSEpIdTFOb3p2NW9nSFY1S3R5WDFiQ2RjT0VGZ0NJSDRPMUcrK0Q1azRrODkwM0pEdUlQTll5QzJNVlZJNwpIdUlIYUprQk55QTYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+              },
+              "conversionReviewVersions": [
+                "v1beta1",
+                "v1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:46Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:46Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "tasks",
+            "singular": "task",
+            "kind": "Task",
+            "listKind": "TaskList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "Task",
+      "apiGroup": "tekton.dev",
+      "apiKind": "Task",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1.TaskRun",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "TaskRun",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "taskruns.tekton.dev",
+          "uid": "2355c730-25ad-4dee-9b96-2486203069fe",
+          "resourceVersion": "131118924",
+          "generation": 2,
+          "creationTimestamp": "2024-03-02T14:15:45Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"taskruns.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1beta1\",\"v1\"]}},\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"TaskRun\",\"plural\":\"taskruns\",\"shortNames\":[\"tr\",\"trs\"],\"singular\":\"taskrun\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.startTime\",\"name\":\"StartTime\",\"type\":\"date\"},{\"jsonPath\":\".status.completionTime\",\"name\":\"CompletionTime\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.startTime\",\"name\":\"StartTime\",\"type\":\"date\"},{\"jsonPath\":\".status.completionTime\",\"name\":\"CompletionTime\",\"type\":\"date\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:45Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:45Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "webhook",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:16:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {},
+                        "f:service": {
+                          "f:path": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:35Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "taskruns",
+            "singular": "taskrun",
+            "shortNames": [
+              "tr",
+              "trs"
+            ],
+            "kind": "TaskRun",
+            "listKind": "TaskRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "date",
+                  "jsonPath": ".status.startTime"
+                },
+                {
+                  "name": "CompletionTime",
+                  "type": "date",
+                  "jsonPath": ".status.completionTime"
+                }
+              ]
+            },
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "date",
+                  "jsonPath": ".status.startTime"
+                },
+                {
+                  "name": "CompletionTime",
+                  "type": "date",
+                  "jsonPath": ".status.completionTime"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "path": "/resource-conversion",
+                  "port": 443
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNwVENDQWt1Z0F3SUJBZ0lRUElsQmVjd2RiS051MlFHTjlWK3pqekFLQmdncWhrak9QUVFEQWpCSk1SUXcKRWdZRFZRUUtFd3RyYm1GMGFYWmxMbVJsZGpFeE1DOEdBMVVFQXhNb2RHVnJkRzl1TFhCcGNHVnNhVzVsY3kxMwpaV0pvYjI5ckxuWjVibWxzTFhSdmIyeHpMbk4yWXpBZUZ3MHlOREF6TURJeE5ERTJORFphRncweU5EQXpNRGt4Ck5ERTJORFphTUVreEZEQVNCZ05WQkFvVEMydHVZWFJwZG1VdVpHVjJNVEV3THdZRFZRUURFeWgwWld0MGIyNHQKY0dsd1pXeHBibVZ6TFhkbFltaHZiMnN1ZG5sdWFXd3RkRzl2YkhNdWMzWmpNRmt3RXdZSEtvWkl6ajBDQVFZSQpLb1pJemowREFRY0RRZ0FFdjFnS3NybHhCY3didVdNdFA2bklkSzQvNnBCZFJKSlJOTWhtUklyc2dBZGVTdjBKCjkxSTRTNlVlMzRUdDFLRG82SnlnT2dVUkpoVlo2UTRmSEhINDhxT0NBUk13Z2dFUE1BNEdBMVVkRHdFQi93UUUKQXdJQ2hEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVTdXQ3NCSXNaaDZHUVJFUEYrTjVuQ1FVd1ZnVXdnYTBHQTFVZEVRU0JwVENCCm9vSVlkR1ZyZEc5dUxYQnBjR1ZzYVc1bGN5MTNaV0pvYjI5cmdpUjBaV3QwYjI0dGNHbHdaV3hwYm1WekxYZGwKWW1odmIyc3Vkbmx1YVd3dGRHOXZiSE9DS0hSbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cApiQzEwYjI5c2N5NXpkbU9DTm5SbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cGJDMTBiMjlzCmN5NXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJEQUtCZ2dxaGtqT1BRUURBZ05JQURCRkFpRUF4MGNiS2M0eXhtU00KVjRXSEpIdTFOb3p2NW9nSFY1S3R5WDFiQ2RjT0VGZ0NJSDRPMUcrK0Q1azRrODkwM0pEdUlQTll5QzJNVlZJNwpIdUlIYUprQk55QTYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+              },
+              "conversionReviewVersions": [
+                "v1beta1",
+                "v1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:45Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:45Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "taskruns",
+            "singular": "taskrun",
+            "shortNames": [
+              "tr",
+              "trs"
+            ],
+            "kind": "TaskRun",
+            "listKind": "TaskRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "Succeeded",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+        },
+        {
+          "name": "StartTime",
+          "type": "date",
+          "jsonPath": ".status.startTime"
+        },
+        {
+          "name": "CompletionTime",
+          "type": "date",
+          "jsonPath": ".status.completionTime"
+        }
+      ],
+      "short": "TaskRun",
+      "apiGroup": "tekton.dev",
+      "apiKind": "TaskRun",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1alpha1.StepAction",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "StepAction",
+            "version": "v1alpha1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "stepactions.tekton.dev",
+          "uid": "7c5fc3f5-2559-4a76-b651-852165e5f040",
+          "resourceVersion": "131118921",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:43Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"stepactions.tekton.dev\"},\"spec\":{\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"StepAction\",\"plural\":\"stepactions\",\"singular\":\"stepaction\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:35Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "stepactions",
+            "singular": "stepaction",
+            "kind": "StepAction",
+            "listKind": "StepActionList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "stepactions",
+            "singular": "stepaction",
+            "kind": "StepAction",
+            "listKind": "StepActionList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1alpha1"
+          ]
+        }
+      },
+      "short": "StepAction",
+      "apiGroup": "tekton.dev",
+      "apiKind": "StepAction",
+      "apiVersion": "v1alpha1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1alpha1.VerificationPolicy",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "VerificationPolicy",
+            "version": "v1alpha1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "verificationpolicies.tekton.dev",
+          "uid": "4a031309-236e-4629-8340-cc213d929c8a",
+          "resourceVersion": "131118721",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:49Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"verificationpolicies.tekton.dev\"},\"spec\":{\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"VerificationPolicy\",\"plural\":\"verificationpolicies\",\"singular\":\"verificationpolicy\"},\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:49Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:49Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:15Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "verificationpolicies",
+            "singular": "verificationpolicy",
+            "kind": "VerificationPolicy",
+            "listKind": "VerificationPolicyList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:49Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:49Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "verificationpolicies",
+            "singular": "verificationpolicy",
+            "kind": "VerificationPolicy",
+            "listKind": "VerificationPolicyList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1alpha1"
+          ]
+        }
+      },
+      "short": "VerificationPolicy",
+      "apiGroup": "tekton.dev",
+      "apiKind": "VerificationPolicy",
+      "apiVersion": "v1alpha1",
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1beta1.ClusterTask",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "ClusterTask",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "clustertasks.tekton.dev",
+          "uid": "137c2d8f-2a52-4f65-8035-4d6e64067d46",
+          "resourceVersion": "131118897",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:39Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"clustertasks.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1beta1\"]}},\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"ClusterTask\",\"plural\":\"clustertasks\",\"singular\":\"clustertask\"},\"preserveUnknownFields\":false,\"scope\":\"Cluster\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:34Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "clustertasks",
+            "singular": "clustertask",
+            "kind": "ClusterTask",
+            "listKind": "ClusterTaskList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Cluster",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "port": 443
+                }
+              },
+              "conversionReviewVersions": [
+                "v1beta1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "clustertasks",
+            "singular": "clustertask",
+            "kind": "ClusterTask",
+            "listKind": "ClusterTaskList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "short": "ClusterTask",
+      "apiGroup": "tekton.dev",
+      "apiKind": "ClusterTask",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": false
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.v1beta1.CustomRun",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "tekton.dev",
+            "kind": "CustomRun",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "customruns.tekton.dev",
+          "uid": "c66c590b-1f58-40fd-926c-e7b9c1d7a05f",
+          "resourceVersion": "131118898",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:39Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-pipelines",
+            "pipeline.tekton.dev/release": "v0.57.0",
+            "version": "v0.57.0"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-pipelines\",\"pipeline.tekton.dev/release\":\"v0.57.0\",\"version\":\"v0.57.0\"},\"name\":\"customruns.tekton.dev\"},\"spec\":{\"group\":\"tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"CustomRun\",\"plural\":\"customruns\",\"singular\":\"customrun\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Succeeded\\\")].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.startTime\",\"name\":\"StartTime\",\"type\":\"date\"},{\"jsonPath\":\".status.completionTime\",\"name\":\"CompletionTime\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:pipeline.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:34Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "tekton.dev",
+          "names": {
+            "plural": "customruns",
+            "singular": "customrun",
+            "kind": "CustomRun",
+            "listKind": "CustomRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "date",
+                  "jsonPath": ".status.startTime"
+                },
+                {
+                  "name": "CompletionTime",
+                  "type": "date",
+                  "jsonPath": ".status.completionTime"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "customruns",
+            "singular": "customrun",
+            "kind": "CustomRun",
+            "listKind": "CustomRunList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "Succeeded",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type==\"Succeeded\")].reason"
+        },
+        {
+          "name": "StartTime",
+          "type": "date",
+          "jsonPath": ".status.startTime"
+        },
+        {
+          "name": "CompletionTime",
+          "type": "date",
+          "jsonPath": ".status.completionTime"
+        }
+      ],
+      "short": "CustomRun",
+      "apiGroup": "tekton.dev",
+      "apiKind": "CustomRun",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.resolution.v1beta1.ResolutionRequest",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "resolution.tekton.dev",
+            "kind": "ResolutionRequest",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "resolutionrequests.resolution.tekton.dev",
+          "uid": "8afc7d64-7aa2-44a6-97ba-c69dc903569d",
+          "resourceVersion": "131118918",
+          "generation": 2,
+          "creationTimestamp": "2024-03-02T14:15:43Z",
+          "labels": {
+            "resolution.tekton.dev/release": "devel"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"resolution.tekton.dev/release\":\"devel\"},\"name\":\"resolutionrequests.resolution.tekton.dev\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"tekton-pipelines-webhook\",\"namespace\":\"tekton-pipelines\"}},\"conversionReviewVersions\":[\"v1alpha1\",\"v1beta1\"]}},\"group\":\"resolution.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-pipelines\"],\"kind\":\"ResolutionRequest\",\"plural\":\"resolutionrequests\",\"shortNames\":[\"resolutionrequest\",\"resolutionrequests\"],\"singular\":\"resolutionrequest\"},\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type=='Succeeded')].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Succeeded')].reason\",\"name\":\"Reason\",\"type\":\"string\"}],\"deprecated\":true,\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".metadata.ownerReferences[0].kind\",\"name\":\"OwnerKind\",\"type\":\"string\"},{\"jsonPath\":\".metadata.ownerReferences[0].name\",\"name\":\"Owner\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Succeeded')].status\",\"name\":\"Succeeded\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Succeeded')].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"StartTime\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Succeeded')].lastTransitionTime\",\"name\":\"EndTime\",\"type\":\"string\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:resolution.tekton.dev/release": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {},
+                    "f:webhook": {
+                      ".": {},
+                      "f:clientConfig": {
+                        ".": {},
+                        "f:service": {
+                          ".": {},
+                          "f:name": {},
+                          "f:namespace": {},
+                          "f:port": {}
+                        }
+                      },
+                      "f:conversionReviewVersions": {}
+                    }
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "webhook",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:16:46Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {},
+                        "f:service": {
+                          "f:path": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:35Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "resolution.tekton.dev",
+          "names": {
+            "plural": "resolutionrequests",
+            "singular": "resolutionrequest",
+            "shortNames": [
+              "resolutionrequest",
+              "resolutionrequests"
+            ],
+            "kind": "ResolutionRequest",
+            "listKind": "ResolutionRequestList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "deprecated": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Succeeded')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Succeeded')].reason"
+                }
+              ]
+            },
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "OwnerKind",
+                  "type": "string",
+                  "jsonPath": ".metadata.ownerReferences[0].kind"
+                },
+                {
+                  "name": "Owner",
+                  "type": "string",
+                  "jsonPath": ".metadata.ownerReferences[0].name"
+                },
+                {
+                  "name": "Succeeded",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Succeeded')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Succeeded')].reason"
+                },
+                {
+                  "name": "StartTime",
+                  "type": "string",
+                  "jsonPath": ".metadata.creationTimestamp"
+                },
+                {
+                  "name": "EndTime",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Succeeded')].lastTransitionTime"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "Webhook",
+            "webhook": {
+              "clientConfig": {
+                "service": {
+                  "namespace": "tekton-pipelines",
+                  "name": "tekton-pipelines-webhook",
+                  "path": "/resource-conversion",
+                  "port": 443
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNwVENDQWt1Z0F3SUJBZ0lRUElsQmVjd2RiS051MlFHTjlWK3pqekFLQmdncWhrak9QUVFEQWpCSk1SUXcKRWdZRFZRUUtFd3RyYm1GMGFYWmxMbVJsZGpFeE1DOEdBMVVFQXhNb2RHVnJkRzl1TFhCcGNHVnNhVzVsY3kxMwpaV0pvYjI5ckxuWjVibWxzTFhSdmIyeHpMbk4yWXpBZUZ3MHlOREF6TURJeE5ERTJORFphRncweU5EQXpNRGt4Ck5ERTJORFphTUVreEZEQVNCZ05WQkFvVEMydHVZWFJwZG1VdVpHVjJNVEV3THdZRFZRUURFeWgwWld0MGIyNHQKY0dsd1pXeHBibVZ6TFhkbFltaHZiMnN1ZG5sdWFXd3RkRzl2YkhNdWMzWmpNRmt3RXdZSEtvWkl6ajBDQVFZSQpLb1pJemowREFRY0RRZ0FFdjFnS3NybHhCY3didVdNdFA2bklkSzQvNnBCZFJKSlJOTWhtUklyc2dBZGVTdjBKCjkxSTRTNlVlMzRUdDFLRG82SnlnT2dVUkpoVlo2UTRmSEhINDhxT0NBUk13Z2dFUE1BNEdBMVVkRHdFQi93UUUKQXdJQ2hEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVTdXQ3NCSXNaaDZHUVJFUEYrTjVuQ1FVd1ZnVXdnYTBHQTFVZEVRU0JwVENCCm9vSVlkR1ZyZEc5dUxYQnBjR1ZzYVc1bGN5MTNaV0pvYjI5cmdpUjBaV3QwYjI0dGNHbHdaV3hwYm1WekxYZGwKWW1odmIyc3Vkbmx1YVd3dGRHOXZiSE9DS0hSbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cApiQzEwYjI5c2N5NXpkbU9DTm5SbGEzUnZiaTF3YVhCbGJHbHVaWE10ZDJWaWFHOXZheTUyZVc1cGJDMTBiMjlzCmN5NXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJEQUtCZ2dxaGtqT1BRUURBZ05JQURCRkFpRUF4MGNiS2M0eXhtU00KVjRXSEpIdTFOb3p2NW9nSFY1S3R5WDFiQ2RjT0VGZ0NJSDRPMUcrK0Q1azRrODkwM0pEdUlQTll5QzJNVlZJNwpIdUlIYUprQk55QTYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+              },
+              "conversionReviewVersions": [
+                "v1alpha1",
+                "v1beta1"
+              ]
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "resolutionrequests",
+            "singular": "resolutionrequest",
+            "shortNames": [
+              "resolutionrequest",
+              "resolutionrequests"
+            ],
+            "kind": "ResolutionRequest",
+            "listKind": "ResolutionRequestList",
+            "categories": [
+              "tekton",
+              "tekton-pipelines"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "OwnerKind",
+          "type": "string",
+          "jsonPath": ".metadata.ownerReferences[0].kind"
+        },
+        {
+          "name": "Owner",
+          "type": "string",
+          "jsonPath": ".metadata.ownerReferences[0].name"
+        },
+        {
+          "name": "Succeeded",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Succeeded')].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Succeeded')].reason"
+        },
+        {
+          "name": "StartTime",
+          "type": "string",
+          "jsonPath": ".metadata.creationTimestamp"
+        },
+        {
+          "name": "EndTime",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Succeeded')].lastTransitionTime"
+        }
+      ],
+      "short": "ResolutionRequest",
+      "apiGroup": "resolution.tekton.dev",
+      "apiKind": "ResolutionRequest",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1alpha1.ClusterInterceptor",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "ClusterInterceptor",
+            "version": "v1alpha1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "clusterinterceptors.triggers.tekton.dev",
+          "uid": "86d9bd0f-790b-4ea1-9e23-e05dbb74e3e8",
+          "resourceVersion": "131119121",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:39Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"clusterinterceptors.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"ClusterInterceptor\",\"plural\":\"clusterinterceptors\",\"shortNames\":[\"ci\"],\"singular\":\"clusterinterceptor\"},\"scope\":\"Cluster\",\"versions\":[{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:56Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "clusterinterceptors",
+            "singular": "clusterinterceptor",
+            "shortNames": [
+              "ci"
+            ],
+            "kind": "ClusterInterceptor",
+            "listKind": "ClusterInterceptorList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Cluster",
+          "versions": [
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "clusterinterceptors",
+            "singular": "clusterinterceptor",
+            "shortNames": [
+              "ci"
+            ],
+            "kind": "ClusterInterceptor",
+            "listKind": "ClusterInterceptorList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1alpha1"
+          ]
+        }
+      },
+      "short": "ClusterInterceptor",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "ClusterInterceptor",
+      "apiVersion": "v1alpha1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": false
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1alpha1.Interceptor",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "Interceptor",
+            "version": "v1alpha1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "interceptors.triggers.tekton.dev",
+          "uid": "ad52136c-1110-49ab-bd81-5e9d8400a60f",
+          "resourceVersion": "131119131",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:42Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"interceptors.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"Interceptor\",\"plural\":\"interceptors\",\"shortNames\":[\"ni\"],\"singular\":\"interceptor\"},\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:42Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:42Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:57Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "interceptors",
+            "singular": "interceptor",
+            "shortNames": [
+              "ni"
+            ],
+            "kind": "Interceptor",
+            "listKind": "InterceptorList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:42Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:42Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "interceptors",
+            "singular": "interceptor",
+            "shortNames": [
+              "ni"
+            ],
+            "kind": "Interceptor",
+            "listKind": "InterceptorList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1alpha1"
+          ]
+        }
+      },
+      "short": "Interceptor",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "Interceptor",
+      "apiVersion": "v1alpha1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1beta1.ClusterTriggerBinding",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "ClusterTriggerBinding",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "clustertriggerbindings.triggers.tekton.dev",
+          "uid": "2a985fd1-5850-479c-bb51-159cc0eadae5",
+          "resourceVersion": "131119122",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:39Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"clustertriggerbindings.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"ClusterTriggerBinding\",\"plural\":\"clustertriggerbindings\",\"shortNames\":[\"ctb\"],\"singular\":\"clustertriggerbinding\"},\"scope\":\"Cluster\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}},{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:39Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:56Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "clustertriggerbindings",
+            "singular": "clustertriggerbinding",
+            "shortNames": [
+              "ctb"
+            ],
+            "kind": "ClusterTriggerBinding",
+            "listKind": "ClusterTriggerBindingList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Cluster",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:39Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "clustertriggerbindings",
+            "singular": "clustertriggerbinding",
+            "shortNames": [
+              "ctb"
+            ],
+            "kind": "ClusterTriggerBinding",
+            "listKind": "ClusterTriggerBindingList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "short": "ClusterTriggerBinding",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "ClusterTriggerBinding",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": false
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1beta1.EventListener",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "EventListener",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "eventlisteners.triggers.tekton.dev",
+          "uid": "083e2377-6b1e-4738-a81d-18b3e439499f",
+          "resourceVersion": "131119124",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:40Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"eventlisteners.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"EventListener\",\"plural\":\"eventlisteners\",\"shortNames\":[\"el\"],\"singular\":\"eventlistener\"},\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.address.url\",\"name\":\"Address\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Available')].status\",\"name\":\"Available\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Available')].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Ready')].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Ready')].reason\",\"name\":\"Reason\",\"type\":\"string\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.address.url\",\"name\":\"Address\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Available')].status\",\"name\":\"Available\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Available')].reason\",\"name\":\"Reason\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Ready')].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type=='Ready')].reason\",\"name\":\"Reason\",\"type\":\"string\"}],\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:40Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:40Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:57Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "eventlisteners",
+            "singular": "eventlistener",
+            "shortNames": [
+              "el"
+            ],
+            "kind": "EventListener",
+            "listKind": "EventListenerList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Address",
+                  "type": "string",
+                  "jsonPath": ".status.address.url"
+                },
+                {
+                  "name": "Available",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Available')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Available')].reason"
+                },
+                {
+                  "name": "Ready",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].reason"
+                }
+              ]
+            },
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Address",
+                  "type": "string",
+                  "jsonPath": ".status.address.url"
+                },
+                {
+                  "name": "Available",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Available')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Available')].reason"
+                },
+                {
+                  "name": "Ready",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].status"
+                },
+                {
+                  "name": "Reason",
+                  "type": "string",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].reason"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:40Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:40Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "eventlisteners",
+            "singular": "eventlistener",
+            "shortNames": [
+              "el"
+            ],
+            "kind": "EventListener",
+            "listKind": "EventListenerList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "Address",
+          "type": "string",
+          "jsonPath": ".status.address.url"
+        },
+        {
+          "name": "Available",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Available')].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Available')].reason"
+        },
+        {
+          "name": "Ready",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Ready')].status"
+        },
+        {
+          "name": "Reason",
+          "type": "string",
+          "jsonPath": ".status.conditions[?(@.type=='Ready')].reason"
+        }
+      ],
+      "short": "EventListener",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "EventListener",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1beta1.Trigger",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "Trigger",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "triggers.triggers.tekton.dev",
+          "uid": "2f07ca4b-1010-4fc1-976c-32486fea6005",
+          "resourceVersion": "131119139",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:43Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"triggers.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"Trigger\",\"plural\":\"triggers\",\"shortNames\":[\"tri\"],\"singular\":\"trigger\"},\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}},{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:58Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "triggers",
+            "singular": "trigger",
+            "shortNames": [
+              "tri"
+            ],
+            "kind": "Trigger",
+            "listKind": "TriggerList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "triggers",
+            "singular": "trigger",
+            "shortNames": [
+              "tri"
+            ],
+            "kind": "Trigger",
+            "listKind": "TriggerList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "short": "Trigger",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "Trigger",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1beta1.TriggerBinding",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "TriggerBinding",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "triggerbindings.triggers.tekton.dev",
+          "uid": "25aeee29-d670-4c59-9621-81e46b771cf1",
+          "resourceVersion": "131119134",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:43Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"triggerbindings.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"TriggerBinding\",\"plural\":\"triggerbindings\",\"shortNames\":[\"tb\"],\"singular\":\"triggerbinding\"},\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}},{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:57Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "triggerbindings",
+            "singular": "triggerbinding",
+            "shortNames": [
+              "tb"
+            ],
+            "kind": "TriggerBinding",
+            "listKind": "TriggerBindingList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:43Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "triggerbindings",
+            "singular": "triggerbinding",
+            "shortNames": [
+              "tb"
+            ],
+            "kind": "TriggerBinding",
+            "listKind": "TriggerBindingList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "short": "TriggerBinding",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "TriggerBinding",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "dev.tekton.triggers.v1beta1.TriggerTemplate",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "triggers.tekton.dev",
+            "kind": "TriggerTemplate",
+            "version": "v1beta1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "triggertemplates.triggers.tekton.dev",
+          "uid": "8fe73568-acdb-40ef-9a70-62ddcdf9fea9",
+          "resourceVersion": "131119142",
+          "generation": 1,
+          "creationTimestamp": "2024-03-02T14:15:45Z",
+          "labels": {
+            "app.kubernetes.io/instance": "default",
+            "app.kubernetes.io/part-of": "tekton-triggers",
+            "triggers.tekton.dev/release": "v0.26.1",
+            "version": "v0.26.1"
+          },
+          "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/instance\":\"default\",\"app.kubernetes.io/part-of\":\"tekton-triggers\",\"triggers.tekton.dev/release\":\"v0.26.1\",\"version\":\"v0.26.1\"},\"name\":\"triggertemplates.triggers.tekton.dev\"},\"spec\":{\"group\":\"triggers.tekton.dev\",\"names\":{\"categories\":[\"tekton\",\"tekton-triggers\"],\"kind\":\"TriggerTemplate\",\"plural\":\"triggertemplates\",\"shortNames\":[\"tt\"],\"singular\":\"triggertemplate\"},\"scope\":\"Namespaced\",\"versions\":[{\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}},{\"name\":\"v1alpha1\",\"schema\":{\"openAPIV3Schema\":{\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}}]}}\n"
+          },
+          "managedFields": [
+            {
+              "manager": "kube-apiserver",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:45Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:status": {
+                  "f:acceptedNames": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:conditions": {
+                    "k:{\"type\":\"Established\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    },
+                    "k:{\"type\":\"NamesAccepted\"}": {
+                      ".": {},
+                      "f:lastTransitionTime": {},
+                      "f:message": {},
+                      "f:reason": {},
+                      "f:status": {},
+                      "f:type": {}
+                    }
+                  }
+                }
+              },
+              "subresource": "status"
+            },
+            {
+              "manager": "kubectl-create",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:15:45Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:labels": {
+                    ".": {},
+                    "f:app.kubernetes.io/instance": {},
+                    "f:app.kubernetes.io/part-of": {},
+                    "f:triggers.tekton.dev/release": {},
+                    "f:version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {
+                    ".": {},
+                    "f:strategy": {}
+                  },
+                  "f:group": {},
+                  "f:names": {
+                    "f:categories": {},
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:shortNames": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {},
+                  "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-02T14:46:58Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "spec": {
+          "group": "triggers.tekton.dev",
+          "names": {
+            "plural": "triggertemplates",
+            "singular": "triggertemplate",
+            "shortNames": [
+              "tt"
+            ],
+            "kind": "TriggerTemplate",
+            "listKind": "TriggerTemplateList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1beta1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            },
+            {
+              "name": "v1alpha1",
+              "served": true,
+              "storage": false,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "type": "NamesAccepted",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:45Z",
+              "reason": "NoConflicts",
+              "message": "no conflicts found"
+            },
+            {
+              "type": "Established",
+              "status": "True",
+              "lastTransitionTime": "2024-03-02T14:15:45Z",
+              "reason": "InitialNamesAccepted",
+              "message": "the initial names have been accepted"
+            }
+          ],
+          "acceptedNames": {
+            "plural": "triggertemplates",
+            "singular": "triggertemplate",
+            "shortNames": [
+              "tt"
+            ],
+            "kind": "TriggerTemplate",
+            "listKind": "TriggerTemplateList",
+            "categories": [
+              "tekton",
+              "tekton-triggers"
+            ]
+          },
+          "storedVersions": [
+            "v1beta1"
+          ]
+        }
+      },
+      "short": "TriggerTemplate",
+      "apiGroup": "triggers.tekton.dev",
+      "apiKind": "TriggerTemplate",
+      "apiVersion": "v1beta1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "tekton",
+      "sub": "tekton",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    }
+  ]
+}

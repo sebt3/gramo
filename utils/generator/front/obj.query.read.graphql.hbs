@@ -47,6 +47,15 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
         host
         path
       {{/if}}
+      {{#if (eq resultShort 'Problem')}}
+        source
+        description
+      {{/if}}
+      {{#if (eq resultShort 'Advice')}}
+        source
+        reason
+        description
+      {{/if}}
       {{#if (eq resultShort 'Container')}}
         namespace
         pod_name
@@ -93,12 +102,31 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
           path
         }
       {{/if}}
+        getcoreProblem {
+          source
+          description
+        }
+        getcoreAdvice {
+          source
+          reason
+          description
+        }
       {{#each properties}}
         {{this}}
       {{/each}}
     {{/if}}
       }
   {{/each}}
+{{else}}
+      getcoreProblem {
+        source
+        description
+      }
+      getcoreAdvice {
+        source
+        reason
+        description
+      }
 {{/if}}
 {{#each readProperties}}
       {{this}}

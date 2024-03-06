@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
-import {{ group }}{{ short }}List from '@/components/{{ group }}/{{ short }}List.vue';
+const  {{ group }}{{ short }}List   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 import { useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 import { watch } from 'vue';
 {{#if namespaced}}
@@ -22,7 +24,7 @@ const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   }
 }, navigation.refreshOption);
 {{else}}
-const { actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler } = use{{ short }}();
+const { navigation, actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler } = use{{ short }}();
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {}
 }, navigation.refreshOption);
@@ -30,7 +32,8 @@ const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
 </script>
-<template>
+<template><div>
+  <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="result === undefined" />
 {{#if namespaced}}
   <{{ group }}{{ short }}List @refresh="refetch()" :useAction="isNamespaced()"
     v-if="result !== undefined && result['k8sNamespace'] !== undefined"
@@ -44,4 +47,4 @@ onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
     @on-delete="(meta)=>{actionDelete(deletor, meta)}"
   />
 {{/if}}
-</template>
+</div></template>

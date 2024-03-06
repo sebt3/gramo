@@ -1,3 +1,4 @@
+#!/usr/bin/env -S npx tsx
 import { server, setup, app, httpServer } from './main.js'
 import { createServer as createViteServer } from 'vite'
 

@@ -10,6 +10,7 @@ const can = usePermissionStore().can;
 export const {{short}}Columns:Array<QTableColumn> = ([
   {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat(extra{{short}}Columns).concat([
+  {name: 'Problems', label: 'Ok', field: 'Ok', sortable: false, align: tableColumnAlign.right},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ]);
 {{#if namespaced}}

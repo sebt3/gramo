@@ -2,6 +2,8 @@
 import { ref, use{{ short }} } from '../../libs/{{ group }}/{{ short }}.js'
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
 import { elude, getColor, getConditionColor } from "../../libs/core/"
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 const { can, toEdit } = use{{ short }}();
 defineEmits(['on-delete']);
 const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean, showLabels?:boolean, showStatus?: boolean, origin?:string}>(), {
@@ -27,7 +29,7 @@ const props = withDefaults(defineProps<{model: object, useActions?:boolean, show
         </q-btn-group>
       </div>
     </q-card-section>
-    <q-card-section :class="`bg-${ color{{ short }} }-2`">
+    <q-card-section :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'2'}`">
       <div class="q-gutter-md">
 {{> vueNameFields namespaced=namespaced group=group short=short }}
         <div v-if="showStatus">

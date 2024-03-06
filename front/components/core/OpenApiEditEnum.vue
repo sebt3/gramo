@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import OpenApiNamedIcon from './OpenApiNamedIcon.vue';
+import { defineAsyncComponent } from 'vue'
+const  OpenApiNamedIcon   = defineAsyncComponent(() => import( './OpenApiNamedIcon.vue'));
 import { ref, computed, watch } from 'vue'
 import { elude } from "../../libs/core/"
 const props = withDefaults(defineProps<{

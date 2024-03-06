@@ -1,0 +1,107 @@
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+import {{ category }}Query from '@/queries/{{ name }}/{{ category }}.read.graphql'
+const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
+const AdviceOverview = defineAsyncComponent(() => import( '@/components/core/AdviceOverview.vue'));
+const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+import { {{#each objects}}have{{ short }}, {{/each}} } from '@/libs/{{ name }}/{{ category }}Cat.js'
+import {onlyUnique} from "@/components/charts/commonTools.js"
+{{#each objects}}
+const  {{ group }}{{ short }}List   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
+import { {{ short }}ListExcludes{{#if namespaced}}, use{{short}}{{/if}} } from '@/libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const {toList: to{{ short }}List}  = use{{short}}();
+{{/if}}
+{{/each}}
+import { ref, useCore, useNavigationStoreRef, useQuery } from '@/libs/core';
+const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
+const ready = ref(false);
+{{#each objects}}
+const {{ short }}Problems = ref([]);
+const {{ short }}Advices = ref([]);
+{{/each}}
+if (isNamespaced()) setNamespaceFromRoute();
+const navigation = useNavigationStoreRef();
+const { result, loading, refetch, onError } = useQuery({{ category }}Query, {
+{{#each objects}}
+  "{{ short }}": {
+    "filters": [],
+    "havingAny": [{"resolver":"getcoreProblem"},{"resolver":"getcoreAdvice"}],
+    "excludes": {{ short }}ListExcludes
+  },
+{{/each}}
+  "namespace": {
+    "filters": isNamespaced()?[
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentNamespace
+      }
+    ]:[]
+  }
+});
+onError(onErrorHandler);
+</script>
+<template><div>
+{{#each objects}}
+  <div class="row q-mb-sm q-ml-sm" v-if="loading{{#unless namespaced}} && !isNamespaced(){{/unless}}">
+    <div class="col-lg-4">
+      <OverviewSkeleton />
+    </div>
+    <div class="col-lg-8">
+      <TableSkeleton :showNamespace="{{toJson namespaced}}" />
+    </div>
+  </div>
+{{#if namespaced}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat().length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+{{else}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+{{/if}}
+  </div>
+{{/each}}
+{{#each objects}}
+{{#if namespaced}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat().length>0">
+    <div class="col-lg-4">
+      <AdviceOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
+    </div>
+{{else}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0).length>0">
+    <div class="col-lg-4">
+      <AdviceOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
+    </div>
+{{/if}}
+  </div>
+{{/each}}
+</div></template>

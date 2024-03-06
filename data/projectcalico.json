@@ -5,8 +5,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.BGPConfiguration",
       "definition": {
-        "description": "BGPConfiguration contains the configuration for any BGP routing.",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -163,6 +161,8 @@
             }
           }
         },
+        "description": "BGPConfiguration contains the configuration for any BGP routing.",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -488,7 +488,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.BGPPeer",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -578,6 +577,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -835,7 +835,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.BlockAffinity",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -871,6 +870,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -1074,7 +1074,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.CalicoNodeStatus",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -1341,6 +1340,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -1781,8 +1781,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.ClusterInformation",
       "definition": {
-        "description": "ClusterInformation contains the cluster specific information.",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -1819,6 +1817,8 @@
             }
           }
         },
+        "description": "ClusterInformation contains the cluster specific information.",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -2024,8 +2024,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.FelixConfiguration",
       "definition": {
-        "description": "Felix Configuration contains the configuration for Felix.",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -2611,6 +2609,8 @@
             }
           }
         },
+        "description": "Felix Configuration contains the configuration for Felix.",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -3389,7 +3389,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.GlobalNetworkPolicy",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -3957,6 +3956,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -4788,8 +4788,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.GlobalNetworkSet",
       "definition": {
-        "description": "GlobalNetworkSet contains a set of arbitrary IP sub-networks/CIDRs that share labels to allow rules to refer to them via selectors.  The labels of GlobalNetworkSet are not namespaced.",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -4813,6 +4811,8 @@
             }
           }
         },
+        "description": "GlobalNetworkSet contains a set of arbitrary IP sub-networks/CIDRs that share labels to allow rules to refer to them via selectors.  The labels of GlobalNetworkSet are not namespaced.",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -5005,7 +5005,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.HostEndpoint",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5068,6 +5067,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -5306,7 +5306,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.IPAMBlock",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5389,6 +5388,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -5643,7 +5643,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.IPAMConfig",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5676,6 +5675,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -5876,7 +5876,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.IPAMHandle",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5909,6 +5908,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -6109,7 +6109,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.IPPool",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -6186,6 +6185,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -6430,7 +6430,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.IPReservation",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -6454,6 +6453,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -6647,7 +6647,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.KubeControllersConfiguration",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -6879,6 +6878,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -7280,7 +7280,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.NetworkPolicy",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -7832,6 +7831,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",
@@ -8647,8 +8647,6 @@
       "alternatives": [],
       "name": "org.projectcalico.crd.v1.NetworkSet",
       "definition": {
-        "description": "NetworkSet is the Namespaced-equivalent of the GlobalNetworkSet.",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -8672,6 +8670,8 @@
             }
           }
         },
+        "description": "NetworkSet is the Namespaced-equivalent of the GlobalNetworkSet.",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "crd.projectcalico.org",

@@ -1,6 +1,7 @@
 <script setup>
-import MainMenu from './components/navigation/MainMenu.vue';
-import BreadCrumbs from './components/navigation/BreadCrumbs.vue';
+import { defineAsyncComponent } from 'vue'
+const MainMenu = defineAsyncComponent(() => import('./components/navigation/MainMenu.vue'));
+const BreadCrumbs = defineAsyncComponent(() => import('./components/navigation/BreadCrumbs.vue'));
 import { useNavigationStore } from './stores';
 const { getTransition } = useNavigationStore();
 </script>

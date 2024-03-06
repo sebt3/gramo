@@ -25,14 +25,34 @@ input ExcludeInclude {
   path: String!
   include: Boolean
 }
+input Having {
+  resolver: String!
+  filters: [Filter!]
+}
 input queryParameters {
   filters: [Filter!]
   excludes: [ExcludeInclude!]
+  havingAny: [Having!]
+  havingAll: [Having!]
   maxLines: Int
 }
-input metadataMore {
-  labels: [Label!]
-  annotations: [Label!]
+input ownerReferenceInput {
+  apiVersion: String!
+  blockOwnerDeletion: Boolean
+  controller: Boolean
+  kind: String!
+  name: String!
+  uid: String!
+}
+input metadataInput {
+  name: String!
+  namespace: String
+  annotations: JSONObject
+  labels: JSONObject
+  creationTimestamp: String
+  ownerReferences: [ownerReferenceInput]
+  resourceVersion: String
+  uid: String
 }
 type ownerReference {
   apiVersion: String!
@@ -105,6 +125,15 @@ type coreEvent {
   reason: String
   reportingComponent: String
   reportingInstance: String
+}
+type coreProblem {
+  source: String
+  description: String
+}
+type coreAdvice {
+  source: String
+  reason: String
+  description: String
 }
 type coreLog {
   lines: [String]!

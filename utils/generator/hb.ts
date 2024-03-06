@@ -34,7 +34,7 @@ HB.registerHelper('toJsonKeys', v => new HB.SafeString(JSON.stringify(Object.key
 HB.registerHelper('getGQLType', (name,obj)=>new HB.SafeString(Object.entries(obj).filter(([n])=>name==n).map(([_,v])=>v)[0] as string))
 HB.registerHelper('genParameterQuery', (obj)=>new HB.SafeString(
     Object.entries(obj['gqlDefs'])
-        .filter(([name,])=>!excludedWriteNames.includes(name)).concat([['metadata', 'metadataMore']])
+        .filter(([name,])=>!excludedWriteNames.includes(name))
         .map(([name,value])=> `${name}: ${value}`).join(', ')
 ));
 const unsure = 'gen.';

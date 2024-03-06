@@ -1,0 +1,135 @@
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+import {{ category }}Query from '@/queries/{{ name }}/{{ category }}.read.graphql'
+const  pieChart       = defineAsyncComponent(() => import( '@/components/charts/pieChart.vue'));
+const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
+const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+import { {{#each objects}}have{{ short }}, {{/each}} } from '@/libs/{{ name }}/{{ category }}Cat.js'
+import { {{#each objects}}color{{ short }}, {{/each}} } from '@/libs/{{ name }}/custom.js'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
+{{#each objects}}
+const  {{ group }}{{ short }}List   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
+import { {{ short }}ListExcludes{{#if namespaced}}, use{{short}}{{/if}} } from '@/libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const {toList: to{{ short }}List}  = use{{short}}();
+{{/if}}
+{{/each}}
+import { ref, useCore, useNavigationStoreRef, useQuery } from '@/libs/core';
+const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
+const ready = ref(false);
+{{#each objects}}
+const {{ short }}Problems = ref([]);
+{{#if namespaced}}
+const {{ short }}ByTs = ref([]);
+{{/if}}
+{{/each}}
+if (isNamespaced()) setNamespaceFromRoute();
+const navigation = useNavigationStoreRef();
+const { result, loading, refetch, onResult, onError } = useQuery({{ category }}Query, {
+{{#each objects}}
+  "{{ short }}": {
+    "filters": [],
+    "excludes": {{ short }}ListExcludes
+  },
+{{/each}}
+  "namespace": {
+    "filters": isNamespaced()?[
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentNamespace
+      }
+    ]:[]
+  }
+});
+onError(onErrorHandler);
+onResult((res) => {
+  if ( !res.loading ) {
+    ready.value = false;
+{{#each objects}}
+{{#if namespaced}}
+    if (have{{ short }}()) {
+      {{ short }}ByTs.value.length = 0;
+      {{ short }}ByTs.value.push(...res.data.k8sNamespace.map(n => {return {name: n.metadata.name, value: n.{{ group }}{{ short }}.length} }).filter(n => n.value>0))
+    }
+{{/if}}
+{{/each}}
+    ready.value = true;
+  }
+})
+</script>
+<template><div>
+{{#each objects}}
+  <div class="row q-mb-sm q-ml-sm" v-if="loading{{#unless namespaced}} && !isNamespaced(){{/unless}}">
+    <div class="col-lg-4">
+      <OverviewSkeleton />
+    </div>
+    <div class="col-lg-8">
+      <TableSkeleton :showNamespace="{{toJson namespaced}}" />
+    </div>
+  </div>
+{{#if namespaced}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat().length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+{{else}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ short }}List"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+{{/if}}
+  </div>
+{{/each}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!isNamespaced()">
+{{#each objects}}
+{{#if namespaced}}
+    <div class="col-lg-4" v-if="ready && {{ short }}ByTs.length>1" >
+      <q-card bordered :class="`q-ma-sm bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
+        <q-card-section :class="`text-center bg-${ color{{ short }} }`">
+          <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#{{ group }}{{ short }}">{{ short }} per namespace</a></div>
+        </q-card-section>
+        <q-card-section class="text-center">
+          <pieChart
+            :datum="{{ short }}ByTs"
+            @on-click="(name)=>{to{{ short }}List(name)}"
+            />
+        </q-card-section>
+      </q-card>
+    </div>
+{{/if}}
+{{/each}}
+  </div>
+<div class="column">
+{{#each objects}}
+<div {{#if order }}:style="`order: {{order}}`"{{/if}} >
+<a name="{{ group }}{{ short }}" />
+{{#if namespaced}}
+  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+    v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+    :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
+  />
+{{else}}
+  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+    v-if="!isNamespaced() && result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+    :model="result.{{ group }}{{ short }}"
+  />
+{{/if}}
+</div>
+{{/each}}
+</div>
+</div></template>

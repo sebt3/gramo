@@ -5,12 +5,6 @@
       "alternatives": [],
       "name": "fr.solidite.vynil.v1.Distrib",
       "definition": {
-        "description": "Auto-generated derived type for DistribSpec via `CustomResource`",
-        "type": "object",
-        "title": "Distrib",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -55,6 +49,12 @@
             ]
           }
         },
+        "description": "Auto-generated derived type for DistribSpec via `CustomResource`",
+        "type": "object",
+        "title": "Distrib",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "vynil.solidite.fr",
@@ -66,10 +66,10 @@
       "crd": {
         "metadata": {
           "name": "distribs.vynil.solidite.fr",
-          "uid": "e4052365-8341-4618-80de-154057cf5613",
-          "resourceVersion": "118456240",
+          "uid": "d50bfd5b-e37f-4cd1-97b7-3e32b264696a",
+          "resourceVersion": "25879923002",
           "generation": 2,
-          "creationTimestamp": "2023-06-29T06:16:28Z",
+          "creationTimestamp": "2023-11-21T13:59:10Z",
           "annotations": {
             "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"name\":\"distribs.vynil.solidite.fr\"},\"spec\":{\"group\":\"vynil.solidite.fr\",\"names\":{\"categories\":[],\"kind\":\"Distrib\",\"plural\":\"distribs\",\"shortNames\":[\"dist\"],\"singular\":\"distrib\"},\"scope\":\"Cluster\",\"versions\":[{\"additionalPrinterColumns\":[{\"description\":\"Git url\",\"jsonPath\":\".spec.url\",\"name\":\"url\",\"type\":\"string\"},{\"description\":\"Update schedule\",\"jsonPath\":\".spec.schedule\",\"name\":\"schedule\",\"type\":\"string\"},{\"description\":\"Last update date\",\"format\":\"date-time\",\"jsonPath\":\".status.last_updated\",\"name\":\"last_updated\",\"type\":\"string\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"Auto-generated derived type for DistribSpec via `CustomResource`\",\"properties\":{\"spec\":{\"description\":\"Distrib:\\n\\nDescribe a source of components distribution git repository\",\"properties\":{\"branch\":{\"description\":\"Git branch\",\"nullable\":true,\"type\":\"string\"},\"insecure\":{\"description\":\"Git clone URL\",\"nullable\":true,\"type\":\"boolean\"},\"login\":{\"description\":\"Git authentication\",\"nullable\":true,\"properties\":{\"git_credentials\":{\"description\":\"a git-credentials store file (format: https://\\u003cusername\\u003e:\\u003cpassword|token\\u003e@\\u003curl\\u003e/\\u003crepo\\u003e)\",\"nullable\":true,\"properties\":{\"key\":{\"description\":\"Key of the secret containing the file\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the secret\",\"type\":\"string\"}},\"required\":[\"key\",\"name\"],\"type\":\"object\"},\"ssh_key\":{\"description\":\"SSH private key\",\"nullable\":true,\"properties\":{\"key\":{\"description\":\"Key of the secret containing the file\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the secret\",\"type\":\"string\"}},\"required\":[\"key\",\"name\"],\"type\":\"object\"}},\"type\":\"object\"},\"schedule\":{\"description\":\"Actual cron-type expression that defines the interval of the updates.\",\"type\":\"string\"},\"url\":{\"description\":\"Git clone URL\",\"type\":\"string\"}},\"required\":[\"schedule\",\"url\"],\"type\":\"object\"},\"status\":{\"description\":\"The status object of `Distrib`\",\"nullable\":true,\"properties\":{\"components\":{\"description\":\"List of known category-\\u003ecomponents\",\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true},\"errors\":{\"description\":\"Set with the messages if any error occured\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"last_updated\":{\"description\":\"Last update date\",\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"components\",\"last_updated\"],\"type\":\"object\"}},\"required\":[\"spec\"],\"title\":\"Distrib\",\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
           },
@@ -78,7 +78,7 @@
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:16:28Z",
+              "time": "2023-11-21T13:59:10Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -115,7 +115,7 @@
               "manager": "kubectl-client-side-apply",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-09T16:26:15Z",
+              "time": "2023-11-21T14:03:04Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:metadata": {
@@ -310,14 +310,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-06-29T06:16:28Z",
+              "lastTransitionTime": "2023-11-21T13:59:10Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-06-29T06:16:28Z",
+              "lastTransitionTime": "2023-11-21T13:59:10Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }
@@ -384,12 +384,6 @@
       "alternatives": [],
       "name": "fr.solidite.vynil.v1.Install",
       "definition": {
-        "description": "Auto-generated derived type for InstallSpec via `CustomResource`",
-        "type": "object",
-        "title": "Install",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -439,6 +433,12 @@
             ]
           }
         },
+        "description": "Auto-generated derived type for InstallSpec via `CustomResource`",
+        "type": "object",
+        "title": "Install",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "vynil.solidite.fr",
@@ -450,10 +450,10 @@
       "crd": {
         "metadata": {
           "name": "installs.vynil.solidite.fr",
-          "uid": "71b0970d-55e3-4a31-8505-1143ffd8713f",
-          "resourceVersion": "118456241",
+          "uid": "0221fee0-5806-402b-8505-7c07ae9672ed",
+          "resourceVersion": "25879923014",
           "generation": 2,
-          "creationTimestamp": "2023-06-29T06:16:28Z",
+          "creationTimestamp": "2023-11-21T13:59:10Z",
           "annotations": {
             "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{},\"name\":\"installs.vynil.solidite.fr\"},\"spec\":{\"group\":\"vynil.solidite.fr\",\"names\":{\"categories\":[],\"kind\":\"Install\",\"plural\":\"installs\",\"shortNames\":[\"inst\"],\"singular\":\"install\"},\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"description\":\"Distribution\",\"jsonPath\":\".spec.distrib\",\"name\":\"dist\",\"type\":\"string\"},{\"description\":\"Category\",\"jsonPath\":\".spec.category\",\"name\":\"cat\",\"type\":\"string\"},{\"description\":\"Component\",\"jsonPath\":\".spec.component\",\"name\":\"comp\",\"type\":\"string\"},{\"description\":\"Status\",\"jsonPath\":\".status.status\",\"name\":\"status\",\"type\":\"string\"},{\"description\":\"Errors\",\"jsonPath\":\".status.errors[*]\",\"name\":\"errors\",\"type\":\"string\"},{\"description\":\"Last update date\",\"format\":\"date-time\",\"jsonPath\":\".status.last_updated\",\"name\":\"last_updated\",\"type\":\"string\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"Auto-generated derived type for InstallSpec via `CustomResource`\",\"properties\":{\"spec\":{\"description\":\"Generate the Kubernetes wrapper struct `Install` from our Spec and Status struct\\n\\nThis provides a hook for generating the CRD yaml (in crdgen.rs) Maybe\",\"properties\":{\"auto_upgrade\":{\"description\":\"Should we automatically upgrade the package\",\"nullable\":true,\"type\":\"boolean\"},\"category\":{\"description\":\"The category name\",\"type\":\"string\"},\"component\":{\"description\":\"The package name\",\"type\":\"string\"},\"distrib\":{\"description\":\"The distribution source name\",\"type\":\"string\"},\"options\":{\"description\":\"Parameters\",\"nullable\":true,\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"required\":[\"category\",\"component\",\"distrib\"],\"type\":\"object\"},\"status\":{\"description\":\"The status object of `Install`\",\"nullable\":true,\"properties\":{\"commit_id\":{\"description\":\"component version applied\",\"type\":\"string\"},\"digest\":{\"description\":\"Options digests\",\"type\":\"string\"},\"errors\":{\"description\":\"Set with the messages if any error occured\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"last_updated\":{\"description\":\"Last update date\",\"format\":\"date-time\",\"type\":\"string\"},\"plan\":{\"description\":\"Currently planned changed, only set if planned is true\",\"nullable\":true,\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true},\"status\":{\"description\":\"Current high-level status of the installation\",\"type\":\"string\"},\"tfstate\":{\"description\":\"Current terraform status\",\"nullable\":true,\"type\":\"object\",\"x-kubernetes-preserve-unknown-fields\":true}},\"required\":[\"commit_id\",\"digest\",\"last_updated\",\"status\"],\"type\":\"object\"}},\"required\":[\"spec\"],\"title\":\"Install\",\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]}}\n"
           },
@@ -462,7 +462,7 @@
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:16:28Z",
+              "time": "2023-11-21T13:59:10Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -499,7 +499,7 @@
               "manager": "kubectl-client-side-apply",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-09T16:26:15Z",
+              "time": "2023-11-21T14:03:05Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:metadata": {
@@ -694,14 +694,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-06-29T06:16:28Z",
+              "lastTransitionTime": "2023-11-21T13:59:10Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-06-29T06:16:28Z",
+              "lastTransitionTime": "2023-11-21T13:59:10Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }

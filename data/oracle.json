@@ -5,10 +5,6 @@
       "alternatives": [],
       "name": "com.oracle.mysql.v2.InnoDBCluster",
       "definition": {
-        "type": "object",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -689,6 +685,10 @@
             "x-kubernetes-preserve-unknown-fields": true
           }
         },
+        "type": "object",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "mysql.oracle.com",
@@ -2148,7 +2148,6 @@
       "alternatives": [],
       "name": "com.oracle.mysql.v2.MySQLBackup",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -2227,6 +2226,7 @@
             }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mysql.oracle.com",

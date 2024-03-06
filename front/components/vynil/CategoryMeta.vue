@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // noGramoGenerator
-import TableHeader from '@/components/core/TableHeader.vue';
+import { defineAsyncComponent } from 'vue'
+const  TableHeader   = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
 import { QTableColumn } from 'quasar'
 import { ref, useCore, tableColumnAlign } from '../../libs/core'
 const { pagination } = useCore();

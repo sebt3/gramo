@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
-import {{ group }}{{ short }}Meta from '@/components/{{ group }}/{{ short }}Meta.vue';
-import {{ group }}{{ short }}Edit from '@/components/{{ group }}/{{ short }}Edit.vue';
+const  {{ group }}{{ short }}Meta   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Meta.vue'));
+const  {{ group }}{{ short }}Edit   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 {{#if (propertyContain readProperties 'status')}}
-import {{ group }}{{ short }}Status from '@/components/{{ group }}/{{ short }}Status.vue';
+const  {{ group }}{{ short }}Status   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Status.vue'));
 {{/if}}
 import { ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
@@ -108,15 +110,13 @@ function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patch{{ short }}({
     ...obj,
-    "name": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.name,
-{{#if namespaced}}
-    "namespace": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata.namespace,
-{{/if}}
+    "metadata": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata,
   });
 }
 onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
 </script>
 <template><div>
+  <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />
   <div class="row q-ml-sm">
 {{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">

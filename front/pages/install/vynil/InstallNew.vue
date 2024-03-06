@@ -1,9 +1,12 @@
 <script setup lang="ts">
 // noGramoGenerator
+import { defineAsyncComponent } from 'vue'
 import InstallNew from '@/queries/vynil/Install.create.graphql'
-import MetadataNew from '@/components/core/MetadataNew.vue';
+const  MetadataNew   = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
 import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
 import { ref, useMutation, useInstall, InstallDefinition, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 const name = ref('');
 const form = ref(null);
 const { editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
@@ -20,8 +23,8 @@ onError((err) => {
 import { useQuery } from '@/libs/vynil/Install.js'
 import { addByPath, getByPath } from '../../../libs/core';
 import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
+const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const  MonacoEditor   = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
 const { result, loading } = useQuery(installPrepare,{
   "namespace": {
     "filters": [{
@@ -74,12 +77,12 @@ function startStep2() {
       <q-card-section  :class="`bg-${ colorInstall } text-grey-2`">
         <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
       </q-card-section>
-      <q-card-section :class="`bg-${ colorInstall }-1`">
+      <q-card-section :class="`bg-${ colorInstall }-${$q.dark.isActive?'10':'1'}`">
         <MetadataNew v-model:name="name" :namespaced="true" />
       </q-card-section>
     </q-card>
     <q-stepper v-model="step"  class="q-ma-sm" bordered ref="stepper" color="primary" animated v-if="!loading"  :class="`bg-${ colorInstall }`" >
-      <q-step :name="1" title="Specifications" icon="settings" :done="step > 1" :class="`bg-${ colorInstall }-2`">
+      <q-step :name="1" title="Specifications" icon="settings" :done="step > 1" :class="`bg-${ colorInstall }-${$q.dark.isActive?'10':'2'}`">
         <div  class="q-gutter-md">
           <q-select filled v-model="distrib" :options="result.vynilDistrib.map(d=>d.metadata.name)" label="Distribution" stack-label />
           <q-select filled v-model="category" :options="result.vynilCategory.map(c=>c.name)" label="Category" stack-label />
@@ -87,7 +90,7 @@ function startStep2() {
         </div>
       </q-step>
 
-      <q-step :name="2" title="Configure" caption="Selected package" icon="settings_suggest" :done="step > 2" :class="`bg-${ colorInstall }-2`">
+      <q-step :name="2" title="Configure" caption="Selected package" icon="settings_suggest" :done="step > 2" :class="`bg-${ colorInstall }-${$q.dark.isActive?'10':'2'}`">
         <OpenApiEdit v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category).length>0"
           @update:out="(v)=>setkey('spec', {category, distrib, component, options:sanitizeData(v)})"
           :in="editor.obj['spec']['options']"
@@ -95,7 +98,7 @@ function startStep2() {
           :properties="getProperties({properties: result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category)[0].options})"
         />
       </q-step>
-      <q-step :name="3" title="Full YAML" caption="optional" icon="settings_suggest" :done="step > 3" :class="`bg-${ colorInstall }-2`">
+      <q-step :name="3" title="Full YAML" caption="optional" icon="settings_suggest" :done="step > 3" :class="`bg-${ colorInstall }-${$q.dark.isActive?'10':'2'}`">
         <MonacoEditor v-if="editor.ready && result.vynilPackage.filter(p => p.name == component && p.consumevynilDistrib.metadata.name == distrib && p.consumevynilCategory.name == category).length>0"
           :text="editor.yaml" :key="`${distrib}-${category}-${component}-${editor.yaml}`"
           @update:text="v=>setYaml(v)"
@@ -103,7 +106,7 @@ function startStep2() {
           />
       </q-step>
       <template v-slot:navigation>
-        <q-stepper-navigation :class="`bg-${ colorInstall }-2`">
+        <q-stepper-navigation :class="`bg-${ colorInstall }-${$q.dark.isActive?'10':'2'}`">
           <q-btn v-if="step < 2" @click="startStep2()" color="primary" label="Next" :disable="component==''" />
           <q-btn v-if="step > 1" flat color="primary" @click="stepper.previous()" label="Back" class="q-ml-sm" />
           <q-btn v-if="step > 1" label="Submit" class="q-ml-sm" type="submit" color="primary"/>

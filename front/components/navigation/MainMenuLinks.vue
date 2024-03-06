@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import MainMenuLinks from './MainMenuLinks.vue';
+import { defineAsyncComponent } from 'vue'
+import { useQuasar } from 'quasar'
+const  MainMenuLinks   = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
 import { menuLinksProps } from '../../routes/interfaces.js';
 import { elude, useCore } from '../../libs/core';
 import { useRouter } from 'vue-router'
 import { watch,onMounted, ref } from 'vue'
-import {installColor,automationColor,workloadColor,databaseColor,storageColor,configColor,networkColor,securityColor,systemColor} from '../../routes/custom'
+import {installColor,automationColor,workflowColor,workloadColor,databaseColor,storageColor,configColor,networkColor,securityColor,systemColor} from '../../routes/custom'
 const { isNamespaced } = useCore();
+const $q = useQuasar()
 const expansionItem = ref(null);
 const router = useRouter();
 const maxCaptionLength= 25;
@@ -20,6 +23,7 @@ function getLevel0Color(name){
     case 'install':     return installColor;
     case 'automation':  return automationColor;
     case 'workload':    return workloadColor;
+    case 'workflow':    return workflowColor;
     case 'database':    return databaseColor;
     case 'storage':     return storageColor;
     case 'config':      return configColor;
@@ -40,7 +44,7 @@ const toNoNS = props.target!=undefined?{ name: props.target }:props.name!=undefi
 const toNS = props.targetNS!=undefined?{ name: props.targetNS }:props.target!=undefined?{ name: props.target }:props.name!=undefined?{ name: props.name }:null
 </script>
 <template>
-    <div v-if="children != undefined && children.length > 0"  :class="`${getLevel0Color(props.name)==''?'':'bg-'+getLevel0Color(props.name)+'-1'}`">
+    <div v-if="children != undefined && children.length > 0"  :class="`${getLevel0Color(props.name)==''?'':'bg-'+getLevel0Color(props.name)+($q.dark.isActive?'-10':'-1')}`">
       <q-expansion-item ref="expansionItem" class="column"
           expand-separator
           :header-inset-level="level"

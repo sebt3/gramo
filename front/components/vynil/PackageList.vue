@@ -1,8 +1,11 @@
 <script setup lang="ts">
 // noGramoGenerator
-import TableHeader from '@/components/core/TableHeader.vue';
+import { defineAsyncComponent } from 'vue'
+const  TableHeader   = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
 import { QTableColumn } from 'quasar'
 import { ref, useCore, tableColumnAlign } from '../../libs/core'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 const { pagination } = useCore();
 const DistribColumns:Array<QTableColumn> = [
     {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -20,7 +23,7 @@ withDefaults(defineProps<{model: object[], deletor?:any, useAction?:boolean}>(),
   <q-card class="q-ma-sm" bordered>
     <TableHeader title="Packages" class="bg-teal" :usecreate="false" :userefresh="useAction" itemtype='vynil Package' v-model:model-filter="filter" @refresh="$emit('refresh')" />
     <q-card-section class="q-pa-none">
-    <q-table class="bg-teal-1 no-shadow" :rows="model" :columns="DistribColumns" v-model:pagination="pagination" :filter="filter" hide-bottom>
+    <q-table :class="`bg-teal-${$q.dark.isActive?'10':'1'} no-shadow`" :rows="model" :columns="DistribColumns" v-model:pagination="pagination" :filter="filter" hide-bottom>
         <template v-slot:body-cell-Name="props">
           <q-td :props="props">
             {{ props.row.name }}

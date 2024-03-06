@@ -1,6 +1,6 @@
 import k8s from '@kubernetes/client-node';
 import rfc6902  from 'rfc6902';
-import {kc, cache, applyFilter, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
+import {kc, cache, applyFilter, applyHaving, applyFieldSelection, getByPath, {{#if namespaced}}getMetaNS{{else}}getMeta{{/if}} } from '../k8slibs.js';
 import { lists as listNamespace } from '../k8s/Namespace.js';
 import { lists as listEvent } from '../core/Event.js';
 import { gramoConfig } from '../../config.js'
@@ -24,16 +24,11 @@ export const mutations = {
 {{> deleteResolver ctx=. }}
 {{> patchResolver ctx=. }}
 };
-export const lists = {
-{{> listResolver ctx=. }}
-};
-{{#unless namespaced}}
-export const queries = {
-    {{group}}{{short}}: lists.{{group}}{{short}},
-};
-{{/unless}}
 const localResolvers = {
 {{#each autoResolvers}}
+    {{#if (eq algo 'k8up')}}
+{{> resolversK8up algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'traefik')}}
 {{> resolversTraefik algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}
@@ -82,8 +77,22 @@ const localResolvers = {
     {{#if (eq algo 'pvc')}}
 {{> resolversPVC algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}
+    {{#if (eq algo 'problem')}}
+{{> resolversProblems algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'advice')}}
+{{> resolversAdvices algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
 {{/each}}
 };
+export const lists = {
+{{> listResolver ctx=. }}
+};
+{{#unless namespaced}}
+export const queries = {
+    {{group}}{{short}}: lists.{{group}}{{short}},
+};
+{{/unless}}
 export const resolvers = {
     {{group}}{{short}}: {
         parentReference: async (obj, args: object) => {

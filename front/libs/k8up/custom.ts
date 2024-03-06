@@ -62,21 +62,18 @@ export const extraSnapshotColumns:Array<QTableColumn> = [
   {name: 'Repository', label: 'Repository', field: row => row.spec.repository, sortable: true, align: tableColumnAlign.left},
 ];
 export const ArchiveListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ArchiveReadExcludes = [
 ];
 export const ArchiveSimpleExcludes = [
 ];
 export const BackupListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const BackupReadExcludes = [
 ];
 export const BackupSimpleExcludes = [
 ];
 export const CheckListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const CheckReadExcludes = [
 ];
@@ -89,14 +86,12 @@ export const PreBackupPodReadExcludes = [
 export const PreBackupPodSimpleExcludes = [
 ];
 export const PruneListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const PruneReadExcludes = [
 ];
 export const PruneSimpleExcludes = [
 ];
 export const RestoreListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const RestoreReadExcludes = [
 ];

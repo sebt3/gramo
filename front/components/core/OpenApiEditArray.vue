@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import OpenApiEditUndefObject from './OpenApiEditUndefObject.vue';
-import OpenApiEditObject from './OpenApiEditObject.vue';
+import { defineAsyncComponent } from 'vue'
+const  OpenApiEditUndefObject   = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
+const  OpenApiEditObject   = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
 import { ref, computed, watch } from 'vue'
 import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";

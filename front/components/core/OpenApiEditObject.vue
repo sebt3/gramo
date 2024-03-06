@@ -1,12 +1,13 @@
 <!-- eslint-disable vue/valid-v-model -->
 <script setup lang="ts">
-import OpenApiEditObject from './OpenApiEditObject.vue';
-import OpenApiEditUndefObject from './OpenApiEditUndefObject.vue';
-import OpenApiEditArray from './OpenApiEditArray.vue';
-import OpenApiEditBoolean from './OpenApiEditBoolean.vue';
-import OpenApiEditString from './OpenApiEditString.vue';
-import OpenApiEditEnum from './OpenApiEditEnum.vue';
-import OpenApiEditNumber from './OpenApiEditNumber.vue';
+import { defineAsyncComponent } from 'vue'
+const  OpenApiEditObject   = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
+const  OpenApiEditUndefObject   = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
+const  OpenApiEditArray   = defineAsyncComponent(() => import( './OpenApiEditArray.vue'));
+const  OpenApiEditBoolean   = defineAsyncComponent(() => import( './OpenApiEditBoolean.vue'));
+const  OpenApiEditString   = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
+const  OpenApiEditEnum   = defineAsyncComponent(() => import( './OpenApiEditEnum.vue'));
+const  OpenApiEditNumber   = defineAsyncComponent(() => import( './OpenApiEditNumber.vue'));
 
 import { ref, watch } from 'vue'
 import {getProperties,getItems,getType, getFullData} from '../../libs/core/openapiSetup';

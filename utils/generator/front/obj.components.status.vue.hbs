@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { getConditionColor, elude } from "../../libs/core/"
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 defineProps<{model: object}>();
 </script>
 <template>
@@ -8,7 +10,7 @@ defineProps<{model: object}>();
     <q-card-section :class="`bg-${ color{{ short }} } text-white`">
       <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
     </q-card-section>
-    <q-card-section  :class="`bg-${ color{{ short }} }-2`">
+    <q-card-section  :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'2'}`">
       <div class="q-gutter-md">
 {{> vueStatusFields properties=definition.properties crd=crd }}
       </div>

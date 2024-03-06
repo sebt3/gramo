@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import MainMenuLinks from './MainMenuLinks.vue';
-import RefreshRateSelector from './RefreshRateSelector.vue';
+import { defineAsyncComponent } from 'vue'
+const  MainMenuLinks   = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
+const  RefreshRateSelector   = defineAsyncComponent(() => import( './RefreshRateSelector.vue'));
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useNavigationStoreRef } from '../../stores'
 import { links } from '../../routes'
-
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 const route = useRoute();
 const router = useRouter();
 const navigation = useNavigationStoreRef()
@@ -14,7 +16,7 @@ const leftDrawerOpen = ref(true)
 const miniState = ref(true)
 const isNamespaced = computed(() => {
   if (route.meta != undefined) {
-    return route.meta.ns
+    return route.meta.ns||false
   }
   return false
 })
@@ -71,9 +73,9 @@ function toggleLeftDrawer() {
   </q-header>
 
   <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="miniState" :width="400" :breakpoint="300" :mini-to-overlay="false" @click.capture="handleMini">
-    <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: '0' }">
-      <q-list padding v-if="router.currentRoute.value.matched.length>1">
-        <MainMenuLinks class="q-mr-sm"
+    <q-scroll-area :class="`fit ${$q.dark.isActive?'bg-grey-9':'bg-grey-1'}`" :horizontal-thumb-style="{ opacity: '0' }">
+      <q-list v-if="router.currentRoute.value.matched.length>1">
+        <MainMenuLinks class="q-pr-sm"
           v-for="link in links"
           :key="`${link.title}`"
           v-bind="link">

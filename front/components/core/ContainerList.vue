@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { elude, getColor, getConditionColor} from "../../libs/core/"
-import { usePod, getProperties, PodDefinition } from '../../libs/k8s/Pod.js'
+import { usePod } from '../../libs/k8s/Pod.js'
 import { colorPod, iconPod } from '../../libs/k8s/custom.js'
 import { QTableColumn } from 'quasar'
 import { ref, useCore, tableColumnAlign } from '../../libs/core'
-const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = usePod();setNamespacedItemFromRoute();
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
+const {  onlyReadProperties, viewerUpdate, setNamespacedItemFromRoute } = usePod();setNamespacedItemFromRoute();
 defineEmits(['refresh','on-delete']);
 const props=withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean}>(),{
   useAction: false,
@@ -20,8 +21,8 @@ const ContainerColumns:Array<QTableColumn> = ((props.showNamespace?[{name: 'Name
   {name: 'Init', label: 'Init?', field: row => row.init?'init':'main', sortable: true, align: tableColumnAlign.left},
   {name: 'Name', label: 'Name', field: row => row.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Image', label: 'Image', field: row => row.spec.image, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: 'Status', field: row => null, sortable: true, align: tableColumnAlign.left},
-  {name: 'Action', label: 'Action', field: row => null, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: 'Status', field: () => null, sortable: true, align: tableColumnAlign.left},
+  {name: 'Action', label: 'Action', field: () => null, sortable: true, align: tableColumnAlign.left},
 ] as QTableColumn[]);
 const filter = ref('');
 onMounted(() => {
@@ -40,8 +41,8 @@ function switchToLog(obj) {
       <q-tab label="Logs" name="logs" />
     </q-tabs>
     <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="list" :class="`bg-${ colorPod }-1`">
-        <q-table :rows="model" :class="`no-shadow bg-${ colorPod }-1`" :columns="ContainerColumns" v-model:pagination="pagination" :filter="filter" hide-bottom>
+      <q-tab-panel name="list" :class="`bg-${ colorPod }-${$q.dark.isActive?'10':'1'}`">
+        <q-table :rows="model" :class="`no-shadow bg-${ colorPod }-${$q.dark.isActive?'10':'1'}`" :columns="ContainerColumns" v-model:pagination="pagination" :filter="filter" hide-bottom>
           <template v-slot:body-cell-Status="props">
             <q-td :props="props">
               <q-chip class="float-right text-white text-capitalize" v-if="typeof props.row.status.state.terminated==='object'"
@@ -63,7 +64,7 @@ function switchToLog(obj) {
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="logs" :class="`bg-${ colorPod }-1`">
+      <q-tab-panel name="logs" :class="`bg-${ colorPod }-${$q.dark.isActive?'10':'1'}`">
         <q-toolbar :class="`bg-${ colorPod } text-white q-my-md shadow-2`">
           <q-space />
           <q-select v-model="container" :options="model.map(o=>o['name'])" label="Container" label-color="white"  style="min-width: 350px">

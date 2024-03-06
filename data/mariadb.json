@@ -5,8 +5,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.Backup",
       "definition": {
-        "description": "Backup is the Schema for the backups API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -2333,6 +2331,8 @@
             }
           }
         },
+        "description": "Backup is the Schema for the backups API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -4962,8 +4962,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.Connection",
       "definition": {
-        "description": "Connection is the Schema for the connections API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5171,6 +5169,8 @@
             }
           }
         },
+        "description": "Connection is the Schema for the connections API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -5615,8 +5615,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.Database",
       "definition": {
-        "description": "Database is the Schema for the databases API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -5746,6 +5744,8 @@
             }
           }
         },
+        "description": "Database is the Schema for the databases API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -6134,8 +6134,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.Grant",
       "definition": {
-        "description": "Grant is the Schema for the grants API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -6279,6 +6277,8 @@
             }
           }
         },
+        "description": "Grant is the Schema for the grants API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -6692,11 +6692,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.MariaDB",
       "definition": {
-        "description": "MariaDB is the Schema for the mariadbs API",
-        "type": "object",
-        "required": [
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -14448,6 +14443,11 @@
             }
           }
         },
+        "description": "MariaDB is the Schema for the mariadbs API",
+        "type": "object",
+        "required": [
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -22852,8 +22852,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.Restore",
       "definition": {
-        "description": "Restore is the Schema for the restores API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -25004,6 +25002,8 @@
             }
           }
         },
+        "description": "Restore is the Schema for the restores API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -27439,8 +27439,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.SqlJob",
       "definition": {
-        "description": "SqlJob is the Schema for the sqljobs API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -28384,6 +28382,8 @@
             }
           }
         },
+        "description": "SqlJob is the Schema for the sqljobs API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",
@@ -29573,8 +29573,6 @@
       "alternatives": [],
       "name": "io.mmontes.mariadb.v1alpha1.User",
       "definition": {
-        "description": "User is the Schema for the users API",
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -29729,6 +29727,8 @@
             }
           }
         },
+        "description": "User is the Schema for the users API",
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "mariadb.mmontes.io",

@@ -56,6 +56,7 @@ export const extraClusterIssuerColumns:Array<QTableColumn> = [
 export const extraIssuerColumns:Array<QTableColumn> = [
   {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
+// Certificate') (eq short 'CertificateRequest')) (or (eq short 'ClusterIssuer') (eq short 'Issuer'
 export const ChallengeListExcludes = [
   { path: 'status/state', include: true },
   { path: 'spec/dnsName', include: true },
@@ -77,6 +78,7 @@ export const OrderSimpleExcludes = [
 export const CertificateListExcludes = [
   { path: 'spec/secretName', include: true },
   { path: 'spec/issuerRef', include: true },
+  { path: 'status/conditions', include: true },
 ];
 export const CertificateReadExcludes = [
 ];
@@ -85,6 +87,7 @@ export const CertificateSimpleExcludes = [
 export const CertificateRequestListExcludes = [
   { path: 'spec/issuerRef', include: true },
   { path: 'spec/username', include: true },
+  { path: 'status/conditions', include: true },
 ];
 export const CertificateRequestReadExcludes = [
 ];

@@ -40,6 +40,11 @@ export const iconTraefikService = networkIcon;
 export const colorTraefikService = networkColor;
 export const descriptionTraefikService = '';
 export const shortTraefikService = 'TraefikService';
+export const iconServersTransportTCP = networkIcon;
+export const colorServersTransportTCP = networkColor;
+export const descriptionServersTransportTCP = '';
+export const shortServersTransportTCP = 'ServersTransportTCP';
+
 export const extraIngressRouteColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
@@ -65,6 +70,9 @@ export const extraTLSStoreColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTraefikServiceColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraServersTransportTCPColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const IngressRouteListExcludes = [
@@ -120,4 +128,10 @@ export const TraefikServiceListExcludes = [
 export const TraefikServiceReadExcludes = [
 ];
 export const TraefikServiceSimpleExcludes = [
+];
+export const ServersTransportTCPListExcludes = [
+];
+export const ServersTransportTCPReadExcludes = [
+];
+export const ServersTransportTCPSimpleExcludes = [
 ];

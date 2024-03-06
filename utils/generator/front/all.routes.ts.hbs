@@ -3,8 +3,18 @@ import {menuLinksProps} from './interfaces.js';
 import { useConfigStore } from '../stores'
 export * from './interfaces.js'
 const { defaultRoute } = useConfigStore()
-const routeChildren:Array<RouteRecordRaw> = [];
-const linkRedirect = {name:''};
+const routeChildren:Array<RouteRecordRaw> = [
+    {
+      path: 'advices',
+      name: 'Advices',
+      component: () => import('../pages/AllAdvices.vue'),
+      meta: {
+        breadcrumb: 'Advices', icon: 'warning', ns: false,
+        title: () => 'All Advices'
+      },
+    },
+];
+const linkRedirect = {name:'Advices'};
 export const links:Array<menuLinksProps> = [];
 
 {{#each categories}}
@@ -16,7 +26,7 @@ if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
   {{else}}
   links.push({{this}}Link)
   {{/if}}
-  linkRedirect.name = linkRedirect.name!=''?linkRedirect.name:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.name:''
+  linkRedirect.name = linkRedirect.name!='Advices'?linkRedirect.name:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.name:'Advices'
 }
 {{/each}}
 

@@ -1,0 +1,26 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent: object, args: object) => {
+      try {
+{{#if (and (eq type 'parent') (eq short 'Job'))}}
+        if (parent['metadata']['labels'] == undefined || parent['metadata']['labels']['k8upjob'] == undefined || parent['metadata']['labels']['k8up.io/owned-by'] == undefined) return null;
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})).filter(target=>'{{ minimizeFirstLetter targetShort }}_'+target['metadata']['name']==parent['metadata']['labels']['k8up.io/owned-by']);
+        if (Array.isArray(res) && res.length>0) return res[0];
+{{/if}}
+{{#if (and (eq type 'child') (eq targetShort 'Job'))}}
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})).filter(target=>target['metadata']['labels'] != undefined && target['metadata']['labels']['k8upjob'] != undefined && target['metadata']['labels']['k8up.io/owned-by']=='{{ minimizeFirstLetter short }}_'+parent['metadata']['name']);
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'parent') (eq targetShort 'Schedule'))}}
+        const splited = parent['metadata']['name'].split('-{{ minimizeFirstLetter short }}-')
+        if (splited.length<2) return null;
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})).filter(target=>target['metadata']['name']==splited[0]);
+        if (Array.isArray(res) && res.length>0) return res[0];
+{{/if}}
+{{#if (and (eq type 'child') (eq short 'Schedule'))}}
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: parent['metadata']['namespace'], ...args})).filter(target=>target['metadata']['name'].split('-{{ minimizeFirstLetter targetShort }}-').length>1 && target['metadata']['name'].split('-{{ minimizeFirstLetter targetShort }}-')[0]==parent['metadata']['name']);
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+      } catch (err) {
+        console.error(err)
+      }
+      return null
+    },

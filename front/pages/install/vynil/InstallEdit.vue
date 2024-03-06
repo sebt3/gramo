@@ -1,10 +1,11 @@
 <script setup lang="ts">
 // noGramoGenerator
+import { defineAsyncComponent } from 'vue'
 import vynilInstallQuery from '@/queries/vynil/Install.details.graphql'
 import InstallEdit from '@/queries/vynil/Install.patch.graphql'
-import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
-import vynilInstallEdit from '@/components/vynil/InstallEdit.vue';
-import vynilInstallStatus from '@/components/vynil/InstallStatus.vue';
+const  vynilInstallMeta   = defineAsyncComponent(() => import( '@/components/vynil/InstallMeta.vue'));
+const  vynilInstallEdit   = defineAsyncComponent(() => import( '@/components/vynil/InstallEdit.vue'));
+const  vynilInstallStatus   = defineAsyncComponent(() => import( '@/components/vynil/InstallStatus.vue'));
 import { useQuery, useMutation, useInstall, InstallSimpleExcludes } from '../../../libs/vynil/Install.js'
 const { onErrorHandler, patchDone, patchError, notifyWorking, onNotInstallFound, navigation, setNamespacedItemFromRoute } = useInstall();setNamespacedItemFromRoute();
 const { result, loading, onResult, onError } = useQuery(vynilInstallQuery, {

@@ -1,5 +1,5 @@
-mutation {{ group }}{{ short }}({{#if namespaced}}$namespace: String!, {{/if}}$name: String!{{#unless (isDelete mutationType)}}{{#each writeProperties}}, ${{this}}: {{getGQLType this ../gqlDefs}}{{/each}}{{/unless}}) {
-  {{ group }}{{ short }}{{ mutationType }}({{#if namespaced}}namespace: $namespace, {{/if}}name: $name{{#unless (isDelete mutationType)}}{{#each writeProperties}}, {{this}}: ${{this}}{{/each}}{{/unless}}) {
+mutation {{ group }}{{ short }}({{#if (isDelete mutationType)}}{{#if namespaced}}$namespace: String!, {{/if}}$name: String!{{else}}$metadata: metadataInput{{#each writeProperties}}, ${{this}}: {{getGQLType this ../gqlDefs}}{{/each}}{{/if}}) {
+  {{ group }}{{ short }}{{ mutationType }}({{#if (isDelete mutationType)}}{{#if namespaced}}namespace: $namespace, {{/if}}name: $name{{else}}metadata: $metadata{{#each writeProperties}}, {{this}}: ${{this}}{{/each}}{{/if}}) {
       metadata {
         name
         namespace

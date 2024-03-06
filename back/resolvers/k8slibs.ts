@@ -6,15 +6,10 @@ export const cache = new NodeCache({ stdTTL: 2, useClones: false, deleteOnExpire
 if (process.env['NODE_ENV']=='dev') kc.loadFromDefault();
 else kc.loadFromCluster();
 export function getMetaNS(args: object) {
-    return {
-        namespace: args['namespace'],
-        name: args['name'],
-    }
+    return args['metadata']
 }
 export function getMeta(args: object) {
-    return {
-        name: args['name'],
-    }
+    return args['metadata']
 }
 
 export function getByPath(obj, path) {
@@ -30,6 +25,26 @@ function addByPath(target,path,data) {
     path.split("/").slice(0,-1).reduce((res,cur) => {if (res[cur]==undefined) res[cur]={};return res[cur]},target)[path.split("/").slice(-1)[0]] = data
 }
 
+export async function applyHaving(obj,args, resolvers) {
+    if (args['params']==null||args['params']==undefined||typeof args['params']!=='object'||((args['params']['havingAny']==null||args['params']['havingAny']==undefined||!Array.isArray(args['params']['havingAny'])&&(args['params']['havingAll']==null||args['params']['havingAll']==undefined||!Array.isArray(args['params']['havingAll'])))))
+        return true;
+    let ret = true;
+    if (args['params']['havingAny']!=null&&args['params']['havingAny']!=undefined&&Array.isArray(args['params']['havingAny'])) {
+        ret = args['params']['havingAny'].reduce(async (res,cur)=>{
+            if (typeof resolvers[cur['resolver']] != 'function') return res;
+            const content=await resolvers[cur['resolver']](obj,{...args, filters: cur['filters']})
+            return res||Array.isArray(content)
+        }, false)
+        //if (ret) console.log('applyHaving', obj)
+    }
+    if (args['params']['havingAll']!=null&&args['params']['havingAll']!=undefined&&Array.isArray(args['params']['havingAll'])) {
+        ret = ret && args['params']['havingAll'].reduce(async (res,cur)=>{
+            if (typeof resolvers[cur['resolver']] != 'function') return false;
+            return res&&Array.isArray(await resolvers[cur['resolver']](obj,{...args, filters: cur['filters']}))
+        }, true)
+    }
+    return ret;
+}
 export function applyFilter(obj,args) {
     if (args['params']==null||args['params']==undefined||typeof args['params']!=='object'||args['params']['filters']==null||args['params']['filters']==undefined||!Array.isArray(args['params']['filters']))
         return true;

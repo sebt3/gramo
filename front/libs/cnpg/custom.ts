@@ -55,10 +55,7 @@ export const BackupSimpleExcludes = [
 ];
 export const ClusterListExcludes = [
   { path: 'metadata/creationTimestamp', include: true },
-  { path: 'status/instances', include: true },
-  { path: 'status/readyInstances', include: true },
-  { path: 'status/phase', include: true },
-  { path: 'status/currentPrimary', include: true },
+  { path: 'status', include: true },
 ];
 export const ClusterReadExcludes = [
 ];

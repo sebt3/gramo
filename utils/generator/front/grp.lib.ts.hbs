@@ -1,0 +1,20 @@
+export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
+{{#each objects}}
+export { {{short}}Definition, {{short}}Columns, {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes, use{{short}}{{#if namespaced}}, {{short}}AllColumns{{/if}} } from './{{ short }}.js'
+{{/each}}
+import { useCRDStore, usePermissionStore } from '../../stores'
+const crds = useCRDStore().crds;
+const havePermission = usePermissionStore().have;
+const can = usePermissionStore().can;
+
+{{#each objects}}
+export const can{{ short }} = (verb:string, namespace?:string) => can(verb, '{{group}}', '{{short}}', namespace)
+export const have{{ short }} = () => {{#if (defined crd)}}crds['{{crd.metadata.name}}'] != undefined && {{/if}}havePermission('{{group}}', '{{short}}')
+{{/each}}
+export function isActive{{ category }}{{ name }}() {
+    let count = 0;
+{{#each objects}}
+    if (have{{ short }}()) count++;
+{{/each}}
+    return count>0;
+}

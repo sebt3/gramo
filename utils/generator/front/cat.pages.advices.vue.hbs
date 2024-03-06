@@ -1,0 +1,12 @@
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+{{#each groups}}
+const {{ ../category }}{{ name }}SubPage = defineAsyncComponent(() => import('@/pages/{{ ../category }}/{{ name }}/{{ ../category }}Advices.vue'))
+{{/each}}
+import { {{#each groups}}isActive{{ ../category }}{{ name }}, {{/each}} } from '@/libs/{{ category }}.js'
+</script>
+<template><div>
+{{#each groups}}
+  <{{ ../category }}{{ name }}SubPage v-if="isActive{{ ../category }}{{ name }}()" />
+{{/each}}
+</div></template>

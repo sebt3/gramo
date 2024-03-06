@@ -5,12 +5,6 @@
       "alternatives": [],
       "name": "do.zalan.acid.v1.postgresql",
       "definition": {
-        "type": "object",
-        "required": [
-          "kind",
-          "apiVersion",
-          "spec"
-        ],
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -720,6 +714,12 @@
             }
           }
         },
+        "type": "object",
+        "required": [
+          "kind",
+          "apiVersion",
+          "spec"
+        ],
         "x-kubernetes-group-version-kind": [
           {
             "group": "acid.zalan.do",
@@ -1820,7 +1820,6 @@
       "alternatives": [],
       "name": "org.zalando.v1.ClusterKopfPeering",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -1834,6 +1833,7 @@
             "x-kubernetes-preserve-unknown-fields": true
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "zalando.org",
@@ -1994,7 +1994,6 @@
       "alternatives": [],
       "name": "org.zalando.v1.KopfPeering",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -2008,6 +2007,7 @@
             "x-kubernetes-preserve-unknown-fields": true
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "zalando.org",

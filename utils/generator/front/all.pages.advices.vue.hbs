@@ -1,0 +1,159 @@
+<script setup lang="ts">
+import allQuery from '@/queries/all.read.graphql'
+import { defineAsyncComponent } from 'vue'
+const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
+const AdviceOverview = defineAsyncComponent(() => import( '@/components/core/AdviceOverview.vue'));
+const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+{{#each categories}}
+{{#each groups}}
+import { {{#each objects}}have{{ short }} as have{{ group }}{{ short }}, {{/each}} } from '@/libs/{{ name }}/{{ ../category }}Cat.js'
+{{/each}}
+{{/each}}
+{{#each groups}}
+{{#each objects}}
+const {{ group }}{{ short }}List = defineAsyncComponent(() => import('@/components/{{ group }}/{{ short }}List.vue'));
+import { {{ short }}ListExcludes as {{ group }}{{ short }}ListExcludes{{#if namespaced}}, use{{short}} as use{{ group }}{{short}}{{/if}} } from '@/libs/{{ group }}/{{ short }}.js'
+{{#if namespaced}}
+const {toList: to{{ group }}{{ short }}List}  = use{{ group }}{{short}}();
+{{/if}}
+{{/each}}
+{{/each}}
+import { ref, useCore, useNavigationStoreRef, useQuery } from '@/libs/core';
+const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
+const ready = ref(false);
+{{#each groups}}
+{{#each objects}}
+const {{ group }}{{ short }}Problems = ref([]);
+const {{ group }}{{ short }}Advices = ref([]);
+{{/each}}
+{{/each}}
+if (isNamespaced()) setNamespaceFromRoute();
+const navigation = useNavigationStoreRef();
+const { result, loading, refetch, onResult, onError } = useQuery(allQuery, {
+{{#each groups}}
+{{#each objects}}
+  "{{ group }}In{{ short }}": {
+    "filters": [],
+    "havingAny": [{"resolver":"getcoreProblem"},{"resolver":"getcoreAdvice"}],
+    "excludes": {{ group }}{{ short }}ListExcludes
+  },
+{{/each}}
+{{/each}}
+  "namespace": {
+    "filters": isNamespaced()?[
+      {
+        "op": "eq",
+        "path": "metadata/name",
+        "value": navigation.currentNamespace
+      }
+    ]:[]
+  }
+});
+onError(onErrorHandler);
+onResult((res) => {
+  if ( !res.loading ) {
+    ready.value = false;
+{{#each groups}}
+{{#each objects}}
+    if (have{{ group }}{{ short }}()) {
+      {{ group }}{{ short }}Problems.value.length = 0;
+{{#if namespaced}}
+      {{ group }}{{ short }}Problems.value.push(...res.data.k8sNamespace.map(n => {
+        return {
+          name: n.metadata.name, value: n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length
+        }
+        }).filter(n => n.value>0))
+{{ else }}
+      {{ group }}{{ short }}Problems.value.push(...Object.entries(Object.groupBy(res.data.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).map(o=>o['getcoreProblem']).flat(),p=>p['source'])).map(([name,v])=>{ return {name, value: v.length } }))
+{{/if}}
+{{#if namespaced}}
+      {{ group }}{{ short }}Advices.value.push(...res.data.k8sNamespace.map(n => {return {name: n.metadata.name, value: n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0).length} }).filter(n => n.value>0))
+{{ else }}
+      {{ group }}{{ short }}Advices.value.push(...Object.entries(Object.groupBy(res.data.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreProblem'].length>0).map(o=>o['getcoreAdvice']).flat(),p=>p['source'])).map(([name,v])=>{ return {name, value: v.length } }))
+{{/if}}
+    }
+{{/each}}
+{{/each}}
+    ready.value = true;
+  }
+})
+</script>
+<template><div>
+{{#each groups}}
+{{#each objects}}
+  <div class="row q-mb-sm q-ml-sm" v-if="loading{{#unless namespaced}} && !isNamespaced(){{/unless}}">
+    <div class="col-lg-4">
+      <OverviewSkeleton />
+    </div>
+    <div class="col-lg-8">
+      <TableSkeleton :showNamespace="{{toJson namespaced}}" />
+    </div>
+  </div>
+{{#if namespaced}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat().length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ group }}{{ short }}List"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
+    </div>
+{{else}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="{{ short }}" :to="to{{ group }}{{ short }}List"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+{{/if}}
+  </div>
+{{/each}}
+{{/each}}
+{{#each groups}}
+{{#each objects}}
+{{#if namespaced}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat().length>0">
+    <div class="col-lg-4">
+      <AdviceOverview short="{{ short }}" :to="to{{ group }}{{ short }}List"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
+        :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
+    </div>
+{{else}}
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0).length>0">
+    <div class="col-lg-4">
+      <AdviceOverview short="{{ short }}" :to="to{{ group }}{{ short }}List"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
+        :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
+    </div>
+{{/if}}
+  </div>
+{{/each}}
+{{/each}}
+  <q-card bordered class="q-ma-sm" v-if="{{#each groups}}{{#each objects}}!have{{ group }}{{ short }}() &&{{/each}}{{/each}}true">
+    <q-card-section :class="`bg-negative text-white`">
+      <div class="text-subtitle1 q-mt-none q-mb-none q-pt-none q-pb-none">
+        Error
+      </div>
+    </q-card-section>
+    <q-card-section :class="`bg-negative-2`">
+      <div class="q-gutter-md">
+        It look like you have no permissions at all
+      </div>
+    </q-card-section>
+  </q-card>
+</div></template>

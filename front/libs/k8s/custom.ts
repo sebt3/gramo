@@ -1,7 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
-import { configColor, configIcon,securityColor, securityIcon,networkColor, networkIcon,workloadColor, workloadIcon,systemColor, systemIcon,storageColor, storageIcon, } from '../../routes/custom';
+import { configColor, configIcon,securityColor, securityIcon,networkColor, networkIcon,workloadColor, workloadIcon,systemColor, systemIcon,storageColor, storageIcon,workflowColor, workflowIcon, } from '../../routes/custom';
 export const k8sIcon = 'fas fa-dharmachakra';
 export const k8sTitle = 'Standard';
 export const iconConfigMap = configIcon;
@@ -88,12 +88,12 @@ export const iconHorizontalPodAutoscaler = workloadIcon;
 export const colorHorizontalPodAutoscaler = workloadColor;
 export const descriptionHorizontalPodAutoscaler = '';
 export const shortHorizontalPodAutoscaler = 'HorizontalPodAutoscaler';
-export const iconJob = workloadIcon;
-export const colorJob = workloadColor;
+export const iconJob = workflowIcon;
+export const colorJob = workflowColor;
 export const descriptionJob = '';
 export const shortJob = 'Job';
-export const iconCronJob = workloadIcon;
-export const colorCronJob = workloadColor;
+export const iconCronJob = workflowIcon;
+export const colorCronJob = workflowColor;
 export const descriptionCronJob = '';
 export const shortCronJob = 'CronJob';
 export const iconCertificateSigningRequest = securityIcon;
@@ -176,6 +176,18 @@ export const iconEndpointSlice = networkIcon;
 export const colorEndpointSlice = networkColor;
 export const descriptionEndpointSlice = '';
 export const shortEndpointSlice = 'EndpointSlice';
+export const iconVolumeSnapshot = systemIcon;
+export const colorVolumeSnapshot = systemColor;
+export const descriptionVolumeSnapshot = '';
+export const shortVolumeSnapshot = 'VolumeSnapshot';
+export const iconVolumeSnapshotClass = systemIcon;
+export const colorVolumeSnapshotClass = systemColor;
+export const descriptionVolumeSnapshotClass = '';
+export const shortVolumeSnapshotClass = 'VolumeSnapshotClass';
+export const iconVolumeSnapshotContent = systemIcon;
+export const colorVolumeSnapshotContent = systemColor;
+export const descriptionVolumeSnapshotContent = '';
+export const shortVolumeSnapshotContent = 'VolumeSnapshotContent';
 export const extraConfigMapColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
@@ -304,6 +316,31 @@ export const extraRuntimeClassColumns:Array<QTableColumn> = [
 ];
 export const extraEndpointSliceColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraVolumeSnapshotColumns:Array<QTableColumn> = [
+  {name: 'ReadyToUse', label: 'ReadyToUse', field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'SourcePVC', label: 'SourcePVC', field: row => row.spec.source.persistentVolumeClaimName, sortable: true, align: tableColumnAlign.left},
+  {name: 'SourceSnapshotContent', label: 'SourceSnapshotContent', field: row => row.spec.source.volumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
+  {name: 'RestoreSize', label: 'RestoreSize', field: row => row.status.restoreSize, sortable: true, align: tableColumnAlign.left},
+  {name: 'SnapshotClass', label: 'SnapshotClass', field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
+  {name: 'SnapshotContent', label: 'SnapshotContent', field: row => row.status.boundVolumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
+  {name: 'CreationTime', label: 'CreationTime', field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+];
+export const extraVolumeSnapshotClassColumns:Array<QTableColumn> = [
+  {name: 'Driver', label: 'Driver', field: row => row.driver, sortable: true, align: tableColumnAlign.left},
+  {name: 'DeletionPolicy', label: 'DeletionPolicy', field: row => row.deletionPolicy, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+];
+export const extraVolumeSnapshotContentColumns:Array<QTableColumn> = [
+  {name: 'ReadyToUse', label: 'ReadyToUse', field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'RestoreSize', label: 'RestoreSize', field: row => row.status.restoreSize, sortable: true, align: tableColumnAlign.left},
+  {name: 'DeletionPolicy', label: 'DeletionPolicy', field: row => row.spec.deletionPolicy, sortable: true, align: tableColumnAlign.left},
+  {name: 'Driver', label: 'Driver', field: row => row.spec.driver, sortable: true, align: tableColumnAlign.left},
+  {name: 'VolumeSnapshotClass', label: 'VolumeSnapshotClass', field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
+  {name: 'VolumeSnapshot', label: 'VolumeSnapshot', field: row => row.spec.volumeSnapshotRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'VolumeSnapshotNamespace', label: 'VolumeSnapshotNamespace', field: row => row.spec.volumeSnapshotRef.namespace, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const ConfigMapListExcludes = [
 ];
@@ -562,4 +599,41 @@ export const EndpointSliceListExcludes = [
 export const EndpointSliceReadExcludes = [
 ];
 export const EndpointSliceSimpleExcludes = [
+];
+export const VolumeSnapshotListExcludes = [
+  { path: 'status/readyToUse', include: true },
+  { path: 'spec/source/persistentVolumeClaimName', include: true },
+  { path: 'spec/source/volumeSnapshotContentName', include: true },
+  { path: 'status/restoreSize', include: true },
+  { path: 'spec/volumeSnapshotClassName', include: true },
+  { path: 'status/boundVolumeSnapshotContentName', include: true },
+  { path: 'status/creationTime', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const VolumeSnapshotReadExcludes = [
+];
+export const VolumeSnapshotSimpleExcludes = [
+];
+export const VolumeSnapshotClassListExcludes = [
+  { path: 'driver', include: true },
+  { path: 'deletionPolicy', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const VolumeSnapshotClassReadExcludes = [
+];
+export const VolumeSnapshotClassSimpleExcludes = [
+];
+export const VolumeSnapshotContentListExcludes = [
+  { path: 'status/readyToUse', include: true },
+  { path: 'status/restoreSize', include: true },
+  { path: 'spec/deletionPolicy', include: true },
+  { path: 'spec/driver', include: true },
+  { path: 'spec/volumeSnapshotClassName', include: true },
+  { path: 'spec/volumeSnapshotRef/name', include: true },
+  { path: 'spec/volumeSnapshotRef/namespace', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const VolumeSnapshotContentReadExcludes = [
+];
+export const VolumeSnapshotContentSimpleExcludes = [
 ];

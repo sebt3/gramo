@@ -82,7 +82,7 @@ export function sanitizeData(data:object) {
 }
 
 export function elude(str:string, maxsize:number=20) {
-    if (str.length>maxsize) {
+    if (typeof str=='string' && str.length>maxsize) {
       return str.substring(0,maxsize-3)+'...'
     }
     return str;

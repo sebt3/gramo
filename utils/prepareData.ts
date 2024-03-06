@@ -1,14 +1,15 @@
-#!/usr/bin/env -S npx ts-node-esm
+#!/usr/bin/env -S npx tsx
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {crds, k8sObject, openapi} from './generator/types.js'
-import {uniq, getShort, enhenceObject, finalizeObject, getObjFQN, mkdir, saveTo, replaceRefWithDef} from './generator/utils.js'
-import {getClusterByPath} from './generator/k8s.js'
+import { crds, openapi } from './generator/types.js'
+import { uniq, getShort, enhenceObject, getObjFQN, mkdir, saveTo, replaceRefWithDef, getTargetVersion } from './generator/utils.js'
+import { getClusterByPath } from './generator/k8s.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const path_data = path.resolve(__dirname, '..', 'data');
 
-Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getClusterByPath('apis/apiextensions.k8s.io/v1/customresourcedefinitions')]).then(([data_in, apis_in, crd_in]) => {
+Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getClusterByPath('apis/apiextensions.k8s.io/v1/customresourcedefinitions')])
+    .then(([data_in, apis_in, crd_in]) => {
 ////////////////////////////////////
 //// Prepare the data
 ///
@@ -20,13 +21,20 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
     const known_data = ((apis_in as object)['groups'] as Array<object>).map(i => { return {
         name: i['name'],
         ...getShort(i['name']),
-        objects: Object.entries(definitions).filter(([_, value]) =>
+        objects: Object.entries(definitions).filter(([name, value]) =>
             Object.keys(value).includes('x-kubernetes-group-version-kind') && value['x-kubernetes-group-version-kind'][0]['group'] == i['name'] &&
-            Object.keys(value).includes('properties') && value.properties!=undefined && value.properties['items']==undefined
-        ).map(([name, def]) => {return enhenceObject(i['name'], {
-            name: name, definition: def,
-            crd: (crd_in as crds).items.filter(c => getObjFQN(c) == name).length<1?null:(crd_in as crds).items.filter(c => getObjFQN(c) == name)[0]
-        })})
+            Object.keys(value).includes('properties') && value.properties!=undefined && value.properties['items']==undefined &&
+            (crd_in as crds).items.filter(c => getObjFQN(c) == name).length<1
+        ).map(([name, def]) => {return enhenceObject(i['name'], {name: name, definition: def, crd: null})})
+        .concat(Object.entries(definitions).filter(([name, value]) =>
+            Object.keys(value).includes('x-kubernetes-group-version-kind') && value['x-kubernetes-group-version-kind'][0]['group'] == i['name'] &&
+            (crd_in as crds).items.filter(c => getObjFQN(c) == name).length>0
+        ).map(([name, def]) => {
+            const crd = (crd_in as crds).items.filter(c => getObjFQN(c) == name)[0];
+            const ver = crd.spec.versions.filter(v=> v.name == getTargetVersion(crd.spec.versions))[0]
+            const minDef = { properties: ver.subresources?.status!=undefined?{metadata: undefined,spec: {type: 'object'},status: {type: 'object'}}:{metadata: undefined,spec: {type: 'object'}} }
+            return enhenceObject(i['name'], {name: name,definition: {...minDef, ...def}, crd})
+        }))
     }});
     // List the remaining objects not matched in a defined apiGroup (they belong to the group '' which is kubernetes main objects)
     const excluded_objects = Object.entries(definitions).filter(([n, i]) =>

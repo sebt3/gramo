@@ -46,6 +46,9 @@ export interface k8sDefinitionPropertiesVersion {
     served: boolean,
     storage: boolean,
     schema: { openAPIV3Schema: openapiDefinitionPropertiesK8s }
+    subresources?: {
+        status?: object
+    }
 }
 interface k8sDefinitionPropertiesSpec {
     group: string,

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import OpenApiEdit from '@/components/core/OpenApiEdit.vue';
-import MonacoEditor from '@/components/core/MonacoEditor.vue';
+import { defineAsyncComponent } from 'vue'
+const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const  MonacoEditor   = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
 import { use{{ short }}, sanitizeData, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
 import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 {{#if namespaced}}
 const { writeProperties, onlyWriteProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
 {{else}}
@@ -33,7 +36,7 @@ const setYaml = (v) => editor.value.setYaml(v)
       </q-btn-group>
     </q-tabs>
     <q-tab-panels v-model="editor.tab" animated>
-      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-1`">
+      <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
         <OpenApiEdit v-if="editor.ready"
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
           @update:out="(v)=>setkey('spec', {...model['spec'],options:sanitizeData(v)})"
@@ -52,7 +55,7 @@ const setYaml = (v) => editor.value.setYaml(v)
 {{/if}}
         />
       </q-tab-panel>
-      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-1`">
+      <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
           <MonacoEditor
             :text="editor.yaml" :key="editor.yaml"
             @update:text="v=>setYaml(v)"
@@ -64,7 +67,7 @@ const setYaml = (v) => editor.value.setYaml(v)
             />
       </q-tab-panel>
     </q-tab-panels>
-      <q-card-actions :class="`bg-${ color{{ short }} }-1`">
+      <q-card-actions :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
         <q-btn label="Submit" icon="save" type="submit" color="primary"/>
       </q-card-actions>
   </q-card>

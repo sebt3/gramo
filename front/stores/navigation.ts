@@ -21,7 +21,6 @@ export const useNavigationStore = defineStore('navigation', () => {
   function getTransition(to, usage) {
     loading.value = false;
     if (to.redirectedFrom && to.redirectedFrom.meta) {
-      console.log("getTransition", `${to.redirectedFrom.meta.animation}-${usage}`);
       switch (`${to.redirectedFrom.meta.animation}-${usage}`) {
         case "parent-enter": return "animate__animated animate__fast animate__fadeInUp";
         case "parent-leave": return "animate__animated animate__fast animate__fadeOutUp fixed";

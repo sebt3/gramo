@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import OpenApiEditString from './OpenApiEditString.vue';
+import { defineAsyncComponent } from 'vue'
+const  OpenApiEditString   = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
 import { ref, watch } from 'vue'
 import { OpenAPIV3 } from "openapi-types";
 const prompt = ref(false);

@@ -22,8 +22,8 @@ type Query {
 {{/if}}
 type Mutation {
 {{#each objects}}
-    {{../name}}{{this.short}}Create({{#if this.namespaced}}namespace: String!, {{/if}}name: String!, {{genParameterQuery this}}): {{../name}}{{this.short}}
-    {{../name}}{{this.short}}Patch({{#if this.namespaced}}namespace: String!, {{/if}}name: String!, {{genParameterQuery this}}): {{../name}}{{this.short}}
+    {{../name}}{{this.short}}Create(metadata: metadataInput!, {{genParameterQuery this}}): {{../name}}{{this.short}}
+    {{../name}}{{this.short}}Patch(metadata: metadataInput!, {{genParameterQuery this}}): {{../name}}{{this.short}}
     {{../name}}{{this.short}}Delete({{#if this.namespaced}}namespace: String!, {{/if}}name: String!): {{../name}}{{this.short}}
 {{/each}}
 }

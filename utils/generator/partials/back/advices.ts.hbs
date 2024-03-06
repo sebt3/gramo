@@ -1,0 +1,10 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+        const advices = [] as { source:string, description:string }[]
+{{#if (eq 'comment' 'TODO')}}
+https://github.com/stackrox/kube-linter/tree/main/pkg/templates
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'Pod'))}}
+{{/if}}
+        if (advices.length>0) return advices
+        return null
+    },

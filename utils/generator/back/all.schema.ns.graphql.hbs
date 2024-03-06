@@ -5,6 +5,8 @@ type k8sNamespace {
   permissions: permissionReview
   parentReference: parentRef
   getcoreEvent(params: queryParameters): [coreEvent]
+  getcoreProblem(params: queryParameters): [coreProblem]
+  getcoreAdvice(params: queryParameters): [coreAdvice]
   parentvynilInstall(params: queryParameters): vynilInstall
   parentfluxcdKustomization(params: queryParameters): fluxcdKustomization
 {{#each groups}}

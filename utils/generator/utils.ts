@@ -2,11 +2,13 @@ import {HashMap,openapiDefinition} from './types.js'
 import {k8sDefinitionProperties, k8sDefinitionPropertiesVersion, openapiDefinitionPropertiesDef, unspeciedObject, k8sObject} from './types.js'
 import {objectsOrder, toExtraResolvers, autoTargetResolvers, extraAllResolvers, autoAllResolvers, excludedReadNames,excludedWriteNames,defaultResolvers,autoResolvers,extraResolvers,categoryMappingGroup,categoryMappingShort, excludes} from './config.js'
 import * as fs from 'fs';
+import flexver from 'flexver/dist/module.js';
 
 export function getTargetVersion(versions: Array<k8sDefinitionPropertiesVersion>) {
-    const targetVersion = versions.map(v=>v.name).reduce((res,item) => res<item?item:res,"");
-    const regexpV1 = new RegExp('^v1')
-    return versions.map(v=>v.name).includes('v1') && regexpV1.test(targetVersion)? 'v1': targetVersion;
+    if (versions.length==1) return versions[0].name
+    const targetVersion = versions.map(v=>v.name).sort(flexver.apply)[0];
+    const maxVersion = versions.map(v=>v.name).sort((a,b)=>a<b?1:-1)[0];
+    return (targetVersion.length<maxVersion.length)?targetVersion:maxVersion
 }
 export function getBaseName(key:string) {
     const isFlux = /toolkit\.fluxcd\.io$/

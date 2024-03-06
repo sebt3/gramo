@@ -1,0 +1,216 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+        const problems = [] as { source:string, description:string }[]
+{{#if (and (eq group 'k8s') (eq short 'Node'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']!='Ready'&& c['status']!='False').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']!='Ready'&& c['status']!='False').map(c=>{return {
+                source: c['type'],
+                description: c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (or (eq short 'HorizontalPodAutoscaler') (eq short 'Deployment')))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['status']!='True').map(c=>{ return {
+                source: c['reason'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (or (or (or (and (eq group 'k8s') (eq short 'Node')) (and (eq group 'k8up') (eq short 'Schedule'))) (and (eq group 'certmanager') (or (or (eq short 'Certificate') (eq short 'CertificateRequest')) (or (eq short 'ClusterIssuer') (eq short 'Issuer'))))) (or (and (eq group 'cnpg') (eq short 'Cluster')) (and (eq group 'fluxcd') (or (or (or (or (eq short 'Kustomization') (eq short 'Receiver')) (or (eq short 'GitRepository') (eq short 'Bucket')))) (or (or (eq short 'HelmChart') (eq short 'HelmRepository')) (or (eq short 'OCIRepository') (eq short 'ImageUpdateAutomation'))) (or (eq short 'ImagePolicy') (or (eq short 'ImageRepository') (eq short 'HelmRelease') ))))))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Ready'&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='Ready'&&c['status']!='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'cnpg') (eq short 'Cluster'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='ContinuousArchiving'&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='ContinuousArchiving'&&c['status']!='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'certmanager') (eq short 'CertificateRequest'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Approved'&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='ContinuousArchiving'&&c['status']!='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'k8up') (or (or (eq short 'Backup') (eq short 'Check')) (eq short 'Prune')))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['reason']=='Failed'&&c['status']=='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['reason']=='Failed'&&c['status']=='True').map(c=>{ return {
+                source: c['reason'],
+                description:c['message']
+            } }))
+        }
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>!['Progressing','Completed'].includes(c['type'])&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>!['Progressing','Completed'].includes(c['type'])&&c['status']!='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'Job'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Failed'&&c['status']=='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='Failed'&&c['status']=='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'Pod'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['containerStatuses']) && parent['status']['containerStatuses'].filter(c=>c['state']!=undefined && c['state']['waiting']!=undefined && ['CrashLoopBackOff','CreateContainerConfigError'].includes(c['state']['waiting']['reason'])).length>0) {
+            problems.unshift(...parent['status']['containerStatuses'].filter(c=>c['state']!=undefined && c['state']['waiting']!=undefined && ['CrashLoopBackOff','CreateContainerConfigError'].includes(c['state']['waiting']['reason'])).map(c=>{ return {
+                source: c['state']['waiting']['reason'],
+                description:c['state']['waiting']['message']
+            } }))
+        }
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>['ContainersNotReady','PodFailed'].includes(c['reason']) && c['type']=='Ready').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>['ContainersNotReady','PodFailed'].includes(c['reason']) && c['type']=='Ready').map(c=>{ return {
+                source: c['type'],
+                description:c['reason']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'APIService'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Available'&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='Available'&&c['status']!='True').map(c=>{ return {
+                source: c['type'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (or (and (eq group 'k8s') (eq short 'CustomResourceDefinition')) (and (eq group 'monitoring') (or (eq short 'Alertmanager') (eq short 'Prometheus'))))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['status']!='True').map(c=>{ return {
+                source: c['type']==""?'Failed conditions':c['type'],
+                description:c['message']==""?c['reason']==""?c['type']==""?'Failed conditions':c['type']:c['reason']:c['message']
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'vynil') (or (eq short 'Install') (eq short 'Distrib')))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['errors']) && parent['status']['errors'].length>0) {
+            problems.unshift(...parent['status']['errors'].map(description=>{return {
+                source: 'errors',
+                description
+            } }))
+        }
+{{/if}}
+{{#if (and (eq group 'vynil') (eq short 'Distrib'))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['components']) && parent['status']['components'].length<1) {
+            problems.push({
+                source: 'components',
+                description: 'No components in this distribution'
+            })
+        }
+{{/if}}
+{{#if (or (and (eq group 'vynil') (or (eq short 'Install') (eq short 'Distrib'))) (and (eq group 'cnpg') (eq short 'Cluster')))}}
+        if (parent['status'] == undefined) {
+            problems.push({
+                source: 'status',
+                description: 'No status, is the operator running ?'
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'mongodb') (eq short 'MongoDBCommunity'))}}
+        if (parent['status'] == undefined || parent['status']['phase'] != 'Running') {
+            problems.push({
+                source: 'phase',
+                description: `The {{ short }} is not Running but ${parent['status']['phase'] }`
+            })
+
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (or (eq short 'PersistentVolumeClaim') (eq short 'PersistentVolume')))}}
+        if (parent['status'] = undefined && parent['status']['phase'] != 'Bound') {
+            problems.push({
+                source: 'unBound',
+                description: 'The {{ short }} is not bounded'
+            })
+
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'VolumeAttachment'))}}
+        if (parent['status'] != undefined && !parent['status']['attached']) {
+            problems.push({
+                source: 'unAttached',
+                description: 'The {{ short }} is not attached'
+            })
+
+        }
+{{/if}}
+{{#if (and (eq group 'secretgenerator') (or (eq short 'BasicAuth') (or (eq short 'SSHKeyPair') (eq short 'StringSecret'))))}}
+        if (parent['status'] == undefined || parent['status']['secret'] == undefined || parent['status']['secret']['kind'] != 'Secret') {
+            problems.push({
+                source: 'unready',
+                description: 'The {{ short }} have no secret'
+            })
+
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (or (eq short 'ReplicaSet') (eq short 'StatefulSet')))}}
+        if (parent['spec'] != undefined && parent['status'] != undefined && parent['spec']['replicas']>parent['status']['replicas']) {
+            problems.push({
+                source: 'Missing replicas',
+                description: `${parent['spec']['replicas']} expected replicas, currently have ${parent['status']['replicas']}`
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'StatefulSet'))}}
+        if (parent['spec'] != undefined && parent['status'] != undefined && parent['spec']['replicas']>parent['status']['availableReplicas']) {
+            problems.push({
+                source: 'Missing available replicas',
+                description: `${parent['spec']['replicas']} expected replicas, currently available: ${parent['status']['availableReplicas']}`
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'Ingress'))}}
+        if (parent['status'] == undefined || parent['status']['loadBalancer'] == undefined || !Array.isArray(parent['status']['loadBalancer']['ingress']) || parent['status']['loadBalancer']['ingress'].length<1) {
+            problems.push({
+                source: 'Missing loadBalancer',
+                description: 'The {{ short }} have no ingress'
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'DaemonSet'))}}
+        if (parent['status'] != undefined && parent['status']['desiredNumberScheduled']>parent['status']['numberAvailable']) {
+            problems.push({
+                source: 'Missing available replicas',
+                description: `${parent['status']['desiredNumberScheduled']} expected replicas, currently available: ${parent['status']['numberAvailable']}`
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'cilium') (or (eq short 'CiliumL2AnnouncementPolicy') (eq short 'CiliumLoadBalancerIPPool')))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'rabbitmq') (eq short 'RabbitmqCluster'))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'mariadb') (or (or (or (eq short 'Backup') (eq short 'Connection')) (or (eq short 'Database') (eq short 'MariaDB')))) (or (or (eq short 'Grant') (eq short 'Restore')) (or (eq short 'SqlJob') (eq short 'User'))))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'monitoring') (or (eq short 'ThanosRuler') (eq short 'PrometheusAgent')))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'ReplicationController'))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'CertificateSigningRequest'))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'NetworkPolicy'))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'PodDisruptionBudget'))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+{{#if (and (eq group 'k8up') (or (eq short 'Archive') (eq short 'Restore')))}}
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+{{/if}}
+        if (problems.length>0) return problems
+        return null
+    },

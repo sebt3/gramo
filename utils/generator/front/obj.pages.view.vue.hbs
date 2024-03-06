@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.details.graphql'
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
-import {{ group }}{{ short }}View from '@/components/{{ group }}/{{ short }}View.vue';
+const  {{ group }}{{ short }}View   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}View.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 {{#each resolvers}}
   {{#if (or (eq type 'parent') (eq type 'consume'))}}
-import {{ resultGroup }}{{ resultShort }}Meta from '@/components/{{ resultGroup }}/{{ resultShort }}Meta.vue';
+const  {{ resultGroup }}{{ resultShort }}Meta   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}Meta.vue'));
   {{else}}
   {{#if (eq type 'equity')}}
-import {{ resultGroup }}{{ resultShort }}View from '@/components/{{ resultGroup }}/{{ resultShort }}View.vue';
+const  {{ resultGroup }}{{ resultShort }}View   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}View.vue'));
   {{else}}
-import {{ resultGroup }}{{ resultShort }}List from '@/components/{{ resultGroup }}/{{ resultShort }}List.vue';
+const  {{ resultGroup }}{{ resultShort }}List   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}List.vue'));
   {{/if}}
   {{/if}}
 {{/each}}
@@ -56,15 +58,15 @@ const conditions = ref({
 {{#each resolvers}}
   {{#if ../namespaced}}
     {{#if (or (eq type 'parent') (eq type 'consume'))}}
-  "{{name}}": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['{{ ../group }}{{ ../short }}']).flat().map(obj=>obj['{{name}}']!=null).reduce((acc,cur)=>acc||cur,false),
+  "{{name}}": (data) => data != undefined && Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['{{ ../group }}{{ ../short }}']).flat().map(obj=>obj['{{name}}']!=null).reduce((acc,cur)=>acc||cur,false),
     {{else}}
-  "{{name}}": (data) => Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['{{ ../group }}{{ ../short }}']).flat().map(obj=>obj['{{name}}']).flat().filter(o=>o!=null).length>0,
+  "{{name}}": (data) => data != undefined && Array.isArray(data.k8sNamespace) && data.k8sNamespace.map(ns=>ns['{{ ../group }}{{ ../short }}']).flat().map(obj=>obj['{{name}}']).flat().filter(o=>o!=null).length>0,
     {{/if}}
   {{else}}
     {{#if (or (eq type 'parent') (eq type 'consume'))}}
-  "{{name}}": (data) => Array.isArray(data['{{ ../group }}{{ ../short }}']) && data['{{ ../group }}{{ ../short }}'].map(obj=>obj['{{name}}']!=null).reduce((acc,cur)=>acc||cur,false),
+  "{{name}}": (data) => data != undefined && Array.isArray(data['{{ ../group }}{{ ../short }}']) && data['{{ ../group }}{{ ../short }}'].map(obj=>obj['{{name}}']!=null).reduce((acc,cur)=>acc||cur,false),
     {{else}}
-  "{{name}}": (data) => Array.isArray(data['{{ ../group }}{{ ../short }}']) && data['{{ ../group }}{{ ../short }}'].map(obj=>obj['{{name}}']).flat().filter(o=>o!=null).length>0,
+  "{{name}}": (data) => data != undefined && Array.isArray(data['{{ ../group }}{{ ../short }}']) && data['{{ ../group }}{{ ../short }}'].map(obj=>obj['{{name}}']).flat().filter(o=>o!=null).length>0,
     {{/if}}
   {{/if}}
 {{/each}}
@@ -179,6 +181,7 @@ onDeleteError((err) => {
 })
 </script>
 <template><div>
+  <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
 {{#each resolvers}}

@@ -1,16 +1,17 @@
 <script setup lang="ts">
 // noGramoGenerator
+import { defineAsyncComponent } from 'vue'
 import vynilDistribQuery from '@/queries/vynil/Distrib.details.graphql'
 import DistribDelete from '@/queries/vynil/Distrib.delete.graphql'
-import vynilDistribView from '@/components/vynil/DistribView.vue';
-import vynilPackageList from '@/components/vynil/PackageList.vue';
-import vynilCategoryList from '@/components/vynil/CategoryList.vue';
-import vynilInstallList from '@/components/vynil/InstallList.vue';
-import k8sJobList from '@/components/k8s/JobList.vue';
-import k8sCronJobList from '@/components/k8s/CronJobList.vue';
-import coreEventList from '@/components/core/EventList.vue';
-import vynilInstallMeta from '@/components/vynil/InstallMeta.vue';
-import fluxcdKustomizationMeta from '@/components/fluxcd/KustomizationMeta.vue';
+const  vynilDistribView   = defineAsyncComponent(() => import( '@/components/vynil/DistribView.vue'));
+const  vynilPackageList   = defineAsyncComponent(() => import( '@/components/vynil/PackageList.vue'));
+const  vynilCategoryList   = defineAsyncComponent(() => import( '@/components/vynil/CategoryList.vue'));
+const  vynilInstallList   = defineAsyncComponent(() => import( '@/components/vynil/InstallList.vue'));
+const  k8sJobList   = defineAsyncComponent(() => import( '@/components/k8s/JobList.vue'));
+const  k8sCronJobList   = defineAsyncComponent(() => import( '@/components/k8s/CronJobList.vue'));
+const  coreEventList   = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
+const  vynilInstallMeta   = defineAsyncComponent(() => import( '@/components/vynil/InstallMeta.vue'));
+const  fluxcdKustomizationMeta   = defineAsyncComponent(() => import( '@/components/fluxcd/KustomizationMeta.vue'));
 import { PackageListExcludes as vynilPackageListExcludes } from '../../../libs/vynil/custom.js'
 import { CategoryListExcludes as vynilCategoryListExcludes } from '../../../libs/vynil/custom.js'
 import { InstallListExcludes as vynilInstallListExcludes } from '../../../libs/vynil/custom.js'

@@ -58,7 +58,7 @@ onMounted(() => {
   <svg ref="svgRoot" :viewBox="[-((options.width-options.marginLegend) / 2),-(options.height / 2),options.width,options.height]" :width="options.width" :height="options.height" stroke-linejoin="round" stroke-linecap="round" style="width: 100%; height: auto; font: 20px sans-serif;">
     <g class="lines" fill="none" stroke-width="3"></g>
     <g class="circles" text-anchor="middle" fill="none" stroke="currentColor" stroke-opacity="0.2"></g>
-    <g class="ticks" text-anchor="middle" dy="0.35em" stroke="#fff" stroke-width="5" fill="currentColor" paint-order="stroke"></g>
+    <g class="ticks" text-anchor="middle" dy="0.35em" stroke="#fff" stroke-width="5" fill="#000" paint-order="stroke"></g>
     <g class="axis" stroke="#000" stroke-opacity="0.2"></g>
     <g class="names" text-anchor="middle"></g>
     <g :transform="`translate(${options.height / 2},${10-25*color.domain().length})`">

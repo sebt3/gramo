@@ -36,6 +36,8 @@ const typeDefs = gqlWrapper(
   importGraphQL('jaegertracing.graphql'),
   importGraphQL('cattle.graphql'),
   importGraphQL('cilium.graphql'),
+  importGraphQL('namecheap.graphql'),
+  importGraphQL('tekton.graphql'),
 );
 
 interface MyContext {
@@ -58,7 +60,7 @@ export function setup() {
   app.use(
     '/graphql',
     cors<cors.CorsRequest>(),
-    express.json(),
+    express.json({limit: '25mb'}),
     expressMiddleware(server, {
       context: async ({ req }) => ({ token: req.headers.token }),
     }),
