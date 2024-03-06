@@ -27,10 +27,12 @@ onError((err) => {
 function onFinalSubmit() {
   notifyWorking('Create in progress');
   mutate({
+    "metadata": {
 {{#if namespaced}}
     "namespace": navigation.currentNamespace.value,
 {{/if}}
-    "name": name.value,
+    "name": name.value
+    },
 {{#each writeProperties}}
     "{{this}}": sanitizeData(obj.value.{{this}}),
 {{/each}}

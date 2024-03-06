@@ -110,7 +110,7 @@ function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patch{{ short }}({
     ...obj,
-    "metadata": result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata,
+    "metadata": Object.fromEntries(Object.entries(result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata).filter(([name])=>name!='__typename')),
   });
 }
 onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);

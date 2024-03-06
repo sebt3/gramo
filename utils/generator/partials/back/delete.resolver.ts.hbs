@@ -12,7 +12,11 @@
 {{/if}}
             return res.body
         } catch (err) {
-            console.error((err as object)['body']);
+          if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
+            if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
+              console.error('error', (err as object)['body']);
+            }
+          } else {console.error('error', err)}
         }
         return null
     },

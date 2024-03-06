@@ -20,35 +20,39 @@
         try {
 {{#if (defined crd)}}
   {{#if namespaced}}
-            const resGet = await k8sApi.getNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'])
+            const resGet = await k8sApi.getNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['metadata']['namespace'],'{{crd.status.acceptedNames.plural}}', args['metadata']['name'])
   {{else}}
-            const resGet = await k8sApi.getClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'])
+            const resGet = await k8sApi.getClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['metadata']['name'])
   {{/if}}
 {{else}}
   {{#if namespaced}}
-            const resGet = await k8sApi.readNamespaced{{ short }}(args['name'], args['namespace'])
+            const resGet = await k8sApi.readNamespaced{{ short }}(args['metadata']['name'], args['metadata']['namespace'])
   {{else}}
-            const resGet = await k8sApi.read{{ short }}(args['name'])
+            const resGet = await k8sApi.read{{ short }}(args['metadata']['name'])
   {{/if}}
 {{/if}}
             const payload = rfc6902.createPatch(resGet.body,request).filter(rule => !rule.path.startsWith('/status') && !['/metadata/creationTimestamp', '/metadata/finalizers', '/metadata/generation', '/metadata/managedFields', '/metadata/resourceVersion','/metadata/uid'].includes(rule.path) )
             const options = { "headers": { "Content-type": k8s.PatchUtils.PATCH_FORMAT_JSON_PATCH}};
 {{#if (defined crd)}}
   {{#if namespaced}}
-            const res = await k8sApi.patchNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['namespace'],'{{crd.status.acceptedNames.plural}}', args['name'], payload, undefined, undefined, undefined, options)
+            const res = await k8sApi.patchNamespacedCustomObject('{{apiGroup}}','{{apiVersion}}',args['metadata']['namespace'],'{{crd.status.acceptedNames.plural}}', args['metadata']['name'], payload, undefined, undefined, undefined, options)
   {{else}}
-            const res = await k8sApi.patchClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['name'], payload, undefined, undefined, undefined, options)
+            const res = await k8sApi.patchClusterCustomObject('{{apiGroup}}','{{apiVersion}}','{{crd.status.acceptedNames.plural}}', args['metadata']['name'], payload, undefined, undefined, undefined, options)
   {{/if}}
 {{else}}
   {{#if namespaced}}
-            const res = await k8sApi.patchNamespaced{{ short }}(args['name'], args['namespace'], payload, undefined, undefined, undefined, undefined, undefined, options)
+            const res = await k8sApi.patchNamespaced{{ short }}(args['metadata']['name'], args['metadata']['namespace'], payload, undefined, undefined, undefined, undefined, undefined, options)
   {{else}}
-            const res = await k8sApi.patch{{ short }}(args['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
+            const res = await k8sApi.patch{{ short }}(args['metadata']['name'], payload, undefined, undefined, undefined, undefined, undefined, options)
   {{/if}}
 {{/if}}
             return res.body
         } catch (err) {
-            console.error((err as object)['body']);
+          if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
+            if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
+              console.error('error', (err as object)['body']);
+            }
+          } else {console.error('error', err)}
         }
         return null
     },
