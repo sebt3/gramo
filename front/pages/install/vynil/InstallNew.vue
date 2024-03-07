@@ -45,8 +45,10 @@ const setYaml = (v) => editor.value.setYaml(v)
 function onFinalSubmit() {
   notifyWorking('Create in progress');
   mutate({
+    "metadata": {
     "namespace": navigation.currentNamespace.value,
-    "name": name.value,
+    "name": name.value
+    },
     "spec": sanitizeData(editor.value.obj.spec),
   });
 }

@@ -37,7 +37,7 @@ export function useCore() {
         }),
         isNamespaced: () => {
             const route = useRoute();
-            if (route.meta != undefined) {
+            if (route != undefined && route.meta != undefined) {
               return route.meta.ns||false
             }
             return false

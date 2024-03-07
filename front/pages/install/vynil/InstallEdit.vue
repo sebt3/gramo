@@ -32,8 +32,7 @@ const { mutate: patchInstall, onDone: onPatchInstall, onError: onPatchError } = 
 function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patchInstall({
-    "name": result.value.k8sNamespace[0].vynilInstall[0].metadata.name,
-    "namespace": result.value.k8sNamespace[0].vynilInstall[0].metadata.namespace,
+    "metadata": Object.fromEntries(Object.entries(result.value.k8sNamespace[0].vynilInstall[0].metadata).filter(([name])=>name!='__typename')),
     ...obj
   });
 }

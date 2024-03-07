@@ -61,6 +61,33 @@ onResult((res) => {
 })
 </script>
 <template><div>
+  <div class="row q-mb-sm q-ml-sm" v-if="loading && !isNamespaced()">
+    <div class="col-lg-4">
+      <OverviewSkeleton />
+    </div>
+    <div class="col-lg-8">
+      <TableSkeleton :showNamespace="false" />
+    </div>
+  </div>
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
+    <div class="col-lg-4">
+      <ProblemOverview short="Distrib" :to="toDistribList"
+        :model="result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+    <div class="col-lg-8">
+      <vynilDistribList @refresh="refetch()" :useAction="false"
+        v-if="result !== undefined && Array.isArray(result['vynilDistrib']) && result['vynilDistrib'].length>0"
+        :model="result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
+    </div>
+  </div>
+  <div class="row q-mb-sm q-ml-sm" v-if="loading">
+    <div class="col-lg-4">
+      <OverviewSkeleton />
+    </div>
+    <div class="col-lg-8">
+      <TableSkeleton :showNamespace="true" />
+    </div>
+  </div>
   <div class="row q-mb-sm q-ml-sm" v-if="ready && DistribProblems.length>0">
     <div class="col-lg-4">
       <q-card bordered :class="`q-ma-sm bg-${ colorInstall }-${$q.dark.isActive?'10':'1'}`">
