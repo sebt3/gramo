@@ -114,3 +114,12 @@ export function addByPath(target,path,data) {
 export function getByPath(obj, path) {
     return path.split("/").reduce((res,cur) => res==null?null:res[cur.replaceAll('~1','/')],obj)
 }
+
+export function timeAgo(date:string) {
+    const delta = new Date().getTime() - new Date(date).getTime();
+    const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((delta % (1000 * 60)) / 1000);
+    return `${days>0?`${days} days `:''}${hours>0?`${hours} hours `:''}${minutes>0?`${minutes} minutes `:''}${seconds>0?`${seconds} seconds `:''}`
+}

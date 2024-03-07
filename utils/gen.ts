@@ -31,6 +31,8 @@ loadPartial('resolversSelector',        path.resolve(partials_resolvers, 'select
 loadPartial('resolversIngress',         path.resolve(partials_resolvers, 'ingress.ts.hbs'));
 loadPartial('resolversServiceAccount',  path.resolve(partials_resolvers, 'serviceAccount.ts.hbs'));
 loadPartial('resolversNodeName',        path.resolve(partials_resolvers, 'nodeName.ts.hbs'));
+loadPartial('resolversEndpoint',        path.resolve(partials_resolvers, 'endpoint.ts.hbs'));
+loadPartial('resolversStateful',        path.resolve(partials_resolvers, 'stateful.ts.hbs'));
 loadPartial('resolversRole',            path.resolve(partials_resolvers, 'role.ts.hbs'));
 loadPartial('resolversRoleBinding',     path.resolve(partials_resolvers, 'roleBinding.ts.hbs'));
 loadPartial('resolversCertManager',     path.resolve(partials_resolvers, 'certmanager.ts.hbs'));

@@ -4,6 +4,9 @@ import { defineAsyncComponent } from 'vue'
 import installQuery from '@/queries/vynil/install.read.graphql'
 const  pieChart   = defineAsyncComponent(() => import( '@/components/charts/pieChart.vue'));
 const  radialLineChart   = defineAsyncComponent(() => import( '@/components/charts/radialLineChart.vue'));
+const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
+const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 const  vynilDistribList   = defineAsyncComponent(() => import( '@/components/vynil/DistribList.vue'));
 import { DistribSimpleExcludes } from '../../../libs/vynil/Distrib.js'
 const  vynilInstallList   = defineAsyncComponent(() => import( '@/components/vynil/InstallList.vue'));
@@ -21,7 +24,7 @@ const InstallProblems = ref([]);
 const CatDistCount = ref([]);
 if (isNamespaced()) setNamespaceFromRoute();
 const navigation = useNavigationStoreRef();
-const { result, refetch, onResult, onError } = useQuery(installQuery, {
+const { result, loading, refetch, onResult, onError } = useQuery(installQuery, {
   "Distrib": {
     "filters": [],
     "excludes": DistribSimpleExcludes
@@ -69,7 +72,7 @@ onResult((res) => {
       <TableSkeleton :showNamespace="false" />
     </div>
   </div>
-  <div class="row q-mb-sm q-ml-sm" v-if="!loading && !isNamespaced() && result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
+  <div class="row q-mb-sm q-ml-sm" v-if="!loading && ready && !isNamespaced() && Array.isArray(result.vynilDistrib) && result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0).length>0">
     <div class="col-lg-4">
       <ProblemOverview short="Distrib" :to="toDistribList"
         :model="result.vynilDistrib.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />

@@ -1,0 +1,22 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+      try{
+{{#if (or (eq type 'parent') (eq type 'equity'))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>parent.metadata.name==o['metadata']['name'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (eq type 'use')}}
+        if (!Array.isArray(parent['subsets'])) return null;
+        const pods = parent['subsets'].map(s=>Array.isArray(s['addresses'])?s['addresses'].map(a=>a.targetRef):[]).flat().filter(p=>p.kind=='Pod').map(p=>p.name)
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(o=>pods.includes(o['metadata']['name']))
+{{/if}}
+{{#if (eq type 'users')}}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(e=>Array.isArray(e.subsets)&&e.subsets.filter(s=>Array.isArray(s.addresses) && s.addresses.filter(a=> a.targetRef !=undefined && a.targetRef.kind == 'Pod' && a.targetRef.name == parent['metadata']['name']).length>0).length>0)
+{{/if}}
+      } catch (err) {
+        console.error(err)
+      }
+      return null
+    },

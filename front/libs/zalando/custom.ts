@@ -1,6 +1,6 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 import { databaseColor, databaseIcon, } from '../../routes/custom';
 export const zalandoIcon = databaseIcon;
 export const zalandoTitle = 'Zalando PG';
@@ -23,7 +23,7 @@ export const extrapostgresqlColumns:Array<QTableColumn> = [
   {name: 'Volume', label: 'Volume', field: row => row.spec.volume.size, sortable: true, align: tableColumnAlign.left},
   {name: 'CPU-Request', label: 'CPU-Request', field: row => row.spec.resources.requests.cpu, sortable: true, align: tableColumnAlign.left},
   {name: 'Memory-Request', label: 'Memory-Request', field: row => row.spec.resources.requests.memory, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Status', label: 'Status', field: row => row.status.PostgresClusterStatus, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterKopfPeeringColumns:Array<QTableColumn> = [
@@ -39,7 +39,6 @@ export const postgresqlListExcludes = [
   { path: 'spec/volume/size', include: true },
   { path: 'spec/resources/requests/cpu', include: true },
   { path: 'spec/resources/requests/memory', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
   { path: 'status/PostgresClusterStatus', include: true },
 ];
 export const postgresqlReadExcludes = [

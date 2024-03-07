@@ -673,6 +673,13 @@ onResult(res => {
     if (res.data!=undefined && Array.isArray(res.data.k8sNamespace)  && res.data.k8sNamespace[0].vynilInstall[0]!=undefined && res.data.k8sNamespace[0].vynilInstall[0]!=null) {
       model.value = res.data.k8sNamespace[0].vynilInstall[0]
     }
+    sectionCounts.value.consumeLeft = 0;
+    sectionCounts.value.consumeRight = 0;
+    sectionCounts.value.parent = 0;
+    sectionCounts.value.gets = 0;
+    sectionCounts.value.users = 0;
+    sectionCounts.value.uses = 0;
+    sectionCounts.value.bellow = 0;
     sectionCounts.value.uses += conditions.value["consumevynilPackage"](res.data)?1:0;
     sectionCounts.value.uses += conditions.value["usek8sJob"](res.data)?1:0;
     sectionCounts.value.parent += conditions.value["parentvynilInstall"](res.data)?1:0;

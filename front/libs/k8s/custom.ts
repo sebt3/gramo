@@ -1,6 +1,6 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 import { configColor, configIcon,securityColor, securityIcon,networkColor, networkIcon,workloadColor, workloadIcon,systemColor, systemIcon,storageColor, storageIcon,workflowColor, workflowIcon, } from '../../routes/custom';
 export const k8sIcon = 'fas fa-dharmachakra';
 export const k8sTitle = 'Standard';
@@ -201,6 +201,8 @@ export const extraNamespaceColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraNodeColumns:Array<QTableColumn> = [
+  {name: 'CPUs', label: 'CPUs', field: row => row.status.capacity.cpu, sortable: true, align: tableColumnAlign.left},
+  {name: 'RAM', label: 'RAM', field: row => row.status.capacity.memory, sortable: true, align: tableColumnAlign.left},
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPersistentVolumeColumns:Array<QTableColumn> = [
@@ -237,21 +239,22 @@ export const extraControllerRevisionColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDaemonSetColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Replicas', label: 'Replicas', field: row => row.status.numberReady, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDeploymentColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Replicas', label: 'Replicas', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraReplicaSetColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraStatefulSetColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Replicas', label: 'Replicas', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHorizontalPodAutoscalerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraJobColumns:Array<QTableColumn> = [
+  {name: 'Completion', label: 'Completion', field: row => timeAgo(row.status.completionTime), sortable: true, align: tableColumnAlign.left},
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCronJobColumns:Array<QTableColumn> = [
@@ -264,7 +267,7 @@ export const extraIngressColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraNetworkPolicyColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Types', label: 'Types', field: row => row.spec.policyTypes.join(', '), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPodDisruptionBudgetColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -273,10 +276,14 @@ export const extraRoleColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterRoleBindingColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Role', label: 'Role', field: row => row.roleRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Groups', label: 'Groups', field: row => Array.isArray(row.subjects)?row.subjects.filter(s=>s.kind == 'Group').map(s=>s.name).join(', '):'', sortable: true, align: tableColumnAlign.left},
+  {name: 'ServiceAccount', label: 'ServiceAccount', field: row => Array.isArray(row.subjects)?row.subjects.filter(s=>s.kind == 'ServiceAccount').map(s=>s.namespace+' '+s.name).join(', '):'', sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRoleBindingColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Role', label: 'Role', field: row => row.roleRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Groups', label: 'Groups', field: row => Array.isArray(row.subjects)?row.subjects.filter(s=>s.kind == 'Group').map(s=>s.name).join(', '):'', sortable: true, align: tableColumnAlign.left},
+  {name: 'ServiceAccount', label: 'ServiceAccount', field: row => Array.isArray(row.subjects)?row.subjects.filter(s=>s.kind == 'ServiceAccount').map(s=>s.namespace+' '+s.name).join(', '):'', sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterRoleColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -303,13 +310,16 @@ export const extraValidatingWebhookConfigurationColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCustomResourceDefinitionColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Scope', label: 'Scope', field: row => row.spec.scope, sortable: true, align: tableColumnAlign.left},
+  {name: 'Group', label: 'Group', field: row => row.spec.group, sortable: true, align: tableColumnAlign.left},
+  {name: 'Kind', label:  'Kind', field: row => row.spec.names.kind, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPriorityClassColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraLeaseColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Holder', label: 'Holder', field: row => row.spec.holderIdentity, sortable: true, align: tableColumnAlign.left},
+  {name: 'Duration', label: 'Duration(s)', field: row => row.spec.leaseDurationSeconds, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRuntimeClassColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -325,12 +335,12 @@ export const extraVolumeSnapshotColumns:Array<QTableColumn> = [
   {name: 'SnapshotClass', label: 'SnapshotClass', field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
   {name: 'SnapshotContent', label: 'SnapshotContent', field: row => row.status.boundVolumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
   {name: 'CreationTime', label: 'CreationTime', field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVolumeSnapshotClassColumns:Array<QTableColumn> = [
   {name: 'Driver', label: 'Driver', field: row => row.driver, sortable: true, align: tableColumnAlign.left},
   {name: 'DeletionPolicy', label: 'DeletionPolicy', field: row => row.deletionPolicy, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVolumeSnapshotContentColumns:Array<QTableColumn> = [
   {name: 'ReadyToUse', label: 'ReadyToUse', field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
@@ -340,7 +350,7 @@ export const extraVolumeSnapshotContentColumns:Array<QTableColumn> = [
   {name: 'VolumeSnapshotClass', label: 'VolumeSnapshotClass', field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
   {name: 'VolumeSnapshot', label: 'VolumeSnapshot', field: row => row.spec.volumeSnapshotRef.name, sortable: true, align: tableColumnAlign.left},
   {name: 'VolumeSnapshotNamespace', label: 'VolumeSnapshotNamespace', field: row => row.spec.volumeSnapshotRef.namespace, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const ConfigMapListExcludes = [
 ];
@@ -601,14 +611,13 @@ export const EndpointSliceReadExcludes = [
 export const EndpointSliceSimpleExcludes = [
 ];
 export const VolumeSnapshotListExcludes = [
-  { path: 'status/readyToUse', include: true },
   { path: 'spec/source/persistentVolumeClaimName', include: true },
   { path: 'spec/source/volumeSnapshotContentName', include: true },
-  { path: 'status/restoreSize', include: true },
   { path: 'spec/volumeSnapshotClassName', include: true },
+  { path: 'status/readyToUse', include: true },
+  { path: 'status/restoreSize', include: true },
   { path: 'status/boundVolumeSnapshotContentName', include: true },
   { path: 'status/creationTime', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const VolumeSnapshotReadExcludes = [
 ];
@@ -617,21 +626,19 @@ export const VolumeSnapshotSimpleExcludes = [
 export const VolumeSnapshotClassListExcludes = [
   { path: 'driver', include: true },
   { path: 'deletionPolicy', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const VolumeSnapshotClassReadExcludes = [
 ];
 export const VolumeSnapshotClassSimpleExcludes = [
 ];
 export const VolumeSnapshotContentListExcludes = [
-  { path: 'status/readyToUse', include: true },
-  { path: 'status/restoreSize', include: true },
   { path: 'spec/deletionPolicy', include: true },
   { path: 'spec/driver', include: true },
   { path: 'spec/volumeSnapshotClassName', include: true },
   { path: 'spec/volumeSnapshotRef/name', include: true },
   { path: 'spec/volumeSnapshotRef/namespace', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
+  { path: 'status/readyToUse', include: true },
+  { path: 'status/restoreSize', include: true },
 ];
 export const VolumeSnapshotContentReadExcludes = [
 ];

@@ -26,6 +26,12 @@ export const mutations = {
 };
 const localResolvers = {
 {{#each autoResolvers}}
+    {{#if (eq algo 'stateful')}}
+{{> resolversStateful algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'endpoint')}}
+{{> resolversEndpoint algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'k8up')}}
 {{> resolversK8up algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}

@@ -87,6 +87,13 @@ onResult(res => {
     if (res.data!=undefined{{#if namespaced}} && Array.isArray(res.data.k8sNamespace) {{/if}} && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null) {
       model.value = res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]
     }
+    sectionCounts.value.consumeLeft = 0;
+    sectionCounts.value.consumeRight = 0;
+    sectionCounts.value.parent = 0;
+    sectionCounts.value.gets = 0;
+    sectionCounts.value.users = 0;
+    sectionCounts.value.uses = 0;
+    sectionCounts.value.bellow = 0;
     {{#if (eq group 'cattle')}}
 {{> cattleCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}

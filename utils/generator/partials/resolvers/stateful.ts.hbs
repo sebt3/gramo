@@ -1,0 +1,18 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+      try{
+{{#if (eq type 'parent')}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>parent.metadata.name==o['spec']['serviceName'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (eq type 'equity')}}
+        if (parent['spec'] == undefined || parent['spec']['serviceName'] == undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>parent['spec']['serviceName']==o['metadata']['name'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+      } catch (err) {
+        console.error(err)
+      }
+      return null
+    },

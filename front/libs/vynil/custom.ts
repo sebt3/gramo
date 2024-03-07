@@ -1,6 +1,6 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 export const vynilIcon = 'album';
 export const vynilTitle = 'Vynil';
 export const iconDistrib = 'speaker_group';
@@ -17,14 +17,14 @@ export const PackageListExcludes = [];
 export const CategoryListExcludes = [];
 export const extraDistribColumns:Array<QTableColumn> = [
   {name: 'url', label: 'url', field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
-  {name: 'last_updated', label: 'last_updated', field: row => row.status.last_updated, sortable: true, align: tableColumnAlign.left},
+  {name: 'branch', label: 'branch', field: row => row.spec.branch, sortable: true, align: tableColumnAlign.left},
+  {name: 'last_updated', label: 'last_updated', field: row => timeAgo(row.status.last_updated), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraInstallColumns:Array<QTableColumn> = [
   {name: 'dist', label: 'dist', field: row => row.spec.distrib, sortable: true, align: tableColumnAlign.left},
   {name: 'cat', label: 'cat', field: row => row.spec.category, sortable: true, align: tableColumnAlign.left},
   {name: 'app', label: 'app', field: row => row.spec.component, sortable: true, align: tableColumnAlign.left},
-  {name: 'status', label: 'status', field: row => row.status.status, sortable: true, align: tableColumnAlign.left},
-  {name: 'last_updated', label: 'last_updated', field: row => row.status.last_updated, sortable: true, align: tableColumnAlign.left},
+  {name: 'last_updated', label: 'last_updated', field: row => timeAgo(row.status.last_updated), sortable: true, align: tableColumnAlign.left},
 ];
 export const DistribListExcludes = [
   { path: 'spec/url', include: true },

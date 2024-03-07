@@ -1,6 +1,6 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 import { databaseColor, databaseIcon, installIcon } from '../../routes/custom';
 export const redisIcon = databaseIcon;
 export const redisTitle = 'Redis';
@@ -27,7 +27,7 @@ export const extraRedisClusterColumns:Array<QTableColumn> = [
   {name: 'ClusterSize', label: 'ClusterSize', field: row => row.spec.clusterSize, sortable: true, align: tableColumnAlign.left},
   {name: 'LeaderReplicas', label: 'LeaderReplicas', field: row => row.spec.redisLeader.replicas, sortable: true, align: tableColumnAlign.left},
   {name: 'FollowerReplicas', label: 'FollowerReplicas', field: row => row.spec.redisFollower.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRedisReplicationColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

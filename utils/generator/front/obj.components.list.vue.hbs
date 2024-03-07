@@ -30,8 +30,10 @@ withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: bool
         <template v-slot:body-cell-Problems="props">
           <q-td :props="props">
             <q-chip v-if="props.row.getcoreProblem==null" class="glossy" color="positive" text-color="white" icon="done" />
-            <div v-else>
-              <q-chip v-for="problem in props.row.getcoreProblem" v-bind:key="problem" class="glossy" color="negative" text-color="white" icon="error">\{{ elude(problem.description, 40) }}</q-chip>
+            <div v-else class="column">
+              <div class="col" v-for="problem in props.row.getcoreProblem">
+                <q-chip v-bind:key="problem" class="glossy" color="negative" text-color="white" icon="error">\{{ elude(problem.description, 40) }}<q-tooltip>\{{ problem.description }}</q-tooltip></q-chip>
+              </div>
             </div>
           </q-td>
         </template>

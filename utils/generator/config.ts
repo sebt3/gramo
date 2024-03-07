@@ -8,6 +8,7 @@ export const excludes = [
     {group: 'vynil', short: 'Install', for: ['list', 'simple'], values: [{path:'status/tfstate'}, {path:'status/plan'}]},
 ];
 const uses = [
+    {algo: 'endpoint', group: 'k8s', short: 'Endpoints', usedGroup: 'k8s', usedShort: 'Pod'},
     {algo: 'traefik',  group: 'k8s', short: 'Ingress', usedGroup: 'traefik', usedShort: 'Middleware', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Install', usedGroup: 'k8s', usedShort: 'Job', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Distrib', usedGroup: 'k8s', usedShort: 'Job', path: null},
@@ -75,6 +76,8 @@ const provides = [
     {algo: 'apiService',   group: 'k8s', short: 'APIService', providedGroup: 'k8s', providedShort: 'CustomResourceDefinition'},
 ];
 const equity = [
+    {algo: 'endpoint', group: 'k8s', short: 'Endpoints', parentGroup: 'k8s', parentShort: 'Service'},
+    {algo: 'stateful', group: 'k8s', short: 'Service', parentGroup: 'k8s', parentShort: 'StatefulSet'},
     {algo: 'certmanager', group: 'k8s', short: 'Secret', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'BasicAuth'},
     {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'secretgenerator', parentShort: 'SSHKeyPair'},
@@ -93,6 +96,7 @@ const children = [
 //    {algo: 'k8up', group: 'k8s', short: 'Job', parentGroup: 'k8up', parentShort: 'Archive'},
 //    {algo: 'k8up', group: 'k8up', short: 'Archive', parentGroup: 'k8up', parentShort: 'Schedule'},
     {algo: 'certmanager', group: 'certmanager', short: 'CertificateRequest', parentGroup: 'certmanager', parentShort: 'Certificate'},
+    {algo: 'certmanager', group: 'certmanager', short: 'Order', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'k8s', group: 'core', short: 'Container', parentGroup: 'k8s', parentShort: 'Pod'},
     {algo: 'k8s', group: 'k8s', short: 'ReplicaSet', parentGroup: 'k8s', parentShort: 'Deployment'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'ReplicaSet'},

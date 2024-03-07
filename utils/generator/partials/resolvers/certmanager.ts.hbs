@@ -31,7 +31,7 @@
             .filter(r=>r['spec']!=undefined && r['spec']['secretName']==parent['metadata']['name'])
         if (Array.isArray(res) && res.length>0) return res[0];
 {{/if}}
-{{#if (and (eq type 'parent') (eq short 'CertificateRequest'))}}
+{{#if (and (eq group 'certmanager') (and (eq type 'parent') (eq targetShort 'Certificate')))}}
         if (parent['metadata']['annotations']==undefined || parent['metadata']['annotations']['cert-manager.io/certificate-name']==undefined) return null;
         const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
             .filter(r=>r['metadata']['name']==parent['metadata']['annotations']['cert-manager.io/certificate-name'])

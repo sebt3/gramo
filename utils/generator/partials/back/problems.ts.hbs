@@ -40,6 +40,14 @@
             } }))
         }
 {{/if}}
+{{#if (and (eq group 'certmanager') (or (eq short 'Order') (eq short 'Challenge')))}}
+        if (parent['status'] != undefined &&  parent['status']['state'] != 'valid') {
+            problems.push({
+                source: 'status',
+                description: `The {{short}} is ${parent['status']['state']}`
+            })
+        }
+{{/if}}
 {{#if (and (eq group 'k8up') (or (or (eq short 'Backup') (eq short 'Check')) (eq short 'Prune')))}}
         if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['reason']=='Failed'&&c['status']=='True').length>0) {
             problems.unshift(...parent['status']['conditions'].filter(c=>c['reason']=='Failed'&&c['status']=='True').map(c=>{ return {
@@ -157,6 +165,14 @@
             problems.push({
                 source: 'Missing replicas',
                 description: `${parent['spec']['replicas']} expected replicas, currently have ${parent['status']['replicas']}`
+            })
+        }
+{{/if}}
+{{#if (and (eq group 'k8s') (eq short 'Deployment'))}}
+        if (parent['status'] != undefined && parent['status']['unavailableReplicas']>0) {
+            problems.push({
+                source: 'unavailableReplicas',
+                description: `${parent['status']['unavailableReplicas']} unavailable pods`
             })
         }
 {{/if}}

@@ -55,7 +55,7 @@ export const extraIngressRouteUDPColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMiddlewareColumns:Array<QTableColumn> = [
-//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Type', label: 'Type', field: row => Object.keys(row.spec)[0], sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMiddlewareTCPColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

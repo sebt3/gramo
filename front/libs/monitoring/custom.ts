@@ -1,6 +1,6 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 export const iconAlertmanager = 'apps';
 export const iconPrometheus = 'apps';
 import { systemColor, configIcon, } from '../../routes/custom';
@@ -44,7 +44,7 @@ export const extraAlertmanagerColumns:Array<QTableColumn> = [
   {name: 'Version', label: 'Version', field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Replicas', label: 'Replicas', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Ready', label: 'Ready', field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Paused', label: 'Paused', field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPodMonitorColumns:Array<QTableColumn> = [
@@ -57,7 +57,7 @@ export const extraPrometheusColumns:Array<QTableColumn> = [
   {name: 'Version', label: 'Version', field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Desired', label: 'Desired', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Ready', label: 'Ready', field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Paused', label: 'Paused', field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPrometheusRuleColumns:Array<QTableColumn> = [
@@ -70,7 +70,7 @@ export const extraThanosRulerColumns:Array<QTableColumn> = [
   {name: 'Version', label: 'Version', field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Replicas', label: 'Replicas', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Ready', label: 'Ready', field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Paused', label: 'Paused', field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraAlertmanagerConfigColumns:Array<QTableColumn> = [
@@ -80,14 +80,13 @@ export const extraPrometheusAgentColumns:Array<QTableColumn> = [
   {name: 'Version', label: 'Version', field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Desired', label: 'Desired', field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Ready', label: 'Ready', field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Paused', label: 'Paused', field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const AlertmanagerListExcludes = [
   { path: 'spec/version', include: true },
   { path: 'spec/replicas', include: true },
   { path: 'status/availableReplicas', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
   { path: 'status/paused', include: true },
 ];
 export const AlertmanagerReadExcludes = [
@@ -110,7 +109,6 @@ export const PrometheusListExcludes = [
   { path: 'spec/version', include: true },
   { path: 'spec/replicas', include: true },
   { path: 'status/availableReplicas', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
   { path: 'status/paused', include: true },
 ];
 export const PrometheusReadExcludes = [
@@ -133,7 +131,6 @@ export const ThanosRulerListExcludes = [
   { path: 'spec/version', include: true },
   { path: 'spec/replicas', include: true },
   { path: 'status/availableReplicas', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
   { path: 'status/paused', include: true },
 ];
 export const ThanosRulerReadExcludes = [
@@ -150,7 +147,6 @@ export const PrometheusAgentListExcludes = [
   { path: 'spec/version', include: true },
   { path: 'spec/replicas', include: true },
   { path: 'status/availableReplicas', include: true },
-  { path: 'metadata/creationTimestamp', include: true },
   { path: 'status/paused', include: true },
 ];
 export const PrometheusAgentReadExcludes = [
