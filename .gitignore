@@ -28,6 +28,7 @@
 !/front/components/vynil/CategoryMeta.vue
 /front/libs/**/*.ts
 !/front/libs/*/custom.ts
+!/front/libs/i18n/*
 !/front/libs/core/*
 /front/pages/**/*.vue
 !/front/pages/install/vynil/DistribView.vue

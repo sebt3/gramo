@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { i18n } from "../i18n"
 import { networkColor, networkIcon, } from '../../routes/custom';
 export const traefikIcon = networkIcon;
 export const traefikTitle = 'Traefik';
@@ -55,7 +56,7 @@ export const extraIngressRouteUDPColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMiddlewareColumns:Array<QTableColumn> = [
-  {name: 'Type', label: 'Type', field: row => Object.keys(row.spec)[0], sortable: true, align: tableColumnAlign.left},
+  {name: 'Type', label: `${i18n.global.t('core.type')}`, field: row => Object.keys(row.spec)[0], sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMiddlewareTCPColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

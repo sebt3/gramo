@@ -1,6 +1,7 @@
 import {menuLinksProps} from '../interfaces';
 import { {{#each objects}}icon{{ short }}, {{/each}} {{ name }}Icon, {{ name }}Title }from '../../libs/{{ name }}/custom.js'
 import { useCRDStore, usePermissionStore } from '../../stores'
+import { i18n } from "../../libs/i18n"
 const crds = useCRDStore().crds;
 const havePermission = usePermissionStore().have;
 export const link:menuLinksProps = {
@@ -12,7 +13,7 @@ export const link:menuLinksProps = {
 {{#each objects}}
   {{#if (defined crd)}}crds['{{crd.metadata.name}}'] == undefined || {{/if}}!havePermission('{{group}}','{{ short }}')?[]:[{
     name: '{{ group }}{{ short }}', {{#if order }}order: {{order}},{{/if}}
-    title: '{{ short }}', caption: 'List {{ short }}', icon: icon{{ short }},
+    title: '{{ short }}', caption: i18n.global.t('overview.captionList', {short: '{{ short }}'}), icon: icon{{ short }},
   {{#if namespaced}}
     targetNS: '{{ group }}{{ short }}Table',
   {{/if}}
@@ -32,12 +33,12 @@ export const route = {
       name: '{{ category }}{{ name }}Dashboard',
       component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Dashboard.vue'),
       meta: {
-        breadcrumb: 'Dashboard', icon: {{ name }}Icon, ns: false,
-        title: () => '{{ category }}/{{ name }} Dashboard',
+        breadcrumb: i18n.global.t('overview.dashboardBreadcrumb'), icon: {{ name }}Icon, ns: false,
+        title: () => i18n.global.t('overview.dashboardTitle',{name: '{{ category }}/{{ name }}'}),
         related: [
-          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (ns) => `{{ name }} Dashboard for ${ns} namespace`},
-          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (ns) => `{{ name }} Advices for ${ns} namespace`},
-          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => `{{ name }} Advices for all namespaces`},
+          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ name }}', namespace})},
+          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (namespace) => i18n.global.t('overview.adviceNSTitle',{name: '{{ name }}', namespace})},
+          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ name }}'})},
         ]
       },
     },
@@ -46,12 +47,12 @@ export const route = {
       name: '{{ category }}{{ name }}NSDashboard',
       component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Dashboard.vue'),
       meta: {
-        breadcrumb: 'Dashboard', icon: {{ name }}Icon, ns: true,
-        title: (namespace) => `{{ category }}/{{ name }} Dashboard for namespace ${namespace}`,
+        breadcrumb: i18n.global.t('overview.dashboardBreadcrumb'), icon: {{ name }}Icon, ns: true,
+        title: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ category }}/{{ name }}', namespace}),
         related: [
-          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () => `{{ name }} Dashboard for all namespaces`},
-          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => `{{ name }} Advices for all namespaces`},
-          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (ns) => `{{ name }} Advices for ${ns} namespace`},
+          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () =>  i18n.global.t('overview.dashboardTitle',{name: '{{ name }}'})},
+          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ name }}'})},
+          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (namespace) => i18n.global.t('overview.adviceNSTitle',{name: '{{ name }}', namespace})},
         ]
       },
     },
@@ -60,12 +61,12 @@ export const route = {
       name: '{{ category }}{{ name }}Advices',
       component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Advices.vue'),
       meta: {
-        breadcrumb: 'Advices', icon: {{ name }}Icon, ns: false,
-        title: () => '{{ category }}/{{ name }} Advices',
+        breadcrumb: i18n.global.t('overview.adviceBreadcrumb'), icon: {{ name }}Icon, ns: false,
+        title: () => i18n.global.t('overview.adviceTitle',{name: '{{ category }}/{{ name }}'}),
         related: [
-          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () => `{{ name }} Dashboard for all namespaces`},
-          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (ns) => `{{ name }} Dashboard for ${ns} namespace`},
-          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (ns) => `{{ name }} Advices for ${ns} namespace`},
+          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () => i18n.global.t('overview.dashboardTitle',{name: '{{ name }}'})},
+          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ name }}', namespace})},
+          {target: '{{ category }}{{ name }}NSAdvices', ns: true, display: (namespace) => i18n.global.t('overview.adviceNSTitle',{name: '{{ name }}', namespace})},
         ]
       },
     },
@@ -74,12 +75,12 @@ export const route = {
       name: '{{ category }}{{ name }}NSAdvices',
       component: () => import('../../pages/{{category}}/{{ name }}/{{category}}Advices.vue'),
       meta: {
-        breadcrumb: 'Advices', icon: {{ name }}Icon, ns: true,
-        title: (namespace) => `{{ category }}/{{ name }} Advices for namespace ${namespace}`,
+        breadcrumb: i18n.global.t('overview.adviceBreadcrumb'), icon: {{ name }}Icon, ns: true,
+        title: (namespace) => i18n.global.t('overview.adviceNSTitle',{name: '{{ category }}/{{ name }}', namespace}),
         related: [
-          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (ns) => `{{ name }} Dashboard for ${ns} namespace`},
-          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () => `{{ name }} Dashboard for all namespaces`},
-          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => `{{ name }} Advices for all namespaces`},
+          {target: '{{ category }}{{ name }}NSDashboard', ns: true, display: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ name }}', namespace})},
+          {target: '{{ category }}{{ name }}Dashboard', ns: false, display: () => i18n.global.t('overview.dashboardTitle',{name: '{{ name }}'})},
+          {target: '{{ category }}{{ name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ name }}'})},
         ]
       },
     }],
@@ -95,12 +96,12 @@ export const route = {
           name: '{{ group }}{{ short }}AllTable',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}List.vue'),
           meta: {
-            breadcrumb: 'All', icon: 'list', ns: false,
-            title: () => 'List all {{ short }}',
+            breadcrumb: i18n.global.t('list.all'), icon: 'list', ns: false,
+            title: () => i18n.global.t('overview.titleList',{short: '{{ short }}'}),
             related: [
-              {target: '{{ group }}{{ short }}Table', ns: true, display: (ns) => `List {{ short }} in namespace ${ns}`},
-              {target: '{{ ../category }}{{ ../name }}Dashboard', ns: false, display: () => `{{ group }} Dashboard for all namespaces`},
-              {target: '{{ ../category }}{{ ../name }}Advices', ns: false, display: () => `{{ group }} Advices for all namespaces`},
+              {target: '{{ group }}{{ short }}Table', ns: true, display: (namespace) => i18n.global.t('overview.titleList',{short: '{{ short }}', namespace})},
+              {target: '{{ ../category }}{{ ../name }}Dashboard', ns: false, display: () => i18n.global.t('overview.dashboardTitle',{name: '{{ group }}'})},
+              {target: '{{ ../category }}{{ ../name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ group }}'})},
             ]
           },
         },
@@ -110,16 +111,16 @@ export const route = {
           name: '{{ group }}{{ short }}Table',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}List.vue'),
           meta: {
-            breadcrumb: 'List', icon: 'list', ns: {{toJson namespaced}},
-            title: ({{#if namespaced}}namespace{{/if}}) => `List {{ short }} {{#if namespaced}}in namespace ${namespace}{{/if}}`,
+            breadcrumb: i18n.global.t('list.breadcrumb'), icon: 'list', ns: {{toJson namespaced}},
+            title: ({{#if namespaced}}namespace{{/if}}) => i18n.global.t('list.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}'{{#if namespaced}}, namespace{{/if}} }),
             related: [
   {{#if namespaced}}
-              {target: '{{ group }}{{ short }}AllTable', ns: false, display: () => `List all {{ short }}`},
-              {target: '{{ ../category }}{{ ../name }}NSDashboard', ns: true, display: (ns) => `{{ group }} Dashboard for ${ns} namespace`},
-              {target: '{{ ../category }}{{ ../name }}NSAdvices', ns: true, display: (ns) => `{{ group }} Advices for ${ns} namespace`},
+              {target: '{{ group }}{{ short }}AllTable', ns: false, display: () => i18n.global.t('overview.titleAllList',{short: '{{ short }}'})},
+              {target: '{{ ../category }}{{ ../name }}NSDashboard', ns: true, display: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ group }}', namespace})},
+              {target: '{{ ../category }}{{ ../name }}NSAdvices', ns: true, display: (ns) => i18n.global.t('overview.adviceNSTitle',{name: '{{ group }}', namespace})},
   {{else}}
-              {target: '{{ ../category }}{{ ../name }}Dashboard', ns: false, display: () => `{{ group }} Dashboard for all namespaces`},
-              {target: '{{ ../category }}{{ ../name }}Advices', ns: false, display: () => `{{ group }} Advices for all namespaces`},
+              {target: '{{ ../category }}{{ ../name }}Dashboard', ns: false, display: () => i18n.global.t('overview.dashboardTitle',{name: '{{ group }}'})},
+              {target: '{{ ../category }}{{ ../name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ group }}'})},
   {{/if}}
             ]
           },
@@ -129,8 +130,8 @@ export const route = {
           name: '{{ group }}{{ short }}View',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}View.vue'),
           meta: {
-            breadcrumb: 'View', icon: icon{{ short }}, ns: {{toJson namespaced}}, useName: true,
-            title: ({{#if namespaced}}namespace, {{/if}}name) => `{{ short }} {{#if namespaced}}(${namespace}){{/if}}${name}`
+            breadcrumb: i18n.global.t('view.breadcrumb'), icon: icon{{ short }}, ns: {{toJson namespaced}}, useName: true,
+            title: ({{#if namespaced}}namespace, {{/if}}name) => i18n.global.t('view.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}',name{{#if namespaced}}, namespace{{/if}} })
           },
           children: [
 {{#each resolvers}}
@@ -143,8 +144,8 @@ export const route = {
           name: '{{ group }}{{ short }}Edit',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}Edit.vue'),
           meta: {
-            breadcrumb: 'Edit', icon: 'visibility', ns: {{toJson namespaced}}, useName: true,
-            title: ({{#if namespaced}}namespace, {{/if}}name) => `Edit {{ short }} {{#if namespaced}}(${namespace}){{/if}}${name}`
+            breadcrumb: i18n.global.t('edit.breadcrumb'), icon: 'visibility', ns: {{toJson namespaced}}, useName: true,
+            title: ({{#if namespaced}}namespace, {{/if}}name) => i18n.global.t('edit.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}',name{{#if namespaced}}, namespace{{/if}} })
           },
         },
         {
@@ -152,8 +153,8 @@ export const route = {
           name: '{{ group }}{{ short }}Create',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}New.vue'),
           meta: {
-            breadcrumb: 'Create', icon: 'add', ns: {{toJson namespaced}},
-            title: ({{#if namespaced}}namespace{{/if}}) => `Create a new {{ short }} {{#if namespaced}}in namespace: ${namespace}{{/if}}`
+            breadcrumb: i18n.global.t('new.breadcrumb'), icon: 'add', ns: {{toJson namespaced}},
+            title: ({{#if namespaced}}namespace{{/if}}) => i18n.global.t('new.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}'{{#if namespaced}}, namespace{{/if}} })
           },
         }
       ]

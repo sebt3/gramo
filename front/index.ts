@@ -48,6 +48,8 @@ async function createApp() {
 
     const { createPinia } = await import('pinia')
     app.use(createPinia());
+    const { i18n }  = await import('./libs/i18n');
+    app.use(i18n);
 
     const { Quasar, Dialog, Notify } = await import('quasar');
     app.use(Quasar, {

@@ -108,6 +108,14 @@
             } }))
         }
 {{/if}}
+{{#if (and (eq group 'vynil') (eq short 'Install'))}}
+        if (parent['status'] != undefined && !['installed','installing','planning','planned'].includes(parent['status']['status'])) {
+            problems.push({
+                source: 'status',
+                description: parent['status']['status']
+            })
+        }
+{{/if}}
 {{#if (and (eq group 'vynil') (eq short 'Distrib'))}}
         if (parent['status'] != undefined && Array.isArray(parent['status']['components']) && parent['status']['components'].length<1) {
             problems.push({

@@ -1,0 +1,237 @@
+{
+    "meta": {
+      "metadata": "Metadata",
+      "age": "Age",
+      "lastUpdate": "Dernière mise à jour",
+      "name": "Nom",
+      "namespace": "Namespace",
+      "days": "aucun jour | {n} jour | {n} jours",
+      "hours": "auncune heure | {n} heure | {n} heures",
+      "minutes": "aucune minute | {n} minute | {n} minutes",
+      "seconds": "aucune seconde | {n} seconde | {n} secondes"
+    },
+    "dashboard": {
+      "success": "Félicitation",
+      "noProblem": "Aucun problème trouvé",
+      "noPerm": "Il semblerait que vous n'avait aucun droits"
+    },
+    "overview": {
+      "captionList": "liste { short }",
+      "titleAllList": "Lists tous les { short }",
+      "titleList": "Liste les { short } du namespace { namespace }",
+      "dashboardBreadcrumb": "Dashboard",
+      "dashboardTitle": "Dashboard pour { name }",
+      "dashboardNSTitle": "Dashboard pour { name } du namespace { namespace }",
+      "adviceBreadcrumb": "Recommandations",
+      "adviceTitle": "{ name } Recommandations pour tous les namespaces",
+      "adviceNSTitle": "{ name } recommandations pour le namespace { namespace }",
+      "perNamespace": "{short} par namespace",
+      "perNamespaceSource": "{short} par namespace et source"
+    },
+    "category": {
+      "automation": "Automatisation",
+      "config": "Configuration",
+      "database": "Base de données",
+      "install": "Installation",
+      "network": "Réseaux",
+      "security": "Securité",
+      "storage": "Stockage",
+      "system": "Système",
+      "workflow": "Traitements",
+      "workload": "Workload"
+    },
+    "core": {
+      "url": "URL",
+      "ip": "IP",
+      "highlight": "En avant",
+      "type": "Type",
+      "status": "Statut",
+      "error": "Erreur",
+      "ready": "Ready",
+      "config": "Configuration",
+      "events": "évènements",
+      "submit": "Valider",
+      "notFound": "{ short } not found",
+      "deleteTooltip": "Supprimer { short } { name }",
+      "editTooltip": "Editer { short } { name }",
+      "viewParentTooltip": "Voir le parent { short } { name }",
+      "wait": "{msg}. veuillez patienter...",
+      "related": "Relié",
+      "cancel": "Annuler",
+      "add": "Ajouter",
+      "networkError": "Une erreur réseau est intervenue",
+      "graphqlError": "Une erreur GraphQL est intervenue, c'est probablement un bug"
+    },
+    "delete": {
+      "notifyWorking": "Suppression en cours",
+      "notifyDone": "Suppression terminée",
+      "notifyError": "La suppression a échouée",
+      "title": "Veuillez confirmer la <span class=\"text-red\">suppression</span>",
+      "message": "<em>Vous êtes</em> sur le point de <span class=\"text-red\">supprimer</span> { short } <strong>{ name }</strong>"
+    },
+    "list": {
+      "all": "Lister tous",
+      "refresh":"Rafraichir",
+      "showFilter":"Afficher le filtre",
+      "breadcrumb": "Lister",
+      "namespaced": "Liste les { short } dans le namespace { namespace }",
+      "cluster": "Liste les { short }"
+    },
+    "view": {
+      "breadcrumb": "Voir",
+      "namespaced": "{ short } { name } dans le namespace { namespace }",
+      "cluster": "{ short } { name }",
+      "tabs": {
+        "simple": "Configuration",
+        "yaml": "Yaml"
+      }
+    },
+    "edit": {
+      "breadcrumb": "Editer",
+      "namespaced": "Modifier le { short } { name } dans le namespace { namespace }",
+      "cluster": "Modifier le { short } { name }",
+      "submitTooltip": "Valider les modifications en cours",
+      "notifyWorking": "Mise à jour en cours",
+      "notifyDone": "Modification appliquée",
+      "notifyError": "La modification a échouée",
+      "tabs": {
+        "simple": "Simple",
+        "yaml": "yaml"
+      }
+    },
+    "new": {
+      "breadcrumb": "Créer",
+      "namespaced": "Créer un nouveau { short } dans le namespace { namespace }",
+      "cluster": "Créer un nouveau { short }",
+      "notifyNotReady": "Pes encore prêt",
+      "notifyDone": "Création terminée avec succès",
+      "notifyError": "La création a échouée",
+      "notifyWorking": "Création en cours"
+    },
+    "cilium": {
+      "ciliumID": "Cilium ID",
+      "endpointID": "Endpoint ID",
+      "identityID": "Identity ID",
+      "ingressEnforcement": "Ingress Enforcement",
+      "egressEnforcement": "Egress Enforcement",
+      "visibilityPolicy": "Visibility Policy",
+      "endpointState": "Endpoint State",
+      "disabled": "Désactivé"
+    },
+    "cnpg": {
+      "Cluster": "Cluster",
+      "Instances": "Instances",
+      "Primary": "Primaire",
+      "Phase": "Phase",
+      "lastBackup": "Dernière sauvegarde"
+    },
+    "fluxcd": {
+      "Children": "Children",
+      "Endpoint": "Endpoint",
+      "Chart": "Chart",
+      "Version": "Version",
+      "SourceKind": "Source Kind",
+      "SourceName": "Source Name",
+      "LastRun": "Dernière éxécution",
+      "LatestImage": "Dernière image",
+      "LastChange": "Dernier Changement",
+      "LastScan": "Dernier scan",
+      "Tags": "Tags"
+    },
+    "jaeger": {
+      "Status": "Statut",
+      "Version": "Version",
+      "Strategy": "Strategie",
+      "Storage": "Stockage"
+    },
+    "k8s": {
+      "Types": "Types",
+      "CPUs": "CPUs",
+      "RAM": "RAM",
+      "Replicas": "Replicas",
+      "Completion": "Completion",
+      "Role": "Role",
+      "Groups": "Groups",
+      "ServiceAccount": "ServiceAccount",
+      "Scope": "Scope",
+      "Group": "Group",
+      "Kind": "Kind",
+      "Holder": "Holder",
+      "Duration": "Duration(s)",
+      "ReadyToUse": "ReadyToUse",
+      "SourcePVC": "SourcePVC",
+      "RestoreSize": "RestoreSize",
+      "SnapshotClass": "SnapshotClass",
+      "SnapshotContent": "SnapshotContent",
+      "CreationTime": "CreationTime",
+      "Driver": "Driver",
+      "DeletionPolicy": "DeletionPolicy",
+      "VolumeSnapshotClass": "VolumeSnapshotClass",
+      "VolumeSnapshot": "VolumeSnapshot",
+      "VolumeSnapshotNamespace": "VolumeSnapshotNamespace",
+      "SourceSnapshotContent": "SourceSnapshotContent"
+    },
+    "k8up": {
+      "DateTaken": "Date taken",
+      "Repository": "Repository"
+    },
+    "mariadb": {
+      "MariaDB": "MariaDB",
+      "Secret": "Secret",
+      "CharSet": "CharSet",
+      "Collate": "Collate",
+      "Database": "Database",
+      "Table": "Table",
+      "Username": "Username",
+      "GrantOpt": "GrantOpt",
+      "PrimaryPod": "PrimaryPod",
+      "MaxConns": "MaxConns"
+    },
+    "mongodb": {
+      "Phase": "Phase",
+      "Version": "Version"
+    },
+    "monitoring": {
+      "Version": "Version",
+      "Replicas": "Replicas",
+      "Desired": "Desired",
+      "Paused": "Paused"
+    },
+    "namecheap": {
+      "In": "In",
+      "Condition": "Condition"
+    },
+    "opentelemetry": {
+      "Endpoint": "Endpoint",
+      "Sampler": "Sampler",
+      "SamplerArg": "Sampler Arg",
+      "Version": "Version",
+      "Mode": "Mode",
+      "Image": "Image",
+      "Management": "Management"
+    },
+    "oracle": {
+      "Output": "Output",
+      "Cluster": "Cluster",
+      "Routers": "Routers",
+      "Instances": "Instances",
+      "Online": "Online"
+    },
+    "redis": {
+      "ClusterSize": "ClusterSize",
+      "LeaderReplicas": "LeaderReplicas",
+      "FollowerReplicas": "FollowerReplicas"
+    },
+    "tekton": {
+      "StartTime": "Début",
+      "CompletionTime": "Fin",
+      "Address": "Addresse"
+    },
+    "vynil": {
+      "url": "Url",
+      "branch": "Banche",
+      "distrib": "Distribution",
+      "cat": "Categorie",
+      "app": "Application"
+    }
+  }

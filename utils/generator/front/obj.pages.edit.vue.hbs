@@ -5,9 +5,7 @@ import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
 const  {{ group }}{{ short }}Meta   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Meta.vue'));
 const  {{ group }}{{ short }}Edit   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
 const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
-{{#if (propertyContain readProperties 'status')}}
 const  {{ group }}{{ short }}Status   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Status.vue'));
-{{/if}}
 import { ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
 const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
@@ -107,7 +105,7 @@ onResult(res => {
   }
 });
 function onSubmit(obj:object) {
-  notifyWorking('Update in progress');
+  notifyWorking($t('edit.notifyWorking'));
   patch{{ short }}({
     ...obj,
     "metadata": Object.fromEntries(Object.entries(result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata).filter(([name])=>name!='__typename')),
@@ -118,24 +116,18 @@ onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
 <template><div>
   <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />
   <div class="row q-ml-sm">
-{{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">
-{{else}}
-    <div class="col-md-12">
-{{/if}}
       <{{ group }}{{ short }}Meta :useActions="false" :showStatus="false"
         v-if="!loading && model['metadata'] != undefined"
         :model="model"
        />
     </div>
-{{#if (propertyContain readProperties 'status')}}
     <div class="col-md-6">
       <{{ group }}{{ short }}Status
         v-if="!loading && model['metadata'] != undefined"
         :model="model"
        />
     </div>
-{{/if}}
   </div>
   <div class="row q-ml-sx">
     <div class="col-md-12">

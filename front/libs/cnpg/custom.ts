@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { databaseColor, databaseIcon, } from '../../routes/custom';
 export const cnpgIcon = databaseIcon;
 export const cnpgTitle = 'PostgreSQL';
@@ -21,27 +22,27 @@ export const colorScheduledBackup = databaseColor;
 export const descriptionScheduledBackup = '';
 export const shortScheduledBackup = 'ScheduledBackup';
 export const extraBackupColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Cluster', label: 'Cluster', field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: 'Phase', field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Error', label: 'Error', field: row => row.status.error, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Cluster', label: `${i18n.global.t('cnpg.Cluster')}`, field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('cnpg.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Error', label: `${i18n.global.t('core.error')}`, field: row => row.status.error, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Instances', label: 'Instances', field: row => row.status.instances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: 'Ready', field: row => row.status.readyInstances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: 'Status', field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Primary', label: 'Primary', field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Instances', label: `${i18n.global.t('cnpg.Instances')}`, field: row => row.status.instances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.readyInstances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Primary', label: `${i18n.global.t('cnpg.Primary')}`, field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPoolerColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Cluster', label: 'Cluster', field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Type', label: 'Type', field: row => row.spec.type, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Cluster', label: `${i18n.global.t('cnpg.Cluster')}`, field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Type', label: `${i18n.global.t('core.type')}`, field: row => row.spec.type, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraScheduledBackupColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Cluster', label: 'Cluster', field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Last Backup', label: 'Last Backup', field: row => row.status.lastScheduleTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Cluster', label: `${i18n.global.t('cnpg.Cluster')}`, field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Last Backup', label: `${i18n.global.t('cnpg.lastBackup')}`, field: row => row.status.lastScheduleTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const BackupListExcludes = [
   { path: 'metadata/creationTimestamp', include: true },

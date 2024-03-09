@@ -43,9 +43,9 @@ loadPartial('resolversSecret',          path.resolve(partials_resolvers, 'secret
 loadPartial('resolversFluxCD',          path.resolve(partials_resolvers, 'fluxcd.ts.hbs'));
 loadPartial('resolversK8up',            path.resolve(partials_resolvers, 'k8up.ts.hbs'));
 loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'configMap.ts.hbs'));
-loadPartial('vueStatusFields',          path.resolve(partials_front, 'status.fields.vue.hbs'));
 loadPartial('vueLabelFields',           path.resolve(partials_front, 'labels.fields.vue.hbs'));
 loadPartial('vueNameFields',            path.resolve(partials_front, 'name.fields.vue.hbs'));
+loadPartial('vueExtraFields',           path.resolve(partials_front, 'extra.fields.vue.hbs'));
 loadPartial('cattleCustom',             path.resolve(partials_customs, 'cattle.hbs'));
 loadPartial('certmanagerCustom',        path.resolve(partials_customs, 'certmanager.hbs'));
 loadPartial('ciliumCustom',             path.resolve(partials_customs, 'cilium.hbs'));
@@ -195,8 +195,7 @@ new Promise((resolve) => {
             objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)
             objCompList(path.resolve(path_front, 'components', g.name),`${o.short}List.vue`, o)
             objCompMeta(path.resolve(path_front, 'components', g.name),`${o.short}Meta.vue`, o)
-            if (Object.keys(o.readProperties).includes('status'))
-                objCompStatus(path.resolve(path_front, 'components', g.name),`${o.short}Status.vue`, o);
+            objCompStatus(path.resolve(path_front, 'components', g.name),`${o.short}Status.vue`, o);
             objCompView(path.resolve(path_front, 'components', g.name),`${o.short}View.vue`, o)
             if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', o['category'], g.name));
             objPageEdit(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}Edit.vue`, o)

@@ -180,10 +180,10 @@ onResult(res => {
   }
 });
 onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
+  notifySuccess($t('new.notifyDone'));
 })
 onDeleteError((err) => {
-  notifyError('Deletion failed');
+  notifyError($t('delete.notifyError'));
   console.log('deletion error',err);
 })
 </script>

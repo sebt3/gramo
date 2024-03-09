@@ -1,5 +1,6 @@
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { i18n } from "../i18n"
 import { workflowColor, workflowIcon, } from '../../routes/custom';
 export const tektonIcon = 'apps';
 export const tektonTitle = 'tekton';
@@ -71,15 +72,15 @@ export const extraPipelineColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPipelineRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: 'StartTime', field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: 'CompletionTime', field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTaskColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTaskRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: 'StartTime', field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: 'CompletionTime', field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraStepActionColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -91,11 +92,11 @@ export const extraClusterTaskColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCustomRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: 'StartTime', field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: 'CompletionTime', field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraResolutionRequestColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: 'StartTime', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterInterceptorColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -107,7 +108,7 @@ export const extraClusterTriggerBindingColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraEventListenerColumns:Array<QTableColumn> = [
-  {name: 'Address', label: 'Address', field: row => row.status.address.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Address', label: `${i18n.global.t('tekton.Address')}`, field: row => row.status.address.url, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTriggerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

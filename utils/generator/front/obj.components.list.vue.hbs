@@ -107,17 +107,17 @@ withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: bool
             <q-btn icon="edit" size="sm" class="q-ml-sm" flat dense
               @click="toEdit({{#if namespaced}}props.row.metadata.namespace, {{/if}}props.row.metadata.name)"
               v-if="(props.row.parentReference==null  || (props.row['metadata']['annotations'] != undefined && props.row['metadata']['annotations']['gramo.solidite.fr/no-parent'] == 'true' )) && can('patch'{{#if namespaced}},props.row.metadata.namespace{{/if}})">
-              <q-tooltip>Edit {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
+              <q-tooltip>\{{ $t('core.editTooltip', {short: '{{ short }}', name: props.row.metadata.name}) }}</q-tooltip>
             </q-btn>
             <q-btn icon="delete" size="sm" class="q-ml-sm" flat dense
               @click="$emit('on-delete', props.row.metadata)"
               v-if="props.row.parentReference==null && can('delete'{{#if namespaced}},props.row.metadata.namespace{{/if}})">
-              <q-tooltip>Delete {{ short }} \{{ props.row.metadata.name }}</q-tooltip>
+              <q-tooltip>\{{ $t('core.deleteTooltip', {short: '{{ short }}', name: props.row.metadata.name}) }}</q-tooltip>
             </q-btn>
             <q-btn icon="arrow_upward" size="sm" class="q-ml-sm" flat dense
               @click="toParentView(props.row.parentReference.group, props.row.parentReference.short, props.row.parentReference.name, props.row.parentReference.namespace)"
               v-if="props.row.parentReference!=null">
-              <q-tooltip>View parent \{{ props.row.parentReference.short }} \{{ props.row.parentReference.name }}</q-tooltip>
+              <q-tooltip>\{{ $t('core.viewParentTooltip', {short: props.row.parentReference.short, name: props.row.parentReference.name}) }}</q-tooltip>
             </q-btn>
           </q-td>
         </template>

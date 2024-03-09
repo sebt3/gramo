@@ -1,18 +1,25 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { getConditionColor, elude } from "../../libs/core/"
-import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
 import { useQuasar } from 'quasar'
+const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 const $q = useQuasar()
-defineProps<{model: object}>();
+const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean, showLabels?:boolean, showStatus?: boolean, origin?:string}>(), {
+  useActions: false,
+  showLabels: false,
+  showStatus: true,
+  showLink: true,
+});
 </script>
 <template>
   <q-card bordered class="q-ma-sm" v-if="model.status != null">
     <q-card-section :class="`bg-${ color{{ short }} } text-white`">
-      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Status</div>
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">\{{ $t('core.highlight') }}</div>
     </q-card-section>
     <q-card-section  :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'2'}`">
       <div class="q-gutter-md">
-{{> vueStatusFields properties=definition.properties crd=crd }}
+{{> vueExtraFields properties=definition.properties crd=crd }}
       </div>
     </q-card-section>
   </q-card>

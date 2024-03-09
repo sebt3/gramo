@@ -1,6 +1,6 @@
 {
   "name": "gramo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "@apollo/client": "^3.9.5",
+    "@intlify/unplugin-vue-i18n": "^3.0.1",
     "@quasar/extras": "^1.16.7",
     "@rushstack/eslint-patch": "^1.5.1",
     "@types/node": "^20.9.0",
@@ -43,6 +44,7 @@
     "vite-plugin-graphql-loader": "^2.0.0",
     "vue": "^3.3.7",
     "vue-apollo": "^3.1.2",
+    "vue-i18n": "^9.10.1",
     "vue-router": "4",
     "vue-tsc": "^1.8.22"
   },

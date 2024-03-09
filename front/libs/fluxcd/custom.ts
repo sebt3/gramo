@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { automationColor, automationIcon, } from '../../routes/custom';
 export const fluxcdIcon = automationIcon;
 export const fluxcdTitle = 'Flux CD';
@@ -58,54 +59,54 @@ export const descriptionHelmRelease = '';
 export const shortHelmRelease = 'HelmRelease';
 
 export const extraKustomizationColumns:Array<QTableColumn> = [
-  {name: 'Children', label: 'Children', field: row => row.status.inventory.entries.length, sortable: true, align: tableColumnAlign.left},
-  {name: 'LastChange', label: 'Last Change', field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Children', label: `${i18n.global.t('fluxcd.Children')}`, field: row => row.status.inventory.entries.length, sortable: true, align: tableColumnAlign.left},
+  {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraReceiverColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraAlertColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraProviderColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraGitRepositoryColumns:Array<QTableColumn> = [
-  {name: 'URL', label: 'URL', field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
-  {name: 'LastChange', label: 'Last Change', field: row => row.status!=undefined&&Array.isArray(row.status.conditions)?timeAgo(row.status.conditions[0].lastTransitionTime):'--', sortable: true, align: tableColumnAlign.left},
+  {name: 'URL', label: `${i18n.global.t('core.url')}`, field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => row.status!=undefined&&Array.isArray(row.status.conditions)?timeAgo(row.status.conditions[0].lastTransitionTime):'--', sortable: true, align: tableColumnAlign.left},
 ];
 export const extraBucketColumns:Array<QTableColumn> = [
   {name: 'Endpoint', label: 'Endpoint', field: row => row.spec.endpoint, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHelmChartColumns:Array<QTableColumn> = [
-  {name: 'Chart', label: 'Chart', field: row => row.spec.chart, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: 'Version', field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
-  {name: 'Source Kind', label: 'Source Kind', field: row => row.spec.sourceRef.kind, sortable: true, align: tableColumnAlign.left},
-  {name: 'Source Name', label: 'Source Name', field: row => row.spec.sourceRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Chart', label: `${i18n.global.t('fluxcd.Chart')}`, field: row => row.spec.chart, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('fluxcd.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'SourceKind', label: `${i18n.global.t('fluxcd.SourceKind')}`, field: row => row.spec.sourceRef.kind, sortable: true, align: tableColumnAlign.left},
+  {name: 'SourceName', label: `${i18n.global.t('fluxcd.SourceName')}`, field: row => row.spec.sourceRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHelmRepositoryColumns:Array<QTableColumn> = [
-  {name: 'URL', label: 'URL', field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'URL', label: `${i18n.global.t('core.url')}`, field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraOCIRepositoryColumns:Array<QTableColumn> = [
-  {name: 'URL', label: 'URL', field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'URL', label: `${i18n.global.t('core.url')}`, field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImageUpdateAutomationColumns:Array<QTableColumn> = [
-  {name: 'Last run', label: 'Last run', field: row => timeAgo(row.status?.lastAutomationRunTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'LastRun', label: `${i18n.global.t('fluxcd.LastRun')}`, field: row => timeAgo(row.status?.lastAutomationRunTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImagePolicyColumns:Array<QTableColumn> = [
-  {name: 'LatestImage', label: 'LatestImage', field: row => row.status?.latestImage, sortable: true, align: tableColumnAlign.left},
-  {name: 'LastChange', label: 'Last Change', field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'LatestImage', label: `${i18n.global.t('fluxcd.LatestImage')}`, field: row => row.status?.latestImage, sortable: true, align: tableColumnAlign.left},
+  {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImageRepositoryColumns:Array<QTableColumn> = [
-  {name: 'LastScan', label: 'Last scan', field: row => timeAgo(row.status.lastScanResult?.scanTime), sortable: true, align: tableColumnAlign.left},
-  {name: 'Tags', label: 'Tags', field: row => row.status?.lastScanResult?.tagCount, sortable: true, align: tableColumnAlign.left},
+  {name: 'LastScan', label: `${i18n.global.t('fluxcd.LastScan')}`, field: row => timeAgo(row.status.lastScanResult?.scanTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Tags', label: `${i18n.global.t('fluxcd.Tags')}`, field: row => row.status?.lastScanResult?.tagCount, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHelmReleaseColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const KustomizationListExcludes = [
 ];

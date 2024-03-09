@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { databaseColor, databaseIcon, } from '../../routes/custom';
 export const oracleIcon = databaseIcon;
 export const oracleTitle = 'Oracle';
@@ -13,17 +14,17 @@ export const colorMySQLBackup = databaseColor;
 export const descriptionMySQLBackup = '';
 export const shortMySQLBackup = 'MySQLBackup';
 export const extraInnoDBClusterColumns:Array<QTableColumn> = [
-  {name: 'Status', label: 'Status', field: row => row.status.cluster.status, sortable: true, align: tableColumnAlign.left},
-  {name: 'Online', label: 'Online', field: row => row.status.cluster.onlineInstances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Instances', label: 'Instances', field: row => row.spec.instances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Routers', label: 'Routers', field: row => row.spec.router.instances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.cluster.status, sortable: true, align: tableColumnAlign.left},
+  {name: 'Online', label: `${i18n.global.t('oracle.Online')}`, field: row => row.status.cluster.onlineInstances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Instances', label: `${i18n.global.t('oracle.Instances')}`, field: row => row.spec.instances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Routers', label: `${i18n.global.t('oracle.Routers')}`, field: row => row.spec.router.instances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMySQLBackupColumns:Array<QTableColumn> = [
-  {name: 'Cluster', label: 'Cluster', field: row => row.spec.clusterName, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: 'Status', field: row => row.status.status, sortable: true, align: tableColumnAlign.left},
-  {name: 'Output', label: 'Output', field: row => row.status.output, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Cluster', label: `${i18n.global.t('oracle.Cluster')}`, field: row => row.spec.clusterName, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.status, sortable: true, align: tableColumnAlign.left},
+  {name: 'Output', label: `${i18n.global.t('oracle.Output')}`, field: row => row.status.output, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const InnoDBClusterListExcludes = [
   { path: 'status/cluster/status', include: true },

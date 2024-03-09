@@ -26,13 +26,13 @@ withDefaults(defineProps<{
             </template>
           </q-input>
           <q-btn icon="filter_list" @click="show_filter=!show_filter">
-            <q-tooltip>Show filter</q-tooltip>
+            <q-tooltip>{{ $t('list.showFilter') }}</q-tooltip>
           </q-btn>
           <q-btn v-if="userefresh == true" icon="refresh" @click="console.log(modelFilter);$emit('refresh')">
-            <q-tooltip>Refresh data</q-tooltip>
+            <q-tooltip>{{ $t('list.refresh') }}</q-tooltip>
           </q-btn>
-          <q-btn v-if="usecreate == true" label="Add" color="positive" icon="add" @click="$emit('create')">
-            <q-tooltip>Create a new {{ itemtype }}</q-tooltip>
+          <q-btn v-if="usecreate == true" :label="$t('core.add')" color="positive" icon="add" @click="$emit('create')">
+            <q-tooltip>{{ $t('new.cluster', {name: itemtype}) }}</q-tooltip>
           </q-btn>
         </q-btn-group>
       </div>

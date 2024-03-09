@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { ref, use{{ short }} } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
-import { elude, getColor, getConditionColor } from "../../libs/core/"
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
+import { elude, getColor, getConditionColor, timeAgo } from "../../libs/core/"
 import { useQuasar } from 'quasar'
+const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 const $q = useQuasar()
 const { can, toEdit } = use{{ short }}();
 defineEmits(['on-delete']);
@@ -21,10 +23,10 @@ const props = withDefaults(defineProps<{model: object, useActions?:boolean, show
         <q-btn-group push class="float-right text-capitalize shadow-3" v-if="useActions">
           <q-btn icon="edit" v-if="can('patch'{{#if namespaced}},props.row.metadata.namespace{{/if}})"
           @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)">
-            <q-tooltip>Edit</q-tooltip>
+            <q-tooltip>\{{ $t('core.editTooltip', {short: '{{ short }}', name: model.metadata.name}) }}</q-tooltip>
           </q-btn>
           <q-btn icon="delete" @click="$emit('on-delete', model.metadata)" v-if="can('delete'{{#if namespaced}},props.row.metadata.namespace{{/if}})">
-            <q-tooltip>Delete</q-tooltip>
+            <q-tooltip>\{{ $t('core.deleteTooltip', {short: '{{ short }}', name: model.metadata.name}) }}</q-tooltip>
           </q-btn>
         </q-btn-group>
       </div>
@@ -33,7 +35,7 @@ const props = withDefaults(defineProps<{model: object, useActions?:boolean, show
       <div class="q-gutter-md">
 {{> vueNameFields namespaced=namespaced group=group short=short }}
         <div v-if="showStatus">
-{{> vueStatusFields properties=definition.properties crd=crd }}
+{{> vueExtraFields properties=definition.properties crd=crd }}
         </div>
         <div v-if="showLabels">
 {{> vueLabelFields }}

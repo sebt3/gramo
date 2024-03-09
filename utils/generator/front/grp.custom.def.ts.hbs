@@ -1,5 +1,6 @@
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign } from '../core'
+import { i18n } from "../i18n"
 import { {{#each categories}}{{this}}Color, {{this}}Icon,{{/each}} } from '../../routes/custom';
 export const {{ name }}Icon = 'apps';
 export const {{ name }}Title = '{{ name }}';
@@ -14,7 +15,7 @@ export const extra{{short}}Columns:Array<QTableColumn> = [
 {{#if (defined additionalColumns)}}
   {{#each additionalColumns}}
     {{#unless (contain jsonPath '[')}}
-  {name: '{{name}}', label: '{{name}}', field: row => row{{jsonPath}}, sortable: true, align: tableColumnAlign.left},
+  {name: '{{name}}', label: `${i18n.global.t('{{../group}}.{{name}}')}`, field: row => row{{jsonPath}}, sortable: true, align: tableColumnAlign.left},
     {{/unless}}
   {{/each}}
 {{else}}

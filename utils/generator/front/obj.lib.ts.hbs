@@ -1,4 +1,5 @@
 import { QTableColumn } from 'quasar'
+import { i18n } from "../i18n"
 import { usePermissionStore } from '../../stores'
 import { ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
 export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
@@ -8,14 +9,14 @@ import { stringify, parse } from 'yaml'
 const can = usePermissionStore().can;
 
 export const {{short}}Columns:Array<QTableColumn> = ([
-  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
+  {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat(extra{{short}}Columns).concat([
-  {name: 'Problems', label: 'Ok', field: 'Ok', sortable: false, align: tableColumnAlign.right},
+  {name: 'Problems', label: i18n.global.t('core.status'), field: 'Ok', sortable: false, align: tableColumnAlign.right},
   {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
 ]);
 {{#if namespaced}}
 export const {{short}}AllColumns = ([
-  {name: 'Namespace', label: 'Namespace', field: row => row.metadata.namespace, sortable: true, align: tableColumnAlign.left}
+  {name: 'Namespace', label: i18n.global.t('meta.namespace'), field: row => row.metadata.namespace, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat({{short}}Columns);
 {{/if}}
 
@@ -91,7 +92,7 @@ export function use{{ short }}() {
     if ( !res.loading && res.data.{{group}}{{short}} == null) {
 {{/if}}
         const matched = router.currentRoute.value.matched
-        notifyError('{{ short }} not found');
+        notifyError(i18n.global.t('core.notFound', {short: '{{ short }}'}));
         router.push({
           path: matched[matched.length>1?matched.length-2:matched.length-1].path,
           replace: true
@@ -109,17 +110,17 @@ export function use{{ short }}() {
     toEdit: (name) => router.push({ name: '{{group}}{{short}}Edit', params: {name}}),
 {{/if}}
     toParentView: (group,short,name,namespace) => router.push({ name: `${group}${short}View`, params: {name,namespace}}),
-    deleteDone: () => notifySuccess('Deletion proceded'),
+    deleteDone: () => notifySuccess(i18n.global.t('delete.notifyDone')),
     deleteError: (err) => {
-      notifyError('Deletion failed');
+      notifyError(i18n.global.t('delete.notifyError'));
       console.log('deletion error',err);
     },
     patchDone: () => {
-      notifySuccess('Modification applied');
+      notifySuccess(i18n.global.t('edit.notifyDone'));
       router.go(-1);
     },
     patchError: (err) => {
-      notifyError('Modification failed');
+      notifyError(i18n.global.t('edit.notifyError'));
       console.log('mutation error', err)
     },
 {{#if namespaced}}
@@ -129,11 +130,11 @@ export function use{{ short }}() {
 {{/if}}
     actionDelete: (deletor:(o:object)=>any, meta:object) => {
       $q.dialog({
-        title: 'Confirm <span class="text-red">delete</span>',
-        message: `<em>You are</em> about to <span class="text-red">delete</span> {{ short }} <strong>${meta.name}</strong>`,
+        title: i18n.global.t('delete.title'),
+        message: i18n.global.t('delete.message'),
         persistent: true, cancel: true, html: true, ok: {color: 'negative'}
       }).onOk(() => {
-        notifyWorking('Delete in progress');
+        notifyWorking(i18n.global.t('delete.notifyWorking'));
 {{#if namespaced}}
         deletor({"name": meta.name, "namespace":meta.namespace});
 {{else}}

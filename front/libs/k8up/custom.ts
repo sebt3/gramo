@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { systemColor, systemIcon, } from '../../routes/custom';
 export const iconBackup = 'backup';
 export const iconRestore = 'cloud_download';
@@ -37,29 +38,29 @@ export const colorSnapshot = systemColor;
 export const descriptionSnapshot = '';
 export const shortSnapshot = 'Snapshot';
 export const extraArchiveColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraBackupColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCheckColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPreBackupPodColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPruneColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRestoreColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraScheduleColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraSnapshotColumns:Array<QTableColumn> = [
-  {name: 'Date taken', label: 'Date taken', field: row => row.spec.date, sortable: true, align: tableColumnAlign.left},
-  {name: 'Repository', label: 'Repository', field: row => row.spec.repository, sortable: true, align: tableColumnAlign.left},
+  {name: 'DateTaken', label: `${i18n.global.t('k8up.DateTaken')}`, field: row => row.spec.date, sortable: true, align: tableColumnAlign.left},
+  {name: 'Repository', label: `${i18n.global.t('k8up.Repository')}`, field: row => row.spec.repository, sortable: true, align: tableColumnAlign.left},
 ];
 export const ArchiveListExcludes = [
 ];

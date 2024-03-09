@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { systemColor, systemIcon, installIcon, configIcon} from '../../routes/custom';
 export const opentelemetryIcon = 'apps';
 export const opentelemetryTitle = 'Telemetry';
@@ -17,23 +18,23 @@ export const colorOpenTelemetryCollector = systemColor;
 export const descriptionOpenTelemetryCollector = '';
 export const shortOpenTelemetryCollector = 'OpenTelemetryCollector';
 export const extraInstrumentationColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Endpoint', label: 'Endpoint', field: row => row.spec.exporter.endpoint, sortable: true, align: tableColumnAlign.left},
-  {name: 'Sampler', label: 'Sampler', field: row => row.spec.sampler.type, sortable: true, align: tableColumnAlign.left},
-  {name: 'Sampler Arg', label: 'Sampler Arg', field: row => row.spec.sampler.argument, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Endpoint', label: `${i18n.global.t('opentelemetry.Mode')}`, field: row => row.spec.exporter.endpoint, sortable: true, align: tableColumnAlign.left},
+  {name: 'Sampler', label: `${i18n.global.t('opentelemetry.Sampler')}`, field: row => row.spec.sampler.type, sortable: true, align: tableColumnAlign.left},
+  {name: 'SamplerArg', label: `${i18n.global.t('opentelemetry.SamplerArg')}`, field: row => row.spec.sampler.argument, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraOpAMPBridgeColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: 'Version', field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
-  {name: 'Endpoint', label: 'Endpoint', field: row => row.spec.endpoint, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Mode', label: `${i18n.global.t('opentelemetry.Mode')}`, field: row => row.spec.endpoint, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraOpenTelemetryCollectorColumns:Array<QTableColumn> = [
-  {name: 'Mode', label: 'Mode', field: row => row.spec.mode, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: 'Version', field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: 'Ready', field: row => row.status.scale.statusReplicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Image', label: 'Image', field: row => row.status.image, sortable: true, align: tableColumnAlign.left},
-  {name: 'Management', label: 'Management', field: row => row.spec.managementState, sortable: true, align: tableColumnAlign.left},
+  {name: 'Mode', label: `${i18n.global.t('opentelemetry.Mode')}`, field: row => row.spec.mode, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.scale.statusReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Image', label: `${i18n.global.t('opentelemetry.Image')}`, field: row => row.status.image, sortable: true, align: tableColumnAlign.left},
+  {name: 'Management', label: `${i18n.global.t('opentelemetry.Management')}`, field: row => row.spec.managementState, sortable: true, align: tableColumnAlign.left},
 ];
 export const InstrumentationListExcludes = [
   { path: 'spec/exporter/endpoint', include: true },

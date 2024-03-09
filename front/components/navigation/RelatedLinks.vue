@@ -6,7 +6,7 @@ const route = useRoute();
 const namespace = ref(useNavigationStore().namespace)
 </script>
 <template>
-  <q-btn-dropdown padding="none" dense flat no-caps label="Related" class="text-grey">
+  <q-btn-dropdown padding="none" dense flat no-caps :label="$t('core.related')" class="text-grey">
     <q-list>
       <q-item clickable v-close-popup v-for="item in route.meta.related" v-bind:key="item.target" :to="{ name: item.target, params: item.ns||false?{ namespace }:{} }">
         <q-item-section>

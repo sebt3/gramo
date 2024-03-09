@@ -42,8 +42,8 @@ function onAdd() {
         <q-input dense v-model="newName" autofocus @keyup.enter="prompt = false" />
       </q-card-section>
       <q-card-actions align="right" class="text-primary">
-        <q-btn flat label="Cancel" v-close-popup />
-        <q-btn flat label="Add" v-close-popup @click="onAdd" />
+        <q-btn flat :label="$t('core.cancel')" v-close-popup />
+        <q-btn flat :label="$t('core.add')" v-close-popup @click="onAdd" />
       </q-card-actions>
     </q-card>
   </q-dialog>

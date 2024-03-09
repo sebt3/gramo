@@ -3,6 +3,7 @@ import { setupTableWidget } from './tableSetup.js'
 import { setupItem } from './itemSetup.js'
 import { stringify } from 'yaml'
 import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from "vue-i18n"
 
 export * from './itemSetup.js'
 export * from './openapiSetup.js'
@@ -13,6 +14,7 @@ export { useQuery, useMutation } from '@vue/apollo-composable'
 export { useNavigationStoreRef } from '../../stores'
 export function onlyUnique(value, index, array) {return array.indexOf(value) === index;}
 export function useCore() {
+    const { t } = useI18n()
     const router = useRouter();
     const $q = useQuasar();
     const { pagination, setNamespaceFromRoute } = setupTableWidget();
@@ -22,7 +24,7 @@ export function useCore() {
         notify: (arg) => $q.notify(arg),
         notifyWorking: (msg:string) => $q.notify({
             spinner: true,
-            message: `${msg}. Please wait...`,
+            message: `${t("core.wait",{msg})}`,
             timeout: 1000
         }),
         notifySuccess: (msg:string) => $q.notify({
@@ -46,7 +48,7 @@ export function useCore() {
             if (networkError) {
                 console.log('[Network error]:', networkError);
                 $q.notify({
-                    message: 'A network error have occured',
+                    message: `${t("core.networkError")}`,
                     icon: 'error',
                     color: 'negative'
                 })
@@ -54,7 +56,7 @@ export function useCore() {
             if (graphQLErrors) {
                 console.log('[graphQL error]:', graphQLErrors);
                 $q.notify({
-                    message: 'A GraphQL error have occured, this is likely a bug',
+                    message: `${t("core.graphqlError")}`,
                     icon: 'error',
                     color: 'negative'
                 })
@@ -116,10 +118,11 @@ export function getByPath(obj, path) {
 }
 
 export function timeAgo(date:string) {
+    const { t } = useI18n()
     const delta = new Date().getTime() - new Date(date).getTime();
     const days = Math.floor(delta / (1000 * 60 * 60 * 24));
     const hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((delta % (1000 * 60)) / 1000);
-    return `${days>0?`${days} days `:''}${hours>0?`${hours} hours `:''}${minutes>0?`${minutes} minutes `:''}${seconds>0?`${seconds} seconds `:''}`
+    return `${days>0?`${t("meta.days",days)} `:''}${hours>0?`${t("meta.hours",hours)} `:''}${minutes>0?`${t("meta.minutes",minutes)} `:''}${seconds>0?t("meta.seconds",seconds):''}`
 }

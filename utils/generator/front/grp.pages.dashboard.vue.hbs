@@ -101,7 +101,7 @@ onResult((res) => {
     <div class="col-lg-4" v-if="ready && {{ short }}ByTs.length>1" >
       <q-card bordered :class="`q-ma-sm bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
         <q-card-section :class="`text-center bg-${ color{{ short }} }`">
-          <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#{{ group }}{{ short }}">{{ short }} per namespace</a></div>
+          <div class="q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-white text-subtitle" href="#{{ group }}{{ short }}">\{{ $t('overview.perNamespace', {short: '{{ short }}'}) }}</a></div>
         </q-card-section>
         <q-card-section class="text-center">
           <pieChart

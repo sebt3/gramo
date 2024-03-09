@@ -1,4 +1,5 @@
 // category configuration
+import { i18n } from "../libs/i18n"
 export const automationIcon = 'auto_mode';
 export const configIcon = 'settings_suggest';
 export const databaseIcon = 'fas fa-database';
@@ -19,16 +20,16 @@ export const configColor = 'purple';
 export const networkColor = 'indigo';
 export const securityColor = 'pink';
 export const systemColor = 'deep-orange';
-export const automationTitle = 'Automation';
-export const configTitle = 'Configuration';
-export const databaseTitle = 'Database';
-export const installTitle = 'Installation';
-export const networkTitle = 'Network';
-export const securityTitle = 'Security';
-export const storageTitle = 'Storage';
-export const systemTitle = 'System';
-export const workflowTitle = 'Workflow';
-export const workloadTitle = 'Workload';
+export const automationTitle = i18n.global.t('category.automation');
+export const configTitle = i18n.global.t('category.config');
+export const databaseTitle = i18n.global.t('category.database');
+export const installTitle = i18n.global.t('category.install');
+export const networkTitle = i18n.global.t('category.network');
+export const securityTitle = i18n.global.t('category.security');
+export const storageTitle = i18n.global.t('category.storage');
+export const systemTitle = i18n.global.t('category.system');
+export const workflowTitle = i18n.global.t('category.workflow');
+export const workloadTitle = i18n.global.t('category.workload');
 export const automationDesc = '';
 export const configDesc = '';
 export const databaseDesc = '';

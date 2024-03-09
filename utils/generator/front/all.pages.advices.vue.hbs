@@ -84,12 +84,9 @@ onResult((res) => {
     <div class="col-lg-12">
       <q-card bordered class="q-ma-sm">
         <q-card-section class="bg-positive text-grey-2">
-          <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">Congratulations
-          </div>
+          <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">\{{ $t('dashboard.success') }}</div>
         </q-card-section>
-        <q-card-section class="bg-green-2 text-center q-pa-xl text-subtitle1">
-            No problem found
-        </q-card-section>
+        <q-card-section class="bg-green-2 text-center q-pa-xl text-subtitle1">\{{ $t('dashboard.noProblem') }}</q-card-section>
       </q-card>
     </div>
   </div>
@@ -160,13 +157,11 @@ onResult((res) => {
   <q-card bordered class="q-ma-sm" v-if="{{#each groups}}{{#each objects}}!have{{ group }}{{ short }}() &&{{/each}}{{/each}}true">
     <q-card-section :class="`bg-negative text-white`">
       <div class="text-subtitle1 q-mt-none q-mb-none q-pt-none q-pb-none">
-        Error
+        \{{ $t('core.error') }}
       </div>
     </q-card-section>
     <q-card-section :class="`bg-negative-2`">
-      <div class="q-gutter-md">
-        It look like you have no permissions at all
-      </div>
+      <div class="q-gutter-md">\{{ $t('dashboard.noPerm') }}</div>
     </q-card-section>
   </q-card>
 </div></template>

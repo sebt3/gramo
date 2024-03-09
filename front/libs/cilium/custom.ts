@@ -1,7 +1,8 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
+import { tableColumnAlign, timeAgo } from '../core'
 import { networkColor, networkIcon, } from '../../routes/custom';
+import { i18n } from "../i18n"
 export const ciliumIcon = 'apps';
 export const ciliumTitle = 'cilium';
 export const iconCiliumClusterwideNetworkPolicy = networkIcon;
@@ -52,43 +53,44 @@ export const iconCiliumPodIPPool = networkIcon;
 export const colorCiliumPodIPPool = networkColor;
 export const descriptionCiliumPodIPPool = '';
 export const shortCiliumPodIPPool = 'CiliumPodIPPool';
+const age = `${i18n.global.t('meta.age')}`;
 export const extraCiliumClusterwideNetworkPolicyColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumEndpointColumns:Array<QTableColumn> = [
-  {name: 'Endpoint ID', label: 'Endpoint ID', field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'Identity ID', label: 'Identity ID', field: row => row.status.identity.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ingress Enforcement', label: 'Ingress Enforcement', field: row => row.status.policy.ingress.state, sortable: true, align: tableColumnAlign.left},
-  {name: 'Egress Enforcement', label: 'Egress Enforcement', field: row => row.status.policy.egress.state, sortable: true, align: tableColumnAlign.left},
-  {name: 'Visibility Policy', label: 'Visibility Policy', field: row => row.status['visibility-policy-status'], sortable: true, align: tableColumnAlign.left},
-  {name: 'Endpoint State', label: 'Endpoint State', field: row => row.status.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Endpoint ID', label: `${i18n.global.t('cilium.endpointID')}`, field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'Identity ID', label: `${i18n.global.t('cilium.identityID')}`, field: row => row.status.identity.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ingress Enforcement', label: `${i18n.global.t('cilium.ingressEnforcement')}`, field: row => row.status.policy.ingress.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Egress Enforcement', label: `${i18n.global.t('cilium.egressEnforcement')}`, field: row => row.status.policy.egress.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Visibility Policy', label: `${i18n.global.t('cilium.visibilityPolicy')}`, field: row => row.status['visibility-policy-status'], sortable: true, align: tableColumnAlign.left},
+  {name: 'Endpoint State', label: `${i18n.global.t('cilium.endpointState')}`, field: row => row.status.state, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumExternalWorkloadColumns:Array<QTableColumn> = [
-  {name: 'Cilium ID', label: 'Cilium ID', field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'IP', label: 'IP', field: row => row.status.ip, sortable: true, align: tableColumnAlign.left},
+  {name: 'ciliumID', label: `${i18n.global.t('cilium.ciliumID')}`, field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'IP', label: `${i18n.global.t('core.ip')}`, field: row => row.status.ip, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumIdentityColumns:Array<QTableColumn> = [
-  {name: 'Namespace', label: 'Namespace', field: row => row.metadata.labels['io.kubernetes.pod.namespace'], sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Namespace', label: `${i18n.global.t('meta.namespace')}`, field: row => row.metadata.labels['io.kubernetes.pod.namespace'], sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumLocalRedirectPolicyColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumNetworkPolicyColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumNodeColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumCIDRGroupColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumL2AnnouncementPolicyColumns:Array<QTableColumn> = [
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumLoadBalancerIPPoolColumns:Array<QTableColumn> = [
-  {name: 'Disabled', label: 'Disabled', field: row => row.spec.disabled, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'Disabled', label: `${i18n.global.t('cilium.disabled')}`, field: row => row.spec.disabled, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: age, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumNodeConfigColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

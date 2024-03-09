@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 import { onMounted } from "vue";
-import { elude, getColor, getConditionColor} from "../../libs/core/"
+import { elude, getColor, getConditionColor, timeAgo } from "../../libs/core/"
 const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
 const  EventList   = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
 const  MonacoViewer   = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
+const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 {{#if namespaced}}
@@ -28,29 +29,29 @@ onMounted(() => {
     <q-tabs v-model="viewer.tab" :class="`bg-${ color{{ short }} } text-grey-2`" active-color="white" align="justify">
       <q-avatar :icon="icon{{ short }}" />
       <q-tab label="{{ short }}" name="meta" />
-      <q-tab label="Events" name="events" v-if="Array.isArray(model['getcoreEvent'])" />
-      <q-tab label="Configuration" name="simple" />
+      <q-tab :label="$t('core.events')" name="events" v-if="Array.isArray(model['getcoreEvent'])" />
+      <q-tab :label="$t('view.tabs.simple')" name="simple" />
 {{#each writeProperties}}
   {{#if (isJsonObject this ../gqlDefs)}}
       <q-tab label="{{this}}" name="{{this}}" v-if="model['{{this}}']!=null" />
   {{/if}}
 {{/each}}
-      <q-tab label="full Yaml" name="yaml" />
+      <q-tab :label="$t('view.tabs.yaml')" name="yaml" />
       <q-btn-group push class="float-right text-capitalize shadow-3 q-mr-sm" v-if="useActions">
         <q-btn icon="edit"
           @click="toEdit({{#if namespaced}}model.metadata.namespace, {{/if}}model.metadata.name)"
           v-if="(model.parentReference==null || (model['metadata']['annotations'] != undefined && model['metadata']['annotations']['gramo.solidite.fr/no-parent'] == 'true' )) && can('patch'{{#if namespaced}},model.metadata.namespace{{/if}})">
-          <q-tooltip>Edit</q-tooltip>
+          <q-tooltip>\{{ $t('core.editTooltip', {short: '{{ short }}', name: model.metadata.name}) }}</q-tooltip>
         </q-btn>
         <q-btn icon="delete"
           @click="$emit('on-delete', model.metadata)"
           v-if="model.parentReference==null && can('delete'{{#if namespaced}},model.metadata.namespace{{/if}})">
-          <q-tooltip>Delete</q-tooltip>
+          <q-tooltip>\{{ $t('core.deleteTooltip', {short: '{{ short }}', name: model.metadata.name}) }}</q-tooltip>
         </q-btn>
         <q-btn icon="arrow_upward"
           @click="toParentView(model.parentReference.group, model.parentReference.short, model.parentReference.name, model.parentReference.namespace)"
           v-if="model.parentReference!=null">
-          <q-tooltip>View parent \{{ model.parentReference.short }} \{{ model.parentReference.name }}</q-tooltip>
+          <q-tooltip>\{{ $t('core.viewParentTooltip', {short: model.parentReference.short, name: model.parentReference.name}) }}</q-tooltip>
         </q-btn>
       </q-btn-group>
     </q-tabs>
@@ -58,9 +59,7 @@ onMounted(() => {
       <q-tab-panel name="meta" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
       <div class="q-gutter-md">
 {{> vueNameFields namespaced=namespaced group=group short=short }}
-{{#if (propertyContain readProperties 'status')}}
-{{> vueStatusFields properties=definition.properties crd=crd }}
-{{/if}}
+{{> vueExtraFields namespaced=namespaced group=group short=short }}
 {{> vueLabelFields }}
       </div>
       </q-tab-panel>

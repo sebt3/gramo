@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 import { tableColumnAlign, timeAgo } from '../core'
+import { i18n } from "../i18n"
 import { databaseColor, databaseIcon, } from '../../routes/custom';
 export const iconBackup = 'backup';
 export const iconConnection = 'link';
@@ -38,46 +39,47 @@ export const descriptionUser = '';
 export const shortUser = 'User';
 
 export const extraBackupColumns:Array<QTableColumn> = [
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraConnectionColumns:Array<QTableColumn> = [
-  {name: 'Secret', label: 'Secret', field: row => row.spec.secretName, sortable: true, align: tableColumnAlign.left},
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Secret', label: `${i18n.global.t('mariadb.Secret')}`, field: row => row.spec.secretName, sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDatabaseColumns:Array<QTableColumn> = [
-  {name: 'CharSet', label: 'CharSet', field: row => row.spec.characterSet, sortable: true, align: tableColumnAlign.left},
-  {name: 'Collate', label: 'Collate', field: row => row.spec.collate, sortable: true, align: tableColumnAlign.left},
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Name', label: 'Name', field: row => row.spec.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'CharSet', label: `${i18n.global.t('mariadb.CharSet')}`, field: row => row.spec.characterSet, sortable: true, align: tableColumnAlign.left},
+  {name: 'Collate', label: `${i18n.global.t('mariadb.Collate')}`, field: row => row.spec.collate, sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Name', label: `${i18n.global.t('meta.name')}`, field: row => row.spec.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraGrantColumns:Array<QTableColumn> = [
-  {name: 'Database', label: 'Database', field: row => row.spec.database, sortable: true, align: tableColumnAlign.left},
-  {name: 'Table', label: 'Table', field: row => row.spec.table, sortable: true, align: tableColumnAlign.left},
-  {name: 'Username', label: 'Username', field: row => row.spec.username, sortable: true, align: tableColumnAlign.left},
-  {name: 'GrantOpt', label: 'GrantOpt', field: row => row.spec.grantOption, sortable: true, align: tableColumnAlign.left},
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Database', label: `${i18n.global.t('mariadb.Database')}`, field: row => row.spec.database, sortable: true, align: tableColumnAlign.left},
+  {name: 'Table', label: `${i18n.global.t('mariadb.Table')}`, field: row => row.spec.table, sortable: true, align: tableColumnAlign.left},
+  {name: 'Username', label: `${i18n.global.t('mariadb.Username')}`, field: row => row.spec.username, sortable: true, align: tableColumnAlign.left},
+  {name: 'GrantOpt', label: `${i18n.global.t('mariadb.GrantOpt')}`, field: row => row.spec.grantOption, sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMariaDBColumns:Array<QTableColumn> = [
-  {name: 'Primary Pod', label: 'Primary Pod', field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'PrimaryPod', label: `${i18n.global.t('mariadb.PrimaryPod')}`, field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRestoreColumns:Array<QTableColumn> = [
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraSqlJobColumns:Array<QTableColumn> = [
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraUserColumns:Array<QTableColumn> = [
-  {name: 'MaxConns', label: 'MaxConns', field: row => row.spec.maxUserConnections, sortable: true, align: tableColumnAlign.left},
-  {name: 'MariaDB', label: 'MariaDB', field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: 'Age', field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'MaxConns', label: `${i18n.global.t('mariadb.MaxConns')}`, field: row => row.spec.maxUserConnections, sortable: true, align: tableColumnAlign.left},
+  {name: 'MariaDB', label: `${i18n.global.t('mariadb.MariaDB')}`, field: row => row.spec.mariaDbRef.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
+
 export const BackupListExcludes = [
   { path: 'spec/mariaDbRef/name', include: true },
 ];

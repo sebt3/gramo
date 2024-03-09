@@ -1,6 +1,7 @@
+      <div class="row">
 {{#if namespaced}}
-        <div v-if="model.metadata.namespace != undefined && model.metadata.namespace!=''">
-          <q-field label="Namespace" stack-label borderless>
+        <div class="col-md-4" v-if="model.metadata.namespace != undefined && model.metadata.namespace!=''">
+          <q-field :label="$t('meta.namespace')" stack-label borderless>
             <template v-slot:prepend><q-icon name="dashboard" /></template>
             <template v-slot:control>
               <div class="self-center full-width no-outline"><router-link :to="{ name: '{{ group }}{{ short }}Table', params: { {{#if namespaced}}namespace: model.metadata.namespace{{/if}} } }">\{{ model.metadata.namespace }}</router-link></div>
@@ -8,12 +9,23 @@
           </q-field>
         </div>
 {{/if}}
-        <q-field label="Name" stack-label borderless>
-          <template v-slot:prepend><q-icon name="smart_button" /></template>
-          <template v-slot:control>
-            <div class="self-center full-width no-outline" v-if="showLink">
-              <router-link :to="{ name: origin?`{{ group }}{{ short }}ViewFrom${origin}`:'{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: model.metadata.namespace,{{/if}} name: model.metadata.name } }">\{{ model.metadata.name }}</router-link>
-            </div>
-            <div class="self-center full-width no-outline" v-if="!showLink">\{{ model.metadata.name }}</div>
-          </template>
-        </q-field>
+        <div class="col-md-4">
+          <q-field :label="$t('meta.name')" stack-label borderless>
+            <template v-slot:prepend><q-icon name="smart_button" /></template>
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" v-if="showLink">
+                <router-link :to="{ name: origin?`{{ group }}{{ short }}ViewFrom${origin}`:'{{ group }}{{ short }}View', params: { {{#if namespaced}}namespace: model.metadata.namespace,{{/if}} name: model.metadata.name } }">\{{ model.metadata.name }}</router-link>
+              </div>
+              <div class="self-center full-width no-outline" v-if="!showLink">\{{ model.metadata.name }}</div>
+            </template>
+          </q-field>
+        </div>
+        <div class="col-md-4">
+          <q-field :label="$t('meta.age')" stack-label borderless>
+            <template v-slot:prepend><q-icon name="smart_button" /></template>
+            <template v-slot:control>
+              <div class="self-center full-width no-outline">\{{ timeAgo(model.metadata.creationTimestamp) }}</div>
+            </template>
+          </q-field>
+        </div>
+      </div>

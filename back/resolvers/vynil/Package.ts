@@ -4,6 +4,17 @@ import {kc, cache, applyFilter, applyFieldSelection, getByPath, getMeta } from '
 import { gramoConfig } from '../../config.js'
 import { lists as distribQueries } from './Distrib.js';
 
+function derefOptions(ret: object, dists) {
+    Object.keys(ret).forEach((name) => {
+        if (ret[name]!=null && ret[name]['type']=='object' && !['',null,undefined].includes(ret[name]['x-vynil-category']) && !['',null,undefined].includes(ret[name]['x-vynil-package']) && dists.filter(d=>d.status.components[ret[name]['x-vynil-category']]!=undefined&&d.status.components[ret[name]['x-vynil-category']][ret[name]['x-vynil-package']]!=undefined).length>0) {
+            Object.assign(ret[name]['properties'], dists.filter(d=>d.status.components[ret[name]['x-vynil-category']]!=undefined&&d.status.components[ret[name]['x-vynil-category']][ret[name]['x-vynil-package']]!=undefined)[0].status.components[ret[name]['x-vynil-category']][ret[name]['x-vynil-package']]['options'])
+        }
+        if (ret[name]!=null && ret[name]['type']=='object' && ret[name]['properties']!=undefined) Object.keys(ret[name]['properties']).forEach(key=>derefOptions(ret[name]['properties'][key], dists))
+        if (ret[name]!=null && ret[name]['type']=='array' && ret[name]['items']!=undefined) Object.keys(ret[name]['items']).forEach(key=>derefOptions(ret[name]['items'][key], dists))
+    })
+    return ret
+}
+
 const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
 
 export const mutations = {
@@ -23,13 +34,18 @@ export const lists = {
                       item.name = name;
                       item.distrib = distName as string;
                       item.category = category;
+                      item.options = derefOptions(Object.assign({}, pkg['options']), dists);
                       (lst as object[]).push(item)
                     })
                   })
                 });
                 cache.set('vynilPackage', lst, 2);
             } catch (err) {
-                console.error((err as object)['body']);
+                if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
+                    if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
+                      console.error('error', (err as object)['body']);
+                    }
+                } else {console.error('error', err)}
                 return []
             }
         }

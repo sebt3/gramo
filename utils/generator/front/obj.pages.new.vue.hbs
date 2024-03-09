@@ -17,15 +17,15 @@ const { editor, router, navigation, setItemFromRoute, notifySuccess, notifyError
 {{/if}}
 const { mutate, onDone, onError } = useMutation({{ short }}New);
 onDone(() => {
-  notifySuccess('Creation proceded');
+  notifySuccess($t('new.notifyDone'));
   router.go(-1);
 })
 onError((err) => {
-  notifyError('Creation failed');
+  notifyError($t('new.notifyError'));
   console.log('mutation error',err);
 })
 function onFinalSubmit() {
-  notifyWorking('Create in progress');
+  notifyWorking($t('new.notifyWorking'));
   mutate({
     "metadata": {
 {{#if namespaced}}
@@ -43,7 +43,7 @@ async function onSubmit(o:object) {
     obj.value = o;
     form.value.submit()
   } else {
-    notifyError('Not ready yet');
+    notifyError($t('new.notifyNotReady'));
   }
 }
 
@@ -54,7 +54,7 @@ async function onSubmit(o:object) {
       <q-form ref="form" @submit="onFinalSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
         <q-card bordered class="q-ma-sm">
           <q-card-section  :class="`bg-${ color{{ short }} } text-grey-2`">
-            <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">Metadata</div>
+            <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none">\{{ $t('meta.metadata') }}</div>
           </q-card-section>
           <q-card-section :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
             <MetadataNew v-model:name="name" :namespaced="{{namespaced}}" />
