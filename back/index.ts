@@ -4,6 +4,11 @@ import path from 'path';
 
 await server.start();
 setup();
+app.get('/i18n/:file', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'i18n', req.params.file), {headers: {
+    'Content-Type': 'application/json'
+  }});
+});
 app.use(express.static('public'));
 app.get('*', (req, res) => {
   res.sendFile(

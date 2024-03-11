@@ -24,12 +24,9 @@ const Trans = {
     (document.querySelector("html") as HTMLHtmlElement).setAttribute("lang", newLocale)
     localStorage.setItem("user-locale", newLocale)
   },
-
+//
   async loadLocaleMessages(i18n,locale) {
-    //if(!i18n.global.availableLocales.includes(locale)) {
-      i18n.global.setLocaleMessage(locale, (await import(/* @vite-ignore */`/i18n/${locale}.json`)).default)
-    //}
-//    return nextTick()
+    i18n.global.setLocaleMessage(locale, (await fetch(`/i18n/${locale}.json`).then( r => r.json())))
   },
 
   isLocaleSupported(locale) {
