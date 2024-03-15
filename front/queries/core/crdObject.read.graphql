@@ -1,0 +1,21 @@
+query customObjectQuery($crd: queryParameters, $obj: queryParameters) {
+    k8sCustomResourceDefinition(params: $crd) {
+      childcoreCrdObject(params: $obj) {
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+      }
+      metadata {
+        name
+      }
+      spec
+      status
+    }
+}

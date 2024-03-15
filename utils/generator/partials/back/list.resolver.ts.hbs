@@ -75,6 +75,6 @@
                 return []
             }
         }
-        return lst.filter(o=>applyFilter(o,args)).map(o=>applyFieldSelection(o,args)).filter(o=>applyHaving(o,args, localResolvers))
+        return lst.filter(o=>applyFilter(o,args)).filter(o=>applyHaving(o,args, localResolvers)).map(o=>applyFieldSelection(o,args))
     }
 {{/with}}

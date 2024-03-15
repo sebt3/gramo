@@ -1,8 +1,9 @@
 import { QTableColumn } from 'quasar'
 import { i18n } from "../i18n"
 import { usePermissionStore } from '../../stores'
-import { ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
-export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
+import { watch, ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
+export { onMounted, defineAsyncComponent, elude, getColor, getConditionColor, timeAgo, ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
+export { i18n } from "../../libs/i18n"
 export { {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes } from './custom.js'
 import { extra{{short}}Columns } from './custom.js'
 import { stringify, parse } from 'yaml'
@@ -12,7 +13,7 @@ export const {{short}}Columns:Array<QTableColumn> = ([
   {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat(extra{{short}}Columns).concat([
   {name: 'Problems', label: i18n.global.t('core.status'), field: 'Ok', sortable: false, align: tableColumnAlign.right},
-  {name: 'Action', label: '', field: 'Action', sortable: false, align: tableColumnAlign.right}
+  {name: 'Action', label: i18n.global.t('core.action'), field: 'Action', sortable: false, align: tableColumnAlign.right}
 ]);
 {{#if namespaced}}
 export const {{short}}AllColumns = ([
@@ -33,22 +34,8 @@ export function use{{ short }}() {
 {{/each}}
       }
   });
-  const onlyReadProperties = (obj) => {
-      const res = {}
-      Object.keys(obj).forEach(k=>{
-        if ({{toJsonKeys readProperties}}.includes(k)||k=='metadata')
-          res[k] = obj[k];
-      })
-      return res
-    };
-  const onlyWriteProperties = (obj) => {
-      const res = {}
-      Object.keys(obj).forEach(k=>{
-        if ({{toJsonKeys writeProperties}}.includes(k))
-          res[k] = obj[k];
-      })
-      return res
-    };
+  const onlyReadProperties = (obj) => Object.keys(obj).filter(k=>{{toJsonKeys readProperties}}.includes(k)||k=='metadata').reduce((res,k)=>{res[k] = obj[k]; return res},{});
+  const onlyWriteProperties = (obj) => Object.keys(obj).filter(k=>{{toJsonKeys writeProperties}}.includes(k)).reduce((res,k)=>{res[k] = obj[k];return res},{});
   const editor = ref({
       tab: 'simple',
       yaml: '',
@@ -71,7 +58,7 @@ export function use{{ short }}() {
       },
   });
   return {
-    onlyReadProperties, onlyWriteProperties, editor, viewer, viewerUpdate: (obj) => {
+    onlyReadProperties, onlyWriteProperties, editor, viewer, $q, viewerUpdate: (obj) => {
       viewer.value.full=gqlDataToYaml(obj)
 {{#each writeProperties}}
       viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
@@ -131,7 +118,7 @@ export function use{{ short }}() {
     actionDelete: (deletor:(o:object)=>any, meta:object) => {
       $q.dialog({
         title: i18n.global.t('delete.title'),
-        message: i18n.global.t('delete.message'),
+        message: i18n.global.t('delete.message',{short: '{{short}}', name: meta.name}),
         persistent: true, cancel: true, html: true, ok: {color: 'negative'}
       }).onOk(() => {
         notifyWorking(i18n.global.t('delete.notifyWorking'));

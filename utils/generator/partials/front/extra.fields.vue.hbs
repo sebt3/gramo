@@ -5,7 +5,7 @@
         </div></template>
       </q-field>
       <div class="row" v-if="extra{{ short }}Columns.filter(c=>![null,undefined,''].includes(c.field(model))).length>0">
-        <div class="col-md-3" v-for="extra in extra{{ short }}Columns.filter(c=>![null,undefined,''].includes(c.field(model)))">
+        <div :class="`col-md-${extra{{ short }}Columns.filter(c=>![null,undefined,''].includes(c.field(model))).length<4?12/extra{{ short }}Columns.filter(c=>![null,undefined,''].includes(c.field(model))).length:3}`" v-for="extra in extra{{ short }}Columns.filter(c=>![null,undefined,''].includes(c.field(model)))">
           <q-field stack-label borderless  :label="extra.label">
             <template v-slot:prepend><OpenApiNamedIcon :name="extra.name" /></template>
             <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">

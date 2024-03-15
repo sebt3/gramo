@@ -34,7 +34,7 @@ function handleDelete(key){
 </script>
 <template>
   <div v-if="items != undefined" class="q-gutter-sm">
-    <q-expansion-item header-style="border: 1px solid rgba(0, 0, 0, 0.12);" :label="name"  :default-opened="level<2" v-if="showdefault||!readOnly||(Array.isArray(data)&&data.length>0)">
+    <q-expansion-item header-style="border: 1px solid rgba(0, 0, 0, 0.12);" :label="name"  :default-opened="level<0" v-if="showdefault||!readOnly||(Array.isArray(data)&&data.length>0)">
       <template v-slot:header="{expanded}">
       <q-item-section>
         {{name}}

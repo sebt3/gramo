@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
   readOnly: false,
   showdefault: true
 });
-const out_handler= props.data;
+const out_handler= Object.assign({},props.data);
 const out = ref(out_handler)
 const emit = defineEmits(['update:data'])
 watch(out,(newValue) => emit('update:data', newValue),{ deep: true })

@@ -1,28 +1,20 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { defineAsyncComponent } from 'vue'
-const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
-const  MonacoEditor   = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
-const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
-import { use{{ short }}, sanitizeData, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
-import { useQuasar } from 'quasar'
-const $q = useQuasar()
-{{#if namespaced}}
-const { writeProperties, onlyWriteProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
-{{else}}
-const { writeProperties, onlyWriteProperties, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
-{{/if}}
 const emit = defineEmits(['on-submit'])
 const props = defineProps<{model: object}>();
-onMounted(() => {
-  editor.value.updateFromQuery(onlyWriteProperties(props.model));
-})
-function onSubmit() {
-  emit('on-submit', sanitizeData(editor.value.obj));
-}
+import { onMounted, defineAsyncComponent, use{{ short }}, sanitizeData, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
+{{#if namespaced}}
+const { $q, writeProperties, onlyWriteProperties, editor, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+{{else}}
+const { $q, writeProperties, onlyWriteProperties, editor, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+{{/if}}
+onMounted(() => editor.value.updateFromQuery(onlyWriteProperties(props.model)) )
+const onSubmit = () => emit('on-submit', sanitizeData(editor.value.obj))
 const setkey = (key:string, v) => editor.value.setKey(key, v)
 const setYaml = (v) => editor.value.setYaml(v)
+const OpenApiEdit      = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const MonacoEditor     = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
+const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 </script>
 <template>
   <q-form @submit="onSubmit" class="q-gutter-md q-pt-sm q-ml-sm">
@@ -38,7 +30,7 @@ const setYaml = (v) => editor.value.setYaml(v)
     </q-tabs>
     <q-tab-panels v-model="editor.tab" animated>
       <q-tab-panel name="simple" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
-        <OpenApiEdit v-if="editor.ready"
+        <OpenApiEdit v-if="editor.ready" :showdefault="true"
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
           @update:out="(v)=>setkey('spec', {...model['spec'],options:sanitizeData(v)})"
           :in="editor.obj['spec']['options']"
@@ -63,7 +55,7 @@ const setYaml = (v) => editor.value.setYaml(v)
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
             :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
-            :properties="getProperties({properties: Object.fromEntries(Object.entries({{ short }}Definition).filter(([n])=>!['metadata','status'].includes(n)))})"
+            :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
 {{/if}}
             />
       </q-tab-panel>

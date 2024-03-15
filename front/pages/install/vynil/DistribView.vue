@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // noGramoGenerator
 import { defineAsyncComponent } from 'vue'
+import { i18n } from "../../../libs/i18n"
 import vynilDistribQuery from '@/queries/vynil/Distrib.details.graphql'
 import DistribDelete from '@/queries/vynil/Distrib.delete.graphql'
 const  vynilDistribView   = defineAsyncComponent(() => import( '@/components/vynil/DistribView.vue'));
@@ -77,10 +78,10 @@ onResult(res => {
   }
 });
 onDeleteDone(() => {
-  notifySuccess('Deletion proceded');
+  notifySuccess(i18n.global.t('delete.notifyDone'));
 })
 onDeleteError((err) => {
-  notifyError('Deletion failed');
+  notifyError(i18n.global.t('delete.notifyError'));
   console.log('deletion error',err);
 })
 </script>

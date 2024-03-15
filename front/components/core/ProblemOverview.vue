@@ -19,10 +19,10 @@ const problems = ref(problemlist.map(p=>p.namespace).filter(onlyUnique).map(name
 <template>
   <q-card bordered class="q-ma-sm">
     <q-card-section class="text-center text-white bg-negative">
-      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length>1 && problems.map(p=>p.source).filter(onlyUnique).length>1">{{ short }} problems distribution per namespaces and sources</div>
-      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length<2 && problems.map(p=>p.source).filter(onlyUnique).length>1">{{ short }} problems per sources</div>
-      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length>1 && problems.map(p=>p.source).filter(onlyUnique).length<2">{{ short }} problems per namespace</div>
-      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length<2 && problems.map(p=>p.source).filter(onlyUnique).length<2">{{ short }} problems</div>
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length>1 && problems.map(p=>p.source).filter(onlyUnique).length>1">{{ $t('dashboard.problemPerNamespaceSource', {short}) }}</div>
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length<2 && problems.map(p=>p.source).filter(onlyUnique).length>1">{{ $t('dashboard.problemPerSource', {short}) }}</div>
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length>1 && problems.map(p=>p.source).filter(onlyUnique).length<2">{{ $t('dashboard.problemPerNamespace', {short}) }}</div>
+      <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none" v-if="problems.map(p=>p.namespace).filter(onlyUnique).length<2 && problems.map(p=>p.source).filter(onlyUnique).length<2">{{ $t('dashboard.problemShort', {short}) }}</div>
     </q-card-section>
     <q-card-section :class="`text-center bg-red-${$q.dark.isActive?'10':'2'}`">
       <stackedBarChart v-if="problems.map(p=>p.namespace).filter(onlyUnique).length>1 && problems.map(p=>p.source).filter(onlyUnique).length>1" :options="options"

@@ -1,28 +1,17 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-import { onMounted } from "vue";
-import { elude, getColor, getConditionColor, timeAgo } from "../../libs/core/"
-const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
-const  EventList   = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
-const  MonacoViewer   = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
-const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
-import { use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
-import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
-import { useQuasar } from 'quasar'
-const $q = useQuasar()
-{{#if namespaced}}
-const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
-{{else}}
-const { can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, setItemFromRoute } = use{{ short }}();setItemFromRoute();
-{{/if}}
 defineEmits(['on-delete']);
 const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean, origin?:string}>(), {
   useActions: false,
   showLink: false,
 });
-onMounted(() => {
-  viewerUpdate(onlyReadProperties(props.model));
-})
+import { defineAsyncComponent, onMounted, elude, getColor, getConditionColor, timeAgo, use{{ short }}, getProperties, {{ short }}Definition } from '../../libs/{{ group }}/{{ short }}.js'
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
+const { $q, can, writeProperties, onlyReadProperties, toParentView, viewer, viewerUpdate, toEdit, actionDelete, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute } = use{{ short }}();
+set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();onMounted(() => { viewerUpdate(onlyReadProperties(props.model)) })
+const OpenApiEdit      = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const EventList        = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
+const MonacoViewer     = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
+const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 </script>
 <template>
   <q-card bordered class="q-ma-sm">

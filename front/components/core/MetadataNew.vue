@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useNavigationStoreRef } from '../../stores';
+import { i18n } from "../../libs/i18n"
 const emit = defineEmits(['update:name'])
 const props = withDefaults(defineProps<{
   namespaced?: boolean
@@ -19,9 +20,9 @@ watch(name,(newValue) => emit('update:name', newValue))
 </script>
 <template>
   <div class="q-gutter-md">
-    <q-input v-model="name" label="Name" :rules="nameRules" />
+    <q-input v-model="name" :label="i18n.global.t('meta.name')" :rules="nameRules" />
     <div v-if="props.namespaced">
-      <q-field label="Namespace" stack-label>
+      <q-field :label="i18n.global.t('meta.namespace')" stack-label>
           <template v-slot:control>
             <div class="self-center full-width no-outline" tabindex="0">{{ navigation.currentNamespace.value }}</div>
           </template>

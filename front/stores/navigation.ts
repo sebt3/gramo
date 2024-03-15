@@ -44,6 +44,7 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   }
   function setCurrentNamespace(ns:string) {
+    localStorage.setItem("current-namespace", ns)
     currentNamespace.value = ns
   }
   function setCurrentItem(name:string) {

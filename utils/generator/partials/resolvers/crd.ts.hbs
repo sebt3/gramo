@@ -1,0 +1,87 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent: object, args: object) => {
+      try {
+{{#if (and (eq type 'use') (and (ne targetShort 'Service') (eq short 'CustomResourceDefinition')))}}
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args))
+            .filter(hook=>hook['webhooks'].map(w=>w['rules']).flat().filter(r=>r!=null&&r!=undefined&&Array.isArray(r['apiGroups'])&&Array.isArray(r['resources'])).map(r=>r['apiGroups'].map(g=>r['resources'].map(r=>{return { group:g, res:r} })).flat()).flat().filter(t=>t.group==parent['spec']['group'] && (t.res=='*/*'||t.res==parent['spec']['names']['plural'])).length>0)
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'users') (and (ne short 'Service') (eq targetShort 'CustomResourceDefinition')))}}
+        if (!Array.isArray(parent['webhooks'])) return null;
+        const targets = parent['webhooks'].map(w=>w['rules']).flat().filter(r=>r!=null&&r!=undefined&&Array.isArray(r['apiGroups'])&&Array.isArray(r['resources'])).map(r=>r['apiGroups'].map(g=>r['resources'].map(r=>{return { group:g, res:r} })).flat()).flat()
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args))
+            .filter(crd => crd['spec']!=undefined && targets.filter(t=>t.group==crd['spec']['group'] && (t.res=='*/*'||t.res==crd['spec']['names']['plural'])).length>0)
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Service') (eq short 'CustomResourceDefinition')))}}
+        if (parent['spec']==undefined || parent['spec']['conversion']==undefined || parent['spec']['conversion']['strategy']!='Webhook' || parent['spec']['conversion']['webhook']==undefined||parent['spec']['conversion']['webhook']['clientConfig']==undefined||parent['spec']['conversion']['webhook']['clientConfig']['service']==undefined) return null;
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['spec']['conversion']['webhook']['clientConfig']['service']['namespace'], ...args}))
+            .filter(svc=>svc['metadata']['name']==parent['spec']['conversion']['webhook']['clientConfig']['service']['name'])
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq short 'Service') (eq targetShort 'CustomResourceDefinition')))}}
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args))
+            .filter(crd=>crd['spec']!=undefined && crd['spec']['conversion']!=undefined && crd['spec']['conversion']['strategy']=='Webhook' && crd['spec']['conversion']['webhook']!=undefined&&crd['spec']['conversion']['webhook']['clientConfig']!=undefined&&crd['spec']['conversion']['webhook']['clientConfig']['service']!=undefined && crd['spec']['conversion']['webhook']['clientConfig']['service']['namespace']==parent['metadata']['namespace'] && crd['spec']['conversion']['webhook']['clientConfig']['service']['name']==parent['metadata']['name'])
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Service') (ne short 'CustomResourceDefinition')))}}
+        if (!Array.isArray(parent['webhooks'])) return null;
+        const svcs = parent['webhooks'].filter(h=>h['clientConfig']!=undefined&&h['clientConfig']['service']!=undefined).map(h=>h['clientConfig']['service'])
+        const nss = svcs.map(s=>s['namespace']).filter((v,i,a)=>a.indexOf(v) === i);
+        const res = (await Promise.all(nss.map(async (ns)=>{
+          const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent, {namespace: ns, ...args})
+          return lst.filter(svc=>svcs.filter(s=>s['name']==svc['metadata']['name']&&s['namespace']==svc['metadata']['namespace']).length>0)
+        }))).flat().filter((v)=>v!=null)
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq short 'Service') (ne targetShort 'CustomResourceDefinition')))}}
+        const res = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args))
+            .filter(hook=>Array.isArray(hook['webhooks'])&&hook['webhooks'].filter(h=>h['clientConfig']!=undefined&&h['clientConfig']['service']!=undefined).map(h=>h['clientConfig']['service']).filter(s=>s['name']==parent['metadata']['name'] && s['namespace']==parent['metadata']['namespace']).length>0)
+        if (Array.isArray(res) && res.length>0) return res;
+{{/if}}
+{{#if (eq type 'child')}}
+        if (parent['spec']==undefined||!Array.isArray(parent['spec']['versions'])||parent['status']==undefined||parent['status']['acceptedNames']==undefined) return null;
+        const getTargetVersion = (versions) => {
+          if (versions.length==1) return versions[0].name
+          const targetVersion = versions.map(v=>v.name).sort(flexver.apply)[0];
+          const maxVersion = versions.map(v=>v.name).sort((a,b)=>a<b?1:-1)[0];
+          return (targetVersion.length<maxVersion.length)?targetVersion:maxVersion
+        }
+        const targetVersion = getTargetVersion(parent['spec']['versions'])
+        let res:Array<object>|undefined = cache.get(`{{group}}{{short}}Childs.${parent['metadata']['name']}`)
+        if (res==undefined) {
+          if (parent['spec']['scope']=='Namespaced') {
+            const params = (args['params']!=undefined && Array.isArray(args['params']['filters']) && args['params']['filters'].filter(f=>f['op']=='eq' && f['path']=='metadata/namespace').length>0)?{filters:[{op:'eq',path:'metadata/name',value: args['params']['filters'].filter(f=>f['op']=='eq' && f['path']=='metadata/namespace').map(f=>f.value)[0]}]}:{}
+            const nss = await listNamespace.k8sNamespace(parent, { params })
+            res = (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+              try {
+                return (await crdApi.listNamespacedCustomObject(parent['spec']['group'],targetVersion,ns,parent['status']['acceptedNames']['plural']))['body']['items']
+              } catch (err) {
+                if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
+                  if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
+                    console.error('error', (err as object)['body']);
+                  } else {
+                    cache.set('{{group}}{{short}}', [], 2);
+                  }
+                } else {console.error('error', err)}
+              }
+              return null
+            }))).flat().filter((v)=>v!=null)
+          } else {
+            res = (await crdApi.listClusterCustomObject(parent['spec']['group'],targetVersion,parent['status']['acceptedNames']['plural']))['body']['items']
+          }
+          if (Array.isArray(res) && res.length>0) cache.set(`{{group}}{{short}}Childs.${parent['metadata']['name']}`, res);
+        }
+        if (Array.isArray(res) && res.length>0) return res.filter(o=>applyFilter(o,args)).filter(o=>applyHaving(o,args, localResolvers)).map(o=>applyFieldSelection(o,args));
+{{/if}}
+      } catch (err) {
+        if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
+          if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
+            console.error('error', (err as object)['body']);
+          } else {
+            cache.set('{{group}}{{short}}', [], 2);
+          }
+        } else {console.error('error', err)}
+        return []
+      }
+      return null
+    },

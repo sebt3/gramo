@@ -5,6 +5,8 @@
       "lastUpdate": "last update",
       "name": "Name",
       "namespace": "Namespace",
+      "annotations": "Annotations",
+      "labels": "Labels",
       "days": "no day | {n} day | {n} days",
       "hours": "no hour | {n} hour | {n} hours",
       "minutes": "no minut | {n} minute | {n} minutes",
@@ -13,7 +15,15 @@
     "dashboard": {
       "success": "Congratulations",
       "noProblem": "No problem found",
-      "noPerm": "It look like you have no permissions at all"
+      "noPerm": "It look like you have no permissions at all",
+      "advicePerNamespaceSource": "{ short } advices distribution per namespaces and sources",
+      "advicePerSource": "{ short } advices per sources",
+      "advicePerNamespace": "{ short } advices per namespace",
+      "adviceShort": "{ short } advices",
+      "problemPerNamespaceSource": "{ short } problems distribution per namespaces and sources",
+      "problemPerSource": "{ short } problems per sources",
+      "problemPerNamespace": "{ short } problems per namespace",
+      "problemShort": "{ short } problems"
     },
     "overview": {
       "captionList": "{ short } list",
@@ -25,7 +35,7 @@
       "adviceBreadcrumb": "Advices",
       "adviceTitle": "{ name } Advices for all namespaces",
       "adviceNSTitle": "{ name } Advices for { namespace } namespace",
-      "perNamespace": "{short} par namespace"
+      "perNamespace": "{short} per namespace"
     },
     "category": {
       "automation": "Automation",
@@ -39,8 +49,14 @@
       "workflow": "Workflow",
       "workload": "Workload"
     },
+    "container": {
+      "init": "Init?"
+    },
     "core": {
+      "version": "Version",
+      "image": "Image",
       "url": "URL",
+      "urls": "Urls",
       "ip": "IP",
       "highlight": "Highlight",
       "type": "Type",
@@ -57,6 +73,7 @@
       "related": "Related",
       "cancel": "Cancel",
       "add": "Add",
+      "action": "Action",
       "networkError": "A network error have occured",
       "graphqlError": "A GraphQL error have occured, this is likely a bug"
     },
@@ -79,6 +96,11 @@
       "breadcrumb": "View",
       "namespaced": "{ short } { name } in namespace: { namespace }",
       "cluster": "{ short } { name }",
+      "name": "{ name }",
+      "object": "{ object }",
+      "namespacedObject": "{ name } { object } in namespace: { namespace }",
+      "clusterObject": "{ name } { object }",
+      "as": "View { name } as { group } { short }",
       "tabs": {
         "simple": "Configuration",
         "yaml": "full Yaml"
@@ -88,6 +110,10 @@
       "breadcrumb": "Edit",
       "namespaced": "Edit { short } { name } in namespace: { namespace }",
       "cluster": "Edit { short } { name }",
+      "name": "Edit { name }",
+      "object": "Edit { object }",
+      "namespacedObject": "Edit { name } { object } in namespace: { namespace }",
+      "clusterObject": "Edit { name } { object }",
       "submitTooltip": "Confirm current modifications",
       "notifyWorking": "Update in progress",
       "notifyDone": "Modification applied",
@@ -101,10 +127,19 @@
       "breadcrumb": "Create",
       "namespaced": "Create a new { short } in namespace: { namespace }",
       "cluster": "Create a new { short }",
+      "namespacedObject": "Create a new { name } in namespace: { namespace }",
+      "clusterObject": "Create a new { name }",
       "notifyNotReady": "Not ready yet",
       "notifyDone": "Creation proceded",
       "notifyError": "Creation failed",
       "notifyWorking": "Creation in progress"
+    },
+    "certmanager": {
+      "Domain": "Domain",
+      "Reason": "Reason",
+      "Issuer": "Issuer",
+      "Secret": "Secret",
+      "Requestor": "Requestor"
     },
     "cilium": {
       "ciliumID": "Cilium ID",
@@ -127,22 +162,25 @@
       "Children": "Children",
       "Endpoint": "Endpoint",
       "Chart": "Chart",
-      "Version": "Version",
       "SourceKind": "Source Kind",
       "SourceName": "Source Name",
       "LastRun": "Last run",
       "LatestImage": "LatestImage",
       "LastChange": "Last Change",
       "LastScan": "Last scan",
+      "lastAppliedRevision": "Last applied revision",
+      "revision": "Revision",
       "Tags": "Tags"
     },
     "jaeger": {
       "Status": "Status",
-      "Version": "Version",
       "Strategy": "Strategy",
       "Storage": "Storage"
     },
     "k8s": {
+      "Object": "Object",
+      "Region": "Region",
+      "Zone": "Zone",
       "Types": "Types",
       "CPUs": "CPUs",
       "RAM": "RAM",
@@ -231,6 +269,15 @@
       "branch": "Banch",
       "distrib": "Distribution",
       "cat": "Category",
+      "desc": "Description",
+      "pck": "Package",
       "app": "Application"
+    },
+    "zalando": {
+      "Team": "Team",
+      "Pods": "Pods",
+      "Volume": "Volume",
+      "CPURequest": "CPU request",
+      "MemRequest": "Memory request"
     }
   }

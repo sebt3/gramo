@@ -40,7 +40,7 @@ const { result, loading, refetch, onError } = useQuery({{ category }}Query, {
       }
     ]:[]
   }
-});
+}, navigation.refreshOption);
 onError(onErrorHandler);
 </script>
 <template><div>

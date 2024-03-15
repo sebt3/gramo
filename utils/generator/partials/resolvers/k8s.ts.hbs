@@ -6,12 +6,22 @@
             .filter(o=>parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}'&&r.name==o['metadata']['name']).length>0)
         if (lst.length>0) return lst[0];
 {{/if}}
-{{#if (and (eq type 'child') (ne targetGroup 'core'))}}
+{{#if (and (eq type 'child') (and (ne targetGroup 'core') (ne short 'Node'))) }}
         const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
         return lst.filter(r=>
             r.metadata['ownerReferences']!=null && r.metadata['ownerReferences']!=undefined &&
             r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
         )
+{{/if}}
+{{#if (and (eq type 'child') (eq short 'Node')) }}
+        const nss = await listNamespace.k8sNamespace(parent, args)
+        return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
+            const lst = await listk8sPod.k8sPod(parent, {namespace: ns, ...args})
+            return lst.filter(r=>
+                r.metadata['ownerReferences']!=null && r.metadata['ownerReferences']!=undefined &&
+                r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
+            )
+        }))).flat()
 {{/if}}
 {{#if (eq type 'equity')}}
         const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))

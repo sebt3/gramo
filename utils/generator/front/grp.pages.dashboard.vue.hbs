@@ -43,7 +43,7 @@ const { result, loading, refetch, onResult, onError } = useQuery({{ category }}Q
       }
     ]:[]
   }
-});
+}, navigation.refreshOption);
 onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {

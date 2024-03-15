@@ -69,10 +69,18 @@ async function useRoute(app) {
     router.afterEach((to) => {
       if (Object.keys(to.meta).includes('title') && typeof to.meta.title == 'function') {
         if (Object.keys(to.meta).includes('useName')) {
-          if (to.meta.ns||false) {
-            document.title = to.meta.title(to.params.namespace, to.params.name)+` [${DEFAULT_TITLE}]`
+          if (Object.keys(to.meta).includes('useObject')) {
+            if (to.meta.ns||false) {
+              document.title = to.meta.title(to.params.name, to.params.namespace, to.params.object)+` [${DEFAULT_TITLE}]`
+            } else {
+              document.title = to.meta.title(to.params.name, to.params.object)+` [${DEFAULT_TITLE}]`
+            }
           } else {
-            document.title = to.meta.title(to.params.name)+` [${DEFAULT_TITLE}]`
+            if (to.meta.ns||false) {
+              document.title = to.meta.title(to.params.namespace, to.params.name)+` [${DEFAULT_TITLE}]`
+            } else {
+              document.title = to.meta.title(to.params.name)+` [${DEFAULT_TITLE}]`
+            }
           }
         } else {
           if (to.meta.ns||false) {
@@ -97,7 +105,8 @@ apolloClient.query({query: GramoConfig}).then(res => {
         const {setCRDs} = useCRDStore();
         setConfig(res.data.gramoConfig)
         setPermissions(Object.fromEntries(res.data.k8sNamespace.map(ns => {return [ns.metadata.name, ns.permissions]})))
-        setCurrentNamespace(res.data.gramoConfig.defaultNamespace)
+        const namespace = localStorage.getItem("current-namespace")
+        setCurrentNamespace(namespace!=null?namespace:res.data.gramoConfig.defaultNamespace)
         setCRDs(Object.fromEntries(res.data.k8sCustomResourceDefinition.map(crd => {return[crd.metadata.name, {group: crd.group, names:crd.names, versions:crd.versions}]})))
         setNamespaces(namespaces())
         useRoute(app).then(app =>{app.mount('#app')});

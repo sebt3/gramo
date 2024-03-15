@@ -20,7 +20,6 @@ const props = withDefaults(defineProps<{
   wordWrap: "wordWrapColumn",
   automaticLayout: true,
 });
-console.log('xxx', props.properties)
 const height = window.innerHeight - 300;
 const code=ref(null);
 onMounted(() => {

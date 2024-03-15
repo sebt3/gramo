@@ -31,6 +31,7 @@
 !/front/libs/i18n/*
 !/front/libs/core/*
 /front/pages/**/*.vue
+!/front/pages/core/*.vue
 !/front/pages/install/vynil/DistribView.vue
 !/front/pages/install/vynil/InstallView.vue
 !/front/pages/install/vynil/InstallEdit.vue

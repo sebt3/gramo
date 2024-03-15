@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  TableHeader   = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
-import { ref, use{{ short }}, {{ short }}Columns{{#if namespaced}}, {{ short }}AllColumns{{/if}} } from '../../libs/{{ group }}/{{ short }}.js'
-const { can, actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
-import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
-import { elude } from "../../libs/core/"
-import { useQuasar } from 'quasar'
-const $q = useQuasar()
-let filter = ref('');
 defineEmits(['refresh','on-delete']);
-withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, origin?:string}>(),{
+withDefaults(defineProps<{model: object[], parent?:object, useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, origin?:string}>(),{
   useAction: false,
   useRefresh: true,
   showNamespace: false,
 });
+import { color{{ short }}, icon{{ short }} } from '../../libs/{{ group }}/custom.js'
+import { elude, defineAsyncComponent, ref, use{{ short }}, {{ short }}Columns{{#if namespaced}}, {{ short }}AllColumns{{/if}} } from '../../libs/{{ group }}/{{ short }}.js'
+const { $q, can, actionNew, toEdit, toParentView, pagination{{#if namespaced}}, navigation, isNamespaced{{/if}} } = use{{ short }}();
+const filter = ref('');
+const TableHeader = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
     <TableHeader title="{{ short }}" :icon="icon{{ short }}" :class="`bg-${ color{{ short }} }`" :usecreate="useAction&&can('create'{{#if namespaced}},navigation.currentNamespace.value{{/if}})" :userefresh="useRefresh" itemtype='{{ group }} {{ short }}' v-model:model-filter="filter" @refresh="$emit('refresh')" @create="actionNew({{#if namespaced}}navigation.currentNamespace.value{{/if}})" />
     <q-card-section class="q-pa-none">
-    <q-table :rows="model" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`" :columns="{{#if namespaced}}(showNamespace||!isNamespaced())?{{ short }}AllColumns:{{/if}}{{ short }}Columns.filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
+    <q-table :rows="model" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`" :columns="({{#if namespaced}}(showNamespace||!isNamespaced())?{{ short }}AllColumns:{{/if}}{{ short }}Columns).filter(c=>c.name!='Action'||useAction)" class="no-shadow" v-model:pagination="pagination" :filter="filter" hide-bottom>
 {{#if namespaced}}
         <template v-slot:body-cell-Namespace="props" v-if="showNamespace||!isNamespaced()">
           <q-td :props="props">

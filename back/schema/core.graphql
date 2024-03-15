@@ -114,6 +114,11 @@ type coreUrl {
   host: String
   path: String
 }
+type coreCrdObject {
+  metadata: metadata
+  spec: JSONObject
+  status: JSONObject
+}
 type coreEvent {
   metadata: metadata
   source: JSONObject
@@ -152,4 +157,12 @@ type Query {
   coreEvent(params: queryParameters): [coreEvent]
   vynilCategory(params: queryParameters): [vynilCategory]
   vynilPackage(params: queryParameters): [vynilPackage]
+}
+type Mutation {
+    namespacedCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+    namespacedCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+    namespacedCrdObjectDelete(group: String!, version: String!, plural: String!, namespace: String!, name: String!): coreCrdObject
+    clusteredCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+    clusteredCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+    clusteredCrdObjectDelete(group: String!, version: String!, plural: String!, name: String!): coreCrdObject
 }

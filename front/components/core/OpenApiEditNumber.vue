@@ -15,7 +15,6 @@ const props = withDefaults(defineProps<{
 const max_len=150;
 const value=ref(props.data)
 const emit = defineEmits(['update:data'])
-watch(value,(newValue) => emit('update:data', newValue))
 const isDefault=computed(() => value.value == props.defaultdata || (props.defaultdata ==undefined && value.value == null))
 </script>
 <template>
@@ -30,7 +29,7 @@ const isDefault=computed(() => value.value == props.defaultdata || (props.defaul
   </q-field>
   </div>
   <div v-else>
-    <q-input v-model="value" :label="name" :bottom-slots="description?true:false" :placeholder="defaultdata" :label-color="isDefault?'':'secondary'" type="number">
+    <q-input v-model="value"  @blur="emit('update:data',value)" :label="name" :bottom-slots="description?true:false" :placeholder="defaultdata" :label-color="isDefault?'':'secondary'" type="number">
     <template v-slot:hint v-if="description">
       <div>{{ description?elude(description,max_len):'---' }}<q-tooltip v-if="description&&description.length>max_len"><div v-html="description.replaceAll('\n','<br>')"></div></q-tooltip></div>
     </template>

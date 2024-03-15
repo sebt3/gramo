@@ -22,7 +22,7 @@ const svgRoot = ref(null);
 const series = d3.stack().keys(d3.union(props.datum.map(props.axisColor))).value(([, D], key) => props.getVal(D.get(key)))(d3.index(props.datum, props.axisX, props.axisColor));
 const x = d3.scaleBand().domain(d3.groupSort(props.datum, D => -d3.sum(D, props.getVal), props.axisX)).range([marginLeft, options.value.width - marginRight]).padding(0.1);
 const y = d3.scaleLinear().domain([0, d3.max(series, d => d3.max(d, d => d[1]))]).rangeRound([options.value.height - marginBottom, marginTop]);
-const color = props.datum.length>1?d3.scaleOrdinal().domain(series.map(d => d.key)).range(d3.schemeSpectral[series.length>4?series.length:4]).unknown("#ccc"):()=>d3.schemeSpectral[4][1];
+const color = props.datum.length>1?d3.scaleOrdinal().domain(series.map(d => d.key)).range(d3.schemeSpectral[series.length>4&&series.length<11?series.length:4]).unknown("#ccc"):()=>d3.schemeSpectral[4][1];
 const rotation = options.value.width/(props.datum.map(props.axisX).filter(onlyUnique).length+1)<80?-10:0
 const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
 onMounted(() => {

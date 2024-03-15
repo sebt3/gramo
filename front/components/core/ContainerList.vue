@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { usePod } from '../../libs/k8s/Pod.js'
-import { colorPod, iconPod } from '../../libs/k8s/custom.js'
-import { QTableColumn } from 'quasar'
-import { ref, useCore, tableColumnAlign } from '../../libs/core'
-import { useQuasar } from 'quasar'
-const $q = useQuasar()
-const {  onlyReadProperties, viewerUpdate, setNamespacedItemFromRoute } = usePod();setNamespacedItemFromRoute();
 defineEmits(['refresh','on-delete']);
-const props=withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean}>(),{
+const props=withDefaults(defineProps<{model: object[], parent?:object, useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean}>(),{
   useAction: false,
   useRefresh: true,
   showNamespace: false,
 });
-console.log('ContainerList',props.model)
+import { usePod } from '../../libs/k8s/Pod.js'
+import { colorPod, iconPod } from '../../libs/k8s/custom.js'
+import { useQuasar, QTableColumn } from 'quasar'
+import { onMounted, ref, useCore, tableColumnAlign } from '../../libs/core'
+import { i18n } from "../../libs/i18n"
+const $q = useQuasar()
+const {  onlyReadProperties, viewerUpdate, setNamespacedItemFromRoute } = usePod();setNamespacedItemFromRoute();
 const tab=ref('list')
 const container=ref(props.model.map(c=>c['name'])[0])
 const { pagination } = useCore();
 const ContainerColumns:Array<QTableColumn> = ((props.showNamespace?[{name: 'Namespace', label: 'Namespace', field: row => row.namespace, sortable: true, align: tableColumnAlign.left}]:[]) as QTableColumn[]).concat([
-  {name: 'Init', label: 'Init?', field: row => row.init?'init':'main', sortable: true, align: tableColumnAlign.left},
-  {name: 'Name', label: 'Name', field: row => row.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Image', label: 'Image', field: row => row.spec.image, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: 'Status', field: () => null, sortable: true, align: tableColumnAlign.left},
-  {name: 'Action', label: 'Action', field: () => null, sortable: true, align: tableColumnAlign.left},
+  {name: 'Init', label: i18n.global.t('container.init'), field: row => row.init?'init':'main', sortable: true, align: tableColumnAlign.left},
+  {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.name, sortable: true, align: tableColumnAlign.left},
+  {name: 'Image', label: i18n.global.t('core.image'), field: row => row.spec.image, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: i18n.global.t('core.status'), field: () => null, sortable: true, align: tableColumnAlign.left},
+  {name: 'Action', label: i18n.global.t('core.action'), field: () => null, sortable: true, align: tableColumnAlign.left},
 ] as QTableColumn[]);
 const filter = ref('');
 onMounted(() => {

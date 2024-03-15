@@ -35,7 +35,7 @@ watch(out,(newValue) => emit('update:data', newValue),{ deep: true })
 const isDefault = (key) => props.defaultdata!= undefined && out[key] == props.defaultdata[key];
 </script>
 <template>
-   <q-expansion-item :label="name" :default-opened="level<2"
+   <q-expansion-item :label="name" :default-opened="level<0"
     v-if="name!='' && (!readOnly||showdefault||[...properties.entries()].filter(([key,value]) => (showdefault || !isDefault(key)) && (Object.keys(out).includes(key)||!readOnly)).length>0)">
     <div class="q-gutter-md column q-ml-sm">
       <div v-for="[key, value] in new Map([...properties.entries()].filter(([key,value]) =>  (showdefault || !isDefault(key)) && (Object.keys(out).includes(key)||!readOnly)))" v-bind:key="key"

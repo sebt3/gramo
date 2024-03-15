@@ -5,6 +5,8 @@
       "lastUpdate": "Dernière mise à jour",
       "name": "Nom",
       "namespace": "Namespace",
+      "annotations": "Annotations",
+      "labels": "Labels",
       "days": "aucun jour | {n} jour | {n} jours",
       "hours": "auncune heure | {n} heure | {n} heures",
       "minutes": "aucune minute | {n} minute | {n} minutes",
@@ -13,7 +15,15 @@
     "dashboard": {
       "success": "Félicitation",
       "noProblem": "Aucun problème trouvé",
-      "noPerm": "Il semblerait que vous n'avait aucun droits"
+      "noPerm": "Il semblerait que vous n'avait aucun droits",
+      "advicePerNamespaceSource": "Distribution des recommandations pour { short } par namespaces et sources",
+      "advicePerSource": "Recommandations pour { short } par sources",
+      "advicePerNamespace": "Recommandations pour { short } par namespace",
+      "adviceShort": "Recommandations pour { short }",
+      "problemPerNamespaceSource": "Distribution des problèmes de { short } par namespaces et sources",
+      "problemPerSource": "Problèmes de { short } par sources",
+      "problemPerNamespace": "Problèmes de { short } par namespace",
+      "problemShort": "Problèmes de { short }"
     },
     "overview": {
       "captionList": "liste { short }",
@@ -25,8 +35,7 @@
       "adviceBreadcrumb": "Recommandations",
       "adviceTitle": "{ name } Recommandations pour tous les namespaces",
       "adviceNSTitle": "{ name } recommandations pour le namespace { namespace }",
-      "perNamespace": "{short} par namespace",
-      "perNamespaceSource": "{short} par namespace et source"
+      "perNamespace": "{short} par namespace"
     },
     "category": {
       "automation": "Automatisation",
@@ -40,8 +49,14 @@
       "workflow": "Traitements",
       "workload": "Workload"
     },
+    "container": {
+      "init": "Init?"
+    },
     "core": {
+      "version": "Version",
+      "image": "Image",
       "url": "URL",
+      "urls": "Urls",
       "ip": "IP",
       "highlight": "En avant",
       "type": "Type",
@@ -54,11 +69,12 @@
       "notFound": "{ short } not found",
       "deleteTooltip": "Supprimer { short } { name }",
       "editTooltip": "Editer { short } { name }",
-      "viewParentTooltip": "Voir le parent { short } { name }",
+      "viewParentTooltip": "Voir le { short } parent { name }",
       "wait": "{msg}. veuillez patienter...",
-      "related": "Relié",
+      "related": "Suggestions",
       "cancel": "Annuler",
       "add": "Ajouter",
+      "action": "Action",
       "networkError": "Une erreur réseau est intervenue",
       "graphqlError": "Une erreur GraphQL est intervenue, c'est probablement un bug"
     },
@@ -81,6 +97,11 @@
       "breadcrumb": "Voir",
       "namespaced": "{ short } { name } dans le namespace { namespace }",
       "cluster": "{ short } { name }",
+      "name": "{ name }",
+      "object": "{ object }",
+      "namespacedObject": "{ name } { object } dans le namespace { namespace }",
+      "clusterObject": "{ name } { object }",
+      "as": "Voir { name } comme un { group } { short }",
       "tabs": {
         "simple": "Configuration",
         "yaml": "Yaml"
@@ -90,6 +111,10 @@
       "breadcrumb": "Editer",
       "namespaced": "Modifier le { short } { name } dans le namespace { namespace }",
       "cluster": "Modifier le { short } { name }",
+      "name": "Editer { name }",
+      "object": "Editer { object }",
+      "namespacedObject": "Modifier le { name } { object } dans le namespace { namespace }",
+      "clusterObject": "Edit { name } { object }",
       "submitTooltip": "Valider les modifications en cours",
       "notifyWorking": "Mise à jour en cours",
       "notifyDone": "Modification appliquée",
@@ -103,10 +128,19 @@
       "breadcrumb": "Créer",
       "namespaced": "Créer un nouveau { short } dans le namespace { namespace }",
       "cluster": "Créer un nouveau { short }",
+      "namespacedObject": "Créer un nouveau { name } dans le namespace { namespace }",
+      "clusterObject": "Créer un nouveau { name }",
       "notifyNotReady": "Pes encore prêt",
       "notifyDone": "Création terminée avec succès",
       "notifyError": "La création a échouée",
       "notifyWorking": "Création en cours"
+    },
+    "certmanager": {
+      "Domain": "Domaine",
+      "Reason": "Raison",
+      "Issuer": "Issuer",
+      "Secret": "Secret",
+      "Requestor": "Requestor"
     },
     "cilium": {
       "ciliumID": "Cilium ID",
@@ -129,22 +163,25 @@
       "Children": "Children",
       "Endpoint": "Endpoint",
       "Chart": "Chart",
-      "Version": "Version",
       "SourceKind": "Source Kind",
       "SourceName": "Source Name",
       "LastRun": "Dernière éxécution",
       "LatestImage": "Dernière image",
       "LastChange": "Dernier Changement",
       "LastScan": "Dernier scan",
+      "lastAppliedRevision": "Dernier commit appliqué",
+      "revision": "Commit",
       "Tags": "Tags"
     },
     "jaeger": {
       "Status": "Statut",
-      "Version": "Version",
       "Strategy": "Strategie",
       "Storage": "Stockage"
     },
     "k8s": {
+      "Object": "Objet",
+      "Region": "Région",
+      "Zone": "Zone",
       "Types": "Types",
       "CPUs": "CPUs",
       "RAM": "RAM",
@@ -231,7 +268,16 @@
       "url": "Url",
       "branch": "Banche",
       "distrib": "Distribution",
-      "cat": "Categorie",
+      "cat": "Catégorie",
+      "desc": "Description",
+      "pck": "Paquetage",
       "app": "Application"
+    },
+    "zalando": {
+      "Team": "Equipe",
+      "Pods": "Pods",
+      "Volume": "Volume",
+      "CPURequest": "Demande de CPU",
+      "MemRequest": "Demande de mémoire"
     }
   }

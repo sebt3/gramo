@@ -117,7 +117,7 @@ export const route = {
   {{#if namespaced}}
               {target: '{{ group }}{{ short }}AllTable', ns: false, display: () => i18n.global.t('overview.titleAllList',{short: '{{ short }}'})},
               {target: '{{ ../category }}{{ ../name }}NSDashboard', ns: true, display: (namespace) => i18n.global.t('overview.dashboardNSTitle',{name: '{{ group }}', namespace})},
-              {target: '{{ ../category }}{{ ../name }}NSAdvices', ns: true, display: (ns) => i18n.global.t('overview.adviceNSTitle',{name: '{{ group }}', namespace})},
+              {target: '{{ ../category }}{{ ../name }}NSAdvices', ns: true, display: (namespace) => i18n.global.t('overview.adviceNSTitle',{name: '{{ group }}', namespace})},
   {{else}}
               {target: '{{ ../category }}{{ ../name }}Dashboard', ns: false, display: () => i18n.global.t('overview.dashboardTitle',{name: '{{ group }}'})},
               {target: '{{ ../category }}{{ ../name }}Advices', ns: false, display: () => i18n.global.t('overview.adviceTitle',{name: '{{ group }}'})},
@@ -127,13 +127,103 @@ export const route = {
         },
         {
           path: '{{#if namespaced}}:namespace/{{/if}}view/:name',
+{{#if (and (eq group 'k8s') (eq short 'CustomResourceDefinition'))}}
+          meta: {breadcrumb: arg => i18n.global.t('view.name',arg), icon: icon{{ short }}, ns: {{toJson namespaced}}, useName: true},
+{{else}}
           name: '{{ group }}{{ short }}View',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}View.vue'),
           meta: {
-            breadcrumb: i18n.global.t('view.breadcrumb'), icon: icon{{ short }}, ns: {{toJson namespaced}}, useName: true,
+            breadcrumb: arg => i18n.global.t('view.name',arg), icon: 'visibility', ns: {{toJson namespaced}}, useName: true,
             title: ({{#if namespaced}}namespace, {{/if}}name) => i18n.global.t('view.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}',name{{#if namespaced}}, namespace{{/if}} })
           },
+{{/if}}
           children: [
+{{#if (and (eq group 'k8s') (eq short 'CustomResourceDefinition'))}}
+            {
+              path: '',
+              name: '{{ group }}{{ short }}View',
+              component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}View.vue'),
+              meta: {
+                breadcrumb: i18n.global.t('view.breadcrumb'), icon: 'visibility', ns: {{toJson namespaced}}, useName: true,
+                title: ({{#if namespaced}}namespace, {{/if}}name) => i18n.global.t('view.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}',name{{#if namespaced}}, namespace{{/if}} })
+              },
+              children: [
+                {name: 'CrdObjectClusterViewFromchildcoreCrdObject', path: 'childcoreCrdObject', redirect: to => { return {name: '{{ group }}{{ short }}View', params: to.params} }, meta: {animation: 'child'} },
+              ]
+            },
+            {
+              path: 'cl-view/:object',
+              name: 'CrdObjectClusterView',
+              component: () => import('../../pages/core/CrdObjectView.vue'),
+              meta: {
+                breadcrumb: arg => i18n.global.t('view.object',arg), icon: 'visibility', ns: false, useName: true, useObject: true,
+                title: (name, object) => i18n.global.t('view.clusterObject',{ name, object })
+              },
+              children: [
+                {name: 'CrdObjectClusterViewFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectClusterView', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+            {
+              path: 'ns-view/:namespace/:object',
+              name: 'CrdObjectNamespacedView',
+              component: () => import('../../pages/core/CrdObjectView.vue'),
+              meta: {
+                breadcrumb: arg => i18n.global.t('view.object',arg), icon: 'visibility', ns: true, useName: true, useObject: true,
+                title: (name, namespace, object) => i18n.global.t('view.namespacedObject',{ name, namespace, object })
+              },
+              children: [
+                {name: 'CrdObjectNamespacedViewFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectNamespacedView', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+            {
+              path: 'cl-edit/:object',
+              name: 'CrdObjectClusterEdit',
+              component: () => import('../../pages/core/CrdObjectEdit.vue'),
+              meta: {
+                breadcrumb: arg => i18n.global.t('edit.object',arg), icon: 'visibility', ns: false, useName: true, useObject: true,
+                title: (name, object) => i18n.global.t('edit.clusterObject',{ name, object })
+              },
+              children: [
+                {name: 'CrdObjectClusterEditFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectClusterEdit', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+            {
+              path: 'ns-edit/:namespace/:object',
+              name: 'CrdObjectNamespacedEdit',
+              component: () => import('../../pages/core/CrdObjectEdit.vue'),
+              meta: {
+                breadcrumb: arg => i18n.global.t('edit.object',arg), icon: 'visibility', ns: true, useName: true, useObject: true,
+                title: (name, namespace, object) => i18n.global.t('edit.namespacedObject',{ name, namespace, object })
+              },
+              children: [
+                {name: 'CrdObjectNamespacedEditFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectNamespacedEdit', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+            {
+              path: 'create/:namespace',
+              name: 'CrdObjectNamespacedCreate',
+              component: () => import('../../pages/core/CrdObjectNew.vue'),
+              meta: {
+                breadcrumb: i18n.global.t('new.breadcrumb'), icon: 'visibility', ns: true, useName: true,
+                title: (namespace, name) => i18n.global.t('new.namespacedObject',{ name, namespace })
+              },
+              children: [
+                {name: 'CrdObjectNamespacedCreateFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectNamespacedCreate', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+            {
+              path: 'create',
+              name: 'CrdObjectClusterCreate',
+              component: () => import('../../pages/core/CrdObjectNew.vue'),
+              meta: {
+                breadcrumb: i18n.global.t('new.breadcrumb'), icon: 'visibility', ns: false, useName: true,
+                title: (name) => i18n.global.t('new.clusterObject',{ name })
+              },
+              children: [
+                {name: 'CrdObjectClusterCreateFromparent{{ group }}{{ short }}', path: 'parent{{ group }}{{ short }}', redirect: to => { return {name: 'CrdObjectClusterCreate', params: to.params} }, meta: {animation: 'parent'} },
+              ]
+            },
+{{/if}}
 {{#each resolvers}}
             {name: '{{ ../group }}{{ ../short }}ViewFrom{{name}}', path: '{{name}}', redirect: to => { return {name: '{{ ../group }}{{ ../short }}View', params: to.params} }, meta: {animation: '{{type}}'} },
 {{/each}}
@@ -144,7 +234,7 @@ export const route = {
           name: '{{ group }}{{ short }}Edit',
           component: () => import('../../pages/{{category}}/{{ group }}/{{ short }}Edit.vue'),
           meta: {
-            breadcrumb: i18n.global.t('edit.breadcrumb'), icon: 'visibility', ns: {{toJson namespaced}}, useName: true,
+            breadcrumb: arg => i18n.global.t('edit.name',arg), icon: 'edit', ns: {{toJson namespaced}}, useName: true,
             title: ({{#if namespaced}}namespace, {{/if}}name) => i18n.global.t('edit.{{#if namespaced}}namespaced{{else}}cluster{{/if}}',{short: '{{ short }}',name{{#if namespaced}}, namespace{{/if}} })
           },
         },

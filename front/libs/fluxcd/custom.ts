@@ -59,7 +59,8 @@ export const descriptionHelmRelease = '';
 export const shortHelmRelease = 'HelmRelease';
 
 export const extraKustomizationColumns:Array<QTableColumn> = [
-  {name: 'Children', label: `${i18n.global.t('fluxcd.Children')}`, field: row => row.status.inventory.entries.length, sortable: true, align: tableColumnAlign.left},
+  {name: 'Children', label: `${i18n.global.t('fluxcd.Children')}`, field: row => row.status?.inventory.entries.length, sortable: true, align: tableColumnAlign.left},
+  {name: 'lastAppliedRevision', label: `${i18n.global.t('fluxcd.lastAppliedRevision')}`, field: row => row.status?.lastAppliedRevision, sortable: true, align: tableColumnAlign.left},
   {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraReceiverColumns:Array<QTableColumn> = [
@@ -73,6 +74,7 @@ export const extraProviderColumns:Array<QTableColumn> = [
 ];
 export const extraGitRepositoryColumns:Array<QTableColumn> = [
   {name: 'URL', label: `${i18n.global.t('core.url')}`, field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'revision', label: `${i18n.global.t('fluxcd.revision')}`, field: row => row.status!=undefined&&row.status?.artifact!=undefined?row.status?.artifact.revision:'', sortable: true, align: tableColumnAlign.left},
   {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => row.status!=undefined&&Array.isArray(row.status.conditions)?timeAgo(row.status.conditions[0].lastTransitionTime):'--', sortable: true, align: tableColumnAlign.left},
 ];
 export const extraBucketColumns:Array<QTableColumn> = [
@@ -81,7 +83,7 @@ export const extraBucketColumns:Array<QTableColumn> = [
 ];
 export const extraHelmChartColumns:Array<QTableColumn> = [
   {name: 'Chart', label: `${i18n.global.t('fluxcd.Chart')}`, field: row => row.spec.chart, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: `${i18n.global.t('fluxcd.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('core.version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceKind', label: `${i18n.global.t('fluxcd.SourceKind')}`, field: row => row.spec.sourceRef.kind, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceName', label: `${i18n.global.t('fluxcd.SourceName')}`, field: row => row.spec.sourceRef.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},

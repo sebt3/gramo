@@ -19,13 +19,13 @@ export const CategoryListExcludes = [];
 export const extraDistribColumns:Array<QTableColumn> = [
   {name: 'url', label: `${i18n.global.t('vynil.url')}`, field: row => row.spec.url, sortable: true, align: tableColumnAlign.left},
   {name: 'branch', label: `${i18n.global.t('vynil.branch')}`, field: row => row.spec.branch, sortable: true, align: tableColumnAlign.left},
-  {name: 'last_updated', label: `${i18n.global.t('meta.lastUpdate')}`, field: row => timeAgo(row.status.last_updated), sortable: true, align: tableColumnAlign.left},
+  {name: 'last_updated', label: `${i18n.global.t('meta.lastUpdate')}`, field: row => row.status!=undefined?timeAgo(row.status.last_updated):'', sortable: true, align: tableColumnAlign.left},
 ];
 export const extraInstallColumns:Array<QTableColumn> = [
   {name: 'dist', label: `${i18n.global.t('vynil.distrib')}`, field: row => row.spec.distrib, sortable: true, align: tableColumnAlign.left},
   {name: 'cat', label: `${i18n.global.t('vynil.cat')}`, field: row => row.spec.category, sortable: true, align: tableColumnAlign.left},
   {name: 'app', label: `${i18n.global.t('vynil.app')}`, field: row => row.spec.component, sortable: true, align: tableColumnAlign.left},
-  {name: 'last_updated', label: `${i18n.global.t('meta.lastUpdate')}`, field: row => timeAgo(row.status.last_updated), sortable: true, align: tableColumnAlign.left},
+  {name: 'last_updated', label: `${i18n.global.t('meta.lastUpdate')}`, field: row => row.status!=undefined?timeAgo(row.status.last_updated):'', sortable: true, align: tableColumnAlign.left},
 ];
 export const DistribListExcludes = [
   { path: 'spec/url', include: true },

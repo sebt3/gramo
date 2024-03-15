@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
-const  {{ group }}{{ short }}List   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
-const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
-import { useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
-import { watch } from 'vue';
+import { watch, defineAsyncComponent, useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
 const { actionDelete, deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();
+const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
     "filters": [],
@@ -25,12 +22,14 @@ const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
 }, navigation.refreshOption);
 {{else}}
 const { navigation, actionNew, toEdit, actionDelete, pagination, deleteDone, deleteError, onErrorHandler } = use{{ short }}();
+const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 const { result, refetch, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {}
 }, navigation.refreshOption);
 {{/if}}
-const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation({{ short }}Delete);
 onError(onErrorHandler);onDeleteDone(deleteDone);onDeleteError(deleteError);
+const {{ group }}{{ short }}List = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 </script>
 <template><div>
   <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="result === undefined" />

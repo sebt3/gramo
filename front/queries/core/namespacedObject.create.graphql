@@ -1,0 +1,15 @@
+mutation namespacedObjectCreate($group: String!, $plural: String!, $kind: String!, $metadata: metadataInput!, $version: String!, $spec: JSONObject) {
+  namespacedCrdObjectCreate(group: $group, plural: $plural, kind: $kind, metadata: $metadata, version: $version, spec: $spec) {
+    metadata {
+      annotations
+      creationTimestamp
+      labels
+      name
+      namespace
+      resourceVersion
+      uid
+    }
+    spec
+    status
+  }
+}

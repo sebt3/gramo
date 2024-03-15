@@ -52,13 +52,25 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
         name
           {{/if}}
           {{#if (eq resultShort 'Problem')}}
-            source
-            description
+        source
+        description
           {{/if}}
           {{#if (eq resultShort 'Advice')}}
-            source
-            reason
-            description
+        source
+        reason
+        description
+          {{/if}}
+          {{#if (eq resultShort 'CrdObject')}}
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
           {{/if}}
           {{#if (eq resultShort 'Url')}}
         proto

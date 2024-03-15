@@ -1,14 +1,4 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  OpenApiEditObject = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
-const  OpenApiEditArray  = defineAsyncComponent(() => import( './OpenApiEditArray.vue'));
-const  OpenApiEditUndefObject = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
-const  OpenApiEditBoolean = defineAsyncComponent(() => import( './OpenApiEditBoolean.vue'));
-const  OpenApiEditString  = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
-const  OpenApiEditNumber  = defineAsyncComponent(() => import( './OpenApiEditNumber.vue'));
-import { ref, watch } from 'vue'
-import { OpenAPIV3 } from "openapi-types";
-import {getProperties,getItems,getType, getFullData} from '../../libs/core/openapiSetup';
 const props = withDefaults(defineProps<{
   out?: any
   in?: any
@@ -16,15 +6,23 @@ const props = withDefaults(defineProps<{
   readOnly?: boolean
   showdefault?: boolean
 }>(), {
-  in: {},
   readOnly: false,
   showdefault: false
 });
+import { defineAsyncComponent, ref, watch } from 'vue'
+import { OpenAPIV3 } from "openapi-types";
+import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 const localOut = Object.assign({},props.in!=undefined?props.in:props.out!=undefined?props.out:{});
 const data = ref(localOut)
 const emit = defineEmits(['update:out'])
 watch(data,(newValue) => emit('update:out', newValue),{ deep: true })
-const isDefault = (key) => (props.properties.has(key) && props.properties.get(key).default == undefined && props.in[key] == undefined) || (props.properties.has(key) && props.properties.get(key).default!= undefined && props.in[key] != undefined && props.in[key] == props.properties.get(key).default[key])
+const isDefault = (key) => (props.properties.has(key) && props.properties.get(key).default == undefined && props.in != undefined && props.in[key] == undefined) || (props.properties.has(key) && props.properties.get(key).default!= undefined  && props.in != undefined && props.in[key] != undefined && props.in[key] == props.properties.get(key).default[key])
+const  OpenApiEditObject = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
+const  OpenApiEditArray  = defineAsyncComponent(() => import( './OpenApiEditArray.vue'));
+const  OpenApiEditUndefObject = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
+const  OpenApiEditBoolean = defineAsyncComponent(() => import( './OpenApiEditBoolean.vue'));
+const  OpenApiEditString  = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
+const  OpenApiEditNumber  = defineAsyncComponent(() => import( './OpenApiEditNumber.vue'));
 </script>
 <template>
   <div class="q-gutter-md column">

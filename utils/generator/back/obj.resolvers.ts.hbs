@@ -8,6 +8,9 @@ import { knowledge } from '../knowledge.js'
 {{#if (and (eq group 'k8s') (eq short 'Namespace'))}}
 import { queries as permissionsQueries } from './permissions.js';
 {{/if}}
+{{#if (and (eq group 'k8s') (eq short 'CustomResourceDefinition'))}}
+import flexver from 'flexver/dist/module.js';
+{{/if}}
 {{#each listTargets}}
 {{#unless (eq name 'Url')}}
 import { lists as list{{group}}{{name}} } from '../{{group}}/{{name}}.js';
@@ -17,6 +20,9 @@ import { lists as list{{group}}{{name}} } from '../{{group}}/{{name}}.js';
 const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
 {{else}}
 const k8sApi = kc.makeApiClient(k8s.{{capitalizeFirstLetter sub}}{{capitalizeFirstLetter apiVersion}}Api);
+{{#if (and (eq group 'k8s') (eq short 'CustomResourceDefinition'))}}
+const crdApi = kc.makeApiClient(k8s.CustomObjectsApi);
+{{/if}}
 {{/if}}
 const short2plural = (short:string) => short.toLowerCase()+'s'
 export const mutations = {
@@ -26,6 +32,9 @@ export const mutations = {
 };
 const localResolvers = {
 {{#each autoResolvers}}
+    {{#if (eq algo 'crd')}}
+{{> resolversCRD algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'stateful')}}
 {{> resolversStateful algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}

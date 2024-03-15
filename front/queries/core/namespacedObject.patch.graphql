@@ -1,0 +1,14 @@
+mutation namespacedCrdObjectPatch($group: String!, $version: String!, $plural: String!, $kind: String!, $metadata: metadataInput!, $spec: JSONObject) {
+  namespacedCrdObjectPatch(group: $group, version: $version, plural: $plural, kind: $kind, metadata: $metadata, spec: $spec) {
+    metadata {
+      name
+      namespace
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+}

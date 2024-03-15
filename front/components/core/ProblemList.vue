@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineEmits(['refresh','on-delete']);
-const props=withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, showKind?:boolean}>(),{
+const props=withDefaults(defineProps<{model: object[], parent?:object, useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, showKind?:boolean}>(),{
   useAction: false,
   useRefresh: true,
   showNamespace: false,

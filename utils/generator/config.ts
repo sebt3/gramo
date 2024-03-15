@@ -8,6 +8,11 @@ export const excludes = [
     {group: 'vynil', short: 'Install', for: ['list', 'simple'], values: [{path:'status/tfstate'}, {path:'status/plan'}]},
 ];
 const uses = [
+    {algo: 'crd',      group: 'k8s', short: 'CustomResourceDefinition', usedGroup: 'k8s', usedShort: 'MutatingWebhookConfiguration'},
+    {algo: 'crd',      group: 'k8s', short: 'CustomResourceDefinition', usedGroup: 'k8s', usedShort: 'ValidatingWebhookConfiguration'},
+    {algo: 'crd',      group: 'k8s', short: 'CustomResourceDefinition', usedGroup: 'k8s', usedShort: 'Service'},
+    {algo: 'crd',      group: 'k8s', short: 'MutatingWebhookConfiguration', usedGroup: 'k8s', usedShort: 'Service'},
+    {algo: 'crd',      group: 'k8s', short: 'ValidatingWebhookConfiguration', usedGroup: 'k8s', usedShort: 'Service'},
     {algo: 'endpoint', group: 'k8s', short: 'Endpoints', usedGroup: 'k8s', usedShort: 'Pod'},
     {algo: 'traefik',  group: 'k8s', short: 'Ingress', usedGroup: 'traefik', usedShort: 'Middleware', path: null},
     {algo: 'vynil',    group: 'vynil', short: 'Install', usedGroup: 'k8s', usedShort: 'Job', path: null},
@@ -85,6 +90,7 @@ const equity = [
     {algo: 'pvc', group: 'k8s', short: 'PersistentVolume', parentGroup: 'k8s', parentShort: 'PersistentVolumeClaim'},
 ];
 const children = [
+    {algo: 'crd',  group: 'core', short: 'CrdObject', parentGroup: 'k8s', parentShort: 'CustomResourceDefinition'},
     {algo: 'k8up', group: 'k8s', short: 'Job', parentGroup: 'k8up', parentShort: 'Backup'},
     {algo: 'k8up', group: 'k8s', short: 'Job', parentGroup: 'k8up', parentShort: 'Check'},
     {algo: 'k8up', group: 'k8s', short: 'Job', parentGroup: 'k8up', parentShort: 'Prune'},
@@ -99,6 +105,7 @@ const children = [
     {algo: 'certmanager', group: 'certmanager', short: 'Order', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'k8s', group: 'core', short: 'Container', parentGroup: 'k8s', parentShort: 'Pod'},
     {algo: 'k8s', group: 'k8s', short: 'ReplicaSet', parentGroup: 'k8s', parentShort: 'Deployment'},
+    {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'Node'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'ReplicaSet'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'StatefulSet'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'DaemonSet'},

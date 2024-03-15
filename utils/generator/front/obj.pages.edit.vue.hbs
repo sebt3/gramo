@@ -1,17 +1,9 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
-const  {{ group }}{{ short }}Meta   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Meta.vue'));
-const  {{ group }}{{ short }}Edit   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
-const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
-const  {{ group }}{{ short }}Status   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Status.vue'));
-import { ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
-{{#if namespaced}}
-const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
-{{else}}
-const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
-{{/if}}
+import { i18n, defineAsyncComponent, ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute } = use{{ short }}();set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
+const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
 const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
     "filters": [
@@ -34,7 +26,6 @@ const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Qu
   }
 {{/if}}
 });
-const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
 const model = ref({});
 onResult(res => {
   if ( !res.loading ) {
@@ -105,13 +96,17 @@ onResult(res => {
   }
 });
 function onSubmit(obj:object) {
-  notifyWorking($t('edit.notifyWorking'));
+  notifyWorking(i18n.global.t('edit.notifyWorking'));
   patch{{ short }}({
     ...obj,
     "metadata": Object.fromEntries(Object.entries(result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata).filter(([name])=>name!='__typename')),
   });
 }
 onError(onErrorHandler);onPatch{{ short }}(patchDone);onPatchError(patchError);
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+const {{ group }}{{ short }}Meta   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Meta.vue'));
+const {{ group }}{{ short }}Edit   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
+const {{ group }}{{ short }}Status = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Status.vue'));
 </script>
 <template><div>
   <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />

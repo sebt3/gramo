@@ -10,8 +10,10 @@ const options = ref([
   {label: '2m', value: 120000},
   {label: '5m', value: 60000},
 ]);
-const model = ref(options.value[0])
+const label = localStorage.getItem("refresh-rate")
+const model = ref(options.value.filter(o=>o.label==label).length>0?options.value.filter(o=>o.label==label)[0]:options.value[0])
 function onRefreshChange() {
+  localStorage.setItem("refresh-rate", model.value.label)
   navigation.setPoolInterval(model.value.value)
 }
 navigation.setPoolInterval(model.value.value)

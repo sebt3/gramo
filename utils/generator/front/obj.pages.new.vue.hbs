@@ -1,31 +1,23 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
 import {{ short }}New from '@/queries/{{ group }}/{{ short }}.create.graphql'
-const  {{ group }}{{ short }}Edit   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
-const  MetadataNew   = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
 import { color{{ short }}, icon{{ short }} } from '../../../libs/{{ group }}/custom.js'
-import { ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } from '@/libs/{{ group }}/{{ short }}.js'
-import { useQuasar } from 'quasar'
-const $q = useQuasar()
+import { defineAsyncComponent, i18n, ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } from '@/libs/{{ group }}/{{ short }}.js'
+const { $q, editor, router, navigation, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
+const { mutate, onDone, onError } = useMutation({{ short }}New);
 const name = ref('');
 const form = ref(null);
 const obj  = ref({});
-{{#if namespaced}}
-const { editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setNamespacedItemFromRoute();
-{{else}}
-const { editor, router, navigation, setItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();setItemFromRoute();
-{{/if}}
-const { mutate, onDone, onError } = useMutation({{ short }}New);
+const model = ref({});
 onDone(() => {
-  notifySuccess($t('new.notifyDone'));
+  notifySuccess(i18n.global.t('new.notifyDone'));
   router.go(-1);
 })
 onError((err) => {
-  notifyError($t('new.notifyError'));
+  notifyError(i18n.global.t('new.notifyError'));
   console.log('mutation error',err);
 })
 function onFinalSubmit() {
-  notifyWorking($t('new.notifyWorking'));
+  notifyWorking(i18n.global.t('new.notifyWorking'));
   mutate({
     "metadata": {
 {{#if namespaced}}
@@ -43,10 +35,11 @@ async function onSubmit(o:object) {
     obj.value = o;
     form.value.submit()
   } else {
-    notifyError($t('new.notifyNotReady'));
+    notifyError(i18n.global.t('new.notifyNotReady'));
   }
 }
-
+const {{ group }}{{ short }}Edit = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
+const MetadataNew = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
@@ -64,7 +57,7 @@ async function onSubmit(o:object) {
     </div>
     <div class="col-md-12">
       <{{ group }}{{ short }}Edit
-        :model="{}"
+        :model="model"
         @on-submit="onSubmit"
        />
     </div>

@@ -1,0 +1,15 @@
+mutation namespacedObjectDelete($group: String!, $version: String!, $plural: String!, $namespace: String!, $name: String!) {
+  namespacedCrdObjectDelete(group: $group, version: $version, plural: $plural, namespace: $namespace, name: $name) {
+    metadata {
+      annotations
+      creationTimestamp
+      labels
+      name
+      namespace
+      resourceVersion
+      uid
+    }
+    spec
+    status
+  }
+}

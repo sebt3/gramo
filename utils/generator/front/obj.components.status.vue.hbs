@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-import { getConditionColor, elude } from "../../libs/core/"
-import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
-import { useQuasar } from 'quasar'
-const  OpenApiNamedIcon   = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
-const $q = useQuasar()
 const props = withDefaults(defineProps<{model: object, useActions?:boolean, showLink?:boolean, showLabels?:boolean, showStatus?: boolean, origin?:string}>(), {
   useActions: false,
   showLabels: false,
   showStatus: true,
   showLink: true,
 });
+import { useQuasar, defineAsyncComponent, getConditionColor, elude } from "../../libs/core/"
+import { color{{ short }}, icon{{ short }}, extra{{ short }}Columns } from '../../libs/{{ group }}/custom.js'
+const $q = useQuasar()
+const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
 </script>
 <template>
   <q-card bordered class="q-ma-sm" v-if="model.status != null">

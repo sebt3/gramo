@@ -9,7 +9,8 @@ export * from './itemSetup.js'
 export * from './openapiSetup.js'
 export * from './tableSetup.js'
 export * from './interfaces.js'
-export { ref } from 'vue'
+export { useQuasar } from 'quasar'
+export { ref, defineAsyncComponent, onMounted, watch } from 'vue'
 export { useQuery, useMutation } from '@vue/apollo-composable'
 export { useNavigationStoreRef } from '../../stores'
 export function onlyUnique(value, index, array) {return array.indexOf(value) === index;}
@@ -124,5 +125,5 @@ export function timeAgo(date:string) {
     const hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((delta % (1000 * 60)) / 1000);
-    return `${days>0?`${t("meta.days",days)} `:''}${hours>0?`${t("meta.hours",hours)} `:''}${minutes>0?`${t("meta.minutes",minutes)} `:''}${seconds>0?t("meta.seconds",seconds):''}`
+    return `${days>0?`${t("meta.days",days)} `:''}${hours>0?`${t("meta.hours",hours)} `:''}${minutes>0&&days<10?`${t("meta.minutes",minutes)} `:''}${seconds>0&&days<1&&hours<10?t("meta.seconds",seconds):''}`
 }

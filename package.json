@@ -1,6 +1,6 @@
 {
   "name": "gramo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,6 @@
     "d3": "^7.8.5",
     "eslint": "^8.53.0",
     "eslint-plugin-vue": "^9.18.1",
-    "flexver": "^1.1.1",
     "graphql-tag": "^2.12.6",
     "handlebars": "^4.7.8",
     "node-fetch": "^3.3.2",
@@ -50,6 +49,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
+    "flexver": "^1.1.1",
     "@kubernetes/client-node": "^0.20.0",
     "animate.css": "^4.1.1",
     "cors": "^2.8.5",

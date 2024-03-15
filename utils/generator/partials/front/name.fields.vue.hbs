@@ -20,7 +20,7 @@
             </template>
           </q-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" v-if="model.metadata.creationTimestamp">
           <q-field :label="$t('meta.age')" stack-label borderless>
             <template v-slot:prepend><q-icon name="smart_button" /></template>
             <template v-slot:control>

@@ -1,0 +1,13 @@
+mutation clusteredCrdObjectPatch($group: String!, $version: String!, $plural: String!, $kind: String!, $metadata: metadataInput!, $spec: JSONObject) {
+  clusteredCrdObjectPatch(group: $group, version: $version, plural: $plural, kind: $kind, metadata: $metadata, spec: $spec) {
+    metadata {
+      name
+      annotations
+      labels
+      creationTimestamp
+      uid
+    }
+    spec
+    status
+  }
+}

@@ -43,6 +43,7 @@ loadPartial('resolversSecret',          path.resolve(partials_resolvers, 'secret
 loadPartial('resolversFluxCD',          path.resolve(partials_resolvers, 'fluxcd.ts.hbs'));
 loadPartial('resolversK8up',            path.resolve(partials_resolvers, 'k8up.ts.hbs'));
 loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'configMap.ts.hbs'));
+loadPartial('resolversCRD',             path.resolve(partials_resolvers, 'crd.ts.hbs'));
 loadPartial('vueLabelFields',           path.resolve(partials_front, 'labels.fields.vue.hbs'));
 loadPartial('vueNameFields',            path.resolve(partials_front, 'name.fields.vue.hbs'));
 loadPartial('vueExtraFields',           path.resolve(partials_front, 'extra.fields.vue.hbs'));
