@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.details.graphql'
+{{#if (defined crd)}}
+{{#if namespaced}}
+import {{ short }}Delete from '@/queries/core/namespacedObject.delete.graphql'
+{{else}}
+import {{ short }}Delete from '@/queries/core/clusteredObject.delete.graphql'
+{{/if}}
+{{else}}
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
-const  {{ group }}{{ short }}View   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}View.vue'));
-const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+{{/if}}
 import { i18n } from "../../../libs/i18n"
 {{#each resolvers}}
   {{#if (or (eq type 'parent') (eq type 'consume'))}}
@@ -188,13 +194,13 @@ onResult(res => {
 {{/each}}
   }
 });
-onDeleteDone(() => {
-  notifySuccess(i18n.global.t('delete.notifyDone'));
-})
+onDeleteDone(() => {notifySuccess(i18n.global.t('delete.notifyDone'))})
 onDeleteError((err) => {
   notifyError(i18n.global.t('delete.notifyError'));
   console.log('deletion error',err);
 })
+const {{ group }}{{ short }}View = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}View.vue'));
+const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 </script>
 <template><div>
   <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />

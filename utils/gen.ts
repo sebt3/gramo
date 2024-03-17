@@ -188,9 +188,11 @@ new Promise((resolve) => {
             if (deleteFiles) rmdir(path.resolve(path_front, 'pages', c, g.name))
         })
         g.objects.forEach(o => {
-            objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.create.graphql`, {...o, mutationType: 'Create'})
-            objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.delete.graphql`, {...o, mutationType: 'Delete'})
-            objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.patch.graphql`, {...o, mutationType: 'Patch'})
+            if (o['crd']==undefined) {
+                objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.create.graphql`, {...o, mutationType: 'Create'})
+                objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.delete.graphql`, {...o, mutationType: 'Delete'})
+                objQueryMutation(path.resolve(path_front, 'queries', g.name), `${o.short}.patch.graphql`, {...o, mutationType: 'Patch'})
+            }
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.read.graphql`, {...o, detailed: false})
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.details.graphql`, {...o, detailed: true})
             objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)

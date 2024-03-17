@@ -38,6 +38,7 @@ export function use{{ short }}() {
   const onlyWriteProperties = (obj) => Object.keys(obj).filter(k=>{{toJsonKeys writeProperties}}.includes(k)).reduce((res,k)=>{res[k] = obj[k];return res},{});
   const editor = ref({
       tab: 'simple',
+      showDoc: false,
       yaml: '',
       obj: ref({}),
       setKey: (key:string, o:object) => {
@@ -122,10 +123,18 @@ export function use{{ short }}() {
         persistent: true, cancel: true, html: true, ok: {color: 'negative'}
       }).onOk(() => {
         notifyWorking(i18n.global.t('delete.notifyWorking'));
+{{#if (defined crd)}}
+{{#if namespaced}}
+        deletor({"group": '{{apiGroup}}', "version": '{{apiVersion}}', "plural": '{{crd.status.acceptedNames.plural}}', "name": meta.name, "namespace":meta.namespace});
+{{else}}
+        deletor({"group": '{{apiGroup}}', "version": '{{apiVersion}}', "plural": '{{crd.status.acceptedNames.plural}}', "name": meta.name});
+{{/if}}
+{{else}}
 {{#if namespaced}}
         deletor({"name": meta.name, "namespace":meta.namespace});
 {{else}}
         deletor({"name": meta.name});
+{{/if}}
 {{/if}}
       })
     },

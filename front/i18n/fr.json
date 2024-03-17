@@ -52,7 +52,13 @@
     "container": {
       "init": "Init?"
     },
+    "documentation": {
+      "typeRequiered": "type: { type }, obligatoire.",
+      "typeOptionnal": "type: { type }",
+      "items": "éléments"
+    },
     "core": {
+      "mandatory": "Champ obligatoire",
       "version": "Version",
       "image": "Image",
       "url": "URL",
@@ -108,6 +114,7 @@
       }
     },
     "edit": {
+      "showDoc": "Afficher la documentation",
       "breadcrumb": "Editer",
       "namespaced": "Modifier le { short } { name } dans le namespace { namespace }",
       "cluster": "Modifier le { short } { name }",
@@ -265,6 +272,7 @@
       "Address": "Addresse"
     },
     "vynil": {
+      "dashboard": "Distributions des paquetages par catégories",
       "url": "Url",
       "branch": "Banche",
       "distrib": "Distribution",

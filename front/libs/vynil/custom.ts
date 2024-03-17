@@ -30,6 +30,7 @@ export const extraInstallColumns:Array<QTableColumn> = [
 export const DistribListExcludes = [
   { path: 'spec/url', include: true },
   { path: 'status/errors', include: true },
+  { path: 'status/components', include: true },
   { path: 'status/last_updated', include: true },
 ];
 export const DistribReadExcludes = [

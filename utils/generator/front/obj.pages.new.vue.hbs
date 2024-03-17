@@ -1,5 +1,13 @@
 <script setup lang="ts">
+{{#if (defined crd)}}
+{{#if namespaced}}
+import {{ short }}New from '@/queries/core/namespacedObject.create.graphql'
+{{else}}
+import {{ short }}New from '@/queries/core/clusteredObject.create.graphql'
+{{/if}}
+{{else}}
 import {{ short }}New from '@/queries/{{ group }}/{{ short }}.create.graphql'
+{{/if}}
 import { color{{ short }}, icon{{ short }} } from '../../../libs/{{ group }}/custom.js'
 import { defineAsyncComponent, i18n, ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } from '@/libs/{{ group }}/{{ short }}.js'
 const { $q, editor, router, navigation, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
@@ -19,6 +27,9 @@ onError((err) => {
 function onFinalSubmit() {
   notifyWorking(i18n.global.t('new.notifyWorking'));
   mutate({
+{{#if (defined crd)}}
+    "group": '{{apiGroup}}', "version": '{{apiVersion}}', "plural": '{{crd.status.acceptedNames.plural}}', "kind": '{{ short }}',
+{{/if}}
     "metadata": {
 {{#if namespaced}}
     "namespace": navigation.currentNamespace.value,
@@ -26,7 +37,7 @@ function onFinalSubmit() {
     "name": name.value
     },
 {{#each writeProperties}}
-    "{{this}}": sanitizeData(obj.value.{{this}}),
+    "{{this}}": obj.value!=null&&Object.keys(obj.value).includes('{{this}}')?sanitizeData(obj.value.{{this}}):null,
 {{/each}}
   });
 }

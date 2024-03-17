@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
+{{#if (defined crd)}}
+{{#if namespaced}}
+import {{ short }}Edit from '@/queries/core/namespacedObject.patch.graphql'
+{{else}}
+import {{ short }}Edit  from '@/queries/core/clusteredObject.patch.graphql'
+{{/if}}
+{{else}}
 import {{ short }}Edit from '@/queries/{{ group }}/{{ short }}.patch.graphql'
+{{/if}}
 import { i18n, defineAsyncComponent, ref, useQuery, useMutation, use{{ short }}, {{ short }}SimpleExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 const { onErrorHandler, patchDone, patchError, notifyWorking, onNot{{ short }}Found, navigation, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute } = use{{ short }}();set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
 const { mutate: patch{{ short }}, onDone: onPatch{{ short }}, onError: onPatchError } = useMutation({{ short }}Edit);
@@ -99,6 +107,9 @@ function onSubmit(obj:object) {
   notifyWorking(i18n.global.t('edit.notifyWorking'));
   patch{{ short }}({
     ...obj,
+{{#if (defined crd)}}
+    "group": '{{apiGroup}}', "version": '{{apiVersion}}', "plural": '{{crd.status.acceptedNames.plural}}', "kind": '{{ short }}',
+{{/if}}
     "metadata": Object.fromEntries(Object.entries(result.value{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0].metadata).filter(([name])=>name!='__typename')),
   });
 }

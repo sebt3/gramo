@@ -52,7 +52,13 @@
     "container": {
       "init": "Init?"
     },
+    "documentation": {
+      "typeRequiered": "type: { type }, required.",
+      "typeOptionnal": "type: { type }",
+      "items": "items"
+    },
     "core": {
+      "mandatory": "Field is required",
       "version": "Version",
       "image": "Image",
       "url": "URL",
@@ -107,6 +113,7 @@
       }
     },
     "edit": {
+      "showDoc": "Show documentation",
       "breadcrumb": "Edit",
       "namespaced": "Edit { short } { name } in namespace: { namespace }",
       "cluster": "Edit { short } { name }",
@@ -265,6 +272,7 @@
       "Address": "Address"
     },
     "vynil": {
+      "dashboard": "Distributions packages per categories",
       "url": "Url",
       "branch": "Banch",
       "distrib": "Distribution",

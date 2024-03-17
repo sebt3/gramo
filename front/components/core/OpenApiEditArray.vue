@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  OpenApiEditUndefObject   = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
-const  OpenApiEditObject   = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
-import { ref, computed, watch } from 'vue'
-import {getProperties,getItems,getType} from '../../libs/core/openapiSetup';
 import { OpenAPIV3 } from "openapi-types";
+const emit = defineEmits(['update:data'])
 const props = withDefaults(defineProps<{
   name: string
   data: Array<any>|undefined
@@ -19,18 +15,18 @@ const props = withDefaults(defineProps<{
   readOnly: false,
   showdefault: false
 });
-const out = ref(Object.assign([], props.data))
-const emit = defineEmits(['update:data'])
-watch(out,(newValue) => emit('update:data', newValue),{ deep: true })
-// TODO support for write/add/delete....
-function handleAdd(evt){
+import { defineAsyncComponent, ref, watch } from 'vue'
+import { getProperties } from '../../libs/core/openapiSetup';
+const out          = ref(Object.assign([], props.data))
+const handleDelete = (key) => {out.value.splice(key,1)}
+const handleAdd    = (evt) => {
   out.value.push(props.items?.type == 'object'?{}:'')
   evt.preventDefault();
   evt.stopPropagation();
 }
-function handleDelete(key){
-  out.value.splice(key,1)
-}
+if (!props.readOnly) watch(out, (newValue) => emit('update:data', newValue),{ deep: true });
+const OpenApiEditUndefObject = defineAsyncComponent(() => import( './OpenApiEditUndefObject.vue'));
+const OpenApiEditObject      = defineAsyncComponent(() => import( './OpenApiEditObject.vue'));
 </script>
 <template>
   <div v-if="items != undefined" class="q-gutter-sm">
@@ -51,7 +47,7 @@ function handleDelete(key){
           <q-btn icon="delete" flat @click="handleDelete(key)"><q-tooltip>delete</q-tooltip></q-btn>
         </q-item-section>
         <q-item-section v-if="items.type == 'object' && items.properties != undefined && Object.keys(items.properties).length>0">
-          <OpenApiEditObject v-model:data="out[key]" name="" :level="level+1" :defaultdata="items.default" :properties="getProperties(items)" :read-only="readOnly" :showdefault="showdefault" />
+          <OpenApiEditObject v-model:data="out[key]" name="" :level="level+1" :defaultdata="items.default" :properties="getProperties(items)" :read-only="readOnly" :required="items.required" :showdefault="showdefault" />
         </q-item-section>
         <q-item-section v-if="items.type == 'object' && (items.properties == undefined || Object.keys(items.properties).length<1)">
           <OpenApiEditUndefObject v-model:data="out[key]" name="" :level="level+1" :defaultdata="items.default" :properties="getProperties(items)" :read-only="readOnly" />

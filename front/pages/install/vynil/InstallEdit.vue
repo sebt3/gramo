@@ -2,7 +2,7 @@
 // noGramoGenerator
 import { defineAsyncComponent } from 'vue'
 import vynilInstallQuery from '@/queries/vynil/Install.details.graphql'
-import InstallEdit from '@/queries/vynil/Install.patch.graphql'
+import InstallEdit from '@/queries/core/namespacedObject.patch.graphql'
 const  vynilInstallMeta   = defineAsyncComponent(() => import( '@/components/vynil/InstallMeta.vue'));
 const  vynilInstallEdit   = defineAsyncComponent(() => import( '@/components/vynil/InstallEdit.vue'));
 const  vynilInstallStatus   = defineAsyncComponent(() => import( '@/components/vynil/InstallStatus.vue'));
@@ -32,6 +32,7 @@ const { mutate: patchInstall, onDone: onPatchInstall, onError: onPatchError } = 
 function onSubmit(obj:object) {
   notifyWorking('Update in progress');
   patchInstall({
+    "group": 'vynil.solidite.fr', "version": 'v1', "plural": 'installs', "kind": 'Install',
     "metadata": Object.fromEntries(Object.entries(result.value.k8sNamespace[0].vynilInstall[0].metadata).filter(([name])=>name!='__typename')),
     ...obj
   });

@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  OpenApiEditString   = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
-import { ref, watch } from 'vue'
+const emit = defineEmits(['update:data'])
 import { OpenAPIV3 } from "openapi-types";
-const prompt = ref(false);
-const newName = ref('');
 const props = withDefaults(defineProps<{
   name: string
   data: object|undefined
@@ -19,18 +15,19 @@ const props = withDefaults(defineProps<{
   readOnly: false,
   showdefault: true
 });
-const out_handler= Object.assign({},props.data);
-const out = ref(out_handler)
-const emit = defineEmits(['update:data'])
-watch(out,(newValue) => emit('update:data', newValue),{ deep: true })
-function handleAdd(evt) {
+import { defineAsyncComponent, ref, watch } from 'vue'
+const prompt      = ref(false);
+const newName     = ref('');
+const out_handler = Object.assign({},props.data);
+const out         = ref(out_handler)
+const onAdd       = () => { out.value[newName.value] = '' }
+const handleAdd   = (evt) => {
   prompt.value = true;
   evt.preventDefault();
   evt.stopPropagation();
 }
-function onAdd() {
-  out.value[newName.value] = '';
-}
+if (!props.readOnly) watch(out, (newValue) => emit('update:data', newValue),{ deep: true })
+const OpenApiEditString = defineAsyncComponent(() => import( './OpenApiEditString.vue'));
 </script>
 <template>
   <q-dialog v-model="prompt" persistent v-if="!readOnly">

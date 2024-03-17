@@ -142,10 +142,10 @@ export const finalizeObject = (obj:k8sObject, all:k8sObject[]) => {
 }
 export const getObjFQN = (c: k8sDefinitionProperties) => c.spec.group.split('.').reverse().join('.')+'.'+getTargetVersion(c.spec.versions)+'.'+c.spec.names.kind
 
-export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
-    const excluded: string[] = [
+export const replaceRefWithDef = (defs: [string, openapiDefinition][],extraExclude:string[]=[]) => {
+    const excluded: string[] = extraExclude.concat([
         'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps'
-    ]
+    ]);
     const queue = structuredClone(defs);
     const ret:Map<string, openapiDefinitionPropertiesDef> = new Map();
     const deref = (data) => {
@@ -174,15 +174,12 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
         let missing = false;
         if (item[1].properties != undefined) {for (const [key, val] of Object.entries(item[1].properties)) {
             missing = missing || (val['$ref'] != undefined && key !='metadata' && !excluded.includes(val['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['$ref'].split('/')[2]));
-            //if ((val['$ref'] != undefined && key !='metadata' && !excluded.includes(val['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['$ref'].split('/')[2]))) console.log('missing',val['$ref'].split('/')[2])
             if (val['type'] == 'array') {
                 missing = missing || (val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['items']['$ref'].split('/')[2]));
-                //if (val['items']['$ref'] != undefined && !excluded.includes(val['items']['$ref'].split('/')[2]) && !Object.keys(ret).includes(val['items']['$ref'].split('/')[2])) console.log('missing',val['items']['$ref'].split('/')[2])
             }
             if (val['type'] == 'object' && typeof val.properties == 'object') {
                 for (const [, v2] of Object.entries(val.properties)) {
                     missing = missing || ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2]) && !Object.keys(ret).includes((v2 as object)['$ref'].split('/')[2]));
-                    //if ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2]) && !Object.keys(ret).includes((v2 as object)['$ref'].split('/')[2]))console.log('missing',(v2 as object)['$ref'].split('/')[2]);
                 }
             }
             if (missing) break;
@@ -194,8 +191,8 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][]) => {
                 console.log('leaving with',
                     Object.fromEntries(queue.map(([n,v])=>[n,
                         Object.fromEntries(
-                                    Object.entries(v['properties']).filter(([_,val])=>val['$ref']!=null).map(([name,val])=>[name,val['$ref']])
-                            .concat(Object.entries(v['properties']).filter(([_,val])=>val['type'] == 'array'&& val['items'] != null && val['items']['$ref']!=null).map(([name,val])=>[name,val['items']['$ref']]))
+                                    Object.entries(v['properties']).filter(([_,val])=>val['$ref']!=null && !Object.keys(ret).concat(excluded).includes(val['$ref'].split('/')[2])).map(([name,val])=>[name,val['$ref']])
+                            .concat(Object.entries(v['properties']).filter(([_,val])=>val['type'] == 'array'&& val['items'] != null && val['items']['$ref']!=null&& !Object.keys(ret).concat(excluded).includes(val['items']['$ref'].split('/')[2])).map(([name,val])=>[name,val['items']['$ref']]))
                         )
                     ])),
                     queue.length)

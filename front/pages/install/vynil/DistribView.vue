@@ -3,7 +3,7 @@
 import { defineAsyncComponent } from 'vue'
 import { i18n } from "../../../libs/i18n"
 import vynilDistribQuery from '@/queries/vynil/Distrib.details.graphql'
-import DistribDelete from '@/queries/vynil/Distrib.delete.graphql'
+import DistribDelete from '@/queries/core/clusteredObject.delete.graphql'
 const  vynilDistribView   = defineAsyncComponent(() => import( '@/components/vynil/DistribView.vue'));
 const  vynilPackageList   = defineAsyncComponent(() => import( '@/components/vynil/PackageList.vue'));
 const  vynilCategoryList   = defineAsyncComponent(() => import( '@/components/vynil/CategoryList.vue'));

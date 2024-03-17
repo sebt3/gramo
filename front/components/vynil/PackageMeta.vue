@@ -1,17 +1,5 @@
 <script setup lang="ts">
 // noGramoGenerator
-import { defineAsyncComponent } from 'vue'
-const  TableHeader   = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
-import { i18n } from "../../libs/i18n"
-import { QTableColumn } from 'quasar'
-import { ref, useCore, tableColumnAlign } from '../../libs/core'
-const { pagination } = useCore();
-const PackageColumns:Array<QTableColumn> = [
-    {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
-    {name: 'Category', label: i18n.global.t('vynil.cat'), field: row => row.consumevynilCategory.name, sortable: true, align: tableColumnAlign.left},
-    {name: 'Description', label: i18n.global.t('vynil.desc'), field: row => row.description, sortable: true, align: tableColumnAlign.left}
-] as QTableColumn[];
-const filter = ref('');
 defineEmits(['refresh']);
 withDefaults(defineProps<{model: object, deletor?:any, useAction?:boolean}>(),{
   deletor: ()=>null,

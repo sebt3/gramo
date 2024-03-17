@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // noGramoGenerator
 import { defineAsyncComponent } from 'vue'
-import InstallNew from '@/queries/vynil/Install.create.graphql'
+import InstallNew from '@/queries/core/namespacedObject.create.graphql'
 const  MetadataNew   = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
 import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
 import { ref, useMutation, useInstall, InstallDefinition, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
@@ -45,6 +45,7 @@ const setYaml = (v) => editor.value.setYaml(v)
 function onFinalSubmit() {
   notifyWorking('Create in progress');
   mutate({
+    "group": 'vynil.solidite.fr', "version": 'v1', "plural": 'installs', "kind": 'Install',
     "metadata": {
     "namespace": navigation.currentNamespace.value,
     "name": name.value

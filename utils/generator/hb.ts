@@ -24,6 +24,7 @@ HB.registerHelper('isJsonObject', (grp,lst)=>(lst[grp]=='JSONObject'));
 HB.registerHelper('isCustomTyped', (grp,name)=>(grp=='k8s' && name=='Namespace'));
 HB.registerHelper('isNamespace', (grp,name)=>(grp=='k8s' && name=='Namespace'));
 HB.registerHelper('haveQueries', (objects)=>(objects.filter(o=>!o['namespaced']).length>0));
+HB.registerHelper('haveMutations', (objects)=>(objects.filter(o=>o['crd']==undefined).length>0));
 HB.registerHelper('getByPath', (obj, path)=>new HB.SafeString(getByPath(obj, path)))
 HB.registerHelper('capitalizeFirstLetter', (str)=>new HB.SafeString(capitalizeFirstLetter(str)))
 HB.registerHelper('lower', (str)=>new HB.SafeString(str.toLowerCase()))

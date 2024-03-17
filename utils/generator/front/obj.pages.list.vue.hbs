@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.read.graphql'
+{{#if (defined crd)}}
+{{#if namespaced}}
+import {{ short }}Delete from '@/queries/core/namespacedObject.delete.graphql'
+{{else}}
+import {{ short }}Delete from '@/queries/core/clusteredObject.delete.graphql'
+{{/if}}
+{{else}}
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
+{{/if}}
 import { watch, defineAsyncComponent, useQuery, useMutation, use{{ short }}, {{ short }}ListExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
 {{#if namespaced}}
 const { actionDelete, deleteDone, deleteError, onErrorHandler, navigation, setNamespaceFromRoute{{#if namespaced}}, isNamespaced{{/if}} } = use{{ short }}();setNamespaceFromRoute();

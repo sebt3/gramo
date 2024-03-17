@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  OpenApiNamedIcon   = defineAsyncComponent(() => import( './OpenApiNamedIcon.vue'));
-import { ref, computed, watch } from 'vue'
-import { elude } from "../../libs/core/"
+const emit = defineEmits(['update:data', 'delete'])
 const props = withDefaults(defineProps<{
   name: string
   data: string|null|undefined
@@ -13,11 +10,13 @@ const props = withDefaults(defineProps<{
 }>(), {
   readOnly: false,
 });
-const max_len=150;
-const value=ref(props.data)
-const emit = defineEmits(['update:data', 'delete'])
-watch(value,(newValue) => emit('update:data', newValue))
-const isDefault=computed(() => value.value == props.defaultdata || (props.defaultdata ==undefined && value.value == null))
+import { defineAsyncComponent, ref, computed, watch } from 'vue'
+import { elude } from "../../libs/core/"
+const max_len   = 150;
+const value     = ref(props.data)
+const isDefault = computed(() => value.value == props.defaultdata || (props.defaultdata ==undefined && value.value == null))
+if (!props.readOnly) watch(value, (newValue) => emit('update:data', newValue));
+const OpenApiNamedIcon = defineAsyncComponent(() => import( './OpenApiNamedIcon.vue'));
 </script>
 <template>
   <div v-if="readOnly">

@@ -3,7 +3,7 @@
 import { defineAsyncComponent } from 'vue'
 import { i18n } from "../../../libs/i18n"
 import vynilInstallQuery from '@/queries/vynil/Install.details.graphql'
-import InstallDelete from '@/queries/vynil/Install.delete.graphql'
+import InstallDelete from '@/queries/core/namespacedObject.delete.graphql'
 const  vynilInstallView   = defineAsyncComponent(() => import( '@/components/vynil/InstallView.vue'));
 const  vynilPackageMeta   = defineAsyncComponent(() => import( '@/components/vynil/PackageMeta.vue'));
 const  k8sJobList   = defineAsyncComponent(() => import( '@/components/k8s/JobList.vue'));

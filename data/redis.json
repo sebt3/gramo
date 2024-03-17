@@ -3578,45 +3578,20 @@
       "crd": {
         "metadata": {
           "name": "redis.redis.redis.opstreelabs.in",
-          "uid": "d371fe8b-b756-496b-b009-eeafd1766d0d",
-          "resourceVersion": "27743980420",
-          "generation": 2,
-          "creationTimestamp": "2023-11-21T14:07:21Z",
+          "uid": "e438be48-8ef9-4bdb-a7cb-cc2c1e0cf500",
+          "resourceVersion": "139785702",
+          "generation": 6,
+          "creationTimestamp": "2023-06-29T06:18:07Z",
           "annotations": {
+            "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
             "controller-gen.kubebuilder.io/version": "v0.4.1"
           },
           "managedFields": [
             {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:07:21Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {},
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {}
-                }
-              }
-            },
-            {
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:07:30Z",
+              "time": "2023-06-29T06:18:07Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -3649,12 +3624,43 @@
               "subresource": "status"
             },
             {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-06-29T06:18:07Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:controller-gen.kubebuilder.io/version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {},
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {}
+                }
+              }
+            },
+            {
               "manager": "kubectl-replace",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-24T03:04:49Z",
+              "time": "2024-03-11T16:21:05Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    "f:cert-manager.io/inject-ca-from": {}
+                  }
+                },
                 "f:spec": {
                   "f:conversion": {
                     "f:strategy": {},
@@ -3674,6 +3680,24 @@
                     }
                   },
                   "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "cert-manager-cainjector",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-13T07:07:04Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {}
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10679,11 +10703,12 @@
             "webhook": {
               "clientConfig": {
                 "service": {
-                  "namespace": "redis-operator",
+                  "namespace": "vynil-dbo",
                   "name": "webhook-service",
                   "path": "/convert",
                   "port": 443
-                }
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lSQUlmbDUwWHZWWm44Y21tWURSUDBRWVF3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOREF5TWpReE5qTXlOVFJhRncweU5EQTFNalF4TmpNeU5UUmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURSdEVwT24yd3JidSs5VHZWcThzSW5ETGc2OUJ0MkthVWVHV0hqCms2YU42ZGY3UFFlYXk1QU9YREhHN05BdUpOOTZWRGs4KzZYcjRvZThyK1c0Uy81bmJQd08rK3ZvaHk0R0RFL2YKQUtRK0o1MDlLMWNNUG9sVWJhTUNGZE5ZNFAwcURiajVjMUJHOE0zSjRuVmNNUko3emxoYWV2UWpzc3FhYkRyMgpUVFdvcjQweVVVMldrNEJJNWVLQk03cmFnTXBkZUQxSDhxQkl0WDB6WXJ6bE0rUVVaRlBCL3FORkxYZHY2ZU5aCjYrUExSNHc0NWdxVFhOZ1BGNS9vNk1MbHdxOTdQUnRCbDZNM0hmSzhqNGNMRjJZYzlKWjcrWXRiczFLTFpDVlkKcE43T0dSVU81dmdpQ3JQU3NXVUxIdU12SjZidWpkczFzQmZTNG5ZUk5iMWExUTl4QWdNQkFBR2plakI0TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRmdHQTFVZEVRRUIvd1JPTUV5Q0hYZGxZbWh2CmIyc3RjMlZ5ZG1salpTNTJlVzVwYkMxa1ltOHVjM1pqZ2l0M1pXSm9iMjlyTFhObGNuWnBZMlV1ZG5sdWFXd3QKWkdKdkxuTjJZeTVqYkhWemRHVnlMbXh2WTJGc01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTJsdHJSSG04UgpoWkRWeWQvVTN1Rm9jc1RkWUo5WU1HUk1NQytSYnpiMHo5dXZMNklDWGZOOUVxck82WjdHYnZrOEtGOXJaRWRiClZVMDd2cjlZMVhDWmRvTUxyTmM1eGVERmR3eFFUUTJ2U1Frd2tKdGlkYmV1UFpNOTNVMFpGM2RXNU1HNFl0eFkKd2VQL3RNN1JwMUwwZDlqbXpnWVJUcWdEQW8zdVNCQ2pmNFN3THFnbWVGWUVwam5QU1dhODFqRnZ4Ymp0bHZTZwp0cExTc2M1SjdBYkc0N1ZxRGl5WEF0b040Y0ZPbDdpQTMvUFRzNVFVdVRiRExkMGpaU0RFU3FSaHpwbTQwcE5BCnE5QWZKSGhMN1cyS0g5ZXJzSUJ1TW5vQTF1S2k2OTNlSHVyS08wTGJiVENWcFloNjBJUGM3YUNNZnJCeUVwK1AKTkd1a1NkcWlZbUlyCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
               },
               "conversionReviewVersions": [
                 "v1beta1",
@@ -10697,14 +10722,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:07:26Z",
+              "lastTransitionTime": "2023-06-29T06:18:07Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:07:30Z",
+              "lastTransitionTime": "2023-06-29T06:18:07Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }
@@ -15581,11 +15606,12 @@
       "crd": {
         "metadata": {
           "name": "redisclusters.redis.redis.opstreelabs.in",
-          "uid": "04a78592-38ed-402f-81d1-fb7b9fbb936c",
-          "resourceVersion": "27743976341",
-          "generation": 2,
-          "creationTimestamp": "2023-11-21T14:09:30Z",
+          "uid": "5e7a1ff4-df27-4d5a-8792-e5eac7ab2c1c",
+          "resourceVersion": "139785653",
+          "generation": 6,
+          "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
+            "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
             "controller-gen.kubebuilder.io/version": "v0.4.1"
           },
           "managedFields": [
@@ -15593,7 +15619,7 @@
               "manager": "kubectl-client-side-apply",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:30Z",
+              "time": "2023-06-29T06:18:08Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:metadata": {
@@ -15619,7 +15645,7 @@
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:31Z",
+              "time": "2023-06-29T06:18:09Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -15655,9 +15681,14 @@
               "manager": "kubectl-replace",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-24T03:04:31Z",
+              "time": "2024-03-11T16:21:05Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    "f:cert-manager.io/inject-ca-from": {}
+                  }
+                },
                 "f:spec": {
                   "f:conversion": {
                     "f:strategy": {},
@@ -15677,6 +15708,24 @@
                     }
                   },
                   "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "cert-manager-cainjector",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-13T07:07:03Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {}
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -25051,11 +25100,12 @@
             "webhook": {
               "clientConfig": {
                 "service": {
-                  "namespace": "redis-operator",
+                  "namespace": "vynil-dbo",
                   "name": "webhook-service",
                   "path": "/convert",
                   "port": 443
-                }
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lSQUlmbDUwWHZWWm44Y21tWURSUDBRWVF3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOREF5TWpReE5qTXlOVFJhRncweU5EQTFNalF4TmpNeU5UUmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURSdEVwT24yd3JidSs5VHZWcThzSW5ETGc2OUJ0MkthVWVHV0hqCms2YU42ZGY3UFFlYXk1QU9YREhHN05BdUpOOTZWRGs4KzZYcjRvZThyK1c0Uy81bmJQd08rK3ZvaHk0R0RFL2YKQUtRK0o1MDlLMWNNUG9sVWJhTUNGZE5ZNFAwcURiajVjMUJHOE0zSjRuVmNNUko3emxoYWV2UWpzc3FhYkRyMgpUVFdvcjQweVVVMldrNEJJNWVLQk03cmFnTXBkZUQxSDhxQkl0WDB6WXJ6bE0rUVVaRlBCL3FORkxYZHY2ZU5aCjYrUExSNHc0NWdxVFhOZ1BGNS9vNk1MbHdxOTdQUnRCbDZNM0hmSzhqNGNMRjJZYzlKWjcrWXRiczFLTFpDVlkKcE43T0dSVU81dmdpQ3JQU3NXVUxIdU12SjZidWpkczFzQmZTNG5ZUk5iMWExUTl4QWdNQkFBR2plakI0TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRmdHQTFVZEVRRUIvd1JPTUV5Q0hYZGxZbWh2CmIyc3RjMlZ5ZG1salpTNTJlVzVwYkMxa1ltOHVjM1pqZ2l0M1pXSm9iMjlyTFhObGNuWnBZMlV1ZG5sdWFXd3QKWkdKdkxuTjJZeTVqYkhWemRHVnlMbXh2WTJGc01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTJsdHJSSG04UgpoWkRWeWQvVTN1Rm9jc1RkWUo5WU1HUk1NQytSYnpiMHo5dXZMNklDWGZOOUVxck82WjdHYnZrOEtGOXJaRWRiClZVMDd2cjlZMVhDWmRvTUxyTmM1eGVERmR3eFFUUTJ2U1Frd2tKdGlkYmV1UFpNOTNVMFpGM2RXNU1HNFl0eFkKd2VQL3RNN1JwMUwwZDlqbXpnWVJUcWdEQW8zdVNCQ2pmNFN3THFnbWVGWUVwam5QU1dhODFqRnZ4Ymp0bHZTZwp0cExTc2M1SjdBYkc0N1ZxRGl5WEF0b040Y0ZPbDdpQTMvUFRzNVFVdVRiRExkMGpaU0RFU3FSaHpwbTQwcE5BCnE5QWZKSGhMN1cyS0g5ZXJzSUJ1TW5vQTF1S2k2OTNlSHVyS08wTGJiVENWcFloNjBJUGM3YUNNZnJCeUVwK1AKTkd1a1NkcWlZbUlyCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
               },
               "conversionReviewVersions": [
                 "v1beta1",
@@ -25069,14 +25119,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:31Z",
+              "lastTransitionTime": "2023-06-29T06:18:08Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:31Z",
+              "lastTransitionTime": "2023-06-29T06:18:09Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }
@@ -28738,45 +28788,20 @@
       "crd": {
         "metadata": {
           "name": "redisreplications.redis.redis.opstreelabs.in",
-          "uid": "b408cf40-8a88-4f05-b489-b2d12ae66c31",
-          "resourceVersion": "27744000587",
-          "generation": 2,
-          "creationTimestamp": "2023-11-21T14:09:21Z",
+          "uid": "459c01a4-544e-43b1-a97f-37188d26d90e",
+          "resourceVersion": "139785718",
+          "generation": 6,
+          "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
+            "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
             "controller-gen.kubebuilder.io/version": "v0.4.1"
           },
           "managedFields": [
             {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:21Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {},
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {}
-                }
-              }
-            },
-            {
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:22Z",
+              "time": "2023-06-29T06:18:08Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -28809,12 +28834,43 @@
               "subresource": "status"
             },
             {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-06-29T06:18:08Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:controller-gen.kubebuilder.io/version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {},
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {}
+                }
+              }
+            },
+            {
               "manager": "kubectl-replace",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-24T03:06:13Z",
+              "time": "2024-03-11T16:21:05Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    "f:cert-manager.io/inject-ca-from": {}
+                  }
+                },
                 "f:spec": {
                   "f:conversion": {
                     "f:strategy": {},
@@ -28834,6 +28890,24 @@
                     }
                   },
                   "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "cert-manager-cainjector",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-13T07:07:04Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {}
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -35847,11 +35921,12 @@
             "webhook": {
               "clientConfig": {
                 "service": {
-                  "namespace": "redis-operator",
+                  "namespace": "vynil-dbo",
                   "name": "webhook-service",
                   "path": "/convert",
                   "port": 443
-                }
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lSQUlmbDUwWHZWWm44Y21tWURSUDBRWVF3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOREF5TWpReE5qTXlOVFJhRncweU5EQTFNalF4TmpNeU5UUmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURSdEVwT24yd3JidSs5VHZWcThzSW5ETGc2OUJ0MkthVWVHV0hqCms2YU42ZGY3UFFlYXk1QU9YREhHN05BdUpOOTZWRGs4KzZYcjRvZThyK1c0Uy81bmJQd08rK3ZvaHk0R0RFL2YKQUtRK0o1MDlLMWNNUG9sVWJhTUNGZE5ZNFAwcURiajVjMUJHOE0zSjRuVmNNUko3emxoYWV2UWpzc3FhYkRyMgpUVFdvcjQweVVVMldrNEJJNWVLQk03cmFnTXBkZUQxSDhxQkl0WDB6WXJ6bE0rUVVaRlBCL3FORkxYZHY2ZU5aCjYrUExSNHc0NWdxVFhOZ1BGNS9vNk1MbHdxOTdQUnRCbDZNM0hmSzhqNGNMRjJZYzlKWjcrWXRiczFLTFpDVlkKcE43T0dSVU81dmdpQ3JQU3NXVUxIdU12SjZidWpkczFzQmZTNG5ZUk5iMWExUTl4QWdNQkFBR2plakI0TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRmdHQTFVZEVRRUIvd1JPTUV5Q0hYZGxZbWh2CmIyc3RjMlZ5ZG1salpTNTJlVzVwYkMxa1ltOHVjM1pqZ2l0M1pXSm9iMjlyTFhObGNuWnBZMlV1ZG5sdWFXd3QKWkdKdkxuTjJZeTVqYkhWemRHVnlMbXh2WTJGc01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTJsdHJSSG04UgpoWkRWeWQvVTN1Rm9jc1RkWUo5WU1HUk1NQytSYnpiMHo5dXZMNklDWGZOOUVxck82WjdHYnZrOEtGOXJaRWRiClZVMDd2cjlZMVhDWmRvTUxyTmM1eGVERmR3eFFUUTJ2U1Frd2tKdGlkYmV1UFpNOTNVMFpGM2RXNU1HNFl0eFkKd2VQL3RNN1JwMUwwZDlqbXpnWVJUcWdEQW8zdVNCQ2pmNFN3THFnbWVGWUVwam5QU1dhODFqRnZ4Ymp0bHZTZwp0cExTc2M1SjdBYkc0N1ZxRGl5WEF0b040Y0ZPbDdpQTMvUFRzNVFVdVRiRExkMGpaU0RFU3FSaHpwbTQwcE5BCnE5QWZKSGhMN1cyS0g5ZXJzSUJ1TW5vQTF1S2k2OTNlSHVyS08wTGJiVENWcFloNjBJUGM3YUNNZnJCeUVwK1AKTkd1a1NkcWlZbUlyCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
               },
               "conversionReviewVersions": [
                 "v1beta1",
@@ -35865,14 +35940,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:21Z",
+              "lastTransitionTime": "2023-06-29T06:18:08Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:22Z",
+              "lastTransitionTime": "2023-06-29T06:18:08Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }
@@ -37907,45 +37982,20 @@
       "crd": {
         "metadata": {
           "name": "redissentinels.redis.redis.opstreelabs.in",
-          "uid": "ffdb2d37-daa9-4598-8b8d-5b43085e2cf3",
-          "resourceVersion": "27744004573",
-          "generation": 2,
-          "creationTimestamp": "2023-11-21T14:09:20Z",
+          "uid": "6a9dc72e-3e37-464d-b89c-20dedff63cda",
+          "resourceVersion": "139785726",
+          "generation": 6,
+          "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
+            "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
             "controller-gen.kubebuilder.io/version": "v0.4.1"
           },
           "managedFields": [
             {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:20Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {},
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {}
-                }
-              }
-            },
-            {
               "manager": "kube-apiserver",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T14:09:21Z",
+              "time": "2023-06-29T06:18:08Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:status": {
@@ -37978,12 +38028,43 @@
               "subresource": "status"
             },
             {
+              "manager": "kubectl-client-side-apply",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2023-06-29T06:18:08Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    ".": {},
+                    "f:controller-gen.kubebuilder.io/version": {}
+                  }
+                },
+                "f:spec": {
+                  "f:conversion": {},
+                  "f:group": {},
+                  "f:names": {
+                    "f:kind": {},
+                    "f:listKind": {},
+                    "f:plural": {},
+                    "f:singular": {}
+                  },
+                  "f:scope": {}
+                }
+              }
+            },
+            {
               "manager": "kubectl-replace",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-24T03:06:30Z",
+              "time": "2024-03-11T16:21:06Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
+                "f:metadata": {
+                  "f:annotations": {
+                    "f:cert-manager.io/inject-ca-from": {}
+                  }
+                },
                 "f:spec": {
                   "f:conversion": {
                     "f:strategy": {},
@@ -38003,6 +38084,24 @@
                     }
                   },
                   "f:versions": {}
+                }
+              }
+            },
+            {
+              "manager": "cert-manager-cainjector",
+              "operation": "Update",
+              "apiVersion": "apiextensions.k8s.io/v1",
+              "time": "2024-03-13T07:07:05Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {
+                "f:spec": {
+                  "f:conversion": {
+                    "f:webhook": {
+                      "f:clientConfig": {
+                        "f:caBundle": {}
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -41571,11 +41670,12 @@
             "webhook": {
               "clientConfig": {
                 "service": {
-                  "namespace": "redis-operator",
+                  "namespace": "vynil-dbo",
                   "name": "webhook-service",
                   "path": "/convert",
                   "port": 443
-                }
+                },
+                "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lSQUlmbDUwWHZWWm44Y21tWURSUDBRWVF3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOREF5TWpReE5qTXlOVFJhRncweU5EQTFNalF4TmpNeU5UUmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURSdEVwT24yd3JidSs5VHZWcThzSW5ETGc2OUJ0MkthVWVHV0hqCms2YU42ZGY3UFFlYXk1QU9YREhHN05BdUpOOTZWRGs4KzZYcjRvZThyK1c0Uy81bmJQd08rK3ZvaHk0R0RFL2YKQUtRK0o1MDlLMWNNUG9sVWJhTUNGZE5ZNFAwcURiajVjMUJHOE0zSjRuVmNNUko3emxoYWV2UWpzc3FhYkRyMgpUVFdvcjQweVVVMldrNEJJNWVLQk03cmFnTXBkZUQxSDhxQkl0WDB6WXJ6bE0rUVVaRlBCL3FORkxYZHY2ZU5aCjYrUExSNHc0NWdxVFhOZ1BGNS9vNk1MbHdxOTdQUnRCbDZNM0hmSzhqNGNMRjJZYzlKWjcrWXRiczFLTFpDVlkKcE43T0dSVU81dmdpQ3JQU3NXVUxIdU12SjZidWpkczFzQmZTNG5ZUk5iMWExUTl4QWdNQkFBR2plakI0TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRmdHQTFVZEVRRUIvd1JPTUV5Q0hYZGxZbWh2CmIyc3RjMlZ5ZG1salpTNTJlVzVwYkMxa1ltOHVjM1pqZ2l0M1pXSm9iMjlyTFhObGNuWnBZMlV1ZG5sdWFXd3QKWkdKdkxuTjJZeTVqYkhWemRHVnlMbXh2WTJGc01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTJsdHJSSG04UgpoWkRWeWQvVTN1Rm9jc1RkWUo5WU1HUk1NQytSYnpiMHo5dXZMNklDWGZOOUVxck82WjdHYnZrOEtGOXJaRWRiClZVMDd2cjlZMVhDWmRvTUxyTmM1eGVERmR3eFFUUTJ2U1Frd2tKdGlkYmV1UFpNOTNVMFpGM2RXNU1HNFl0eFkKd2VQL3RNN1JwMUwwZDlqbXpnWVJUcWdEQW8zdVNCQ2pmNFN3THFnbWVGWUVwam5QU1dhODFqRnZ4Ymp0bHZTZwp0cExTc2M1SjdBYkc0N1ZxRGl5WEF0b040Y0ZPbDdpQTMvUFRzNVFVdVRiRExkMGpaU0RFU3FSaHpwbTQwcE5BCnE5QWZKSGhMN1cyS0g5ZXJzSUJ1TW5vQTF1S2k2OTNlSHVyS08wTGJiVENWcFloNjBJUGM3YUNNZnJCeUVwK1AKTkd1a1NkcWlZbUlyCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
               },
               "conversionReviewVersions": [
                 "v1beta1",
@@ -41589,14 +41689,14 @@
             {
               "type": "NamesAccepted",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:20Z",
+              "lastTransitionTime": "2023-06-29T06:18:08Z",
               "reason": "NoConflicts",
               "message": "no conflicts found"
             },
             {
               "type": "Established",
               "status": "True",
-              "lastTransitionTime": "2023-11-21T14:09:21Z",
+              "lastTransitionTime": "2023-06-29T06:18:08Z",
               "reason": "InitialNamesAccepted",
               "message": "the initial names have been accepted"
             }

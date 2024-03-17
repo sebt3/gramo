@@ -10,8 +10,8 @@ const { $q, writeProperties, onlyWriteProperties, editor, setItemFromRoute } = u
 {{/if}}
 onMounted(() => editor.value.updateFromQuery(onlyWriteProperties(props.model)) )
 const onSubmit = () => emit('on-submit', sanitizeData(editor.value.obj))
-const setkey = (key:string, v) => editor.value.setKey(key, v)
-const setYaml = (v) => editor.value.setYaml(v)
+const setkey   = (key:string, v) => editor.value.setKey(key, v)
+const setYaml  = (v) => editor.value.setYaml(v)
 const OpenApiEdit      = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
 const MonacoEditor     = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
 const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/OpenApiNamedIcon.vue'));
@@ -40,10 +40,12 @@ const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/O
           @update:out="(v)=>setkey('spec', sanitizeData(v))"
           :in="editor.obj['spec']"
           :properties="getProperties({{ short }}Definition.properties.spec)"
+          :required="{{ short }}Definition.properties.spec.required"
   {{else}}
           @update:out="(v)=>setkey(null, sanitizeData(v))"
           :in="editor.obj"
           :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
+          :required="{{ short }}Definition.required"
   {{/if}}
 {{/if}}
         />
@@ -51,17 +53,20 @@ const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/core/O
       <q-tab-panel name="yaml" :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
           <MonacoEditor
             :text="editor.yaml" :key="editor.yaml"
+            :showDoc="editor.showDoc"
             @update:text="v=>setYaml(v)"
 {{#if (and (eq group 'vynil') (eq short 'Install'))}}
             :properties="getProperties({properties: model.consumevynilPackage.options})"
 {{else}}
             :properties="getProperties({{ short }}Definition,([k])=>writeProperties.includes(k))"
+            :required="{{ short }}Definition.required"
 {{/if}}
             />
       </q-tab-panel>
     </q-tab-panels>
-      <q-card-actions :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'}`">
-        <q-btn :label="$t('core.submit')" icon="save" type="submit" color="primary"/>
+      <q-card-actions :class="`bg-${ color{{ short }} }-${$q.dark.isActive?'10':'1'} row`">
+        <div class="col"><q-btn :label="$t('core.submit')" icon="save" type="submit" color="primary" /></div>
+        <div class="col text-right" v-if="editor.tab=='yaml'"><q-btn :label="$t('edit.showDoc')" icon="article" color="secondary" @click="()=>{editor.showDoc=!editor.showDoc}" /></div>
       </q-card-actions>
   </q-card>
   </q-form>

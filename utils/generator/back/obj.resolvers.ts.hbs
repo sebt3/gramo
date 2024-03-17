@@ -9,7 +9,7 @@ import { knowledge } from '../knowledge.js'
 import { queries as permissionsQueries } from './permissions.js';
 {{/if}}
 {{#if (and (eq group 'k8s') (eq short 'CustomResourceDefinition'))}}
-import flexver from 'flexver/dist/module.js';
+import flexver from 'flexver/dist/node.js';
 {{/if}}
 {{#each listTargets}}
 {{#unless (eq name 'Url')}}
@@ -26,9 +26,11 @@ const crdApi = kc.makeApiClient(k8s.CustomObjectsApi);
 {{/if}}
 const short2plural = (short:string) => short.toLowerCase()+'s'
 export const mutations = {
+{{#unless (defined crd)}}
 {{> createResolver ctx=. }}
 {{> deleteResolver ctx=. }}
 {{> patchResolver ctx=. }}
+{{/unless}}
 };
 const localResolvers = {
 {{#each autoResolvers}}
