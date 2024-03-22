@@ -2,11 +2,6 @@ import 'quasar/dist/quasar.sass'
 import './style/app.sass'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { useNavigationStore } from './stores/navigation'
-import { useConfigStore } from './stores/config'
-import { usePermissionStore } from './stores/permission'
-import { useCRDStore } from './stores/crds'
-import { beforeEach } from './stores/navigation'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
@@ -35,7 +30,6 @@ const apolloClient = new ApolloClient({
     uri: () => {return window.location.origin+'/graphql'},
     cache: new InMemoryCache(),
 })
-
 import GramoConfig from './queries/core/GramoConfig.graphql'
 async function createApp() {
     const { createApp, provide, defineAsyncComponent, h } = await import('vue');
@@ -64,7 +58,10 @@ async function createApp() {
 }
 async function useRoute(app) {
     const { router } = await import('./routes/index')
-    const DEFAULT_TITLE = "Gramo";
+    const { beforeEach } = await import('./stores/navigation')
+    const { useConfigStore } = await import('./stores/config')
+    const { gramoAppName } = useConfigStore();
+    const DEFAULT_TITLE = gramoAppName;
     router.beforeEach(beforeEach);
     router.afterEach((to) => {
       if (Object.keys(to.meta).includes('title') && typeof to.meta.title == 'function') {
@@ -98,7 +95,11 @@ async function useRoute(app) {
 }
 apolloClient.query({query: GramoConfig}).then(res => {
     if (res.loading) return;
-    createApp().then((app) => {
+    createApp().then(async (app) => {
+        const { useNavigationStore } = await import('./stores/navigation')
+        const { useConfigStore } = await import('./stores/config')
+        const { usePermissionStore } = await import('./stores/permission')
+        const { useCRDStore } = await import('./stores/crds')
         const {setConfig} = useConfigStore();
         const {setCurrentNamespace,setNamespaces} = useNavigationStore();
         const {setPermissions, namespaces} = usePermissionStore();

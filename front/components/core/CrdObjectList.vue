@@ -7,10 +7,14 @@ const props = withDefaults(defineProps<{model: object[]|null, parent:object, use
 import clusteredObjectDelete  from '@/queries/core/clusteredObject.delete.graphql'
 import namespacedObjectDelete from '@/queries/core/namespacedObject.delete.graphql'
 import { QTableColumn } from 'quasar'
-import { ref, tableColumnAlign, i18n, defineAsyncComponent, usecrdObject, useMutation } from '../../libs/core/crdObject.js'
-import { colorCustomResourceDefinition } from '../../libs/k8s/custom.js'
+const { tableColumnAlign } = await import('../../libs/core/navigation.js')
+const { ref, i18n, defineAsyncComponent, usecrdObject, useMutation } = await import('../../libs/core/crdObject.js')
+const { colorCustomResourceDefinition } = await import('../../libs/k8s/custom.js')
+const { useRouter } = await import('vue-router')
+const router = useRouter();
 const haveNamespace = props.parent.spec.scope=="Namespaced";
-const { pagination, router, $q, navigation, actionDelete, notifySuccess, notifyError } = usecrdObject();
+const pagination = ref({rowsPerPage: 0});
+const { $q, navigation, actionDelete, notifySuccess, notifyError } = usecrdObject();
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(haveNamespace?namespacedObjectDelete:clusteredObjectDelete);
 const ObjectColumns:Array<QTableColumn> = (haveNamespace?[
   {name: 'Namespace', label: i18n.global.t('meta.namespace'), field: row => row.metadata.namespace, sortable: true, align: tableColumnAlign.left},

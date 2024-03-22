@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import {menuLinksProps} from './interfaces.js';
-import { useConfigStore } from '../stores'
+const { createRouter, createWebHistory, RouteRecordRaw } = await import('vue-router')
+import { menuLinksProps } from './interfaces.js';
+const { useConfigStore } = await import('../stores/config.js')
 export * from './interfaces.js'
 const { defaultRoute } = useConfigStore()
 const routeChildren:Array<RouteRecordRaw> = [
@@ -18,15 +18,17 @@ const linkRedirect = {name:'Advices'};
 export const links:Array<menuLinksProps> = [];
 
 {{#each categories}}
-import { route as {{this}}Route, link as {{this}}Link } from './{{this}}'
+const { route: {{this}}Route, link: {{this}}Link } = await import('./{{this}}')
 if ({{this}}Route.children != undefined && {{this}}Route.children?.length>0) {
   routeChildren.push({{this}}Route);
-  {{#if (eq this 'system')}}
-  if ({{this}}Route.children?.length>2) links.push({{this}}Link)
-  {{else}}
-  links.push({{this}}Link)
-  {{/if}}
-  linkRedirect.name = linkRedirect.name!='Advices'?linkRedirect.name:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.name:'Advices'
+  if ({{this}}Link.children != undefined && {{this}}Link.children?.length>0) {
+    {{#if (eq this 'system')}}
+    if ({{this}}Route.children?.length>2) links.push({{this}}Link)
+    {{else}}
+    links.push({{this}}Link)
+    {{/if}}
+    linkRedirect.name = linkRedirect.name!='Advices'?linkRedirect.name:{{this}}Route.redirect!=undefined?{{this}}Route.redirect.name:'Advices'
+  }
 }
 {{/each}}
 

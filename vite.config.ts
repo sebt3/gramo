@@ -1,14 +1,22 @@
 import { fileURLToPath, URL } from "url";
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve, dirname } from 'node:path'
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve, dirname } from 'node:path';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import {vitePluginGraphqlLoader} from "vite-plugin-graphql-loader";
+import {sassMigratorQuasar} from "rollup-plugin-sass-migrator";
 
 // https://vitejs.dev/config/
 export default defineConfig({
     root: './front',
+    base: '/',
+    publicPath: '/',
     plugins: [
+        sassMigratorQuasar({
+            indexPath: 'node_modules/quasar/dist/quasar.sass',
+            debug: false,
+            dryRun: false
+        }),
         vue(),
         VueI18nPlugin({
             runtimeOnly: false,

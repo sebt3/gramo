@@ -2,10 +2,11 @@
 import { defineAsyncComponent } from 'vue'
 const MainMenu = defineAsyncComponent(() => import('./components/navigation/MainMenu.vue'));
 const BreadCrumbs = defineAsyncComponent(() => import('./components/navigation/BreadCrumbs.vue'));
-import { useNavigationStore } from './stores';
+import { useNavigationStore } from './stores/navigation';
 const { getTransition } = useNavigationStore();
 </script>
 <template>
+ <Suspense>
   <q-layout view="hHh lpR fFf">
     <MainMenu />
     <q-page-container>
@@ -20,4 +21,5 @@ const { getTransition } = useNavigationStore();
       </router-view>
     </q-page-container>
   </q-layout>
+ </Suspense>
 </template>

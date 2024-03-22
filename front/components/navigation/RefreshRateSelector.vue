@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useNavigationStore } from '../../stores'
+const { ref } = await import('vue')
+const { useNavigationStore } = await import('../../stores/navigation.js')
 const navigation = useNavigationStore()
 const options = ref([
   {label: 'off', value: undefined},

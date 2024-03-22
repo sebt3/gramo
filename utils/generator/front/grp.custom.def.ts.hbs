@@ -1,7 +1,7 @@
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { i18n } from "../i18n"
-import { {{#each categories}}{{this}}Color, {{this}}Icon,{{/each}} } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { i18n } = await import("../i18n")
+const { {{#each categories}}{{this}}Color, {{this}}Icon,{{/each}} } = await import('../../routes/custom');
 export const {{ name }}Icon = 'apps';
 export const {{ name }}Title = '{{ name }}';
 {{#each objects}}

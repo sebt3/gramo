@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { elude } from "../../libs/core/"
+const { elude } = await import("../../libs/core/")
 const props = defineProps<{status: object}>();
 console.log(props.status)
 function getConditionColor(cond) {

@@ -8,9 +8,13 @@ import {{ short }}New from '@/queries/core/clusteredObject.create.graphql'
 {{else}}
 import {{ short }}New from '@/queries/{{ group }}/{{ short }}.create.graphql'
 {{/if}}
-import { color{{ short }}, icon{{ short }} } from '../../../libs/{{ group }}/custom.js'
-import { defineAsyncComponent, i18n, ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } from '@/libs/{{ group }}/{{ short }}.js'
-const { $q, editor, router, navigation, set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute, notifySuccess, notifyError, notifyWorking } = use{{ short }}();set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
+const { useRouter } = await import('vue-router')
+const router = useRouter();
+const { color{{ short }}, icon{{ short }} } = await import('../../../libs/{{ group }}/custom.js')
+const { defineAsyncComponent, i18n, ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } = await import('@/libs/{{ group }}/{{ short }}.js')
+const { set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute } = await import('../../../libs/core/navigation.js')
+set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
+const { $q, editor, navigation, notifySuccess, notifyError, notifyWorking } = use{{ short }}(router);
 const { mutate, onDone, onError } = useMutation({{ short }}New);
 const name = ref('');
 const form = ref(null);
@@ -49,7 +53,7 @@ async function onSubmit(o:object) {
     notifyError(i18n.global.t('new.notifyNotReady'));
   }
 }
-const {{ group }}{{ short }}Edit = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}Edit.vue'));
+const GenericEdit = defineAsyncComponent(() => import( '@/components/generic/GenericEdit.vue'));
 const MetadataNew = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
 </script>
 <template>
@@ -67,7 +71,7 @@ const MetadataNew = defineAsyncComponent(() => import( '@/components/core/Metada
       </q-form>
     </div>
     <div class="col-md-12">
-      <{{ group }}{{ short }}Edit
+      <GenericEdit group="{{ group }}" short="{{ short }}"
         :model="model"
         @on-submit="onSubmit"
        />

@@ -1,8 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { i18n } from "../i18n"
-import { systemColor, systemIcon, installIcon, configIcon} from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { i18n } = await import("../i18n")
+const { systemColor, systemIcon, installIcon, configIcon} = await import('../../routes/custom');
 export const opentelemetryIcon = 'apps';
 export const opentelemetryTitle = 'Telemetry';
 export const iconInstrumentation = configIcon;

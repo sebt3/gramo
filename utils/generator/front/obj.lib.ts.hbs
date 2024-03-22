@@ -1,30 +1,35 @@
 import { QTableColumn } from 'quasar'
-import { i18n } from "../i18n"
-import { usePermissionStore } from '../../stores'
-import { watch, ref, gqlDataToYaml, tableColumnAlign, useCore, useNavigationStoreRef } from '../core'
+const { i18n } = await import("../i18n")
+const { usePermissionStore } = await import('../../stores/permission.js')
+const { watch, ref, gqlDataToYaml, useCore, useNavigationStoreRef } = await import('../core')
+const { tableColumnAlign } = await import('../core/navigation.js')
 export { onMounted, defineAsyncComponent, elude, getColor, getConditionColor, timeAgo, ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
 export { i18n } from "../../libs/i18n"
-export { {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes } from './custom.js'
-import { extra{{short}}Columns } from './custom.js'
-import { stringify, parse } from 'yaml'
+export { {{ short }}ListExcludes, {{ short }}ListExcludes as itemListExcludes, {{ short }}ReadExcludes, {{ short }}ReadExcludes as itemReadExcludes, {{ short }}SimpleExcludes, {{ short }}SimpleExcludes as itemSimpleExcludes, icon{{ short }} as iconItem, color{{ short }} as colorItem, description{{ short }} as descriptionItem, short{{ short }} as shortItem, extra{{ short }}Columns as extraColumns } from './custom.js'
+const { extra{{short}}Columns } = await import('./custom.js')
+const { stringify, parse } = await import('yaml')
 const can = usePermissionStore().can;
-
 export const {{short}}Columns:Array<QTableColumn> = ([
   {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat(extra{{short}}Columns).concat([
   {name: 'Problems', label: i18n.global.t('core.status'), field: 'Ok', sortable: false, align: tableColumnAlign.right},
   {name: 'Action', label: i18n.global.t('core.action'), field: 'Action', sortable: false, align: tableColumnAlign.right}
 ]);
+export const itemColumns = {{short}}Columns;
 {{#if namespaced}}
 export const {{short}}AllColumns = ([
   {name: 'Namespace', label: i18n.global.t('meta.namespace'), field: row => row.metadata.namespace, sortable: true, align: tableColumnAlign.left}
 ] as Array<QTableColumn>).concat({{short}}Columns);
+{{else}}
+export const {{short}}AllColumns = {{short}}Columns;
 {{/if}}
-
+export const itemAllColumns = {{short}}AllColumns;
+const { isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute } = await import('../../libs/core/navigation.js')
+export const namespaced = {{#if namespaced}}true{{else}}false{{/if}};
 export const {{short}}Definition = {{toJson definition}};
-
-export function use{{ short }}() {
-  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking{{#if namespaced}}, isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute{{/if}} } = useCore();
+export const itemDefinition = {{short}}Definition;
+export function use{{ short }}(router) {
+  const { $q, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   const viewer = ref({
       tab: 'meta',
       full: '',
@@ -69,10 +74,8 @@ export function use{{ short }}() {
     readProperties: {{toJsonKeys readProperties}},
     writeProperties: {{toJsonKeys writeProperties}},
     navigation: useNavigationStoreRef(),
-{{#if namespaced}}
-    isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute,
-{{/if}}
-    router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute, namespaced: {{#if namespaced}}true{{else}}false{{/if}},
+    notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     onNot{{ short }}Found: (res) => {
 {{#if namespaced}}
     if ( !res.loading && res.data.k8sNamespace[0].{{group}}{{short}} == null) {
@@ -140,3 +143,4 @@ export function use{{ short }}() {
     },
   }
 }
+export const useItem = use{{ short }}

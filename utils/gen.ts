@@ -14,7 +14,6 @@ const path_data = path.resolve(__dirname, '..', 'data');
 const path_back = path.resolve(__dirname, '..', 'back');
 const path_front = path.resolve(__dirname, '..', 'front');
 const path_lib = path.resolve(__dirname, 'generator');
-const partials_front = path.resolve(path_lib, 'partials', 'front');
 const partials_back = path.resolve(path_lib, 'partials', 'back');
 const partials_resolvers = path.resolve(path_lib, 'partials', 'resolvers');
 const partials_customs = path.resolve(path_lib, 'partials', 'customs');
@@ -44,9 +43,6 @@ loadPartial('resolversFluxCD',          path.resolve(partials_resolvers, 'fluxcd
 loadPartial('resolversK8up',            path.resolve(partials_resolvers, 'k8up.ts.hbs'));
 loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'configMap.ts.hbs'));
 loadPartial('resolversCRD',             path.resolve(partials_resolvers, 'crd.ts.hbs'));
-loadPartial('vueLabelFields',           path.resolve(partials_front, 'labels.fields.vue.hbs'));
-loadPartial('vueNameFields',            path.resolve(partials_front, 'name.fields.vue.hbs'));
-loadPartial('vueExtraFields',           path.resolve(partials_front, 'extra.fields.vue.hbs'));
 loadPartial('cattleCustom',             path.resolve(partials_customs, 'cattle.hbs'));
 loadPartial('certmanagerCustom',        path.resolve(partials_customs, 'certmanager.hbs'));
 loadPartial('ciliumCustom',             path.resolve(partials_customs, 'cilium.hbs'));
@@ -133,22 +129,15 @@ new Promise((resolve) => {
     const grpQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.query.read.graphql.hbs'))
     const allQueryRead      = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.query.read.graphql.hbs'))
     const allKnown          = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.known.ts.hbs'))
-    const allLib            = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.lib.ts.hbs'))
+    const allImporter       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.lib.importer.ts.hbs'))
     const allPageAdvices    = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.pages.advices.vue.hbs'))
     const allRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'all.routes.ts.hbs'))
     const catRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'cat.routes.ts.hbs'))
-    const catPageAdvices    = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'cat.pages.advices.vue.hbs'))
-    const catLib            = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'cat.lib.ts.hbs'))
     const grpPageDashboard  = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.pages.dashboard.vue.hbs'))
     const grpPageAdvices    = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.pages.advices.vue.hbs'))
     const grpLib            = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.lib.ts.hbs'))
     const grpRoutes         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.routes.ts.hbs'))
     const grpCustom         = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'grp.custom.def.ts.hbs'))
-    const objCompEdit       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.edit.vue.hbs'))
-    const objCompMeta       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.meta.vue.hbs'))
-    const objCompStatus     = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.status.vue.hbs'))
-    const objCompList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.list.vue.hbs'))
-    const objCompView       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.components.view.vue.hbs'))
     const objPageEdit       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.edit.vue.hbs'))
     const objPageList       = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.list.vue.hbs'))
     const objPageNew        = loadCompile(deleteFiles, path.resolve(path_lib, 'front', 'obj.pages.new.vue.hbs'))
@@ -158,7 +147,7 @@ new Promise((resolve) => {
     const current = data as {name:string,objects:{short:string, category:string, readProperties:string[]}[]}[];
     allKnown(path.resolve(path_front, 'libs'), `knowledge.ts`, {groups: current})
     allQueryRead(path.resolve(path_front, 'queries'), `all.read.graphql`, {name: 'Advice', detailed: false, objects: current.map(g=>g.objects).flat()})
-    allLib(path.resolve(path_front, 'libs'), `index.ts`, {groups: current, categories: allCategories})
+    allImporter(path.resolve(path_front, 'libs', 'core'), `importer.ts`, {groups: current, categories: allCategories})
     allPageAdvices(path.resolve(path_front, 'pages'), 'AllAdvices.vue', {groups: current, categories: allCategories.map(c=>{return { category: c, groups: current.map(g=>{return{...g, objects: g.objects.filter(o=>o.category==c)}}).filter(g=>g.objects.length>0)}})})
     allRoutes(path.resolve(path_front, 'routes'), `index.ts`, {groups: current, categories: allCategories})
     allCategories.forEach(c=>{
@@ -168,13 +157,10 @@ new Promise((resolve) => {
             ...g,
             objects: g.objects.filter(o=>o.category==c)
         }}).filter(g=>g.objects.length>0)
-        catLib(path.resolve(path_front, 'libs'), `${c}.ts`,{category: c, groups: groups})
-        catPageAdvices(path.resolve(path_front, 'pages', c), `${c}Advices.vue`,{category: c, groups: groups})
         catRoutes(path.resolve(path_front, 'routes', c), 'index.ts',{category: c, groups: groups})
     })
     current.forEach(g => {
         if (!deleteFiles) mkdir(path.resolve(path_front, 'queries', g.name));
-        if (!deleteFiles) mkdir(path.resolve(path_front, 'components', g.name));
         if (!deleteFiles) mkdir(path.resolve(path_front, 'libs', g.name));
         grpCustom(path.resolve(path_front, 'libs', g.name),`custom.ts`, {...g, categories: g.objects.map(o=>o.category).filter(uniq)})
         allCategories.filter(c=> g.objects.filter(o=>o.category==c).length>0).forEach(c=>{
@@ -195,23 +181,12 @@ new Promise((resolve) => {
             }
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.read.graphql`, {...o, detailed: false})
             objQueryRead(path.resolve(path_front, 'queries', g.name), `${o.short}.details.graphql`, {...o, detailed: true})
-            objCompEdit(path.resolve(path_front, 'components', g.name),`${o.short}Edit.vue`, o)
-            objCompList(path.resolve(path_front, 'components', g.name),`${o.short}List.vue`, o)
-            objCompMeta(path.resolve(path_front, 'components', g.name),`${o.short}Meta.vue`, o)
-            objCompStatus(path.resolve(path_front, 'components', g.name),`${o.short}Status.vue`, o);
-            objCompView(path.resolve(path_front, 'components', g.name),`${o.short}View.vue`, o)
             if (!deleteFiles) mkdir(path.resolve(path_front, 'pages', o['category'], g.name));
             objPageEdit(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}Edit.vue`, o)
             objPageList(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}List.vue`, o)
             objPageView(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}View.vue`, o)
             objPageNew(path.resolve(path_front, 'pages', o['category'], g.name),`${o.short}New.vue`, o)
             objLib(path.resolve(path_front, 'libs', g.name),`${o.short}.ts`, o)
-            /*if (Object.keys(o.readProperties).includes('status') &&
-                o['definition'] != undefined && o['definition']['properties'] != undefined &&
-                o['definition']['properties']['status'] != undefined &&
-                o['definition']['properties']['status']['properties'] != undefined &&
-                o['definition']['properties']['status']['properties']['conditions'] != undefined)
-                console.log(o['group'],o['short'])*/
             if (deleteFiles) rmdir(path.resolve(path_front, 'pages', o['category'], g.name));
         })
         if (deleteFiles) rmdir(path.resolve(path_front, 'queries', g.name));
@@ -221,5 +196,6 @@ new Promise((resolve) => {
     if (deleteFiles) allCategories.forEach(c=>{
         rmdir(path.resolve(path_front, 'routes', c));
     })
+    //console.log(current.map(g=>g.objects.length).reduce((cur,res)=>res+cur,0))
     return data
 })

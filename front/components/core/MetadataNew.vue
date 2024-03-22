@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useNavigationStoreRef } from '../../stores';
-import { i18n } from "../../libs/i18n"
+const { ref, watch } = await import('vue')
+const { useNavigationStoreRef } = await import('../../stores/navigation.js');
+const { i18n } = await import("../../libs/i18n")
 const emit = defineEmits(['update:name'])
 const props = withDefaults(defineProps<{
   namespaced?: boolean

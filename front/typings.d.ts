@@ -1,6 +1,6 @@
 
 declare module '*.vue' { // NOTE: ts-loader
-    import { defineComponent } from 'vue';
+    const { defineComponent } = await import('vue');
 
     const component: ReturnType<typeof defineComponent>;
     export default component;

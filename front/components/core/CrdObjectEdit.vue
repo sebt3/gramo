@@ -4,9 +4,9 @@ const props = defineProps<{
   model: object,
   parent:object
 }>();
-import { getProperties, sanitizeData, getTargetVersion, defineAsyncComponent, usecrdObject, onMounted } from '../../libs/core/crdObject.js'
+const { getProperties, sanitizeData, getTargetVersion, defineAsyncComponent, usecrdObject, onMounted } = await import('../../libs/core/crdObject.js')
 const { $q, onlyWriteProperties, editor } = usecrdObject();
-import { colorCustomResourceDefinition } from '../../libs/k8s/custom.js'
+const { colorCustomResourceDefinition } = await import('../../libs/k8s/custom.js')
 const targetVersion = getTargetVersion(props.parent['spec']['versions'])
 const schema = props.parent['spec']['versions'].filter(v=>v.name==targetVersion)[0].schema.openAPIV3Schema
 onMounted(() => {
@@ -17,7 +17,7 @@ function onSubmit() {
 }
 const setkey = (key:string, v) => editor.value.setKey(key, v)
 const setYaml = (v) => editor.value.setYaml(v)
-const OpenApiEdit  = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const OpenApiEdit  = defineAsyncComponent(() => import( '@/components/openapi/OpenApiEdit.vue'));
 const MonacoEditor = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
 </script>
 <template>

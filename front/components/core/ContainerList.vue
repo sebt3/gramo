@@ -5,16 +5,17 @@ const props=withDefaults(defineProps<{model: object[], parent?:object, useAction
   useRefresh: true,
   showNamespace: false,
 });
-import { usePod } from '../../libs/k8s/Pod.js'
-import { colorPod, iconPod } from '../../libs/k8s/custom.js'
-import { useQuasar, QTableColumn } from 'quasar'
-import { onMounted, ref, useCore, tableColumnAlign } from '../../libs/core'
-import { i18n } from "../../libs/i18n"
-const $q = useQuasar()
+import { QTableColumn } from 'quasar'
+const { usePod } = await import('../../libs/k8s/Pod.js')
+const { colorPod, iconPod } = await import('../../libs/k8s/custom.js')
+const { tableColumnAlign } = await import('../../libs/core/navigation.js')
+const { onMounted, ref, useCore } = await import('../../libs/core')
+const { i18n } = await import("../../libs/i18n")
 const {  onlyReadProperties, viewerUpdate, setNamespacedItemFromRoute } = usePod();setNamespacedItemFromRoute();
 const tab=ref('list')
 const container=ref(props.model.map(c=>c['name'])[0])
-const { pagination } = useCore();
+const pagination = ref({rowsPerPage: 0});
+const { $q } = useCore();
 const ContainerColumns:Array<QTableColumn> = ((props.showNamespace?[{name: 'Namespace', label: 'Namespace', field: row => row.namespace, sortable: true, align: tableColumnAlign.left}]:[]) as QTableColumn[]).concat([
   {name: 'Init', label: i18n.global.t('container.init'), field: row => row.init?'init':'main', sortable: true, align: tableColumnAlign.left},
   {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.name, sortable: true, align: tableColumnAlign.left},

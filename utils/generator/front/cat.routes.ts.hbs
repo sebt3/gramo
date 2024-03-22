@@ -1,21 +1,12 @@
-import {menuLinksProps} from '../interfaces';
-import { RouteRecordRaw } from 'vue-router'
-import { {{ category }}Icon, {{ category }}Title, {{ category }}Desc } from '../custom.js';
+import { menuLinksProps } from '../interfaces';
+const { RouteRecordRaw } = await import('vue-router')
+const { {{ category }}Icon, {{ category }}Title, {{ category }}Desc } = await import('../custom.js');
 const linkChildren:Array<menuLinksProps> = [];
 const routeChildren:Array<RouteRecordRaw> = [
-    {
-      path: 'advices',
-      name: '{{ category }}Advices',
-      component: () => import('../../pages/{{category}}/{{category}}Advices.vue'),
-      meta: {
-        breadcrumb: 'Advices', icon: {{ category }}Icon, ns: false,
-        title: () => '{{category}} Advices'
-      },
-    },
 ];
 const linkRedirect = {name:'{{ category }}Advices'};
 {{#each groups}}
-import { route as {{ this.name }}Route, link as {{ this.name }}Link } from './{{ this.name }}'
+const { route: {{ this.name }}Route, link: {{ this.name }}Link } = await import('./{{ this.name }}')
 if (Array.isArray({{ this.name }}Link.children) && {{ this.name }}Link.children.length>0) {
   linkRedirect.name = linkRedirect.name!='{{ ../category }}Advices'?linkRedirect.name:{{ this.name }}Route['redirect']!=undefined?{{ this.name }}Route['redirect'].name:'{{ this.category }}{{ this.name }}Dashboard'
   linkChildren.push({{ this.name }}Link)

@@ -33,7 +33,7 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
       {{#each resolvers}}
         {{#unless (containShort ../../objects resultShort) }}
       {{name}} {
-        {{#if (or (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
+        {{#if (or (and (eq resultGroup 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
           {{#if (eq resultShort 'Package')}}
         name
         commit_id

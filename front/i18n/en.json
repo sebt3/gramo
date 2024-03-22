@@ -23,7 +23,9 @@
       "problemPerNamespaceSource": "{ short } problems distribution per namespaces and sources",
       "problemPerSource": "{ short } problems per sources",
       "problemPerNamespace": "{ short } problems per namespace",
-      "problemShort": "{ short } problems"
+      "problemShort": "{ short } problems",
+      "info": "Information",
+      "nothing": "Nothing to see here"
     },
     "overview": {
       "captionList": "{ short } list",
@@ -287,5 +289,39 @@
       "Volume": "Volume",
       "CPURequest": "CPU request",
       "MemRequest": "Memory request"
+    },
+    "argoproj": {
+      "SyncStatus": "Sync Status",
+      "HealthStatus": "Health Status",
+      "Revision": "Revision",
+      "Message": "Message"
+    },
+    "keda": {
+      "PodIdentity": "PodIdentity",
+      "VaultAddress": "VaultAddress",
+      "ScaleTargetKind": "ScaleTargetKind",
+      "ScaleTargetName": "ScaleTargetName",
+      "ScaledObjects": "ScaledObjects",
+      "ScaledJobs": "ScaledJobs",
+      "Min": "Min",
+      "Max": "Max"
+    },
+    "min": {
+      "Tenant": "Tenant",
+      "Phase": "Phase",
+      "State": "State"
+    },
+    "operators": {
+      "Display": "Display",
+      "Type": "Type",
+      "Publisher": "Publisher",
+      "Version": "Version",
+      "Replaces": "Replaces",
+      "Phase": "Phase",
+      "Approval": "Approval",
+      "Approved": "Approved",
+      "Package": "Package",
+      "Source": "Source",
+      "Channel": "Channel"
     }
   }

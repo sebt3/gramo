@@ -7,6 +7,7 @@
   "include": ["back/**/*.ts", "front/typings.d.ts", "front/**/*.d.ts", "front/**/*.graphql"],
   "rootDirs": ["front", "back"],
   "compilerOptions": {
+    "types": ["vite/client"],
     "paths": { "@/*":["./front/*"] },
     "target": "es2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": ["es2022", "DOM"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */

@@ -1,4 +1,4 @@
-import { OpenAPIV3 } from "openapi-types";
+const { OpenAPIV3 } = await import("openapi-types");
 export function getProperties(val, filter=undefined) {
     if (val != undefined && val['properties'] != undefined && filter == undefined)
         return new Map(Object.entries(val.properties));

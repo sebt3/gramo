@@ -1,8 +1,8 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { i18n } from "../i18n"
-import { databaseColor, databaseIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { i18n } = await import("../i18n")
+const { databaseColor, databaseIcon, } = await import('../../routes/custom');
 export const mongodbIcon = databaseIcon;
 export const mongodbTitle = 'MongoDB';
 export const iconMongoDBCommunity = databaseIcon;

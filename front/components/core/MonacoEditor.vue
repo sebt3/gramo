@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const emit = defineEmits(['update:text'])
-import { OpenAPIV3 } from "openapi-types";
+const { OpenAPIV3 } = await import("openapi-types");
 const props = withDefaults(defineProps<{
   showDoc: boolean,
   properties: Map<string, OpenAPIV3.SchemaObject>
@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<{
   automaticLayout: true,
 });
 import * as monaco from 'monaco-editor'
-import { ref, onMounted, defineAsyncComponent } from "vue";
+import { ref, onMounted, defineAsyncComponent } from 'vue';
 const code=ref(null);
 onMounted(() => {
   const editor = monaco.editor.create(code.value as unknown as HTMLElement, {
@@ -37,7 +37,7 @@ onMounted(() => {
   editor.focus();
   editor.onDidBlurEditorText(() => {emit('update:text', editor.getValue())})
 });
-const OpenAPIDocumentation = defineAsyncComponent(() => import( '@/components/core/OpenAPIDocumentation.vue'));
+const OpenAPIDocumentation = defineAsyncComponent(() => import( '@/components/openapi/OpenAPIDocumentation.vue'));
 </script>
 <template>
   <div class="row">

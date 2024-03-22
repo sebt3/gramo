@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+const { defineAsyncComponent } = await import('vue')
 import {{ group }}{{ short }}Query from '@/queries/{{ group }}/{{ short }}.details.graphql'
 {{#if (defined crd)}}
 {{#if namespaced}}
@@ -10,34 +10,24 @@ import {{ short }}Delete from '@/queries/core/clusteredObject.delete.graphql'
 {{else}}
 import {{ short }}Delete from '@/queries/{{ group }}/{{ short }}.delete.graphql'
 {{/if}}
-import { i18n } from "../../../libs/i18n"
-{{#each resolvers}}
-  {{#if (or (eq type 'parent') (eq type 'consume'))}}
-    {{#unless (and (and (eq type 'parent') (eq short 'Pod')) (eq resultShort 'Node'))}}
-const  {{ resultGroup }}{{ resultShort }}Meta   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}Meta.vue'));
-    {{/unless}}
-  {{else}}
-  {{#if (eq type 'equity')}}
-const  {{ resultGroup }}{{ resultShort }}View   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}View.vue'));
-  {{else}}
-    {{#unless (and (and (eq type 'child') (eq short 'Node')) (eq resultShort 'Pod'))}}
-const  {{ resultGroup }}{{ resultShort }}List   = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}List.vue'));
-    {{/unless}}
-  {{/if}}
-  {{/if}}
-{{/each}}
+const { i18n } = await import("../../../libs/i18n")
 {{#each listTargets}}
   {{#if (eq type 'consume')}}
-import { {{ name }}ReadExcludes as {{ group }}{{ name }}ListExcludes } from '../../../libs/{{ group }}/custom.js'
+const { {{ name }}ReadExcludes: {{ group }}{{ name }}ListExcludes } = await import('../../../libs/{{ group }}/custom.js')
   {{else}}
-import { {{ name }}ListExcludes as {{ group }}{{ name }}ListExcludes } from '../../../libs/{{ group }}/custom.js'
+const { {{ name }}ListExcludes: {{ group }}{{ name }}ListExcludes } = await import('../../../libs/{{ group }}/custom.js')
   {{/if}}
 {{/each}}
-import { ref, sanitizeData, useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } from '../../../libs/{{ group }}/{{ short }}.js'
+const { useRouter } = await import('vue-router')
+const router = useRouter();
+const { ref, sanitizeData, useQuery, useMutation, use{{ short }}, {{ short }}ReadExcludes } = await import('../../../libs/{{ group }}/{{ short }}.js')
+const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation } = use{{ short }}(router);
 {{#if namespaced}}
-const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setNamespacedItemFromRoute } = use{{ short }}();setNamespacedItemFromRoute();
+const { setNamespacedItemFromRoute } = await import('../../../libs/core/navigation.js')
+setNamespacedItemFromRoute();
 {{else}}
-const { actionDelete, onErrorHandler, notifySuccess, notifyError, onNot{{ short }}Found, navigation, setItemFromRoute } = use{{ short }}();setItemFromRoute();
+const { setItemFromRoute } = await import('../../../libs/core/navigation.js')
+setItemFromRoute();
 {{/if}}
 const { result, loading, onResult, onError } = useQuery({{ group }}{{ short }}Query, {
   "obj": {
@@ -170,10 +160,10 @@ onResult(res => {
 {{> zalandoCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
 {{#each resolvers}}
-  {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'Distrib')))}}
+  {{#if (and (eq type 'consume') (eq resultShort 'Node'))}}
     sectionCounts.value.consumeLeft += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
-  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (ne resultShort 'Distrib')))}}
+  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
     sectionCounts.value.consumeRight += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
   {{#if (eq type 'parent')}}
@@ -199,8 +189,19 @@ onDeleteError((err) => {
   notifyError(i18n.global.t('delete.notifyError'));
   console.log('deletion error',err);
 })
-const {{ group }}{{ short }}View = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}View.vue'));
 const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+const GenericMeta   = defineAsyncComponent(() => import( '@/components/generic/GenericMeta.vue'));
+const GenericList   = defineAsyncComponent(() => import( '@/components/generic/GenericList.vue'));
+const GenericView   = defineAsyncComponent(() => import( '@/components/generic/GenericView.vue'));
+{{#each resolvers}}
+  {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
+    {{#if (or (eq type 'parent') (eq type 'consume'))}}
+const {{ resultGroup }}{{ resultShort }}Meta = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}Meta.vue'));
+    {{else}}
+const {{ resultGroup }}{{ resultShort }}List = defineAsyncComponent(() => import( '@/components/{{ resultGroup }}/{{ resultShort }}List.vue'));
+    {{/if}}
+  {{/if}}
+{{/each}}
 </script>
 <template><div>
   <TableSkeleton :showNamespace="{{toJson namespaced}}" v-if="loading" />
@@ -208,7 +209,7 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
 {{#each resolvers}}
   {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'Distrib')))}}
-      <{{ resultGroup }}{{ resultShort }}Meta v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
+      <GenericMeta group="{{ resultGroup }}" short="{{ resultShort }}" v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
@@ -220,7 +221,7 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
 {{#each resolvers}}
   {{#if (eq type 'parent')}}
     <div v-if="!loading && conditions['{{name}}'](result){{#if (eq resultShort 'Install')}}&&sectionCounts.parent==1{{/if}}">
-      <{{ resultGroup }}{{ resultShort }}Meta :showStatus="false"
+      <GenericMeta group="{{ resultGroup }}" short="{{ resultShort }}" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
@@ -231,11 +232,18 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
     <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeRight>0">
 {{#each resolvers}}
-  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (ne resultShort 'Distrib')))}}
+  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
+    {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}Meta v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
+    {{else}}
+      <GenericMeta group="{{ resultGroup }}" short="{{ resultShort }}" v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
+       />
+    {{/if}}
   {{/if}}
 {{/each}}
     </div>
@@ -245,16 +253,24 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
     <div class="col-md-3" v-if="!loading && sectionCounts.users>0">
 {{#each resolvers}}
   {{#if (eq type 'users')}}
+    {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false" :parent="sanitizeData(model)"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
+    {{else}}
+      <GenericList group="{{ resultGroup }}" short="{{ resultShort }}" :useRefresh="false" :parent="sanitizeData(model)"
+        v-if="!loading && conditions['{{name}}'](result)"
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
+       />
+    {{/if}}
   {{/if}}
 {{/each}}
     </div>
     <div :class="`col-md-${6+(sectionCounts.uses<1?2:0)+(sectionCounts.users<1?2:0)}`">
-      <div><{{ group }}{{ short }}View :useActions="true"
+      <div><GenericView group="{{ group }}" short="{{ short }}" :useActions="true"
         v-if="!loading && model['metadata'] != undefined"
         :model="sanitizeData(model)"
         @on-delete="(meta)=>{actionDelete(deletor, meta)}"
@@ -262,7 +278,7 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
 {{#each resolvers}}
   {{#if (eq type 'equity')}}
     <div>
-      <{{ resultGroup }}{{ resultShort }}View :useActions="false" :showLink="true"
+      <GenericView group="{{ resultGroup }}" short="{{ resultShort }}" :useActions="false" :showLink="true"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
@@ -275,21 +291,36 @@ const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/Tabl
     <div class="col-md-3" v-if="!loading && sectionCounts.uses>0">
 {{#each resolvers}}
   {{#if (eq type 'use')}}
+    {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false" :parent="sanitizeData(model)"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
+    {{else}}
+      <GenericList group="{{ resultGroup }}" short="{{ resultShort }}" :useRefresh="false" :parent="sanitizeData(model)"
+        v-if="!loading && conditions['{{name}}'](result)"
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
+       />
+    {{/if}}
   {{/if}}
 {{/each}}
     </div>
 {{#each resolvers}}
   {{#if (or (eq type 'child') (eq type 'provide'))}}
     <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['{{name}}'](result)">
+    {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false" :parent="sanitizeData(model)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
        />
+    {{else}}
+      <GenericList group="{{ resultGroup }}" short="{{ resultShort }}" :useRefresh="false" :parent="sanitizeData(model)"
+        :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
+        origin="{{inverse}}{{../group}}{{../short}}"
+       />
+    {{/if}}
     </div>
   {{/if}}
 {{/each}}

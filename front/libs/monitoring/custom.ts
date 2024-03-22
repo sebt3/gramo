@@ -1,10 +1,11 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { i18n } from "../i18n"
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { i18n } = await import("../i18n")
 export const iconAlertmanager = 'apps';
 export const iconPrometheus = 'apps';
-import { systemColor, configIcon, } from '../../routes/custom';
+const { systemColor, configIcon, } = await import('../../routes/custom');
 export const monitoringIcon = 'supervised_user_circle';
 export const monitoringTitle = 'Monitoring';
 export const colorAlertmanager = systemColor;

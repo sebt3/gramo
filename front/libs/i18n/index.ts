@@ -1,4 +1,4 @@
-import { createI18n } from "vue-i18n"
+const { createI18n } = await import("vue-i18n")
 import translate from './translate.js'
 import en from "../../i18n/en.json"
 const locale = translate.guessDefaultLocale();

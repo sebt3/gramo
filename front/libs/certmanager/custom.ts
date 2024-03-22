@@ -1,8 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { networkColor, networkIcon } from '../../routes/custom';
-import { i18n } from "../i18n"
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { networkColor, networkIcon } = await import('../../routes/custom');
+const { i18n } = await import("../i18n")
 export const certmanagerIcon = networkIcon;
 export const certmanagerTitle = 'cert-manager';
 export const iconChallenge = networkIcon;

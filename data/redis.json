@@ -3579,8 +3579,8 @@
         "metadata": {
           "name": "redis.redis.redis.opstreelabs.in",
           "uid": "e438be48-8ef9-4bdb-a7cb-cc2c1e0cf500",
-          "resourceVersion": "139785702",
-          "generation": 6,
+          "resourceVersion": "144830211",
+          "generation": 8,
           "creationTimestamp": "2023-06-29T06:18:07Z",
           "annotations": {
             "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
@@ -3687,7 +3687,7 @@
               "manager": "cert-manager-cainjector",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-03-13T07:07:04Z",
+              "time": "2024-03-19T11:59:53Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:spec": {
@@ -15607,8 +15607,8 @@
         "metadata": {
           "name": "redisclusters.redis.redis.opstreelabs.in",
           "uid": "5e7a1ff4-df27-4d5a-8792-e5eac7ab2c1c",
-          "resourceVersion": "139785653",
-          "generation": 6,
+          "resourceVersion": "144830197",
+          "generation": 8,
           "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
             "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
@@ -15715,7 +15715,7 @@
               "manager": "cert-manager-cainjector",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-03-13T07:07:03Z",
+              "time": "2024-03-19T11:59:53Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:spec": {
@@ -28789,8 +28789,8 @@
         "metadata": {
           "name": "redisreplications.redis.redis.opstreelabs.in",
           "uid": "459c01a4-544e-43b1-a97f-37188d26d90e",
-          "resourceVersion": "139785718",
-          "generation": 6,
+          "resourceVersion": "144830240",
+          "generation": 8,
           "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
             "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
@@ -28897,7 +28897,7 @@
               "manager": "cert-manager-cainjector",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-03-13T07:07:04Z",
+              "time": "2024-03-19T11:59:54Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:spec": {
@@ -37983,8 +37983,8 @@
         "metadata": {
           "name": "redissentinels.redis.redis.opstreelabs.in",
           "uid": "6a9dc72e-3e37-464d-b89c-20dedff63cda",
-          "resourceVersion": "139785726",
-          "generation": 6,
+          "resourceVersion": "144830273",
+          "generation": 8,
           "creationTimestamp": "2023-06-29T06:18:08Z",
           "annotations": {
             "cert-manager.io/inject-ca-from": "vynil-dbo/redis-cert",
@@ -38091,7 +38091,7 @@
               "manager": "cert-manager-cainjector",
               "operation": "Update",
               "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-03-13T07:07:05Z",
+              "time": "2024-03-19T11:59:54Z",
               "fieldsType": "FieldsV1",
               "fieldsV1": {
                 "f:spec": {

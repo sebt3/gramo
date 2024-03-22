@@ -1,8 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { i18n } from "../i18n"
-import { configColor, configIcon,securityColor, securityIcon,networkColor, networkIcon,workloadColor, workloadIcon,systemColor, systemIcon,storageColor, storageIcon,workflowColor, workflowIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { i18n } = await import("../i18n")
+const { configColor, configIcon,securityColor, securityIcon,networkColor, networkIcon,workloadColor, workloadIcon,systemColor, systemIcon,storageColor, storageIcon,workflowColor, workflowIcon, } = await import('../../routes/custom');
 export const k8sIcon = 'fas fa-dharmachakra';
 export const k8sTitle = 'Standard';
 export const iconConfigMap = configIcon;

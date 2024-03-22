@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-import { useQuasar } from 'quasar'
-const  MainMenuLinks   = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
+const { defineAsyncComponent } = await import('vue')
+const { useQuasar } = await import("quasar")
+const MainMenuLinks = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
 import { menuLinksProps } from '../../routes/interfaces.js';
-import { elude, useCore } from '../../libs/core';
-import { useRouter } from 'vue-router'
-import { watch,onMounted, ref } from 'vue'
-import {installColor,automationColor,workflowColor,workloadColor,databaseColor,storageColor,configColor,networkColor,securityColor,systemColor} from '../../routes/custom'
-const { isNamespaced } = useCore();
+const { elude, useCore } = await import('../../libs/core');
+const { useRouter } = await import('vue-router')
+const { watch,onMounted, ref } = await import('vue')
+const {installColor,automationColor,workflowColor,workloadColor,databaseColor,storageColor,configColor,networkColor,securityColor,systemColor} = await import('../../routes/custom')
+const { isNamespaced } = await import('../../libs/core/navigation.js')
 const $q = useQuasar()
 const expansionItem = ref(null);
 const router = useRouter();

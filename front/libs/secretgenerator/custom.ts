@@ -1,7 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { configColor } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { configColor } = await import('../../routes/custom');
 export const secretgeneratorIcon = 'key';
 export const secretgeneratorTitle = 'Secrets generator';
 export const iconBasicAuth = 'fas fa-user-secret';

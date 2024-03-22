@@ -23,7 +23,9 @@
       "problemPerNamespaceSource": "Distribution des problèmes de { short } par namespaces et sources",
       "problemPerSource": "Problèmes de { short } par sources",
       "problemPerNamespace": "Problèmes de { short } par namespace",
-      "problemShort": "Problèmes de { short }"
+      "problemShort": "Problèmes de { short }",
+      "info": "Information",
+      "nothing": "Rien à voir sur cette page"
     },
     "overview": {
       "captionList": "liste { short }",
@@ -287,5 +289,39 @@
       "Volume": "Volume",
       "CPURequest": "Demande de CPU",
       "MemRequest": "Demande de mémoire"
+    },
+    "argoproj": {
+      "SyncStatus": "Sync Status",
+      "HealthStatus": "Health Status",
+      "Revision": "Revision",
+      "Message": "Message"
+    },
+    "keda": {
+      "PodIdentity": "PodIdentity",
+      "VaultAddress": "VaultAddress",
+      "ScaleTargetKind": "ScaleTargetKind",
+      "ScaleTargetName": "ScaleTargetName",
+      "ScaledObjects": "ScaledObjects",
+      "ScaledJobs": "ScaledJobs",
+      "Min": "Min",
+      "Max": "Max"
+    },
+    "min": {
+      "Tenant": "Tenant",
+      "Phase": "Phase",
+      "State": "State"
+    },
+    "operators": {
+      "Display": "Display",
+      "Type": "Type",
+      "Publisher": "Publisher",
+      "Version": "Version",
+      "Replaces": "Replaces",
+      "Phase": "Phase",
+      "Approval": "Approval",
+      "Approved": "Approved",
+      "Package": "Package",
+      "Source": "Source",
+      "Channel": "Channel"
     }
   }

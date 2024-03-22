@@ -42,7 +42,7 @@
         if (parent['spec']==undefined||!Array.isArray(parent['spec']['versions'])||parent['status']==undefined||parent['status']['acceptedNames']==undefined) return null;
         const getTargetVersion = (versions) => {
           if (versions.length==1) return versions[0].name
-          const targetVersion = versions.map(v=>v.name).sort(flexver.apply)[0];
+          const targetVersion = versions.map(v=>v.name).sort(flexver)[0];
           const maxVersion = versions.map(v=>v.name).sort((a,b)=>a<b?1:-1)[0];
           return (targetVersion.length<maxVersion.length)?targetVersion:maxVersion
         }

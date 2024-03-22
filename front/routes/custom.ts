@@ -1,5 +1,5 @@
 // category configuration
-import { i18n } from "../libs/i18n"
+const { i18n } = await import("../libs/i18n")
 export const automationIcon = 'auto_mode';
 export const configIcon = 'settings_suggest';
 export const databaseIcon = 'fas fa-database';

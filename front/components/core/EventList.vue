@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch,ref } from 'vue';
+const { watch,ref } = await import('vue');
 
 defineEmits(['refresh','on-delete']);
 const props=withDefaults(defineProps<{model: object[], useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, showKind?:boolean}>(),{

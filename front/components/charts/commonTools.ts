@@ -1,4 +1,4 @@
-import {chartSizeOptions,chartMarginOptions} from "../../libs/core"
+const {chartSizeOptions,chartMarginOptions} = await import("../../libs/core")
 export function getSizeOptions(defaultWidth:number,defaultHeight:number,options?:chartSizeOptions) {
   return {
     width: options!=undefined&&options.width!==undefined?options.width:defaultWidth,
@@ -11,7 +11,6 @@ export function getMarginOptions(defaultMargin:number,defaultMarginLegend:number
     marginLegend: options!=undefined&&options.marginLegend!==undefined?options.marginLegend:defaultMarginLegend
   }
 }
-
 
 export const arcDirection = d => (d.startAngle + (d.endAngle - d.startAngle) / 2) < Math.PI ? 1 : -1;
 export function onlyUnique(value, index, array) {return array.indexOf(value) === index;}

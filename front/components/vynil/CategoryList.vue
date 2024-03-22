@@ -1,13 +1,14 @@
 <script setup lang="ts">
 // noGramoGenerator
-import { defineAsyncComponent } from 'vue'
-const  TableHeader   = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
+const { defineAsyncComponent } = await import('vue')
+const TableHeader = defineAsyncComponent(() => import( '@/components/core/TableHeader.vue'));
 import { QTableColumn } from 'quasar'
-import { ref, useCore, tableColumnAlign } from '../../libs/core'
-import { useQuasar } from 'quasar'
+const { tableColumnAlign } = await import('../../libs/core/navigation.js')
+const { ref } = await import('vue')
+const { useQuasar } = await import("quasar")
 const $q = useQuasar()
-import { i18n } from "../../libs/i18n"
-const { pagination } = useCore();
+const { i18n } = await import("../../libs/i18n")
+const pagination = ref({rowsPerPage: 0})
 const DistribColumns:Array<QTableColumn> = [
   {name: 'Name', label: i18n.global.t('meta.name'), field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left}
 ] as QTableColumn[];

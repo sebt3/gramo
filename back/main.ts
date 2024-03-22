@@ -38,6 +38,12 @@ const typeDefs = gqlWrapper(
   importGraphQL('cilium.graphql'),
   importGraphQL('namecheap.graphql'),
   importGraphQL('tekton.graphql'),
+  importGraphQL('argoproj.graphql'),
+  importGraphQL('fission.graphql'),
+  importGraphQL('keda.graphql'),
+  importGraphQL('min.graphql'),
+  importGraphQL('operators.graphql'),
+  importGraphQL('whereabouts.graphql'),
 );
 
 interface MyContext {

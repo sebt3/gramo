@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-const  MainMenuLinks   = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
-const  RefreshRateSelector   = defineAsyncComponent(() => import( './RefreshRateSelector.vue'));
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useNavigationStoreRef } from '../../stores'
-import { links } from '../../routes'
-import { useQuasar } from 'quasar'
+const { defineAsyncComponent } = await import('vue')
+const MainMenuLinks = defineAsyncComponent(() => import( './MainMenuLinks.vue'));
+const RefreshRateSelector = defineAsyncComponent(() => import( './RefreshRateSelector.vue'));
+const { ref, computed } = await import('vue')
+const { useRouter, useRoute } = await import('vue-router')
+const { useNavigationStoreRef } = await import('../../stores/navigation.js')
+const { useConfigStore } = await import('../../stores/config.js')
+const { links } = await import('../../routes')
+const { useQuasar } = await import("quasar")
+const config = useConfigStore()
 const $q = useQuasar()
 const route = useRoute();
 const router = useRouter();
@@ -49,19 +51,22 @@ function toggleLeftDrawer() {
     <q-toolbar>
       <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
       <q-toolbar-title>
-        <q-circular-progress
-          show-value
-          :indeterminate="navigation.isLoading.value"
-          rounded
-          size="30px"
-          class=""
-          :thickness="0.5"
-          color="orange"
-          track-color="primary"
-        >
-          <img src="/icon.svg" loading="lazy" />
-        </q-circular-progress>
-        Gramo
+        <router-link :to="{ name: 'root'}" style="text-decoration: none; color: inherit;">
+          <q-circular-progress
+            show-value
+            :indeterminate="navigation.isLoading.value"
+            rounded
+            size="30px"
+            class=""
+            :thickness="0.5"
+            color="orange"
+            track-color="primary"
+          >
+            <img src="/icon.svg" loading="lazy" />
+          </q-circular-progress>
+          {{ config.gramoAppName }}
+          <q-tooltip>version: {{ config.gramoVersion }}</q-tooltip>
+        </router-link>
       </q-toolbar-title>
       <q-select v-if="isNamespaced" v-model="model" @update:model-value="onChangeNamespace()" :options="navigation.namespaces.value" label="Namespace" standout style="width: 250px" options-dense>
         <template v-slot:prepend>

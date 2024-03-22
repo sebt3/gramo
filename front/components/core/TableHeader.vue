@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+const { ref } = await import('vue')
 const show_filter = ref(false)
 defineEmits(['update:modelFilter','refresh','create'])
 withDefaults(defineProps<{
@@ -28,7 +28,7 @@ withDefaults(defineProps<{
           <q-btn icon="filter_list" @click="show_filter=!show_filter">
             <q-tooltip>{{ $t('list.showFilter') }}</q-tooltip>
           </q-btn>
-          <q-btn v-if="userefresh == true" icon="refresh" @click="console.log(modelFilter);$emit('refresh')">
+          <q-btn v-if="userefresh == true" icon="refresh" @click="$emit('refresh')">
             <q-tooltip>{{ $t('list.refresh') }}</q-tooltip>
           </q-btn>
           <q-btn v-if="usecreate == true" :label="$t('core.add')" color="positive" icon="add" @click="$emit('create')">

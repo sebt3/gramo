@@ -1,8 +1,9 @@
 export { ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
 {{#each objects}}
-export { {{short}}Definition, {{short}}Columns, {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes, use{{short}}{{#if namespaced}}, {{short}}AllColumns{{/if}} } from './{{ short }}.js'
+export { {{short}}Definition, {{short}}Columns, {{ short }}ListExcludes, {{ short }}ReadExcludes, {{ short }}SimpleExcludes{{#if namespaced}}, {{short}}AllColumns{{/if}} } from './{{ short }}.js'
 {{/each}}
-import { useCRDStore, usePermissionStore } from '../../stores'
+const { useCRDStore } = await import('../../stores/crds.js')
+const { usePermissionStore } = await import('../../stores/permission.js')
 const crds = useCRDStore().crds;
 const havePermission = usePermissionStore().have;
 const can = usePermissionStore().can;

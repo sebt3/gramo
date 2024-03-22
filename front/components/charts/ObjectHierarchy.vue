@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {chartSizeOptions,chartMarginOptions, HierarchyObject} from "../../libs/core"
-import { ref, onMounted } from "vue";
-import {getSizeOptions,getMarginOptions} from "./commonTools"
+const {chartSizeOptions,chartMarginOptions, HierarchyObject} = await import("../../libs/core")
+import { ref, onMounted } from 'vue';
+const {getSizeOptions,getMarginOptions} = await import("./commonTools")
 
 const props = defineProps<{
     options?: chartSizeOptions&chartMarginOptions

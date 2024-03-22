@@ -1,5 +1,5 @@
 import i18n from "@/libs/i18n"
-import { nextTick } from "vue"
+import { nextTick } from 'vue'
 
 const Trans = {
   get defaultLocale() {

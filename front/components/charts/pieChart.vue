@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 import * as d3 from "d3";
-import {dataEntry,chartSizeOptions,chartMarginOptions} from "../../libs/core"
-import {arcDirection,entryKey,getSizeOptions,getMarginOptions} from "./commonTools"
+const {dataEntry,chartSizeOptions,chartMarginOptions} = await import("../../libs/core")
+const {arcDirection,entryKey,getSizeOptions,getMarginOptions} = await import("./commonTools")
 const emit = defineEmits(['on-click'])
 const props = withDefaults(defineProps<{
   options?: chartSizeOptions&chartMarginOptions

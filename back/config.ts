@@ -10,6 +10,7 @@ const envMapping = [
 // Frontend config
     {name: 'defaultNamespace',       key: "GRAMO_DEFAULT_NAMESPACE"},
     {name: 'defaultRoute',           key: "GRAMO_DEFAULT_ROUTE"},
+    {name: 'gramoAppName',           key: "GRAMO_APP_NAME"},
 ];
 export const defaultConfig = {
     enableGraphQLClient: false,
@@ -21,6 +22,8 @@ export const defaultConfig = {
     vynilNamespace: "vynil",
     defaultNamespace: "default",
     defaultRoute: "",
+    gramoVersion: "",
+    gramoAppName: "Gramo"
 };
 export function getConfig() {
     const config = defaultConfig
@@ -28,7 +31,7 @@ export function getConfig() {
     envMapping.forEach(item =>{
         const env = process.env[item.key] || ""
         if (env!="") {
-            switch(typeof config[item.name]){
+            switch(typeof defaultConfig[item.name]){
                 case 'boolean':
                     switch(env) {
                         case "false":
@@ -59,4 +62,4 @@ export function getConfig() {
     return config
 }
 export const gramoConfig = getConfig();
-export type gramoConfigType = ReturnType<typeof getConfig>;
+export type gramoConfigType = typeof defaultConfig;

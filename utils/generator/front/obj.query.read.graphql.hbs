@@ -24,7 +24,7 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
 {{#if detailed}}
   {{#each resolvers}}
       {{name}}(params: ${{name}}) {
-    {{#if (or (and (eq group 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
+    {{#if (or (and (eq resultGroup 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
       {{#if (eq resultShort 'Package')}}
         name
         commit_id
@@ -139,6 +139,22 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
         reason
         description
       }
+  {{#if (and (eq group 'vynil') (eq short 'Install'))}}
+      consumevynilPackage {
+        name
+        commit_id
+        description
+        consumevynilCategory {
+          name
+        }
+        consumevynilDistrib {
+          metadata {
+            name
+          }
+        }
+        options
+      }
+  {{/if}}
 {{/if}}
 {{#each readProperties}}
       {{this}}

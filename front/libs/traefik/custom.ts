@@ -1,8 +1,8 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { i18n } from "../i18n"
-import { networkColor, networkIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { i18n } = await import("../i18n")
+const { networkColor, networkIcon, } = await import('../../routes/custom');
 export const traefikIcon = networkIcon;
 export const traefikTitle = 'Traefik';
 export const iconIngressRoute = networkIcon;

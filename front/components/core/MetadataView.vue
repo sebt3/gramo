@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { metadataType } from "../../libs/core/interfaces"
-import { elude } from "../../libs/core/"
-import { i18n } from "../../libs/i18n"
+const { metadataType } = await import("../../libs/core/interfaces")
+const { elude } = await import("../../libs/core/")
+const { i18n } = await import("../../libs/i18n")
 defineProps<{
   metadata: metadataType,
   to?: object,

@@ -1,28 +1,25 @@
 <script setup lang="ts">
 import allQuery from '@/queries/all.read.graphql'
-import { defineAsyncComponent } from 'vue'
-const AllProblemOverview = defineAsyncComponent(() => import( '@/components/core/AllProblemOverview.vue'));
-const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
-const AdviceOverview = defineAsyncComponent(() => import( '@/components/core/AdviceOverview.vue'));
-const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
-const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
-import {onlyUnique} from "@/components/charts/commonTools.js"
+const { defineAsyncComponent } = await import('vue')
+const {onlyUnique} = await import("@/components/charts/commonTools.js")
 {{#each categories}}
 {{#each groups}}
-import { {{#each objects}}have{{ short }} as have{{ group }}{{ short }}, {{/each}} } from '@/libs/{{ name }}/{{ ../category }}Cat.js'
+const { {{#each objects}}have{{ short }}: have{{ group }}{{ short }}, {{/each}} } = await import('@/libs/{{ name }}/{{ ../category }}Cat.js')
 {{/each}}
 {{/each}}
+const { useRouter } = await import('vue-router')
+const router = useRouter();
 {{#each groups}}
 {{#each objects}}
-const {{ group }}{{ short }}List = defineAsyncComponent(() => import('@/components/{{ group }}/{{ short }}List.vue'));
-import { {{ short }}ListExcludes as {{ group }}{{ short }}ListExcludes{{#if namespaced}}, use{{short}} as use{{ group }}{{short}}{{/if}} } from '@/libs/{{ group }}/{{ short }}.js'
+const { {{ short }}ListExcludes: {{ group }}{{ short }}ListExcludes{{#if namespaced}}, use{{short}}: use{{ group }}{{short}}{{/if}} } = await import('@/libs/{{ group }}/{{ short }}.js')
 {{#if namespaced}}
-const {toList: to{{ group }}{{ short }}List}  = use{{ group }}{{short}}();
+const {toList: to{{ group }}{{ short }}List}  = use{{ group }}{{short}}(router);
 {{/if}}
 {{/each}}
 {{/each}}
-import { ref, useCore, useNavigationStoreRef, useQuery } from '@/libs/core';
-const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
+const { ref, useCore, useNavigationStoreRef, useQuery } = await import('@/libs/core');
+const { isNamespaced, setNamespaceFromRoute } = await import('../libs/core/navigation.js')
+const { onErrorHandler } = useCore();
 const ready = ref(false);
 const namespaced = isNamespaced();
 if (namespaced) setNamespaceFromRoute();
@@ -68,6 +65,12 @@ onResult((res) => {
     ready.value = true;
   }
 })
+const AllProblemOverview = defineAsyncComponent(() => import( '@/components/generic/AllProblemOverview.vue'));
+const ProblemOverview    = defineAsyncComponent(() => import( '@/components/generic/ProblemOverview.vue'));
+const AdviceOverview     = defineAsyncComponent(() => import( '@/components/generic/AdviceOverview.vue'));
+const OverviewSkeleton   = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton      = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+const GenericList        = defineAsyncComponent(() => import( '@/components/generic/GenericList.vue'));
 </script>
 <template><div>
   <div class="row q-mb-sm q-ml-sm" v-if="ready && ProblemList.map(o=>`${o.group}${o.short}`).filter(onlyUnique).length>1">
@@ -107,7 +110,7 @@ onResult((res) => {
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
     </div>
@@ -118,7 +121,7 @@ onResult((res) => {
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
     </div>
@@ -135,7 +138,7 @@ onResult((res) => {
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
     </div>
@@ -146,7 +149,7 @@ onResult((res) => {
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
     </div>

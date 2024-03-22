@@ -4,16 +4,19 @@ const props = withDefaults(defineProps<{model: object, parent:object, useActions
   useActions: false,
   showLink: false,
 });
-import { getTargetVersion, elude, getColor, timeAgo, getProperties, defineAsyncComponent, onMounted, usecrdObject } from '../../libs/core/crdObject.js'
-import { colorCustomResourceDefinition } from '../../libs/k8s/custom.js'
-const { $q, viewer, viewerUpdate, isNamespaced, router, onlyReadProperties } = usecrdObject();
-import { knowledge } from '../../libs/knowledge.js'
+const { getTargetVersion, elude, getColor, timeAgo, getProperties, defineAsyncComponent, onMounted, usecrdObject } = await import('../../libs/core/crdObject.js')
+const { colorCustomResourceDefinition } = await import('../../libs/k8s/custom.js')
+const { useRouter } = await import('vue-router')
+const router = useRouter();
+const { $q, viewer, viewerUpdate, onlyReadProperties } = usecrdObject();
+const { knowledge } = await import('../../libs/knowledge.js')
+const { isNamespaced } = await import('../../libs/core/navigation.js')
 const namespaced = isNamespaced();
 const targetVersion = getTargetVersion(props.parent['spec']['versions'])
 const schema = props.parent['spec']['versions'].filter(v=>v.name==targetVersion)[0].schema.openAPIV3Schema
 const found = knowledge.filter(o=>o.apiGroup==props.parent['spec']['group']&&o.apiKind==props.parent['spec']['names']['kind'])
 onMounted(() => {viewerUpdate(onlyReadProperties(props.model))})
-const OpenApiEdit  = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
+const OpenApiEdit  = defineAsyncComponent(() => import( '@/components/openapi/OpenApiEdit.vue'));
 const MonacoViewer = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
 </script>
 <template>

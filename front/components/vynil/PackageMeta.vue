@@ -12,23 +12,29 @@ withDefaults(defineProps<{model: object, deletor?:any, useAction?:boolean}>(),{
       <div class="text-h6 q-mt-none q-mb-none q-pt-none q-pb-none">{{$t('vynil.pck')}}
       </div>
     </q-card-section>
-    <q-card-section class="bg-teal-2">
+    <q-card-section class="bg-teal-2 row">
+      <div class="col">
         <q-field :label="$t('vynil.distrib')" stack-label borderless>
           <template v-slot:prepend><q-icon name="alt_route" /></template>
           <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">
             <router-link :to="{ name: 'vynilDistribView', params: {  name: model.consumevynilDistrib.metadata.name } }">{{ model.consumevynilDistrib.metadata.name }}</router-link>
           </div></template>
         </q-field>
+      </div>
+      <div class="col">
         <q-field :label="$t('vynil.cat')" stack-label borderless>
           <template v-slot:prepend><q-icon name="category" /></template>
           <template v-slot:control><div class="self-center full-width no-outline" tabindex="0">{{ model.consumevynilCategory.name }}</div></template>
         </q-field>
+      </div>
+      <div class="col">
         <q-field :label="$t('meta.name')" stack-label borderless>
-        <template v-slot:prepend><q-icon name="smart_button" /></template>
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">{{ model.name }}</div>
-        </template>
-      </q-field>
+          <template v-slot:prepend><q-icon name="smart_button" /></template>
+          <template v-slot:control>
+            <div class="self-center full-width no-outline" tabindex="0">{{ model.name }}</div>
+          </template>
+        </q-field>
+      </div>
     </q-card-section>
   </q-card>
 </template>

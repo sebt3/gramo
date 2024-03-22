@@ -2,11 +2,14 @@
 import crdObjectQuery         from '@/queries/k8s/CustomResourceDefinition.read.graphql'
 import clusteredObjectCreate  from '@/queries/core/clusteredObject.create.graphql'
 import namespacedObjectCreate from '@/queries/core/namespacedObject.create.graphql'
-import { getTargetVersion, defineAsyncComponent, i18n, ref, useQuery, useMutation, usecrdObject } from '../../libs/core/crdObject.js'
-const { $q, router, onErrorHandler, notifySuccess, notifyError, notifyWorking, navigation, setItemFromRoute, isNamespaced, setNamespaceFromRoute } = usecrdObject();if (isNamespaced()) setNamespaceFromRoute();setItemFromRoute();
-import { sanitizeData, useCustomResourceDefinition } from '../../libs/k8s/CustomResourceDefinition.js'
-import { colorCustomResourceDefinition, CustomResourceDefinitionReadExcludes } from '../../libs/k8s/custom.js'
-const {  onNotCustomResourceDefinitionFound } = useCustomResourceDefinition();setItemFromRoute();
+const { getTargetVersion, defineAsyncComponent, i18n, ref, useQuery, useMutation, usecrdObject } = await import('../../libs/core/crdObject.js')
+const { useRouter } = await import('vue-router')
+const router = useRouter();
+const { setItemFromRoute, isNamespaced, setNamespaceFromRoute } = await import('../../libs/core/navigation.js')
+const { $q, onErrorHandler, notifySuccess, notifyError, notifyWorking, navigation } = usecrdObject();if (isNamespaced()) setNamespaceFromRoute();setItemFromRoute();
+const { sanitizeData, useCustomResourceDefinition } = await import('../../libs/k8s/CustomResourceDefinition.js')
+const { colorCustomResourceDefinition, CustomResourceDefinitionReadExcludes } = await import('../../libs/k8s/custom.js')
+const {  onNotCustomResourceDefinitionFound } = useCustomResourceDefinition(router);setItemFromRoute();
 const { mutate, onDone, onError: onCreateError } = useMutation(isNamespaced()?namespacedObjectCreate:clusteredObjectCreate);
 const { loading, onResult, onError } = useQuery(crdObjectQuery, {
   "obj": {
@@ -64,14 +67,14 @@ async function onSubmit(o:object) {
     notifyError(i18n.global.t('new.notifyNotReady'));
   }
 }
-const MetadataNew                     = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
-const coreCrdObjectEdit               = defineAsyncComponent(() => import( '@/components/core/CrdObjectEdit.vue'));
-const k8sCustomResourceDefinitionMeta = defineAsyncComponent(() => import( '@/components/k8s/CustomResourceDefinitionMeta.vue'));
+const MetadataNew       = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
+const coreCrdObjectEdit = defineAsyncComponent(() => import( '@/components/core/CrdObjectEdit.vue'));
+const GenericMeta       = defineAsyncComponent(() => import( '@/components/generic/GenericMeta.vue'));
 </script>
 <template>
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-6" v-if="!loading && parent['metadata'] != undefined">
-      <k8sCustomResourceDefinitionMeta :useActions="false" :showStatus="true"
+      <GenericMeta group="k8s" short="CustomResourceDefinition" :useActions="false" :showStatus="true"
         :model="parent"
        />
     </div>

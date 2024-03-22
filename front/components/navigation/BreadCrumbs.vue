@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-import { useRouter } from 'vue-router'
-const  RelatedLinks   = defineAsyncComponent(() => import( './RelatedLinks.vue'));
+const { defineAsyncComponent } = await import('vue')
+const { useRouter } = await import('vue-router')
 const router = useRouter();
+const RelatedLinks = defineAsyncComponent(() => import( './RelatedLinks.vue'));
 </script>
 <template>
   <div class="q-pl-md q-pt-sm row q-pb-none q-mb-none">

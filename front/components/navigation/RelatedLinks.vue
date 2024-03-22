@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {useNavigationStore} from '../../stores/navigation.js'
-import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+const {useNavigationStore} = await import('../../stores/navigation.js')
+const { useRoute } = await import('vue-router')
+const { ref } = await import('vue')
 const route = useRoute();
 const namespace = ref(useNavigationStore().namespace)
 </script>

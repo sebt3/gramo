@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+const { defineAsyncComponent } = await import('vue')
 import {{ category }}Query from '@/queries/{{ name }}/{{ category }}.read.graphql'
-const  pieChart       = defineAsyncComponent(() => import( '@/components/charts/pieChart.vue'));
-const ProblemOverview = defineAsyncComponent(() => import( '@/components/core/ProblemOverview.vue'));
-const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
-const TableSkeleton = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
-import { {{#each objects}}have{{ short }}, {{/each}} } from '@/libs/{{ name }}/{{ category }}Cat.js'
-import { {{#each objects}}color{{ short }}, {{/each}} } from '@/libs/{{ name }}/custom.js'
-import { useQuasar } from 'quasar'
+const { {{#each objects}}have{{ short }}, {{/each}} } = await import('@/libs/{{ name }}/{{ category }}Cat.js')
+const { {{#each objects}}color{{ short }}, {{/each}} } = await import('@/libs/{{ name }}/custom.js')
+const { useQuasar } = await import('quasar')
 const $q = useQuasar()
+const { useRouter } = await import('vue-router')
+const router = useRouter();
 {{#each objects}}
-const  {{ group }}{{ short }}List   = defineAsyncComponent(() => import( '@/components/{{ group }}/{{ short }}List.vue'));
-import { {{ short }}ListExcludes{{#if namespaced}}, use{{short}}{{/if}} } from '@/libs/{{ group }}/{{ short }}.js'
+const { {{ short }}ListExcludes{{#if namespaced}}, use{{short}}{{/if}} } = await import('@/libs/{{ group }}/{{ short }}.js')
 {{#if namespaced}}
-const {toList: to{{ short }}List}  = use{{short}}();
+const {toList: to{{ short }}List}  = use{{short}}(router);
 {{/if}}
 {{/each}}
-import { ref, useCore, useNavigationStoreRef, useQuery } from '@/libs/core';
-const { onErrorHandler, setNamespaceFromRoute, isNamespaced } = useCore();
+const { ref, useCore, useNavigationStoreRef, useQuery } = await import('@/libs/core');
+const { isNamespaced, setNamespaceFromRoute } = await import('../../../libs/core/navigation.js')
+const { onErrorHandler } = useCore();
 const ready = ref(false);
 {{#each objects}}
 const {{ short }}Problems = ref([]);
@@ -26,7 +24,7 @@ const {{ short }}ByTs = ref([]);
 {{/if}}
 {{/each}}
 {{#if (eq name 'vynil')}}
-const radialLineChart = defineAsyncComponent(() => import( '@/components/charts/radialLineChart.vue'));
+const radialStackedAreaChart = defineAsyncComponent(() => import( '@/components/charts/radialStackedAreaChart.vue'));
 const CatDistCount = ref([]);
 {{/if}}
 if (isNamespaced()) setNamespaceFromRoute();
@@ -48,6 +46,15 @@ const { result, loading, refetch, onResult, onError } = useQuery({{ category }}Q
     ]:[]
   }
 }, navigation.refreshOption);
+const conditions = ref({
+{{#each objects}}
+{{#if namespaced}}
+      "{{ group }}{{ short }}": (result) => result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0,
+{{else}}
+      "{{ group }}{{ short }}": (result) => !isNamespaced() && result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0,
+{{/if}}
+{{/each}}
+});
 onError(onErrorHandler);
 onResult((res) => {
   if ( !res.loading ) {
@@ -68,6 +75,11 @@ onResult((res) => {
     ready.value = true;
   }
 })
+const pieChart         = defineAsyncComponent(() => import( '@/components/charts/pieChart.vue'));
+const ProblemOverview  = defineAsyncComponent(() => import( '@/components/generic/ProblemOverview.vue'));
+const OverviewSkeleton = defineAsyncComponent(() => import( '@/components/core/OverviewSkeleton.vue'));
+const TableSkeleton    = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+const GenericList      = defineAsyncComponent(() => import( '@/components/generic/GenericList.vue'));
 </script>
 <template><div>
 {{#each objects}}
@@ -86,7 +98,7 @@ onResult((res) => {
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)).flat()" />
     </div>
@@ -97,7 +109,7 @@ onResult((res) => {
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
     </div>
     <div class="col-lg-8">
-      <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
         v-if="result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreProblem'])&&o['getcoreProblem'].length>0)" />
     </div>
@@ -112,7 +124,7 @@ onResult((res) => {
           <div class="text-subtitle q-mt-none q-mb-none q-pt-none q-pb-none"><a class="text-grey-8" href="#vynilDistrib">\{{  $t('vynil.dashboard') }}</a></div>
         </q-card-section>
         <q-card-section class="text-center">
-          <radialLineChart v-model:datum="CatDistCount" :axisX="function (d){return d!=undefined?d['category']:this.id}" :axisColor="function (d){return d!=undefined?d['distrib']:this.id}" :getVal="function (d){return d!=undefined?d['value']:this.id}" ></radialLineChart>
+          <radialStackedAreaChart v-model:datum="CatDistCount" :axisX="function (d){return d!=undefined?d['category']:this.id}" :axisColor="function (d){return d!=undefined?d['distrib']:this.id}" :getVal="function (d){return d!=undefined?d['value']:this.id}" />
         </q-card-section>
       </q-card>
     </div>
@@ -137,20 +149,40 @@ onResult((res) => {
   </div>
 <div class="column">
 {{#each objects}}
-<div {{#if order }}:style="`order: {{order}}`"{{/if}} >
-<a name="{{ group }}{{ short }}" />
+  <div {{#if order }}:style="`order: {{order}}`"{{/if}}>
+    <a name="{{ group }}{{ short }}" />
 {{#if namespaced}}
-  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
-    v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
-    :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
-  />
+    <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
+      v-if="conditions['{{ group }}{{ short }}'](result)"
+      :model="result.k8sNamespace.map(x=>x.{{ group }}{{ short }}).flat()"
+    />
 {{else}}
-  <{{ group }}{{ short }}List @refresh="refetch()" :useAction="false"
-    v-if="!isNamespaced() && result !== undefined && Array.isArray(result['{{ group }}{{ short }}']) && result['{{ group }}{{ short }}'].length>0"
-    :model="result.{{ group }}{{ short }}"
-  />
+    <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
+      v-if="conditions['{{ group }}{{ short }}'](result)"
+      :model="result.{{ group }}{{ short }}"
+    />
 {{/if}}
-</div>
+  </div>
 {{/each}}
+  <q-card bordered class="q-ma-sm" v-if="({{#each objects}}have{{ short }}() || {{/each}} false) && !Object.entries(conditions).map(([_,fn])=>fn(result)).reduce((res,cur)=>cur||res,false)">
+    <q-card-section :class="`bg-info text-white`">
+      <div class="text-subtitle1 q-mt-none q-mb-none q-pt-none q-pb-none">
+        \{{ $t('dashboard.info') }}
+      </div>
+    </q-card-section>
+    <q-card-section :class="`bg-light-blue-2`">
+      <div class="q-ma-xl">\{{ $t('dashboard.nothing') }}</div>
+    </q-card-section>
+  </q-card>
+  <q-card bordered class="q-ma-sm" v-if="{{#each objects}}!have{{ short }}() &&{{/each}}true">
+    <q-card-section :class="`bg-negative text-white`">
+      <div class="text-subtitle1 q-mt-none q-mb-none q-pt-none q-pb-none">
+        \{{ $t('core.error') }}
+      </div>
+    </q-card-section>
+    <q-card-section :class="`bg-red-2`">
+      <div class="q-ma-xl">\{{ $t('dashboard.noPerm') }}</div>
+    </q-card-section>
+  </q-card>
 </div>
 </div></template>

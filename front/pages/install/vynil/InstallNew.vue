@@ -1,15 +1,17 @@
 <script setup lang="ts">
 // noGramoGenerator
-import { defineAsyncComponent } from 'vue'
+const { defineAsyncComponent } = await import('vue')
 import InstallNew from '@/queries/core/namespacedObject.create.graphql'
-const  MetadataNew   = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
-import { colorInstall, iconInstall } from '../../../libs/vynil/custom.js'
-import { ref, useMutation, useInstall, InstallDefinition, sanitizeData, getProperties } from '@/libs/vynil/Install.js'
-import { useQuasar } from 'quasar'
+const MetadataNew = defineAsyncComponent(() => import( '@/components/core/MetadataNew.vue'));
+const { colorInstall, iconInstall } = await import('../../../libs/vynil/custom.js')
+const { ref, useMutation, useInstall, InstallDefinition, sanitizeData, getProperties } = await import('@/libs/vynil/Install.js')
+const { useQuasar } = await import("quasar")
+const { useRouter } = await import('vue-router')
+const router = useRouter();
 const $q = useQuasar()
 const name = ref('');
 const form = ref(null);
-const { editor, router, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
+const { editor, navigation, setNamespacedItemFromRoute, notifySuccess, notifyError, notifyWorking } = useInstall();setNamespacedItemFromRoute();
 const { mutate, onDone, onError } = useMutation(InstallNew);
 onDone(() => {
   notifySuccess('Creation proceded');
@@ -20,11 +22,11 @@ onError((err) => {
   console.log('mutation error',err);
 })
 
-import { useQuery } from '@/libs/vynil/Install.js'
-import { addByPath, getByPath } from '../../../libs/core';
+const { useQuery } = await import('@/libs/vynil/Install.js')
+const { addByPath, getByPath } = await import('../../../libs/core');
 import installPrepare from '@/queries/vynil/InstallPrepare.graphql'
-const  OpenApiEdit   = defineAsyncComponent(() => import( '@/components/core/OpenApiEdit.vue'));
-const  MonacoEditor   = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
+const OpenApiEdit = defineAsyncComponent(() => import( '@/components/openapi/OpenApiEdit.vue'));
+const MonacoEditor = defineAsyncComponent(() => import( '@/components/core/MonacoEditor.vue'));
 const { result, loading } = useQuery(installPrepare,{
   "namespace": {
     "filters": [{

@@ -27,6 +27,7 @@ const uses = [
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'DaemonSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'StatefulSet', path: 'spec/template/metadata'},
     {algo: 'selector',  group: 'k8s', short: 'Service', usedGroup: 'k8s', usedShort: 'PodTemplate', path: 'template/metadata'},
+    {algo: 'vynil', group: 'vynil', short: 'Category', usedGroup: 'vynil', usedShort: 'Distrib'},
     {algo: 'pvc',  group: 'k8s', short: 'Pod', path: 'spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
     {algo: 'pvc',  group: 'k8s', short: 'ReplicaSet', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
     {algo: 'pvc',  group: 'k8s', short: 'Job', path: 'spec/template/spec', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
@@ -65,7 +66,6 @@ const provides = [
     {algo: 'fluxcd', group: 'fluxcd', short: 'GitRepository', providedGroup: 'fluxcd', providedShort: 'Kustomization'},
 //    {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Package'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Package'},
-    {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Category'},
     {algo: 'vynil', group: 'vynil', short: 'Distrib', providedGroup: 'vynil', providedShort: 'Install'},
     {algo: 'vynil', group: 'vynil', short: 'Package', providedGroup: 'vynil', providedShort: 'Install'},
     {algo: 'vynil', group: 'vynil', short: 'Category', providedGroup: 'vynil', providedShort: 'Install'},
@@ -246,6 +246,12 @@ export const categoryMappingGroup = {
     cattle: 'install',
     namecheap: 'system',
     tekton: 'workflow',
+    fission: 'workload',
+    argoproj: 'workflow',
+    whereabouts: 'network',
+    operators: 'install',
+    min: 'storage',
+    keda: 'workload'
 }
 export const categoryMappingShort = {
     StatefulSet: 'workload',
@@ -265,6 +271,7 @@ export const categoryMappingShort = {
     Role: 'security',
     ServiceAccount: 'security',
     NetworkPolicy: 'security',
+    GlobalNetworkPolicy: 'security',
     Endpoints: 'network',
     Ingress: 'network',
     Service: 'network',
@@ -276,6 +283,9 @@ export const categoryMappingShort = {
     PersistentVolume: 'storage',
     StorageClass: 'storage',
     VolumeAttachment: 'storage',
+    VolumeSnapshot: 'storage',
+    VolumeSnapshotClass: 'storage',
+    VolumeSnapshotContent: 'storage',
     CertificateSigningRequest: 'security',
     ControllerRevision: 'workload',
     PodDisruptionBudget: 'workload',
@@ -284,6 +294,9 @@ export const categoryMappingShort = {
     RuntimeClass: 'workload',
     LimitRange: 'workload',
     ReplicationController: 'workload',
+    AppProject: 'automation',
+    Application: 'automation',
+    ApplicationSet: 'automation',
 }
 export const allCategories = Object.entries(categoryMappingShort).map(([_,v])=>v)
         .concat(Object.entries(categoryMappingGroup).map(([_,v])=>v))

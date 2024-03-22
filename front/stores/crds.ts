@@ -1,5 +1,5 @@
-import { defineStore, storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
+import { defineStore, storeToRefs } from 'pinia'
 
 interface customResourceDefinitionName {
   categories: Array<string>

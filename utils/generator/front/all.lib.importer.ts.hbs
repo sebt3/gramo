@@ -1,0 +1,11 @@
+export const loader = async (group:string, short:string) => {
+  switch (`${group}--${short}`) {
+{{#each groups}}
+  {{#each objects}}
+    case "{{group}}--{{short}}":{
+      return await import('../{{group}}/{{short}}.js')
+    }
+  {{/each}}
+{{/each}}
+  }
+}

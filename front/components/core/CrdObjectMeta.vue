@@ -6,8 +6,8 @@ withDefaults(defineProps<{model: object, parent: object, useActions?:boolean, sh
   showStatus: true,
   showLink: true,
 });
-import { elude, getColor, timeAgo, usecrdObject } from '../../libs/core/crdObject.js'
-import { colorCustomResourceDefinition } from '../../libs/k8s/custom.js'
+const { elude, getColor, timeAgo, usecrdObject } = await import('../../libs/core/crdObject.js')
+const { colorCustomResourceDefinition } = await import('../../libs/k8s/custom.js')
 const { $q } = usecrdObject();
 </script>
 <template>

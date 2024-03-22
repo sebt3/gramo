@@ -2,6 +2,8 @@ query GramoConfig {
   gramoConfig {
     defaultNamespace
     defaultRoute
+    gramoVersion
+    gramoAppName
   }
   k8sNamespace {
     metadata {

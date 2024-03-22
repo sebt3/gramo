@@ -10,6 +10,8 @@ type GramoConfig {
   limitNamespaceKey: String!
   limitNamespaceValue: String!
   limitNamespaceHave: String!
+  gramoVersion: String!
+  gramoAppName: String!
 }
 
 input Label {

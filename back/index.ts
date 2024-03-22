@@ -17,4 +17,4 @@ app.get('*', (req, res) => {
 });
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 3000 }, resolve));
-console.log(`🚀 Server ready at http://localhost:3000/graphql`);
+console.log(`☆ Gramo ☆ ready at http://localhost:3000/`);

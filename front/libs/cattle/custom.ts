@@ -1,7 +1,7 @@
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { i18n } from "../i18n"
-import { installColor, installIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { i18n } = await import("../i18n")
+const { installColor, installIcon, } = await import('../../routes/custom');
 export const cattleIcon = 'apps';
 export const cattleTitle = 'cattle';
 export const iconHelmChart = installIcon;

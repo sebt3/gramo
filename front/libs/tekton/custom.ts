@@ -1,7 +1,7 @@
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { i18n } from "../i18n"
-import { workflowColor, workflowIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { i18n } = await import("../i18n")
+const { workflowColor, workflowIcon, } = await import('../../routes/custom');
 export const tektonIcon = 'apps';
 export const tektonTitle = 'tekton';
 export const iconPipeline = workflowIcon;

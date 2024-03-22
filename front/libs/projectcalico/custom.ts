@@ -1,7 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign } from '../core'
-import { networkColor, networkIcon,securityColor, securityIcon, } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const { networkColor, networkIcon,securityColor, securityIcon, } = await import('../../routes/custom');
 export const projectcalicoIcon = networkIcon;
 export const projectcalicoTitle = 'Calico';
 export const iconBGPConfiguration = networkIcon;

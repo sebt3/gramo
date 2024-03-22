@@ -1,9 +1,8 @@
-import { i18n } from "../i18n"
+const { i18n } = await import("../i18n")
 import flexver from 'flexver/dist/module.js';
-import { ref, gqlDataToYaml, useCore, useNavigationStoreRef } from '../core'
-import { stringify, parse } from 'yaml'
-import { useRoute } from 'vue-router'
-export { gqlDataToYaml, ref, useCore, useQuery, useMutation, sanitizeData, getProperties, defineAsyncComponent, onMounted, tableColumnAlign, useNavigationStoreRef, elude, getColor, timeAgo } from '../core';
+const { ref, gqlDataToYaml, useCore, useNavigationStoreRef } = await import('../core')
+const { stringify, parse } = await import('yaml')
+export { gqlDataToYaml, ref, useCore, useQuery, useMutation, sanitizeData, getProperties, defineAsyncComponent, onMounted, useNavigationStoreRef, elude, getColor, timeAgo } from '../core';
 export { i18n } from "../../libs/i18n"
 export { CrdObjectListExcludes as coreCrdObjectListExcludes } from './custom.js'
 export function getTargetVersion(versions: Array<{name:string}>) {
@@ -12,8 +11,8 @@ export function getTargetVersion(versions: Array<{name:string}>) {
   const maxVersion = versions.map(v=>v.name).sort((a,b)=>a<b?1:-1)[0];
   return (targetVersion.length<maxVersion.length)?targetVersion:maxVersion
 }
-export function usecrdObject() {
-  const { router, $q, pagination, setItemFromRoute, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking, isNamespaced, setNamespaceFromRoute } = useCore();
+export function usecrdObject(router) {
+  const { $q, onErrorHandler, notify, notifySuccess, notifyError, notifyWorking } = useCore();
   const viewer = ref({
       tab: 'meta',
       full: '',
@@ -23,7 +22,6 @@ export function usecrdObject() {
   });
   const onlyReadProperties = (obj) => Object.keys(obj).filter(k=>['metadata',"spec","status"].includes(k)).reduce((res,k)=>{res[k] = obj[k]; return res},{});
   const onlyWriteProperties = (obj) => Object.keys(obj).filter(k=>["spec"].includes(k)).reduce((res,k)=>{res[k] = obj[k];return res},{});
-  const route = useRoute();
   const editor = ref({
       tab: 'simple',
       yaml: '',
@@ -46,7 +44,7 @@ export function usecrdObject() {
       },
   });
   return {
-    isNamespaced, setNamespaceFromRoute, $q,
+    $q,
     onlyReadProperties, onlyWriteProperties, editor, viewer, viewerUpdate: (obj) => {
       viewer.value.full=gqlDataToYaml(obj)
       viewer.value.props["spec"]=gqlDataToYaml({"spec": obj["spec"]})
@@ -54,7 +52,7 @@ export function usecrdObject() {
     readProperties: ["spec","status"],
     writeProperties: ["spec"],
     navigation: useNavigationStoreRef(),
-    route, router, pagination, setItemFromRoute, notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
+    notify, notifySuccess, notifyError, notifyWorking, onErrorHandler,
     toView: (name) => router.push({ name: 'vynilcrdObjectView', params: {name}}),
     toViewReloaded: async (name) => {await router.push({ name: 'vynilcrdObjectView', params: {name}});router.go(0);},
     toEdit: (name) => router.push({ name: 'vynilcrdObjectEdit', params: {name}}),

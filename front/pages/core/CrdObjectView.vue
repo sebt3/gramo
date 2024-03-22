@@ -3,10 +3,14 @@
 import crdObjectQuery         from '@/queries/core/crdObject.read.graphql'
 import clusteredObjectDelete  from '@/queries/core/clusteredObject.delete.graphql'
 import namespacedObjectDelete from '@/queries/core/namespacedObject.delete.graphql'
-import { useCustomResourceDefinition, CustomResourceDefinitionReadExcludes } from '../../libs/k8s/CustomResourceDefinition.js'
-import { defineAsyncComponent, i18n, ref, useQuery, useMutation, usecrdObject, coreCrdObjectListExcludes } from '../../libs/core/crdObject.js'
-const { route, onErrorHandler, notifySuccess, notifyError, navigation, setItemFromRoute, isNamespaced, setNamespaceFromRoute, actionDelete } = usecrdObject();if (isNamespaced()) setNamespaceFromRoute();setItemFromRoute();
-const {  onNotCustomResourceDefinitionFound } = useCustomResourceDefinition();
+const { useCustomResourceDefinition, CustomResourceDefinitionReadExcludes } = await import('../../libs/k8s/CustomResourceDefinition.js')
+const { defineAsyncComponent, i18n, ref, useQuery, useMutation, usecrdObject, coreCrdObjectListExcludes } = await import('../../libs/core/crdObject.js')
+const { useRoute, useRouter } = await import('vue-router')
+const router = useRouter();
+const route = useRoute();
+const { setItemFromRoute, isNamespaced, setNamespaceFromRoute } = await import('../../libs/core/navigation.js')
+const {  onErrorHandler, notifySuccess, notifyError, navigation, actionDelete } = usecrdObject(router);if (isNamespaced()) setNamespaceFromRoute();setItemFromRoute();
+const {  onNotCustomResourceDefinitionFound } = useCustomResourceDefinition(router);
 const { mutate: deletor, onDone: onDeleteDone, onError: onDeleteError } = useMutation(isNamespaced()?namespacedObjectDelete:clusteredObjectDelete);
 const { result, loading, onResult, onError } = useQuery(crdObjectQuery, {
   "crd": {
@@ -59,16 +63,16 @@ onDeleteError((err) => {
   notifyError(i18n.global.t('delete.notifyError'));
   console.log('deletion error',err);
 })
-const coreCrdObjectView               = defineAsyncComponent(() => import( '@/components/core/CrdObjectView.vue'));
-const k8sCustomResourceDefinitionMeta = defineAsyncComponent(() => import( '@/components/k8s/CustomResourceDefinitionMeta.vue'));
-const TableSkeleton                   = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
+const coreCrdObjectView  = defineAsyncComponent(() => import( '@/components/core/CrdObjectView.vue'));
+const GenericMeta        = defineAsyncComponent(() => import( '@/components/generic/GenericMeta.vue'));
+const TableSkeleton      = defineAsyncComponent(() => import( '@/components/core/TableSkeleton.vue'));
 </script>
 <template><div>
   <TableSkeleton :showNamespace="false" v-if="loading" />
   <div class="row q-mb-sm q-ml-sm">
     <div :class="`col-md-${4-(sectionCounts.consumeLeft>0?3:0)}`" v-if="!loading && sectionCounts.parent+sectionCounts.consumeRight>0"></div>
     <div class="col-md-4" v-if="!loading && sectionCounts.parent>0">
-      <k8sCustomResourceDefinitionMeta v-if="!loading" :showStatus="true"
+      <GenericMeta group="k8s" short="CustomResourceDefinition" v-if="!loading" :showStatus="true"
         :model="result.k8sCustomResourceDefinition[0]" origin="childcoreCrdObject"
        />
     </div>

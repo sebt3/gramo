@@ -1,7 +1,8 @@
-import {menuLinksProps} from '../interfaces';
+import { menuLinksProps } from '../interfaces';
 import { {{#each objects}}icon{{ short }}, {{/each}} {{ name }}Icon, {{ name }}Title }from '../../libs/{{ name }}/custom.js'
-import { useCRDStore, usePermissionStore } from '../../stores'
-import { i18n } from "../../libs/i18n"
+const { useCRDStore } = await import('../../stores/crds.js')
+const { usePermissionStore } = await import('../../stores/permission.js')
+const { i18n } = await import("../../libs/i18n")
 const crds = useCRDStore().crds;
 const havePermission = usePermissionStore().have;
 export const link:menuLinksProps = {

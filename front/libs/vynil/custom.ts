@@ -1,12 +1,13 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { i18n } from "../i18n"
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { i18n } = await import("../i18n")
 export const vynilIcon = 'album';
 export const vynilTitle = 'Vynil';
 export const iconDistrib = 'speaker_group';
 export const iconInstall = 'album';
-import { installColor, } from '../../routes/custom';
+const { installColor, } = await import('../../routes/custom');
 export const colorDistrib = installColor;
 export const descriptionDistrib = '';
 export const shortDistrib = 'Distrib';
@@ -29,6 +30,7 @@ export const extraInstallColumns:Array<QTableColumn> = [
 ];
 export const DistribListExcludes = [
   { path: 'spec/url', include: true },
+  { path: 'spec/branch', include: true },
   { path: 'status/errors', include: true },
   { path: 'status/components', include: true },
   { path: 'status/last_updated', include: true },

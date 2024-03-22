@@ -1,8 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { i18n } from "../i18n"
-import { databaseColor, databaseIcon, installIcon } from '../../routes/custom';
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { i18n } = await import("../i18n")
+const { databaseColor, databaseIcon, installIcon } = await import('../../routes/custom');
 export const redisIcon = databaseIcon;
 export const redisTitle = 'Redis';
 export const iconRedis = databaseIcon;

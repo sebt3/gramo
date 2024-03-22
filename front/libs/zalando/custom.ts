@@ -1,8 +1,9 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
-import { tableColumnAlign, timeAgo } from '../core'
-import { databaseColor, databaseIcon, } from '../../routes/custom';
-import { i18n } from "../i18n"
+const { tableColumnAlign } = await import('../core/navigation.js')
+const {  timeAgo } = await import('../core')
+const { databaseColor, databaseIcon, } = await import('../../routes/custom');
+const { i18n } = await import("../i18n")
 export const zalandoIcon = databaseIcon;
 export const zalandoTitle = 'Zalando PG';
 export const iconpostgresql = databaseIcon;
