@@ -25,7 +25,9 @@ function deleteByPath(obj,path) {
 const opts = {} as request.Options;
 kc.applyToRequest(opts);
 export const rawQuery = async (path:string) => {
-    return new Promise((resolve,reject) => request.get(kc.getCurrentCluster().server + path, opts, (error, response, body) => {
+    const current=kc.getCurrentCluster()
+    if (current==null) return new Promise((_,reject) => reject(`No known cluster`))
+    return new Promise((resolve,reject) => request.get(current.server + path, opts, (error, response, body) => {
         if (error) reject(error);
         if (response === undefined || response==null) { reject('no response from API'); return }
         if (response.statusCode != 200) { reject(`Query failed, ${response.statusCode}`); return }
