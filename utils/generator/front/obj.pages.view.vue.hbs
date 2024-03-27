@@ -176,7 +176,9 @@ onResult(res => {
     sectionCounts.value.uses += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
   {{#if (eq type 'child')}}
+    {{#unless (and (eq resultGroup 'core') (or (eq resultShort 'PodMetrics') (eq resultShort 'NodeMetrics')))}}
     sectionCounts.value.bellow += conditions.value["{{name}}"](res.data)?1:0;
+    {{/unless}}
   {{/if}}
   {{#if (eq type 'provide')}}
     sectionCounts.value.bellow += conditions.value["{{name}}"](res.data)?1:0;
@@ -278,7 +280,7 @@ const {{ resultGroup }}{{ resultShort }}List = defineAsyncComponent(() => import
 {{#each resolvers}}
   {{#if (eq type 'equity')}}
     <div>
-      <GenericView group="{{ resultGroup }}" short="{{ resultShort }}" :useActions="false" :showLink="true"
+      <GenericView group="{{ resultGroup }}" short="{{ resultShort }}" :useActions="false" :showLink="true" :showLabels="false"
         v-if="!loading && conditions['{{name}}'](result)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
@@ -307,9 +309,15 @@ const {{ resultGroup }}{{ resultShort }}List = defineAsyncComponent(() => import
   {{/if}}
 {{/each}}
     </div>
+  </div>
+  <div class="row q-mb-sm q-ml-sm">
 {{#each resolvers}}
   {{#if (or (eq type 'child') (eq type 'provide'))}}
+    {{#if (and (eq resultGroup 'core') (or (eq resultShort 'PodMetrics') (eq resultShort 'NodeMetrics')))}}
+    <div :class="`col-md-12`" style="order: -1" v-if="!loading && conditions['{{name}}'](result)">
+    {{else}}
     <div :class="`col-md-${sectionCounts.bellow<1?12:sectionCounts.bellow>4?3:12/sectionCounts.bellow}`" v-if="!loading && conditions['{{name}}'](result)">
+    {{/if}}
     {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}List :useRefresh="false" :parent="sanitizeData(model)"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"

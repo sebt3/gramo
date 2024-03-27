@@ -25,6 +25,7 @@ const y = d3.scaleLinear().domain([0, d3.max(series, d => d3.max(d, d => d[1]))]
 const color = props.datum.length>1?d3.scaleOrdinal().domain(series.map(d => d.key)).range(d3.schemeSpectral[series.length>4&&series.length<11?series.length:4]).unknown("#ccc"):()=>d3.schemeSpectral[4][1];
 const rotation = options.value.width/(props.datum.map(props.axisX).filter(onlyUnique).length+1)<80?-10:0
 const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
+console.log('series',series, props.datum, d3.index(props.datum, props.axisX, props.axisColor))
 onMounted(() => {
     const svg = d3.select(svgRoot.value);
     svg.select(".axisBottom").call(d3.axisBottom(x).tickSizeOuter(0)).call(g => g.selectAll(".domain").remove()).call(g => g.selectAll("text").attr('transform', `rotate(${rotation})`));

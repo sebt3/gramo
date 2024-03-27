@@ -52,7 +52,9 @@
       "workload": "Workload"
     },
     "container": {
-      "init": "Init?"
+      "init": "Init?",
+      "memory": "memory",
+      "cpu": "cpu"
     },
     "documentation": {
       "typeRequiered": "type: { type }, obligatoire.",

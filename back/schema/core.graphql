@@ -154,6 +154,22 @@ type coreContainer {
   status: JSONObject
   getcoreLog(params: queryParameters): coreLog
 }
+type coreMetricsData {
+  timestamp: String!
+  window: String!
+  cpu: String!
+  memory: String!
+}
+type corePodMetrics {
+  namespace: String!
+  pod_name: String!
+  name: String!
+  data: [coreMetricsData]
+}
+type coreNodeMetrics {
+  name: String!
+  data: [coreMetricsData]
+}
 type Query {
   gramoConfig: GramoConfig
   coreEvent(params: queryParameters): [coreEvent]
@@ -161,10 +177,13 @@ type Query {
   vynilPackage(params: queryParameters): [vynilPackage]
 }
 type Mutation {
-    namespacedCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-    namespacedCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-    namespacedCrdObjectDelete(group: String!, version: String!, plural: String!, namespace: String!, name: String!): coreCrdObject
-    clusteredCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-    clusteredCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-    clusteredCrdObjectDelete(group: String!, version: String!, plural: String!, name: String!): coreCrdObject
+  namespacedCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+  namespacedCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+  namespacedCrdObjectDelete(group: String!, version: String!, plural: String!, namespace: String!, name: String!): coreCrdObject
+  clusteredCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+  clusteredCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
+  clusteredCrdObjectDelete(group: String!, version: String!, plural: String!, name: String!): coreCrdObject
+}
+type Subscription {
+  onLog(namespace: String!,pod_name: String!,name: String!): coreLog
 }

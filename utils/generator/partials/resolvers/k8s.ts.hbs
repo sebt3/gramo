@@ -13,7 +13,7 @@
             r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
         )
 {{/if}}
-{{#if (and (eq type 'child') (eq short 'Node')) }}
+{{#if (and (eq type 'child') (and (eq short 'Node') (ne targetShort 'NodeMetrics'))) }}
         const nss = await listNamespace.k8sNamespace(parent, args)
         return (await Promise.all(nss.map(n=>n['metadata']['name']).map(async (ns)=>{
             const lst = await listk8sPod.k8sPod(parent, {namespace: ns, ...args})
@@ -30,6 +30,29 @@
                 r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
         );
         if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'child') (and (eq targetGroup 'core') (eq targetShort 'PodMetrics')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(r=>
+  {{#if  (and (eq group 'k8s') (eq short 'Pod'))}}
+                r.pod_name == parent['metadata']['name'] && r.namespace == parent['metadata']['namespace']
+  {{/if}}
+  {{#if  (and (eq group 'k8s') (eq short 'Deployment'))}}
+                r.pod_name.split('-').slice(0,-2).join('-') == parent['metadata']['name'] && r.namespace == parent['metadata']['namespace']
+  {{/if}}
+  {{#if  (and (eq group 'k8s') (or (or (eq short 'ReplicaSet') (eq short 'StatefulSet')) (eq short 'DaemonSet')))}}
+                r.pod_name.split('-').slice(0,-1).join('-') == parent['metadata']['name'] && r.namespace == parent['metadata']['namespace']
+  {{/if}}
+  {{#if  (and (eq group 'k8s') (eq short 'Namespace'))}}
+                r.namespace == parent['metadata']['name']
+  {{/if}}
+        );
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'child') (and (eq targetGroup 'core') (eq targetShort 'NodeMetrics')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,args))
+            .filter(r=> r.name == parent['metadata']['name']);
+        if (lst.length>0) return lst;
 {{/if}}
 {{#if (and (and (eq type 'child') (eq targetGroup 'core')) (eq targetShort 'Container'))}}
         const lst = ((parent['spec'] == undefined || !Array.isArray(parent['spec']['containers']))?[]:parent['spec']['containers']

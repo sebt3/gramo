@@ -1,9 +1,12 @@
 import k8s from '@kubernetes/client-node';
-import { lists as listNamespace } from '../k8s/Namespace.js';
-import {kc, cache, applyFilter, applyFieldSelection, getByPath, getMeta } from '../k8slibs.js';
-import { knowledge } from '../knowledge.js'
+//import { lists as listNamespace } from '../k8s/Namespace.js';
+import {kc, cache /*, applyFilter, applyFieldSelection, getByPath, getMeta*/ } from '../k8slibs.js';
+//import { knowledge } from '../knowledge.js'
+//import { LogPubSub } from '../../pubsub/logpubsub.js'
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-const short2plural = (short:string) => short.toLowerCase()+'s'
+const log = new k8s.Log(kc);
+
+//const short2plural = (short:string) => short.toLowerCase()+'s'
 export const mutations = {
 };
 export const lists = {

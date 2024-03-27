@@ -68,6 +68,26 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
         reason
         description
       {{/if}}
+      {{#if (eq resultShort 'NodeMetrics')}}
+        name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+      {{/if}}
+      {{#if (eq resultShort 'PodMetrics')}}
+        namespace
+        name
+        pod_name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+      {{/if}}
       {{#if (eq resultShort 'Container')}}
         namespace
         pod_name

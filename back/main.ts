@@ -2,6 +2,9 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
@@ -51,7 +54,21 @@ interface MyContext {
 }
 export const app = express();
 export const httpServer = http.createServer(app);
-const apolloPlugins = [ApolloServerPluginDrainHttpServer({ httpServer })]
+/*const wsServer = new WebSocketServer({
+  server: httpServer,
+  path: '/subscriptions',
+});
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const serverCleanup = useServer({ schema }, wsServer);*/
+const apolloPlugins = [ApolloServerPluginDrainHttpServer({ httpServer }),/*{
+  async serverWillStart() {
+    return {
+      async drainServer() {
+        await serverCleanup.dispose();
+      },
+    };
+  },
+}*/]
 if (gramoConfig.enableGraphQLClient||process.env.NODE_ENV !== 'production')
   apolloPlugins.push(ApolloServerPluginLandingPageLocalDefault());
 else

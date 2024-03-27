@@ -1,8 +1,9 @@
 <script setup lang="ts">
 defineEmits(['on-delete']);
-const props = withDefaults(defineProps<{model: object, group:string, short:string, useActions?:boolean, showLink?:boolean, origin?:string}>(), {
+const props = withDefaults(defineProps<{model: object, group:string, short:string, useActions?:boolean, showLink?:boolean, showLabels?:boolean, origin?:string}>(), {
   useActions: false,
   showLink: false,
+  showLabels: true,
 });
 const { loader } = await import("../../libs/core/importer")
 const { defineAsyncComponent, onMounted, elude, getColor, timeAgo, useItem, getProperties, colorItem, itemDefinition, iconItem, extraColumns } = await loader(props.group,props.short)
@@ -98,8 +99,8 @@ const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/openap
           </q-field>
         </div>
       </div>
-      <div class="row" v-if="(model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0) || (model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0)">
-        <div :class="`col-md-${model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0?6:12}`" v-if="model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0">
+      <div class="row" v-if="showLabels && (model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0) || (model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0)">
+        <div :class="`col-md-${model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0?6:12}`" v-if="showLabels && model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0">
           <q-field label="Annotations" stack-label borderless>
             <template v-slot:prepend><q-icon name="short_text" /></template>
             <template v-slot:control><div class="self-center full-width no-outline">
@@ -110,7 +111,7 @@ const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/openap
               </span>
             </div></template>
           </q-field>
-        </div><div :class="`col-md-${model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0?6:12}`" v-if="model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0">
+        </div><div :class="`col-md-${model.metadata.annotations != undefined && Object.entries(model.metadata.annotations).length>0?6:12}`" v-if="showLabels && model.metadata.labels != undefined && Object.entries(model.metadata.labels).length>0">
           <q-field label="Labels" stack-label borderless>
             <template v-slot:prepend><q-icon name="label" /></template>
             <template v-slot:control><div class="self-center full-width no-outline">

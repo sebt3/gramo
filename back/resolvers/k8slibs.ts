@@ -1,4 +1,5 @@
 import k8s from '@kubernetes/client-node';
+import request from 'request';
 import NodeCache from 'node-cache';
 export const kc = new k8s.KubeConfig();
 export const cache = new NodeCache({ stdTTL: 2, useClones: false, deleteOnExpire: true, checkperiod: 60 });
@@ -19,6 +20,17 @@ function deleteByPath(obj,path) {
     const parent = path.split("/").slice(0,-1).reduce((res,cur) => res==null?null:res[cur.replaceAll('~1','/')],obj)
     if (parent!=null)
         delete parent[path.split("/").slice(-1)[0]];
+}
+
+const opts = {} as request.Options;
+kc.applyToRequest(opts);
+export const rawQuery = async (path:string) => {
+    return new Promise((resolve,reject) => request.get(kc.getCurrentCluster().server + path, opts, (error, response, body) => {
+        if (error) reject(error);
+        if (response === undefined || response==null) { reject('no response from API'); return }
+        if (response.statusCode != 200) { reject(`Query failed, ${response.statusCode}`); return }
+        resolve(JSON.parse(body))
+    }));
 }
 
 function addByPath(target,path,data) {

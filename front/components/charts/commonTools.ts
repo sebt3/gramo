@@ -35,6 +35,12 @@ export function darkenColor(col:string, darkenBy:number=10) {
 }
 export default lightenColor
 
+const cpuSuffix = (v:string) => {switch (v.split('').splice(-1)[0]) {case 'n': return Math.pow(10,-7);case 'μ': return Math.pow(10,-4);case 'm': return Math.pow(10,-1);case 'd': return 10;} return 1}
+export const cpuValue = (v:string) => parseInt(v)*cpuSuffix(v)
+const memSuffix = (v:string) => {switch (v.split('').splice(-2).join('')) {case 'Ki': return 1/Math.pow(2,10);case 'Gi': return Math.pow(2,10);} return 1}
+export const memValue = (v:string) => parseInt(v)*memSuffix(v)
+
+
 let count = 0;
 export function uid(name) {
   return new Id("O-" + (name == null ? "" : name + "-") + ++count);

@@ -77,6 +77,26 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
         host
         path
           {{/if}}
+          {{#if (eq resultShort 'NodeMetrics')}}
+        name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+          {{/if}}
+          {{#if (eq resultShort 'PodMetrics')}}
+        namespace
+        name
+        pod_name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+          {{/if}}
           {{#if (eq resultShort 'Container')}}
         namespace
         pod_name

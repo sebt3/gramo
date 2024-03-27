@@ -9,6 +9,7 @@ type k8sNamespace {
   getcoreAdvice(params: queryParameters): [coreAdvice]
   parentvynilInstall(params: queryParameters): vynilInstall
   parentfluxcdKustomization(params: queryParameters): fluxcdKustomization
+  childcorePodMetrics(params: queryParameters): [corePodMetrics]
 {{#each groups}}
   {{#each this.objects}}
     {{#if this.namespaced}}
