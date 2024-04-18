@@ -29,7 +29,7 @@ const OpenApiEditNumber      = defineAsyncComponent(() => import( './OpenApiEdit
   <div class="q-gutter-md column">
     <div v-for="[key, value] in new Map([...properties.entries()].filter(([key]) => showdefault || !isDefault(key)))" v-bind:key="key" :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
       <div v-if="value.type == 'object' && value.properties != undefined && Object.keys(value.properties).length>0" :key="`${key}-obj`">
-        <OpenApiEditObject v-model:data="data[key]" :level="0" :showdefault="showdefault" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="value.required" :read-only="readOnly" />
+        <OpenApiEditObject v-model:data="data[key]" :level="0" :showdefault="showdefault" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="Array.isArray(required) && required.includes(key)?value.required:[]" :read-only="readOnly" />
       </div>
       <div v-if="value.type == 'object' && (value.properties == undefined || Object.keys(value.properties).length<1)" :key="`${key}-unknown`">
         <OpenApiEditUndefObject v-model:data="data[key]" :name="key" :level="0" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :read-only="readOnly" />

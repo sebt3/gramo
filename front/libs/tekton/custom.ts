@@ -1,3 +1,4 @@
+// noGramoGenerator
 import { QTableColumn } from 'quasar'
 const { tableColumnAlign } = await import('../core/navigation.js')
 const { i18n } = await import("../i18n")
@@ -126,6 +127,8 @@ export const PipelineReadExcludes = [
 export const PipelineSimpleExcludes = [
 ];
 export const PipelineRunListExcludes = [
+  { path: 'spec', include: true },
+  { path: 'status/childReferences', include: true },
   { path: 'status/startTime', include: true },
   { path: 'status/completionTime', include: true },
 ];
@@ -140,6 +143,7 @@ export const TaskReadExcludes = [
 export const TaskSimpleExcludes = [
 ];
 export const TaskRunListExcludes = [
+  { path: 'spec', include: true },
   { path: 'status/startTime', include: true },
   { path: 'status/completionTime', include: true },
 ];
@@ -166,6 +170,7 @@ export const ClusterTaskReadExcludes = [
 export const ClusterTaskSimpleExcludes = [
 ];
 export const CustomRunListExcludes = [
+  { path: 'spec', include: true },
   { path: 'status/startTime', include: true },
   { path: 'status/completionTime', include: true },
 ];
@@ -174,7 +179,6 @@ export const CustomRunReadExcludes = [
 export const CustomRunSimpleExcludes = [
 ];
 export const ResolutionRequestListExcludes = [
-  { path: 'metadata/creationTimestamp', include: true },
 ];
 export const ResolutionRequestReadExcludes = [
 ];
@@ -199,6 +203,7 @@ export const ClusterTriggerBindingReadExcludes = [
 export const ClusterTriggerBindingSimpleExcludes = [
 ];
 export const EventListenerListExcludes = [
+  { path: 'spec', include: true },
   { path: 'status/address/url', include: true },
 ];
 export const EventListenerReadExcludes = [

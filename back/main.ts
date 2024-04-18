@@ -4,6 +4,7 @@ import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPag
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
+import { parse } from 'url';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import express from 'express';
 import http from 'http';
@@ -47,6 +48,8 @@ const typeDefs = gqlWrapper(
   importGraphQL('min.graphql'),
   importGraphQL('operators.graphql'),
   importGraphQL('whereabouts.graphql'),
+  importGraphQL('kubevirt.graphql'),
+  importGraphQL('networkaddonsoperator.graphql'),
 );
 
 interface MyContext {
@@ -54,13 +57,18 @@ interface MyContext {
 }
 export const app = express();
 export const httpServer = http.createServer(app);
-/*const wsServer = new WebSocketServer({
-  server: httpServer,
-  path: '/subscriptions',
+const wsServer = new WebSocketServer({ noServer: true });
+httpServer.on('upgrade', function upgrade(request, socket, head) {
+  const { pathname } = parse(request.url as string);
+  if (pathname === '/suscrptions') {
+    wsServer.handleUpgrade(request, socket, head, function done(ws) {
+      wsServer.emit('connection', ws, request);
+    });
+  }
 });
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-const serverCleanup = useServer({ schema }, wsServer);*/
-const apolloPlugins = [ApolloServerPluginDrainHttpServer({ httpServer }),/*{
+const serverCleanup = useServer({ schema }, wsServer);
+const apolloPlugins = [ApolloServerPluginDrainHttpServer({ httpServer }),{
   async serverWillStart() {
     return {
       async drainServer() {
@@ -68,7 +76,7 @@ const apolloPlugins = [ApolloServerPluginDrainHttpServer({ httpServer }),/*{
       },
     };
   },
-}*/]
+}]
 if (gramoConfig.enableGraphQLClient||process.env.NODE_ENV !== 'production')
   apolloPlugins.push(ApolloServerPluginLandingPageLocalDefault());
 else

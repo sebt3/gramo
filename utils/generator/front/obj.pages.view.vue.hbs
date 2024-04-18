@@ -160,10 +160,10 @@ onResult(res => {
 {{> zalandoCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
 {{#each resolvers}}
-  {{#if (and (eq type 'consume') (eq resultShort 'Node'))}}
+  {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'EventListener')))}}
     sectionCounts.value.consumeLeft += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
-  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
+  {{#if (and (eq type 'consume') (and (and (ne resultShort 'Node') (ne resultShort 'EventListener')) (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
     sectionCounts.value.consumeRight += conditions.value["{{name}}"](res.data)?1:0;
   {{/if}}
   {{#if (eq type 'parent')}}
@@ -210,7 +210,7 @@ const {{ resultGroup }}{{ resultShort }}List = defineAsyncComponent(() => import
   <div class="row q-mb-sm q-ml-sm">
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeLeft>0">
 {{#each resolvers}}
-  {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'Distrib')))}}
+  {{#if (and (eq type 'consume') (or (or (eq resultShort 'Node') (eq resultShort 'EventListener')) (eq resultShort 'Distrib')))}}
       <GenericMeta group="{{ resultGroup }}" short="{{ resultShort }}" v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"
         origin="{{inverse}}{{../group}}{{../short}}"
@@ -234,7 +234,7 @@ const {{ resultGroup }}{{ resultShort }}List = defineAsyncComponent(() => import
     <div :class="`col-md-${5-(sectionCounts.parent>0?4:0)}`" v-if="!loading && sectionCounts.consumeRight>0"></div>
     <div class="col-md-3" v-if="!loading && sectionCounts.consumeRight>0">
 {{#each resolvers}}
-  {{#if (and (eq type 'consume') (and (ne resultShort 'Node') (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
+  {{#if (and (eq type 'consume') (and (and (ne resultShort 'Node') (ne resultShort 'EventListener')) (or (ne resultGroup 'vynil') (and (ne resultShort 'Distrib') (ne resultShort 'Category')))))}}
     {{#if (or (eq resultGroup 'core') (or (and (eq resultGroup 'vynil') (eq resultShort 'Category')) (and (eq resultGroup 'vynil') (eq resultShort 'Package'))))}}
       <{{ resultGroup }}{{ resultShort }}Meta v-if="!loading && conditions['{{name}}'](result)" :showStatus="false"
         :model="result{{#if ../namespaced}}.k8sNamespace[0]{{/if}}.{{ ../group }}{{ ../short }}[0].{{ name }}"

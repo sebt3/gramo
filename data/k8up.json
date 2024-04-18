@@ -709,82 +709,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "archives.k8up.io",
-          "uid": "2111f6a3-15fc-4a80-b440-e60ef120d4ec",
-          "resourceVersion": "127259319",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:07Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:07Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:07Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "archives.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -1541,27 +1466,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:07Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:07Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "archives",
             "singular": "archive",
@@ -2248,82 +2156,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "backups.k8up.io",
-          "uid": "1dbfdb80-962e-4d0b-ac0b-d608366e7730",
-          "resourceVersion": "127259333",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:08Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:08Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:08Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "backups.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -3011,27 +2844,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "backups",
             "singular": "backup",
@@ -3713,82 +3529,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "checks.k8up.io",
-          "uid": "f37e9a51-ce2e-4971-836a-f684190f29ab",
-          "resourceVersion": "127259343",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:08Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:08Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:08Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "checks.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -4459,27 +4200,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "checks",
             "singular": "check",
@@ -10048,82 +9772,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "prebackuppods.k8up.io",
-          "uid": "709aa490-f874-49ce-b6ce-0ebb690f3de6",
-          "resourceVersion": "127259357",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:08Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:08Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:09Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "prebackuppods.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -16015,27 +15664,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:08Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "prebackuppods",
             "singular": "prebackuppod",
@@ -16730,82 +16362,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "prunes.k8up.io",
-          "uid": "1a4673be-ed78-4815-8001-4c3f5dcede08",
-          "resourceVersion": "127259368",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:09Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:09Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:09Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "prunes.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -17516,27 +17073,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:09Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:09Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "prunes",
             "singular": "prune",
@@ -18298,82 +17838,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "restores.k8up.io",
-          "uid": "f083827c-5f68-4a76-86ff-ef4565dfc4e1",
-          "resourceVersion": "127259380",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "restores.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -19130,27 +18595,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "restores",
             "singular": "restore",
@@ -22713,82 +22161,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "schedules.k8up.io",
-          "uid": "c68e113f-cba0-48cb-9c46-417b10f527e2",
-          "resourceVersion": "127259398",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "schedules.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -26407,27 +25780,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "schedules",
             "singular": "schedule",
@@ -26514,82 +25870,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "snapshots.k8up.io",
-          "uid": "6ccc48d1-294f-4fb0-9008-0a1744549a38",
-          "resourceVersion": "127259405",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.10.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "snapshots.k8up.io"
         },
         "spec": {
           "group": "k8up.io",
@@ -26675,27 +25956,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "snapshots",
             "singular": "snapshot",

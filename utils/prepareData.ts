@@ -1,7 +1,7 @@
 #!/usr/bin/env -S npx tsx
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { crds, openapi } from './generator/types.js'
+import { crds, openapi, k8sDefinitionPropertiesStatus  } from './generator/types.js'
 import { uniq, getShort, enhenceObject, getObjFQN, mkdir, saveTo, replaceRefWithDef, getTargetVersion } from './generator/utils.js'
 import { getClusterByPath } from './generator/k8s.js'
 
@@ -14,51 +14,7 @@ const AdditionnalDefSources = [
     'https://github.com/tektoncd/pipeline/raw/v0.57.0/pkg/apis/pipeline/v1beta1/swagger.json',
     'https://github.com/tektoncd/pipeline/raw/v0.57.0/pkg/apis/pipeline/v1/swagger.json'
 ]
-const AdditionnalDefinitions = replaceRefWithDef(Object.entries((await Promise.all(AdditionnalDefSources.map(async u=>(await fetch(u).then(r => r.json()).then(o=>o.definitions))))).reduce((res,cur)=>{return {...cur,...res}},{})),[
-    'github.com.tektoncd.pipeline.pkg.apis.config.FeatureFlags',
-    'github.com.tektoncd.pipeline.pkg.apis.run.v1beta1.CustomRunStatus',
-    'k8s.io.apimachinery.pkg.runtime.RawExtension',
-    'knative.Condition',
-    'v1.Affinity',
-    'v1alpha1.PipelineResourceSpec',
-    'v1.ConfigMapVolumeSource',
-    'v1.ContainerStateRunning',
-    'v1.Duration',
-    'v1.EnvVar',
-    'v1.LocalObjectReference',
-    'v1.ResourceRequirements',
-    'v1.SecretReference',
-    'v1.Time',
-    'v1beta1.PipelineSpec',
-    'v1.PipelineSpec',
-    'github.com.tektoncd.pipeline.pkg.result.RunResult',
-    'v1.ContainerStateTerminated',
-    'v1.CSIVolumeSource',
-    'v1.EnvFromSource',
-    'v1.PodDNSConfig',
-    'v1.SecurityContext',
-    'v1.TaskRunStatus',
-    'v1.Toleration',
-    'v1beta1.TaskRunStatus',
-    'v1.ContainerStateWaiting',
-    'v1.EmptyDirVolumeSource',
-    'v1.HostAlias',
-    'v1.Lifecycle',
-    'v1.VolumeDevice',
-    'v1.VolumeMount',
-    'v1.PersistentVolumeClaimVolumeSource',
-    'v1.PodSecurityContext',
-    'v1.Probe',
-    'v1.ContainerPort',
-    'v1.ProjectedVolumeSource',
-    'v1.TopologySpreadConstraint',
-    'v1.SecretVolumeSource',
-    'v1.Volume',
-    'v1.PersistentVolumeClaim',
-    'github.com.tektoncd.pipeline.pkg.apis.run.v1alpha1.RunStatus',
-])
-//console.log(AdditionnalDefinitions)
-
+const AdditionnalDefinitions = (await Promise.all(AdditionnalDefSources.map(async u=>(await fetch(u).then(r => r.json()).then(o=>o.definitions))))).reduce((res,cur)=>{return {...cur,...res}},{})
 Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getClusterByPath('apis/apiextensions.k8s.io/v1/customresourcedefinitions')])
     .then(([data_in, apis_in, crd_in]) => {
 ////////////////////////////////////
@@ -68,7 +24,7 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
 // and group them according to their defined apiGroup and final super group
     // Group all swagger definitions marked as a kubernetes object into their apiGroup,
     // add its CRD if found and start to refine the object properties
-    const definitions = replaceRefWithDef(Object.entries((data_in as openapi).definitions))//.filter(e => e[1].properties!=undefined && e[1].properties['items']==undefined))
+    const definitions = replaceRefWithDef(Object.entries({...AdditionnalDefinitions,...((data_in as openapi).definitions)}))
     const known_data = ((apis_in as object)['groups'] as Array<object>).map(i => { return {
         name: i['name'],
         ...getShort(i['name']),
@@ -83,14 +39,8 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
         ).map(([name, def]) => {
             const crd = (crd_in as crds).items.filter(c => getObjFQN(c) == name)[0];
             const ver = crd.spec.versions.filter(v=> v.name == getTargetVersion(crd.spec.versions))[0]
-            /*if(Object.keys(AdditionnalDefinitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)) {
-                console.log(`${name.split('.').slice(-2).join('.')}Spec`, AdditionnalDefinitions[`${name.split('.').slice(-2).join('.')}Spec`])
-            }
-            if(Object.keys(AdditionnalDefinitions).includes(`${name.split('.').slice(-2).join('.')}Status`)) {
-                console.log(`${name.split('.').slice(-2).join('.')}Status`, AdditionnalDefinitions[`${name.split('.').slice(-2).join('.')}Status`])
-            }*/
-            const minDef = { properties: ver.subresources?.status!=undefined?{metadata: undefined,spec: Object.keys(AdditionnalDefinitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?AdditionnalDefinitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'},status: Object.keys(AdditionnalDefinitions).includes(`${name.split('.').slice(-2).join('.')}Status`)?AdditionnalDefinitions[`${name.split('.').slice(-2).join('.')}Status`]:{type: 'object'}}:{metadata: undefined,spec: Object.keys(AdditionnalDefinitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?AdditionnalDefinitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'}} }
-            return enhenceObject(i['name'], {name: name,definition: {...minDef, ...def}, crd})
+            const minDef = { properties: ver.subresources?.status!=undefined?{metadata: undefined,spec: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?definitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'},status: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Status`)?definitions[`${name.split('.').slice(-2).join('.')}Status`]:{type: 'object'}}:{metadata: undefined,spec: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?definitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'}} }
+            return enhenceObject(i['name'], {name: name,definition: {...minDef, ...def}, crd: {kind:crd.kind,apiVersion:crd.apiVersion,metadata:{name:crd.metadata['name']},spec:{...crd.spec,conversion:{}},status:({conditions:[],acceptedNames:crd.status.acceptedNames,storedVersions:crd.status.storedVersions} as k8sDefinitionPropertiesStatus)}})
         }))
     }});
     // List the remaining objects not matched in a defined apiGroup (they belong to the group '' which is kubernetes main objects)

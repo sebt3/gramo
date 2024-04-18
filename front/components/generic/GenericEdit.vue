@@ -10,7 +10,7 @@ const { $q, writeProperties, onlyWriteProperties, editor } = useItem(router);
 if (namespaced) setNamespacedItemFromRoute();
 else setItemFromRoute();
 onMounted(() => editor.value.updateFromQuery(onlyWriteProperties(props.model)) )
-const onSubmit = () => emit('on-submit', sanitizeData(editor.value.obj))
+const onSubmit = () => {emit('on-submit', sanitizeData(editor.value.obj));console.log('emited')}
 const setkey   = (key:string, v) => editor.value.setKey(key, v)
 const setYaml  = (v) => editor.value.setYaml(v)
 const OpenApiEdit      = defineAsyncComponent(() => import( '@/components/openapi/OpenApiEdit.vue'));

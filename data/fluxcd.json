@@ -480,84 +480,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "kustomizations.kustomize.toolkit.fluxcd.io",
-          "uid": "31c43b56-93bc-41ee-8f68-8152c772ed7a",
-          "resourceVersion": "127259432",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "kustomizations.kustomize.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "kustomize.toolkit.fluxcd.io",
@@ -2247,27 +2170,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "kustomizations",
             "singular": "kustomization",
@@ -2532,82 +2438,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "receivers.notification.toolkit.fluxcd.io",
-          "uid": "50efb44f-db26-4fbc-b7c9-a896a2fe0d68",
-          "resourceVersion": "127259463",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "receivers.notification.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "notification.toolkit.fluxcd.io",
@@ -3309,27 +3140,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "receivers",
             "singular": "receiver",
@@ -3521,82 +3335,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "alerts.notification.toolkit.fluxcd.io",
-          "uid": "7b8e6231-d3fe-489b-a375-d04636cbf981",
-          "resourceVersion": "127259318",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "alerts.notification.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "notification.toolkit.fluxcd.io",
@@ -4203,27 +3942,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "alerts",
             "singular": "alert",
@@ -4393,82 +4115,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "providers.notification.toolkit.fluxcd.io",
-          "uid": "641e1029-15a4-4172-b771-8c4466056cca",
-          "resourceVersion": "127259449",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "providers.notification.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "notification.toolkit.fluxcd.io",
@@ -5040,27 +4687,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "providers",
             "singular": "provider",
@@ -5494,84 +5124,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "gitrepositories.source.toolkit.fluxcd.io",
-          "uid": "0aa75049-17ba-4f71-8e41-fbcd4695888a",
-          "resourceVersion": "127259340",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "gitrepositories.source.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "source.toolkit.fluxcd.io",
@@ -6817,27 +6370,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "gitrepositories",
             "singular": "gitrepository",
@@ -7145,82 +6681,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "buckets.source.toolkit.fluxcd.io",
-          "uid": "4a1057ad-d1c7-4e27-b873-73ca5bfc3e5c",
-          "resourceVersion": "127259332",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "buckets.source.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "source.toolkit.fluxcd.io",
@@ -7759,27 +7220,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "buckets",
             "singular": "bucket",
@@ -8141,84 +7585,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "helmcharts.source.toolkit.fluxcd.io",
-          "uid": "e4e0c33a-4e91-4d55-b46c-ef4b93d0368d",
-          "resourceVersion": "127259348",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "helmcharts.source.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "source.toolkit.fluxcd.io",
@@ -8856,27 +8223,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "helmcharts",
             "singular": "helmchart",
@@ -9203,84 +8553,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "helmrepositories.source.toolkit.fluxcd.io",
-          "uid": "13e24f2c-1b75-4d66-ac7c-b177674dcf54",
-          "resourceVersion": "127259369",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "helmrepositories.source.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "source.toolkit.fluxcd.io",
@@ -9802,27 +9075,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "helmrepositories",
             "singular": "helmrepository",
@@ -10218,84 +9474,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ocirepositories.source.toolkit.fluxcd.io",
-          "uid": "442372de-a2a6-4ca8-9960-f6c83d80a68b",
-          "resourceVersion": "127259442",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "ocirepositories.source.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "source.toolkit.fluxcd.io",
@@ -10676,27 +9855,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ocirepositories",
             "singular": "ocirepository",
@@ -11046,82 +10208,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "imageupdateautomations.image.toolkit.fluxcd.io",
-          "uid": "bdbe2ab8-f1b3-4573-afe6-4a46d9dbcf70",
-          "resourceVersion": "127259407",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "imageupdateautomations.image.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "image.toolkit.fluxcd.io",
@@ -11440,27 +10527,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "imageupdateautomations",
             "singular": "imageupdateautomation",
@@ -11688,82 +10758,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "imagepolicies.image.toolkit.fluxcd.io",
-          "uid": "58960100-e845-409f-8c72-d3b1cc5fb12d",
-          "resourceVersion": "127259381",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "imagepolicies.image.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "image.toolkit.fluxcd.io",
@@ -12170,27 +11165,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "imagepolicies",
             "singular": "imagepolicy",
@@ -12463,82 +11441,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "imagerepositories.image.toolkit.fluxcd.io",
-          "uid": "7b04c801-9b5a-49aa-b745-b059c874cdce",
-          "resourceVersion": "127259396",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "imagerepositories.image.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "image.toolkit.fluxcd.io",
@@ -13021,27 +11924,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "imagerepositories",
             "singular": "imagerepository",
@@ -14141,84 +13027,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "helmreleases.helm.toolkit.fluxcd.io",
-          "uid": "b6b6f225-3b6e-46b1-a64c-6814853a4936",
-          "resourceVersion": "127259359",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.12.0"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:19Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "helmreleases.helm.toolkit.fluxcd.io"
         },
         "spec": {
           "group": "helm.toolkit.fluxcd.io",
@@ -16359,27 +15168,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "helmreleases",
             "singular": "helmrelease",

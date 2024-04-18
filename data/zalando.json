@@ -730,77 +730,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "postgresqls.acid.zalan.do",
-          "uid": "2ad1a541-c3a4-49e7-bb1b-da93a4f193a9",
-          "resourceVersion": "2176",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:16Z",
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:16Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "postgres-operator",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:16Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "postgresqls.acid.zalan.do"
         },
         "spec": {
           "group": "acid.zalan.do",
@@ -1706,27 +1636,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:16Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:16Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "postgresqls",
             "singular": "postgresql",
@@ -1844,73 +1757,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "clusterkopfpeerings.zalando.org",
-          "uid": "db255947-d5ac-431f-bf01-f4cebc7e5527",
-          "resourceVersion": "104674813",
-          "generation": 1,
-          "creationTimestamp": "2024-01-18T17:34:17Z",
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-01-18T17:34:17Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-01-18T17:34:17Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "clusterkopfpeerings.zalando.org"
         },
         "spec": {
           "group": "zalando.org",
@@ -1939,27 +1786,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2024-01-18T17:34:17Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2024-01-18T17:34:17Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "clusterkopfpeerings",
             "singular": "clusterkopfpeering",
@@ -2018,73 +1848,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "kopfpeerings.zalando.org",
-          "uid": "a331063c-7e02-4081-9deb-e4f16139e917",
-          "resourceVersion": "104674814",
-          "generation": 1,
-          "creationTimestamp": "2024-01-18T17:34:17Z",
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-01-18T17:34:17Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-01-18T17:34:17Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "kopfpeerings.zalando.org"
         },
         "spec": {
           "group": "zalando.org",
@@ -2113,27 +1877,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2024-01-18T17:34:17Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2024-01-18T17:34:17Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "kopfpeerings",
             "singular": "kopfpeering",

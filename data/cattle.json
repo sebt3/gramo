@@ -5,7 +5,6 @@
       "alternatives": [],
       "name": "io.cattle.helm.v1.HelmChart",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -16,12 +15,49 @@
             "type": "string"
           },
           "spec": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "type": "object",
+            "properties": {
+              "authPassCredentials": {
+                "type": "boolean"
+              },
+              "authSecret": {},
+              "backOffLimit": {},
+              "bootstrap": {
+                "type": "boolean"
+              },
+              "chart": {},
+              "chartContent": {},
+              "createNamespace": {
+                "type": "boolean"
+              },
+              "dockerRegistrySecret": {},
+              "failurePolicy": {},
+              "helmVersion": {},
+              "jobImage": {},
+              "podSecurityContext": {},
+              "repo": {},
+              "repoCA": {},
+              "repoCAConfigMap": {},
+              "securityContext": {},
+              "set": {
+                "additionalProperties": {
+                  "x-kubernetes-int-or-string": true
+                }
+              },
+              "targetNamespace": {},
+              "timeout": {},
+              "valuesContent": {},
+              "version": {}
+            }
           },
           "status": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "type": "object",
+            "properties": {
+              "jobName": {}
+            }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "helm.cattle.io",
@@ -32,97 +68,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "helmcharts.helm.cattle.io",
-          "uid": "847e2775-2708-487f-906b-d43dc1c1eea1",
-          "resourceVersion": "199",
-          "generation": 1,
-          "creationTimestamp": "2023-03-07T15:49:24Z",
-          "labels": {
-            "objectset.rio.cattle.io/hash": "29aa74e2abe5947484ef867c989a6921f51b1438"
-          },
-          "annotations": {
-            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5RTTY/TMBD9K2jOblG73W0biQNahEBIK8RHL4jDxJk0Jo5teezuoir/HU2SLlukLXCLxzNv3nt+OQIGs6PIxjso5EAPiZwced5ueG78y8MCFLTGVVDAbebku0/EPkdNb6g2ziSZVdBRwgoTQnEEdM4nlAuWoy9/kE5MaR6Nn2tMyZIgG4EE9ey9v3cUZ/tD+zw19eKDcdWrC7wugzvsCApoyHa6wZh4Lp+/2/4JgANqQYFegY40CP9iOuKEXYDCZWsVWCzJXrSjQW6ggOUWcb2iJZZ0vV2tV5sV1Zubtd5utnizXS7q60W5WF1tZNtf6fcKOJCWtfvoc5iazwQOEqRjeuR3ZLtbQQMFweaI9mwFKGDj9tlifFqXVSESUzzQV9c6f+/eGrIVQ1GjZVLA2gdhe3eyrAIFhzF8DMW340nOkDjWDXVDmnwg9/rj+93V58dSiD5QTGbkfVL4MGtzSdFRIp6duMzySGZWT2xSzCS2JEyZ/3OsV5B+DiLGRwSpDP3V2CG4PuKepoHvZ5tQawqJqrs/HH9q9BAi7yoz/T5jegSVqt2jWVLt+18BAAD//32jWoG/AwAA",
-            "objectset.rio.cattle.io/id": "",
-            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
-            "objectset.rio.cattle.io/owner-name": "helmcharts.helm.cattle.io",
-            "objectset.rio.cattle.io/owner-namespace": ""
-          },
-          "managedFields": [
-            {
-              "manager": "deploy@kydah-share",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/applied": {},
-                    "f:objectset.rio.cattle.io/id": {},
-                    "f:objectset.rio.cattle.io/owner-gvk": {},
-                    "f:objectset.rio.cattle.io/owner-name": {},
-                    "f:objectset.rio.cattle.io/owner-namespace": {}
-                  },
-                  "f:labels": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/hash": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "k3s",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "helmcharts.helm.cattle.io"
         },
         "spec": {
           "group": "helm.cattle.io",
@@ -143,14 +89,375 @@
                   "type": "object",
                   "properties": {
                     "spec": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "type": "object",
+                      "properties": {
+                        "authPassCredentials": {
+                          "type": "boolean"
+                        },
+                        "authSecret": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "backOffLimit": {
+                          "type": "integer",
+                          "nullable": true
+                        },
+                        "bootstrap": {
+                          "type": "boolean"
+                        },
+                        "chart": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "chartContent": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "createNamespace": {
+                          "type": "boolean"
+                        },
+                        "dockerRegistrySecret": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "failurePolicy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "helmVersion": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "jobImage": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "podSecurityContext": {
+                          "type": "object",
+                          "properties": {
+                            "fsGroup": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "fsGroupChangePolicy": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "runAsGroup": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "runAsNonRoot": {
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "runAsUser": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "seLinuxOptions": {
+                              "type": "object",
+                              "properties": {
+                                "level": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "role": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "user": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "seccompProfile": {
+                              "type": "object",
+                              "properties": {
+                                "localhostProfile": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "supplementalGroups": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              },
+                              "nullable": true
+                            },
+                            "sysctls": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "nullable": true
+                                  }
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "windowsOptions": {
+                              "type": "object",
+                              "properties": {
+                                "gmsaCredentialSpec": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "gmsaCredentialSpecName": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "hostProcess": {
+                                  "type": "boolean",
+                                  "nullable": true
+                                },
+                                "runAsUserName": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "repo": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "repoCA": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "repoCAConfigMap": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "securityContext": {
+                          "type": "object",
+                          "properties": {
+                            "allowPrivilegeEscalation": {
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "capabilities": {
+                              "type": "object",
+                              "properties": {
+                                "add": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "nullable": true
+                                },
+                                "drop": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "privileged": {
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "procMount": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "readOnlyRootFilesystem": {
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "runAsGroup": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "runAsNonRoot": {
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "runAsUser": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "seLinuxOptions": {
+                              "type": "object",
+                              "properties": {
+                                "level": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "role": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "user": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "seccompProfile": {
+                              "type": "object",
+                              "properties": {
+                                "localhostProfile": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            },
+                            "windowsOptions": {
+                              "type": "object",
+                              "properties": {
+                                "gmsaCredentialSpec": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "gmsaCredentialSpecName": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "hostProcess": {
+                                  "type": "boolean",
+                                  "nullable": true
+                                },
+                                "runAsUserName": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "set": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "x-kubernetes-int-or-string": true
+                          },
+                          "nullable": true
+                        },
+                        "targetNamespace": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "timeout": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "valuesContent": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "version": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     },
                     "status": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "type": "object",
+                      "properties": {
+                        "jobName": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
-              }
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Job",
+                  "type": "string",
+                  "jsonPath": ".status.jobName"
+                },
+                {
+                  "name": "Chart",
+                  "type": "string",
+                  "jsonPath": ".spec.chart"
+                },
+                {
+                  "name": "TargetNamespace",
+                  "type": "string",
+                  "jsonPath": ".spec.targetNamespace"
+                },
+                {
+                  "name": "Version",
+                  "type": "string",
+                  "jsonPath": ".spec.version"
+                },
+                {
+                  "name": "Repo",
+                  "type": "string",
+                  "jsonPath": ".spec.repo"
+                },
+                {
+                  "name": "HelmVersion",
+                  "type": "string",
+                  "jsonPath": ".spec.helmVersion"
+                },
+                {
+                  "name": "Bootstrap",
+                  "type": "string",
+                  "jsonPath": ".spec.bootstrap"
+                }
+              ]
             }
           ],
           "conversion": {
@@ -158,22 +465,7 @@
           }
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "helmcharts",
             "singular": "helmchart",
@@ -185,6 +477,43 @@
           ]
         }
       },
+      "additionalColumns": [
+        {
+          "name": "Job",
+          "type": "string",
+          "jsonPath": ".status.jobName"
+        },
+        {
+          "name": "Chart",
+          "type": "string",
+          "jsonPath": ".spec.chart"
+        },
+        {
+          "name": "TargetNamespace",
+          "type": "string",
+          "jsonPath": ".spec.targetNamespace"
+        },
+        {
+          "name": "Version",
+          "type": "string",
+          "jsonPath": ".spec.version"
+        },
+        {
+          "name": "Repo",
+          "type": "string",
+          "jsonPath": ".spec.repo"
+        },
+        {
+          "name": "HelmVersion",
+          "type": "string",
+          "jsonPath": ".spec.helmVersion"
+        },
+        {
+          "name": "Bootstrap",
+          "type": "string",
+          "jsonPath": ".spec.bootstrap"
+        }
+      ],
       "short": "HelmChart",
       "apiGroup": "helm.cattle.io",
       "apiKind": "HelmChart",
@@ -212,7 +541,6 @@
       "alternatives": [],
       "name": "io.cattle.helm.v1.HelmChartConfig",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -223,12 +551,14 @@
             "type": "string"
           },
           "spec": {
-            "x-kubernetes-preserve-unknown-fields": true
-          },
-          "status": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "type": "object",
+            "properties": {
+              "failurePolicy": {},
+              "valuesContent": {}
+            }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "helm.cattle.io",
@@ -239,97 +569,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "helmchartconfigs.helm.cattle.io",
-          "uid": "5309c3cc-3577-4f51-ad7b-d4c8b44a807f",
-          "resourceVersion": "205",
-          "generation": 1,
-          "creationTimestamp": "2023-03-07T15:49:24Z",
-          "labels": {
-            "objectset.rio.cattle.io/hash": "2052208f1663688d05f513c2fa308fde31521d9d"
-          },
-          "annotations": {
-            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5RTTY8TMQz9K8jntPRDrcpIHFARAiGtEB+9IA5u4mnDZJIoTrqLqvnvyDPThQW2Wo7xx7Pf88sZMNodJbbBQyUPusvk5cnTZsNTG56f5qCgsd5ABdvCObQfiUNJml5Tbb3N0qugpYwGM0J1BvQ+ZJQEyzPsv5POTHmabJhqzNmRIFuBBPVoPtx6SpPDqXl8NfXsvfXm5ZW9roN7bAkqOJJr9RFT1sHX9sBTCfwqfhIMR9SCBZ0Cnain/9m2xBnbCJUvzilwuCd3VZQj8hEqWMxWi8VsU8/X6+V6szGzVb2aL/WixuVsUxtazleLuXlhZNoTSXQKOJKW4YcUShxbHtDsiUjFePC35NqtYG57TFAQXUno/jEOFLD1h+Iw/Z2V4TERUzrRF9/4cOvfWHKGoarRMSlgHaKwuLlIaUDBabAmQ/X1fKHZ+5H1kdreayGSf/Xh3W756T4UU4iUsh2YXDjfTZqyp+QpE08uu0zKsMykHrfJqZAIlTEX/s+2TkH+0ZMYjgsS6evNUCG4IeGBxoZvDyah1hQzmZs/bvC76L25gjd2/FyDqwSVzO5eLIl23c8AAAD//y6EtavdAwAA",
-            "objectset.rio.cattle.io/id": "",
-            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
-            "objectset.rio.cattle.io/owner-name": "helmchartconfigs.helm.cattle.io",
-            "objectset.rio.cattle.io/owner-namespace": ""
-          },
-          "managedFields": [
-            {
-              "manager": "deploy@kydah-share",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/applied": {},
-                    "f:objectset.rio.cattle.io/id": {},
-                    "f:objectset.rio.cattle.io/owner-gvk": {},
-                    "f:objectset.rio.cattle.io/owner-name": {},
-                    "f:objectset.rio.cattle.io/owner-namespace": {}
-                  },
-                  "f:labels": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/hash": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "k3s",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "helmchartconfigs.helm.cattle.io"
         },
         "spec": {
           "group": "helm.cattle.io",
@@ -350,10 +590,17 @@
                   "type": "object",
                   "properties": {
                     "spec": {
-                      "x-kubernetes-preserve-unknown-fields": true
-                    },
-                    "status": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "type": "object",
+                      "properties": {
+                        "failurePolicy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "valuesContent": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -365,22 +612,7 @@
           }
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "helmchartconfigs",
             "singular": "helmchartconfig",
@@ -397,8 +629,7 @@
       "apiKind": "HelmChartConfig",
       "apiVersion": "v1",
       "readProperties": {
-        "spec": "spec",
-        "status": "status"
+        "spec": "spec"
       },
       "writeProperties": {
         "spec": "spec"
@@ -410,8 +641,7 @@
       "simpleExcludes": [],
       "gqlDefs": {
         "metadata": "metadata!",
-        "spec": "JSONObject",
-        "status": "JSONObject"
+        "spec": "JSONObject"
       },
       "namespaced": true
     },
@@ -419,7 +649,6 @@
       "alternatives": [],
       "name": "io.cattle.k3s.v1.Addon",
       "definition": {
-        "type": "object",
         "properties": {
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -430,12 +659,14 @@
             "type": "string"
           },
           "spec": {
-            "x-kubernetes-preserve-unknown-fields": true
-          },
-          "status": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "type": "object",
+            "properties": {
+              "checksum": {},
+              "source": {}
+            }
           }
         },
+        "type": "object",
         "x-kubernetes-group-version-kind": [
           {
             "group": "k3s.cattle.io",
@@ -446,97 +677,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "addons.k3s.cattle.io",
-          "uid": "9e93a14f-f7ca-49b2-bd0b-24e2d9ee12a7",
-          "resourceVersion": "196",
-          "generation": 1,
-          "creationTimestamp": "2023-03-07T15:49:24Z",
-          "labels": {
-            "objectset.rio.cattle.io/hash": "76092cd54ba63fc73cd7b8728426e6e5e7033ede"
-          },
-          "annotations": {
-            "objectset.rio.cattle.io/applied": "H4sIAAAAAAAA/5ST34/TMAzH/xXk52wc6902KvFwAiEhpBPix14QD27ibaFpEsXJ7tDU/x25XQecdBP3aNf++Otv3CNgtBtKbIOHWgJ6yOQl5Hm75rkNLw+vQEFrvYEa3hbOoftMHErS9I621tssvQo6ymgwI9RHQO9DRvnAEobmJ+nMlOfJhrnGnB0J2QoS1JPfw72nNNsd2qelqRcfrTdvLui6DPfYkdCNGbAV/6n4r16OqAUAvQKdaNj5q+2IM3YRal+cU+CwIXfRiT3yHmpYLa9eL7S5uW5wWW31qtJm1axXi/X1YklLuqHVVVWRIZl2SXmvgCNpmbhLoUSo4fFqg3gpOL3srXBAQXQloTuDQQFbvysO05QTekzElA70zbc+3Pv3lpxhqLfomBSwDlG03U0GGVBwGK+Mof5+nMQPp8V6T91wNiGSv/30YVN9OadiCpFStqPWaamHWVsaSp4y8WzSMiujmNn2pCanQuJExlz4mW29gvxrWGJ8MpDMUG/GCuGGhDs6Nfz4ZxJqTTGTuXvk8t8GDycTvLGn/2S8FaGS2ZzNkmzf/w4AAP//r7lyxagDAAA",
-            "objectset.rio.cattle.io/id": "",
-            "objectset.rio.cattle.io/owner-gvk": "apiextensions.k8s.io/v1, Kind=CustomResourceDefinition",
-            "objectset.rio.cattle.io/owner-name": "addons.k3s.cattle.io",
-            "objectset.rio.cattle.io/owner-namespace": ""
-          },
-          "managedFields": [
-            {
-              "manager": "deploy@kydah-share",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/applied": {},
-                    "f:objectset.rio.cattle.io/id": {},
-                    "f:objectset.rio.cattle.io/owner-gvk": {},
-                    "f:objectset.rio.cattle.io/owner-name": {},
-                    "f:objectset.rio.cattle.io/owner-namespace": {}
-                  },
-                  "f:labels": {
-                    ".": {},
-                    "f:objectset.rio.cattle.io/hash": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "k3s",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-03-07T15:49:24Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "addons.k3s.cattle.io"
         },
         "spec": {
           "group": "k3s.cattle.io",
@@ -557,14 +698,33 @@
                   "type": "object",
                   "properties": {
                     "spec": {
-                      "x-kubernetes-preserve-unknown-fields": true
-                    },
-                    "status": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "type": "object",
+                      "properties": {
+                        "checksum": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "source": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
-              }
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "Source",
+                  "type": "string",
+                  "jsonPath": ".spec.source"
+                },
+                {
+                  "name": "Checksum",
+                  "type": "string",
+                  "jsonPath": ".spec.checksum"
+                }
+              ]
             }
           ],
           "conversion": {
@@ -572,22 +732,7 @@
           }
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-03-07T15:49:24Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "addons",
             "singular": "addon",
@@ -599,9 +744,272 @@
           ]
         }
       },
+      "additionalColumns": [
+        {
+          "name": "Source",
+          "type": "string",
+          "jsonPath": ".spec.source"
+        },
+        {
+          "name": "Checksum",
+          "type": "string",
+          "jsonPath": ".spec.checksum"
+        }
+      ],
       "short": "Addon",
       "apiGroup": "k3s.cattle.io",
       "apiKind": "Addon",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "cattle",
+      "sub": "cattle",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject"
+      },
+      "namespaced": true
+    },
+    {
+      "alternatives": [],
+      "name": "io.cattle.k3s.v1.ETCDSnapshotFile",
+      "definition": {
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          },
+          "spec": {
+            "type": "object",
+            "properties": {
+              "location": {},
+              "metadata": {
+                "additionalProperties": {}
+              },
+              "nodeName": {},
+              "s3": {},
+              "snapshotName": {}
+            }
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "creationTime": {},
+              "error": {},
+              "readyToUse": {},
+              "size": {}
+            }
+          }
+        },
+        "type": "object",
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "k3s.cattle.io",
+            "kind": "ETCDSnapshotFile",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "etcdsnapshotfiles.k3s.cattle.io"
+        },
+        "spec": {
+          "group": "k3s.cattle.io",
+          "names": {
+            "plural": "etcdsnapshotfiles",
+            "singular": "etcdsnapshotfile",
+            "kind": "ETCDSnapshotFile",
+            "listKind": "ETCDSnapshotFileList"
+          },
+          "scope": "Cluster",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "type": "object",
+                  "properties": {
+                    "spec": {
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "nullable": true
+                        },
+                        "nodeName": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "s3": {
+                          "type": "object",
+                          "properties": {
+                            "bucket": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "endpoint": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "endpointCA": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "insecure": {
+                              "type": "boolean"
+                            },
+                            "prefix": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "region": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "skipSSLVerify": {
+                              "type": "boolean"
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "snapshotName": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "creationTime": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "error": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "time": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "readyToUse": {
+                          "type": "boolean",
+                          "nullable": true
+                        },
+                        "size": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalPrinterColumns": [
+                {
+                  "name": "SnapshotName",
+                  "type": "string",
+                  "jsonPath": ".spec.snapshotName"
+                },
+                {
+                  "name": "Node",
+                  "type": "string",
+                  "jsonPath": ".spec.nodeName"
+                },
+                {
+                  "name": "Location",
+                  "type": "string",
+                  "jsonPath": ".spec.location"
+                },
+                {
+                  "name": "Size",
+                  "type": "string",
+                  "jsonPath": ".status.size"
+                },
+                {
+                  "name": "CreationTime",
+                  "type": "string",
+                  "jsonPath": ".status.creationTime"
+                }
+              ]
+            }
+          ],
+          "conversion": {
+            "strategy": "None"
+          }
+        },
+        "status": {
+          "conditions": [],
+          "acceptedNames": {
+            "plural": "etcdsnapshotfiles",
+            "singular": "etcdsnapshotfile",
+            "kind": "ETCDSnapshotFile",
+            "listKind": "ETCDSnapshotFileList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "additionalColumns": [
+        {
+          "name": "SnapshotName",
+          "type": "string",
+          "jsonPath": ".spec.snapshotName"
+        },
+        {
+          "name": "Node",
+          "type": "string",
+          "jsonPath": ".spec.nodeName"
+        },
+        {
+          "name": "Location",
+          "type": "string",
+          "jsonPath": ".spec.location"
+        },
+        {
+          "name": "Size",
+          "type": "string",
+          "jsonPath": ".status.size"
+        },
+        {
+          "name": "CreationTime",
+          "type": "string",
+          "jsonPath": ".status.creationTime"
+        }
+      ],
+      "short": "ETCDSnapshotFile",
+      "apiGroup": "k3s.cattle.io",
+      "apiKind": "ETCDSnapshotFile",
       "apiVersion": "v1",
       "readProperties": {
         "spec": "spec",
@@ -620,7 +1028,7 @@
         "spec": "JSONObject",
         "status": "JSONObject"
       },
-      "namespaced": true
+      "namespaced": false
     }
   ]
 }

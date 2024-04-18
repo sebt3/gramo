@@ -2343,84 +2343,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "backups.mariadb.mmontes.io",
-          "uid": "f274a34a-2df5-4152-b780-38d3e6f6e256",
-          "resourceVersion": "55032025",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:37:59Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:37:59Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "backups.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -4878,27 +4801,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "backups",
             "singular": "backup",
@@ -5181,84 +5087,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "connections.mariadb.mmontes.io",
-          "uid": "d336d1b6-bfd8-4464-a971-7d553041c96c",
-          "resourceVersion": "55032027",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "connections.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -5526,27 +5355,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "connections",
             "singular": "connection",
@@ -5756,84 +5568,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "databases.mariadb.mmontes.io",
-          "uid": "548a917c-7a40-4f85-a9bf-a21c4c7e46ac",
-          "resourceVersion": "55032028",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "databases.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -6035,27 +5770,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "databases",
             "singular": "database",
@@ -6289,84 +6007,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "grants.mariadb.mmontes.io",
-          "uid": "4f7d8da9-f5e7-469c-85ec-044d065984c8",
-          "resourceVersion": "55032029",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "grants.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -6588,27 +6229,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "grants",
             "singular": "grant",
@@ -14458,84 +14082,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "mariadbs.mariadb.mmontes.io",
-          "uid": "95145ca8-8979-4ee3-a977-e4c2794695ce",
-          "resourceVersion": "55032038",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "mariadbs.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -22768,27 +22315,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "mariadbs",
             "singular": "mariadb",
@@ -25014,84 +24544,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "restores.mariadb.mmontes.io",
-          "uid": "0b6932da-b027-4b6f-a1e4-4213a2f3f906",
-          "resourceVersion": "55032039",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "restores.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -27355,27 +26808,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "restores",
             "singular": "restore",
@@ -28394,84 +27830,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "sqljobs.mariadb.mmontes.io",
-          "uid": "150f47fd-09dd-4323-97b9-008a8ba25157",
-          "resourceVersion": "55032040",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "sqljobs.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -29489,27 +28848,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "sqljobs",
             "singular": "sqljob",
@@ -29739,84 +29081,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "users.mariadb.mmontes.io",
-          "uid": "9b4af74d-c5bf-4797-a640-2521ddfc9b15",
-          "resourceVersion": "55032041",
-          "generation": 1,
-          "creationTimestamp": "2023-10-14T17:38:00Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.11.1"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-create",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-10-14T17:38:00Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "users.mariadb.mmontes.io"
         },
         "spec": {
           "group": "mariadb.mmontes.io",
@@ -30032,27 +29297,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-10-14T17:38:00Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "users",
             "singular": "user",

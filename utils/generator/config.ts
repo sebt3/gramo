@@ -55,6 +55,7 @@ const uses = [
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'RoleBinding'},
     {algo: 'role',         group: 'k8s', short: 'ClusterRoleBinding', usedGroup: 'k8s', usedShort: 'ClusterRole'},
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
+    {algo: 'tekton', group: 'tekton', short: 'Pipeline', usedGroup: 'tekton', usedShort: 'Task'},
 ];
 const provides = [
     {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'Certificate'},
@@ -79,6 +80,10 @@ const provides = [
     {algo: 'storageClass', group: 'k8s', short: 'StorageClass', providedGroup: 'k8s', providedShort: 'PersistentVolume'},
     {algo: 'storageClass', group: 'k8s', short: 'StorageClass', providedGroup: 'k8s', providedShort: 'PersistentVolumeClaim'},
     {algo: 'apiService',   group: 'k8s', short: 'APIService', providedGroup: 'k8s', providedShort: 'CustomResourceDefinition'},
+    {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'tekton', providedShort: 'EventListener', path: 'spec'},
+    {algo: 'tekton',  group: 'tekton', short: 'EventListener', providedGroup: 'tekton', providedShort: 'PipelineRun'},
+    {algo: 'tekton', group: 'tekton', short: 'Pipeline', providedGroup: 'tekton', providedShort: 'PipelineRun'},
+    {algo: 'tekton', group: 'tekton', short: 'Task', providedGroup: 'tekton', providedShort: 'TaskRun'},
 ];
 const equity = [
     {algo: 'endpoint', group: 'k8s', short: 'Endpoints', parentGroup: 'k8s', parentShort: 'Service'},
@@ -103,6 +108,23 @@ const children = [
 //    {algo: 'k8up', group: 'k8up', short: 'Archive', parentGroup: 'k8up', parentShort: 'Schedule'},
     {algo: 'certmanager', group: 'certmanager', short: 'CertificateRequest', parentGroup: 'certmanager', parentShort: 'Certificate'},
     {algo: 'certmanager', group: 'certmanager', short: 'Order', parentGroup: 'certmanager', parentShort: 'Certificate'},
+    {algo: 'clustered', group: 'k8s', short: 'Deployment', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'APIService', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'ClusterRoleBinding', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'ClusterRole', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'RoleBinding', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'Role', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'ConfigMap', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'MutatingWebhookConfiguration', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'ServiceAccount', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'Service', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'ValidatingWebhookConfiguration', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'k8s', short: 'CustomResourceDefinition', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'monitoring', short: 'PrometheusRule', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'clustered', group: 'monitoring', short: 'ServiceMonitor', parentGroup: 'kubevirt', parentShort: 'CDI'},
+    {algo: 'k8s', group: 'k8s', short: 'PersistentVolumeClaim', parentGroup: 'kubevirt', parentShort: 'DataVolume'},
+    {algo: 'tekton', group: 'k8s', short: 'Pod', parentGroup: 'tekton', parentShort: 'TaskRun'},
+    {algo: 'tekton', group: 'tekton', short: 'TaskRun', parentGroup: 'tekton', parentShort: 'PipelineRun'},
     {algo: 'k8s', group: 'core', short: 'NodeMetrics', parentGroup: 'k8s', parentShort: 'Node'},
     {algo: 'k8s', group: 'core', short: 'PodMetrics', parentGroup: 'k8s', parentShort: 'Pod'},
     {algo: 'k8s', group: 'core', short: 'PodMetrics', parentGroup: 'k8s', parentShort: 'Deployment'},
@@ -258,7 +280,9 @@ export const categoryMappingGroup = {
     whereabouts: 'network',
     operators: 'install',
     min: 'storage',
-    keda: 'workload'
+    keda: 'workload',
+    kubevirt: 'workload',
+    networkaddonsoperator: 'system',
 }
 export const categoryMappingShort = {
     StatefulSet: 'workload',
@@ -304,6 +328,20 @@ export const categoryMappingShort = {
     AppProject: 'automation',
     Application: 'automation',
     ApplicationSet: 'automation',
+    MTQ: 'system',
+    CDI: 'system',
+    CDIConfig: 'system',
+    KubeVirt: 'system',
+    HyperConverged: 'system',
+    SSP: 'system',
+    HostPathProvisioner: 'system',
+    StorageProfile: 'system',
+    VolumeCloneSource: 'storage',
+    VolumImportSource: 'storage',
+    VolumeUploadSource: 'storage',
+    ObjectTransfer: 'storage',
+    DataSource: 'storage',
+    DataVolume: 'storage',
 }
 export const allCategories = Object.entries(categoryMappingShort).map(([_,v])=>v)
         .concat(Object.entries(categoryMappingGroup).map(([_,v])=>v))

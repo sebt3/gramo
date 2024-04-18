@@ -144,8 +144,9 @@ export const getObjFQN = (c: k8sDefinitionProperties) => c.spec.group.split('.')
 
 export const replaceRefWithDef = (defs: [string, openapiDefinition][],extraExclude:string[]=[]) => {
     const excluded: string[] = extraExclude.concat([
-        'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps'
+        'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps',
     ]);
+
     const queue = structuredClone(defs);
     const ret:Map<string, openapiDefinitionPropertiesDef> = new Map();
     const deref = (data) => {
@@ -161,6 +162,38 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][],extraExclu
                 for (const [k2, v2] of Object.entries(val.properties)) {
                     if ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2])) {
                         res.properties[key]['properties'][k2] = ret[val['properties'][k2]['$ref'].split('/')[2]]
+                    }
+                }
+            }
+        }}
+        return res
+    }
+    const deref_partial = (data, depth=0, queue) => {
+        const res = structuredClone(data);
+        if (depth>4) return res;
+        if (data.properties != undefined) {for (const [key, val] of Object.entries(data.properties as HashMap<openapiDefinitionPropertiesDef>)) {
+            if (val['$ref'] != undefined && val['$ref'].split('/').length>2 && !excluded.includes(val['$ref'].split('/')[2])) {
+                const id = val['$ref'].split('/')[2]
+                if (Object.keys(ret).includes(id))
+                    res.properties[key] = ret[id]
+                else if (queue.map(([k])=>k).includes(id))
+                    res.properties[key] = deref_partial(queue.filter(([k])=>k==id).map(([_,v]) => v)[0], depth+1, queue)
+            }
+            if (val['type'] == 'array' && val['items'] != undefined && val['items']['$ref'] != undefined && val['items']['$ref'].split('/').length>2 && !excluded.includes(val['items']['$ref'].split('/')[2])) {
+                const id = val['items']['$ref'].split('/')[2]
+                if (Object.keys(ret).includes(id))
+                    res.properties[key]['items'] = ret[id]
+                else if (queue.map(([k])=>k).includes(id))
+                    res.properties[key]['items'] = deref_partial(queue.filter(([k])=>k==id).map(([_,v]) => v)[0], depth+1, queue)
+            }
+            if (val['type'] == 'object' && val.properties != undefined) {
+                for (const [k2, v2] of Object.entries(val.properties)) {
+                    if ((v2 as object)['$ref'] != undefined && !excluded.includes((v2 as object)['$ref'].split('/')[2])) {
+                        const id = val['properties'][k2]['$ref'].split('/')[2]
+                        if (Object.keys(ret).includes(id))
+                            res.properties[key]['properties'][k2] = ret[id]
+                        else if (queue.filter(([k])=>k==id).length>0)
+                            res.properties[key]['properties'][k2] = deref_partial(queue.filter(([k])=>k==id).map(([_,v]) => v)[0], depth+1, queue)
                     }
                 }
             }
@@ -187,15 +220,16 @@ export const replaceRefWithDef = (defs: [string, openapiDefinition][],extraExclu
         if (missing) {
             queue.push(item)
             counter++;
-            if (counter>queue.length) {
-                console.log('leaving with',
+            if (counter>defs.length+1) {
+                /*console.log('leaving with',
                     Object.fromEntries(queue.map(([n,v])=>[n,
                         Object.fromEntries(
-                                    Object.entries(v['properties']).filter(([_,val])=>val['$ref']!=null && !Object.keys(ret).concat(excluded).includes(val['$ref'].split('/')[2])).map(([name,val])=>[name,val['$ref']])
-                            .concat(Object.entries(v['properties']).filter(([_,val])=>val['type'] == 'array'&& val['items'] != null && val['items']['$ref']!=null&& !Object.keys(ret).concat(excluded).includes(val['items']['$ref'].split('/')[2])).map(([name,val])=>[name,val['items']['$ref']]))
+                                    Object.entries(v['properties']).filter(([_,val])=>val['$ref']!=null && !Object.keys(ret).concat(excluded).includes(val['$ref'].split('/')[2])).map(([name,val])=>[name,val['$ref'].split('/')[2]])
+                            .concat(Object.entries(v['properties']).filter(([_,val])=>val['type'] == 'array'&& val['items'] != null && val['items']['$ref']!=null&& !Object.keys(ret).concat(excluded).includes(val['items']['$ref'].split('/')[2])).map(([name,val])=>[name,val['items']['$ref'].split('/')[2]]))
                         )
                     ])),
-                    queue.length)
+                    queue.length)*/
+                queue.forEach(item => ret[item[0]] = deref_partial(item[1], 0, queue))
                 break;
             }
             continue;

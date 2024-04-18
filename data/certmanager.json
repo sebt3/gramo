@@ -1503,90 +1503,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "challenges.acme.cert-manager.io",
-          "uid": "875341a6-57f0-4f42-b15f-06d3f07adb5a",
-          "resourceVersion": "127259344",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "challenges.acme.cert-manager.io"
         },
         "spec": {
           "group": "acme.cert-manager.io",
@@ -3132,27 +3049,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "challenges",
             "singular": "challenge",
@@ -3407,90 +3307,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "orders.acme.cert-manager.io",
-          "uid": "4df1166f-d37f-49a9-8a76-b50ea62522d2",
-          "resourceVersion": "127259376",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "orders.acme.cert-manager.io"
         },
         "spec": {
           "group": "acme.cert-manager.io",
@@ -3725,27 +3542,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "orders",
             "singular": "order",
@@ -4354,92 +4154,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "certificates.cert-manager.io",
-          "uid": "36a8bf6a-5703-4868-ad78-f410b9feb3ca",
-          "resourceVersion": "127259334",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "certificates.cert-manager.io"
         },
         "spec": {
           "group": "cert-manager.io",
@@ -5035,27 +4750,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "certificates",
             "singular": "certificate",
@@ -5321,92 +5019,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "certificaterequests.cert-manager.io",
-          "uid": "25a38943-dd5f-4e05-9de6-09f805b13251",
-          "resourceVersion": "127259316",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "certificaterequests.cert-manager.io"
         },
         "spec": {
           "group": "cert-manager.io",
@@ -5660,27 +5273,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "certificaterequests",
             "singular": "certificaterequest",
@@ -7617,90 +7213,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "clusterissuers.cert-manager.io",
-          "uid": "3fdbac1a-8412-493b-927a-1440e6b9eb4a",
-          "resourceVersion": "127259354",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "clusterissuers.cert-manager.io"
         },
         "spec": {
           "group": "cert-manager.io",
@@ -9594,27 +9107,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "clusterissuers",
             "singular": "clusterissuer",
@@ -11527,90 +11023,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "issuers.cert-manager.io",
-          "uid": "fd0cd61b-13b7-44db-abb9-4689cb6cdeed",
-          "resourceVersion": "127259367",
-          "generation": 2,
-          "creationTimestamp": "2023-06-29T06:18:10Z",
-          "labels": {
-            "app": "cert-manager",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.14.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:10Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:15Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:app": {},
-                    "f:app.kubernetes.io/instance": {},
-                    "f:app.kubernetes.io/name": {},
-                    "f:app.kubernetes.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:categories": {},
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "issuers.cert-manager.io"
         },
         "spec": {
           "group": "cert-manager.io",
@@ -13504,27 +12917,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:10Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "issuers",
             "singular": "issuer",

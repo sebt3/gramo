@@ -8,7 +8,6 @@ const props=withDefaults(defineProps<{model: object[], useAction?:boolean, useRe
   showNamespace: false,
   showKind: true,
 });
-console.log('EventList',props.model)
 </script>
 <template>
   <q-timeline dense>

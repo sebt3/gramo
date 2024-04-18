@@ -1,0 +1,70 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+      try{
+{{#if (and (eq type 'parent') (ne targetShort 'EventListener'))}}
+        if (parent.metadata['ownerReferences']==null || parent.metadata['ownerReferences']==undefined || parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}').length<1) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}'&&r.name==o['metadata']['name']).length>0)
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'child') (ne targetShort 'TaskRun')) }}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(r=>
+            r.metadata['ownerReferences']!=null && r.metadata['ownerReferences']!=undefined &&
+            r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
+        )
+{{/if}}
+{{#if (and (eq type 'child') (eq targetShort 'TaskRun')) }}
+        if (parent['status'] == null || !Array.isArray(parent['status']['childReferences']) || parent['status']['childReferences'].filter(r=>r.kind=='{{targetShort}}').length<1) return null;
+
+        const tasks = parent['status']['childReferences'].filter(r=>r.kind=='{{targetShort}}').map(r=>r['name'])
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(r=> tasks.includes(r.metadata['name']))
+{{/if}}
+{{#if (and (eq type 'consume') (eq targetShort 'EventListener'))}}
+        if (parent.metadata['labels']==undefined || parent.metadata['labels']['triggers.tekton.dev/eventlistener']==undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>o['metadata'] != undefined && o['metadata']['name'] == parent.metadata['labels']['triggers.tekton.dev/eventlistener'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'provide') (eq short 'EventListener')) }}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(r=>r['metadata']!=undefined && r['metadata']['labels']!=undefined && r['metadata']['labels']['triggers.tekton.dev/eventlistener'] == parent['metadata']['name']
+        )
+{{/if}}
+{{#if (and (eq type 'consume') (and (eq targetShort 'Pipeline') (eq short 'PipelineRun')))}}
+        if (parent['spec'] == undefined || parent['spec']['pipelineRef'] == undefined || parent['spec']['pipelineRef']['name'] == undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>o['metadata']['name'] == parent['spec']['pipelineRef']['name'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'provide') (and (eq targetShort 'PipelineRun') (eq short 'Pipeline')))}}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(run=>run['spec'] != undefined && run['spec']['pipelineRef'] != undefined && run['spec']['pipelineRef']['name'] == parent['metadata']['name'])
+{{/if}}
+{{#if (and (eq type 'consume') (and (eq targetShort 'Task') (eq short 'TaskRun')))}}
+        if (parent['spec'] == undefined || parent['spec']['taskRef'] == undefined || parent['spec']['taskRef']['name'] == undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>o['metadata']['name'] == parent['spec']['taskRef']['name'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'provide') (and (eq targetShort 'TaskRun') (eq short 'Task')))}}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(run=>run['spec'] != undefined && run['spec']['taskRef'] != undefined && run['spec']['taskRef']['name'] == parent['metadata']['name'])
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'Pipeline') (eq short 'Task')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>o['spec'] != undefined && Array.isArray(o['spec']['tasks']) && o['spec']['tasks'].filter(t=>t['taskRef']!=undefined && t['taskRef']['kind'] == '{{short}}' && t['taskRef']['name'] == parent['metadata']['name']).length>0)
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Task') (eq short 'Pipeline')))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['tasks']) || parent['spec']['tasks'].filter(t=>t['taskRef']!=undefined && t['taskRef']['kind'] == '{{targetShort}}').length<1) return null;
+        const tasks = parent['spec']['tasks'].filter(t=>t['taskRef']!=undefined && t['taskRef']['kind'] == '{{targetShort}}').map(t=>t['taskRef']['name'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>tasks.includes(o['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+      } catch (err) {
+        console.error(err)
+      }
+      return null
+    },

@@ -34,6 +34,12 @@ export const mutations = {
 };
 const localResolvers = {
 {{#each autoResolvers}}
+    {{#if (eq algo 'clustered')}}
+{{> resolversClustered algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
+    {{#if (eq algo 'tekton')}}
+{{> resolversTekton algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
+    {{/if}}
     {{#if (eq algo 'crd')}}
 {{> resolversCRD algo=this.algo type=this.type targetShort=this.targetShort targetGroup=this.targetGroup path=this.path }}
     {{/if}}

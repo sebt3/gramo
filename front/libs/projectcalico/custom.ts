@@ -72,6 +72,10 @@ export const iconNetworkSet = networkIcon;
 export const colorNetworkSet = networkColor;
 export const descriptionNetworkSet = '';
 export const shortNetworkSet = 'NetworkSet';
+export const iconBGPFilter = networkIcon;
+export const colorBGPFilter = networkColor;
+export const descriptionBGPFilter = '';
+export const shortBGPFilter = 'BGPFilter';
 
 export const extraBGPConfigurationColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

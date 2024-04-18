@@ -57,7 +57,7 @@ interface k8sDefinitionPropertiesSpec {
     versions: Array<k8sDefinitionPropertiesVersion>,
     conversion: object
 }
-interface k8sDefinitionPropertiesStatus {
+export interface k8sDefinitionPropertiesStatus {
     conditions: Array<object>,
     acceptedNames: k8sDefinitionPropertiesNames,
     storedVersions: Array<string>

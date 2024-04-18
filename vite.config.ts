@@ -9,7 +9,7 @@ import {sassMigratorQuasar} from "rollup-plugin-sass-migrator";
 // https://vitejs.dev/config/
 export default defineConfig({
     root: './front',
-    base: '/',
+    base: '/hrm/',
     publicPath: '/',
     plugins: [
         sassMigratorQuasar({

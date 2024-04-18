@@ -42,6 +42,8 @@ loadPartial('resolversSecret',          path.resolve(partials_resolvers, 'secret
 loadPartial('resolversFluxCD',          path.resolve(partials_resolvers, 'fluxcd.ts.hbs'));
 loadPartial('resolversK8up',            path.resolve(partials_resolvers, 'k8up.ts.hbs'));
 loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'configMap.ts.hbs'));
+loadPartial('resolversClustered',       path.resolve(partials_resolvers, 'clustered.ts.hbs'));
+loadPartial('resolversTekton',          path.resolve(partials_resolvers, 'tekton.ts.hbs'));
 loadPartial('resolversCRD',             path.resolve(partials_resolvers, 'crd.ts.hbs'));
 loadPartial('cattleCustom',             path.resolve(partials_customs, 'cattle.hbs'));
 loadPartial('certmanagerCustom',        path.resolve(partials_customs, 'certmanager.hbs'));

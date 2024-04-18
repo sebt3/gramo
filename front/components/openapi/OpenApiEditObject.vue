@@ -41,7 +41,7 @@ const OpenApiEditNumber      = defineAsyncComponent(() => import( './OpenApiEdit
       <div v-for="[key, value] in new Map([...properties.entries()].filter(([key,value]) => (showdefault || !isDefault(key)) && (Object.keys(out).includes(key)||!readOnly)))" v-bind:key="key"
         :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
         <div v-if="value.type == 'object' && value.properties != undefined && Object.keys(value.properties).length>0 && (Object.keys(out).includes(key)||!readOnly)" :key="`${key}-obj`">
-          <OpenApiEditObject v-model:data="out[key]" :level="level+1" :showdefault="showdefault" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="value.required" :read-only="readOnly" />
+          <OpenApiEditObject v-model:data="out[key]" :level="level+1" :showdefault="showdefault" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="Array.isArray(required) && required.includes(key)?value.required:[]" :read-only="readOnly" />
         </div>
         <div v-if="value.type == 'object' && (value.properties == undefined || Object.keys(value.properties).length<1) && (Object.keys(out).includes(key)||!readOnly)" :key="`${key}-unknown`">
           <OpenApiEditUndefObject v-model:data="out[key]" :level="level+1" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :read-only="readOnly" />
@@ -71,7 +71,7 @@ const OpenApiEditNumber      = defineAsyncComponent(() => import( './OpenApiEdit
       <div v-for="[key, value] in new Map([...properties.entries()].filter(([key]) => (showdefault || !isDefault(key)) && (Object.keys(out).includes(key)||!readOnly)))" v-bind:key="key"
         :style="getType(value)=='string'?key=='name'?'order: 1':'order: 2':['number','integer'].includes(getType(value))?'order: 3':getType(value)=='boolean'?'order: 1':getType(value)=='array'?'order: 5':'order: 4'">
         <div v-if="value.type == 'object' && (Object.keys(out).includes(key)||!readOnly)" :key="key">
-          <OpenApiEditObject :level="level" v-model:data="out[key]" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="value.required" :read-only="readOnly" :showdefault="showdefault" />
+          <OpenApiEditObject :level="level" v-model:data="out[key]" :name="key" :defaultdata="value.default" :description="value.description" :properties="getProperties(value)" :required="Array.isArray(required) && required.includes(key)?value.required:[]" :read-only="readOnly" :showdefault="showdefault" />
         </div>
         <div v-else-if="value.type == 'array' && (Object.keys(out).includes(key)||!readOnly)">
           <OpenApiEditArray :level="level" v-model:data="out[key]" :name="key" :defaultdata="value.default" :description="value.description" :items="getItems(value)" :read-only="readOnly" :showdefault="showdefault" />

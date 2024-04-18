@@ -262,82 +262,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressroutes.traefik.io",
-              "uid": "24ef3a94-9267-4836-b2ca-c4a4ae99fc68",
-              "resourceVersion": "127259335",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressroutes.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -616,27 +541,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressroutes",
                 "singular": "ingressroute",
@@ -928,82 +836,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressroutes.traefik.containo.us",
-              "uid": "1e86305d-5c75-4773-8c8d-1973da7f198d",
-              "resourceVersion": "127259320",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressroutes.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -1282,27 +1115,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressroutes",
                 "singular": "ingressroute",
@@ -1594,82 +1410,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ingressroutes.traefik.io",
-          "uid": "24ef3a94-9267-4836-b2ca-c4a4ae99fc68",
-          "resourceVersion": "127259335",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "ingressroutes.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -1948,27 +1689,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ingressroutes",
             "singular": "ingressroute",
@@ -2211,82 +1935,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressroutetcps.traefik.io",
-              "uid": "45ec47de-5e0e-4832-8683-d5dfc4d7d176",
-              "resourceVersion": "127259351",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressroutetcps.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -2514,27 +2163,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressroutetcps",
                 "singular": "ingressroutetcp",
@@ -2775,82 +2407,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressroutetcps.traefik.containo.us",
-              "uid": "aaec32a9-fbd4-404e-9a0f-b82e30e9bc04",
-              "resourceVersion": "127259342",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressroutetcps.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -3078,27 +2635,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressroutetcps",
                 "singular": "ingressroutetcp",
@@ -3339,82 +2879,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ingressroutetcps.traefik.io",
-          "uid": "45ec47de-5e0e-4832-8683-d5dfc4d7d176",
-          "resourceVersion": "127259351",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "ingressroutetcps.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -3642,27 +3107,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ingressroutetcps",
             "singular": "ingressroutetcp",
@@ -3786,82 +3234,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressrouteudps.traefik.io",
-              "uid": "c317a95a-2741-4379-aff6-4e0b214a6eb9",
-              "resourceVersion": "127259372",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressrouteudps.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -3970,27 +3343,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressrouteudps",
                 "singular": "ingressrouteudp",
@@ -4112,82 +3468,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "ingressrouteudps.traefik.containo.us",
-              "uid": "4d652a63-d013-469b-a785-bf6654ce23e1",
-              "resourceVersion": "127259360",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "ingressrouteudps.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -4296,27 +3577,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "ingressrouteudps",
                 "singular": "ingressrouteudp",
@@ -4438,82 +3702,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ingressrouteudps.traefik.io",
-          "uid": "c317a95a-2741-4379-aff6-4e0b214a6eb9",
-          "resourceVersion": "127259372",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "ingressrouteudps.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -4622,27 +3811,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ingressrouteudps",
             "singular": "ingressrouteudp",
@@ -5537,82 +4709,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "middlewares.traefik.io",
-              "uid": "7fac2a0b-f1d8-4b6f-ba4b-f708956b4890",
-              "resourceVersion": "127259400",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "middlewares.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -6532,27 +5629,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "middlewares",
                 "singular": "middleware",
@@ -7445,82 +6525,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "middlewares.traefik.containo.us",
-              "uid": "1ef7b5d4-9104-424a-9af6-0d4017d957b0",
-              "resourceVersion": "127259382",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "middlewares.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -8440,27 +7445,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "middlewares",
                 "singular": "middleware",
@@ -9353,82 +8341,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "middlewares.traefik.io",
-          "uid": "7fac2a0b-f1d8-4b6f-ba4b-f708956b4890",
-          "resourceVersion": "127259400",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "middlewares.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -10348,27 +9261,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "middlewares",
             "singular": "middleware",
@@ -10462,82 +9358,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "middlewaretcps.traefik.io",
-              "uid": "e1cda2f2-7785-407c-a81e-8fbff2975693",
-              "resourceVersion": "127259431",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "middlewaretcps.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -10608,27 +9429,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "middlewaretcps",
                 "singular": "middlewaretcp",
@@ -10720,82 +9524,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "middlewaretcps.traefik.containo.us",
-              "uid": "51aee58c-6b32-44cb-9e83-7f9ef7abd25a",
-              "resourceVersion": "127259409",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "middlewaretcps.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -10866,27 +9595,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "middlewaretcps",
                 "singular": "middlewaretcp",
@@ -10978,82 +9690,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "middlewaretcps.traefik.io",
-          "uid": "e1cda2f2-7785-407c-a81e-8fbff2975693",
-          "resourceVersion": "127259431",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "middlewaretcps.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -11124,27 +9761,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "middlewaretcps",
             "singular": "middlewaretcp",
@@ -11274,82 +9894,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "serverstransports.traefik.io",
-              "uid": "9274dcdb-49e0-4fc5-9c1c-33580ba384f3",
-              "resourceVersion": "127259447",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "serverstransports.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -11496,27 +10041,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "serverstransports",
                 "singular": "serverstransport",
@@ -11644,82 +10172,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "serverstransports.traefik.containo.us",
-              "uid": "986f1c56-c1f5-4841-aaed-a4ec196f739b",
-              "resourceVersion": "127259441",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "serverstransports.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -11866,27 +10319,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "serverstransports",
                 "singular": "serverstransport",
@@ -12014,82 +10450,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "serverstransports.traefik.io",
-          "uid": "9274dcdb-49e0-4fc5-9c1c-33580ba384f3",
-          "resourceVersion": "127259447",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "serverstransports.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -12236,27 +10597,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "serverstransports",
             "singular": "serverstransport",
@@ -12387,82 +10731,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "tlsoptions.traefik.io",
-              "uid": "18e029bb-37e7-4b01-972b-032c8033df3e",
-              "resourceVersion": "127259480",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "tlsoptions.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -12570,27 +10839,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "tlsoptions",
                 "singular": "tlsoption",
@@ -12719,82 +10971,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "tlsoptions.traefik.containo.us",
-              "uid": "31d7fef3-7cba-48ac-9164-0667ade68716",
-              "resourceVersion": "127259468",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "tlsoptions.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -12902,27 +11079,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "tlsoptions",
                 "singular": "tlsoption",
@@ -13051,82 +11211,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "tlsoptions.traefik.io",
-          "uid": "18e029bb-37e7-4b01-972b-032c8033df3e",
-          "resourceVersion": "127259480",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "tlsoptions.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -13234,27 +11319,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "tlsoptions",
             "singular": "tlsoption",
@@ -13381,82 +11449,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "tlsstores.traefik.io",
-              "uid": "b172383a-d8db-42ac-bc9c-cad64d153f9e",
-              "resourceVersion": "127259504",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "tlsstores.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -13560,27 +11553,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "tlsstores",
                 "singular": "tlsstore",
@@ -13705,82 +11681,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "tlsstores.traefik.containo.us",
-              "uid": "ef4a710a-ac8f-4e2c-aea9-85bb9f63a711",
-              "resourceVersion": "127259489",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "tlsstores.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -13884,27 +11785,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "tlsstores",
                 "singular": "tlsstore",
@@ -14029,82 +11913,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "tlsstores.traefik.io",
-          "uid": "b172383a-d8db-42ac-bc9c-cad64d153f9e",
-          "resourceVersion": "127259504",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "tlsstores.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -14208,27 +12017,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "tlsstores",
             "singular": "tlsstore",
@@ -14622,82 +12414,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "traefikservices.traefik.io",
-              "uid": "305cd8a7-da1b-4a34-b9ff-e1312baa5400",
-              "resourceVersion": "127259531",
-              "generation": 1,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "traefikservices.traefik.io"
             },
             "spec": {
               "group": "traefik.io",
@@ -15092,27 +12809,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "traefikservices",
                 "singular": "traefikservice",
@@ -15504,82 +13204,7 @@
           },
           "crd": {
             "metadata": {
-              "name": "traefikservices.traefik.containo.us",
-              "uid": "48866bd9-3084-489c-bceb-211fa2f1f610",
-              "resourceVersion": "127259518",
-              "generation": 2,
-              "creationTimestamp": "2023-06-29T06:18:11Z",
-              "annotations": {
-                "controller-gen.kubebuilder.io/version": "v0.6.2"
-              },
-              "managedFields": [
-                {
-                  "manager": "kube-apiserver",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2023-06-29T06:18:11Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:status": {
-                      "f:acceptedNames": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:conditions": {
-                        "k:{\"type\":\"Established\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        },
-                        "k:{\"type\":\"NamesAccepted\"}": {
-                          ".": {},
-                          "f:lastTransitionTime": {},
-                          "f:message": {},
-                          "f:reason": {},
-                          "f:status": {},
-                          "f:type": {}
-                        }
-                      }
-                    }
-                  },
-                  "subresource": "status"
-                },
-                {
-                  "manager": "kubectl-client-side-apply",
-                  "operation": "Update",
-                  "apiVersion": "apiextensions.k8s.io/v1",
-                  "time": "2024-02-22T09:46:20Z",
-                  "fieldsType": "FieldsV1",
-                  "fieldsV1": {
-                    "f:metadata": {
-                      "f:annotations": {
-                        ".": {},
-                        "f:controller-gen.kubebuilder.io/version": {}
-                      }
-                    },
-                    "f:spec": {
-                      "f:conversion": {
-                        ".": {},
-                        "f:strategy": {}
-                      },
-                      "f:group": {},
-                      "f:names": {
-                        "f:kind": {},
-                        "f:listKind": {},
-                        "f:plural": {},
-                        "f:singular": {}
-                      },
-                      "f:scope": {},
-                      "f:versions": {}
-                    }
-                  }
-                }
-              ]
+              "name": "traefikservices.traefik.containo.us"
             },
             "spec": {
               "group": "traefik.containo.us",
@@ -15974,27 +13599,10 @@
                   }
                 }
               ],
-              "conversion": {
-                "strategy": "None"
-              }
+              "conversion": {}
             },
             "status": {
-              "conditions": [
-                {
-                  "type": "NamesAccepted",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "NoConflicts",
-                  "message": "no conflicts found"
-                },
-                {
-                  "type": "Established",
-                  "status": "True",
-                  "lastTransitionTime": "2023-06-29T06:18:11Z",
-                  "reason": "InitialNamesAccepted",
-                  "message": "the initial names have been accepted"
-                }
-              ],
+              "conditions": [],
               "acceptedNames": {
                 "plural": "traefikservices",
                 "singular": "traefikservice",
@@ -16386,82 +13994,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "traefikservices.traefik.io",
-          "uid": "305cd8a7-da1b-4a34-b9ff-e1312baa5400",
-          "resourceVersion": "127259531",
-          "generation": 1,
-          "creationTimestamp": "2023-06-29T06:18:11Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-06-29T06:18:11Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "traefikservices.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -16856,27 +14389,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-06-29T06:18:11Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "traefikservices",
             "singular": "traefikservice",
@@ -17006,82 +14522,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "serverstransporttcps.traefik.io",
-          "uid": "fdb7f35e-cd59-4769-a730-a0ad7a4adcde",
-          "resourceVersion": "127259462",
-          "generation": 1,
-          "creationTimestamp": "2024-02-22T09:46:20Z",
-          "annotations": {
-            "controller-gen.kubebuilder.io/version": "v0.6.2"
-          },
-          "managedFields": [
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:20Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            },
-            {
-              "manager": "kubectl-client-side-apply",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2024-02-22T09:46:20Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:annotations": {
-                    ".": {},
-                    "f:controller-gen.kubebuilder.io/version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            }
-          ]
+          "name": "serverstransporttcps.traefik.io"
         },
         "spec": {
           "group": "traefik.io",
@@ -17213,27 +14654,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2024-02-22T09:46:20Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2024-02-22T09:46:20Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "serverstransporttcps",
             "singular": "serverstransporttcp",
