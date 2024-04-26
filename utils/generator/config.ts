@@ -56,6 +56,7 @@ const uses = [
     {algo: 'role',         group: 'k8s', short: 'ClusterRoleBinding', usedGroup: 'k8s', usedShort: 'ClusterRole'},
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
     {algo: 'tekton', group: 'tekton', short: 'Pipeline', usedGroup: 'tekton', usedShort: 'Task'},
+    {algo: 'tekton', group: 'tekton', short: 'EventListener', usedGroup: 'tekton', usedShort: 'Trigger'},
 ];
 const provides = [
     {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'Certificate'},
@@ -82,6 +83,7 @@ const provides = [
     {algo: 'apiService',   group: 'k8s', short: 'APIService', providedGroup: 'k8s', providedShort: 'CustomResourceDefinition'},
     {algo: 'serviceAccount',  group: 'k8s', short: 'ServiceAccount', providedGroup: 'tekton', providedShort: 'EventListener', path: 'spec'},
     {algo: 'tekton',  group: 'tekton', short: 'EventListener', providedGroup: 'tekton', providedShort: 'PipelineRun'},
+    {algo: 'tekton',  group: 'tekton', short: 'EventListener', providedGroup: 'tekton', providedShort: 'TaskRun'},
     {algo: 'tekton', group: 'tekton', short: 'Pipeline', providedGroup: 'tekton', providedShort: 'PipelineRun'},
     {algo: 'tekton', group: 'tekton', short: 'Task', providedGroup: 'tekton', providedShort: 'TaskRun'},
 ];
@@ -125,6 +127,8 @@ const children = [
     {algo: 'k8s', group: 'k8s', short: 'PersistentVolumeClaim', parentGroup: 'kubevirt', parentShort: 'DataVolume'},
     {algo: 'tekton', group: 'k8s', short: 'Pod', parentGroup: 'tekton', parentShort: 'TaskRun'},
     {algo: 'tekton', group: 'tekton', short: 'TaskRun', parentGroup: 'tekton', parentShort: 'PipelineRun'},
+    {algo: 'tekton',  group: 'tekton', short: 'PipelineRun', parentGroup: 'tekton', parentShort: 'Trigger'},
+    {algo: 'tekton',  group: 'tekton', short: 'TaskRun', parentGroup: 'tekton', parentShort: 'Trigger'},
     {algo: 'k8s', group: 'core', short: 'NodeMetrics', parentGroup: 'k8s', parentShort: 'Node'},
     {algo: 'k8s', group: 'core', short: 'PodMetrics', parentGroup: 'k8s', parentShort: 'Pod'},
     {algo: 'k8s', group: 'core', short: 'PodMetrics', parentGroup: 'k8s', parentShort: 'Deployment'},

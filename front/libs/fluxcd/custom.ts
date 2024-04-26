@@ -60,9 +60,9 @@ export const descriptionHelmRelease = '';
 export const shortHelmRelease = 'HelmRelease';
 
 export const extraKustomizationColumns:Array<QTableColumn> = [
-  {name: 'Children', label: `${i18n.global.t('fluxcd.Children')}`, field: row => row.status?.inventory.entries.length, sortable: true, align: tableColumnAlign.left},
-  {name: 'lastAppliedRevision', label: `${i18n.global.t('fluxcd.lastAppliedRevision')}`, field: row => row.status?.lastAppliedRevision, sortable: true, align: tableColumnAlign.left},
-  {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Children', label: `${i18n.global.t('fluxcd.Children')}`, field: row => row.status!=undefined&&row.status.inventory!=undefined&&Array.isArray(row.status.inventory.entries)?row.status.inventory.entries.length:0, sortable: true, align: tableColumnAlign.left},
+  {name: 'lastAppliedRevision', label: `${i18n.global.t('fluxcd.lastAppliedRevision')}`, field: row => row.status!=undefined?row.status.lastAppliedRevision:"", sortable: true, align: tableColumnAlign.left},
+  {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => row.status!=undefined&&Array.isArray(row.status.conditions)?timeAgo(row.status.conditions[0].lastTransitionTime):"", sortable: true, align: tableColumnAlign.left},
 ];
 export const extraReceiverColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},

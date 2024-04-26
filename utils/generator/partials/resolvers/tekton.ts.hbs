@@ -1,19 +1,19 @@
     {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
       try{
-{{#if (and (eq type 'parent') (ne targetShort 'EventListener'))}}
+{{#if (and (eq type 'parent') (and (ne targetShort 'Trigger') (ne targetShort 'EventListener')))}}
         if (parent.metadata['ownerReferences']==null || parent.metadata['ownerReferences']==undefined || parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}').length<1) return null;
         const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
             .filter(o=>parent.metadata['ownerReferences'].filter(r=>r.kind=='{{targetShort}}'&&r.name==o['metadata']['name']).length>0)
         if (lst.length>0) return lst[0];
 {{/if}}
-{{#if (and (eq type 'child') (ne targetShort 'TaskRun')) }}
+{{#if (and (eq type 'child') (and (ne short 'Trigger') (ne targetShort 'TaskRun'))) }}
         const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
         return lst.filter(r=>
             r.metadata['ownerReferences']!=null && r.metadata['ownerReferences']!=undefined &&
             r.metadata['ownerReferences'].filter(r=>r.kind=='{{short}}' && r.name == parent['metadata']['name']).length>0
         )
 {{/if}}
-{{#if (and (eq type 'child') (eq targetShort 'TaskRun')) }}
+{{#if (and (eq type 'child') (and (ne short 'Trigger') (eq targetShort 'TaskRun'))) }}
         if (parent['status'] == null || !Array.isArray(parent['status']['childReferences']) || parent['status']['childReferences'].filter(r=>r.kind=='{{targetShort}}').length<1) return null;
 
         const tasks = parent['status']['childReferences'].filter(r=>r.kind=='{{targetShort}}').map(r=>r['name'])
@@ -21,6 +21,9 @@
         return lst.filter(r=> tasks.includes(r.metadata['name']))
 {{/if}}
 {{#if (and (eq type 'consume') (eq targetShort 'EventListener'))}}
+  {{#if (eq short 'TaskRun')}}
+        if (parent.metadata['ownerReferences']!=null && parent.metadata['ownerReferences']!=undefined && parent.metadata['ownerReferences'].filter(r=>r.kind=='PipelineRun').length>0) return null;
+  {{/if}}
         if (parent.metadata['labels']==undefined || parent.metadata['labels']['triggers.tekton.dev/eventlistener']==undefined) return null;
         const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
             .filter(o=>o['metadata'] != undefined && o['metadata']['name'] == parent.metadata['labels']['triggers.tekton.dev/eventlistener'])
@@ -28,7 +31,21 @@
 {{/if}}
 {{#if (and (eq type 'provide') (eq short 'EventListener')) }}
         const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
-        return lst.filter(r=>r['metadata']!=undefined && r['metadata']['labels']!=undefined && r['metadata']['labels']['triggers.tekton.dev/eventlistener'] == parent['metadata']['name']
+        return lst.filter(r=>r['metadata']!=undefined && r['metadata']['labels']!=undefined && r['metadata']['labels']['triggers.tekton.dev/eventlistener'] == parent['metadata']['name'] && (r.metadata['ownerReferences']==null || !Array.isArray(r.metadata['ownerReferences']) || r.metadata['ownerReferences'].filter(r=>r.kind=='PipelineRun').length<1)
+        )
+{{/if}}
+{{#if (and (eq type 'parent') (eq targetShort 'Trigger'))}}
+  {{#if (eq short 'TaskRun')}}
+        if (parent.metadata['ownerReferences']!=null && parent.metadata['ownerReferences']!=undefined && parent.metadata['ownerReferences'].filter(r=>r.kind=='PipelineRun').length>0) return null;
+  {{/if}}
+        if (parent.metadata['labels']==undefined || parent.metadata['labels']['triggers.tekton.dev/trigger']==undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(o=>o['metadata'] != undefined && o['metadata']['name'] == parent.metadata['labels']['triggers.tekton.dev/trigger'])
+        if (lst.length>0) return lst[0];
+{{/if}}
+{{#if (and (eq type 'child') (eq short 'Trigger')) }}
+        const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args})
+        return lst.filter(r=>r['metadata']!=undefined && r['metadata']['labels']!=undefined && r['metadata']['labels']['triggers.tekton.dev/trigger'] == parent['metadata']['name'] && (r.metadata['ownerReferences']==null || r.metadata['ownerReferences']==undefined || r.metadata['ownerReferences'].filter(r=>r.kind=='PipelineRun').length<1)
         )
 {{/if}}
 {{#if (and (eq type 'consume') (and (eq targetShort 'Pipeline') (eq short 'PipelineRun')))}}
@@ -61,6 +78,36 @@
         const tasks = parent['spec']['tasks'].filter(t=>t['taskRef']!=undefined && t['taskRef']['kind'] == '{{targetShort}}').map(t=>t['taskRef']['name'])
         const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
             .filter(o=>tasks.includes(o['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'EventListener') (eq short 'Trigger')))}}
+        if (parent['metadata'] == undefined ||parent['metadata']['labels'] == undefined) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(el=>{
+                if (el['spec'] == undefined || !Array.isArray(el['spec']['triggerGroups']) || el['spec']['triggerGroups'].filter(t=>t['triggerSelector']!=undefined && t['triggerSelector']['labelSelector']!=undefined && t['triggerSelector']['labelSelector']['matchLabels']!=undefined).length<1) return null;
+                const labelGroups = el['spec']['triggerGroups'].filter(t=>t['triggerSelector']!=undefined && t['triggerSelector']['labelSelector']!=undefined && t['triggerSelector']['labelSelector']['matchLabels']!=undefined).map(t=>t['triggerSelector']['labelSelector']['matchLabels'])
+                return labelGroups.reduce((acc,labels)=>{
+                    if (acc) return acc;
+                    return  Object.entries(labels).length == Object.entries(parent.metadata['labels']).reduce((acc,[name, value]) =>acc+Object.entries(labels).reduce(
+                            (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
+                        ,0),0)
+                },false)
+            })
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Trigger') (eq short 'EventListener')))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['triggerGroups']) || parent['spec']['triggerGroups'].filter(t=>t['triggerSelector']!=undefined && t['triggerSelector']['labelSelector']!=undefined && t['triggerSelector']['labelSelector']['matchLabels']!=undefined).length<1) return null;
+        const labelGroups = parent['spec']['triggerGroups'].filter(t=>t['triggerSelector']!=undefined && t['triggerSelector']['labelSelector']!=undefined && t['triggerSelector']['labelSelector']['matchLabels']!=undefined).map(t=>t['triggerSelector']['labelSelector']['matchLabels'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(trg=>{
+                if (trg.metadata == undefined || trg.metadata['labels'] == undefined) return false;
+                return labelGroups.reduce((acc,labels)=>{
+                    if (acc) return acc;
+                    return  Object.entries(labels).length == Object.entries(trg.metadata['labels']).reduce((acc,[name, value]) =>acc+Object.entries(labels).reduce(
+                            (inAcc,[inName,inValue]) => inAcc+((name==inName&&value==inValue)?1:0)
+                        ,0),0)
+                },false)
+            })
         if (lst.length>0) return lst;
 {{/if}}
       } catch (err) {

@@ -127,6 +127,70 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
           creationTimestamp
           uid
         }
+      {{#if (and (eq type 'use') (and (and (eq group 'vynil') (or (eq short 'Install'))) (and (eq resultGroup 'k8s') (eq resultShort 'Job'))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+      {{/if}}
+      {{#if (and (and (eq group 'k8s') (eq short 'Deployment')) (and (eq resultGroup 'k8s') (eq resultShort 'ReplicaSet')))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+      {{/if}}
+      {{#if (and (and (eq group 'k8s') (or (or (eq short 'Job') (eq short 'ReplicaSet')) (or (eq short 'DaemonSet') (eq short 'StatefulSet')))) (and (eq resultGroup 'k8s') (eq resultShort 'Pod')))}}
+        childcoreContainer {
+          name
+          init
+          getcoreLog {
+            lines
+          }
+        }
+      {{/if}}
+      {{#if (and (and (eq group 'tekton') (eq short 'TaskRun')) (and (eq resultGroup 'k8s') (eq resultShort 'Pod')))}}
+        childcoreContainer {
+          name
+          init
+          getcoreLog {
+            lines
+          }
+        }
+      {{/if}}
+      {{#if (and (and (eq group 'tekton') (eq short 'PipelineRun')) (and (eq resultGroup 'tekton') (eq resultShort 'TaskRun')))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          getcoreProblem {
+            source
+            description
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+      {{/if}}
       {{#if (and (or (eq short 'Install') (eq short 'Kustomize')) (eq resultShort 'Ingress'))}}
         userscoreUrl {
           proto

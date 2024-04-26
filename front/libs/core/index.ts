@@ -108,3 +108,23 @@ export function timeAgo(date:string) {
     const seconds = Math.floor((delta % (1000 * 60)) / 1000);
     return `${days>0?`${i18n.global.t("meta.days",days)} `:''}${hours>0?`${i18n.global.t("meta.hours",hours)} `:''}${minutes>0&&days<10?`${i18n.global.t("meta.minutes",minutes)} `:''}${seconds>0&&days<1&&hours<10?i18n.global.t("meta.seconds",seconds):''}`
 }
+export function duration(date:string, from:string) {
+    const delta = new Date(from).getTime() - new Date(date).getTime();
+    const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((delta % (1000 * 60)) / 1000);
+    return `${days>0?`${i18n.global.t("meta.days",days)} `:''}${hours>0?`${i18n.global.t("meta.hours",hours)} `:''}${minutes>0&&days<10?`${i18n.global.t("meta.minutes",minutes)} `:''}${seconds>0&&days<1&&hours<10?i18n.global.t("meta.seconds",seconds):''}`
+}
+import * as d3 from "d3";
+export const dateTimeFormat = d3.timeFormatLocale({
+    "dateTime": "%A, le %e %B %Y, %X",
+    "date": "%Y-%m-%d",
+    "time": "%H:%M:%S",
+    "periods": ["AM", "PM"],
+    "days": ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+    "shortDays": ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+    "months": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+    "shortMonths": ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
+});
+export const dateFormat = d => dateTimeFormat.format("%x %X")(new Date(d))

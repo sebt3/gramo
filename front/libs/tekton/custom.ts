@@ -1,6 +1,7 @@
 // noGramoGenerator
 import { QTableColumn } from 'quasar'
 const { tableColumnAlign } = await import('../core/navigation.js')
+const { duration, dateFormat } = await import('../core')
 const { i18n } = await import("../i18n")
 const { workflowColor, workflowIcon, } = await import('../../routes/custom');
 export const tektonIcon = 'apps';
@@ -73,15 +74,15 @@ export const extraPipelineColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPipelineRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => dateFormat(row.status.startTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Duration', label: `${i18n.global.t('tekton.Duration')}`, field: row => duration(row.status.startTime, row.status.completionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTaskColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTaskRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => dateFormat(row.status.startTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Duration', label: `${i18n.global.t('tekton.Duration')}`, field: row => duration(row.status.startTime, row.status.completionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraStepActionColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -93,11 +94,11 @@ export const extraClusterTaskColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCustomRunColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.status.startTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'CompletionTime', label: `${i18n.global.t('tekton.CompletionTime')}`, field: row => row.status.completionTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => dateFormat(row.status.startTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Duration', label: `${i18n.global.t('tekton.Duration')}`, field: row => duration(row.status.startTime, row.status.completionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraResolutionRequestColumns:Array<QTableColumn> = [
-  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
+  {name: 'StartTime', label: `${i18n.global.t('tekton.StartTime')}`, field: row => dateFormat(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterInterceptorColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -109,7 +110,7 @@ export const extraClusterTriggerBindingColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraEventListenerColumns:Array<QTableColumn> = [
-  {name: 'Address', label: `${i18n.global.t('tekton.Address')}`, field: row => row.status.address.url, sortable: true, align: tableColumnAlign.left},
+  {name: 'Address', label: `${i18n.global.t('tekton.Address')}`, field: row => row.status?.address.url, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTriggerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -127,10 +128,6 @@ export const PipelineReadExcludes = [
 export const PipelineSimpleExcludes = [
 ];
 export const PipelineRunListExcludes = [
-  { path: 'spec', include: true },
-  { path: 'status/childReferences', include: true },
-  { path: 'status/startTime', include: true },
-  { path: 'status/completionTime', include: true },
 ];
 export const PipelineRunReadExcludes = [
 ];
@@ -143,9 +140,6 @@ export const TaskReadExcludes = [
 export const TaskSimpleExcludes = [
 ];
 export const TaskRunListExcludes = [
-  { path: 'spec', include: true },
-  { path: 'status/startTime', include: true },
-  { path: 'status/completionTime', include: true },
 ];
 export const TaskRunReadExcludes = [
 ];
@@ -170,9 +164,6 @@ export const ClusterTaskReadExcludes = [
 export const ClusterTaskSimpleExcludes = [
 ];
 export const CustomRunListExcludes = [
-  { path: 'spec', include: true },
-  { path: 'status/startTime', include: true },
-  { path: 'status/completionTime', include: true },
 ];
 export const CustomRunReadExcludes = [
 ];
@@ -203,8 +194,6 @@ export const ClusterTriggerBindingReadExcludes = [
 export const ClusterTriggerBindingSimpleExcludes = [
 ];
 export const EventListenerListExcludes = [
-  { path: 'spec', include: true },
-  { path: 'status/address/url', include: true },
 ];
 export const EventListenerReadExcludes = [
 ];

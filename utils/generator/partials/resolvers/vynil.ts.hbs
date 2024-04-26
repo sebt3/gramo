@@ -135,6 +135,6 @@
 {{#if (and (eq type 'use') (and (eq short 'Install') (eq targetShort 'Job')))}}
     {{type}}{{targetGroup}}{{targetShort}}: async (inst, args: object) => {
         const lst = await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(inst,{namespace: gramoConfig.vynilNamespace, ...args})
-        return lst.filter(job=>job['metadata']['name'].split('--').length==3 && `${inst['metadata']['namespace']}--${inst['metadata']['name']}--agent` == job['metadata']['name'])
+        return lst.filter(job=>job['metadata']['name'].split('--').length==3 && (`${inst['metadata']['namespace']}--${inst['metadata']['name']}--agent` == job['metadata']['name'] || `${inst['metadata']['namespace']}--${inst['metadata']['name']}--delete` == job['metadata']['name']))
     },
 {{/if}}

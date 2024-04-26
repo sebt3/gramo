@@ -54,7 +54,8 @@
     "container": {
       "init": "Init?",
       "memory": "memory",
-      "cpu": "cpu"
+      "cpu": "cpu",
+      "log": "logs"
     },
     "documentation": {
       "typeRequiered": "type: { type }, obligatoire.",
@@ -272,6 +273,7 @@
     },
     "tekton": {
       "StartTime": "Début",
+      "Duration": "Durée",
       "CompletionTime": "Fin",
       "Address": "Addresse"
     },

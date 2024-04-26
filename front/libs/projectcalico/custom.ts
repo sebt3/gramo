@@ -80,6 +80,9 @@ export const shortBGPFilter = 'BGPFilter';
 export const extraBGPConfigurationColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
+export const extraBGPFilterColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
 export const extraBGPPeerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
@@ -133,6 +136,12 @@ export const BGPConfigurationListExcludes = [
 export const BGPConfigurationReadExcludes = [
 ];
 export const BGPConfigurationSimpleExcludes = [
+];
+export const BGPFilterListExcludes = [
+];
+export const BGPFilterReadExcludes = [
+];
+export const BGPFilterSimpleExcludes = [
 ];
 export const BGPPeerListExcludes = [
 ];

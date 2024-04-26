@@ -235,6 +235,14 @@
 {{#if (and (eq group 'k8up') (or (eq short 'Archive') (eq short 'Restore')))}}
         /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
+{{#if (and (eq group 'tekton') (or (eq short 'TaskRun') (eq short 'PipelineRun')))}}
+        if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Succeeded'&&c['status']!='True').length>0) {
+            problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='Succeeded'&&c['status']!='True').map(c=>{ return {
+                source: c['reason'],
+                description:c['message']
+            } }))
+        }
+{{/if}}
         if (problems.length>0) return problems
         return null
     },

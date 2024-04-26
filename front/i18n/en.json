@@ -54,7 +54,8 @@
     "container": {
       "init": "Init?",
       "memory": "memory",
-      "cpu": "cpu"
+      "cpu": "cpu",
+      "log": "logs"
     },
     "documentation": {
       "typeRequiered": "type: { type }, required.",
@@ -273,6 +274,7 @@
     "tekton": {
       "StartTime": "StartTime",
       "CompletionTime": "CompletionTime",
+      "Duration": "Duration",
       "Address": "Address"
     },
     "vynil": {
