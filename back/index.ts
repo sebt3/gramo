@@ -9,7 +9,7 @@ app.get('/i18n/:file', (req, res) => {
     'Content-Type': 'application/json'
   }});
 });
-app.use(express.static('public'));
+app.use('/hrm', express.static('public'));
 app.get('*', (req, res) => {
   res.sendFile(
       path.resolve(__dirname, 'public', 'index.html')
