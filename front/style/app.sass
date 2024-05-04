@@ -1,5 +1,22 @@
+@use "quasar/src/css/variables" as q
 @import '@quasar/extras/roboto-font/roboto-font.css'
 @import '@quasar/extras/material-icons/material-icons.css'
 @import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
-@import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
+@import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
 @import 'animate.css/animate.min.css'
+rect.isFailed
+    fill: q.$red-2
+    stroke: q.$red
+    stroke-width: 2
+rect.isSuccess
+    fill: q.$light-green-2
+    stroke: q.$light-green
+    stroke-width: 2
+rect.isSkipped
+    fill: q.$grey-2
+    stroke: q.$grey
+    stroke-width: 2
+rect.isPending
+    fill: q.$blue-2
+    stroke: q.$blue
+    stroke-width: 2

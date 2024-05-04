@@ -1,0 +1,16 @@
+{{#with ctx}}
+{{#if (and (eq ../operation 'queryResolver') (and (eq type 'child') (and (eq short 'Redis') (and (eq resultGroup 'k8s') (eq resultShort 'StatefulSet')))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+{{/if}}
+{{/with}}

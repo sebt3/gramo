@@ -14,9 +14,10 @@ const path_data = path.resolve(__dirname, '..', 'data');
 const path_back = path.resolve(__dirname, '..', 'back');
 const path_front = path.resolve(__dirname, '..', 'front');
 const path_lib = path.resolve(__dirname, 'generator');
+const path_components = path.resolve(path_front, 'components');
 const partials_back = path.resolve(path_lib, 'partials', 'back');
 const partials_resolvers = path.resolve(path_lib, 'partials', 'resolvers');
-const partials_customs = path.resolve(path_lib, 'partials', 'customs');
+const partials_front = path.resolve(path_lib, 'partials', 'front');
 loadPartial('resolversProblems',        path.resolve(partials_back, 'problems.ts.hbs'));
 loadPartial('resolversAdvices',         path.resolve(partials_back, 'advices.ts.hbs'));
 loadPartial('createResolver',           path.resolve(partials_back, 'create.resolver.ts.hbs'));
@@ -45,26 +46,17 @@ loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'config
 loadPartial('resolversClustered',       path.resolve(partials_resolvers, 'clustered.ts.hbs'));
 loadPartial('resolversTekton',          path.resolve(partials_resolvers, 'tekton.ts.hbs'));
 loadPartial('resolversCRD',             path.resolve(partials_resolvers, 'crd.ts.hbs'));
-loadPartial('cattleCustom',             path.resolve(partials_customs, 'cattle.hbs'));
-loadPartial('certmanagerCustom',        path.resolve(partials_customs, 'certmanager.hbs'));
-loadPartial('ciliumCustom',             path.resolve(partials_customs, 'cilium.hbs'));
-loadPartial('cnpgCustom',               path.resolve(partials_customs, 'cnpg.hbs'));
-loadPartial('fluxcdCustom',             path.resolve(partials_customs, 'fluxcd.hbs'));
-loadPartial('jaegertracingCustom',      path.resolve(partials_customs, 'jaegertracing.hbs'));
-loadPartial('k8sCustom',                path.resolve(partials_customs, 'k8s.hbs'));
-loadPartial('k8upCustom',               path.resolve(partials_customs, 'k8up.hbs'));
-loadPartial('mariadbCustom',            path.resolve(partials_customs, 'mariadb.hbs'));
-loadPartial('mongodbCustom',            path.resolve(partials_customs, 'mongodb.hbs'));
-loadPartial('monitoringCustom',         path.resolve(partials_customs, 'monitoring.hbs'));
-loadPartial('opentelemetryCustom',      path.resolve(partials_customs, 'opentelemetry.hbs'));
-loadPartial('oracleCustom',             path.resolve(partials_customs, 'oracle.hbs'));
-loadPartial('projectcalicoCustom',      path.resolve(partials_customs, 'projectcalico.hbs'));
-loadPartial('rabbitmqCustom',           path.resolve(partials_customs, 'rabbitmq.hbs'));
-loadPartial('redisCustom',              path.resolve(partials_customs, 'redis.hbs'));
-loadPartial('secretgeneratorCustom',    path.resolve(partials_customs, 'secretgenerator.hbs'));
-loadPartial('traefikCustom',            path.resolve(partials_customs, 'traefik.hbs'));
-loadPartial('vynilCustom',              path.resolve(partials_customs, 'vynil.hbs'));
-loadPartial('zalandoCustom',            path.resolve(partials_customs, 'zalando.hbs'));
+loadPartial('cnpgCustom',               path.resolve(partials_front, 'cnpg.hbs'));
+loadPartial('fluxcdCustom',             path.resolve(partials_front, 'fluxcd.hbs'));
+loadPartial('k8sCustom',                path.resolve(partials_front, 'k8s.hbs'));
+loadPartial('k8upCustom',               path.resolve(partials_front, 'k8up.hbs'));
+loadPartial('monitoringCustom',         path.resolve(partials_front, 'monitoring.hbs'));
+loadPartial('redisCustom',              path.resolve(partials_front, 'redis.hbs'));
+loadPartial('secretgeneratorCustom',    path.resolve(partials_front, 'secretgenerator.hbs'));
+loadPartial('traefikCustom',            path.resolve(partials_front, 'traefik.hbs'));
+loadPartial('vynilCustom',              path.resolve(partials_front, 'vynil.hbs'));
+loadPartial('tektonCustom',             path.resolve(partials_front, 'tekton.hbs'));
+loadPartial('coreCustom',               path.resolve(partials_front, 'core.hbs'));
 ////////////////////////////////////
 //// Load the data
 ///
@@ -75,6 +67,16 @@ new Promise((resolve) => {
             .filter(f=>fs.statSync(f).isFile() && f.match(/.*\.json$/))
             .map(f=>LoadFrom(f))
     );
+}).then(data => {
+    return (data as {name:string,objects:{short:string}[]}[]).map(grp => {
+        if (!fs.existsSync(path.resolve(path_components, grp.name)) )
+            return {...grp,objects:grp.objects.map(o=>{return{...o,extraComponents:[]}})}
+        return {...grp,objects:grp.objects.map(o=>{
+            return{...o,extraComponents:[
+            fs.existsSync(path.resolve(path_components, grp.name,`${o.short}Meta.vue`))?'Meta':null,
+            fs.existsSync(path.resolve(path_components, grp.name,`${o.short}TabLogs.vue`))?'TabLogs':null,
+        ].filter(c=>c!=null)}})}
+    })
 }).then(data => {
     const allObjects = (data as object[]).map(s=>s['objects']).flat();
     const allUniqObjects = allObjects.filter(obj=>allObjects.filter(o=>o.group==obj.group&&o.short==obj.short).indexOf(obj)==0)

@@ -1,0 +1,51 @@
+{{#with ctx}}
+{{# if (and (eq ../operation 'dataPrepare') (eq short 'Secret'))}}
+    if (Array.isArray(res.data.k8sNamespace) && res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat().length>0) {
+      model.value = {...model.value, ...res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0], data: JSON.parse(JSON.stringify(res.data.k8sNamespace.map(ns=>ns['k8sSecret']).flat()[0]['data']))};
+      model.value['stringData'] = model.value['stringData']==undefined?{}:model.value['stringData'];
+      if (typeof model.value['data'] === 'object' && model.value['data'] != null) Object.keys(model.value['data']).forEach(key=>{
+        try {
+          model.value['stringData'][key] = atob(model.value['data'][key])
+          model.value['data'][key] = undefined
+        } catch (err) {
+          console.error(err);
+        }
+      })
+    }
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (eq short 'Deployment'))}}
+    (name != 'TabLogs' || (Array.isArray(model.childk8sReplicaSet) && model.childk8sReplicaSet.filter(rs=>Array.isArray(rs.childk8sPod)).length>0)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (and (eq group 'k8s') (eq short 'Deployment')) (and (eq resultGroup 'k8s') (eq resultShort 'ReplicaSet'))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+{{/if}}
+{{#if (and (eq ../operation 'extraComponents') (or (or (eq short 'StatefulSet') (eq short 'DaemonSet')) (eq short 'Job')))}}"TabLogs",{{/if}}
+{{#if (and (eq ../operation 'componentLoader') (or (or (eq short 'StatefulSet') (eq short 'DaemonSet')) (eq short 'Job')))}}
+    case "TabLogs":{
+      return defineAsyncComponent(() => import( '@/components/k8s/ReplicaSetTabLogs.vue'))
+    }
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (or (eq short 'ReplicaSet') (or (or (eq short 'StatefulSet') (eq short 'DaemonSet')) (or (eq short 'Job') (eq short 'TaskRun')))))}}
+    (name != 'TabLogs' || Array.isArray(model.childk8sPod)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (and (eq group 'k8s') (or (or (eq short 'Job') (eq short 'ReplicaSet')) (or (eq short 'DaemonSet') (eq short 'StatefulSet')))) (and (eq resultGroup 'k8s') (eq resultShort 'Pod'))))}}
+        childcoreContainer {
+          name
+          init
+          getcoreLog {
+            lines
+          }
+        }
+{{/if}}
+{{/with}}

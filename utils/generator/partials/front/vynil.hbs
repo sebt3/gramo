@@ -1,0 +1,59 @@
+{{#with ctx}}
+{{#if (and (eq ../operation 'queryResolver') (and (eq resultGroup 'vynil') (eq resultShort 'Package')))}}
+        name
+        commit_id
+        description
+        consumevynilCategory {
+          name
+        }
+        consumevynilDistrib {
+          metadata {
+            name
+          }
+        }
+        options
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (eq resultGroup 'vynil') (eq resultShort 'Category')))}}
+        name
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (eq short 'Install'))}}
+    (name != 'TabLogs' || (Array.isArray(model.usek8sJob) && model.usek8sJob.filter(rs=>Array.isArray(rs.childk8sPod) && rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)).length>0).length>0)) &&
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (and (eq short 'Install') (eq resultShort 'Ingress')))}}
+        userscoreUrl {
+          proto
+          host
+          path
+        }
+{{/if}}
+{{#if (and (eq ../operation 'query') (and (eq group 'vynil') (eq short 'Install')))}}
+      consumevynilPackage {
+        name
+        commit_id
+        description
+        consumevynilCategory {
+          name
+        }
+        consumevynilDistrib {
+          metadata {
+            name
+          }
+        }
+        options
+      }
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (eq type 'use') (and (and (eq group 'vynil') (or (eq short 'Install'))) (and (eq resultGroup 'k8s') (eq resultShort 'Job')))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+{{/if}}
+{{/with}}

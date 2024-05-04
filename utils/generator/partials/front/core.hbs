@@ -1,0 +1,78 @@
+{{#with ctx}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'CrdObject'))}}
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        spec
+        status
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'Url'))}}
+        proto
+        host
+        path
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'Problem'))}}
+        source
+        description
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'Advice'))}}
+        source
+        reason
+        description
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'NodeMetrics'))}}
+        name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'PodMetrics'))}}
+        namespace
+        name
+        pod_name
+        data {
+          timestamp
+          window
+          cpu
+          memory
+        }
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'Container'))}}
+        namespace
+        pod_name
+        name
+        init
+        spec
+        status
+        getcoreLog(params: $childcoreContainer) {
+          lines
+        }
+{{/if}}
+{{# if (and (eq ../operation 'queryResolver') (eq resultShort 'Event'))}}
+        metadata {
+          name
+          namespace
+          annotations
+          labels
+          creationTimestamp
+          uid
+        }
+        source
+        involvedObject
+        type
+        action
+        count
+        message
+        reason
+        reportingComponent
+        reportingInstance
+{{/if}}
+{{/with}}

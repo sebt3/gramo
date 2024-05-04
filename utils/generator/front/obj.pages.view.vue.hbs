@@ -99,23 +99,11 @@ onResult(res => {
     sectionCounts.value.users = 0;
     sectionCounts.value.uses = 0;
     sectionCounts.value.bellow = 0;
-    {{#if (eq group 'cattle')}}
-{{> cattleCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'certmanager')}}
-{{> certmanagerCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'cilium')}}
-{{> ciliumCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
     {{#if (eq group 'cnpg')}}
 {{> cnpgCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'fluxcd')}}
 {{> fluxcdCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'jaegertracing')}}
-{{> jaegertracingCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'k8s')}}
 {{> k8sCustom ctx=. page='view' operation='dataPrepare'}}
@@ -123,26 +111,8 @@ onResult(res => {
     {{#if (eq group 'k8up')}}
 {{> k8upCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
-    {{#if (eq group 'mariadb')}}
-{{> mariadbCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'mongodb')}}
-{{> mongodbCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
     {{#if (eq group 'monitoring')}}
 {{> monitoringCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'opentelemetry')}}
-{{> opentelemetryCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'oracle')}}
-{{> oracleCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'projectcalico')}}
-{{> projectcalicoCustom ctx=. page='view' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'rabbitmq')}}
-{{> rabbitmqCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'redis')}}
 {{> redisCustom ctx=. page='view' operation='dataPrepare'}}
@@ -156,8 +126,8 @@ onResult(res => {
     {{#if (eq group 'vynil')}}
 {{> vynilCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
-    {{#if (eq group 'zalando')}}
-{{> zalandoCustom ctx=. page='view' operation='dataPrepare'}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. page='view' operation='dataPrepare'}}
     {{/if}}
 {{#each resolvers}}
   {{#if (and (eq type 'consume') (or (eq resultShort 'Node') (eq resultShort 'EventListener')))}}

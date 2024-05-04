@@ -45,23 +45,11 @@ onResult(res => {
     if (res.data!=undefined{{#if namespaced}} && Array.isArray(res.data.k8sNamespace) {{/if}} && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=undefined && res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]!=null) {
       model.value = res.data{{#if namespaced}}.k8sNamespace[0]{{/if}}.{{ group }}{{ short }}[0]
     }
-    {{#if (eq group 'cattle')}}
-{{> cattleCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'certmanager')}}
-{{> certmanagerCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'cilium')}}
-{{> ciliumCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
     {{#if (eq group 'cnpg')}}
 {{> cnpgCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'fluxcd')}}
 {{> fluxcdCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'jaegertracing')}}
-{{> jaegertracingCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'k8s')}}
 {{> k8sCustom ctx=. page='edit' operation='dataPrepare'}}
@@ -69,26 +57,8 @@ onResult(res => {
     {{#if (eq group 'k8up')}}
 {{> k8upCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
-    {{#if (eq group 'mariadb')}}
-{{> mariadbCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'mongodb')}}
-{{> mongodbCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
     {{#if (eq group 'monitoring')}}
 {{> monitoringCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'opentelemetry')}}
-{{> opentelemetryCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'oracle')}}
-{{> oracleCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'projectcalico')}}
-{{> projectcalicoCustom ctx=. page='edit' operation='dataPrepare'}}
-    {{/if}}
-    {{#if (eq group 'rabbitmq')}}
-{{> rabbitmqCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
     {{#if (eq group 'redis')}}
 {{> redisCustom ctx=. page='edit' operation='dataPrepare'}}
@@ -102,8 +72,8 @@ onResult(res => {
     {{#if (eq group 'vynil')}}
 {{> vynilCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
-    {{#if (eq group 'zalando')}}
-{{> zalandoCustom ctx=. page='edit' operation='dataPrepare'}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. page='edit' operation='dataPrepare'}}
     {{/if}}
   }
 });

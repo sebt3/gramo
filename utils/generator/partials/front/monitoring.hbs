@@ -1,0 +1,25 @@
+{{#with ctx}}
+{{#if (and (eq ../operation 'extraComponents') (or (eq short 'Alertmanager') (eq short 'Prometheus')))}}"TabLogs",{{/if}}
+{{#if (and (eq ../operation 'componentLoader') (or (eq short 'Alertmanager') (eq short 'Prometheus')))}}
+    case "TabLogs":{
+      return defineAsyncComponent(() => import( '@/components/redis/RedisTabLogs.vue'))
+    }
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (or (eq short 'Alertmanager') (eq short 'Prometheus')))}}
+    (name != 'TabLogs' || Array.isArray(model.childk8sStatefulSet)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (eq type 'child') (and (or (eq short 'Alertmanager') (eq short 'Prometheus')) (and (eq resultGroup 'k8s') (eq resultShort 'StatefulSet')))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+{{/if}}
+{{/with}}

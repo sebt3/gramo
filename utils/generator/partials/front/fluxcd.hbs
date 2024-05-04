@@ -1,0 +1,9 @@
+{{#with ctx}}
+{{# if (and (eq ../operation 'queryResolver') (and (eq short 'Kustomize') (eq resultShort 'Ingress')))}}
+        userscoreUrl {
+          proto
+          host
+          path
+        }
+{{/if}}
+{{/with}}

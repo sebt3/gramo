@@ -24,25 +24,40 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
 {{#if detailed}}
   {{#each resolvers}}
       {{name}}(params: ${{name}}) {
-    {{#if (or (and (eq resultGroup 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
-      {{#if (eq resultShort 'Package')}}
-        name
-        commit_id
-        description
-        consumevynilCategory {
-          name
-        }
-        consumevynilDistrib {
-          metadata {
-            name
-          }
-        }
-        options
-      {{/if}}
-      {{#if (eq resultShort 'Category')}}
-        name
-      {{/if}}
-      {{#if (eq resultShort 'CrdObject')}}
+    {{#if (or (eq group 'cnpg') (eq resultGroup 'cnpg'))}}
+{{> cnpgCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'fluxcd') (eq resultGroup 'fluxcd'))}}
+{{> fluxcdCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'k8s') (eq resultGroup 'k8s'))}}
+{{> k8sCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'k8up') (eq resultGroup 'k8up'))}}
+{{> k8upCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'monitoring') (eq resultGroup 'monitoring'))}}
+{{> monitoringCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'redis') (eq resultGroup 'redis'))}}
+{{> redisCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'secretgenerator') (eq resultGroup 'secretgenerator'))}}
+{{> secretgeneratorCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'traefik') (eq resultGroup 'traefik'))}}
+{{> traefikCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'vynil') (eq resultGroup 'vynil'))}}
+{{> vynilCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'tekton') (eq resultGroup 'tekton'))}}
+{{> tektonCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#if (or (eq group 'core') (eq resultGroup 'core'))}}
+{{> coreCustom ctx=. operation='queryResolver'}}
+    {{/if}}
+    {{#unless (or (and (eq resultGroup 'vynil') (or (eq resultShort 'Package') (eq resultShort 'Category'))) (eq resultGroup 'core') )}}
         metadata {
           name
           namespace
@@ -51,153 +66,6 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
           creationTimestamp
           uid
         }
-        spec
-        status
-      {{/if}}
-      {{#if (eq resultShort 'Url')}}
-        proto
-        host
-        path
-      {{/if}}
-      {{#if (eq resultShort 'Problem')}}
-        source
-        description
-      {{/if}}
-      {{#if (eq resultShort 'Advice')}}
-        source
-        reason
-        description
-      {{/if}}
-      {{#if (eq resultShort 'NodeMetrics')}}
-        name
-        data {
-          timestamp
-          window
-          cpu
-          memory
-        }
-      {{/if}}
-      {{#if (eq resultShort 'PodMetrics')}}
-        namespace
-        name
-        pod_name
-        data {
-          timestamp
-          window
-          cpu
-          memory
-        }
-      {{/if}}
-      {{#if (eq resultShort 'Container')}}
-        namespace
-        pod_name
-        name
-        init
-        spec
-        status
-        getcoreLog(params: $childcoreContainer) {
-          lines
-        }
-      {{/if}}
-      {{#if (eq resultShort 'Event')}}
-        metadata {
-          name
-          namespace
-          annotations
-          labels
-          creationTimestamp
-          uid
-        }
-        source
-        involvedObject
-        type
-        action
-        count
-        message
-        reason
-        reportingComponent
-        reportingInstance
-      {{/if}}
-    {{else}}
-        metadata {
-          name
-          namespace
-          annotations
-          labels
-          creationTimestamp
-          uid
-        }
-      {{#if (and (eq type 'use') (and (and (eq group 'vynil') (or (eq short 'Install'))) (and (eq resultGroup 'k8s') (eq resultShort 'Job'))))}}
-        childk8sPod {
-          metadata {
-            name
-          }
-          childcoreContainer {
-            name
-            init
-            getcoreLog {
-              lines
-            }
-          }
-        }
-      {{/if}}
-      {{#if (and (and (eq group 'k8s') (eq short 'Deployment')) (and (eq resultGroup 'k8s') (eq resultShort 'ReplicaSet')))}}
-        childk8sPod {
-          metadata {
-            name
-          }
-          childcoreContainer {
-            name
-            init
-            getcoreLog {
-              lines
-            }
-          }
-        }
-      {{/if}}
-      {{#if (and (and (eq group 'k8s') (or (or (eq short 'Job') (eq short 'ReplicaSet')) (or (eq short 'DaemonSet') (eq short 'StatefulSet')))) (and (eq resultGroup 'k8s') (eq resultShort 'Pod')))}}
-        childcoreContainer {
-          name
-          init
-          getcoreLog {
-            lines
-          }
-        }
-      {{/if}}
-      {{#if (and (and (eq group 'tekton') (eq short 'TaskRun')) (and (eq resultGroup 'k8s') (eq resultShort 'Pod')))}}
-        childcoreContainer {
-          name
-          init
-          getcoreLog {
-            lines
-          }
-        }
-      {{/if}}
-      {{#if (and (and (eq group 'tekton') (eq short 'PipelineRun')) (and (eq resultGroup 'tekton') (eq resultShort 'TaskRun')))}}
-        childk8sPod {
-          metadata {
-            name
-          }
-          getcoreProblem {
-            source
-            description
-          }
-          childcoreContainer {
-            name
-            init
-            getcoreLog {
-              lines
-            }
-          }
-        }
-      {{/if}}
-      {{#if (and (or (eq short 'Install') (eq short 'Kustomize')) (eq resultShort 'Ingress'))}}
-        userscoreUrl {
-          proto
-          host
-          path
-        }
-      {{/if}}
         getcoreProblem {
           source
           description
@@ -210,7 +78,7 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
       {{#each properties}}
         {{this}}
       {{/each}}
-    {{/if}}
+    {{/unless}}
       }
   {{/each}}
 {{else}}
@@ -218,27 +86,39 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
         source
         description
       }
-      getcoreAdvice {
-        source
-        reason
-        description
-      }
-  {{#if (and (eq group 'vynil') (eq short 'Install'))}}
-      consumevynilPackage {
-        name
-        commit_id
-        description
-        consumevynilCategory {
-          name
-        }
-        consumevynilDistrib {
-          metadata {
-            name
-          }
-        }
-        options
-      }
-  {{/if}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. operation='query'}}
+    {{/if}}
+    {{#if (eq group 'core')}}
+{{> coreCustom ctx=. operation='query'}}
+    {{/if}}
 {{/if}}
 {{#each readProperties}}
       {{this}}

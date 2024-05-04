@@ -1,7 +1,7 @@
 import { QTableColumn } from 'quasar'
 const { i18n } = await import("../i18n")
 const { usePermissionStore } = await import('../../stores/permission.js')
-const { watch, ref, gqlDataToYaml, useCore, useNavigationStoreRef } = await import('../core')
+const { watch, ref, gqlDataToYaml, useCore, useNavigationStoreRef, defineAsyncComponent } = await import('../core')
 const { tableColumnAlign } = await import('../core/navigation.js')
 export { onMounted, defineAsyncComponent, elude, getColor, getConditionColor, timeAgo, ref, useCore, useQuery, useMutation, sanitizeData, getProperties } from '../core';
 export { i18n } from "../../libs/i18n"
@@ -23,6 +23,122 @@ export const {{short}}AllColumns = ([
 {{else}}
 export const {{short}}AllColumns = {{short}}Columns;
 {{/if}}
+export const extraComponents = [
+{{#each extraComponents}}"{{this}}",{{/each}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+    {{#if (eq group 'core')}}
+{{> coreCustom ctx=. operation='extraComponents'}}
+    {{/if}}
+]
+export const componentLoader = (name:string) => {
+  switch (`${name}`) {
+{{#each extraComponents}}
+    case "{{this}}":{
+      return defineAsyncComponent(() => import( '@/components/{{../group}}/{{../short}}{{this}}.vue'))
+    }
+{{/each}}
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+    {{#if (eq group 'core')}}
+{{> coreCustom ctx=. operation='componentLoader'}}
+    {{/if}}
+  }
+  return null
+}
+export const componentHave = (name:string, model:object) => {
+  return extraComponents.includes(name) &&
+    {{#if (eq group 'cnpg')}}
+{{> cnpgCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'fluxcd')}}
+{{> fluxcdCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'k8s')}}
+{{> k8sCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'k8up')}}
+{{> k8upCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'monitoring')}}
+{{> monitoringCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'redis')}}
+{{> redisCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'secretgenerator')}}
+{{> secretgeneratorCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'traefik')}}
+{{> traefikCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'vynil')}}
+{{> vynilCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'tekton')}}
+{{> tektonCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    {{#if (eq group 'core')}}
+{{> coreCustom ctx=. operation='componentHave'}}
+    {{/if}}
+    true
+}
 export const itemAllColumns = {{short}}AllColumns;
 const { isNamespaced, setNamespaceFromRoute, setNamespacedItemFromRoute } = await import('../../libs/core/navigation.js')
 export const namespaced = {{#if namespaced}}true{{else}}false{{/if}};

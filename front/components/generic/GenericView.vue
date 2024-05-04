@@ -6,7 +6,7 @@ const props = withDefaults(defineProps<{model: object, group:string, short:strin
   showLabels: true,
 });
 const { loader } = await import("../../libs/core/importer")
-const { defineAsyncComponent, onMounted, elude, getColor, timeAgo, useItem, getProperties, colorItem, itemDefinition, iconItem, extraColumns } = await loader(props.group,props.short)
+const { defineAsyncComponent, onMounted, elude, getColor, timeAgo, useItem, getProperties, colorItem, itemDefinition, iconItem, extraColumns, componentLoader, componentHave } = await loader(props.group,props.short)
 const { ref } = await import('vue')
 const { useRouter } = await import('vue-router')
 const router = useRouter();
@@ -16,29 +16,19 @@ if (namespaced) setNamespacedItemFromRoute();
 else setItemFromRoute();
 onMounted(() => { viewerUpdate(onlyReadProperties(props.model)) })
 
-const PipelineRun      = defineAsyncComponent(() => import( '@/components/tekton/PipelineRun.vue'));
+const objectMeta       = componentLoader('Meta');
+const objectTabLogs    = componentLoader('TabLogs');
 const OpenApiEdit      = defineAsyncComponent(() => import( '@/components/openapi/OpenApiEdit.vue'));
 const EventList        = defineAsyncComponent(() => import( '@/components/core/EventList.vue'));
 const MonacoViewer     = defineAsyncComponent(() => import( '@/components/core/MonacoViewer.vue'));
 const OpenApiNamedIcon = defineAsyncComponent(() => import( '@/components/openapi/OpenApiNamedIcon.vue'));
-const logViewTab = ref((
-  ['TaskRun','Job','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short) && props.model.childk8sPod != undefined && props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer.filter(c=>!c.init)).flat().length>0)?props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer.filter(c=>!c.init)).flat()[0].name
-  :(['PipelineRun'].includes(props.short)&& props.model.childtektonTaskRun != undefined && props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0&&Array.isArray(tr.getcoreProblem)).length>0)?props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0&&Array.isArray(tr.getcoreProblem))[0].metadata.name
-  :(['PipelineRun'].includes(props.short)&& props.model.childtektonTaskRun != undefined && props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0).length>0)?props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0).sort((a,b)=>a.metadata.creationTimestamp<b.metadata.creationTimestamp?-1:1)[0].metadata.name
-  :'none')
-const logViewSplitterModel= ref(20)
-if (['Install'].includes(props.short)) console.log(props.model, props.model.metadata.name)
-if (['Install'].includes(props.short)) console.log(props.model.usek8sJob)
 </script>
 <template>
   <q-card bordered class="q-ma-sm">
     <q-tabs v-model="viewer.tab" :class="`bg-${ colorItem } text-grey-2`" active-color="white" align="justify">
       <q-avatar :icon="iconItem" />
       <q-tab :label="props.short" name="meta" />
-      <q-tab :label="$t('container.log')" name="logs" v-if="['TaskRun','Job','Deployment','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short) && props.model.childk8sPod != undefined" />
-      <q-tab :label="$t('container.log')" name="logs" v-if="['PipelineRun'].includes(props.short) && Array.isArray(props.model.childtektonTaskRun)" />
-      <q-tab :label="$t('container.log')" name="logs" v-if="['Deployment'].includes(props.short) && Array.isArray(props.model.childk8sReplicaSet) && props.model.childk8sReplicaSet.filter(rs=>Array.isArray(rs.childk8sPod)).length>0" />
-        <q-tab :label="$t('container.log')" name="logs" v-if="['Install'].includes(props.short) && Array.isArray(props.model.usek8sJob) && props.model.usek8sJob.filter(rs=>Array.isArray(rs.childk8sPod) && rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)).length>0).length>0" />
+      <q-tab :label="$t('container.log')" name="logs" v-if="componentHave('TabLogs', props.model)" />
       <q-tab :label="$t('core.events')" name="events" v-if="Array.isArray(model['getcoreEvent'])" />
       <q-tab :label="$t('view.tabs.simple')" name="simple" />
       <q-tab v-for="prop in writeProperties.filter(prop=>model[prop]!=null && itemDefinition.properties != undefined && itemDefinition.properties[prop] != undefined && (itemDefinition.properties[prop]['type']==undefined || itemDefinition.properties[prop]['type']=='object'))" v-bind:key="prop" :name="prop" :label="prop" />
@@ -98,8 +88,8 @@ if (['Install'].includes(props.short)) console.log(props.model.usek8sJob)
           </q-field>
         </div>
       </div>
-      <div v-if="['PipelineRun'].includes(props.short) && props.model.status != undefined && props.model.status.pipelineSpec != undefined">
-        <PipelineRun :model="props.model" />
+      <div v-if="componentHave('Meta',props.model)">
+        <objectMeta :model="props.model" />
       </div>
       <q-field label="Problems" stack-label borderless v-if="Array.isArray(model.getcoreProblem) && model.getcoreProblem.length>0">
         <template v-slot:prepend><q-icon name="error" /></template>
@@ -163,81 +153,8 @@ if (['Install'].includes(props.short)) console.log(props.model.usek8sJob)
           :showdefault="false"
         />
       </q-tab-panel>
-      <q-tab-panel  name="logs" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="['TaskRun','Job','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short) && props.model.childk8sPod != undefined">
-        <q-splitter v-model="logViewSplitterModel" style="height: 250px" >
-          <template v-slot:before>
-            <q-tabs v-model="logViewTab" vertical class="text-teal" switch-indicator active-color="primary">
-              <q-tab v-for="prop in props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer.filter(c=>!c.init||['Job','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short))).flat()" v-bind:key="prop.name" :name="prop.name" :label="prop.name" />
-            </q-tabs>
-          </template>
-          <template v-slot:after>
-            <q-tab-panels v-model="logViewTab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
-              <q-tab-panel  v-for="prop in props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer.filter(c=>!c.init||['Job','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short))).flat()" v-bind:key="prop.name"  :name="prop.name"  class="bg-black text-white">
-                <pre v-if="prop.getcoreLog != undefined && Array.isArray(prop.getcoreLog.lines)">
-{{ prop.getcoreLog.lines.join('\n') }}
-                </pre>
-              </q-tab-panel>
-            </q-tab-panels>
-          </template>
-        </q-splitter>
-      </q-tab-panel>
-      <q-tab-panel  name="logs" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="['PipelineRun'].includes(props.short)">
-        <q-splitter v-model="logViewSplitterModel" >
-          <template v-slot:before>
-            <q-tabs inline-label v-model="logViewTab" vertical class="text-teal" switch-indicator active-color="primary">
-              <q-tab v-for="prop in props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0).sort((a,b)=>a.metadata.creationTimestamp<b.metadata.creationTimestamp?-1:1)" v-bind:key="prop.metadata.name" :name="prop.metadata.name" :label="prop.metadata.name.replace(props.model.metadata.name+'-','')" :icon="prop.status.conditions[0].status=='True'?'check':'error'" />
-            </q-tabs>
-          </template>
-          <template v-slot:after>
-            <q-tab-panels v-model="logViewTab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
-              <q-tab-panel  v-for="tr in props.model.childtektonTaskRun.filter(tr=>Array.isArray(tr.childk8sPod)&&tr.childk8sPod.length>0).sort((a,b)=>a.metadata.creationTimestamp<b.metadata.creationTimestamp?-1:1)" v-bind:key="tr.metadata.name" :name="tr.metadata.name"  class="bg-black text-white">
-                <div v-for="cont in tr.childk8sPod.map(po=>po.childcoreContainer.filter(c=>!c.init)).flat()" v-bind:key="cont.name">
-                  <h5>{{ cont.name }}</h5>
-                  <pre v-if="cont.getcoreLog!=undefined && Array.isArray(cont.getcoreLog.lines)">
-{{ cont.getcoreLog.lines.join('\n') }}
-                  </pre>
-                </div>
-              </q-tab-panel>
-            </q-tab-panels>
-          </template>
-        </q-splitter>
-      </q-tab-panel>
-      <q-tab-panel name="logs" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="['Deployment'].includes(props.short) && Array.isArray(props.model.childk8sReplicaSet) && props.model.childk8sReplicaSet.filter(rs=>Array.isArray(rs.childk8sPod)).length>0">
-        <q-splitter v-model="logViewSplitterModel" >
-          <template v-slot:before>
-            <q-tabs inline-label v-model="logViewTab" vertical class="text-teal" switch-indicator active-color="primary">
-              <q-tab v-for="cont in props.model.childk8sReplicaSet.filter(rs=>Array.isArray(rs.childk8sPod)&&rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)&&po.childcoreContainer.length>0).length>0).map(rs=>rs.childk8sPod.map(po=>po.childcoreContainer.map(cont=>{return {rs:rs.metadata,po:po.metadata, ...cont}}))).flat().flat().sort((a,b)=>a.po.creationTimestamp<b.po.creationTimestamp?-1:1)" v-bind:key="`${cont.po.name}-${cont.name}`" :name="`${cont.po.name}-${cont.name}`" :label="`${cont.name}#${cont.po.name.replace(props.model.metadata.name+'-','')}`"  />
-            </q-tabs>
-          </template>
-          <template v-slot:after>
-            <q-tab-panels v-model="logViewTab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
-              <q-tab-panel  v-for="cont in props.model.childk8sReplicaSet.filter(rs=>Array.isArray(rs.childk8sPod)&&rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)&&po.childcoreContainer.length>0).length>0).map(rs=>rs.childk8sPod.map(po=>po.childcoreContainer.map(cont=>{return {rs:rs.metadata,po:po.metadata, ...cont}}))).flat().flat()" v-bind:key="`${cont.po.name}-${cont.name}`" :name="`${cont.po.name}-${cont.name}`" class="bg-black text-white">
-                <pre v-if="cont.getcoreLog != undefined && Array.isArray(cont.getcoreLog.lines)">
-{{ cont.getcoreLog.lines.join('\n') }}
-                </pre>
-              </q-tab-panel>
-            </q-tab-panels>
-          </template>
-        </q-splitter>
-      </q-tab-panel>
-      <q-tab-panel name="logs" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="['Install'].includes(props.short) && Array.isArray(props.model.usek8sJob) && props.model.usek8sJob.filter(rs=>Array.isArray(rs.childk8sPod) && rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)).length>0).length>0">
-        <q-splitter v-model="logViewSplitterModel" >
-          <template v-slot:before>
-            <q-tabs :no-caps="true" inline-label v-model="logViewTab" vertical class="text-teal" switch-indicator active-color="primary">
-              <q-tab v-for="cont in props.model.usek8sJob.filter(rs=>Array.isArray(rs.childk8sPod) && rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)).length>0).map(job=>job.childk8sPod.map(po=>po.childcoreContainer.map(cont=>{return {job:job.metadata,po:po.metadata, ...cont}})))
-              .flat().flat().sort((a,b)=>a.po.creationTimestamp<b.po.creationTimestamp?-1:1)" v-bind:key="`${cont.po.name}-${cont.name}`" :name="`${cont.po.name}-${cont.name}`" :label="`${cont.name}#${cont.po.name.replace(props.model.metadata.name+'-','')}`"  />
-            </q-tabs>
-          </template>
-          <template v-slot:after>
-            <q-tab-panels v-model="logViewTab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
-              <q-tab-panel  v-for="cont in props.model.usek8sJob.filter(rs=>Array.isArray(rs.childk8sPod) && rs.childk8sPod.filter(po=>Array.isArray(po.childcoreContainer)).length>0).map(job=>job.childk8sPod.map(po=>po.childcoreContainer.map(cont=>{return {job:job.metadata,po:po.metadata, ...cont}}))).flat().flat()" v-bind:key="`${cont.po.name}-${cont.name}`" :name="`${cont.po.name}-${cont.name}`" class="bg-black text-white">
-                <pre v-if="cont.getcoreLog != undefined && Array.isArray(cont.getcoreLog.lines)">
-{{ cont.getcoreLog.lines.join('\n') }}
-                </pre>
-              </q-tab-panel>
-            </q-tab-panels>
-          </template>
-        </q-splitter>
+      <q-tab-panel name="logs" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="componentHave('TabLogs', props.model)">
+        <objectTabLogs :model="props.model" />
       </q-tab-panel>
       <q-tab-panel name="events" :class="`bg-${ colorItem }-${$q.dark.isActive?'10':'1'}`" v-if="Array.isArray(model['getcoreEvent'])">
         <EventList :model="model['getcoreEvent']"

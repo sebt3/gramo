@@ -1,0 +1,68 @@
+{{#with ctx}}
+{{#if (and (eq ../operation 'componentHave') (eq short 'EventListener'))}}
+    (name != 'TabLogs' || Array.isArray(model.childk8sDeployment)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (and (eq group 'tekton') (eq short 'EventListener')) (and (eq resultGroup 'k8s') (eq resultShort 'Deployment'))))}}
+        childk8sReplicaSet {
+          metadata {
+            name
+          }
+          childk8sPod {
+            metadata {
+              name
+            }
+            getcoreProblem {
+              source
+              description
+            }
+            childcoreContainer {
+              name
+              init
+              getcoreLog {
+                lines
+              }
+            }
+          }
+        }
+{{/if}}
+{{#if (and (eq ../operation 'extraComponents') (eq short 'TaskRun'))}}"TabLogs",{{/if}}
+{{#if (and (eq ../operation 'componentLoader') (eq short 'TaskRun'))}}
+    case "TabLogs":{
+      return defineAsyncComponent(() => import( '@/components/k8s/ReplicaSetTabLogs.vue'))
+    }
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (eq short 'TaskRun'))}}
+    (name != 'TabLogs' || Array.isArray(model.childk8sPod)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (and (eq group 'tekton') (eq short 'TaskRun')) (and (eq resultGroup 'k8s') (eq resultShort 'Pod'))))}}
+        childcoreContainer {
+          name
+          init
+          getcoreLog {
+            lines
+          }
+        }
+{{/if}}
+{{#if (and (eq ../operation 'componentHave') (eq short 'PipelineRun'))}}
+    (name != 'TabLogs' || Array.isArray(model.childtektonTaskRun)) &&
+    (name != 'Meta' || (model.status != undefined && model.status.pipelineSpec != undefined)) &&
+{{/if}}
+{{#if (and (eq ../operation 'queryResolver') (and (and (eq group 'tekton') (eq short 'PipelineRun')) (and (eq resultGroup 'tekton') (eq resultShort 'TaskRun'))))}}
+        childk8sPod {
+          metadata {
+            name
+          }
+          getcoreProblem {
+            source
+            description
+          }
+          childcoreContainer {
+            name
+            init
+            getcoreLog {
+              lines
+            }
+          }
+        }
+{{/if}}
+{{/with}}
