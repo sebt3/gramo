@@ -57,6 +57,13 @@ const uses = [
     {algo: 'roleBinding',  group: 'k8s', short: 'ServiceAccount', usedGroup: 'k8s', usedShort: 'ClusterRoleBinding'},
     {algo: 'tekton', group: 'tekton', short: 'Pipeline', usedGroup: 'tekton', usedShort: 'Task'},
     {algo: 'tekton', group: 'tekton', short: 'EventListener', usedGroup: 'tekton', usedShort: 'Trigger'},
+    {algo: 'tekton', group: 'tekton', short: 'TaskRun', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
+    {algo: 'tekton', group: 'tekton', short: 'PipelineRun', usedGroup: 'k8s', usedShort: 'PersistentVolumeClaim'},
+    {algo: 'tekton', group: 'tekton', short: 'TaskRun', usedGroup: 'k8s', usedShort: 'Secret'},
+    {algo: 'tekton', group: 'tekton', short: 'PipelineRun', usedGroup: 'k8s', usedShort: 'Secret'},
+    {algo: 'tekton', group: 'tekton', short: 'TaskRun', usedGroup: 'k8s', usedShort: 'ConfigMap'},
+    {algo: 'tekton', group: 'tekton', short: 'PipelineRun', usedGroup: 'k8s', usedShort: 'ConfigMap'},
+    {algo: 'tekton', group: 'tekton', short: 'Task', usedGroup: 'k8s', usedShort: 'ConfigMap'},
 ];
 const provides = [
     {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'Certificate'},

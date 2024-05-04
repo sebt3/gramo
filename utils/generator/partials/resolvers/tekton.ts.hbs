@@ -110,6 +110,67 @@
             })
         if (lst.length>0) return lst;
 {{/if}}
+{{#if (and (eq type 'users') (and (or (eq targetShort 'TaskRun') (eq targetShort 'PipelineRun')) (eq short 'PersistentVolumeClaim')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(run=>run['spec'] != undefined && Array.isArray(run['spec']['workspaces']) && run['spec']['workspaces'].filter(w=>w['persistentVolumeClaim']!=undefined && w['persistentVolumeClaim']['claimName']==parent['metadata']['name']).length>0)
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'PersistentVolumeClaim') (or (eq short 'TaskRun') (eq short 'PipelineRun'))))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['workspaces']) || parent['spec']['workspaces'].filter(w=>w['persistentVolumeClaim']!=undefined && w['persistentVolumeClaim']['claimName']!=undefined).length<1) return null;
+        const claims = parent['spec']['workspaces'].filter(w=>w['persistentVolumeClaim']!=undefined && w['persistentVolumeClaim']['claimName']!=undefined).map(w=>w['persistentVolumeClaim']['claimName'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pvc=>claims.includes(pvc['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (or (eq targetShort 'TaskRun') (eq targetShort 'PipelineRun')) (eq short 'Secret')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(run=>run['spec'] != undefined && Array.isArray(run['spec']['workspaces']) && run['spec']['workspaces'].filter(w=>w['secret']!=undefined && w['secret']['secretName']==parent['metadata']['name']).length>0)
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Secret') (or (eq short 'TaskRun') (eq short 'PipelineRun'))))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['workspaces']) || parent['spec']['workspaces'].filter(w=>w['secret']!=undefined && w['secret']['secretName']!=undefined).length<1) return null;
+        const claims = parent['spec']['workspaces'].filter(w=>w['secret']!=undefined && w['secret']['secretName']!=undefined).map(w=>w['secret']['secretName'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pvc=>claims.includes(pvc['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'PipelineRun') (eq short 'ConfigMap')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(run=>run['spec'] != undefined && Array.isArray(run['spec']['workspaces']) && run['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']==parent['metadata']['name']).length>0)
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'ConfigMap') (eq short 'PipelineRun')))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['workspaces']) || parent['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).length<1) return null;
+        const claims = parent['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).map(w=>w['configMap']['name'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pvc=>claims.includes(pvc['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'TaskRun') (eq short 'ConfigMap')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(run=>(run['spec'] != undefined && Array.isArray(run['spec']['workspaces']) && run['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']==parent['metadata']['name']).length>0) || (run['status'] != undefined && run['status']['taskSpec'] != undefined && Array.isArray(run['status']['taskSpec']['volumes']) && run['status']['taskSpec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']==parent['metadata']['name']).length>0))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'ConfigMap') (eq short 'TaskRun')))}}
+        if (parent['spec'] == undefined || (!Array.isArray(parent['spec']['workspaces']) || parent['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).length<1) && (parent['status'] == undefined || parent['status']['taskSpec'] == undefined || !Array.isArray(parent['status']['taskSpec']['volumes']) || parent['status']['taskSpec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).length<1) ) return null;
+        const claims = parent['spec']['workspaces'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).map(w=>w['configMap']['name'])
+                .concat((parent['status'] != undefined && parent['status']['taskSpec'] != undefined && Array.isArray(parent['status']['taskSpec']['volumes']))?parent['status']['taskSpec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).map(w=>w['configMap']['name']):[])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pvc=>claims.includes(pvc['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'Task') (eq short 'ConfigMap')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(run=>run['spec'] != undefined && Array.isArray(run['spec']['volumes']) && run['spec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']==parent['metadata']['name']).length>0)
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'ConfigMap') (eq short 'Task')))}}
+        if (parent['spec'] == undefined || !Array.isArray(parent['spec']['volumes']) || parent['spec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).length<1) return null;
+        const claims = parent['spec']['volumes'].filter(w=>w['configMap']!=undefined && w['configMap']['name']!=undefined).map(w=>w['configMap']['name'])
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pvc=>claims.includes(pvc['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
       } catch (err) {
         console.error(err)
       }
