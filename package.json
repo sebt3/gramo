@@ -1,6 +1,6 @@
 {
   "name": "gramo",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
