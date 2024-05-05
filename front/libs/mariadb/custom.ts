@@ -64,7 +64,7 @@ export const extraGrantColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraMariaDBColumns:Array<QTableColumn> = [
-  {name: 'PrimaryPod', label: `${i18n.global.t('mariadb.PrimaryPod')}`, field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
+  {name: 'PrimaryPod', label: `${i18n.global.t('mariadb.PrimaryPod')}`, field: row => row.status?.currentPrimary, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraRestoreColumns:Array<QTableColumn> = [

@@ -45,9 +45,9 @@ export const shortPrometheusAgent = 'PrometheusAgent';
 export const extraAlertmanagerColumns:Array<QTableColumn> = [
   {name: 'Version', label: `${i18n.global.t('monitoring.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Replicas', label: `${i18n.global.t('monitoring.Replicas')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.availableReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
+  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status?.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPodMonitorColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -58,9 +58,9 @@ export const extraProbeColumns:Array<QTableColumn> = [
 export const extraPrometheusColumns:Array<QTableColumn> = [
   {name: 'Version', label: `${i18n.global.t('monitoring.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Desired', label: `${i18n.global.t('monitoring.Desired')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.availableReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
+  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status?.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPrometheusRuleColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -71,9 +71,9 @@ export const extraServiceMonitorColumns:Array<QTableColumn> = [
 export const extraThanosRulerColumns:Array<QTableColumn> = [
   {name: 'Version', label: `${i18n.global.t('monitoring.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Replicas', label: `${i18n.global.t('monitoring.Replicas')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.availableReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
+  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status?.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraAlertmanagerConfigColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -81,9 +81,9 @@ export const extraAlertmanagerConfigColumns:Array<QTableColumn> = [
 export const extraPrometheusAgentColumns:Array<QTableColumn> = [
   {name: 'Version', label: `${i18n.global.t('monitoring.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Desired', label: `${i18n.global.t('monitoring.Desired')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.availableReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.availableReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status.paused, sortable: true, align: tableColumnAlign.left},
+  {name: 'Paused', label: `${i18n.global.t('monitoring.Paused')}`, field: row => row.status?.paused, sortable: true, align: tableColumnAlign.left},
 ];
 export const AlertmanagerListExcludes = [
   { path: 'spec/version', include: true },

@@ -30,8 +30,8 @@ export const extraCloudEventSourceColumns:Array<QTableColumn> = [
 export const extraClusterTriggerAuthenticationColumns:Array<QTableColumn> = [
   {name: 'PodIdentity', label: `${i18n.global.t('keda.PodIdentity')}`, field: row => row.spec.podIdentity.provider, sortable: true, align: tableColumnAlign.left},
   {name: 'VaultAddress', label: `${i18n.global.t('keda.VaultAddress')}`, field: row => row.spec.hashiCorpVault.address, sortable: true, align: tableColumnAlign.left},
-  {name: 'ScaledObjects', label: `${i18n.global.t('keda.ScaledObjects')}`, field: row => row.status.scaledobjects, sortable: true, align: tableColumnAlign.left},
-  {name: 'ScaledJobs', label: `${i18n.global.t('keda.ScaledJobs')}`, field: row => row.status.scaledjobs, sortable: true, align: tableColumnAlign.left},
+  {name: 'ScaledObjects', label: `${i18n.global.t('keda.ScaledObjects')}`, field: row => row.status?.scaledobjects, sortable: true, align: tableColumnAlign.left},
+  {name: 'ScaledJobs', label: `${i18n.global.t('keda.ScaledJobs')}`, field: row => row.status?.scaledjobs, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraScaledJobColumns:Array<QTableColumn> = [
   {name: 'Min', label: `${i18n.global.t('keda.Min')}`, field: row => row.spec.minReplicaCount, sortable: true, align: tableColumnAlign.left},
@@ -39,7 +39,7 @@ export const extraScaledJobColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraScaledObjectColumns:Array<QTableColumn> = [
-  {name: 'ScaleTargetKind', label: `${i18n.global.t('keda.ScaleTargetKind')}`, field: row => row.status.scaleTargetKind, sortable: true, align: tableColumnAlign.left},
+  {name: 'ScaleTargetKind', label: `${i18n.global.t('keda.ScaleTargetKind')}`, field: row => row.status?.scaleTargetKind, sortable: true, align: tableColumnAlign.left},
   {name: 'ScaleTargetName', label: `${i18n.global.t('keda.ScaleTargetName')}`, field: row => row.spec.scaleTargetRef.name, sortable: true, align: tableColumnAlign.left},
   {name: 'Min', label: `${i18n.global.t('keda.Min')}`, field: row => row.spec.minReplicaCount, sortable: true, align: tableColumnAlign.left},
   {name: 'Max', label: `${i18n.global.t('keda.Max')}`, field: row => row.spec.maxReplicaCount, sortable: true, align: tableColumnAlign.left},
@@ -48,8 +48,8 @@ export const extraScaledObjectColumns:Array<QTableColumn> = [
 export const extraTriggerAuthenticationColumns:Array<QTableColumn> = [
   {name: 'PodIdentity', label: `${i18n.global.t('keda.PodIdentity')}`, field: row => row.spec.podIdentity.provider, sortable: true, align: tableColumnAlign.left},
   {name: 'VaultAddress', label: `${i18n.global.t('keda.VaultAddress')}`, field: row => row.spec.hashiCorpVault.address, sortable: true, align: tableColumnAlign.left},
-  {name: 'ScaledObjects', label: `${i18n.global.t('keda.ScaledObjects')}`, field: row => row.status.scaledobjects, sortable: true, align: tableColumnAlign.left},
-  {name: 'ScaledJobs', label: `${i18n.global.t('keda.ScaledJobs')}`, field: row => row.status.scaledjobs, sortable: true, align: tableColumnAlign.left},
+  {name: 'ScaledObjects', label: `${i18n.global.t('keda.ScaledObjects')}`, field: row => row.status?.scaledobjects, sortable: true, align: tableColumnAlign.left},
+  {name: 'ScaledJobs', label: `${i18n.global.t('keda.ScaledJobs')}`, field: row => row.status?.scaledjobs, sortable: true, align: tableColumnAlign.left},
 ];
 export const CloudEventSourceListExcludes = [
 ];

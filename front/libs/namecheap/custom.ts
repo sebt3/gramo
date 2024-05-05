@@ -13,7 +13,7 @@ export const shortScheduledResource = 'ScheduledResource';
 export const extraScheduledResourceColumns:Array<QTableColumn> = [
   {name: 'In', label: `${i18n.global.t('namecheap.In')}`, field: row => row.spec.in, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Condition', label: `${i18n.global.t('namecheap.Condition')}`, field: row => row.status.condition, sortable: true, align: tableColumnAlign.left},
+  {name: 'Condition', label: `${i18n.global.t('namecheap.Condition')}`, field: row => row.status?.condition, sortable: true, align: tableColumnAlign.left},
 ];
 export const ScheduledResourceListExcludes = [
   { path: 'spec/in', include: true },

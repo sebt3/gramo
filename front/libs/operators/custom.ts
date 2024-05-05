@@ -56,7 +56,7 @@ export const extraClusterServiceVersionColumns:Array<QTableColumn> = [
   {name: 'Display', label: `${i18n.global.t('operators.Display')}`, field: row => row.spec.displayName, sortable: true, align: tableColumnAlign.left},
   {name: 'Version', label: `${i18n.global.t('operators.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Replaces', label: `${i18n.global.t('operators.Replaces')}`, field: row => row.spec.replaces, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('operators.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('operators.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraInstallPlanColumns:Array<QTableColumn> = [
   {name: 'Approval', label: `${i18n.global.t('operators.Approval')}`, field: row => row.spec.approval, sortable: true, align: tableColumnAlign.left},

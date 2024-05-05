@@ -10,8 +10,8 @@ export const colorMongoDBCommunity = databaseColor;
 export const descriptionMongoDBCommunity = '';
 export const shortMongoDBCommunity = 'MongoDBCommunity';
 export const extraMongoDBCommunityColumns:Array<QTableColumn> = [
-  {name: 'Phase', label: `${i18n.global.t('mongodb.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: `${i18n.global.t('mongodb.Version')}`, field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('mongodb.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('mongodb.Version')}`, field: row => row.status?.version, sortable: true, align: tableColumnAlign.left},
 ];
 export const MongoDBCommunityListExcludes = [
   { path: 'status/phase', include: true },

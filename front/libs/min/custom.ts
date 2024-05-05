@@ -22,11 +22,11 @@ export const extraMinIOJobColumns:Array<QTableColumn> = [
   {name: 'Phase', label: `${i18n.global.t('min.Phase')}`, field: row => row.spec.status.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPolicyBindingColumns:Array<QTableColumn> = [
-  {name: 'State', label: `${i18n.global.t('min.State')}`, field: row => row.status.currentState, sortable: true, align: tableColumnAlign.left},
+  {name: 'State', label: `${i18n.global.t('min.State')}`, field: row => row.status?.currentState, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraTenantColumns:Array<QTableColumn> = [
-  {name: 'State', label: `${i18n.global.t('min.State')}`, field: row => row.status.currentState, sortable: true, align: tableColumnAlign.left},
+  {name: 'State', label: `${i18n.global.t('min.State')}`, field: row => row.status?.currentState, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const MinIOJobListExcludes = [

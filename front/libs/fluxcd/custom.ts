@@ -105,7 +105,7 @@ export const extraImagePolicyColumns:Array<QTableColumn> = [
   {name: 'LastChange', label: `${i18n.global.t('fluxcd.LastChange')}`, field: row => timeAgo(row.status?.conditions[0].lastTransitionTime), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraImageRepositoryColumns:Array<QTableColumn> = [
-  {name: 'LastScan', label: `${i18n.global.t('fluxcd.LastScan')}`, field: row => timeAgo(row.status.lastScanResult?.scanTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'LastScan', label: `${i18n.global.t('fluxcd.LastScan')}`, field: row => timeAgo(row.status?.lastScanResult?.scanTime), sortable: true, align: tableColumnAlign.left},
   {name: 'Tags', label: `${i18n.global.t('fluxcd.Tags')}`, field: row => row.status?.lastScanResult?.tagCount, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraHelmReleaseColumns:Array<QTableColumn> = [

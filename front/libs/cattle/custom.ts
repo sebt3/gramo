@@ -22,7 +22,7 @@ export const colorETCDSnapshotFile = installColor;
 export const descriptionETCDSnapshotFile = '';
 export const shortETCDSnapshotFile = 'ETCDSnapshotFile';
 export const extraHelmChartColumns:Array<QTableColumn> = [
-  {name: 'Job', label: `${i18n.global.t('cattle.Job')}`, field: row => row.status.jobName, sortable: true, align: tableColumnAlign.left},
+  {name: 'Job', label: `${i18n.global.t('cattle.Job')}`, field: row => row.status?.jobName, sortable: true, align: tableColumnAlign.left},
   {name: 'Chart', label: `${i18n.global.t('cattle.Chart')}`, field: row => row.spec.chart, sortable: true, align: tableColumnAlign.left},
   {name: 'TargetNamespace', label: `${i18n.global.t('cattle.TargetNamespace')}`, field: row => row.spec.targetNamespace, sortable: true, align: tableColumnAlign.left},
   {name: 'Version', label: `${i18n.global.t('cattle.Version')}`, field: row => row.spec.version, sortable: true, align: tableColumnAlign.left},
@@ -41,8 +41,8 @@ export const extraETCDSnapshotFileColumns:Array<QTableColumn> = [
   {name: 'SnapshotName', label: `${i18n.global.t('cattle.SnapshotName')}`, field: row => row.spec.snapshotName, sortable: true, align: tableColumnAlign.left},
   {name: 'Node', label: `${i18n.global.t('cattle.Node')}`, field: row => row.spec.nodeName, sortable: true, align: tableColumnAlign.left},
   {name: 'Location', label: `${i18n.global.t('cattle.Location')}`, field: row => row.spec.location, sortable: true, align: tableColumnAlign.left},
-  {name: 'Size', label: `${i18n.global.t('cattle.Size')}`, field: row => row.status.size, sortable: true, align: tableColumnAlign.left},
-  {name: 'CreationTime', label: `${i18n.global.t('cattle.CreationTime')}`, field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Size', label: `${i18n.global.t('cattle.Size')}`, field: row => row.status?.size, sortable: true, align: tableColumnAlign.left},
+  {name: 'CreationTime', label: `${i18n.global.t('cattle.CreationTime')}`, field: row => row.status?.creationTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const HelmChartListExcludes = [
   { path: 'status/jobName', include: true },

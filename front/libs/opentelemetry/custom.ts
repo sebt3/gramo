@@ -26,15 +26,15 @@ export const extraInstrumentationColumns:Array<QTableColumn> = [
 ];
 export const extraOpAMPBridgeColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status?.version, sortable: true, align: tableColumnAlign.left},
   {name: 'Mode', label: `${i18n.global.t('opentelemetry.Mode')}`, field: row => row.spec.endpoint, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraOpenTelemetryCollectorColumns:Array<QTableColumn> = [
   {name: 'Mode', label: `${i18n.global.t('opentelemetry.Mode')}`, field: row => row.spec.mode, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status.version, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.scale.statusReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('opentelemetry.Version')}`, field: row => row.status?.version, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.scale.statusReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Image', label: `${i18n.global.t('opentelemetry.Image')}`, field: row => row.status.image, sortable: true, align: tableColumnAlign.left},
+  {name: 'Image', label: `${i18n.global.t('opentelemetry.Image')}`, field: row => row.status?.image, sortable: true, align: tableColumnAlign.left},
   {name: 'Management', label: `${i18n.global.t('opentelemetry.Management')}`, field: row => row.spec.managementState, sortable: true, align: tableColumnAlign.left},
 ];
 export const InstrumentationListExcludes = [

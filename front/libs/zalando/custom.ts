@@ -26,7 +26,7 @@ export const extrapostgresqlColumns:Array<QTableColumn> = [
   {name: 'CPU-Request', label: i18n.global.t('zalando.CPURequest'), field: row => row.spec.resources.requests.cpu, sortable: true, align: tableColumnAlign.left},
   {name: 'Memory-Request', label: i18n.global.t('zalando.MemRequest'), field: row => row.spec.resources.requests.memory, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: i18n.global.t('meta.age'), field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: i18n.global.t('core.status'), field: row => row.status.PostgresClusterStatus, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: i18n.global.t('core.status'), field: row => row.status?.PostgresClusterStatus, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterKopfPeeringColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},

@@ -59,16 +59,16 @@ export const extraCiliumClusterwideNetworkPolicyColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumEndpointColumns:Array<QTableColumn> = [
-  {name: 'Endpoint ID', label: `${i18n.global.t('cilium.endpointID')}`, field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'Identity ID', label: `${i18n.global.t('cilium.identityID')}`, field: row => row.status.identity.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ingress Enforcement', label: `${i18n.global.t('cilium.ingressEnforcement')}`, field: row => row.status.policy.ingress.state, sortable: true, align: tableColumnAlign.left},
-  {name: 'Egress Enforcement', label: `${i18n.global.t('cilium.egressEnforcement')}`, field: row => row.status.policy.egress.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Endpoint ID', label: `${i18n.global.t('cilium.endpointID')}`, field: row => row.status?.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'Identity ID', label: `${i18n.global.t('cilium.identityID')}`, field: row => row.status?.identity.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ingress Enforcement', label: `${i18n.global.t('cilium.ingressEnforcement')}`, field: row => row.status?.policy.ingress.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Egress Enforcement', label: `${i18n.global.t('cilium.egressEnforcement')}`, field: row => row.status?.policy.egress.state, sortable: true, align: tableColumnAlign.left},
   {name: 'Visibility Policy', label: `${i18n.global.t('cilium.visibilityPolicy')}`, field: row => row.status['visibility-policy-status'], sortable: true, align: tableColumnAlign.left},
-  {name: 'Endpoint State', label: `${i18n.global.t('cilium.endpointState')}`, field: row => row.status.state, sortable: true, align: tableColumnAlign.left},
+  {name: 'Endpoint State', label: `${i18n.global.t('cilium.endpointState')}`, field: row => row.status?.state, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumExternalWorkloadColumns:Array<QTableColumn> = [
-  {name: 'ciliumID', label: `${i18n.global.t('cilium.ciliumID')}`, field: row => row.status.id, sortable: true, align: tableColumnAlign.left},
-  {name: 'IP', label: `${i18n.global.t('core.ip')}`, field: row => row.status.ip, sortable: true, align: tableColumnAlign.left},
+  {name: 'ciliumID', label: `${i18n.global.t('cilium.ciliumID')}`, field: row => row.status?.id, sortable: true, align: tableColumnAlign.left},
+  {name: 'IP', label: `${i18n.global.t('core.ip')}`, field: row => row.status?.ip, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCiliumIdentityColumns:Array<QTableColumn> = [
   {name: 'Namespace', label: `${i18n.global.t('meta.namespace')}`, field: row => row.metadata.labels['io.kubernetes.pod.namespace'], sortable: true, align: tableColumnAlign.left},

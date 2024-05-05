@@ -203,9 +203,9 @@ export const extraNamespaceColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraNodeColumns:Array<QTableColumn> = [
-  {name: 'CPUs', label: `${i18n.global.t('k8s.CPUs')}`, field: row => row.status.capacity.cpu, sortable: true, align: tableColumnAlign.left},
-  {name: 'RAM', label: `${i18n.global.t('k8s.RAM')}`, field: row => row.status.capacity.memory, sortable: true, align: tableColumnAlign.left},
-  {name: 'Version', label: `${i18n.global.t('core.version')}`, field: row => row.status.nodeInfo.kubeletVersion, sortable: true, align: tableColumnAlign.left},
+  {name: 'CPUs', label: `${i18n.global.t('k8s.CPUs')}`, field: row => row.status?.capacity.cpu, sortable: true, align: tableColumnAlign.left},
+  {name: 'RAM', label: `${i18n.global.t('k8s.RAM')}`, field: row => row.status?.capacity.memory, sortable: true, align: tableColumnAlign.left},
+  {name: 'Version', label: `${i18n.global.t('core.version')}`, field: row => row.status?.nodeInfo.kubeletVersion, sortable: true, align: tableColumnAlign.left},
   {name: 'Region', label: `${i18n.global.t('k8s.Region')}`, field: row => row.metadata.labels['topology.kubernetes.io/region'], sortable: true, align: tableColumnAlign.left},
   {name: 'Zone', label: `${i18n.global.t('k8s.Zone')}`, field: row => row.metadata.labels['topology.kubernetes.io/zone'], sortable: true, align: tableColumnAlign.left},
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -244,7 +244,7 @@ export const extraControllerRevisionColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDaemonSetColumns:Array<QTableColumn> = [
-  {name: 'Replicas', label: `${i18n.global.t('k8s.Replicas')}`, field: row => row.status.numberReady, sortable: true, align: tableColumnAlign.left},
+  {name: 'Replicas', label: `${i18n.global.t('k8s.Replicas')}`, field: row => row.status?.numberReady, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDeploymentColumns:Array<QTableColumn> = [
   {name: 'Replicas', label: `${i18n.global.t('k8s.Replicas')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
@@ -259,7 +259,7 @@ export const extraHorizontalPodAutoscalerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraJobColumns:Array<QTableColumn> = [
-  {name: 'Completion', label: `${i18n.global.t('k8s.Completion')}`, field: row => timeAgo(row.status.completionTime), sortable: true, align: tableColumnAlign.left},
+  {name: 'Completion', label: `${i18n.global.t('k8s.Completion')}`, field: row => timeAgo(row.status?.completionTime), sortable: true, align: tableColumnAlign.left},
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCronJobColumns:Array<QTableColumn> = [
@@ -333,13 +333,13 @@ export const extraEndpointSliceColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVolumeSnapshotColumns:Array<QTableColumn> = [
-  {name: 'ReadyToUse', label: `${i18n.global.t('k8s.ReadyToUse')}`, field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'ReadyToUse', label: `${i18n.global.t('k8s.ReadyToUse')}`, field: row => row.status?.readyToUse, sortable: true, align: tableColumnAlign.left},
   {name: 'SourcePVC', label: `${i18n.global.t('k8s.SourcePVC')}`, field: row => row.spec.source.persistentVolumeClaimName, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceSnapshotContent', label: `${i18n.global.t('k8s.SourceSnapshotContent')}`, field: row => row.spec.source.volumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
-  {name: 'RestoreSize', label: `${i18n.global.t('k8s.RestoreSize')}`, field: row => row.status.restoreSize, sortable: true, align: tableColumnAlign.left},
+  {name: 'RestoreSize', label: `${i18n.global.t('k8s.RestoreSize')}`, field: row => row.status?.restoreSize, sortable: true, align: tableColumnAlign.left},
   {name: 'SnapshotClass', label: `${i18n.global.t('k8s.SnapshotClass')}`, field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
-  {name: 'SnapshotContent', label: `${i18n.global.t('k8s.SnapshotContent')}`, field: row => row.status.boundVolumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
-  {name: 'CreationTime', label: `${i18n.global.t('k8s.CreationTime')}`, field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'SnapshotContent', label: `${i18n.global.t('k8s.SnapshotContent')}`, field: row => row.status?.boundVolumeSnapshotContentName, sortable: true, align: tableColumnAlign.left},
+  {name: 'CreationTime', label: `${i18n.global.t('k8s.CreationTime')}`, field: row => row.status?.creationTime, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVolumeSnapshotClassColumns:Array<QTableColumn> = [
@@ -348,8 +348,8 @@ export const extraVolumeSnapshotClassColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVolumeSnapshotContentColumns:Array<QTableColumn> = [
-  {name: 'ReadyToUse', label: `${i18n.global.t('k8s.ReadyToUse')}`, field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
-  {name: 'RestoreSize', label: `${i18n.global.t('k8s.RestoreSize')}`, field: row => row.status.restoreSize, sortable: true, align: tableColumnAlign.left},
+  {name: 'ReadyToUse', label: `${i18n.global.t('k8s.ReadyToUse')}`, field: row => row.status?.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'RestoreSize', label: `${i18n.global.t('k8s.RestoreSize')}`, field: row => row.status?.restoreSize, sortable: true, align: tableColumnAlign.left},
   {name: 'DeletionPolicy', label: `${i18n.global.t('k8s.DeletionPolicy')}`, field: row => row.spec.deletionPolicy, sortable: true, align: tableColumnAlign.left},
   {name: 'Driver', label: `${i18n.global.t('k8s.Driver')}`, field: row => row.spec.driver, sortable: true, align: tableColumnAlign.left},
   {name: 'VolumeSnapshotClass', label: `${i18n.global.t('k8s.VolumeSnapshotClass')}`, field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},

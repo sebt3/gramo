@@ -25,15 +25,15 @@ export const shortScheduledBackup = 'ScheduledBackup';
 export const extraBackupColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Cluster', label: `${i18n.global.t('cnpg.Cluster')}`, field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('cnpg.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Error', label: `${i18n.global.t('core.error')}`, field: row => row.status.error, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('cnpg.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Error', label: `${i18n.global.t('core.error')}`, field: row => row.status?.error, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraClusterColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
-  {name: 'Instances', label: `${i18n.global.t('cnpg.Instances')}`, field: row => row.status.instances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status.readyInstances, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Primary', label: `${i18n.global.t('cnpg.Primary')}`, field: row => row.status.currentPrimary, sortable: true, align: tableColumnAlign.left},
+  {name: 'Instances', label: `${i18n.global.t('cnpg.Instances')}`, field: row => row.status?.instances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('core.ready')}`, field: row => row.status?.readyInstances, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Primary', label: `${i18n.global.t('cnpg.Primary')}`, field: row => row.status?.currentPrimary, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraPoolerColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
@@ -43,7 +43,7 @@ export const extraPoolerColumns:Array<QTableColumn> = [
 export const extraScheduledBackupColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
   {name: 'Cluster', label: `${i18n.global.t('cnpg.Cluster')}`, field: row => row.spec.cluster.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Last Backup', label: `${i18n.global.t('cnpg.lastBackup')}`, field: row => row.status.lastScheduleTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Last Backup', label: `${i18n.global.t('cnpg.lastBackup')}`, field: row => row.status?.lastScheduleTime, sortable: true, align: tableColumnAlign.left},
 ];
 export const BackupListExcludes = [
   { path: 'metadata/creationTimestamp', include: true },

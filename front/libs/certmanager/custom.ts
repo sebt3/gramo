@@ -32,12 +32,12 @@ export const descriptionIssuer = '';
 export const shortIssuer = 'Issuer';
 export const extraChallengeColumns:Array<QTableColumn> = [
   {name: 'Domain', label: i18n.global.t('certmanager.Domain'), field: row => row.spec.dnsName, sortable: true, align: tableColumnAlign.left},
-  {name: 'Reason', label: i18n.global.t('certmanager.Reason'), field: row => row.status.reason, sortable: true, align: tableColumnAlign.left},
+  {name: 'Reason', label: i18n.global.t('certmanager.Reason'), field: row => row.status?.reason, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: i18n.global.t('meta.age'), field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraOrderColumns:Array<QTableColumn> = [
   {name: 'Issuer', label: i18n.global.t('certmanager.Issuer'), field: row => row.spec.issuerRef.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Reason', label: i18n.global.t('certmanager.Reason'), field: row => row.status.reason, sortable: true, align: tableColumnAlign.left},
+  {name: 'Reason', label: i18n.global.t('certmanager.Reason'), field: row => row.status?.reason, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: i18n.global.t('meta.age'), field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCertificateColumns:Array<QTableColumn> = [

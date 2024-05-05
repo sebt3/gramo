@@ -131,19 +131,19 @@ export const descriptionSSP = '';
 export const shortSSP = 'SSP';
 export const extraKubeVirtColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.printableStatus, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status?.printableStatus, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineInstanceColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'NodeName', label: `${i18n.global.t('kubevirt.NodeName')}`, field: row => row.status.nodeName, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'NodeName', label: `${i18n.global.t('kubevirt.NodeName')}`, field: row => row.status?.nodeName, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineInstanceMigrationColumns:Array<QTableColumn> = [
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
   {name: 'VMI', label: `${i18n.global.t('kubevirt.VMI')}`, field: row => row.spec.vmiName, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineInstancePresetColumns:Array<QTableColumn> = [
@@ -151,19 +151,19 @@ export const extraVirtualMachineInstancePresetColumns:Array<QTableColumn> = [
 ];
 export const extraVirtualMachineInstanceReplicaSetColumns:Array<QTableColumn> = [
   {name: 'Desired', label: `${i18n.global.t('kubevirt.Desired')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Current', label: `${i18n.global.t('kubevirt.Current')}`, field: row => row.status.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('kubevirt.Ready')}`, field: row => row.status.readyReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Current', label: `${i18n.global.t('kubevirt.Current')}`, field: row => row.status?.replicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('kubevirt.Ready')}`, field: row => row.status?.readyReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineCloneColumns:Array<QTableColumn> = [
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceVirtualMachine', label: `${i18n.global.t('kubevirt.SourceVirtualMachine')}`, field: row => row.spec.source.name, sortable: true, align: tableColumnAlign.left},
   {name: 'TargetVirtualMachine', label: `${i18n.global.t('kubevirt.TargetVirtualMachine')}`, field: row => row.spec.target.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineExportColumns:Array<QTableColumn> = [
   {name: 'SourceKind', label: `${i18n.global.t('kubevirt.SourceKind')}`, field: row => row.spec.source.kind, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceName', label: `${i18n.global.t('kubevirt.SourceName')}`, field: row => row.spec.source.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineClusterInstancetypeColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -182,37 +182,37 @@ export const extraMigrationPolicyColumns:Array<QTableColumn> = [
 ];
 export const extraMTQColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachinePoolColumns:Array<QTableColumn> = [
   {name: 'Desired', label: `${i18n.global.t('kubevirt.Desired')}`, field: row => row.spec.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Current', label: `${i18n.global.t('kubevirt.Current')}`, field: row => row.status.replicas, sortable: true, align: tableColumnAlign.left},
-  {name: 'Ready', label: `${i18n.global.t('kubevirt.Ready')}`, field: row => row.status.readyReplicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Current', label: `${i18n.global.t('kubevirt.Current')}`, field: row => row.status?.replicas, sortable: true, align: tableColumnAlign.left},
+  {name: 'Ready', label: `${i18n.global.t('kubevirt.Ready')}`, field: row => row.status?.readyReplicas, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineRestoreColumns:Array<QTableColumn> = [
   {name: 'TargetKind', label: `${i18n.global.t('kubevirt.TargetKind')}`, field: row => row.spec.target.kind, sortable: true, align: tableColumnAlign.left},
   {name: 'TargetName', label: `${i18n.global.t('kubevirt.TargetName')}`, field: row => row.spec.target.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Complete', label: `${i18n.global.t('kubevirt.Complete')}`, field: row => row.status.complete, sortable: true, align: tableColumnAlign.left},
-  {name: 'RestoreTime', label: `${i18n.global.t('kubevirt.RestoreTime')}`, field: row => row.status.restoreTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status.error.message, sortable: true, align: tableColumnAlign.left},
+  {name: 'Complete', label: `${i18n.global.t('kubevirt.Complete')}`, field: row => row.status?.complete, sortable: true, align: tableColumnAlign.left},
+  {name: 'RestoreTime', label: `${i18n.global.t('kubevirt.RestoreTime')}`, field: row => row.status?.restoreTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status?.error.message, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineSnapshotColumns:Array<QTableColumn> = [
   {name: 'SourceKind', label: `${i18n.global.t('kubevirt.SourceKind')}`, field: row => row.spec.source.kind, sortable: true, align: tableColumnAlign.left},
   {name: 'SourceName', label: `${i18n.global.t('kubevirt.SourceName')}`, field: row => row.spec.source.name, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'ReadyToUse', label: `${i18n.global.t('kubevirt.ReadyToUse')}`, field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
-  {name: 'CreationTime', label: `${i18n.global.t('kubevirt.CreationTime')}`, field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status.error.message, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'ReadyToUse', label: `${i18n.global.t('kubevirt.ReadyToUse')}`, field: row => row.status?.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'CreationTime', label: `${i18n.global.t('kubevirt.CreationTime')}`, field: row => row.status?.creationTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status?.error.message, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraVirtualMachineSnapshotContentColumns:Array<QTableColumn> = [
-  {name: 'ReadyToUse', label: `${i18n.global.t('kubevirt.ReadyToUse')}`, field: row => row.status.readyToUse, sortable: true, align: tableColumnAlign.left},
-  {name: 'CreationTime', label: `${i18n.global.t('kubevirt.CreationTime')}`, field: row => row.status.creationTime, sortable: true, align: tableColumnAlign.left},
-  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status.error.message, sortable: true, align: tableColumnAlign.left},
+  {name: 'ReadyToUse', label: `${i18n.global.t('kubevirt.ReadyToUse')}`, field: row => row.status?.readyToUse, sortable: true, align: tableColumnAlign.left},
+  {name: 'CreationTime', label: `${i18n.global.t('kubevirt.CreationTime')}`, field: row => row.status?.creationTime, sortable: true, align: tableColumnAlign.left},
+  {name: 'Error', label: `${i18n.global.t('kubevirt.Error')}`, field: row => row.status?.error.message, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCDIColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraCDIConfigColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -224,14 +224,14 @@ export const extraDataSourceColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraDataVolumeColumns:Array<QTableColumn> = [
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Progress', label: `${i18n.global.t('kubevirt.Progress')}`, field: row => row.status.progress, sortable: true, align: tableColumnAlign.left},
-  {name: 'Restarts', label: `${i18n.global.t('kubevirt.Restarts')}`, field: row => row.status.restartCount, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Progress', label: `${i18n.global.t('kubevirt.Progress')}`, field: row => row.status?.progress, sortable: true, align: tableColumnAlign.left},
+  {name: 'Restarts', label: `${i18n.global.t('kubevirt.Restarts')}`, field: row => row.status?.restartCount, sortable: true, align: tableColumnAlign.left},
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraObjectTransferColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.metadata.creationTimestamp, sortable: true, align: tableColumnAlign.left},
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraStorageProfileColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -252,7 +252,7 @@ export const extraHostPathProvisionerColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraSSPColumns:Array<QTableColumn> = [
-  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Phase', label: `${i18n.global.t('kubevirt.Phase')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
 ];
 export const KubeVirtListExcludes = [
   { path: 'status/phase', include: true },

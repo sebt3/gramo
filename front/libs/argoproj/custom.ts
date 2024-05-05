@@ -65,9 +65,9 @@ export const extraAppProjectColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraApplicationColumns:Array<QTableColumn> = [
-  {name: 'SyncStatus', label: `${i18n.global.t('argoproj.SyncStatus')}`, field: row => row.status.sync.status, sortable: true, align: tableColumnAlign.left},
-  {name: 'HealthStatus', label: `${i18n.global.t('argoproj.HealthStatus')}`, field: row => row.status.health.status, sortable: true, align: tableColumnAlign.left},
-  {name: 'Revision', label: `${i18n.global.t('argoproj.Revision')}`, field: row => row.status.sync.revision, sortable: true, align: tableColumnAlign.left},
+  {name: 'SyncStatus', label: `${i18n.global.t('argoproj.SyncStatus')}`, field: row => row.status?.sync.status, sortable: true, align: tableColumnAlign.left},
+  {name: 'HealthStatus', label: `${i18n.global.t('argoproj.HealthStatus')}`, field: row => row.status?.health.status, sortable: true, align: tableColumnAlign.left},
+  {name: 'Revision', label: `${i18n.global.t('argoproj.Revision')}`, field: row => row.status?.sync.revision, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraApplicationSetColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
@@ -88,9 +88,9 @@ export const extraSensorColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraWorkflowColumns:Array<QTableColumn> = [
-  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status.phase, sortable: true, align: tableColumnAlign.left},
-  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.status.startedAt, sortable: true, align: tableColumnAlign.left},
-  {name: 'Message', label: `${i18n.global.t('argoproj.Message')}`, field: row => row.status.message, sortable: true, align: tableColumnAlign.left},
+  {name: 'Status', label: `${i18n.global.t('core.status')}`, field: row => row.status?.phase, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => row.status?.startedAt, sortable: true, align: tableColumnAlign.left},
+  {name: 'Message', label: `${i18n.global.t('argoproj.Message')}`, field: row => row.status?.message, sortable: true, align: tableColumnAlign.left},
 ];
 export const extraWorkflowArtifactGCTaskColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
