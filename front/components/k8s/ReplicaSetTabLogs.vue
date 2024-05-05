@@ -17,7 +17,7 @@ const logViewSplitterModel= ref(20)
     </template>
     <template v-slot:after>
       <q-tab-panels v-model="logViewTab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
-        <q-tab-panel  v-for="prop in props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer.filter(c=>!c.init||['Job','ReplicaSet','DaemonSet','StatefulSet'].includes(props.short))).flat()" v-bind:key="prop.name"  :name="prop.name"  class="bg-black text-white">
+        <q-tab-panel  v-for="prop in props.model.childk8sPod.filter(x=>x!=undefined).map(pod=>pod.childcoreContainer).flat()" v-bind:key="prop.name"  :name="prop.name"  class="bg-black text-white">
           <pre v-if="prop.getcoreLog != undefined && Array.isArray(prop.getcoreLog.lines)">
 {{ prop.getcoreLog.lines.join('\n') }}
           </pre>

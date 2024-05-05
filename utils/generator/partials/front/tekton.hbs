@@ -25,12 +25,6 @@
           }
         }
 {{/if}}
-{{#if (and (eq ../operation 'extraComponents') (eq short 'TaskRun'))}}"TabLogs",{{/if}}
-{{#if (and (eq ../operation 'componentLoader') (eq short 'TaskRun'))}}
-    case "TabLogs":{
-      return defineAsyncComponent(() => import( '@/components/k8s/ReplicaSetTabLogs.vue'))
-    }
-{{/if}}
 {{#if (and (eq ../operation 'componentHave') (eq short 'TaskRun'))}}
     (name != 'TabLogs' || Array.isArray(model.childk8sPod)) &&
 {{/if}}

@@ -3,7 +3,6 @@ import { computed } from 'vue';
 const props = defineProps<{
   model: object
 }>();
-console.log(props.model)
 const stepWidth = 100
 const stepHeight = 20
 const stepHMargin = 10

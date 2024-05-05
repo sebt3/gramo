@@ -64,21 +64,29 @@ const getProjectedY = (y, max) => (y+1)*(height.value/(max+1))
 const getPath = link => `
 M${link.startX} ${link.startY}
 L${link.midX-10} ${link.startY}
-Q${link.midX} ${link.startY} ${link.midX} ${link.startY+10*(link.midY<link.startY?-1:link.midY==link.startY?0:1)}
-L${link.midX} ${link.destY+10*(link.midY<link.startY?1:link.midY==link.startY?0:-1)}
+Q${link.midX} ${link.startY} ${link.midX} ${(link.midY<link.startY?Math.max:Math.min)(link.startY+(link.midY<link.startY?-10:link.midY==link.startY?0:10),link.midY)}
+L${link.midX} ${(link.midY<link.destY?Math.max:Math.min)(link.destY+(link.midY<link.destY?-10:link.midY==link.destY?0:10),link.midY)}
 Q${link.midX} ${link.destY} ${link.destX-10} ${link.destY}
 L${link.destX-5} ${link.destY}
 L${link.destX-5} ${link.destY-3}
 L${link.destX-1} ${link.destY}
 L${link.destX-5} ${link.destY+3}
 L${link.destX-5} ${link.destY}`
+const getCondition = name => {
+  if (props.model.status == undefined || props.model.status.pipelineSpec == undefined || !Array.isArray(props.model.status.pipelineSpec.tasks)) return null;
+  const myTasks = (props.model.status.pipelineSpec.tasks.concat(Array.isArray(props.model.status.pipelineSpec.finally)?props.model.status.pipelineSpec.finally:[])).filter(t=>t.name==name)
+  if (myTasks.length>0 && Array.isArray(myTasks[0].when))
+    return myTasks[0].when
+  return null
+}
+const haveCondition = task => getCondition(task)!=null
 const links = computed(() => {
   const stgs = stages.value;
   const hMargin = stepHMargin.value;
   return virtLinks.value.map(link=>{return{...link,
     c1: 5,
     c2: 5,
-    destX: getProjectedX(link.dix),
+    destX: getProjectedX(link.dix)-(haveCondition(link.dst)?4:0),
     startX: getProjectedX(link.six)+stepWidth,
     destY: getProjectedY(link.diy,stgs[link.col+1].length)+stepHeight/2,
     startY: getProjectedY(link.siy,stgs[link.col].length)+stepHeight/2,
@@ -89,41 +97,65 @@ const links = computed(() => {
 const dialogs = ref(Object.fromEntries(Array.isArray(props.model.childtektonTaskRun)?props.model.childtektonTaskRun.map(tr=>[tr.metadata.name,false]):[]))
 const GenericView = defineAsyncComponent(() => import( '@/components/generic/GenericView.vue'));
 const showDialog = task => {
-  console.log(task,getTask(task.name))
   if(getTask(task.name)!=null){dialogs.value[getTask(task.name).metadata.name]=true}
 }
-console.log(props.model, stages.value,links.value)
+const getConditionClass = task => {
+  const tsk = getTask(task.name)
+  if (taskIsSkipped(task.name)) return "isFailed"
+  if (tsk==null||tsk.status==undefined||!Array.isArray(tsk.status.conditions)||tsk.status.conditions.length<1) return "isPending"
+  return "isSuccess"
+}
 </script>
 <template><div>
   <q-dialog v-for="task in Array.isArray(model.childtektonTaskRun)?model.childtektonTaskRun:[]" :key="task.metadata.name" v-model="dialogs[task.metadata.name]">
     <GenericView :model="task" group="tekton" short="TaskRun" :showLabels="false" style="width: 700px; max-width: 80vw;" />
   </q-dialog>
-  <svg ref="svgRoot" :viewBox="[0,0,width,height]" :width="width" :height="height" stroke-linejoin="round" stroke-linecap="round" style="width: 100%; height: auto; font: 10px sans-serif;">
-    <g class="links" v-for="link in links" :key="`${link.src}-${link.dst}`">
-      <path :d="link.d" stroke="black" stroke-width="1" fill="none" />
-    </g>
-    <g class="rects" v-for="(steps, x) in stages" :key="`rects-${x}`">
-        <rect v-for="(task, y) in steps" :key="`rect-${task.name}`"
-          :width="stepWidth" :height="stepHeight" rx="5" ry="5"
-          :x="getProjectedX(x)" :y="getProjectedY(y, steps.length)"
-          v-on:click="showDialog(task)"
-          :class="getClass(task.name)" />
-    </g>
-    <g class="labels" text-anchor="middle"  v-for="(steps, x) in stages" :key="`labels-${x}`">
-        <text v-for="(task, y) in steps" :key="`text-${task.name}`"
-          :x="getProjectedX(x)+stepWidth/2" :y="getProjectedY(y, steps.length)+stepHeight-8"
-          :class="getClass(task.name)"
-          v-on:click="showDialog(task)"
-        >{{ task['name'] }}</text>
-    </g>
-  </svg>
+  <div class="col">
+    <div class="row" v-if="props.model.spec != undefined && Array.isArray(props.model.spec.params)">
+      <div v-for="param in props.model.spec.params" :key="param.name"  class="col-md-3">
+        <q-field :label="param.name" stack-label borderless>
+          <template v-slot:prepend><q-icon name="input" /></template>
+          <template v-slot:control>
+            <div class="self-center full-width no-outline">{{ param.value }}</div>
+          </template>
+        </q-field>
+      </div>
+    </div>
+    <div>
+      <svg ref="svgRoot" :viewBox="[0,0,width,height]" :width="width" :height="height" stroke-linejoin="round" stroke-linecap="round" style="width: 100%; height: auto; font: 10px sans-serif;">
+        <g class="links" v-for="link in links" :key="`${link.src}-${link.dst}`">
+          <path :d="link.d" stroke="black" stroke-width="1" fill="none" />
+        </g>
+        <g class="tasks" v-for="(steps, x) in stages" :key="`rects-${x}`">
+            <rect v-for="(task, y) in steps" :key="`rect-${task.name}`"
+              :width="stepWidth" :height="stepHeight" rx="5" ry="5"
+              :x="getProjectedX(x)" :y="getProjectedY(y, steps.length)"
+              v-on:click="showDialog(task)"
+              :class="getClass(task.name)" />
+        </g>
+        <g class="labels" text-anchor="middle" v-for="(steps, x) in stages" :key="`labels-${x}`">
+            <text v-for="(task, y) in steps" :key="`text-${task.name}`"
+              :x="getProjectedX(x)+stepWidth/2" :y="getProjectedY(y, steps.length)+stepHeight-8"
+              :class="getClass(task.name)"
+              v-on:click="showDialog(task)"
+            >{{ task['name'] }}</text>
+        </g>
+        <g class="conditions" v-for="(steps, x) in stages" :key="`conds-${x}`">
+            <g v-for="(task, y) in steps" :key="`cond-${task.name}`" :transform="`translate(${getProjectedX(x)-3} ${getProjectedY(y, steps.length)+stepHeight/2-3})`">
+              <rect v-if="haveCondition(task.name)" :transform="`rotate(45 3 3)`" width="6" height="6" :class="getConditionClass(task)" />
+            </g>
+        </g>
+      </svg>
+    </div>
+  </div>
 </div></template>
 <style scoped lang="sass">
 @use "quasar/src/css/variables" as q
-rect.isFailed
-    cursor: pointer
-rect.isSuccess
-    cursor: pointer
+.tasks
+  rect.isFailed
+      cursor: pointer
+  rect.isSuccess
+      cursor: pointer
 text.isFailed
     fill: q.$red
     cursor: pointer
