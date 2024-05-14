@@ -29,7 +29,7 @@
         if (Array.isArray(res) && res.length>0) return res[0];
 {{/if}}
       } catch (err) {
-        console.error(err)
+        log.error(err)
       }
       return null
     },

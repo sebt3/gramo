@@ -13,6 +13,8 @@ import fs from 'fs';
 import path from 'path';
 import { resolvers } from './resolvers/index.js';
 import { gramoConfig } from './config.js'
+import { logger } from './logger.js'
+const log = logger.child({componant:"main"});
 
 export const __dirname = path.resolve(path.dirname(''));
 const importGraphQL = (file) => {return fs.readFileSync(path.join(__dirname, 'back', 'schema', file),"utf-8");}
@@ -84,6 +86,11 @@ else
 export const server = new ApolloServer<MyContext>({
   typeDefs,
   resolvers,
+  formatError: (formattedError, error) => {
+    log.info('ApolloServer::formatError::formattedError', formattedError);
+    log.error('ApolloServer::formatError::error', error);
+    return formattedError
+  },
   introspection: gramoConfig.enableGraphQLClient||process.env.NODE_ENV !== 'production',
   plugins: apolloPlugins,
 });

@@ -5,6 +5,8 @@ import { lists as listNamespace } from '../k8s/Namespace.js';
 import { lists as listEvent } from '../core/Event.js';
 import { gramoConfig } from '../../config.js'
 import { knowledge } from '../knowledge.js'
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "{{short}}"});
 {{#if (and (eq group 'k8s') (eq short 'Namespace'))}}
 import { queries as permissionsQueries } from './permissions.js';
 {{/if}}

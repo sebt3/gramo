@@ -209,31 +209,31 @@
         }
 {{/if}}
 {{#if (and (eq group 'cilium') (or (eq short 'CiliumL2AnnouncementPolicy') (eq short 'CiliumLoadBalancerIPPool')))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'rabbitmq') (eq short 'RabbitmqCluster'))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'mariadb') (or (or (or (eq short 'Backup') (eq short 'Connection')) (or (eq short 'Database') (eq short 'MariaDB')))) (or (or (eq short 'Grant') (eq short 'Restore')) (or (eq short 'SqlJob') (eq short 'User'))))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'monitoring') (or (eq short 'ThanosRuler') (eq short 'PrometheusAgent')))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'k8s') (eq short 'ReplicationController'))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'k8s') (eq short 'CertificateSigningRequest'))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'k8s') (eq short 'NetworkPolicy'))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'k8s') (eq short 'PodDisruptionBudget'))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'k8up') (or (eq short 'Archive') (eq short 'Restore')))}}
-        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) console.log('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
+        /*if (parent['status'] != undefined && Array.isArray(parent['status']['conditions'])) log.info('{{type}}{{targetGroup}}{{targetShort}}','{{group}}','{{short}}',parent['status']['conditions'])*/
 {{/if}}
 {{#if (and (eq group 'tekton') (or (eq short 'TaskRun') (eq short 'PipelineRun')))}}
         if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Succeeded'&&c['status']!='True').length>0) {

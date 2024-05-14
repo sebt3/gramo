@@ -16,7 +16,7 @@
         return lst.filter(e=>Array.isArray(e.subsets)&&e.subsets.filter(s=>Array.isArray(s.addresses) && s.addresses.filter(a=> a.targetRef !=undefined && a.targetRef.kind == 'Pod' && a.targetRef.name == parent['metadata']['name']).length>0).length>0)
 {{/if}}
       } catch (err) {
-        console.error(err)
+        log.error(err)
       }
       return null
     },

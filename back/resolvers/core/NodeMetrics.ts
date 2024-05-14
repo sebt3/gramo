@@ -1,4 +1,6 @@
 import {cache, rawQuery, applyFilter, applyFieldSelection} from '../k8slibs.js';
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "Event"});
 const metricMaxLength = 500;
 export const mutations = {
 };
@@ -35,11 +37,11 @@ export const lists = {
       } catch (err) {
         if (typeof err === 'object' && (err as object)['body'] !=undefined) {
           if ((err as object)['body']['reason']!='Forbidden') {
-            console.error('error', (err as object)['body']);
+            log.error('error', (err as object)['body']);
           } else {
             cache.set('coreNodeMetricsInternal', [], 2);
           }
-        } else {console.error('error', err)}
+        } else {log.error('error', err)}
         return []
       }
     }

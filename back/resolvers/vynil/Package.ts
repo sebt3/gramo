@@ -3,6 +3,8 @@ import rfc6902  from 'rfc6902';
 import {kc, cache, applyFilter, applyFieldSelection, getByPath, getMeta } from '../k8slibs.js';
 import { gramoConfig } from '../../config.js'
 import { lists as distribQueries } from './Distrib.js';
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "vynilPackage"});
 
 function derefOptions(ret: object, dists) {
     Object.keys(ret).forEach((name) => {
@@ -43,9 +45,9 @@ export const lists = {
             } catch (err) {
                 if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
                     if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-                      console.error('error', (err as object)['body']);
+                      log.error('error', (err as object)['body']);
                     }
-                } else {console.error('error', err)}
+                } else {log.error('error', err)}
                 return []
             }
         }

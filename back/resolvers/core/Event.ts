@@ -4,6 +4,8 @@ import {kc, cache, applyFilter, applyFieldSelection} from '../k8slibs.js';
 import { knowledge } from '../knowledge.js'
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const short2plural = (short:string) => short.toLowerCase()+'s'
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "Event"});
 export const mutations = {
 };
 export const lists = {
@@ -28,7 +30,7 @@ export const lists = {
       } catch (err) {
         if (typeof err === 'object' && (err as object)['body'] !=undefined) {
           if ((err as object)['body']['reason']!='Forbidden') {
-            console.error('error', (err as object)['body']);
+            log.error('error', (err as object)['body']);
           } else {
             try {
               const nss = await listNamespace.k8sNamespace(parent, args)
@@ -44,15 +46,15 @@ export const lists = {
             } catch (err) {
               if (typeof err === 'object' && (err as object)['body'] !=undefined) {
                 if ((err as object)['body']['reason']!='Forbidden') {
-                  console.error('error', (err as object)['body']);
+                  log.error('error', (err as object)['body']);
                 } else {
                   cache.set('coreEvent', [], 2);
                 }
-              } else {console.error('error', err)}
+              } else {log.error('error', err)}
               return []
             }
           }
-        } else {console.error('error', err)}
+        } else {log.error('error', err)}
         return []
       }
     }

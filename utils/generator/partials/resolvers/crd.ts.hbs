@@ -58,11 +58,11 @@
               } catch (err) {
                 if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
                   if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-                    console.error('error', (err as object)['body']);
+                    log.error('error', (err as object)['body']);
                   } else {
                     cache.set('{{group}}{{short}}', [], 2);
                   }
-                } else {console.error('error', err)}
+                } else {log.error('error', err)}
               }
               return null
             }))).flat().filter((v)=>v!=null)
@@ -76,11 +76,11 @@
       } catch (err) {
         if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
           if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-            console.error('error', (err as object)['body']);
+            log.error('error', (err as object)['body']);
           } else {
             cache.set('{{group}}{{short}}', [], 2);
           }
-        } else {console.error('error', err)}
+        } else {log.error('error', err)}
         return []
       }
       return null

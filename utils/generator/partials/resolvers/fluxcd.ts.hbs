@@ -46,7 +46,7 @@
         if (Array.isArray(res) && res.length>0) return res;
 {{/if}}
       } catch (err) {
-        console.error(err)
+        log.error(err)
       }
       return null
     },

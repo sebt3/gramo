@@ -2,6 +2,8 @@ import k8s from '@kubernetes/client-node';
 import rfc6902  from 'rfc6902';
 import {kc, getMeta, getMetaNS } from '../k8slibs.js';
 const k8sApi = kc.makeApiClient(k8s.CustomObjectsApi);
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "CrdObject"});
 export const mutations = {
     clusteredCrdObjectCreate: async (_parent, args: object) => {
         const payload = {
@@ -16,9 +18,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },
@@ -29,9 +31,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },
@@ -52,9 +54,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },
@@ -71,9 +73,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },
@@ -84,9 +86,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },
@@ -107,9 +109,9 @@ export const mutations = {
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
-              console.error('error', (err as object)['body']);
+              log.error('error', (err as object)['body']);
             }
-          } else {console.error('error', err)}
+          } else {log.error('error', err)}
         }
         return null
     },

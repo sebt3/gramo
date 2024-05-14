@@ -1,5 +1,7 @@
 import {PubSubEngine} from 'graphql-subscriptions';
 import {PubSubAsyncIterator} from './pubsubAsyncIterator.js';
+import { logger } from '../logger.js'
+const log = logger.child({componant:"logpubsub"});
 type OnMessage<T> = (message: T) => void;
 
 export interface LogPubSubOptions {
@@ -16,12 +18,12 @@ export class LogPubSub implements PubSubEngine {
         this.subscriptionMap = {};
         this.subsRefsMap = new Map<string, Set<number>>();
         this.currentSubscriptionId = 0;
-        console.log('LogPubSub.constructor', options)
+        log.info('LogPubSub.constructor', options)
     }
 
     public async publish<T>(trigger: string, payload: T): Promise<void> {
         //await this.redisPublisher.publish(trigger, this.serializer ? this.serializer(payload) : JSON.stringify(payload));
-        console.log('TODO', 'publish', trigger, payload)
+        log.info('TODO', 'publish', trigger, payload)
         return Promise.resolve();
     }
     public asyncIterator<T>(triggers: string | string[], options?: object): AsyncIterator<T> {
@@ -36,13 +38,13 @@ export class LogPubSub implements PubSubEngine {
             this.subsRefsMap.set(triggerName, new Set());
         }
         const refs = this.subsRefsMap.get(triggerName);
-        console.log('LogPubSub.subscribe', triggerName, options, id, this.subscriptionMap, this.subsRefsMap)
+        log.info('LogPubSub.subscribe', triggerName, options, id, this.subscriptionMap, this.subsRefsMap)
         if (refs != undefined && refs.size > 0) {
             refs.add(id);
             return Promise.resolve(id);
         } else {
             return new Promise<number>((resolve, reject) => {
-                console.log('TODO', 'Create the source for', triggerName, reject)
+                log.info('TODO', 'Create the source for', triggerName, reject)
                 resolve(id);
             })
         }
@@ -53,7 +55,7 @@ export class LogPubSub implements PubSubEngine {
         const refs = this.subsRefsMap.get(triggerName);
         if (!refs) throw new Error(`There is no subscription of id "${subId}"`);
         if (refs.size === 1) {
-            console.log('TODO', 'Deleting stream source for', triggerName)
+            log.info('TODO', 'Deleting stream source for', triggerName)
             this.subsRefsMap.delete(triggerName);
         } else {
             refs.delete(subId);

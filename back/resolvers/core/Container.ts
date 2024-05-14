@@ -5,6 +5,8 @@ import {kc, cache /*, applyFilter, applyFieldSelection, getByPath, getMeta*/ } f
 //import { LogPubSub } from '../../pubsub/logpubsub.js'
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const log = new k8s.Log(kc);
+import { logger } from '../../logger.js'
+const output = logger.child({componant: "resolver", short: "Container"});
 
 //const short2plural = (short:string) => short.toLowerCase()+'s'
 export const mutations = {
@@ -39,11 +41,11 @@ export const resolvers = {
                 } catch (err) {
                   if (typeof err === 'object' && (err as object)['body'] !=undefined) {
                     if ((err as object)['body']['reason']!='Forbidden') {
-                      console.error('error', (err as object)['body']);
+                      output.error('error', (err as object)['body']);
                     } else {
                         cache.set(`getcoreLog-${cont['namespace']}-${cont['pod_name']}-${cont['name']}`, undefined, 2);
                     }
-                  } else {console.error('error', err)}
+                  } else {output.error('error', err)}
                   return null
                 }
             }

@@ -1,6 +1,8 @@
 import {cache, applyFilter, applyFieldSelection } from '../k8slibs.js';
 import { gramoConfig } from '../../config.js'
 import { lists as packageQueries } from './Package.js';
+import { logger } from '../../logger.js'
+const log = logger.child({componant: "resolver", short: "vynilCategory"});
 
 export const mutations = {
 };
@@ -13,7 +15,7 @@ export const lists = {
                 lst = [...new Set(packages.map((pkg) => pkg['category']))].sort().map((n) => {return {name: n}})
                 cache.set('vynilCategory', lst, 2);
             } catch (err) {
-                console.error((err as object)['body']);
+                log.error((err as object)['body']);
                 return []
             }
         }

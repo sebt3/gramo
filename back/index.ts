@@ -1,6 +1,8 @@
 import { server, setup, app, httpServer, __dirname } from './main.js'
 import express from 'express';
 import path from 'path';
+import { logger } from './logger.js'
+const log = logger.child({componant:"index"});
 
 await server.start();
 setup();
@@ -17,4 +19,4 @@ app.get('*', (req, res) => {
 });
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 3000 }, resolve));
-console.log(`☆ Gramo ☆ ready at http://localhost:3000/`);
+log.info(`☆ Gramo ☆ ready at http://localhost:3000/`);
