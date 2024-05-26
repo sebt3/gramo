@@ -4,7 +4,7 @@
   },
   "files": ["front/typings.d.ts"],
   "exclude": ["back/**/gen*.ts"],
-  "include": ["back/**/*.ts", "front/typings.d.ts", "front/**/*.d.ts", "front/**/*.graphql"],
+  "include": ["back/**/*.ts", "utils/**/*.ts", "front/typings.d.ts", "front/**/*.d.ts", "front/**/*.graphql"],
   "rootDirs": ["front", "back"],
   "compilerOptions": {
     "types": ["vite/client"],

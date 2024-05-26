@@ -102,7 +102,7 @@ export const iconCertificateSigningRequest = securityIcon;
 export const colorCertificateSigningRequest = securityColor;
 export const descriptionCertificateSigningRequest = '';
 export const shortCertificateSigningRequest = 'CertificateSigningRequest';
-export const iconIngress = networkIcon;
+export const iconIngress = 'public';
 export const colorIngress = networkColor;
 export const descriptionIngress = '';
 export const shortIngress = 'Ingress';
@@ -190,6 +190,26 @@ export const iconVolumeSnapshotContent = systemIcon;
 export const colorVolumeSnapshotContent = systemColor;
 export const descriptionVolumeSnapshotContent = '';
 export const shortVolumeSnapshotContent = 'VolumeSnapshotContent';
+export const iconGRPCRoute = systemIcon;
+export const colorGRPCRoute = networkColor;
+export const descriptionGRPCRoute = '';
+export const shortGRPCRoute = 'GRPCRoute';
+export const iconGateway = systemIcon;
+export const colorGateway = networkColor;
+export const descriptionGateway = '';
+export const shortGateway = 'Gateway';
+export const iconGatewayClass = systemIcon;
+export const colorGatewayClass = networkColor;
+export const descriptionGatewayClass = '';
+export const shortGatewayClass = 'GatewayClass';
+export const iconHTTPRoute = systemIcon;
+export const colorHTTPRoute = networkColor;
+export const descriptionHTTPRoute = '';
+export const shortHTTPRoute = 'HTTPRoute';
+export const iconReferenceGrant = systemIcon;
+export const colorReferenceGrant = networkColor;
+export const descriptionReferenceGrant = '';
+export const shortReferenceGrant = 'ReferenceGrant';
 export const extraConfigMapColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
@@ -355,6 +375,26 @@ export const extraVolumeSnapshotContentColumns:Array<QTableColumn> = [
   {name: 'VolumeSnapshotClass', label: `${i18n.global.t('k8s.VolumeSnapshotClass')}`, field: row => row.spec.volumeSnapshotClassName, sortable: true, align: tableColumnAlign.left},
   {name: 'VolumeSnapshot', label: `${i18n.global.t('k8s.VolumeSnapshot')}`, field: row => row.spec.volumeSnapshotRef.name, sortable: true, align: tableColumnAlign.left},
   {name: 'VolumeSnapshotNamespace', label: `${i18n.global.t('k8s.VolumeSnapshotNamespace')}`, field: row => row.spec.volumeSnapshotRef.namespace, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+];
+export const extraGRPCRouteColumns:Array<QTableColumn> = [
+  {name: 'Hostnames', label: `${i18n.global.t('k8s.Hostnames')}`, field: row => row.spec.hostnames, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+];
+export const extraGatewayColumns:Array<QTableColumn> = [
+  {name: 'Class', label: `${i18n.global.t('k8s.Class')}`, field: row => row.spec.gatewayClassName, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+];
+export const extraGatewayClassColumns:Array<QTableColumn> = [
+  {name: 'Controller', label: `${i18n.global.t('k8s.Controller')}`, field: row => row.spec.controllerName, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+  {name: 'Description', label: `${i18n.global.t('k8s.Description')}`, field: row => row.spec.description, sortable: true, align: tableColumnAlign.left},
+];
+export const extraHTTPRouteColumns:Array<QTableColumn> = [
+  {name: 'Hostnames', label: `${i18n.global.t('k8s.Hostnames')}`, field: row => row.spec.hostnames, sortable: true, align: tableColumnAlign.left},
+  {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+];
+export const extraReferenceGrantColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
 ];
 export const ConfigMapListExcludes = [
@@ -648,4 +688,44 @@ export const VolumeSnapshotContentListExcludes = [
 export const VolumeSnapshotContentReadExcludes = [
 ];
 export const VolumeSnapshotContentSimpleExcludes = [
+];
+export const GRPCRouteListExcludes = [
+  { path: 'spec/hostnames', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const GRPCRouteReadExcludes = [
+];
+export const GRPCRouteSimpleExcludes = [
+];
+export const GatewayListExcludes = [
+  { path: 'spec/gatewayClassName', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const GatewayReadExcludes = [
+];
+export const GatewaySimpleExcludes = [
+];
+export const GatewayClassListExcludes = [
+  { path: 'spec/controllerName', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+  { path: 'spec/description', include: true },
+];
+export const GatewayClassReadExcludes = [
+];
+export const GatewayClassSimpleExcludes = [
+];
+export const HTTPRouteListExcludes = [
+  { path: 'spec/hostnames', include: true },
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const HTTPRouteReadExcludes = [
+];
+export const HTTPRouteSimpleExcludes = [
+];
+export const ReferenceGrantListExcludes = [
+  { path: 'metadata/creationTimestamp', include: true },
+];
+export const ReferenceGrantReadExcludes = [
+];
+export const ReferenceGrantSimpleExcludes = [
 ];

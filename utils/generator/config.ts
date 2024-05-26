@@ -355,6 +355,11 @@ export const categoryMappingShort = {
     ObjectTransfer: 'storage',
     DataSource: 'storage',
     DataVolume: 'storage',
+    GRPCRoute: 'network',
+    Gateway: 'network',
+    GatewayClass: 'network',
+    HTTPRoute: 'network',
+    ReferenceGrant: 'network'
 }
 export const allCategories = Object.entries(categoryMappingShort).map(([_,v])=>v)
         .concat(Object.entries(categoryMappingGroup).map(([_,v])=>v))

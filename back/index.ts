@@ -3,6 +3,8 @@ import express from 'express';
 import path from 'path';
 import { logger } from './logger.js'
 const log = logger.child({componant:"index"});
+const oneHour = 3_600_000 // 3600000msec => 1hour
+const oneYear = oneHour * 24 * 365
 
 await server.start();
 setup();
@@ -11,7 +13,7 @@ app.get('/i18n/:file', (req, res) => {
     'Content-Type': 'application/json'
   }});
 });
-app.use('/hrm', express.static('public'));
+app.use('/hrm', express.static('public', { maxAge: oneYear }));
 app.get('*', (req, res) => {
   res.sendFile(
       path.resolve(__dirname, 'public', 'index.html')

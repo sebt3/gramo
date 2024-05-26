@@ -218,7 +218,11 @@
       "VolumeSnapshot": "VolumeSnapshot",
       "VolumeSnapshotNamespace": "VolumeSnapshotNamespace",
       "SourceSnapshotContent": "SourceSnapshotContent",
-      "DateTaken": "DateTaken"
+      "DateTaken": "DateTaken",
+      "Class": "Class",
+      "Hostnames": "Hostnames",
+      "Controller": "Controller",
+      "Description": "Description"
     },
     "k8up": {
       "DateTaken": "Date taken",
@@ -264,7 +268,11 @@
       "Cluster": "Cluster",
       "Routers": "Routers",
       "Instances": "Instances",
-      "Online": "Online"
+      "Online": "Online",
+      "Replica": "Replica",
+      "ManagementNodes": "Management Nodes",
+      "DataNodes": "Data Nodes",
+      "MySQLServers": "MySQL Servers"
     },
     "redis": {
       "ClusterSize": "ClusterSize",

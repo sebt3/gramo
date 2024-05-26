@@ -1,6 +1,6 @@
 {
   "name": "gramo",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "prebuild": "NODE_ENV=production vite build --emptyOutDir",
     "build": "tsc -b",
     "ps": "for i in $(ls -1 /proc);do if [ $(($i+1)) -gt 1 ];then echo -n \"$i\\t\\t\";cat /proc/$i/cmdline;echo;fi;done",
-    "postbuild": "mkdir -p dist/back; cp -Rapvf back/schema dist/back/;cp -Rapvf front/i18n/ dist/public/",
+    "postbuild": "rm -rf dist/back/schema dist/pubsub dist/resolvers; mv dist/back/* dist/; cp -Rapvf back/schema dist/back/;cp -Rapvf front/i18n/ dist/public/",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch"
   },

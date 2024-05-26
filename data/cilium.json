@@ -4122,84 +4122,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumclusterwidenetworkpolicies.cilium.io",
-          "uid": "3d029b4f-c221-434b-8909-541b88606b8d",
-          "resourceVersion": "25877238546",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:04Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:06Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumclusterwidenetworkpolicies.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -8525,27 +8448,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:05Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:05Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumclusterwidenetworkpolicies",
             "singular": "ciliumclusterwidenetworkpolicy",
@@ -9117,84 +9023,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumendpoints.cilium.io",
-          "uid": "d5f73d60-13a4-42c1-a5c5-d457a32c68ce",
-          "resourceVersion": "25877237966",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:04Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumendpoints.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -9791,27 +9620,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumendpoints",
             "singular": "ciliumendpoint",
@@ -9956,84 +9768,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumexternalworkloads.cilium.io",
-          "uid": "38cadee6-0b6a-449b-81be-b21f6f73259b",
-          "resourceVersion": "25877237570",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:02Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:02Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:02Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumexternalworkloads.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -10122,27 +9857,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:02Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:02Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumexternalworkloads",
             "singular": "ciliumexternalworkload",
@@ -10229,84 +9947,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumidentities.cilium.io",
-          "uid": "fd5d1b33-6735-452e-88c0-01c61a14935c",
-          "resourceVersion": "25877237601",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:02Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:02Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:02Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumidentities.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -10374,27 +10015,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:02Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:02Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumidentities",
             "singular": "ciliumidentity",
@@ -10693,84 +10317,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumlocalredirectpolicies.cilium.io",
-          "uid": "d93c516d-3719-4157-a543-f9a82f015169",
-          "resourceVersion": "25877238010",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:04Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumlocalredirectpolicies.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -11059,27 +10606,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumlocalredirectpolicies",
             "singular": "ciliumlocalredirectpolicy",
@@ -15245,84 +14775,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumnetworkpolicies.cilium.io",
-          "uid": "dd9a3306-cf2e-4ee0-9bc0-e38569bda3cf",
-          "resourceVersion": "25877238829",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:05Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:05Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:07Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumnetworkpolicies.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -19656,27 +19109,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:06Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:07Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumnetworkpolicies",
             "singular": "ciliumnetworkpolicy",
@@ -20453,84 +19889,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumnodes.cilium.io",
-          "uid": "e63e4483-99aa-4126-b039-1dcb7939570a",
-          "resourceVersion": "25877238085",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:04Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumnodes.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -21296,27 +20655,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumnodes",
             "singular": "ciliumnode",
@@ -21422,84 +20764,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumcidrgroups.cilium.io",
-          "uid": "237adbd4-29f3-4e58-bb3d-27553dbdf045",
-          "resourceVersion": "25877237674",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:03Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumcidrgroups.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -21560,27 +20825,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumcidrgroups",
             "singular": "ciliumcidrgroup",
@@ -21833,84 +21081,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliuml2announcementpolicies.cilium.io",
-          "uid": "045b0f4b-4aa5-4b83-8498-e19a8ca2d17b",
-          "resourceVersion": "25877237891",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:03Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliuml2announcementpolicies.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -22151,27 +21322,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliuml2announcementpolicies",
             "singular": "ciliuml2announcementpolicy",
@@ -22392,84 +21546,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumloadbalancerippools.cilium.io",
-          "uid": "4dec27d7-9d0d-4cc6-8c15-21013ad8c13f",
-          "resourceVersion": "25877237733",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:03Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumloadbalancerippools.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -22688,27 +21765,10 @@
               ]
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumloadbalancerippools",
             "singular": "ciliumloadbalancerippool",
@@ -22859,82 +21919,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumnodeconfigs.cilium.io",
-          "uid": "95118eb5-6732-4646-b7dc-7148916cddba",
-          "resourceVersion": "25877237845",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:03Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:03Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumnodeconfigs.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -23033,27 +22018,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:03Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumnodeconfigs",
             "singular": "ciliumnodeconfig",
@@ -23172,84 +22140,7 @@
       },
       "crd": {
         "metadata": {
-          "name": "ciliumpodippools.cilium.io",
-          "uid": "b997fc8f-e8ad-480e-8b86-f4404c882320",
-          "resourceVersion": "25877237972",
-          "generation": 1,
-          "creationTimestamp": "2023-11-21T10:47:04Z",
-          "labels": {
-            "io.cilium.k8s.crd.schema.version": "1.26.11"
-          },
-          "managedFields": [
-            {
-              "manager": "cilium-operator-generic",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:metadata": {
-                  "f:labels": {
-                    ".": {},
-                    "f:io.cilium.k8s.crd.schema.version": {}
-                  }
-                },
-                "f:spec": {
-                  "f:conversion": {
-                    ".": {},
-                    "f:strategy": {}
-                  },
-                  "f:group": {},
-                  "f:names": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:scope": {},
-                  "f:versions": {}
-                }
-              }
-            },
-            {
-              "manager": "kube-apiserver",
-              "operation": "Update",
-              "apiVersion": "apiextensions.k8s.io/v1",
-              "time": "2023-11-21T10:47:04Z",
-              "fieldsType": "FieldsV1",
-              "fieldsV1": {
-                "f:status": {
-                  "f:acceptedNames": {
-                    "f:kind": {},
-                    "f:listKind": {},
-                    "f:plural": {},
-                    "f:shortNames": {},
-                    "f:singular": {}
-                  },
-                  "f:conditions": {
-                    "k:{\"type\":\"Established\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    },
-                    "k:{\"type\":\"NamesAccepted\"}": {
-                      ".": {},
-                      "f:lastTransitionTime": {},
-                      "f:message": {},
-                      "f:reason": {},
-                      "f:status": {},
-                      "f:type": {}
-                    }
-                  }
-                }
-              },
-              "subresource": "status"
-            }
-          ]
+          "name": "ciliumpodippools.cilium.io"
         },
         "spec": {
           "group": "cilium.io",
@@ -23349,27 +22240,10 @@
               }
             }
           ],
-          "conversion": {
-            "strategy": "None"
-          }
+          "conversion": {}
         },
         "status": {
-          "conditions": [
-            {
-              "type": "NamesAccepted",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "NoConflicts",
-              "message": "no conflicts found"
-            },
-            {
-              "type": "Established",
-              "status": "True",
-              "lastTransitionTime": "2023-11-21T10:47:04Z",
-              "reason": "InitialNamesAccepted",
-              "message": "the initial names have been accepted"
-            }
-          ],
+          "conditions": [],
           "acceptedNames": {
             "plural": "ciliumpodippools",
             "singular": "ciliumpodippool",
