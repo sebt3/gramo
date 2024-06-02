@@ -1,9 +1,10 @@
 <script setup lang="ts">
 defineEmits(['refresh','on-delete']);
-const props = withDefaults(defineProps<{model: object[], group:string, short:string, parent?:object, useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, origin?:string}>(),{
+const props = withDefaults(defineProps<{model: object[], group:string, short:string, parent?:object, useAction?:boolean, useRefresh?: boolean, showNamespace?:boolean, showAdvices?:boolean, origin?:string}>(),{
   useAction: false,
   useRefresh: true,
   showNamespace: false,
+  showAdvices: false
 });
 const { loader } = await import("../../libs/core/importer")
 const { colorItem, iconItem, elude, defineAsyncComponent, ref, useItem, itemColumns, itemAllColumns } = await loader(props.group,props.short)
@@ -28,12 +29,17 @@ const TableHeader = defineAsyncComponent(() => import( '@/components/core/TableH
         </template>
         <template v-slot:body-cell-Problems="props">
           <q-td :props="props">
-            <q-chip v-if="props.row.getcoreProblem==null" class="glossy" color="positive" text-color="white" icon="done" />
-            <div v-else class="column">
+            <div v-if="props.row.getcoreProblem!=null" class="column">
               <div class="col" v-for="problem in props.row.getcoreProblem" :key="problem.description">
                 <q-chip v-bind:key="problem" class="glossy" color="negative" text-color="white" icon="error">{{ elude(problem.description, 40) }}<q-tooltip>{{ problem.description }}</q-tooltip></q-chip>
               </div>
             </div>
+            <div v-else-if="showAdvices && props.row.getcoreAdvice!=null" class="column">
+              <div class="col" v-for="advice in props.row.getcoreAdvice" :key="advice.description">
+                <q-chip v-bind:key="advice" color="warning" text-color="white" icon="error">{{ elude(advice.description, 40) }}<q-tooltip>{{ advice.description }}</q-tooltip></q-chip>
+              </div>
+            </div>
+            <q-chip v-else class="glossy" color="positive" text-color="white" icon="done" />
           </q-td>
         </template>
         <template v-slot:body-cell-Name="props">

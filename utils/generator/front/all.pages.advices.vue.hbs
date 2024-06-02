@@ -138,14 +138,14 @@ const GenericList        = defineAsyncComponent(() => import( '@/components/gene
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
     </div>
     <div class="col-lg-8">
-      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false"
+      <GenericList group="{{ group }}" short="{{ short }}" @refresh="refetch()" :useAction="false" :showAdvices="true"
         v-if="result !== undefined && result['k8sNamespace'] !== undefined && Array.isArray(result['k8sNamespace']) && result['k8sNamespace'].map(n=>n['{{ group }}{{ short }}']).flat().length>0"
         :model="result.k8sNamespace.map(n => n.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)).flat()" />
     </div>
 {{else}}
   <div class="row q-mb-sm q-ml-sm" v-if="!loading && !namespaced && result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0).length>0">
     <div class="col-lg-4">
-      <AdviceOverview short="{{ short }}" :to="to{{ group }}{{ short }}List"
+      <AdviceOverview short="{{ short }}" :to="to{{ group }}{{ short }}List" :showAdvices="true"
         :model="result.{{ group }}{{ short }}.filter(o=>Array.isArray(o['getcoreAdvice'])&&o['getcoreAdvice'].length>0)" />
     </div>
     <div class="col-lg-8">

@@ -9,7 +9,7 @@ const props=withDefaults(defineProps<{model: object[], short: string, to: (strin
   showNamespace: false,
   showKind: true,
 });
-const advicelist = props.model.map(o=>o.getcoreadvice.map(p=>{ return {namespace: o.metadata.namespace, source: p.source}})).flat()
+const advicelist = props.model.map(o=>o.getcoreAdvice.map(p=>{ return {namespace: o.metadata.namespace, source: p.source}})).flat()
 const advices = ref(advicelist.map(p=>p.namespace).filter(onlyUnique).map(namespace=>advicelist.map(p=>p.source).filter(onlyUnique).map(source=>{return {namespace, source, value: advicelist.filter(p=>p.namespace==namespace&&p.source==source).length}})).flat().filter(p=>p.value>0))
 const pieChart        = defineAsyncComponent(() => import( '@/components/charts/pieChart.vue'));
 const stackedBarChart = defineAsyncComponent(() => import( '@/components/charts/stackedBarChart.vue'));
