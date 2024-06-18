@@ -56,7 +56,7 @@ const TableHeader = defineAsyncComponent(() => import( '@/components/core/TableH
               <q-tooltip>{{ $t('core.editTooltip', {short: short, name: props.row.metadata.name}) }}</q-tooltip>
             </q-btn>
             <q-btn icon="edit" size="sm" class="q-ml-sm" flat dense
-              @click="toEdit(props.row.metadata.namespace)"
+              @click="toEdit(props.row.metadata.name)"
               v-if="!namespaced && (props.row.parentReference==null  || (props.row['metadata']['annotations'] != undefined && props.row['metadata']['annotations']['gramo.solidite.fr/no-parent'] == 'true' )) && can('patch')">
               <q-tooltip>{{ $t('core.editTooltip', {short: short, name: props.row.metadata.name}) }}</q-tooltip>
             </q-btn>

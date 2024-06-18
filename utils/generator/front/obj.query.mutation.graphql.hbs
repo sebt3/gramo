@@ -1,15 +1,6 @@
 mutation {{ group }}{{ short }}({{#if (isDelete mutationType)}}{{#if namespaced}}$namespace: String!, {{/if}}$name: String!{{else}}$metadata: metadataInput!{{#each writeProperties}}, ${{this}}: {{getGQLType this ../gqlDefs}}{{/each}}{{/if}}) {
   {{ group }}{{ short }}{{ mutationType }}({{#if (isDelete mutationType)}}{{#if namespaced}}namespace: $namespace, {{/if}}name: $name{{else}}metadata: $metadata{{#each writeProperties}}, {{this}}: ${{this}}{{/each}}{{/if}}) {
-      metadata {
-        name
-        namespace
-        annotations
-        labels
-        creationTimestamp
-        uid
-      }
-{{#each readProperties}}
-      {{this}}
-{{/each}}
+    object
+    error
   }
 }

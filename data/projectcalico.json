@@ -6,17 +6,12 @@
       "name": "org.projectcalico.crd.v1.BGPConfiguration",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "BGPConfigurationSpec contains the values of the BGP configuration.",
             "type": "object",
+            "description": "BGPConfigurationSpec contains the values of the BGP configuration.",
             "properties": {
               "asNumber": {
                 "description": "ASNumber is the default AS number used by a node. [Default: 64512]",
@@ -159,6 +154,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "BGPConfiguration contains the configuration for any BGP routing.",
@@ -397,17 +400,12 @@
       "name": "org.projectcalico.crd.v1.BGPFilter",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "BGPFilterSpec contains the IPv4 and IPv6 filter rules of the BGP Filter.",
             "type": "object",
+            "description": "BGPFilterSpec contains the IPv4 and IPv6 filter rules of the BGP Filter.",
             "properties": {
               "exportV4": {
                 "description": "The ordered set of IPv4 BGPFilter rules acting on exporting routes to a peer.",
@@ -506,6 +504,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -698,17 +704,12 @@
       "name": "org.projectcalico.crd.v1.BGPPeer",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "BGPPeerSpec contains the specification for a BGPPeer resource.",
             "type": "object",
+            "description": "BGPPeerSpec contains the specification for a BGPPeer resource.",
             "properties": {
               "asNumber": {
                 "description": "The AS Number of the peer.",
@@ -791,6 +792,14 @@
                 "type": "integer"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -967,17 +976,12 @@
       "name": "org.projectcalico.crd.v1.BlockAffinity",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "BlockAffinitySpec contains the specification for a BlockAffinity resource.",
             "type": "object",
+            "description": "BlockAffinitySpec contains the specification for a BlockAffinity resource.",
             "required": [
               "cidr",
               "deleted",
@@ -999,6 +1003,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -1114,17 +1126,12 @@
       "name": "org.projectcalico.crd.v1.CalicoNodeStatus",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "CalicoNodeStatusSpec contains the specification for a CalicoNodeStatus resource.",
             "type": "object",
+            "description": "CalicoNodeStatusSpec contains the specification for a CalicoNodeStatus resource.",
             "properties": {
               "classes": {
                 "description": "Classes declares the types of information to monitor for this calico/node, and allows for selective status reporting about certain subsets of information.",
@@ -1143,6 +1150,14 @@
                 "format": "int32"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           },
           "status": {
             "description": "CalicoNodeStatusStatus defines the observed state of CalicoNodeStatus. No validation needed for status since it is updated by Calico.",
@@ -1288,7 +1303,9 @@
               },
               "lastUpdated": {
                 "description": "LastUpdated is a timestamp representing the server time when CalicoNodeStatus object last updated. It is represented in RFC3339 form and is in UTC.",
-                "format": "date-time"
+                "format": "date-time",
+                "type": "string",
+                "nullable": true
               },
               "routes": {
                 "description": "Routes reports routes known to the Calico BGP daemon on the node.",
@@ -1727,17 +1744,12 @@
       "name": "org.projectcalico.crd.v1.ClusterInformation",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "ClusterInformationSpec contains the values of describing the cluster.",
             "type": "object",
+            "description": "ClusterInformationSpec contains the values of describing the cluster.",
             "properties": {
               "calicoVersion": {
                 "description": "CalicoVersion is the version of Calico that the cluster is running",
@@ -1760,6 +1772,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "ClusterInformation contains the cluster specific information.",
@@ -1878,17 +1898,12 @@
       "name": "org.projectcalico.crd.v1.FelixConfiguration",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "FelixConfigurationSpec contains the values of the Felix configuration.",
             "type": "object",
+            "description": "FelixConfigurationSpec contains the values of the Felix configuration.",
             "properties": {
               "allowIPIPPacketsFromWorkloads": {
                 "description": "AllowIPIPPacketsFromWorkloads controls whether Felix will add a rule to drop IPIP encapsulated traffic from workloads [Default: false]",
@@ -1996,7 +2011,15 @@
               "bpfPSNATPorts": {
                 "description": "BPFPSNATPorts sets the range from which we randomly pick a port if there is a source port collision. This should be within the ephemeral range as defined by RFC 6056 (1024–65535) and preferably outside the  ephemeral ranges used by common operating systems. Linux uses 32768–60999, while others mostly use the IANA defined range 49152–65535. It is not necessarily a problem if this range overlaps with the operating systems. Both ends of the range are inclusive. [Default: 20000:29999]",
                 "pattern": "^.*",
-                "x-kubernetes-int-or-string": true
+                "x-kubernetes-int-or-string": true,
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
               },
               "bpfPolicyDebugEnabled": {
                 "description": "BPFPolicyDebugEnabled when true, Felix records detailed information about the BPF policy programs, which can be examined with the calico-bpf command-line tool.",
@@ -2227,7 +2250,15 @@
                 "type": "array",
                 "items": {
                   "pattern": "^.*",
-                  "x-kubernetes-int-or-string": true
+                  "x-kubernetes-int-or-string": true,
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
                 }
               },
               "logDebugFilenameRegex": {
@@ -2276,7 +2307,15 @@
               "natPortRange": {
                 "description": "NATPortRange specifies the range of ports that is used for port mapping when doing outgoing NAT. When unset the default behavior of the network stack is used.",
                 "pattern": "^.*",
-                "x-kubernetes-int-or-string": true
+                "x-kubernetes-int-or-string": true,
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
               },
               "netlinkTimeout": {
                 "type": "string"
@@ -2471,6 +2510,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Felix Configuration contains the configuration for Felix.",
@@ -3173,13 +3220,8 @@
       "name": "org.projectcalico.crd.v1.GlobalNetworkPolicy",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
             "type": "object",
@@ -3232,7 +3274,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -3244,7 +3294,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -3361,12 +3419,28 @@
                     "notProtocol": {
                       "description": "NotProtocol is the negated version of the Protocol field.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "protocol": {
                       "description": "Protocol is an optional field that restricts the rule to only apply to traffic of a specific IP protocol. Required if any of the EntityRules contain Ports (because ports only apply to certain protocols). \n Must be one of these string values: \"TCP\", \"UDP\", \"ICMP\", \"ICMPv6\", \"SCTP\", \"UDPLite\" or an integer in the range 1-255.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "source": {
                       "description": "Source contains the match criteria that apply to source entity.",
@@ -3395,7 +3469,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -3407,7 +3489,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -3490,7 +3580,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -3502,7 +3600,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -3619,12 +3725,28 @@
                     "notProtocol": {
                       "description": "NotProtocol is the negated version of the Protocol field.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "protocol": {
                       "description": "Protocol is an optional field that restricts the rule to only apply to traffic of a specific IP protocol. Required if any of the EntityRules contain Ports (because ports only apply to certain protocols). \n Must be one of these string values: \"TCP\", \"UDP\", \"ICMP\", \"ICMPv6\", \"SCTP\", \"UDPLite\" or an integer in the range 1-255.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "source": {
                       "description": "Source contains the match criteria that apply to source entity.",
@@ -3653,7 +3775,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -3665,7 +3795,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -3737,6 +3875,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -4480,17 +4626,12 @@
       "name": "org.projectcalico.crd.v1.GlobalNetworkSet",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "GlobalNetworkSetSpec contains the specification for a NetworkSet resource.",
             "type": "object",
+            "description": "GlobalNetworkSetSpec contains the specification for a NetworkSet resource.",
             "properties": {
               "nets": {
                 "description": "The list of IP networks that belong to this set.",
@@ -4500,6 +4641,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "GlobalNetworkSet contains a set of arbitrary IP sub-networks/CIDRs that share labels to allow rules to refer to them via selectors.  The labels of GlobalNetworkSet are not namespaced.",
@@ -4605,17 +4754,12 @@
       "name": "org.projectcalico.crd.v1.HostEndpoint",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "HostEndpointSpec contains the specification for a HostEndpoint resource.",
             "type": "object",
+            "description": "HostEndpointSpec contains the specification for a HostEndpoint resource.",
             "properties": {
               "expectedIPs": {
                 "description": "The expected IP addresses (IPv4 and IPv6) of the endpoint. If \"InterfaceName\" is not present, Calico will look for an interface matching any of the IPs in the list and apply policy to that. Note: \tWhen using the selector match criteria in an ingress or egress security Policy \tor Profile, Calico converts the selector into a set of IP addresses. For host \tendpoints, the ExpectedIPs field is used for that purpose. (If only the interface \tname is specified, Calico does not learn the IPs of the interface for use in match \tcriteria.)",
@@ -4651,7 +4795,15 @@
                     },
                     "protocol": {
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -4664,6 +4816,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -4814,17 +4974,12 @@
       "name": "org.projectcalico.crd.v1.IPAMBlock",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IPAMBlockSpec contains the specification for an IPAMBlock resource.",
             "type": "object",
+            "description": "IPAMBlockSpec contains the specification for an IPAMBlock resource.",
             "required": [
               "allocations",
               "attributes",
@@ -4840,7 +4995,10 @@
               "allocations": {
                 "description": "Array of allocations in-use within this block. nil entries mean the allocation is free. For non-nil entries at index i, the index is the ordinal of the allocation within this block and the value is the index of the associated attributes in the Attributes array.",
                 "type": "array",
-                "items": {}
+                "items": {
+                  "type": "integer",
+                  "nullable": true
+                }
               },
               "attributes": {
                 "description": "Attributes is an array of arbitrary metadata associated with allocations in the block. To find attributes for a given allocation, use the value of the allocation's entry in the Allocations array as the index of the element in this array.",
@@ -4871,7 +5029,8 @@
               "sequenceNumber": {
                 "description": "We store a sequence number that is updated each time the block is written. Each allocation will also store the sequence number of the block at the time of its creation. When releasing an IP, passing the sequence number associated with the allocation allows us to protect against a race condition and ensure the IP hasn't been released and re-allocated since the release request.",
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "default": 0
               },
               "sequenceNumberForAllocation": {
                 "description": "Map of allocated ordinal within the block to sequence number of the block at the time of allocation. Kubernetes does not allow numerical keys for maps, so the key is cast to a string.",
@@ -4893,6 +5052,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -5059,17 +5226,12 @@
       "name": "org.projectcalico.crd.v1.IPAMConfig",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IPAMConfigSpec contains the specification for an IPAMConfig resource.",
             "type": "object",
+            "description": "IPAMConfigSpec contains the specification for an IPAMConfig resource.",
             "required": [
               "autoAllocateBlocks",
               "strictAffinity"
@@ -5088,6 +5250,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -5200,17 +5370,12 @@
       "name": "org.projectcalico.crd.v1.IPAMHandle",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IPAMHandleSpec contains the specification for an IPAMHandle resource.",
             "type": "object",
+            "description": "IPAMHandleSpec contains the specification for an IPAMHandle resource.",
             "required": [
               "block",
               "handleID"
@@ -5229,6 +5394,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -5341,17 +5514,12 @@
       "name": "org.projectcalico.crd.v1.IPPool",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IPPoolSpec contains the specification for an IPPool resource.",
             "type": "object",
+            "description": "IPPoolSpec contains the specification for an IPPool resource.",
             "required": [
               "cidr"
             ],
@@ -5414,6 +5582,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -5570,17 +5746,12 @@
       "name": "org.projectcalico.crd.v1.IPReservation",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IPReservationSpec contains the specification for an IPReservation resource.",
             "type": "object",
+            "description": "IPReservationSpec contains the specification for an IPReservation resource.",
             "properties": {
               "reservedCIDRs": {
                 "description": "ReservedCIDRs is a list of CIDRs and/or IP addresses that Calico IPAM will exclude from new allocations.",
@@ -5590,6 +5761,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -5693,17 +5872,12 @@
       "name": "org.projectcalico.crd.v1.KubeControllersConfiguration",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "KubeControllersConfigurationSpec contains the values of the Kubernetes controllers configuration.",
             "type": "object",
+            "description": "KubeControllersConfigurationSpec contains the values of the Kubernetes controllers configuration.",
             "required": [
               "controllers"
             ],
@@ -5804,6 +5978,14 @@
                 "type": "integer"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           },
           "status": {
             "description": "KubeControllersConfigurationStatus represents the status of the configuration. It's useful for admins to be able to see the actual config that was applied, which can be modified by environment variables on the kube-controllers process.",
@@ -6234,13 +6416,8 @@
       "name": "org.projectcalico.crd.v1.NetworkPolicy",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
             "type": "object",
@@ -6285,7 +6462,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -6297,7 +6482,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -6414,12 +6607,28 @@
                     "notProtocol": {
                       "description": "NotProtocol is the negated version of the Protocol field.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "protocol": {
                       "description": "Protocol is an optional field that restricts the rule to only apply to traffic of a specific IP protocol. Required if any of the EntityRules contain Ports (because ports only apply to certain protocols). \n Must be one of these string values: \"TCP\", \"UDP\", \"ICMP\", \"ICMPv6\", \"SCTP\", \"UDPLite\" or an integer in the range 1-255.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "source": {
                       "description": "Source contains the match criteria that apply to source entity.",
@@ -6448,7 +6657,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -6460,7 +6677,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -6543,7 +6768,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -6555,7 +6788,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -6672,12 +6913,28 @@
                     "notProtocol": {
                       "description": "NotProtocol is the negated version of the Protocol field.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "protocol": {
                       "description": "Protocol is an optional field that restricts the rule to only apply to traffic of a specific IP protocol. Required if any of the EntityRules contain Ports (because ports only apply to certain protocols). \n Must be one of these string values: \"TCP\", \"UDP\", \"ICMP\", \"ICMPv6\", \"SCTP\", \"UDPLite\" or an integer in the range 1-255.",
                       "pattern": "^.*",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     },
                     "source": {
                       "description": "Source contains the match criteria that apply to source entity.",
@@ -6706,7 +6963,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "notSelector": {
@@ -6718,7 +6983,15 @@
                           "type": "array",
                           "items": {
                             "pattern": "^.*",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "selector": {
@@ -6782,6 +7055,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -7509,17 +7790,12 @@
       "name": "org.projectcalico.crd.v1.NetworkSet",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "NetworkSetSpec contains the specification for a NetworkSet resource.",
             "type": "object",
+            "description": "NetworkSetSpec contains the specification for a NetworkSet resource.",
             "properties": {
               "nets": {
                 "description": "The list of IP networks that belong to this set.",
@@ -7529,6 +7805,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "NetworkSet is the Namespaced-equivalent of the GlobalNetworkSet.",

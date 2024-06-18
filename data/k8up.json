@@ -6,17 +6,12 @@
       "name": "io.k8up.v1.Archive",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "ArchiveSpec defines the desired state of Archive.",
             "type": "object",
+            "description": "ArchiveSpec defines the desired state of Archive.",
             "properties": {
               "activeDeadlineSeconds": {
                 "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it. Value must be positive integer if given.",
@@ -517,7 +512,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -525,7 +528,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -627,8 +638,8 @@
             }
           },
           "status": {
-            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "type": "object",
+            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -695,6 +706,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Archive is the Schema for the archives API",
@@ -1528,17 +1547,12 @@
       "name": "io.k8up.v1.Backup",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "BackupSpec defines a single backup. It must contain all information to connect to the backup repository when applied. If used with defaults or schedules the operator will ensure that the defaults are applied before creating the object on the API.",
             "type": "object",
+            "description": "BackupSpec defines a single backup. It must contain all information to connect to the backup repository when applied. If used with defaults or schedules the operator will ensure that the defaults are applied before creating the object on the API.",
             "properties": {
               "activeDeadlineSeconds": {
                 "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it. Value must be positive integer if given.",
@@ -2043,7 +2057,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -2051,7 +2073,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -2074,8 +2104,8 @@
             }
           },
           "status": {
-            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "type": "object",
+            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -2142,6 +2172,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Backup is the Schema for the backups API",
@@ -2912,17 +2950,12 @@
       "name": "io.k8up.v1.Check",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "CheckSpec defines the desired state of Check. It needs to contain the repository information.",
             "type": "object",
+            "description": "CheckSpec defines the desired state of Check. It needs to contain the repository information.",
             "properties": {
               "activeDeadlineSeconds": {
                 "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it. Value must be positive integer if given.",
@@ -3427,7 +3460,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -3435,7 +3476,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -3447,8 +3496,8 @@
             }
           },
           "status": {
-            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "type": "object",
+            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -3515,6 +3564,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Check is the Schema for the checks API",
@@ -4262,17 +4319,12 @@
       "name": "io.k8up.v1.PreBackupPod",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "PreBackupPodSpec define pods that will be launched during the backup. After the backup has finished (successfully or not), they should be removed again automatically by the operator.",
             "type": "object",
+            "description": "PreBackupPodSpec define pods that will be launched during the backup. After the backup has finished (successfully or not), they should be removed again automatically by the operator.",
             "properties": {
               "backupCommand": {
                 "description": "BackupCommand will be added to the backupcommand annotation on the pod.",
@@ -5062,7 +5114,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -5210,7 +5270,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -5231,7 +5299,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -5293,7 +5369,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -5314,7 +5398,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -5401,7 +5493,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -5437,7 +5537,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -5487,7 +5595,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -5576,7 +5685,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -5612,7 +5729,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -5637,7 +5762,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -5645,7 +5778,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -5848,7 +5989,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -5884,7 +6033,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -6132,7 +6289,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -6280,7 +6445,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -6301,7 +6474,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -6363,7 +6544,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -6384,7 +6573,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -6471,7 +6668,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -6507,7 +6712,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -6557,7 +6770,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -6646,7 +6860,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -6682,7 +6904,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -6707,7 +6937,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -6715,7 +6953,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -6918,7 +7164,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -6954,7 +7208,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -7217,7 +7479,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -7365,7 +7635,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -7386,7 +7664,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -7448,7 +7734,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -7469,7 +7763,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -7556,7 +7858,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -7592,7 +7902,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -7642,7 +7960,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -7731,7 +8050,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -7767,7 +8094,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -7792,7 +8127,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -7800,7 +8143,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -8003,7 +8354,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -8039,7 +8398,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -8172,7 +8539,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "preemptionPolicy": {
@@ -8803,7 +9178,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -8828,7 +9211,15 @@
                                 "sizeLimit": {
                                   "description": "sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -8913,7 +9304,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "requests": {
@@ -8921,7 +9320,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             }
                                           }
@@ -9419,7 +9826,15 @@
                                                     "divisor": {
                                                       "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                      "x-kubernetes-int-or-string": true
+                                                      "x-kubernetes-int-or-string": true,
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer"
+                                                        },
+                                                        {
+                                                          "type": "string"
+                                                        }
+                                                      ]
                                                     },
                                                     "resource": {
                                                       "description": "Required: resource to select",
@@ -9758,6 +10173,17 @@
                 }
               }
             }
+          },
+          "status": {
+            "type": "object"
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "PreBackupPod is the Schema for the prebackuppods API",
@@ -15684,7 +16110,8 @@
       "apiKind": "PreBackupPod",
       "apiVersion": "v1",
       "readProperties": {
-        "spec": "spec"
+        "spec": "spec",
+        "status": "status"
       },
       "writeProperties": {
         "spec": "spec"
@@ -15696,7 +16123,8 @@
       "simpleExcludes": [],
       "gqlDefs": {
         "metadata": "metadata!",
-        "spec": "JSONObject"
+        "spec": "JSONObject",
+        "status": "JSONObject"
       },
       "namespaced": true
     },
@@ -15705,17 +16133,12 @@
       "name": "io.k8up.v1.Prune",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "PruneSpec needs to contain the repository information as well as the desired retention policies.",
             "type": "object",
+            "description": "PruneSpec needs to contain the repository information as well as the desired retention policies.",
             "properties": {
               "activeDeadlineSeconds": {
                 "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it. Value must be positive integer if given.",
@@ -16216,7 +16639,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -16224,7 +16655,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -16280,8 +16719,8 @@
             }
           },
           "status": {
-            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "type": "object",
+            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -16348,6 +16787,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Prune is the Schema for the prunes API",
@@ -17135,17 +17582,12 @@
       "name": "io.k8up.v1.Restore",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "RestoreSpec can either contain an S3 restore point or a local one. For the local one you need to define an existing PVC.",
             "type": "object",
+            "description": "RestoreSpec can either contain an S3 restore point or a local one. For the local one you need to define an existing PVC.",
             "properties": {
               "activeDeadlineSeconds": {
                 "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it. Value must be positive integer if given.",
@@ -17646,7 +18088,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -17654,7 +18104,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -17756,8 +18214,8 @@
             }
           },
           "status": {
-            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "type": "object",
+            "description": "Status defines the observed state of a generic K8up job. It is used for the operator to determine what to do.",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -17824,6 +18282,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Restore is the Schema for the restores API",
@@ -18657,17 +19123,12 @@
       "name": "io.k8up.v1.Schedule",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "ScheduleSpec defines the schedules for the various job types.",
             "type": "object",
+            "description": "ScheduleSpec defines the schedules for the various job types.",
             "properties": {
               "archive": {
                 "description": "ArchiveSchedule manages schedules for the archival service",
@@ -19175,7 +19636,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -19183,7 +19652,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -20155,7 +20632,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -20163,7 +20648,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -20699,7 +21192,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -20707,7 +21208,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -21356,7 +21865,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -21364,7 +21881,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -21432,7 +21957,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -21440,7 +21973,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -21951,7 +22492,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -21959,7 +22508,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -22071,8 +22628,8 @@
             }
           },
           "status": {
-            "description": "ScheduleStatus defines the observed state of Schedule",
             "type": "object",
+            "description": "ScheduleStatus defines the observed state of Schedule",
             "properties": {
               "conditions": {
                 "description": "Conditions provide a standard mechanism for higher-level status reporting from a controller. They are an extension mechanism which allows tools and other controllers to collect summary information about resources without needing to understand resource-specific status details.",
@@ -22147,6 +22704,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Schedule is the Schema for the schedules API",
@@ -25823,17 +26388,12 @@
       "name": "io.k8up.v1.Snapshot",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "SnapshotSpec contains all information needed about a restic snapshot so it can be restored.",
             "type": "object",
+            "description": "SnapshotSpec contains all information needed about a restic snapshot so it can be restored.",
             "properties": {
               "date": {
                 "type": "string",
@@ -25854,8 +26414,16 @@
             }
           },
           "status": {
-            "description": "SnapshotStatus defines the observed state of Snapshot",
-            "type": "object"
+            "type": "object",
+            "description": "SnapshotStatus defines the observed state of Snapshot"
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Snapshot is the Schema for the snapshots API",

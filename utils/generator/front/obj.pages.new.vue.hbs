@@ -14,20 +14,13 @@ const { color{{ short }}, icon{{ short }} } = await import('../../../libs/{{ gro
 const { defineAsyncComponent, i18n, ref, useMutation, use{{ short }}, {{ short }}Definition, sanitizeData, getProperties } = await import('@/libs/{{ group }}/{{ short }}.js')
 const { set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute } = await import('../../../libs/core/navigation.js')
 set{{#if namespaced}}Namespaced{{/if}}ItemFromRoute();
-const { $q, editor, navigation, notifySuccess, notifyError, notifyWorking } = use{{ short }}(router);
+const { $q, editor, navigation, notifySuccess, notifyError, notifyWorking, createError, createDone } = use{{ short }}(router);
 const { mutate, onDone, onError } = useMutation({{ short }}New);
 const name = ref('');
 const form = ref(null);
 const obj  = ref({});
 const model = ref({});
-onDone(() => {
-  notifySuccess(i18n.global.t('new.notifyDone'));
-  router.go(-1);
-})
-onError((err) => {
-  notifyError(i18n.global.t('new.notifyError'));
-  console.log('mutation error',err);
-})
+onError(createError);onDone(createDone);
 function onFinalSubmit() {
   notifyWorking(i18n.global.t('new.notifyWorking'));
   mutate({

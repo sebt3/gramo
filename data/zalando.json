@@ -6,14 +6,6 @@
       "name": "do.zalan.acid.v1.postgresql",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
-          },
           "spec": {
             "type": "object",
             "required": [
@@ -42,14 +34,28 @@
                     "subPath": {
                       "type": "string"
                     },
-                    "targetContainers": {},
+                    "targetContainers": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "nullable": true
+                    },
                     "volumeSource": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object"
                     }
                   }
                 }
               },
-              "allowedSourceRanges": {},
+              "allowedSourceRanges": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\/(\\d|[1-2]\\d|3[0-2])$"
+                },
+                "nullable": true
+              },
               "clone": {
                 "type": "object",
                 "required": [
@@ -176,10 +182,30 @@
               "enableShmVolume": {
                 "type": "boolean"
               },
-              "env": {},
-              "initContainers": {},
+              "env": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                },
+                "nullable": true
+              },
+              "initContainers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                },
+                "nullable": true
+              },
               "init_containers": {
-                "description": "deprecated"
+                "description": "deprecated",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                },
+                "nullable": true
               },
               "logicalBackupSchedule": {
                 "type": "string",
@@ -500,7 +526,14 @@
                   "type": "string"
                 }
               },
-              "sidecars": {},
+              "sidecars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "x-kubernetes-preserve-unknown-fields": true
+                },
+                "nullable": true
+              },
               "spiloFSGroup": {
                 "type": "integer"
               },
@@ -525,7 +558,24 @@
                   "standby_port": {
                     "type": "string"
                   }
-                }
+                },
+                "oneOf": [
+                  {
+                    "required": [
+                      "s3_wal_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "gs_wal_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "standby_host"
+                    ]
+                  }
+                ]
               },
               "streams": {
                 "type": "array",
@@ -639,10 +689,58 @@
               },
               "users": {
                 "type": "object",
-                "additionalProperties": {}
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "bypassrls",
+                      "BYPASSRLS",
+                      "nobypassrls",
+                      "NOBYPASSRLS",
+                      "createdb",
+                      "CREATEDB",
+                      "nocreatedb",
+                      "NOCREATEDB",
+                      "createrole",
+                      "CREATEROLE",
+                      "nocreaterole",
+                      "NOCREATEROLE",
+                      "inherit",
+                      "INHERIT",
+                      "noinherit",
+                      "NOINHERIT",
+                      "login",
+                      "LOGIN",
+                      "nologin",
+                      "NOLOGIN",
+                      "replication",
+                      "REPLICATION",
+                      "noreplication",
+                      "NOREPLICATION",
+                      "superuser",
+                      "SUPERUSER",
+                      "nosuperuser",
+                      "NOSUPERUSER"
+                    ]
+                  },
+                  "nullable": true
+                }
               },
-              "usersWithInPlaceSecretRotation": {},
-              "usersWithSecretRotation": {},
+              "usersWithInPlaceSecretRotation": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              "usersWithSecretRotation": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
               "volume": {
                 "type": "object",
                 "required": [
@@ -686,7 +784,8 @@
                         }
                       },
                       "matchLabels": {
-                        "x-kubernetes-preserve-unknown-fields": true
+                        "x-kubernetes-preserve-unknown-fields": true,
+                        "type": "object"
                       }
                     }
                   },
@@ -712,6 +811,20 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string",
+            "enum": [
+              "acid.zalan.do/v1"
+            ]
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string",
+            "enum": [
+              "postgresql"
+            ]
           }
         },
         "type": "object",
@@ -1734,6 +1847,9 @@
       "name": "org.zalando.v1.ClusterKopfPeering",
       "definition": {
         "properties": {
+          "spec": {
+            "type": "object"
+          },
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
             "type": "string"
@@ -1743,7 +1859,8 @@
             "type": "string"
           },
           "status": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "x-kubernetes-preserve-unknown-fields": true,
+            "type": "object"
           }
         },
         "type": "object",
@@ -1806,9 +1923,12 @@
       "apiKind": "ClusterKopfPeering",
       "apiVersion": "v1",
       "readProperties": {
+        "spec": "spec",
         "status": "status"
       },
-      "writeProperties": {},
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "zalando",
       "sub": "zalando",
       "listExcludes": [],
@@ -1816,6 +1936,7 @@
       "simpleExcludes": [],
       "gqlDefs": {
         "metadata": "metadata!",
+        "spec": "JSONObject",
         "status": "JSONObject"
       },
       "namespaced": false
@@ -1825,6 +1946,9 @@
       "name": "org.zalando.v1.KopfPeering",
       "definition": {
         "properties": {
+          "spec": {
+            "type": "object"
+          },
           "apiVersion": {
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
             "type": "string"
@@ -1834,7 +1958,8 @@
             "type": "string"
           },
           "status": {
-            "x-kubernetes-preserve-unknown-fields": true
+            "x-kubernetes-preserve-unknown-fields": true,
+            "type": "object"
           }
         },
         "type": "object",
@@ -1897,9 +2022,12 @@
       "apiKind": "KopfPeering",
       "apiVersion": "v1",
       "readProperties": {
+        "spec": "spec",
         "status": "status"
       },
-      "writeProperties": {},
+      "writeProperties": {
+        "spec": "spec"
+      },
       "group": "zalando",
       "sub": "zalando",
       "listExcludes": [],
@@ -1907,6 +2035,7 @@
       "simpleExcludes": [],
       "gqlDefs": {
         "metadata": "metadata!",
+        "spec": "JSONObject",
         "status": "JSONObject"
       },
       "namespaced": true

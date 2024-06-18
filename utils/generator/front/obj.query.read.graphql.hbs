@@ -12,7 +12,14 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
 {{/if}}
         annotations
         labels
-        creationTimestamp
+        ownerReferences {
+          apiVersion
+          blockOwnerDeletion
+          controller
+          kind
+          name
+          uid
+        }
         uid
       }
       parentReference {
@@ -63,7 +70,6 @@ query {{ group }}{{ short }}Query($obj: queryParameters{{#if detailed}}{{#each r
           namespace
           annotations
           labels
-          creationTimestamp
           uid
         }
         getcoreProblem {

@@ -6,17 +6,12 @@
       "name": "in.opstreelabs.redis.redis.v1beta2.Redis",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "RedisSpec defines the desired state of Redis",
             "type": "object",
+            "description": "RedisSpec defines the desired state of Redis",
             "required": [
               "kubernetesConfig"
             ],
@@ -855,7 +850,15 @@
                             "divisor": {
                               "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "resource": {
                               "description": "Required: resource to select",
@@ -984,7 +987,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -1055,7 +1066,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -1063,7 +1082,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -1145,7 +1172,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -1153,7 +1188,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -1188,7 +1231,15 @@
                         "properties": {
                           "maxUnavailable": {
                             "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. This can not be 0. Defaults to 1. This field is alpha-level and is only honored by servers that enable the MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it will be counted towards MaxUnavailable.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "partition": {
                             "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned for updates. During a rolling update, all pods from ordinal Replicas-1 to Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched. This is helpful in being able to do a canary based deployment. The default value is 0.",
@@ -1212,28 +1263,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "nodeSelector": {
@@ -1372,28 +1435,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "redisConfig": {
@@ -1488,7 +1563,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -1559,7 +1642,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -1567,7 +1658,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -1785,7 +1884,15 @@
                                   "divisor": {
                                     "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   },
                                   "resource": {
                                     "description": "Required: resource to select",
@@ -1895,7 +2002,8 @@
                           },
                           "protocol": {
                             "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                            "type": "string"
+                            "type": "string",
+                            "default": "TCP"
                           }
                         }
                       }
@@ -1930,7 +2038,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "requests": {
@@ -1938,7 +2054,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         }
                       }
@@ -2055,7 +2179,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               },
                               "requests": {
@@ -2063,7 +2195,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -2149,7 +2289,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "capacity": {
@@ -2157,7 +2305,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "conditions": {
@@ -2555,7 +2711,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -2579,7 +2743,15 @@
                                 "sizeLimit": {
                                   "description": "sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -2687,7 +2859,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "requests": {
@@ -2695,7 +2875,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             }
                                           }
@@ -3188,7 +3376,15 @@
                                                     "divisor": {
                                                       "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                      "x-kubernetes-int-or-string": true
+                                                      "x-kubernetes-int-or-string": true,
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer"
+                                                        },
+                                                        {
+                                                          "type": "string"
+                                                        }
+                                                      ]
                                                     },
                                                     "resource": {
                                                       "description": "Required: resource to select",
@@ -3558,8 +3754,16 @@
             }
           },
           "status": {
-            "description": "RedisStatus defines the observed state of Redis",
-            "type": "object"
+            "type": "object",
+            "description": "RedisStatus defines the observed state of Redis"
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Redis is the Schema for the redis API",
@@ -10618,17 +10822,12 @@
       "name": "in.opstreelabs.redis.redis.v1beta2.RedisCluster",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "RedisClusterSpec defines the desired state of RedisCluster",
             "type": "object",
+            "description": "RedisClusterSpec defines the desired state of RedisCluster",
             "required": [
               "clusterSize",
               "kubernetesConfig"
@@ -10754,7 +10953,8 @@
                 "format": "int32"
               },
               "clusterVersion": {
-                "type": "string"
+                "type": "string",
+                "default": "v7"
               },
               "env": {
                 "type": "array",
@@ -10829,7 +11029,15 @@
                             "divisor": {
                               "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "resource": {
                               "description": "Required: resource to select",
@@ -10958,7 +11166,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -11029,7 +11245,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -11037,7 +11261,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -11119,7 +11351,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -11127,7 +11367,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -11162,7 +11410,15 @@
                         "properties": {
                           "maxUnavailable": {
                             "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. This can not be 0. Defaults to 1. This field is alpha-level and is only honored by servers that enable the MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it will be counted towards MaxUnavailable.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "partition": {
                             "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned for updates. During a rolling update, all pods from ordinal Replicas-1 to Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched. This is helpful in being able to do a canary based deployment. The default value is 0.",
@@ -11388,7 +11644,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -11459,7 +11723,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -11467,7 +11739,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -12131,28 +12411,40 @@
                       "failureThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 3
                       },
                       "initialDelaySeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "periodSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 10
                       },
                       "successThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "timeoutSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       }
+                    },
+                    "default": {
+                      "failureThreshold": 3,
+                      "initialDelaySeconds": 1,
+                      "periodSeconds": 10,
+                      "successThreshold": 1,
+                      "timeoutSeconds": 1
                     }
                   },
                   "nodeSelector": {
@@ -12185,28 +12477,40 @@
                       "failureThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 3
                       },
                       "initialDelaySeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "periodSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 10
                       },
                       "successThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "timeoutSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       }
+                    },
+                    "default": {
+                      "failureThreshold": 3,
+                      "initialDelaySeconds": 1,
+                      "periodSeconds": 10,
+                      "successThreshold": 1,
+                      "timeoutSeconds": 1
                     }
                   },
                   "redisConfig": {
@@ -12374,6 +12678,22 @@
                         }
                       }
                     }
+                  }
+                },
+                "default": {
+                  "livenessProbe": {
+                    "failureThreshold": 3,
+                    "initialDelaySeconds": 1,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "readinessProbe": {
+                    "failureThreshold": 3,
+                    "initialDelaySeconds": 1,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
                   }
                 }
               },
@@ -13034,28 +13354,40 @@
                       "failureThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 3
                       },
                       "initialDelaySeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "periodSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 10
                       },
                       "successThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "timeoutSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       }
+                    },
+                    "default": {
+                      "failureThreshold": 3,
+                      "initialDelaySeconds": 1,
+                      "periodSeconds": 10,
+                      "successThreshold": 1,
+                      "timeoutSeconds": 1
                     }
                   },
                   "nodeSelector": {
@@ -13088,28 +13420,40 @@
                       "failureThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 3
                       },
                       "initialDelaySeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "periodSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 10
                       },
                       "successThreshold": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       },
                       "timeoutSeconds": {
                         "type": "integer",
                         "format": "int32",
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 1
                       }
+                    },
+                    "default": {
+                      "failureThreshold": 3,
+                      "initialDelaySeconds": 1,
+                      "periodSeconds": 10,
+                      "successThreshold": 1,
+                      "timeoutSeconds": 1
                     }
                   },
                   "redisConfig": {
@@ -13278,6 +13622,22 @@
                       }
                     }
                   }
+                },
+                "default": {
+                  "livenessProbe": {
+                    "failureThreshold": 3,
+                    "initialDelaySeconds": 1,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  },
+                  "readinessProbe": {
+                    "failureThreshold": 3,
+                    "initialDelaySeconds": 1,
+                    "periodSeconds": 10,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                  }
                 }
               },
               "resources": {
@@ -13310,7 +13670,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -13318,7 +13686,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -13415,7 +13791,15 @@
                                   "divisor": {
                                     "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   },
                                   "resource": {
                                     "description": "Required: resource to select",
@@ -13525,7 +13909,8 @@
                           },
                           "protocol": {
                             "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                            "type": "string"
+                            "type": "string",
+                            "default": "TCP"
                           }
                         }
                       }
@@ -13560,7 +13945,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "requests": {
@@ -13568,7 +13961,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         }
                       }
@@ -13581,7 +13982,8 @@
                 "type": "object",
                 "properties": {
                   "nodeConfVolume": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "nodeConfVolumeClaimTemplate": {
                     "description": "PersistentVolumeClaim is a user's request for and claim to a persistent volume",
@@ -13688,7 +14090,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               },
                               "requests": {
@@ -13696,7 +14106,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -13782,7 +14200,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "capacity": {
@@ -13790,7 +14216,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "conditions": {
@@ -13945,7 +14379,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               },
                               "requests": {
@@ -13953,7 +14395,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -14039,7 +14489,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "capacity": {
@@ -14047,7 +14505,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "conditions": {
@@ -14445,7 +14911,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -14469,7 +14943,15 @@
                                 "sizeLimit": {
                                   "description": "sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -14577,7 +15059,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "requests": {
@@ -14585,7 +15075,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             }
                                           }
@@ -15078,7 +15576,15 @@
                                                     "divisor": {
                                                       "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                      "x-kubernetes-int-or-string": true
+                                                      "x-kubernetes-int-or-string": true,
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer"
+                                                        },
+                                                        {
+                                                          "type": "string"
+                                                        }
+                                                      ]
                                                     },
                                                     "resource": {
                                                       "description": "Required: resource to select",
@@ -15414,16 +15920,18 @@
             }
           },
           "status": {
-            "description": "RedisClusterStatus defines the observed state of RedisCluster",
             "type": "object",
+            "description": "RedisClusterStatus defines the observed state of RedisCluster",
             "properties": {
               "readyFollowerReplicas": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 0
               },
               "readyLeaderReplicas": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 0
               },
               "reason": {
                 "type": "string"
@@ -15432,6 +15940,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "RedisCluster is the Schema for the redisclusters API",
@@ -24900,13 +25416,8 @@
       "name": "in.opstreelabs.redis.redis.v1beta2.RedisReplication",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
             "type": "object",
@@ -25753,7 +26264,15 @@
                             "divisor": {
                               "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "resource": {
                               "description": "Required: resource to select",
@@ -25882,7 +26401,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -25953,7 +26480,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -25961,7 +26496,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -26043,7 +26586,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -26051,7 +26602,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -26086,7 +26645,15 @@
                         "properties": {
                           "maxUnavailable": {
                             "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. This can not be 0. Defaults to 1. This field is alpha-level and is only honored by servers that enable the MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it will be counted towards MaxUnavailable.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "partition": {
                             "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned for updates. During a rolling update, all pods from ordinal Replicas-1 to Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched. This is helpful in being able to do a canary based deployment. The default value is 0.",
@@ -26110,28 +26677,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "nodeSelector": {
@@ -26270,28 +26849,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "redisConfig": {
@@ -26386,7 +26977,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -26457,7 +27056,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -26465,7 +27072,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -26683,7 +27298,15 @@
                                   "divisor": {
                                     "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   },
                                   "resource": {
                                     "description": "Required: resource to select",
@@ -26793,7 +27416,8 @@
                           },
                           "protocol": {
                             "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                            "type": "string"
+                            "type": "string",
+                            "default": "TCP"
                           }
                         }
                       }
@@ -26828,7 +27452,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "requests": {
@@ -26836,7 +27468,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         }
                       }
@@ -26953,7 +27593,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               },
                               "requests": {
@@ -26961,7 +27609,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -27047,7 +27703,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "capacity": {
@@ -27055,7 +27719,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "conditions": {
@@ -27453,7 +28125,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -27477,7 +28157,15 @@
                                 "sizeLimit": {
                                   "description": "sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -27585,7 +28273,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "requests": {
@@ -27593,7 +28289,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             }
                                           }
@@ -28086,7 +28790,15 @@
                                                     "divisor": {
                                                       "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                      "x-kubernetes-int-or-string": true
+                                                      "x-kubernetes-int-or-string": true,
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer"
+                                                        },
+                                                        {
+                                                          "type": "string"
+                                                        }
+                                                      ]
                                                     },
                                                     "resource": {
                                                       "description": "Required: resource to select",
@@ -28456,8 +29168,16 @@
             }
           },
           "status": {
-            "description": "RedisStatus defines the observed state of Redis",
-            "type": "object"
+            "type": "object",
+            "description": "RedisStatus defines the observed state of Redis"
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Redis is the Schema for the redis API",
@@ -35524,13 +36244,8 @@
       "name": "in.opstreelabs.redis.redis.v1beta2.RedisSentinel",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
             "type": "object",
@@ -36252,7 +36967,8 @@
               "clusterSize": {
                 "type": "integer",
                 "format": "int32",
-                "minimum": 1
+                "minimum": 1,
+                "default": 3
               },
               "env": {
                 "type": "array",
@@ -36327,7 +37043,15 @@
                             "divisor": {
                               "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "resource": {
                               "description": "Required: resource to select",
@@ -36456,7 +37180,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -36527,7 +37259,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -36535,7 +37275,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -36617,7 +37365,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -36625,7 +37381,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -36660,7 +37424,15 @@
                         "properties": {
                           "maxUnavailable": {
                             "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. This can not be 0. Defaults to 1. This field is alpha-level and is only honored by servers that enable the MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it will be counted towards MaxUnavailable.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "partition": {
                             "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned for updates. During a rolling update, all pods from ordinal Replicas-1 to Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched. This is helpful in being able to do a canary based deployment. The default value is 0.",
@@ -36684,28 +37456,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "nodeSelector": {
@@ -36861,28 +37645,40 @@
                   "failureThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 3
                   },
                   "initialDelaySeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "periodSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 10
                   },
                   "successThreshold": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "timeoutSeconds": {
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   }
+                },
+                "default": {
+                  "failureThreshold": 3,
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
                 }
               },
               "redisExporter": {
@@ -36968,7 +37764,15 @@
                                 "divisor": {
                                   "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 },
                                 "resource": {
                                   "description": "Required: resource to select",
@@ -37039,7 +37843,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "requests": {
@@ -37047,7 +37859,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       }
                     }
@@ -37064,22 +37884,28 @@
                     "type": "string"
                   },
                   "downAfterMilliseconds": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "30000"
                   },
                   "failoverTimeout": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "180000"
                   },
                   "masterGroupName": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "myMaster"
                   },
                   "parallelSyncs": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "1"
                   },
                   "quorum": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "2"
                   },
                   "redisPort": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "6379"
                   },
                   "redisReplicationName": {
                     "type": "string"
@@ -37297,7 +38123,15 @@
                                   "divisor": {
                                     "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   },
                                   "resource": {
                                     "description": "Required: resource to select",
@@ -37407,7 +38241,8 @@
                           },
                           "protocol": {
                             "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                            "type": "string"
+                            "type": "string",
+                            "default": "TCP"
                           }
                         }
                       }
@@ -37442,7 +38277,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         },
                         "requests": {
@@ -37450,7 +38293,15 @@
                           "type": "object",
                           "additionalProperties": {
                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           }
                         }
                       }
@@ -37496,6 +38347,14 @@
           },
           "status": {
             "type": "object"
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Redis is the Schema for the redis API",

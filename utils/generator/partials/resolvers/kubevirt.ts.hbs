@@ -1,0 +1,81 @@
+    {{type}}{{targetGroup}}{{targetShort}}: async (parent, args: object) => {
+      try{
+{{#if (and (eq type 'users') (and (or (eq targetShort 'VirtualMachine') (eq targetShort 'VirtualMachineInstance')) (eq short 'Secret')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(vm=>{
+                let vols = getByPath(vm, '{{path}}');
+                if (!Array.isArray(vols)) return false;
+                return vols.filter(v=>v.cloudInitConfigDrive!=undefined&&v.cloudInitConfigDrive.secretRef!=undefined&&v.cloudInitConfigDrive.secretRef.name==parent.metadata.name).length>0
+            })
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'Secret') (or (eq short 'VirtualMachine') (eq short 'VirtualMachineInstance'))))}}
+        let vols = getByPath(parent, '{{path}}');
+        if (!Array.isArray(vols)) return null;
+        let secrets = vols.filter(v=>v.cloudInitConfigDrive!=undefined&&v.cloudInitConfigDrive.secretRef!=undefined).map(v=>v.cloudInitConfigDrive.secretRef.name);
+        if (secrets.length<1) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(s=>secrets.includes(s['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (or (eq targetShort 'VirtualMachine') (eq targetShort 'VirtualMachineInstance')) (eq short 'DataVolume')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(vm=>{
+                let vols = getByPath(vm, '{{path}}');
+                if (!Array.isArray(vols)) return false;
+                return vols.filter(v=>v.dataVolume!=undefined&&v.dataVolume.name==parent.metadata.name).length>0
+            })
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'DataVolume') (or (eq short 'VirtualMachine') (eq short 'VirtualMachineInstance'))))}}
+        let vols = getByPath(parent, '{{path}}');
+        if (!Array.isArray(vols)) return null;
+        let dvs = vols.filter(v=>v.dataVolume!=undefined).map(v=>v.dataVolume.name);
+        if (dvs.length<1) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(s=>dvs.includes(s['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (or (eq targetShort 'VirtualMachine') (eq targetShort 'VirtualMachineInstance')) (eq short 'NetworkAttachmentDefinition')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(vm=>{
+                let nets = getByPath(vm, '{{path}}');
+                if (!Array.isArray(nets)) return false;
+                return nets.filter(n=>n.multus!=undefined&&n.multus.networkName==parent.metadata.name).length>0
+            })
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'NetworkAttachmentDefinition') (or (eq short 'VirtualMachine') (eq short 'VirtualMachineInstance'))))}}
+        let nets = getByPath(parent, '{{path}}');
+        if (!Array.isArray(nets)) return null;
+        let nads = nets.filter(v=>v.multus!=undefined).map(v=>v.multus.networkName);
+        if (nads.length<1) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(s=>nads.includes(s['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'users') (and (eq targetShort 'Pod') (eq short 'NetworkAttachmentDefinition')))}}
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(pod=>{
+                if (pod.metadata == undefined || pod.metadata.annotations == undefined || pod.metadata.annotations['k8s.v1.cni.cncf.io/networks'] == undefined) return false;
+                let nets = JSON.parse(pod.metadata.annotations['k8s.v1.cni.cncf.io/networks']);
+                if (!Array.isArray(nets)) return false;
+                return nets.filter(n=>n.name==parent.metadata.name)
+            })
+        if (lst.length>0) return lst;
+{{/if}}
+{{#if (and (eq type 'use') (and (eq targetShort 'NetworkAttachmentDefinition') (eq short 'Pod')))}}
+        if (parent.metadata == undefined || parent.metadata.annotations == undefined || parent.metadata.annotations['k8s.v1.cni.cncf.io/networks'] == undefined) return null;
+        let nets = JSON.parse(parent.metadata.annotations['k8s.v1.cni.cncf.io/networks']);
+        if (!Array.isArray(nets)) return null;
+        let nads = nets.map(n=>n.name);
+        if (nads.length<1) return null;
+        const lst = (await list{{targetGroup}}{{targetShort}}.{{targetGroup}}{{targetShort}}(parent,{namespace: parent['metadata']['namespace'], ...args}))
+            .filter(s=>nads.includes(s['metadata']['name']))
+        if (lst.length>0) return lst;
+{{/if}}
+      } catch (err) {
+        log.error(err)
+      }
+      return null
+    },

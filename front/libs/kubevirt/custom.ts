@@ -262,15 +262,12 @@ export const KubeVirtReadExcludes = [
 export const KubeVirtSimpleExcludes = [
 ];
 export const VirtualMachineListExcludes = [
-  { path: 'status/printableStatus', include: true },
 ];
 export const VirtualMachineReadExcludes = [
 ];
 export const VirtualMachineSimpleExcludes = [
 ];
 export const VirtualMachineInstanceListExcludes = [
-  { path: 'status/phase', include: true },
-  { path: 'status/nodeName', include: true },
 ];
 export const VirtualMachineInstanceReadExcludes = [
 ];

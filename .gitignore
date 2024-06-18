@@ -26,3 +26,4 @@
 /front/pages/**/*.vue
 !/front/pages/core/*.vue
 !/front/pages/install/vynil/InstallNew.vue
+core

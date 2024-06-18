@@ -56,7 +56,7 @@ input metadataInput {
   resourceVersion: String
   uid: String
 }
-type ownerReference {
+type ownerRef {
   apiVersion: String!
   blockOwnerDeletion: Boolean
   controller: Boolean
@@ -71,7 +71,7 @@ type metadata {
   annotations: JSONObject
   labels: JSONObject
   creationTimestamp: String
-  ownerReferences: [ownerReference]
+  ownerReferences: [ownerRef]
   resourceVersion: String
   uid: String
 }
@@ -176,13 +176,17 @@ type Query {
   vynilCategory(params: queryParameters): [vynilCategory]
   vynilPackage(params: queryParameters): [vynilPackage]
 }
+type MutationResponse {
+  object: JSONObject
+  error: JSONObject
+}
 type Mutation {
-  namespacedCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-  namespacedCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-  namespacedCrdObjectDelete(group: String!, version: String!, plural: String!, namespace: String!, name: String!): coreCrdObject
-  clusteredCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-  clusteredCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): coreCrdObject
-  clusteredCrdObjectDelete(group: String!, version: String!, plural: String!, name: String!): coreCrdObject
+  namespacedCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): MutationResponse
+  namespacedCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): MutationResponse
+  namespacedCrdObjectDelete(group: String!, version: String!, plural: String!, namespace: String!, name: String!): MutationResponse
+  clusteredCrdObjectCreate(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): MutationResponse
+  clusteredCrdObjectPatch(group: String!, version: String!, plural: String!, kind: String!, metadata: metadataInput!, spec: JSONObject): MutationResponse
+  clusteredCrdObjectDelete(group: String!, version: String!, plural: String!, name: String!): MutationResponse
 }
 type Subscription {
   onLog(namespace: String!,pod_name: String!,name: String!): coreLog

@@ -6,17 +6,12 @@
       "name": "com.mongodb.mongodbcommunity.v1.MongoDBCommunity",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "MongoDBCommunitySpec defines the desired state of MongoDB",
             "type": "object",
+            "description": "MongoDBCommunitySpec defines the desired state of MongoDB",
             "required": [
               "security",
               "type",
@@ -25,11 +20,15 @@
             "properties": {
               "additionalConnectionStringConfig": {
                 "description": "Additional options to be appended to the connection string. These options apply to the entire resource and to each user.",
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object",
+                "nullable": true
               },
               "additionalMongodConfig": {
                 "description": "AdditionalMongodConfig is additional configuration that can be passed to each data-bearing mongod at runtime. Uses the same structure as the mongod configuration file: https://www.mongodb.com/docs/manual/reference/configuration-options/",
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object",
+                "nullable": true
               },
               "agent": {
                 "description": "AgentConfiguration sets options for the MongoDB automation agent",
@@ -272,7 +271,11 @@
                           "X509"
                         ]
                       },
-                      "ignoreUnknownUsers": {},
+                      "ignoreUnknownUsers": {
+                        "type": "boolean",
+                        "default": true,
+                        "nullable": true
+                      },
                       "modes": {
                         "description": "Modes is an array specifying which authentication methods should be enabled.",
                         "type": "array",
@@ -474,7 +477,8 @@
                     }
                   },
                   "spec": {
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   }
                 }
               },
@@ -497,7 +501,9 @@
                   "properties": {
                     "additionalConnectionStringConfig": {
                       "description": "Additional options to be appended to the connection string. These options apply only to this user and will override any existing options in the resource.",
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object",
+                      "nullable": true
                     },
                     "connectionStringSecretName": {
                       "description": "ConnectionStringSecretName is the name of the secret object created by the operator which exposes the connection strings for the user. If provided, this secret must be different for each user in a deployment.",
@@ -505,7 +511,8 @@
                     },
                     "db": {
                       "description": "DB is the database the user is stored in. Defaults to \"admin\"",
-                      "type": "string"
+                      "type": "string",
+                      "default": "admin"
                     },
                     "name": {
                       "description": "Name is the username of the user",
@@ -565,8 +572,8 @@
             }
           },
           "status": {
-            "description": "MongoDBCommunityStatus defines the observed state of MongoDB",
             "type": "object",
+            "description": "MongoDBCommunityStatus defines the observed state of MongoDB",
             "required": [
               "currentMongoDBMembers",
               "currentStatefulSetReplicas",
@@ -599,6 +606,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "MongoDBCommunity is the Schema for the mongodbs API",

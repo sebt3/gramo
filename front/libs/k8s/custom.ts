@@ -210,6 +210,26 @@ export const iconReferenceGrant = systemIcon;
 export const colorReferenceGrant = networkColor;
 export const descriptionReferenceGrant = '';
 export const shortReferenceGrant = 'ReferenceGrant';
+export const iconNetworkAttachmentDefinition = networkIcon;
+export const colorNetworkAttachmentDefinition = networkColor;
+export const descriptionNetworkAttachmentDefinition = '';
+export const shortNetworkAttachmentDefinition = 'NetworkAttachmentDefinition';
+export const iconHNCConfiguration = securityIcon;
+export const colorHNCConfiguration = securityColor;
+export const descriptionHNCConfiguration = '';
+export const shortHNCConfiguration = 'HNCConfiguration';
+export const iconHierarchicalResourceQuota = securityIcon;
+export const colorHierarchicalResourceQuota = securityColor;
+export const descriptionHierarchicalResourceQuota = '';
+export const shortHierarchicalResourceQuota = 'HierarchicalResourceQuota';
+export const iconHierarchyConfiguration = securityIcon;
+export const colorHierarchyConfiguration = securityColor;
+export const descriptionHierarchyConfiguration = '';
+export const shortHierarchyConfiguration = 'HierarchyConfiguration';
+export const iconSubnamespaceAnchor = securityIcon;
+export const colorSubnamespaceAnchor = securityColor;
+export const descriptionSubnamespaceAnchor = '';
+export const shortSubnamespaceAnchor = 'SubnamespaceAnchor';
 export const extraConfigMapColumns:Array<QTableColumn> = [
 //  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
@@ -396,6 +416,21 @@ export const extraHTTPRouteColumns:Array<QTableColumn> = [
 ];
 export const extraReferenceGrantColumns:Array<QTableColumn> = [
   {name: 'Age', label: `${i18n.global.t('meta.age')}`, field: row => timeAgo(row.metadata.creationTimestamp), sortable: true, align: tableColumnAlign.left},
+];
+export const extraNetworkAttachmentDefinitionColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraHNCConfigurationColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraHierarchicalResourceQuotaColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraHierarchyConfigurationColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
+];
+export const extraSubnamespaceAnchorColumns:Array<QTableColumn> = [
+//  {name: 'Name', label: 'Name', field: row => row.metadata.name, sortable: true, align: tableColumnAlign.left},
 ];
 export const ConfigMapListExcludes = [
 ];
@@ -728,4 +763,34 @@ export const ReferenceGrantListExcludes = [
 export const ReferenceGrantReadExcludes = [
 ];
 export const ReferenceGrantSimpleExcludes = [
+];
+export const NetworkAttachmentDefinitionListExcludes = [
+];
+export const NetworkAttachmentDefinitionReadExcludes = [
+];
+export const NetworkAttachmentDefinitionSimpleExcludes = [
+];
+export const HNCConfigurationListExcludes = [
+];
+export const HNCConfigurationReadExcludes = [
+];
+export const HNCConfigurationSimpleExcludes = [
+];
+export const HierarchicalResourceQuotaListExcludes = [
+];
+export const HierarchicalResourceQuotaReadExcludes = [
+];
+export const HierarchicalResourceQuotaSimpleExcludes = [
+];
+export const HierarchyConfigurationListExcludes = [
+];
+export const HierarchyConfigurationReadExcludes = [
+];
+export const HierarchyConfigurationSimpleExcludes = [
+];
+export const SubnamespaceAnchorListExcludes = [
+];
+export const SubnamespaceAnchorReadExcludes = [
+];
+export const SubnamespaceAnchorSimpleExcludes = [
 ];

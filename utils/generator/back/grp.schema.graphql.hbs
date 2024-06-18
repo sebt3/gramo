@@ -24,9 +24,9 @@ type Query {
 type Mutation {
 {{#each objects}}
   {{#unless (defined crd)}}
-    {{../name}}{{this.short}}Create(metadata: metadataInput!, {{genParameterQuery this}}): {{../name}}{{this.short}}
-    {{../name}}{{this.short}}Patch(metadata: metadataInput!, {{genParameterQuery this}}): {{../name}}{{this.short}}
-    {{../name}}{{this.short}}Delete({{#if this.namespaced}}namespace: String!, {{/if}}name: String!): {{../name}}{{this.short}}
+    {{../name}}{{this.short}}Create(metadata: metadataInput!, {{genParameterQuery this}}): MutationResponse
+    {{../name}}{{this.short}}Patch(metadata: metadataInput!, {{genParameterQuery this}}): MutationResponse
+    {{../name}}{{this.short}}Delete({{#if this.namespaced}}namespace: String!, {{/if}}name: String!): MutationResponse
   {{/unless}}
 {{/each}}
 }

@@ -5,12 +5,12 @@ export { {{short}}Definition, {{short}}Columns, {{ short }}ListExcludes, {{ shor
 const { useCRDStore } = await import('../../stores/crds.js')
 const { usePermissionStore } = await import('../../stores/permission.js')
 const crds = useCRDStore().crds;
-const havePermission = usePermissionStore().have;
+const havePermissionUsingStore = usePermissionStore().have;
 const can = usePermissionStore().can;
 
 {{#each objects}}
 export const can{{ short }} = (verb:string, namespace?:string) => can(verb, '{{group}}', '{{short}}', namespace)
-export const have{{ short }} = () => {{#if (defined crd)}}crds['{{crd.metadata.name}}'] != undefined && {{/if}}havePermission('{{group}}', '{{short}}')
+export const have{{ short }} = () => {{#if (defined crd)}}crds['{{crd.metadata.name}}'] != undefined && {{/if}}havePermissionUsingStore('{{group}}', '{{short}}')
 {{/each}}
 export function isActive{{ category }}{{ name }}() {
     let count = 0;

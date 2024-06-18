@@ -7,17 +7,12 @@
           "name": "io.traefik.v1alpha1.IngressRoute",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteSpec defines the desired state of IngressRoute.",
                 "type": "object",
+                "description": "IngressRouteSpec defines the desired state of IngressRoute.",
                 "required": [
                   "routes"
                 ],
@@ -112,7 +107,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "responseForwarding": {
                                 "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -252,6 +255,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRoute is the CRD implementation of a Traefik HTTP Router.",
@@ -597,17 +608,12 @@
           "name": "us.containo.traefik.v1alpha1.IngressRoute",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteSpec defines the desired state of IngressRoute.",
                 "type": "object",
+                "description": "IngressRouteSpec defines the desired state of IngressRoute.",
                 "required": [
                   "routes"
                 ],
@@ -702,7 +708,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "responseForwarding": {
                                 "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -834,6 +848,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRoute is the CRD implementation of a Traefik HTTP Router.",
@@ -1171,17 +1193,12 @@
       "name": "io.traefik.v1alpha1.IngressRoute",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IngressRouteSpec defines the desired state of IngressRoute.",
             "type": "object",
+            "description": "IngressRouteSpec defines the desired state of IngressRoute.",
             "required": [
               "routes"
             ],
@@ -1276,7 +1293,15 @@
                           },
                           "port": {
                             "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "responseForwarding": {
                             "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -1416,6 +1441,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "IngressRoute is the CRD implementation of a Traefik HTTP Router.",
@@ -1763,17 +1796,12 @@
           "name": "io.traefik.v1alpha1.IngressRouteTCP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
                 "type": "object",
+                "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
                 "required": [
                   "routes"
                 ],
@@ -1849,7 +1877,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "proxyProtocol": {
                                 "description": "ProxyProtocol defines the PROXY protocol configuration.\nMore info: https://doc.traefik.io/traefik/v3.0/routing/services/#proxy-protocol",
@@ -1961,6 +1997,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.",
@@ -2259,17 +2303,12 @@
           "name": "us.containo.traefik.v1alpha1.IngressRouteTCP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
                 "type": "object",
+                "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
                 "required": [
                   "routes"
                 ],
@@ -2345,7 +2384,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "proxyProtocol": {
                                 "description": "ProxyProtocol defines the PROXY protocol configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#proxy-protocol",
@@ -2445,6 +2492,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.",
@@ -2731,17 +2786,12 @@
       "name": "io.traefik.v1alpha1.IngressRouteTCP",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
             "type": "object",
+            "description": "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.",
             "required": [
               "routes"
             ],
@@ -2817,7 +2867,15 @@
                           },
                           "port": {
                             "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "proxyProtocol": {
                             "description": "ProxyProtocol defines the PROXY protocol configuration.\nMore info: https://doc.traefik.io/traefik/v3.0/routing/services/#proxy-protocol",
@@ -2929,6 +2987,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.",
@@ -3229,17 +3295,12 @@
           "name": "io.traefik.v1alpha1.IngressRouteUDP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
                 "type": "object",
+                "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
                 "required": [
                   "routes"
                 ],
@@ -3283,7 +3344,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "weight": {
                                 "description": "Weight defines the weight used when balancing requests between multiple Kubernetes Service.",
@@ -3296,6 +3365,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.",
@@ -3463,17 +3540,12 @@
           "name": "us.containo.traefik.v1alpha1.IngressRouteUDP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
                 "type": "object",
+                "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
                 "required": [
                   "routes"
                 ],
@@ -3517,7 +3589,15 @@
                               },
                               "port": {
                                 "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                                "x-kubernetes-int-or-string": true
+                                "x-kubernetes-int-or-string": true,
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
                               },
                               "weight": {
                                 "description": "Weight defines the weight used when balancing requests between multiple Kubernetes Service.",
@@ -3530,6 +3610,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.",
@@ -3697,17 +3785,12 @@
       "name": "io.traefik.v1alpha1.IngressRouteUDP",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
             "type": "object",
+            "description": "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.",
             "required": [
               "routes"
             ],
@@ -3751,7 +3834,15 @@
                           },
                           "port": {
                             "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "weight": {
                             "description": "Weight defines the weight used when balancing requests between multiple Kubernetes Service.",
@@ -3764,6 +3855,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.",
@@ -3933,17 +4032,12 @@
           "name": "io.traefik.v1alpha1.Middleware",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "MiddlewareSpec defines the desired state of a Middleware.",
                 "type": "object",
+                "description": "MiddlewareSpec defines the desired state of a Middleware.",
                 "properties": {
                   "addPrefix": {
                     "description": "AddPrefix holds the add prefix middleware configuration.\nThis middleware updates the path of a request before forwarding it.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/http/addprefix/",
@@ -4040,7 +4134,15 @@
                     "properties": {
                       "checkPeriod": {
                         "description": "CheckPeriod is the interval between successive checks of the circuit breaker condition (when in standby state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "expression": {
                         "description": "Expression is the condition that triggers the tripped state.",
@@ -4048,11 +4150,27 @@
                       },
                       "fallbackDuration": {
                         "description": "FallbackDuration is the duration for which the circuit breaker will wait before trying to recover (from a tripped state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "recoveryDuration": {
                         "description": "RecoveryDuration is the duration for which the circuit breaker will try to recover (as soon as it is in recovering state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -4153,7 +4271,15 @@
                           },
                           "port": {
                             "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "responseForwarding": {
                             "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -4697,7 +4823,15 @@
                       },
                       "period": {
                         "description": "Period, in combination with Average, defines the actual maximum rate, such as:\nr = Average / Period. It defaults to a second.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "sourceCriterion": {
                         "description": "SourceCriterion defines what criterion is used to group requests as originating from a common source.\nIf several strategies are defined at the same time, an error will be raised.\nIf none are set, the default is to use the request's remote address field (as an ipStrategy).",
@@ -4802,7 +4936,15 @@
                       },
                       "initialInterval": {
                         "description": "InitialInterval defines the first wait time in the exponential backoff series.\nThe maximum interval is calculated as twice the initialInterval.\nIf unspecified, requests will be retried immediately.\nThe value of initialInterval should be provided in seconds or as a valid duration format,\nsee https://pkg.go.dev/time#ParseDuration.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -4837,6 +4979,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "Middleware is the CRD implementation of a Traefik Middleware.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/http/overview/",
@@ -5881,17 +6031,12 @@
           "name": "us.containo.traefik.v1alpha1.Middleware",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "MiddlewareSpec defines the desired state of a Middleware.",
                 "type": "object",
+                "description": "MiddlewareSpec defines the desired state of a Middleware.",
                 "properties": {
                   "addPrefix": {
                     "description": "AddPrefix holds the add prefix middleware configuration. This middleware updates the path of a request before forwarding it. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/addprefix/",
@@ -5988,7 +6133,15 @@
                     "properties": {
                       "checkPeriod": {
                         "description": "CheckPeriod is the interval between successive checks of the circuit breaker condition (when in standby state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "expression": {
                         "description": "Expression is the condition that triggers the tripped state.",
@@ -5996,11 +6149,27 @@
                       },
                       "fallbackDuration": {
                         "description": "FallbackDuration is the duration for which the circuit breaker will wait before trying to recover (from a tripped state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "recoveryDuration": {
                         "description": "RecoveryDuration is the duration for which the circuit breaker will try to recover (as soon as it is in recovering state).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -6094,7 +6263,15 @@
                           },
                           "port": {
                             "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                            "x-kubernetes-int-or-string": true
+                            "x-kubernetes-int-or-string": true,
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
                           },
                           "responseForwarding": {
                             "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -6579,7 +6756,15 @@
                       },
                       "period": {
                         "description": "Period, in combination with Average, defines the actual maximum rate, such as: r = Average / Period. It defaults to a second.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "sourceCriterion": {
                         "description": "SourceCriterion defines what criterion is used to group requests as originating from a common source. If several strategies are defined at the same time, an error will be raised. If none are set, the default is to use the request's remote address field (as an ipStrategy).",
@@ -6684,7 +6869,15 @@
                       },
                       "initialInterval": {
                         "description": "InitialInterval defines the first wait time in the exponential backoff series. The maximum interval is calculated as twice the initialInterval. If unspecified, requests will be retried immediately. The value of initialInterval should be provided in seconds or as a valid duration format, see https://pkg.go.dev/time#ParseDuration.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -6719,6 +6912,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "Middleware is the CRD implementation of a Traefik Middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/overview/",
@@ -7697,17 +7898,12 @@
       "name": "io.traefik.v1alpha1.Middleware",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "MiddlewareSpec defines the desired state of a Middleware.",
             "type": "object",
+            "description": "MiddlewareSpec defines the desired state of a Middleware.",
             "properties": {
               "addPrefix": {
                 "description": "AddPrefix holds the add prefix middleware configuration.\nThis middleware updates the path of a request before forwarding it.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/http/addprefix/",
@@ -7804,7 +8000,15 @@
                 "properties": {
                   "checkPeriod": {
                     "description": "CheckPeriod is the interval between successive checks of the circuit breaker condition (when in standby state).",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "expression": {
                     "description": "Expression is the condition that triggers the tripped state.",
@@ -7812,11 +8016,27 @@
                   },
                   "fallbackDuration": {
                     "description": "FallbackDuration is the duration for which the circuit breaker will wait before trying to recover (from a tripped state).",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "recoveryDuration": {
                     "description": "RecoveryDuration is the duration for which the circuit breaker will try to recover (as soon as it is in recovering state).",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   }
                 }
               },
@@ -7917,7 +8137,15 @@
                       },
                       "port": {
                         "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "responseForwarding": {
                         "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -8461,7 +8689,15 @@
                   },
                   "period": {
                     "description": "Period, in combination with Average, defines the actual maximum rate, such as:\nr = Average / Period. It defaults to a second.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "sourceCriterion": {
                     "description": "SourceCriterion defines what criterion is used to group requests as originating from a common source.\nIf several strategies are defined at the same time, an error will be raised.\nIf none are set, the default is to use the request's remote address field (as an ipStrategy).",
@@ -8566,7 +8802,15 @@
                   },
                   "initialInterval": {
                     "description": "InitialInterval defines the first wait time in the exponential backoff series.\nThe maximum interval is calculated as twice the initialInterval.\nIf unspecified, requests will be retried immediately.\nThe value of initialInterval should be provided in seconds or as a valid duration format,\nsee https://pkg.go.dev/time#ParseDuration.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   }
                 }
               },
@@ -8601,6 +8845,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Middleware is the CRD implementation of a Traefik Middleware.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/http/overview/",
@@ -9647,17 +9899,12 @@
           "name": "io.traefik.v1alpha1.MiddlewareTCP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
                 "type": "object",
+                "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
                 "properties": {
                   "inFlightConn": {
                     "description": "InFlightConn defines the InFlightConn middleware configuration.",
@@ -9697,6 +9944,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/overview/",
@@ -9839,17 +10094,12 @@
           "name": "us.containo.traefik.v1alpha1.MiddlewareTCP",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
                 "type": "object",
+                "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
                 "properties": {
                   "inFlightConn": {
                     "description": "InFlightConn defines the InFlightConn middleware configuration.",
@@ -9876,6 +10126,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "MiddlewareTCP is the CRD implementation of a Traefik TCP middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/overview/",
@@ -10005,17 +10263,12 @@
       "name": "io.traefik.v1alpha1.MiddlewareTCP",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
             "type": "object",
+            "description": "MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.",
             "properties": {
               "inFlightConn": {
                 "description": "InFlightConn defines the InFlightConn middleware configuration.",
@@ -10055,6 +10308,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.\nMore info: https://doc.traefik.io/traefik/v3.0/middlewares/overview/",
@@ -10199,17 +10460,12 @@
           "name": "io.traefik.v1alpha1.ServersTransport",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
                 "type": "object",
+                "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
                 "properties": {
                   "certificatesSecrets": {
                     "description": "CertificatesSecrets defines a list of secret storing client certificates for mTLS.",
@@ -10228,23 +10484,63 @@
                     "properties": {
                       "dialTimeout": {
                         "description": "DialTimeout is the amount of time to wait until a connection to a backend server can be established.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "idleConnTimeout": {
                         "description": "IdleConnTimeout is the maximum period for which an idle HTTP keep-alive connection will remain open before closing itself.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "pingTimeout": {
                         "description": "PingTimeout is the timeout after which the HTTP/2 connection will be closed if a response to ping is not received.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "readIdleTimeout": {
                         "description": "ReadIdleTimeout is the timeout after which a health check using ping frame will be carried out if no frame is received on the HTTP/2 connection.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "responseHeaderTimeout": {
                         "description": "ResponseHeaderTimeout is the amount of time to wait for a server's response headers after fully writing the request (including its body, if any).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -10289,6 +10585,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "ServersTransport is the CRD implementation of a ServersTransport.\nIf no serversTransport is specified, the default@internal will be used.\nThe default@internal serversTransport is created from the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.0/routing/services/#serverstransport_1",
@@ -10511,17 +10815,12 @@
           "name": "us.containo.traefik.v1alpha1.ServersTransport",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
                 "type": "object",
+                "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
                 "properties": {
                   "certificatesSecrets": {
                     "description": "CertificatesSecrets defines a list of secret storing client certificates for mTLS.",
@@ -10540,23 +10839,63 @@
                     "properties": {
                       "dialTimeout": {
                         "description": "DialTimeout is the amount of time to wait until a connection to a backend server can be established.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "idleConnTimeout": {
                         "description": "IdleConnTimeout is the maximum period for which an idle HTTP keep-alive connection will remain open before closing itself.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "pingTimeout": {
                         "description": "PingTimeout is the timeout after which the HTTP/2 connection will be closed if a response to ping is not received.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "readIdleTimeout": {
                         "description": "ReadIdleTimeout is the timeout after which a health check using ping frame will be carried out if no frame is received on the HTTP/2 connection.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "responseHeaderTimeout": {
                         "description": "ResponseHeaderTimeout is the amount of time to wait for a server's response headers after fully writing the request (including its body, if any).",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -10584,6 +10923,14 @@
                     "type": "string"
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "ServersTransport is the CRD implementation of a ServersTransport. If no serversTransport is specified, the default@internal will be used. The default@internal serversTransport is created from the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#serverstransport_1",
@@ -10789,17 +11136,12 @@
       "name": "io.traefik.v1alpha1.ServersTransport",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
             "type": "object",
+            "description": "ServersTransportSpec defines the desired state of a ServersTransport.",
             "properties": {
               "certificatesSecrets": {
                 "description": "CertificatesSecrets defines a list of secret storing client certificates for mTLS.",
@@ -10818,23 +11160,63 @@
                 "properties": {
                   "dialTimeout": {
                     "description": "DialTimeout is the amount of time to wait until a connection to a backend server can be established.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "idleConnTimeout": {
                     "description": "IdleConnTimeout is the maximum period for which an idle HTTP keep-alive connection will remain open before closing itself.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "pingTimeout": {
                     "description": "PingTimeout is the timeout after which the HTTP/2 connection will be closed if a response to ping is not received.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "readIdleTimeout": {
                     "description": "ReadIdleTimeout is the timeout after which a health check using ping frame will be carried out if no frame is received on the HTTP/2 connection.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "responseHeaderTimeout": {
                     "description": "ResponseHeaderTimeout is the amount of time to wait for a server's response headers after fully writing the request (including its body, if any).",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   }
                 }
               },
@@ -10879,6 +11261,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "ServersTransport is the CRD implementation of a ServersTransport.\nIf no serversTransport is specified, the default@internal will be used.\nThe default@internal serversTransport is created from the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.0/routing/services/#serverstransport_1",
@@ -11103,17 +11493,12 @@
           "name": "io.traefik.v1alpha1.TLSOption",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TLSOptionSpec defines the desired state of a TLSOption.",
                 "type": "object",
+                "description": "TLSOptionSpec defines the desired state of a TLSOption.",
                 "properties": {
                   "alpnProtocols": {
                     "description": "ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#alpn-protocols",
@@ -11177,6 +11562,14 @@
                     "type": "boolean"
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#tls-options",
@@ -11343,17 +11736,12 @@
           "name": "us.containo.traefik.v1alpha1.TLSOption",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TLSOptionSpec defines the desired state of a TLSOption.",
                 "type": "object",
+                "description": "TLSOptionSpec defines the desired state of a TLSOption.",
                 "properties": {
                   "alpnProtocols": {
                     "description": "ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#alpn-protocols",
@@ -11417,6 +11805,14 @@
                     "type": "boolean"
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options",
@@ -11583,17 +11979,12 @@
       "name": "io.traefik.v1alpha1.TLSOption",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "TLSOptionSpec defines the desired state of a TLSOption.",
             "type": "object",
+            "description": "TLSOptionSpec defines the desired state of a TLSOption.",
             "properties": {
               "alpnProtocols": {
                 "description": "ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#alpn-protocols",
@@ -11657,6 +12048,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#tls-options",
@@ -11825,17 +12224,12 @@
           "name": "io.traefik.v1alpha1.TLSStore",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TLSStoreSpec defines the desired state of a TLSStore.",
                 "type": "object",
+                "description": "TLSStoreSpec defines the desired state of a TLSStore.",
                 "properties": {
                   "certificates": {
                     "description": "Certificates is a list of secret names, each secret holding a key/certificate pair to add to the store.",
@@ -11895,6 +12289,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TLSStore is the CRD implementation of a Traefik TLS Store.\nFor the time being, only the TLSStore named default is supported.\nThis means that you cannot have two stores that are named default in different Kubernetes namespaces.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#certificates-stores",
@@ -12057,17 +12459,12 @@
           "name": "us.containo.traefik.v1alpha1.TLSStore",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TLSStoreSpec defines the desired state of a TLSStore.",
                 "type": "object",
+                "description": "TLSStoreSpec defines the desired state of a TLSStore.",
                 "properties": {
                   "certificates": {
                     "description": "Certificates is a list of secret names, each secret holding a key/certificate pair to add to the store.",
@@ -12127,6 +12524,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TLSStore is the CRD implementation of a Traefik TLS Store. For the time being, only the TLSStore named default is supported. This means that you cannot have two stores that are named default in different Kubernetes namespaces. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#certificates-stores",
@@ -12289,17 +12694,12 @@
       "name": "io.traefik.v1alpha1.TLSStore",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "TLSStoreSpec defines the desired state of a TLSStore.",
             "type": "object",
+            "description": "TLSStoreSpec defines the desired state of a TLSStore.",
             "properties": {
               "certificates": {
                 "description": "Certificates is a list of secret names, each secret holding a key/certificate pair to add to the store.",
@@ -12359,6 +12759,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "TLSStore is the CRD implementation of a Traefik TLS Store.\nFor the time being, only the TLSStore named default is supported.\nThis means that you cannot have two stores that are named default in different Kubernetes namespaces.\nMore info: https://doc.traefik.io/traefik/v3.0/https/tls/#certificates-stores",
@@ -12523,17 +12931,12 @@
           "name": "io.traefik.v1alpha1.TraefikService",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
                 "type": "object",
+                "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
                 "properties": {
                   "mirroring": {
                     "description": "Mirroring defines the Mirroring service configuration.",
@@ -12595,7 +12998,15 @@
                             },
                             "port": {
                               "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "responseForwarding": {
                               "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -12676,7 +13087,15 @@
                       },
                       "port": {
                         "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "responseForwarding": {
                         "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -12778,7 +13197,15 @@
                             },
                             "port": {
                               "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "responseForwarding": {
                               "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -12876,6 +13303,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TraefikService is the CRD implementation of a Traefik Service.\nTraefikService object allows to:\n- Apply weight to Services on load-balancing\n- Mirror traffic on services\nMore info: https://doc.traefik.io/traefik/v3.0/routing/providers/kubernetes-crd/#kind-traefikservice",
@@ -13345,17 +13780,12 @@
           "name": "us.containo.traefik.v1alpha1.TraefikService",
           "definition": {
             "properties": {
-              "apiVersion": {
-                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-                "type": "string"
-              },
-              "kind": {
-                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-                "type": "string"
+              "metadata": {
+                "type": "object"
               },
               "spec": {
-                "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
                 "type": "object",
+                "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
                 "properties": {
                   "mirroring": {
                     "description": "Mirroring defines the Mirroring service configuration.",
@@ -13417,7 +13847,15 @@
                             },
                             "port": {
                               "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "responseForwarding": {
                               "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -13494,7 +13932,15 @@
                       },
                       "port": {
                         "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "responseForwarding": {
                         "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -13592,7 +14038,15 @@
                             },
                             "port": {
                               "description": "Port defines the port of a Kubernetes Service. This can be a reference to a named port.",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "responseForwarding": {
                               "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -13682,6 +14136,14 @@
                     }
                   }
                 }
+              },
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
               }
             },
             "description": "TraefikService is the CRD implementation of a Traefik Service. TraefikService object allows to: - Apply weight to Services on load-balancing - Mirror traffic on services More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-traefikservice",
@@ -14135,17 +14597,12 @@
       "name": "io.traefik.v1alpha1.TraefikService",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
             "type": "object",
+            "description": "TraefikServiceSpec defines the desired state of a TraefikService.",
             "properties": {
               "mirroring": {
                 "description": "Mirroring defines the Mirroring service configuration.",
@@ -14207,7 +14664,15 @@
                         },
                         "port": {
                           "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         },
                         "responseForwarding": {
                           "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -14288,7 +14753,15 @@
                   },
                   "port": {
                     "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "responseForwarding": {
                     "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -14390,7 +14863,15 @@
                         },
                         "port": {
                           "description": "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         },
                         "responseForwarding": {
                           "description": "ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.",
@@ -14488,6 +14969,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "TraefikService is the CRD implementation of a Traefik Service.\nTraefikService object allows to:\n- Apply weight to Services on load-balancing\n- Mirror traffic on services\nMore info: https://doc.traefik.io/traefik/v3.0/routing/providers/kubernetes-crd/#kind-traefikservice",
@@ -14958,29 +15447,48 @@
       "name": "io.traefik.v1alpha1.ServersTransportTCP",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.",
             "type": "object",
+            "description": "ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.",
             "properties": {
               "dialKeepAlive": {
                 "description": "DialKeepAlive is the interval between keep-alive probes for an active network connection. If zero, keep-alive probes are sent with a default value (currently 15 seconds), if supported by the protocol and operating system. Network protocols or operating systems that do not support keep-alives ignore this field. If negative, keep-alive probes are disabled.",
-                "x-kubernetes-int-or-string": true
+                "x-kubernetes-int-or-string": true,
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
               },
               "dialTimeout": {
                 "description": "DialTimeout is the amount of time to wait until a connection to a backend server can be established.",
-                "x-kubernetes-int-or-string": true
+                "x-kubernetes-int-or-string": true,
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
               },
               "terminationDelay": {
                 "description": "TerminationDelay defines the delay to wait before fully terminating the connection, after one connected peer has closed its writing capability.",
-                "x-kubernetes-int-or-string": true
+                "x-kubernetes-int-or-string": true,
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
               },
               "tls": {
                 "description": "TLS defines the TLS configuration",
@@ -15032,6 +15540,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "ServersTransportTCP is the CRD implementation of a TCPServersTransport.\nIf no tcpServersTransport is specified, a default one named default@internal will be used.\nThe default@internal tcpServersTransport can be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.0/routing/services/#serverstransport_3",

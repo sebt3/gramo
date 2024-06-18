@@ -6,17 +6,12 @@
       "name": "io.cnpg.postgresql.v1.Backup",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "Specification of the desired behavior of the backup. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Specification of the desired behavior of the backup. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "required": [
               "cluster"
             ],
@@ -40,7 +35,8 @@
                 "enum": [
                   "barmanObjectStore",
                   "volumeSnapshot"
-                ]
+                ],
+                "default": "barmanObjectStore"
               },
               "online": {
                 "description": "Whether the default type of backup with volume snapshots is online/hot (`true`, default) or offline/cold (`false`) Overrides the default setting specified in the cluster field '.spec.backup.volumeSnapshot.online'",
@@ -56,7 +52,8 @@
                   },
                   "waitForArchive": {
                     "description": "If false, the function will return immediately after the backup is completed, without waiting for WAL to be archived. This behavior is only useful with backup software that independently monitors WAL archiving. Otherwise, WAL required to make the backup consistent might be missing and make the backup useless. By default, or when this parameter is true, pg_backup_stop will wait for WAL to be archived when archiving is enabled. On a standby, this means that it will wait only when archive_mode = always. If write activity on the primary is low, it may be useful to run pg_switch_wal on the primary in order to trigger an immediate segment switch.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   }
                 }
               },
@@ -71,8 +68,8 @@
             }
           },
           "status": {
-            "description": "Most recently observed status of the backup. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Most recently observed status of the backup. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "properties": {
               "azureCredentials": {
                 "description": "The credentials to use to upload data to Azure Blob Storage",
@@ -415,6 +412,14 @@
                 "format": "byte"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Backup is the Schema for the backups API",
@@ -978,17 +983,12 @@
       "name": "io.cnpg.postgresql.v1.Cluster",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "Specification of the desired behavior of the cluster. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Specification of the desired behavior of the cluster. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "required": [
               "instances"
             ],
@@ -2022,7 +2022,8 @@
                     "enum": [
                       "primary",
                       "prefer-standby"
-                    ]
+                    ],
+                    "default": "prefer-standby"
                   },
                   "volumeSnapshot": {
                     "description": "VolumeSnapshot provides the configuration for the execution of volume snapshot backups.",
@@ -2048,7 +2049,8 @@
                       },
                       "online": {
                         "description": "Whether the default type of backup with volume snapshots is online/hot (`true`, default) or offline/cold (`false`)",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": true
                       },
                       "onlineConfiguration": {
                         "description": "Configuration parameters to control the online/hot backup with volume snapshots",
@@ -2060,8 +2062,13 @@
                           },
                           "waitForArchive": {
                             "description": "If false, the function will return immediately after the backup is completed, without waiting for WAL to be archived. This behavior is only useful with backup software that independently monitors WAL archiving. Otherwise, WAL required to make the backup consistent might be missing and make the backup useless. By default, or when this parameter is true, pg_backup_stop will wait for WAL to be archived when archiving is enabled. On a standby, this means that it will wait only when archive_mode = always. If write activity on the primary is low, it may be useful to run pg_switch_wal on the primary in order to trigger an immediate segment switch.",
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": true
                           }
+                        },
+                        "default": {
+                          "immediateCheckpoint": false,
+                          "waitForArchive": true
                         }
                       },
                       "snapshotOwnerReference": {
@@ -2071,7 +2078,8 @@
                           "none",
                           "cluster",
                           "backup"
-                        ]
+                        ],
+                        "default": "none"
                       },
                       "tablespaceClassName": {
                         "description": "TablespaceClassName specifies the Snapshot Class to be used for the tablespaces. defaults to the PGDATA Snapshot Class, if set",
@@ -2530,7 +2538,8 @@
               },
               "enableSuperuserAccess": {
                 "description": "When this option is enabled, the operator will use the `SuperuserSecret` to update the `postgres` user password (if the secret is not present, the operator will automatically create one). When this option is disabled, the operator will ignore the `SuperuserSecret` content, delete it when automatically created, and then blank the password of the `postgres` user by setting it to `NULL`. Disabled by default.",
-                "type": "boolean"
+                "type": "boolean",
+                "default": false
               },
               "env": {
                 "description": "Env follows the Env format to pass environment variables to the pods created in the cluster",
@@ -2608,7 +2617,15 @@
                             "divisor": {
                               "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             },
                             "resource": {
                               "description": "Required: resource to select",
@@ -2793,7 +2810,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               },
                               "requests": {
@@ -2801,7 +2826,15 @@
                                 "type": "object",
                                 "additionalProperties": {
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -2874,12 +2907,28 @@
                   "shm": {
                     "description": "Shm is the size limit of the shared memory volume",
                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "temporaryData": {
                     "description": "TemporaryData is the size limit of the temporary data volume",
                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                    "x-kubernetes-int-or-string": true
+                    "x-kubernetes-int-or-string": true,
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   }
                 }
               },
@@ -3305,7 +3354,8 @@
               "failoverDelay": {
                 "description": "The amount of time (in seconds) to wait before triggering a failover after the primary PostgreSQL instance in the cluster was detected to be unhealthy",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 0
               },
               "imageName": {
                 "description": "Name of the container image, supporting both tags (`<image>:<tag>`) and digests for deterministic and repeatable deployments (`<image>:<tag>@sha256:<digestValue>`)",
@@ -3353,7 +3403,8 @@
               "instances": {
                 "description": "Number of instances required in the cluster",
                 "type": "integer",
-                "minimum": 1
+                "minimum": 1,
+                "default": 1
               },
               "logLevel": {
                 "description": "The instances' log level, one of the following values: error, warning, info (default), debug, trace",
@@ -3364,7 +3415,8 @@
                   "info",
                   "debug",
                   "trace"
-                ]
+                ],
+                "default": "info"
               },
               "managed": {
                 "description": "The configuration that is used by the portions of PostgreSQL that are managed by the instance manager",
@@ -3391,7 +3443,8 @@
                         "connectionLimit": {
                           "description": "If the role can log in, this specifies how many concurrent connections the role can make. `-1` (the default) means no limit.",
                           "type": "integer",
-                          "format": "int64"
+                          "format": "int64",
+                          "default": -1
                         },
                         "createdb": {
                           "description": "When set to `true`, the role being defined will be allowed to create new databases. Specifying `false` (default) will deny a role the ability to create databases.",
@@ -3411,7 +3464,8 @@
                           "enum": [
                             "present",
                             "absent"
-                          ]
+                          ],
+                          "default": "present"
                         },
                         "inRoles": {
                           "description": "List of one or more existing roles to which this role will be immediately added as a new member. Default empty.",
@@ -3422,7 +3476,8 @@
                         },
                         "inherit": {
                           "description": "Whether a role \"inherits\" the privileges of roles it is a member of. Defaults is `true`.",
-                          "type": "boolean"
+                          "type": "boolean",
+                          "default": true
                         },
                         "login": {
                           "description": "Whether the role is allowed to log in. A role having the `login` attribute can be thought of as a user. Roles without this attribute are useful for managing database privileges, but are not users in the usual sense of the word. Default is `false`.",
@@ -3466,12 +3521,14 @@
               "maxSyncReplicas": {
                 "description": "The target value for the synchronous replication quorum, that can be decreased if the number of ready standbys is lower than this. Undefined or 0 disable synchronous replication.",
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0,
+                "default": 0
               },
               "minSyncReplicas": {
                 "description": "Minimum number of instances required in synchronous replication with the primary. Undefined or 0 allow writes to complete when no standby is available.",
                 "type": "integer",
-                "minimum": 0
+                "minimum": 0,
+                "default": 0
               },
               "monitoring": {
                 "description": "The configuration of the monitoring infrastructure of this cluster",
@@ -3523,11 +3580,13 @@
                   },
                   "disableDefaultQueries": {
                     "description": "Whether the default queries should be injected. Set it to `true` if you don't want to inject default queries into the cluster. Default: false.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "enablePodMonitor": {
                     "description": "Enable or disable the `PodMonitor`",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "podMonitorMetricRelabelings": {
                     "description": "The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.",
@@ -3562,7 +3621,8 @@
                             "KeepEqual",
                             "dropequal",
                             "DropEqual"
-                          ]
+                          ],
+                          "default": "replace"
                         },
                         "modulus": {
                           "description": "Modulus to take of the hash of the source label values. \n Only applicable when the action is `HashMod`.",
@@ -3630,7 +3690,8 @@
                             "KeepEqual",
                             "dropequal",
                             "DropEqual"
-                          ]
+                          ],
+                          "default": "replace"
                         },
                         "modulus": {
                           "description": "Modulus to take of the hash of the source label values. \n Only applicable when the action is `HashMod`.",
@@ -3673,23 +3734,27 @@
                 "properties": {
                   "inProgress": {
                     "description": "Is there a node maintenance activity in progress?",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "reusePVC": {
                     "description": "Reuse the existing PVC (wait for the node to come up again) or not (recreate it elsewhere - when `instances` >1)",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   }
                 }
               },
               "postgresGID": {
                 "description": "The GID of the `postgres` user inside the image, defaults to `26`",
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "default": 26
               },
               "postgresUID": {
                 "description": "The UID of the `postgres` user inside the image, defaults to `26`",
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "default": 26
               },
               "postgresql": {
                 "description": "Configuration of the PostgreSQL server",
@@ -3844,7 +3909,8 @@
                 "enum": [
                   "switchover",
                   "restart"
-                ]
+                ],
+                "default": "restart"
               },
               "primaryUpdateStrategy": {
                 "description": "Deployment strategy to follow to upgrade the primary server during a rolling update procedure, after all replicas have been successfully updated: it can be automated (`unsupervised` - default) or manual (`supervised`)",
@@ -3852,7 +3918,8 @@
                 "enum": [
                   "unsupervised",
                   "supervised"
-                ]
+                ],
+                "default": "unsupervised"
               },
               "priorityClassName": {
                 "description": "Name of the priority class which will be used in every generated Pod, if the PriorityClass specified does not exist, the pod will not be able to schedule.  Please refer to https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass for more information",
@@ -3971,7 +4038,15 @@
                                       "divisor": {
                                         "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                         "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                        "x-kubernetes-int-or-string": true
+                                        "x-kubernetes-int-or-string": true,
+                                        "anyOf": [
+                                          {
+                                            "type": "integer"
+                                          },
+                                          {
+                                            "type": "string"
+                                          }
+                                        ]
                                       },
                                       "resource": {
                                         "description": "Required: resource to select",
@@ -4083,19 +4158,30 @@
                     "properties": {
                       "enabled": {
                         "description": "If enabled (default), the operator will automatically manage replication slots on the primary instance and use them in streaming replication connections with all the standby instances that are part of the HA cluster. If disabled, the operator will not take advantage of replication slots in streaming connections with the replicas. This feature also controls replication slots in replica cluster, from the designated primary to its cascading replicas.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": true
                       },
                       "slotPrefix": {
                         "description": "Prefix for replication slots managed by the operator for HA. It may only contain lower case letters, numbers, and the underscore character. This can only be set at creation time. By default set to `_cnpg_`.",
                         "type": "string",
-                        "pattern": "^[0-9a-z_]*$"
+                        "pattern": "^[0-9a-z_]*$",
+                        "default": "_cnpg_"
                       }
+                    },
+                    "default": {
+                      "enabled": true
                     }
                   },
                   "updateInterval": {
                     "description": "Standby will update the status of the local replication slots every `updateInterval` seconds (default 30).",
                     "type": "integer",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 30
+                  }
+                },
+                "default": {
+                  "highAvailability": {
+                    "enabled": true
                   }
                 }
               },
@@ -4129,7 +4215,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "requests": {
@@ -4137,7 +4231,15 @@
                     "type": "object",
                     "additionalProperties": {
                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   }
                 }
@@ -4195,17 +4297,20 @@
               "smartShutdownTimeout": {
                 "description": "The time in seconds that controls the window of time reserved for the smart shutdown of Postgres to complete. Make sure you reserve enough time for the operator to request a fast shutdown of Postgres (that is: `stopDelay` - `smartShutdownTimeout`).",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 180
               },
               "startDelay": {
                 "description": "The time in seconds that is allowed for a PostgreSQL instance to successfully start up (default 3600). The startup probe failure threshold is derived from this value using the formula: ceiling(startDelay / 10).",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 3600
               },
               "stopDelay": {
                 "description": "The time in seconds that is allowed for a PostgreSQL instance to gracefully shutdown (default 1800)",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 1800
               },
               "storage": {
                 "description": "Configuration of the storage of the instances",
@@ -4301,7 +4406,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -4309,7 +4422,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -4373,7 +4494,8 @@
                   },
                   "resizeInUseVolumes": {
                     "description": "Resize existent PVCs, defaults to true",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   },
                   "size": {
                     "description": "Size of the storage. Required if not already specified in the PVC template. Changes to this field are automatically reapplied to the created PVCs. Size cannot be decreased.",
@@ -4401,7 +4523,8 @@
               "switchoverDelay": {
                 "description": "The time in seconds that is allowed for a primary PostgreSQL instance to gracefully shutdown during a switchover. Default value is 3600 seconds (1 hour).",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 3600
               },
               "tablespaces": {
                 "description": "The tablespaces configuration",
@@ -4521,7 +4644,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -4529,7 +4660,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -4593,7 +4732,8 @@
                         },
                         "resizeInUseVolumes": {
                           "description": "Resize existent PVCs, defaults to true",
-                          "type": "boolean"
+                          "type": "boolean",
+                          "default": true
                         },
                         "size": {
                           "description": "Size of the storage. Required if not already specified in the PVC template. Changes to this field are automatically reapplied to the created PVCs. Size cannot be decreased.",
@@ -4607,7 +4747,8 @@
                     },
                     "temporary": {
                       "description": "When set to true, the tablespace will be added as a `temp_tablespaces` entry in PostgreSQL, and will be available to automatically house temp database objects, or other temporary files. Please refer to PostgreSQL documentation for more information on the `temp_tablespaces` GUC.",
-                      "type": "boolean"
+                      "type": "boolean",
+                      "default": false
                     }
                   }
                 }
@@ -4798,7 +4939,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -4806,7 +4955,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -4870,7 +5027,8 @@
                   },
                   "resizeInUseVolumes": {
                     "description": "Resize existent PVCs, defaults to true",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   },
                   "size": {
                     "description": "Size of the storage. Required if not already specified in the PVC template. Changes to this field are automatically reapplied to the created PVCs. Size cannot be decreased.",
@@ -4885,8 +5043,8 @@
             }
           },
           "status": {
-            "description": "Most recently observed status of the cluster. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Most recently observed status of the cluster. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "properties": {
               "azurePVCUpdateEnabled": {
                 "description": "AzurePVCUpdateEnabled shows if the PVC online upgrade is enabled for this cluster",
@@ -5350,6 +5508,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Cluster is the Schema for the PostgreSQL API",
@@ -10044,17 +10210,12 @@
       "name": "io.cnpg.postgresql.v1.Pooler",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "Specification of the desired behavior of the Pooler. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Specification of the desired behavior of the Pooler. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "required": [
               "cluster",
               "pgbouncer"
@@ -10083,11 +10244,27 @@
                     "properties": {
                       "maxSurge": {
                         "description": "The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       },
                       "maxUnavailable": {
                         "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.",
-                        "x-kubernetes-int-or-string": true
+                        "x-kubernetes-int-or-string": true,
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
                       }
                     }
                   },
@@ -10100,7 +10277,8 @@
               "instances": {
                 "description": "The number of replicas we want. Default: 1.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 1
               },
               "monitoring": {
                 "description": "The configuration of the monitoring infrastructure of this pooler.",
@@ -10108,7 +10286,8 @@
                 "properties": {
                   "enablePodMonitor": {
                     "description": "Enable or disable the `PodMonitor`",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "podMonitorMetricRelabelings": {
                     "description": "The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.",
@@ -10143,7 +10322,8 @@
                             "KeepEqual",
                             "dropequal",
                             "DropEqual"
-                          ]
+                          ],
+                          "default": "replace"
                         },
                         "modulus": {
                           "description": "Modulus to take of the hash of the source label values. \n Only applicable when the action is `HashMod`.",
@@ -10211,7 +10391,8 @@
                             "KeepEqual",
                             "dropequal",
                             "DropEqual"
-                          ]
+                          ],
+                          "default": "replace"
                         },
                         "modulus": {
                           "description": "Modulus to take of the hash of the source label values. \n Only applicable when the action is `HashMod`.",
@@ -10278,7 +10459,8 @@
                   },
                   "paused": {
                     "description": "When set to `true`, PgBouncer will disconnect from the PostgreSQL server, first waiting for all queries to complete, and pause all new client connections until this value is set to `false` (default). Internally, the operator calls PgBouncer's `PAUSE` and `RESUME` commands.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "pg_hba": {
                     "description": "PostgreSQL Host Based Authentication rules (lines to be appended to the pg_hba.conf file)",
@@ -10293,7 +10475,8 @@
                     "enum": [
                       "session",
                       "transaction"
-                    ]
+                    ],
+                    "default": "session"
                   }
                 }
               },
@@ -11094,7 +11277,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -11242,7 +11433,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -11263,7 +11462,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -11325,7 +11532,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -11346,7 +11561,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -11433,7 +11656,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -11469,7 +11700,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -11519,7 +11758,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -11608,7 +11848,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -11644,7 +11892,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -11713,7 +11969,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -11721,7 +11985,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -11928,7 +12200,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -11964,7 +12244,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -12212,7 +12500,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -12360,7 +12656,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -12381,7 +12685,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -12443,7 +12755,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -12464,7 +12784,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -12551,7 +12879,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -12587,7 +12923,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -12637,7 +12981,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -12726,7 +13071,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -12762,7 +13115,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -12831,7 +13192,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -12839,7 +13208,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -13046,7 +13423,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -13082,7 +13467,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -13345,7 +13738,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -13493,7 +13894,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -13514,7 +13923,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -13576,7 +13993,15 @@
                                         },
                                         "port": {
                                           "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         },
                                         "scheme": {
                                           "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -13597,7 +14022,15 @@
                                         },
                                         "port": {
                                           "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                          "x-kubernetes-int-or-string": true
+                                          "x-kubernetes-int-or-string": true,
+                                          "anyOf": [
+                                            {
+                                              "type": "integer"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ]
                                         }
                                       }
                                     }
@@ -13684,7 +14117,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -13720,7 +14161,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -13770,7 +14219,8 @@
                                   },
                                   "protocol": {
                                     "description": "Protocol for port. Must be UDP, TCP, or SCTP. Defaults to \"TCP\".",
-                                    "type": "string"
+                                    "type": "string",
+                                    "default": "TCP"
                                   }
                                 }
                               },
@@ -13859,7 +14309,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -13895,7 +14353,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -13964,7 +14430,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 },
                                 "requests": {
@@ -13972,7 +14446,15 @@
                                   "type": "object",
                                   "additionalProperties": {
                                     "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                    "x-kubernetes-int-or-string": true
+                                    "x-kubernetes-int-or-string": true,
+                                    "anyOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -14179,7 +14661,15 @@
                                     },
                                     "port": {
                                       "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     },
                                     "scheme": {
                                       "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
@@ -14215,7 +14705,15 @@
                                     },
                                     "port": {
                                       "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
-                                      "x-kubernetes-int-or-string": true
+                                      "x-kubernetes-int-or-string": true,
+                                      "anyOf": [
+                                        {
+                                          "type": "integer"
+                                        },
+                                        {
+                                          "type": "string"
+                                        }
+                                      ]
                                     }
                                   }
                                 },
@@ -14348,7 +14846,15 @@
                         "type": "object",
                         "additionalProperties": {
                           "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                          "x-kubernetes-int-or-string": true
+                          "x-kubernetes-int-or-string": true,
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
                         }
                       },
                       "preemptionPolicy": {
@@ -15035,7 +15541,15 @@
                                           "divisor": {
                                             "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                             "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                            "x-kubernetes-int-or-string": true
+                                            "x-kubernetes-int-or-string": true,
+                                            "anyOf": [
+                                              {
+                                                "type": "integer"
+                                              },
+                                              {
+                                                "type": "string"
+                                              }
+                                            ]
                                           },
                                           "resource": {
                                             "description": "Required: resource to select",
@@ -15060,7 +15574,15 @@
                                 "sizeLimit": {
                                   "description": "sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir",
                                   "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                  "x-kubernetes-int-or-string": true
+                                  "x-kubernetes-int-or-string": true,
+                                  "anyOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string"
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -15169,7 +15691,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "requests": {
@@ -15177,7 +15707,15 @@
                                               "type": "object",
                                               "additionalProperties": {
                                                 "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                "x-kubernetes-int-or-string": true
+                                                "x-kubernetes-int-or-string": true,
+                                                "anyOf": [
+                                                  {
+                                                    "type": "integer"
+                                                  },
+                                                  {
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               }
                                             }
                                           }
@@ -15675,7 +16213,15 @@
                                                     "divisor": {
                                                       "description": "Specifies the output format of the exposed resources, defaults to \"1\"",
                                                       "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                                                      "x-kubernetes-int-or-string": true
+                                                      "x-kubernetes-int-or-string": true,
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer"
+                                                        },
+                                                        {
+                                                          "type": "string"
+                                                        }
+                                                      ]
                                                     },
                                                     "resource": {
                                                       "description": "Required: resource to select",
@@ -16019,13 +16565,14 @@
                 "enum": [
                   "rw",
                   "ro"
-                ]
+                ],
+                "default": "rw"
               }
             }
           },
           "status": {
-            "description": "Most recently observed status of the Pooler. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Most recently observed status of the Pooler. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "properties": {
               "instances": {
                 "description": "The number of pods trying to be scheduled",
@@ -16101,6 +16648,14 @@
                 }
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Pooler is the Schema for the poolers API",
@@ -22680,17 +23235,12 @@
       "name": "io.cnpg.postgresql.v1.ScheduledBackup",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "Specification of the desired behavior of the ScheduledBackup. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Specification of the desired behavior of the ScheduledBackup. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "required": [
               "cluster",
               "schedule"
@@ -22703,7 +23253,8 @@
                   "none",
                   "self",
                   "cluster"
-                ]
+                ],
+                "default": "none"
               },
               "cluster": {
                 "description": "The cluster to backup",
@@ -22728,7 +23279,8 @@
                 "enum": [
                   "barmanObjectStore",
                   "volumeSnapshot"
-                ]
+                ],
+                "default": "barmanObjectStore"
               },
               "online": {
                 "description": "Whether the default type of backup with volume snapshots is online/hot (`true`, default) or offline/cold (`false`) Overrides the default setting specified in the cluster field '.spec.backup.volumeSnapshot.online'",
@@ -22744,7 +23296,8 @@
                   },
                   "waitForArchive": {
                     "description": "If false, the function will return immediately after the backup is completed, without waiting for WAL to be archived. This behavior is only useful with backup software that independently monitors WAL archiving. Otherwise, WAL required to make the backup consistent might be missing and make the backup useless. By default, or when this parameter is true, pg_backup_stop will wait for WAL to be archived when archiving is enabled. On a standby, this means that it will wait only when archive_mode = always. If write activity on the primary is low, it may be useful to run pg_switch_wal on the primary in order to trigger an immediate segment switch.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   }
                 }
               },
@@ -22767,8 +23320,8 @@
             }
           },
           "status": {
-            "description": "Most recently observed status of the ScheduledBackup. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "type": "object",
+            "description": "Most recently observed status of the ScheduledBackup. This data may not be up to date. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
             "properties": {
               "lastCheckTime": {
                 "description": "The latest time the schedule",
@@ -22786,6 +23339,14 @@
                 "format": "date-time"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "ScheduledBackup is the Schema for the scheduledbackups API",

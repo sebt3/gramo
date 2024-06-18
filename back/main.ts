@@ -51,6 +51,7 @@ const typeDefs = gqlWrapper(
   importGraphQL('operators.graphql'),
   importGraphQL('whereabouts.graphql'),
   importGraphQL('kubevirt.graphql'),
+  importGraphQL('kuberest.graphql'),
   importGraphQL('networkaddonsoperator.graphql'),
 );
 

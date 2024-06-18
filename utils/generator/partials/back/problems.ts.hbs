@@ -16,14 +16,14 @@
             } }))
         }
 {{/if}}
-{{#if (or (or (or (and (eq group 'k8s') (eq short 'Node')) (and (eq group 'k8up') (eq short 'Schedule'))) (and (eq group 'certmanager') (or (or (eq short 'Certificate') (eq short 'CertificateRequest')) (or (eq short 'ClusterIssuer') (eq short 'Issuer'))))) (or (and (eq group 'cnpg') (eq short 'Cluster')) (and (eq group 'fluxcd') (or (or (or (or (eq short 'Kustomization') (eq short 'Receiver')) (or (eq short 'GitRepository') (eq short 'Bucket')))) (or (or (eq short 'HelmChart') (eq short 'HelmRepository')) (or (eq short 'OCIRepository') (eq short 'ImageUpdateAutomation'))) (or (eq short 'ImagePolicy') (or (eq short 'ImageRepository') (eq short 'HelmRelease') ))))))}}
+{{#unless (and (eq group 'k8s') (eq short 'Pod')) }}
         if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='Ready'&&c['status']!='True').length>0) {
             problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='Ready'&&c['status']!='True').map(c=>{ return {
                 source: c['type'],
                 description:c['message']
             } }))
         }
-{{/if}}
+{{/unless}}
 {{#if (and (eq group 'cnpg') (eq short 'Cluster'))}}
         if (parent['status'] != undefined && Array.isArray(parent['status']['conditions']) && parent['status']['conditions'].filter(c=>c['type']=='ContinuousArchiving'&&c['status']!='True').length>0) {
             problems.unshift(...parent['status']['conditions'].filter(c=>c['type']=='ContinuousArchiving'&&c['status']!='True').map(c=>{ return {

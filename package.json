@@ -1,6 +1,6 @@
 {
   "name": "gramo",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A cross-navigation Kubernetes front-end",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint:schema": "graphql-schema-linter $(ls --ignore='gen.*' back/schema/|grep -E 'graphql$'|sed 's#^#back/schema/#')",
     "gen": "tsx utils/gen.ts",
     "dev": "NODE_ENV=dev GRAMO_APP_NAME='devGramo' tsx back/dev.ts",
-    "prebuild": "NODE_ENV=production vite build --emptyOutDir",
+    "prebuild": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=32768 vite build --emptyOutDir",
     "build": "tsc -b",
     "ps": "for i in $(ls -1 /proc);do if [ $(($i+1)) -gt 1 ];then echo -n \"$i\\t\\t\";cat /proc/$i/cmdline;echo;fi;done",
     "postbuild": "rm -rf dist/back/schema dist/pubsub dist/resolvers; mv dist/back/* dist/; cp -Rapvf back/schema dist/back/;cp -Rapvf front/i18n/ dist/public/",

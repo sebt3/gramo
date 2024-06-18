@@ -14,28 +14,28 @@ export const mutations = {
         }
         try {
             const res = await k8sApi.createClusterCustomObject(args['group'],args['version'],args['plural'], payload)
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
     clusteredCrdObjectDelete: async (_parent, args: object) => {
         try {
             const res = await k8sApi.deleteClusterCustomObject(args['group'],args['version'],args['plural'], args['name'])
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
     clusteredCrdObjectPatch: async (_parent, args: object) => {
         const request = {
@@ -50,15 +50,15 @@ export const mutations = {
             const payload = rfc6902.createPatch(resGet.body,request).filter(rule => !rule.path.startsWith('/status') && !['/metadata/creationTimestamp', '/metadata/finalizers', '/metadata/generation', '/metadata/managedFields', '/metadata/resourceVersion','/metadata/uid'].includes(rule.path) )
             const options = { "headers": { "Content-type": k8s.PatchUtils.PATCH_FORMAT_JSON_PATCH}};
             const res = await k8sApi.patchClusterCustomObject(args['group'],args['version'],args['plural'], args['metadata']['name'], payload, undefined, undefined, undefined, options)
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
     namespacedCrdObjectCreate: async (_parent, args: object) => {
         const payload = {
@@ -69,28 +69,28 @@ export const mutations = {
         }
         try {
             const res = await k8sApi.createNamespacedCustomObject(args['group'],args['version'],args['metadata']['namespace'],args['plural'], payload)
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
     namespacedCrdObjectDelete: async (_parent, args: object) => {
         try {
             const res = await k8sApi.deleteNamespacedCustomObject(args['group'],args['version'],args['namespace'],args['plural'], args['name'])
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
     namespacedCrdObjectPatch: async (_parent, args: object) => {
         const request = {
@@ -105,15 +105,15 @@ export const mutations = {
             const payload = rfc6902.createPatch(resGet.body,request).filter(rule => !rule.path.startsWith('/status') && !['/metadata/creationTimestamp', '/metadata/finalizers', '/metadata/generation', '/metadata/managedFields', '/metadata/resourceVersion','/metadata/uid'].includes(rule.path) )
             const options = { "headers": { "Content-type": k8s.PatchUtils.PATCH_FORMAT_JSON_PATCH}};
             const res = await k8sApi.patchNamespacedCustomObject(args['group'],args['version'],args['metadata']['namespace'],args['plural'], args['metadata']['name'], payload, undefined, undefined, undefined, options)
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
 };
 export const lists = {

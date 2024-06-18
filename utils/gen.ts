@@ -45,6 +45,8 @@ loadPartial('resolversK8up',            path.resolve(partials_resolvers, 'k8up.t
 loadPartial('resolversConfigMap',       path.resolve(partials_resolvers, 'configMap.ts.hbs'));
 loadPartial('resolversClustered',       path.resolve(partials_resolvers, 'clustered.ts.hbs'));
 loadPartial('resolversTekton',          path.resolve(partials_resolvers, 'tekton.ts.hbs'));
+loadPartial('resolversKubevirt',        path.resolve(partials_resolvers, 'kubevirt.ts.hbs'));
+loadPartial('resolversKuberest',        path.resolve(partials_resolvers, 'kuberest.ts.hbs'));
 loadPartial('resolversCRD',             path.resolve(partials_resolvers, 'crd.ts.hbs'));
 loadPartial('cnpgCustom',               path.resolve(partials_front, 'cnpg.hbs'));
 loadPartial('fluxcdCustom',             path.resolve(partials_front, 'fluxcd.hbs'));

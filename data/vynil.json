@@ -6,30 +6,68 @@
       "name": "fr.solidite.vynil.v1.Distrib",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
-          },
           "spec": {
-            "description": "Distrib:\n\nDescribe a source of components distribution git repository",
             "type": "object",
+            "description": "Distrib:\n\nDescribe a source of components distribution git repository",
             "required": [
               "schedule",
               "url"
             ],
             "properties": {
               "branch": {
-                "description": "Git branch"
+                "description": "Git branch",
+                "type": "string",
+                "nullable": true
               },
               "insecure": {
-                "description": "Git clone URL"
+                "description": "Git clone URL",
+                "type": "boolean",
+                "nullable": true
               },
               "login": {
-                "description": "Git authentication"
+                "description": "Git authentication",
+                "type": "object",
+                "properties": {
+                  "git_credentials": {
+                    "description": "a git-credentials store file (format: https://<username>:<password|token>@<url>/<repo>)",
+                    "type": "object",
+                    "required": [
+                      "key",
+                      "name"
+                    ],
+                    "properties": {
+                      "key": {
+                        "description": "Key of the secret containing the file",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Name of the secret",
+                        "type": "string"
+                      }
+                    },
+                    "nullable": true
+                  },
+                  "ssh_key": {
+                    "description": "SSH private key",
+                    "type": "object",
+                    "required": [
+                      "key",
+                      "name"
+                    ],
+                    "properties": {
+                      "key": {
+                        "description": "Key of the secret containing the file",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Name of the secret",
+                        "type": "string"
+                      }
+                    },
+                    "nullable": true
+                  }
+                },
+                "nullable": true
               },
               "schedule": {
                 "description": "Actual cron-type expression that defines the interval of the updates.",
@@ -42,11 +80,41 @@
             }
           },
           "status": {
+            "type": "object",
             "description": "The status object of `Distrib`",
             "required": [
               "components",
               "last_updated"
-            ]
+            ],
+            "properties": {
+              "components": {
+                "description": "List of known category->components",
+                "type": "object",
+                "x-kubernetes-preserve-unknown-fields": true
+              },
+              "errors": {
+                "description": "Set with the messages if any error occured",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              "last_updated": {
+                "description": "Last update date",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "nullable": true
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Auto-generated derived type for DistribSpec via `CustomResource`",
@@ -291,17 +359,9 @@
       "name": "fr.solidite.vynil.v1.Install",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
-          },
           "spec": {
-            "description": "Generate the Kubernetes wrapper struct `Install` from our Spec and Status struct\n\nThis provides a hook for generating the CRD yaml (in crdgen.rs) Maybe",
             "type": "object",
+            "description": "Generate the Kubernetes wrapper struct `Install` from our Spec and Status struct\n\nThis provides a hook for generating the CRD yaml (in crdgen.rs) Maybe",
             "required": [
               "category",
               "component",
@@ -309,7 +369,9 @@
             ],
             "properties": {
               "auto_upgrade": {
-                "description": "Should we automatically upgrade the package"
+                "description": "Should we automatically upgrade the package",
+                "type": "boolean",
+                "nullable": true
               },
               "category": {
                 "description": "The category name",
@@ -325,18 +387,69 @@
               },
               "options": {
                 "description": "Parameters",
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object",
+                "nullable": true
               }
             }
           },
           "status": {
+            "type": "object",
             "description": "The status object of `Install`",
             "required": [
               "commit_id",
               "digest",
               "last_updated",
               "status"
-            ]
+            ],
+            "properties": {
+              "commit_id": {
+                "description": "component version applied",
+                "type": "string"
+              },
+              "digest": {
+                "description": "Options digests",
+                "type": "string"
+              },
+              "errors": {
+                "description": "Set with the messages if any error occured",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              "last_updated": {
+                "description": "Last update date",
+                "type": "string",
+                "format": "date-time"
+              },
+              "plan": {
+                "description": "Currently planned changed, only set if planned is true",
+                "type": "object",
+                "nullable": true,
+                "x-kubernetes-preserve-unknown-fields": true
+              },
+              "status": {
+                "description": "Current high-level status of the installation",
+                "type": "string"
+              },
+              "tfstate": {
+                "description": "Current terraform status",
+                "type": "object",
+                "nullable": true,
+                "x-kubernetes-preserve-unknown-fields": true
+              }
+            },
+            "nullable": true
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "Auto-generated derived type for InstallSpec via `CustomResource`",

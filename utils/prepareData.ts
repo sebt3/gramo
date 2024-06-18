@@ -8,6 +8,24 @@ import { getClusterByPath } from './generator/k8s.js'
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const path_data = path.resolve(__dirname, '..', 'data');
 
+function isObject(item) {
+    return (item && typeof item === 'object' && !Array.isArray(item));
+}
+function mergeDeep(target, ...sources) {
+    if (!sources.length) return target;
+    const source = sources.shift();
+    if (isObject(target) && isObject(source)) {
+        for (const key in source) {
+            if (isObject(source[key])) {
+                if (!target[key]) Object.assign(target, { [key]: {} });
+                mergeDeep(target[key], source[key]);
+            } else {
+                Object.assign(target, { [key]: source[key] });
+            }
+        }
+    }
+    return mergeDeep(target, ...sources);
+}
 const AdditionnalDefSources = [
     'https://github.com/tektoncd/triggers/raw/v0.26.1/pkg/apis/triggers/v1beta1/swagger.json',
     'https://github.com/tektoncd/pipeline/raw/v0.57.0/pkg/apis/pipeline/v1alpha1/swagger.json',
@@ -40,7 +58,8 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
             const crd = (crd_in as crds).items.filter(c => getObjFQN(c) == name)[0];
             const ver = crd.spec.versions.filter(v=> v.name == getTargetVersion(crd.spec.versions))[0]
             const minDef = { properties: ver.subresources?.status!=undefined?{metadata: undefined,spec: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?definitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'},status: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Status`)?definitions[`${name.split('.').slice(-2).join('.')}Status`]:{type: 'object'}}:{metadata: undefined,spec: Object.keys(definitions).includes(`${name.split('.').slice(-2).join('.')}Spec`)?definitions[`${name.split('.').slice(-2).join('.')}Spec`]:{type: 'object'}} }
-            return enhenceObject(i['name'], {name: name,definition: {...minDef, ...def}, crd: {kind:crd.kind,apiVersion:crd.apiVersion,metadata:{name:crd.metadata['name']},spec:{...crd.spec,conversion:{}},status:({conditions:[],acceptedNames:crd.status.acceptedNames,storedVersions:crd.status.storedVersions} as k8sDefinitionPropertiesStatus)}})
+            mergeDeep(minDef,def,ver.schema.openAPIV3Schema);
+            return enhenceObject(i['name'], {name: name,definition: minDef, crd: {kind:crd.kind,apiVersion:crd.apiVersion,metadata:{name:crd.metadata['name']},spec:{...crd.spec,conversion:{}},status:({conditions:[],acceptedNames:crd.status.acceptedNames,storedVersions:crd.status.storedVersions} as k8sDefinitionPropertiesStatus)}})
         }))
     }});
     // List the remaining objects not matched in a defined apiGroup (they belong to the group '' which is kubernetes main objects)
@@ -70,5 +89,5 @@ Promise.all([getClusterByPath('openapi/v2'), getClusterByPath('apis'), getCluste
 //// Generate the datafiles
 ///
     mkdir(path_data);
-    data.forEach(g => saveTo(path.resolve(path_data, `${g.name}.json`), g));
+    data.filter(g=>g.objects.length>0).forEach(g => saveTo(path.resolve(path_data, `${g.name}.json`), g));
 })

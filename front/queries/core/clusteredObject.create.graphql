@@ -1,14 +1,6 @@
 mutation clusteredObjectCreate($group: String!, $plural: String!, $kind: String!, $metadata: metadataInput!, $version: String!, $spec: JSONObject) {
   clusteredCrdObjectCreate(group: $group, plural: $plural, kind: $kind, metadata: $metadata, version: $version, spec: $spec) {
-    metadata {
-      annotations
-      creationTimestamp
-      labels
-      name
-      resourceVersion
-      uid
-    }
-    spec
-    status
+    object
+    error
   }
 }

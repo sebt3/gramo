@@ -30,14 +30,14 @@
             const res = await k8sApi.create{{ short }}(payload)
   {{/if}}
 {{/if}}
-            return res.body
+            return {object: res.body}
         } catch (err) {
           if (typeof err === 'object' && (err as object)['body'] !=undefined && (err as object)['statusCode'] !=undefined) {
             if ((err as object)['statusCode'] != 404 && (err as object)['body']['reason']!='Forbidden') {
               log.error('error', (err as object)['body']);
             }
           } else {log.error('error', err)}
+          if (typeof err === 'object') return {error: err}; else return {error: {err}}
         }
-        return null
     },
 {{/with}}

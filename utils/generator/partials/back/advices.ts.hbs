@@ -11,11 +11,25 @@ https://github.com/stackrox/kube-linter/tree/main/pkg/templates
                 description: `${c['name']} imagePullPolicy is ${c['imagePullPolicy']}`
             } }))
         }
+        if (parent['spec'] != undefined && Array.isArray(parent['spec']['containers']) && parent['spec']['containers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" )) {
+            advices.unshift(...parent['spec']['containers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest").map(c=>{ return {
+                source: `${c['name']}`,
+                reason: "image tag should never be 'latest'",
+                description: `${c['name']} image is ${c['image']}`
+            } }))
+        }
         if (parent['spec'] != undefined && Array.isArray(parent['spec']['initContainers']) && parent['spec']['initContainers'].filter(c=>c['imagePullPolicy']!=undefined && c['imagePullPolicy']!='IfNotPresent')) {
             advices.unshift(...parent['spec']['initContainers'].filter(c=>c['imagePullPolicy']!=undefined && c['imagePullPolicy']!='IfNotPresent').map(c=>{ return {
                 source: `${c['name']}`,
                 reason: "imagePullPolicy should always be 'IfNotPresent'",
                 description: `${c['name']} imagePullPolicy is ${c['imagePullPolicy']}`
+            } }))
+        }
+        if (parent['spec'] != undefined && Array.isArray(parent['spec']['initContainers']) && parent['spec']['initContainers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" )) {
+            advices.unshift(...parent['spec']['initContainers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest").map(c=>{ return {
+                source: `${c['name']}`,
+                reason: "image tag should never be 'latest'",
+                description: `${c['name']} image is ${c['image']}`
             } }))
         }
 {{/if}}
@@ -27,11 +41,25 @@ https://github.com/stackrox/kube-linter/tree/main/pkg/templates
                 description: `${c['name']} imagePullPolicy is ${c['imagePullPolicy']}`
             } }))
         }
+        if (parent['spec'] != undefined && parent['spec']['template'] != undefined && parent['spec']['template']['spec'] != undefined && Array.isArray(parent['spec']['template']['spec']['containers']) && parent['spec']['template']['spec']['containers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" )) {
+            advices.unshift(...parent['spec']['template']['spec']['containers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" ).map(c=>{ return {
+                source: `${c['name']}`,
+                reason: "image tag should never be 'latest'",
+                description: `${c['name']} image is ${c['image']}`
+            } }))
+        }
         if (parent['spec'] != undefined && parent['spec']['template'] != undefined && parent['spec']['template']['spec'] != undefined && Array.isArray(parent['spec']['template']['spec']['initContainers']) && parent['spec']['template']['spec']['initContainers'].filter(c=>c['imagePullPolicy']!=undefined && c['imagePullPolicy']!='IfNotPresent')) {
             advices.unshift(...parent['spec']['template']['spec']['initContainers'].filter(c=>c['imagePullPolicy']!=undefined && c['imagePullPolicy']!='IfNotPresent').map(c=>{ return {
                 source: `${c['name']}`,
                 reason: "imagePullPolicy should always be 'IfNotPresent'",
                 description: `${c['name']} imagePullPolicy is ${c['imagePullPolicy']}`
+            } }))
+        }
+        if (parent['spec'] != undefined && parent['spec']['template'] != undefined && parent['spec']['template']['spec'] != undefined && Array.isArray(parent['spec']['template']['spec']['initContainers']) && parent['spec']['template']['spec']['initContainers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" )) {
+            advices.unshift(...parent['spec']['template']['spec']['initContainers'].filter(c=>c['image']!=undefined && (c['image'].split(":").length<2) || c['image'].split(":").at(-1) == "latest" ).map(c=>{ return {
+                source: `${c['name']}`,
+                reason: "image tag should never be 'latest'",
+                description: `${c['name']} image is ${c['image']}`
             } }))
         }
 {{/if}}

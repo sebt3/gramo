@@ -64,6 +64,14 @@ const uses = [
     {algo: 'tekton', group: 'tekton', short: 'TaskRun', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'tekton', group: 'tekton', short: 'PipelineRun', usedGroup: 'k8s', usedShort: 'ConfigMap'},
     {algo: 'tekton', group: 'tekton', short: 'Task', usedGroup: 'k8s', usedShort: 'ConfigMap'},
+    {algo: 'kubevirt', group: 'kubevirt', short: 'VirtualMachineInstance', usedGroup: 'kubevirt', usedShort: 'DataVolume', path: 'spec/volumes'},
+    {algo: 'kubevirt', group: 'kubevirt', short: 'VirtualMachineInstance', usedGroup: 'k8s', usedShort: 'Secret', path: 'spec/volumes'},
+    {algo: 'kubevirt', group: 'kubevirt', short: 'VirtualMachine', usedGroup: 'k8s', usedShort: 'Secret', path: 'spec/template/spec/volumes'},
+    {algo: 'kubevirt', group: 'kubevirt', short: 'VirtualMachineInstance', usedGroup: 'k8s', usedShort: 'NetworkAttachmentDefinition', path: 'spec/networks'},
+    {algo: 'kubevirt', group: 'kubevirt', short: 'VirtualMachine', usedGroup: 'k8s', usedShort: 'NetworkAttachmentDefinition', path: 'spec/template/spec/networks'},
+    {algo: 'kubevirt', group: 'k8s', short: 'Pod', usedGroup: 'k8s', usedShort: 'NetworkAttachmentDefinition'},
+    {algo: 'kuberest', group: 'kuberest', short: 'RestEndPoint', usedGroup: 'k8s', usedShort: 'Secret'},
+    {algo: 'kuberest', group: 'kuberest', short: 'RestEndPoint', usedGroup: 'k8s', usedShort: 'ConfigMap'},
 ];
 const provides = [
     {algo: 'certmanager', group: 'certmanager', short: 'Issuer', providedGroup: 'certmanager', providedShort: 'Certificate'},
@@ -151,6 +159,11 @@ const children = [
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'DaemonSet'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'k8s', parentShort: 'Job'},
     {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'cnpg', parentShort: 'Cluster'},
+    {algo: 'k8s', group: 'kubevirt', short: 'DataVolume', parentGroup: 'kubevirt', parentShort: 'VirtualMachine'},
+    {algo: 'k8s', group: 'kubevirt', short: 'VirtualMachineInstance', parentGroup: 'kubevirt', parentShort: 'VirtualMachine'},
+    {algo: 'k8s', group: 'k8s', short: 'Pod', parentGroup: 'kubevirt', parentShort: 'VirtualMachineInstance'},
+    {algo: 'k8s', group: 'k8s', short: 'Secret', parentGroup: 'kuberest', parentShort: 'RestEndPoint'},
+    {algo: 'k8s', group: 'k8s', short: 'ConfigMap', parentGroup: 'kuberest', parentShort: 'RestEndPoint'},
 //    {algo: 'k8s', group: 'k8s', short: 'ControllerRevision', parentGroup: 'k8s', parentShort: 'DaemonSet'},
 //    {algo: 'k8s', group: 'k8s', short: 'ControllerRevision', parentGroup: 'k8s', parentShort: 'StatefulSet'},
     {algo: 'k8s', group: 'k8s', short: 'Job', parentGroup: 'k8s', parentShort: 'CronJob'},
@@ -284,6 +297,7 @@ export const categoryMappingGroup = {
     k8up: 'system',
     k8s: 'system',
     secretgenerator: 'config',
+    kuberest: 'config',
     vynil: 'install',
     cattle: 'install',
     namecheap: 'system',
@@ -359,7 +373,12 @@ export const categoryMappingShort = {
     Gateway: 'network',
     GatewayClass: 'network',
     HTTPRoute: 'network',
-    ReferenceGrant: 'network'
+    ReferenceGrant: 'network',
+    NetworkAttachmentDefinition: 'network',
+    HNCConfiguration: 'system',
+    HierarchicalResourceQuota: 'security',
+    HierarchyConfiguration: 'security',
+    SubnamespaceAnchor: 'security',
 }
 export const allCategories = Object.entries(categoryMappingShort).map(([_,v])=>v)
         .concat(Object.entries(categoryMappingGroup).map(([_,v])=>v))

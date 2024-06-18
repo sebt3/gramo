@@ -1,14 +1,6 @@
 mutation clusteredObjectDelete($group: String!, $version: String!, $plural: String!, $name: String!) {
   clusteredCrdObjectDelete(group: $group, version: $version, plural: $plural, name: $name) {
-    metadata {
-      annotations
-      creationTimestamp
-      labels
-      name
-      resourceVersion
-      uid
-    }
-    spec
-    status
+    object
+    error
   }
 }

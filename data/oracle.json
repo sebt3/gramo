@@ -6,17 +6,12 @@
       "name": "com.oracle.mysql.v1.NdbCluster",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object"
           },
           "spec": {
-            "description": "The desired state of a MySQL NDB Cluster.",
             "type": "object",
+            "description": "The desired state of a MySQL NDB Cluster.",
             "properties": {
               "dataNode": {
                 "description": "DataNode specifies the configuration of the data node running in MySQL Cluster.",
@@ -29,7 +24,15 @@
                     "description": "Config is a map of default MySQL Cluster Data node configurations. \n More info : https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-params-ndbd.html",
                     "type": "object",
                     "additionalProperties": {
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "ndbPodSpec": {
@@ -730,7 +733,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -738,7 +749,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -877,7 +896,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -885,7 +912,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -952,11 +987,13 @@
               "freeAPISlots": {
                 "description": "The number of extra API sections declared in the MySQL Cluster config, in addition to the API sections declared implicitly by the NDB Operator for the MySQL Servers. Any NDBAPI application can connect to the MySQL Cluster via these free slots.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "default": 2
               },
               "image": {
                 "description": "The name of the MySQL Ndb Cluster image to be used. If not specified, \"container-registry.oracle.com/mysql/community-cluster:8.4.0\" will be used.",
-                "type": "string"
+                "type": "string",
+                "default": "container-registry.oracle.com/mysql/community-cluster:8.4.0"
               },
               "imagePullPolicy": {
                 "description": "ImagePullPolicy describes a policy for if/when to pull the MySQL Cluster container image",
@@ -965,7 +1002,8 @@
                   "Always",
                   "Never",
                   "IfNotPresent"
-                ]
+                ],
+                "default": "IfNotPresent"
               },
               "imagePullSecretName": {
                 "description": "ImagePullSecretName optionally specifies the name of the secret that holds the credentials required for pulling the MySQL Cluster image.",
@@ -979,12 +1017,21 @@
                     "description": "Config is a map of default MySQL Cluster Management node configurations. \n More info : https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-params-mgmd.html",
                     "type": "object",
                     "additionalProperties": {
-                      "x-kubernetes-int-or-string": true
+                      "x-kubernetes-int-or-string": true,
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
                     }
                   },
                   "enableLoadBalancer": {
                     "description": "EnableLoadBalancer exposes the management servers externally using the kubernetes cloud provider's load balancer. By default, the operator creates a ClusterIP type service to expose the management server pods internally within the kubernetes cluster. If EnableLoadBalancer is set to true, a LoadBalancer type service will be created instead, exposing the management Servers outside the kubernetes cluster.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "ndbPodSpec": {
                     "description": "NdbPodSpec contains a subset of PodSpec fields which when set will be copied into to the podSpec of Management node's statefulset definition.",
@@ -1684,7 +1731,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -1692,7 +1747,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -1748,11 +1811,13 @@
                     "type": "integer",
                     "format": "int32",
                     "maximum": 63,
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "enableLoadBalancer": {
                     "description": "EnableLoadBalancer exposes the MySQL servers externally using the kubernetes cloud provider's load balancer. By default, the operator creates a ClusterIP type service to expose the MySQL server pods internally within the kubernetes cluster. If EnableLoadBalancer is set to true, a LoadBalancer type service will be created instead, exposing the MySQL servers outside the kubernetes cluster.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "initScripts": {
                     "description": "InitScripts is a map of configMap names from the same namespace and optionally an array of keys which store the SQL scripts to be executed during MySQL Server initialization. If key names are omitted, contents of all the keys will be treated as initialization SQL scripts. All scripts will be mounted into the MySQL pods and will be executed in the alphabetical order of configMap names and key names.",
@@ -2471,7 +2536,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -2479,7 +2552,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -2525,7 +2606,8 @@
                     "description": "NodeCount is the number of MySQL Servers to be started by the Operator",
                     "type": "integer",
                     "format": "int32",
-                    "minimum": 1
+                    "minimum": 1,
+                    "default": 1
                   },
                   "pvcSpec": {
                     "description": "PVCSpec is the PersistentVolumeClaimSpec to be used as the VolumeClaimTemplate of the mysql server statefulset. A PVC will be created for each mysql server by the statefulset controller and will be loaded into the mysql server pod and the container.",
@@ -2617,7 +2699,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           },
                           "requests": {
@@ -2625,7 +2715,15 @@
                             "type": "object",
                             "additionalProperties": {
                               "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
-                              "x-kubernetes-int-or-string": true
+                              "x-kubernetes-int-or-string": true,
+                              "anyOf": [
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
                             }
                           }
                         }
@@ -2689,7 +2787,8 @@
                   },
                   "rootHost": {
                     "description": "RootHost is the host or hosts from which the root user can connect to the MySQL Server. If unspecified, root user will be able to connect from any host that can access the MySQL Server.",
-                    "type": "string"
+                    "type": "string",
+                    "default": "%"
                   },
                   "rootPasswordSecretName": {
                     "description": "The name of the Secret that holds the password to be set for the MySQL root accounts. The Secret should have a 'password' key that holds the password. If unspecified, a Secret will be created by the operator with a generated name of format \"<ndb-resource-name>-mysqld-root-password\"",
@@ -2702,7 +2801,8 @@
                 "type": "integer",
                 "format": "int32",
                 "maximum": 4,
-                "minimum": 1
+                "minimum": 1,
+                "default": 2
               },
               "tdeSecretName": {
                 "description": "The name of the Secret that holds the encryption key or password required for Transparent Data Encryption (TDE) in MySQL Cluster. If a value is provided, the ndb operator will enable TDE and utilize the password stored in the Secret as the file system password for all data nodes within the MySQL Cluster. If no value is provided, TDE will not be enabled for MySQL Cluster.",
@@ -2711,8 +2811,8 @@
             }
           },
           "status": {
-            "description": "The status of the NdbCluster resource and the MySQL Cluster managed by it.",
             "type": "object",
+            "description": "The status of the NdbCluster resource and the MySQL Cluster managed by it.",
             "properties": {
               "conditions": {
                 "description": "Conditions represent the latest available observations of the MySQL Cluster's current state.",
@@ -2771,6 +2871,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "description": "NdbCluster is the Schema for the Ndb CRD API",
@@ -5827,13 +5935,14 @@
       "name": "com.oracle.mysql.v2.InnoDBCluster",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 40
+              }
+            }
           },
           "spec": {
             "type": "object",
@@ -5848,7 +5957,203 @@
                   "required": [
                     "name"
                   ],
-                  "x-kubernetes-preserve-unknown-fields": true
+                  "x-kubernetes-preserve-unknown-fields": true,
+                  "type": "object",
+                  "properties": {
+                    "dumpInstance": {
+                      "type": "object",
+                      "properties": {
+                        "dumpOptions": {
+                          "description": "A dictionary of key-value pairs passed directly to MySQL Shell's DumpInstance()",
+                          "type": "object",
+                          "x-kubernetes-preserve-unknown-fields": true
+                        },
+                        "storage": {
+                          "type": "object",
+                          "properties": {
+                            "azure": {
+                              "type": "object",
+                              "required": [
+                                "containerName",
+                                "config"
+                              ],
+                              "properties": {
+                                "config": {
+                                  "description": "Name of a Secret with Azure BLOB Storage configuration and credentials",
+                                  "type": "string"
+                                },
+                                "containerName": {
+                                  "description": "Name of the Azure  BLOB Storage container where the dump is stored",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in the container where the dump files are stored",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ociObjectStorage": {
+                              "type": "object",
+                              "required": [
+                                "bucketName",
+                                "credentials"
+                              ],
+                              "properties": {
+                                "bucketName": {
+                                  "description": "Name of the OCI bucket where backup is stored",
+                                  "type": "string"
+                                },
+                                "credentials": {
+                                  "description": "Name of a Secret with data for accessing the bucket",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in bucket where backup is stored",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "persistentVolumeClaim": {
+                              "description": "Specification of the PVC to be used. Used 'as is' in pod executing the backup.",
+                              "type": "object",
+                              "x-kubernetes-preserve-unknown-fields": true
+                            },
+                            "s3": {
+                              "type": "object",
+                              "required": [
+                                "bucketName",
+                                "config"
+                              ],
+                              "properties": {
+                                "bucketName": {
+                                  "description": "Name of the S3 bucket where the dump is stored",
+                                  "type": "string"
+                                },
+                                "config": {
+                                  "description": "Name of a Secret with S3 configuration and credentials",
+                                  "type": "string"
+                                },
+                                "endpoint": {
+                                  "description": "Override endpoint URL",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in the bucket where the dump files are stored",
+                                  "type": "string"
+                                },
+                                "profile": {
+                                  "description": "Profile being used in configuration files",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            }
+                          },
+                          "x-kubernetes-preserve-unknown-fields": true
+                        }
+                      }
+                    },
+                    "name": {
+                      "description": "Embedded backup profile, referenced as backupProfileName elsewhere",
+                      "type": "string"
+                    },
+                    "podAnnotations": {
+                      "type": "object",
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "podLabels": {
+                      "type": "object",
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "snapshot": {
+                      "type": "object",
+                      "properties": {
+                        "storage": {
+                          "type": "object",
+                          "properties": {
+                            "azure": {
+                              "type": "object",
+                              "required": [
+                                "containerName",
+                                "config"
+                              ],
+                              "properties": {
+                                "config": {
+                                  "description": "Name of a Secret with Azure BLOB Storage configuration and credentials",
+                                  "type": "string"
+                                },
+                                "containerName": {
+                                  "description": "Name of the Azure  BLOB Storage container where the dump is stored",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in the container where the dump files are stored",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "ociObjectStorage": {
+                              "type": "object",
+                              "required": [
+                                "bucketName",
+                                "credentials"
+                              ],
+                              "properties": {
+                                "bucketName": {
+                                  "description": "Bucket name where backup is stored",
+                                  "type": "string"
+                                },
+                                "credentials": {
+                                  "description": "Name of a Secret with data for accessing the bucket",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in bucket where backup is stored",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "persistentVolumeClaim": {
+                              "description": "Specification of the PVC to be used. Used 'as is' in pod executing the backup.",
+                              "type": "object",
+                              "x-kubernetes-preserve-unknown-fields": true
+                            },
+                            "s3": {
+                              "type": "object",
+                              "required": [
+                                "bucketName",
+                                "config"
+                              ],
+                              "properties": {
+                                "bucketName": {
+                                  "description": "Name of the S3 bucket where the dump is stored",
+                                  "type": "string"
+                                },
+                                "config": {
+                                  "description": "Name of a Secret with S3 configuration and credentials",
+                                  "type": "string"
+                                },
+                                "endpoint": {
+                                  "description": "Override endpoint URL",
+                                  "type": "string"
+                                },
+                                "prefix": {
+                                  "description": "Path in the bucket where the dump files are stored",
+                                  "type": "string"
+                                },
+                                "profile": {
+                                  "description": "Profile being used in configuration files",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            }
+                          },
+                          "x-kubernetes-preserve-unknown-fields": true
+                        }
+                      }
+                    }
+                  }
                 }
               },
               "backupSchedules": {
@@ -5859,18 +6164,153 @@
                     "name",
                     "schedule"
                   ],
-                  "x-kubernetes-preserve-unknown-fields": true
+                  "x-kubernetes-preserve-unknown-fields": true,
+                  "type": "object",
+                  "properties": {
+                    "backupProfile": {
+                      "description": "backupProfile specification if backupProfileName is not specified",
+                      "type": "object",
+                      "properties": {
+                        "dumpInstance": {
+                          "type": "object",
+                          "properties": {
+                            "dumpOptions": {
+                              "description": "A dictionary of key-value pairs passed directly to MySQL Shell's DumpInstance()",
+                              "type": "object",
+                              "x-kubernetes-preserve-unknown-fields": true
+                            },
+                            "storage": {
+                              "type": "object",
+                              "properties": {
+                                "azure": {
+                                  "type": "object",
+                                  "required": [
+                                    "containerName",
+                                    "config"
+                                  ],
+                                  "properties": {
+                                    "config": {
+                                      "description": "Name of a Secret with Azure BLOB Storage configuration and credentials",
+                                      "type": "string"
+                                    },
+                                    "containerName": {
+                                      "description": "Name of the Azure  BLOB Storage container where the dump is stored",
+                                      "type": "string"
+                                    },
+                                    "prefix": {
+                                      "description": "Path in the container where the dump files are stored",
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "ociObjectStorage": {
+                                  "type": "object",
+                                  "required": [
+                                    "bucketName",
+                                    "credentials"
+                                  ],
+                                  "properties": {
+                                    "bucketName": {
+                                      "description": "Name of the OCI Bucket where backup is stored",
+                                      "type": "string"
+                                    },
+                                    "credentials": {
+                                      "description": "Name of a Secret with data for accessing the bucket",
+                                      "type": "string"
+                                    },
+                                    "prefix": {
+                                      "description": "Path in bucket where backup is stored",
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "persistentVolumeClaim": {
+                                  "description": "Specification of the PVC to be used. Used 'as is' in pod executing the backup.",
+                                  "type": "object",
+                                  "x-kubernetes-preserve-unknown-fields": true
+                                },
+                                "s3": {
+                                  "type": "object",
+                                  "required": [
+                                    "bucketName",
+                                    "config"
+                                  ],
+                                  "properties": {
+                                    "bucketName": {
+                                      "description": "Name of the S3 bucket where the dump is stored",
+                                      "type": "string"
+                                    },
+                                    "config": {
+                                      "description": "Name of a Secret with S3 configuration and credentials",
+                                      "type": "string"
+                                    },
+                                    "endpoint": {
+                                      "description": "Override endpoint URL",
+                                      "type": "string"
+                                    },
+                                    "prefix": {
+                                      "description": "Path in the bucket where the dump files are stored",
+                                      "type": "string"
+                                    },
+                                    "profile": {
+                                      "description": "Profile being used in configuration files",
+                                      "type": "string",
+                                      "default": ""
+                                    }
+                                  }
+                                }
+                              },
+                              "x-kubernetes-preserve-unknown-fields": true
+                            }
+                          }
+                        },
+                        "podAnnotations": {
+                          "type": "object",
+                          "x-kubernetes-preserve-unknown-fields": true
+                        },
+                        "podLabels": {
+                          "type": "object",
+                          "x-kubernetes-preserve-unknown-fields": true
+                        }
+                      },
+                      "x-kubernetes-preserve-unknown-fields": true
+                    },
+                    "backupProfileName": {
+                      "description": "Name of the backupProfile to be used",
+                      "type": "string"
+                    },
+                    "deleteBackupData": {
+                      "description": "Whether to delete the backup data in case the MySQLBackup object created by the job is deleted",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "enabled": {
+                      "description": "Whether the schedule is enabled or not",
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "name": {
+                      "description": "Name of the backup schedule",
+                      "type": "string"
+                    },
+                    "schedule": {
+                      "description": "The schedule of the job, syntax as a cron expression",
+                      "type": "string"
+                    }
+                  }
                 }
               },
               "baseServerId": {
                 "description": "Base value for MySQL server_id for instances in the cluster",
                 "type": "integer",
                 "maximum": 4294967195,
-                "minimum": 0
+                "minimum": 0,
+                "default": 1000
               },
               "datadirVolumeClaimTemplate": {
                 "description": "Template for a PersistentVolumeClaim, to be used as datadir",
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object"
               },
               "edition": {
                 "description": "MySQL Server Edition (community or enterprise)",
@@ -5897,13 +6337,154 @@
                 "type": "string"
               },
               "initDB": {
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object",
+                "properties": {
+                  "clone": {
+                    "type": "object",
+                    "required": [
+                      "donorUrl",
+                      "secretKeyRef"
+                    ],
+                    "properties": {
+                      "donorUrl": {
+                        "description": "URL of the cluster to clone from",
+                        "type": "string"
+                      },
+                      "rootUser": {
+                        "description": "User name used for cloning",
+                        "type": "string",
+                        "default": "root"
+                      },
+                      "secretKeyRef": {
+                        "type": "object",
+                        "required": [
+                          "name"
+                        ],
+                        "properties": {
+                          "name": {
+                            "description": "Secret name with key 'rootPassword' storing the password for the user specified in rootUser",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "dump": {
+                    "type": "object",
+                    "required": [
+                      "storage"
+                    ],
+                    "properties": {
+                      "name": {
+                        "description": "Name of the dump. Not used by the operator, but a descriptive hint for the cluster administrator",
+                        "type": "string"
+                      },
+                      "options": {
+                        "description": "A dictionary of key-value pairs passed directly to MySQL Shell's loadDump()",
+                        "type": "object",
+                        "x-kubernetes-preserve-unknown-fields": true
+                      },
+                      "path": {
+                        "description": "Path to the dump in the PVC. Use when specifying persistentVolumeClaim. Omit for ociObjectStorage, S3, or azure.",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "type": "object",
+                        "properties": {
+                          "azure": {
+                            "type": "object",
+                            "required": [
+                              "containerName",
+                              "prefix",
+                              "config"
+                            ],
+                            "properties": {
+                              "config": {
+                                "description": "Name of a Secret with Azure BLOB Storage configuration and credentials",
+                                "type": "string"
+                              },
+                              "containerName": {
+                                "description": "Name of the Azure  BLOB Storage container where the dump is stored",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in the container where the dump files are stored",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "ociObjectStorage": {
+                            "type": "object",
+                            "required": [
+                              "bucketName",
+                              "prefix",
+                              "credentials"
+                            ],
+                            "properties": {
+                              "bucketName": {
+                                "description": "Name of the OCI bucket where the dump is stored",
+                                "type": "string"
+                              },
+                              "credentials": {
+                                "description": "Name of a Secret with data for accessing the bucket",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in the bucket where the dump files are stored",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "persistentVolumeClaim": {
+                            "description": "Specification of the PVC to be used. Used 'as is' in the cloning pod.",
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "s3": {
+                            "type": "object",
+                            "required": [
+                              "bucketName",
+                              "prefix",
+                              "config"
+                            ],
+                            "properties": {
+                              "bucketName": {
+                                "description": "Name of the S3 bucket where the dump is stored",
+                                "type": "string"
+                              },
+                              "config": {
+                                "description": "Name of a Secret with S3 configuration and credentials",
+                                "type": "string"
+                              },
+                              "endpoint": {
+                                "description": "Override endpoint URL",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in the bucket where the dump files are stored",
+                                "type": "string"
+                              },
+                              "profile": {
+                                "description": "Profile being used in configuration files",
+                                "type": "string",
+                                "default": ""
+                              }
+                            }
+                          }
+                        },
+                        "x-kubernetes-preserve-unknown-fields": true
+                      }
+                    }
+                  }
+                }
               },
               "instances": {
                 "description": "Number of MySQL replica instances for the cluster",
                 "type": "integer",
                 "maximum": 9,
-                "minimum": 1
+                "minimum": 1,
+                "default": 1
               },
               "keyring": {
                 "description": "Keyring specification",
@@ -5928,11 +6509,13 @@
                       },
                       "readOnly": {
                         "description": "Whether to open the keyring file in read-only mode",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "storage": {
                         "description": "Specification of the volume to be mounted where the keyring file resides",
-                        "x-kubernetes-preserve-unknown-fields": true
+                        "x-kubernetes-preserve-unknown-fields": true,
+                        "type": "object"
                       }
                     }
                   },
@@ -5950,11 +6533,13 @@
                       },
                       "readOnly": {
                         "description": "Whether to open the keyring file in read-only mode",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "storage": {
                         "description": "Specification of the volume to be mounted where the keyring file resides",
-                        "x-kubernetes-preserve-unknown-fields": true
+                        "x-kubernetes-preserve-unknown-fields": true,
+                        "type": "object"
                       }
                     }
                   },
@@ -6039,13 +6624,15 @@
                     "properties": {
                       "containerName": {
                         "description": "Name of the collector container sidecar",
-                        "type": "string"
+                        "type": "string",
+                        "default": "logcollector"
                       },
                       "env": {
                         "type": "array",
                         "items": {
                           "description": "Environment variables to be passed to the image. Definition will be directly copied like podSpec fields are",
-                          "x-kubernetes-preserve-unknown-fields": true
+                          "x-kubernetes-preserve-unknown-fields": true,
+                          "type": "object"
                         }
                       },
                       "fluentd": {
@@ -6061,11 +6648,13 @@
                             "properties": {
                               "options": {
                                 "description": "fluentd specific options for the error log",
-                                "x-kubernetes-preserve-unknown-fields": true
+                                "x-kubernetes-preserve-unknown-fields": true,
+                                "type": "object"
                               },
                               "tag": {
                                 "description": "Tag for the error log records",
-                                "type": "string"
+                                "type": "string",
+                                "default": ""
                               }
                             }
                           },
@@ -6074,11 +6663,13 @@
                             "properties": {
                               "options": {
                                 "description": "fluentd specific options for the general log",
-                                "x-kubernetes-preserve-unknown-fields": true
+                                "x-kubernetes-preserve-unknown-fields": true,
+                                "type": "object"
                               },
                               "tag": {
                                 "description": "Tag for the general log records",
-                                "type": "string"
+                                "type": "string",
+                                "default": ""
                               }
                             }
                           },
@@ -6107,7 +6698,8 @@
                               },
                               "enabled": {
                                 "description": "Whether to enable record augmentation with additional data",
-                                "type": "boolean"
+                                "type": "boolean",
+                                "default": false
                               },
                               "labels": {
                                 "type": "array",
@@ -6202,7 +6794,18 @@
                                 "name",
                                 "rawConfig"
                               ],
-                              "x-kubernetes-preserve-unknown-fields": true
+                              "x-kubernetes-preserve-unknown-fields": true,
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "description": "Name of the sink. Used only for documentation purposes",
+                                  "type": "string"
+                                },
+                                "rawConfig": {
+                                  "description": "Raw configuration of the sink",
+                                  "type": "string"
+                                }
+                              }
                             }
                           },
                           "slowQueryLog": {
@@ -6210,34 +6813,53 @@
                             "properties": {
                               "options": {
                                 "description": "fluentd specific options for the slow log",
-                                "x-kubernetes-preserve-unknown-fields": true
+                                "x-kubernetes-preserve-unknown-fields": true,
+                                "type": "object"
                               },
                               "tag": {
                                 "description": "Tag for the slow log records",
-                                "type": "string"
+                                "type": "string",
+                                "default": ""
                               }
                             }
                           }
-                        }
+                        },
+                        "oneOf": [
+                          {
+                            "required": [
+                              "sinks"
+                            ]
+                          }
+                        ]
                       },
                       "image": {
                         "description": "Name of an image, including registry and repository, to be used for the log collector sidecar. If provided it needs to be an image for the configured collector type.",
                         "type": "string"
                       }
-                    }
+                    },
+                    "oneOf": [
+                      {
+                        "required": [
+                          "image",
+                          "fluentd"
+                        ]
+                      }
+                    ]
                   },
                   "error": {
                     "type": "object",
                     "properties": {
                       "collect": {
                         "description": "Whether error logging data should be collected. Implies that the logging should be enabled. If enabled the error log will be switched to JSON format output",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "verbosity": {
                         "description": "Log error verbosity. For details, see the MySQL Server --log-error-verbosity documentation.",
                         "type": "integer",
                         "maximum": 3,
-                        "minimum": 1
+                        "minimum": 1,
+                        "default": 3
                       }
                     }
                   },
@@ -6246,11 +6868,13 @@
                     "properties": {
                       "collect": {
                         "description": "Whether general logging data should be collected. Implies that the logging should be enabled.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "enabled": {
                         "description": "Whether general logging should be enabled",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       }
                     }
                   },
@@ -6259,16 +6883,19 @@
                     "properties": {
                       "collect": {
                         "description": "Whether slow query logging data should be collected. Implies that the logging should be enabled.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "enabled": {
                         "description": "Whether slow query logging should be enabled",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                       },
                       "longQueryTime": {
                         "description": "Long query time threshold",
                         "type": "number",
-                        "minimum": 0
+                        "minimum": 0,
+                        "default": 10
                       }
                     }
                   }
@@ -6284,7 +6911,8 @@
                 "properties": {
                   "enable": {
                     "description": "Toggle to enable or disable the metrics sidecar",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "image": {
                     "description": "Name of an image to be used for the metrics sidecar, if provided metrics will be enabled",
@@ -6292,11 +6920,14 @@
                   },
                   "monitor": {
                     "description": "Create a ServiceMonitor for Prometheus Operator",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": false
                   },
                   "monitorSpec": {
                     "description": "Custom configuration for the ServiceMonitor object",
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object",
+                    "default": {}
                   },
                   "options": {
                     "description": "Options passed to the metrics provider as command line arguments",
@@ -6320,13 +6951,16 @@
                 "type": "string"
               },
               "podAnnotations": {
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object"
               },
               "podLabels": {
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object"
               },
               "podSpec": {
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object"
               },
               "readReplicas": {
                 "type": "array",
@@ -6341,17 +6975,20 @@
                       "description": "Base value for MySQL server_id for instances of the readReplica, if 0 it will be assigned automatically",
                       "type": "integer",
                       "maximum": 4294967195,
-                      "minimum": 0
+                      "minimum": 0,
+                      "default": 0
                     },
                     "datadirVolumeClaimTemplate": {
                       "description": "Template for a PersistentVolumeClaim, to be used as datadir",
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object"
                     },
                     "instances": {
                       "description": "Number of MySQL instances for the set of read replica",
                       "type": "integer",
                       "maximum": 999,
-                      "minimum": 1
+                      "minimum": 1,
+                      "default": 1
                     },
                     "mycnf": {
                       "description": "Custom configuration additions for my.cnf",
@@ -6361,13 +6998,16 @@
                       "type": "string"
                     },
                     "podAnnotations": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object"
                     },
                     "podLabels": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object"
                     },
                     "podSpec": {
-                      "x-kubernetes-preserve-unknown-fields": true
+                      "x-kubernetes-preserve-unknown-fields": true,
+                      "type": "object"
                     },
                     "version": {
                       "description": "MySQL Server version",
@@ -6391,7 +7031,8 @@
                   "instances": {
                     "description": "Number of MySQL Router instances to deploy",
                     "type": "integer",
-                    "minimum": 0
+                    "minimum": 0,
+                    "default": 1
                   },
                   "options": {
                     "description": "Command line options passed to MySQL Router while running",
@@ -6401,13 +7042,16 @@
                     }
                   },
                   "podAnnotations": {
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   },
                   "podLabels": {
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   },
                   "podSpec": {
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   },
                   "routingOptions": {
                     "description": "Set routing options for the cluster",
@@ -6430,7 +7074,8 @@
                       },
                       "stats_updates_frequency": {
                         "type": "integer",
-                        "minimum": 0
+                        "minimum": 0,
+                        "default": 0
                       }
                     }
                   },
@@ -6455,7 +7100,8 @@
                 "properties": {
                   "annotations": {
                     "description": "Custom annotations for the Service",
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   },
                   "defaultPort": {
                     "description": "Target for the Service's default (3306) port. If mysql-rw traffic will go to the primary and allow read and write operations, with mysql-ro traffic goes to the replica and allows only read operations, with mysql-rw-split the router's read-write-splitting will be targeted",
@@ -6464,11 +7110,13 @@
                       "mysql-rw",
                       "mysql-ro",
                       "mysql-rw-split"
-                    ]
+                    ],
+                    "default": "mysql-rw"
                   },
                   "labels": {
                     "description": "Custom labels for the Service",
-                    "x-kubernetes-preserve-unknown-fields": true
+                    "x-kubernetes-preserve-unknown-fields": true,
+                    "type": "object"
                   },
                   "type": {
                     "type": "string",
@@ -6476,7 +7124,8 @@
                       "ClusterIP",
                       "NodePort",
                       "LoadBalancer"
-                    ]
+                    ],
+                    "default": "ClusterIP"
                   }
                 }
               },
@@ -6493,7 +7142,8 @@
               },
               "tlsUseSelfSigned": {
                 "description": "Enables use of self-signed TLS certificates, reducing or disabling TLS based security verifications",
-                "type": "boolean"
+                "type": "boolean",
+                "default": false
               },
               "version": {
                 "description": "MySQL Server version",
@@ -6503,7 +7153,16 @@
             }
           },
           "status": {
+            "type": "object",
             "x-kubernetes-preserve-unknown-fields": true
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",
@@ -7885,14 +8544,6 @@
       "name": "com.oracle.mysql.v2.MySQLBackup",
       "definition": {
         "properties": {
-          "apiVersion": {
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-            "type": "string"
-          },
           "spec": {
             "type": "object",
             "required": [
@@ -7900,11 +8551,116 @@
             ],
             "properties": {
               "addTimestampToBackupDirectory": {
-                "type": "boolean"
+                "type": "boolean",
+                "default": true
               },
               "backupProfile": {
                 "description": "backupProfile specification if backupProfileName is not specified",
-                "x-kubernetes-preserve-unknown-fields": true
+                "x-kubernetes-preserve-unknown-fields": true,
+                "type": "object",
+                "properties": {
+                  "dumpInstance": {
+                    "type": "object",
+                    "properties": {
+                      "dumpOptions": {
+                        "description": "A dictionary of key-value pairs passed directly to MySQL Shell's DumpInstance()",
+                        "type": "object",
+                        "x-kubernetes-preserve-unknown-fields": true
+                      },
+                      "storage": {
+                        "type": "object",
+                        "properties": {
+                          "azure": {
+                            "type": "object",
+                            "required": [
+                              "containerName",
+                              "config"
+                            ],
+                            "properties": {
+                              "config": {
+                                "description": "Name of a Secret with Azure BLOB Storage configuration and credentials",
+                                "type": "string"
+                              },
+                              "containerName": {
+                                "description": "Name of the Azure  BLOB Storage container where the dump is stored",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in the container where the dump files are stored",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "ociObjectStorage": {
+                            "type": "object",
+                            "required": [
+                              "bucketName",
+                              "credentials"
+                            ],
+                            "properties": {
+                              "bucketName": {
+                                "description": "Name of the OCI bucket where backup is stored",
+                                "type": "string"
+                              },
+                              "credentials": {
+                                "description": "Name of a Secret with data for accessing the bucket",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in bucket where backup is stored",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "persistentVolumeClaim": {
+                            "description": "Specification of the PVC to be used. Used 'as is' in pod executing the backup.",
+                            "type": "object",
+                            "x-kubernetes-preserve-unknown-fields": true
+                          },
+                          "s3": {
+                            "type": "object",
+                            "required": [
+                              "bucketName",
+                              "config"
+                            ],
+                            "properties": {
+                              "bucketName": {
+                                "description": "Name of the S3 bucket where the dump is stored",
+                                "type": "string"
+                              },
+                              "config": {
+                                "description": "Name of a Secret with S3 configuration and credentials",
+                                "type": "string"
+                              },
+                              "endpoint": {
+                                "description": "Override endpoint URL",
+                                "type": "string"
+                              },
+                              "prefix": {
+                                "description": "Path in the bucket where the dump files are stored",
+                                "type": "string"
+                              },
+                              "profile": {
+                                "description": "Profile being used in configuration files",
+                                "type": "string",
+                                "default": ""
+                              }
+                            }
+                          }
+                        },
+                        "x-kubernetes-preserve-unknown-fields": true
+                      }
+                    }
+                  },
+                  "podAnnotations": {
+                    "type": "object",
+                    "x-kubernetes-preserve-unknown-fields": true
+                  },
+                  "podLabels": {
+                    "type": "object",
+                    "x-kubernetes-preserve-unknown-fields": true
+                  }
+                }
               },
               "backupProfileName": {
                 "type": "string"
@@ -7913,7 +8669,8 @@
                 "type": "string"
               },
               "deleteBackupData": {
-                "type": "boolean"
+                "type": "boolean",
+                "default": false
               }
             }
           },
@@ -7960,6 +8717,14 @@
                 "type": "string"
               }
             }
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
           }
         },
         "type": "object",

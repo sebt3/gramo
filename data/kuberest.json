@@ -1,0 +1,1320 @@
+{
+  "name": "kuberest",
+  "objects": [
+    {
+      "alternatives": [],
+      "name": "fr.solidite.kuberest.v1.RestEndPoint",
+      "definition": {
+        "properties": {
+          "spec": {
+            "type": "object",
+            "description": "Describe the specification of a RestEndPoint",
+            "required": [
+              "client"
+            ],
+            "properties": {
+              "checkFrequency": {
+                "description": "checkFrequency define the pooling interval (in seconds, default: 300)",
+                "format": "uint64",
+                "minimum": 0,
+                "type": "integer",
+                "nullable": true
+              },
+              "client": {
+                "description": "Define the how the client should connect to the API endpoint(s)",
+                "type": "object",
+                "required": [
+                  "baseurl"
+                ],
+                "properties": {
+                  "baseurl": {
+                    "description": "The baseurl the client will use. All path will use this as a prefix",
+                    "type": "string"
+                  },
+                  "clientCert": {
+                    "description": "mTLS client certificate",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "clientKey": {
+                    "description": "mTLS client key",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "createMethod": {
+                    "description": "Method to use when creating an object (default: Get)",
+                    "enum": [
+                      "Post"
+                    ],
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "deleteMethod": {
+                    "description": "Method to use when deleting an object (default: Delete)",
+                    "enum": [
+                      "Delete"
+                    ],
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "headers": {
+                    "description": "Headers to use on each requests to the endpoint",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "type": "object",
+                    "nullable": true
+                  },
+                  "keyName": {
+                    "description": "keyName: the key of the object (default: id)",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "readMethod": {
+                    "description": "Method to use when reading an object (default: Post)",
+                    "enum": [
+                      "Get"
+                    ],
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "serverCa": {
+                    "description": "For self-signed Certificates on the destination endpoint",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "teardown": {
+                    "description": "Delete the Objects on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "updateMethod": {
+                    "description": "Method to use when updating an object (default: Put)",
+                    "enum": [
+                      "Patch",
+                      "Put",
+                      "Post"
+                    ],
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "inputs": {
+                "description": "List input source for Handlebars renders",
+                "type": "array",
+                "items": {
+                  "description": "inputItem describe a data input for handlebars renders",
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "configMapRef": {
+                      "description": "The ConfigMap to select from",
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "description": "Name of the ConfigMap",
+                          "type": "string"
+                        },
+                        "namespace": {
+                          "description": "Namespace of the ConfigMap, only used if the cross-namespace option is enabled (default: current object namespace)",
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "optional": {
+                          "description": "Is the ConfigMap requiered for processing ? (default: false)",
+                          "type": "boolean",
+                          "nullable": true
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "handleBarsRender": {
+                      "description": "an handlebars template to be rendered",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "name": {
+                      "description": "name of the input (used for handlebars renders)",
+                      "type": "string"
+                    },
+                    "passwordGenerator": {
+                      "description": "A password generator",
+                      "type": "object",
+                      "properties": {
+                        "length": {
+                          "description": "length of the password (default: 32)",
+                          "type": "integer",
+                          "format": "uint32",
+                          "minimum": 0,
+                          "nullable": true
+                        },
+                        "weightAlphas": {
+                          "description": "weight of alpha caracters (default: 60)",
+                          "type": "integer",
+                          "format": "uint32",
+                          "minimum": 0,
+                          "nullable": true
+                        },
+                        "weightNumbers": {
+                          "description": "weight of numbers caracters (default: 20)",
+                          "type": "integer",
+                          "format": "uint32",
+                          "minimum": 0,
+                          "nullable": true
+                        },
+                        "weightSymbols": {
+                          "description": "weight of symbols caracters (default: 20)",
+                          "type": "integer",
+                          "format": "uint32",
+                          "minimum": 0,
+                          "nullable": true
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "secretRef": {
+                      "description": "The Secret to select from",
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "description": "Name of the Secret",
+                          "type": "string"
+                        },
+                        "namespace": {
+                          "description": "Namespace of the Secret, only used if the cross-namespace option is enabled (default: current object namespace)",
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "optional": {
+                          "description": "Is the Secret optional for processing ? (default: false)",
+                          "type": "boolean",
+                          "nullable": true
+                        }
+                      },
+                      "nullable": true
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "outputs": {
+                "description": "Objects (Secret or ConfigMap) to create at the end of the process",
+                "type": "array",
+                "items": {
+                  "description": "outputItem describe an object that will be created/updated after the path objects are all handled",
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "kind",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "data": {
+                      "description": "Data of the Output (will be base64-encoded for secret Secrets)",
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "kind": {
+                      "description": "Either ConfigMap or Secret",
+                      "type": "string",
+                      "enum": [
+                        "Secret",
+                        "ConfigMap"
+                      ]
+                    },
+                    "metadata": {
+                      "description": "The metadata of the Object (requiered: name)",
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "annotations": {
+                          "description": "annotations of the objects",
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "nullable": true
+                        },
+                        "labels": {
+                          "description": "labels of the objects",
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "nullable": true
+                        },
+                        "name": {
+                          "description": "name of the created object",
+                          "type": "string"
+                        },
+                        "namespace": {
+                          "description": "namespace of the created object",
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "teardown": {
+                      "description": "Delete the Secret on RestEndPoint deletion (default: true)",
+                      "type": "boolean",
+                      "nullable": true
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "post": {
+                "description": "A rhai post-script for final validation if any",
+                "type": "string",
+                "nullable": true
+              },
+              "pre": {
+                "description": "A rhai pre-script to setup some complex variables",
+                "type": "string",
+                "nullable": true
+              },
+              "reads": {
+                "description": "Allow to read some pre-existing objects",
+                "type": "array",
+                "items": {
+                  "description": "ReadGroup describe a rest endpoint within the client sub-paths,",
+                  "type": "object",
+                  "required": [
+                    "items",
+                    "name",
+                    "path"
+                  ],
+                  "properties": {
+                    "items": {
+                      "description": "The list of object mapping",
+                      "type": "array",
+                      "items": {
+                        "description": "readGroupItem describe an object to read with the client",
+                        "type": "object",
+                        "required": [
+                          "key",
+                          "name"
+                        ],
+                        "properties": {
+                          "key": {
+                            "description": "configuration of this object",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the item (used for handlebars renders)",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "name": {
+                      "description": "name of the write (used for handlebars renders)",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "path appended to the client's baseurl for this group of objects",
+                      "type": "string"
+                    },
+                    "read_method": {
+                      "description": "Method to use when reading an object (default: Get)",
+                      "type": "string",
+                      "enum": [
+                        "Get"
+                      ],
+                      "nullable": true
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "teardown": {
+                "description": "A rhai teardown-script for a final cleanup on RestEndPoint deletion",
+                "type": "string",
+                "nullable": true
+              },
+              "templates": {
+                "description": "List Handlebars templates to register",
+                "type": "array",
+                "items": {
+                  "description": "templateItem describe a list of handlebars templates that will be registered with given name",
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "template"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "name of the input (used for handlebars renders)",
+                      "type": "string"
+                    },
+                    "template": {
+                      "description": "The template to register",
+                      "type": "string"
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "writes": {
+                "description": "Sub-paths to the client. Allow to describe the objects to create on the end-point",
+                "type": "array",
+                "items": {
+                  "description": "writeGroup describe a rest endpoint within the client sub-paths,",
+                  "type": "object",
+                  "required": [
+                    "items",
+                    "name",
+                    "path"
+                  ],
+                  "properties": {
+                    "createMethod": {
+                      "description": "Method to use when creating an object (default: Get)",
+                      "type": "string",
+                      "enum": [
+                        "Post"
+                      ],
+                      "nullable": true
+                    },
+                    "deleteMethod": {
+                      "description": "Method to use when deleting an object (default: Delete)",
+                      "type": "string",
+                      "enum": [
+                        "Delete"
+                      ],
+                      "nullable": true
+                    },
+                    "items": {
+                      "description": "The list of object mapping",
+                      "type": "array",
+                      "items": {
+                        "description": "writeGroupItem describe an object to maintain within",
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "values"
+                        ],
+                        "properties": {
+                          "name": {
+                            "description": "name of the item (used for handlebars renders: write.<group>.<name>)",
+                            "type": "string"
+                          },
+                          "teardown": {
+                            "description": "Delete the Object on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                            "type": "boolean",
+                            "nullable": true
+                          },
+                          "values": {
+                            "description": "configuration of this object (yaml format, use handlebars to generate your needed values)",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "keyName": {
+                      "description": "keyName: the key of the object (default: id)",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "keyUseSlash": {
+                      "description": "keyUseSlash: should the update/delete url end with a slash at the end (default: false)",
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "name": {
+                      "description": "name of the write (used for handlebars renders: write.<name>)",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "path appended to the client's baseurl for this group of objects",
+                      "type": "string"
+                    },
+                    "readMethod": {
+                      "description": "Method to use when reading an object (default: Post)",
+                      "type": "string",
+                      "enum": [
+                        "Get"
+                      ],
+                      "nullable": true
+                    },
+                    "teardown": {
+                      "description": "Delete the Objects on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "updateMethod": {
+                      "description": "Method to use when updating an object (default: Patch)",
+                      "type": "string",
+                      "enum": [
+                        "Patch",
+                        "Put",
+                        "Post"
+                      ],
+                      "nullable": true
+                    }
+                  }
+                },
+                "nullable": true
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "The status object of `RestEndPoint`",
+            "required": [
+              "conditions",
+              "generation",
+              "owned",
+              "ownedTarget"
+            ],
+            "properties": {
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "description": "ApplicationCondition contains details about an application condition, which is usually an error or warning",
+                  "type": "object",
+                  "required": [
+                    "message",
+                    "status",
+                    "type"
+                  ],
+                  "properties": {
+                    "lastTransitionTime": {
+                      "description": "LastTransitionTime is the time the condition was last observed",
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    },
+                    "message": {
+                      "description": "Message contains human-readable message indicating details about condition",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Status (\"True\" or \"False\") describe if the condition is enbled",
+                      "type": "string",
+                      "enum": [
+                        "True",
+                        "False"
+                      ]
+                    },
+                    "type": {
+                      "description": "Type is an application condition type",
+                      "type": "string",
+                      "enum": [
+                        "Ready",
+                        "InputMissing",
+                        "InputFailed",
+                        "TemplateFailed",
+                        "PreScriptFailed",
+                        "PostScriptFailed",
+                        "TeardownScriptFailed",
+                        "ReadFailed",
+                        "WriteFailed",
+                        "WriteDeleteFailed",
+                        "WriteAlreadyExist",
+                        "OutputFailed",
+                        "OutputDeleteFailed",
+                        "OutputAlreadyExist"
+                      ]
+                    }
+                  }
+                }
+              },
+              "generation": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "owned": {
+                "type": "array",
+                "items": {
+                  "description": "List all owned k8s objects",
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "name",
+                    "namespace",
+                    "uid"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "description": "Either ConfigMap or Secret",
+                      "type": "string",
+                      "enum": [
+                        "Secret",
+                        "ConfigMap"
+                      ]
+                    },
+                    "name": {
+                      "description": "name of the owned object",
+                      "type": "string"
+                    },
+                    "namespace": {
+                      "description": "namespace of the owned object",
+                      "type": "string"
+                    },
+                    "uid": {
+                      "description": "uid of the owned object",
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "ownedTarget": {
+                "type": "array",
+                "items": {
+                  "description": "List all owned rest objects",
+                  "type": "object",
+                  "required": [
+                    "group",
+                    "key",
+                    "name",
+                    "path",
+                    "teardown"
+                  ],
+                  "properties": {
+                    "group": {
+                      "description": "Object writeGroup",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "Object key",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Object name within its writeGroup",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "Object path within the client",
+                      "type": "string"
+                    },
+                    "teardown": {
+                      "description": "should we manage this object deletion",
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "nullable": true
+          },
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+          }
+        },
+        "description": "Auto-generated derived type for RestEndPointSpec via `CustomResource`",
+        "type": "object",
+        "title": "RestEndPoint",
+        "required": [
+          "spec"
+        ],
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "kuberest.solidite.fr",
+            "kind": "RestEndPoint",
+            "version": "v1"
+          }
+        ]
+      },
+      "crd": {
+        "metadata": {
+          "name": "restendpoints.kuberest.solidite.fr"
+        },
+        "spec": {
+          "group": "kuberest.solidite.fr",
+          "names": {
+            "plural": "restendpoints",
+            "singular": "restendpoint",
+            "shortNames": [
+              "rep"
+            ],
+            "kind": "RestEndPoint",
+            "listKind": "RestEndPointList"
+          },
+          "scope": "Namespaced",
+          "versions": [
+            {
+              "name": "v1",
+              "served": true,
+              "storage": true,
+              "schema": {
+                "openAPIV3Schema": {
+                  "description": "Auto-generated derived type for RestEndPointSpec via `CustomResource`",
+                  "type": "object",
+                  "title": "RestEndPoint",
+                  "required": [
+                    "spec"
+                  ],
+                  "properties": {
+                    "spec": {
+                      "description": "Describe the specification of a RestEndPoint",
+                      "type": "object",
+                      "required": [
+                        "client"
+                      ],
+                      "properties": {
+                        "checkFrequency": {
+                          "description": "checkFrequency define the pooling interval (in seconds, default: 300)",
+                          "type": "integer",
+                          "format": "uint64",
+                          "minimum": 0,
+                          "nullable": true
+                        },
+                        "client": {
+                          "description": "Define the how the client should connect to the API endpoint(s)",
+                          "type": "object",
+                          "required": [
+                            "baseurl"
+                          ],
+                          "properties": {
+                            "baseurl": {
+                              "description": "The baseurl the client will use. All path will use this as a prefix",
+                              "type": "string"
+                            },
+                            "clientCert": {
+                              "description": "mTLS client certificate",
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "clientKey": {
+                              "description": "mTLS client key",
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "createMethod": {
+                              "description": "Method to use when creating an object (default: Get)",
+                              "type": "string",
+                              "enum": [
+                                "Post"
+                              ],
+                              "nullable": true
+                            },
+                            "deleteMethod": {
+                              "description": "Method to use when deleting an object (default: Delete)",
+                              "type": "string",
+                              "enum": [
+                                "Delete"
+                              ],
+                              "nullable": true
+                            },
+                            "headers": {
+                              "description": "Headers to use on each requests to the endpoint",
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "string"
+                              },
+                              "nullable": true
+                            },
+                            "keyName": {
+                              "description": "keyName: the key of the object (default: id)",
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "readMethod": {
+                              "description": "Method to use when reading an object (default: Post)",
+                              "type": "string",
+                              "enum": [
+                                "Get"
+                              ],
+                              "nullable": true
+                            },
+                            "serverCa": {
+                              "description": "For self-signed Certificates on the destination endpoint",
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "teardown": {
+                              "description": "Delete the Objects on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                              "type": "boolean",
+                              "nullable": true
+                            },
+                            "updateMethod": {
+                              "description": "Method to use when updating an object (default: Put)",
+                              "type": "string",
+                              "enum": [
+                                "Patch",
+                                "Put",
+                                "Post"
+                              ],
+                              "nullable": true
+                            }
+                          }
+                        },
+                        "inputs": {
+                          "description": "List input source for Handlebars renders",
+                          "type": "array",
+                          "items": {
+                            "description": "inputItem describe a data input for handlebars renders",
+                            "type": "object",
+                            "required": [
+                              "name"
+                            ],
+                            "properties": {
+                              "configMapRef": {
+                                "description": "The ConfigMap to select from",
+                                "type": "object",
+                                "required": [
+                                  "name"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "description": "Name of the ConfigMap",
+                                    "type": "string"
+                                  },
+                                  "namespace": {
+                                    "description": "Namespace of the ConfigMap, only used if the cross-namespace option is enabled (default: current object namespace)",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "optional": {
+                                    "description": "Is the ConfigMap requiered for processing ? (default: false)",
+                                    "type": "boolean",
+                                    "nullable": true
+                                  }
+                                },
+                                "nullable": true
+                              },
+                              "handleBarsRender": {
+                                "description": "an handlebars template to be rendered",
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "name": {
+                                "description": "name of the input (used for handlebars renders)",
+                                "type": "string"
+                              },
+                              "passwordGenerator": {
+                                "description": "A password generator",
+                                "type": "object",
+                                "properties": {
+                                  "length": {
+                                    "description": "length of the password (default: 32)",
+                                    "type": "integer",
+                                    "format": "uint32",
+                                    "minimum": 0,
+                                    "nullable": true
+                                  },
+                                  "weightAlphas": {
+                                    "description": "weight of alpha caracters (default: 60)",
+                                    "type": "integer",
+                                    "format": "uint32",
+                                    "minimum": 0,
+                                    "nullable": true
+                                  },
+                                  "weightNumbers": {
+                                    "description": "weight of numbers caracters (default: 20)",
+                                    "type": "integer",
+                                    "format": "uint32",
+                                    "minimum": 0,
+                                    "nullable": true
+                                  },
+                                  "weightSymbols": {
+                                    "description": "weight of symbols caracters (default: 20)",
+                                    "type": "integer",
+                                    "format": "uint32",
+                                    "minimum": 0,
+                                    "nullable": true
+                                  }
+                                },
+                                "nullable": true
+                              },
+                              "secretRef": {
+                                "description": "The Secret to select from",
+                                "type": "object",
+                                "required": [
+                                  "name"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "description": "Name of the Secret",
+                                    "type": "string"
+                                  },
+                                  "namespace": {
+                                    "description": "Namespace of the Secret, only used if the cross-namespace option is enabled (default: current object namespace)",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "optional": {
+                                    "description": "Is the Secret optional for processing ? (default: false)",
+                                    "type": "boolean",
+                                    "nullable": true
+                                  }
+                                },
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "outputs": {
+                          "description": "Objects (Secret or ConfigMap) to create at the end of the process",
+                          "type": "array",
+                          "items": {
+                            "description": "outputItem describe an object that will be created/updated after the path objects are all handled",
+                            "type": "object",
+                            "required": [
+                              "data",
+                              "kind",
+                              "metadata"
+                            ],
+                            "properties": {
+                              "data": {
+                                "description": "Data of the Output (will be base64-encoded for secret Secrets)",
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              },
+                              "kind": {
+                                "description": "Either ConfigMap or Secret",
+                                "type": "string",
+                                "enum": [
+                                  "Secret",
+                                  "ConfigMap"
+                                ]
+                              },
+                              "metadata": {
+                                "description": "The metadata of the Object (requiered: name)",
+                                "type": "object",
+                                "required": [
+                                  "name"
+                                ],
+                                "properties": {
+                                  "annotations": {
+                                    "description": "annotations of the objects",
+                                    "type": "object",
+                                    "additionalProperties": {
+                                      "type": "string"
+                                    },
+                                    "nullable": true
+                                  },
+                                  "labels": {
+                                    "description": "labels of the objects",
+                                    "type": "object",
+                                    "additionalProperties": {
+                                      "type": "string"
+                                    },
+                                    "nullable": true
+                                  },
+                                  "name": {
+                                    "description": "name of the created object",
+                                    "type": "string"
+                                  },
+                                  "namespace": {
+                                    "description": "namespace of the created object",
+                                    "type": "string",
+                                    "nullable": true
+                                  }
+                                }
+                              },
+                              "teardown": {
+                                "description": "Delete the Secret on RestEndPoint deletion (default: true)",
+                                "type": "boolean",
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "post": {
+                          "description": "A rhai post-script for final validation if any",
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "pre": {
+                          "description": "A rhai pre-script to setup some complex variables",
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "reads": {
+                          "description": "Allow to read some pre-existing objects",
+                          "type": "array",
+                          "items": {
+                            "description": "ReadGroup describe a rest endpoint within the client sub-paths,",
+                            "type": "object",
+                            "required": [
+                              "items",
+                              "name",
+                              "path"
+                            ],
+                            "properties": {
+                              "items": {
+                                "description": "The list of object mapping",
+                                "type": "array",
+                                "items": {
+                                  "description": "readGroupItem describe an object to read with the client",
+                                  "type": "object",
+                                  "required": [
+                                    "key",
+                                    "name"
+                                  ],
+                                  "properties": {
+                                    "key": {
+                                      "description": "configuration of this object",
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "description": "name of the item (used for handlebars renders)",
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "name": {
+                                "description": "name of the write (used for handlebars renders)",
+                                "type": "string"
+                              },
+                              "path": {
+                                "description": "path appended to the client's baseurl for this group of objects",
+                                "type": "string"
+                              },
+                              "read_method": {
+                                "description": "Method to use when reading an object (default: Get)",
+                                "type": "string",
+                                "enum": [
+                                  "Get"
+                                ],
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "teardown": {
+                          "description": "A rhai teardown-script for a final cleanup on RestEndPoint deletion",
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "templates": {
+                          "description": "List Handlebars templates to register",
+                          "type": "array",
+                          "items": {
+                            "description": "templateItem describe a list of handlebars templates that will be registered with given name",
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "template"
+                            ],
+                            "properties": {
+                              "name": {
+                                "description": "name of the input (used for handlebars renders)",
+                                "type": "string"
+                              },
+                              "template": {
+                                "description": "The template to register",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "nullable": true
+                        },
+                        "writes": {
+                          "description": "Sub-paths to the client. Allow to describe the objects to create on the end-point",
+                          "type": "array",
+                          "items": {
+                            "description": "writeGroup describe a rest endpoint within the client sub-paths,",
+                            "type": "object",
+                            "required": [
+                              "items",
+                              "name",
+                              "path"
+                            ],
+                            "properties": {
+                              "createMethod": {
+                                "description": "Method to use when creating an object (default: Get)",
+                                "type": "string",
+                                "enum": [
+                                  "Post"
+                                ],
+                                "nullable": true
+                              },
+                              "deleteMethod": {
+                                "description": "Method to use when deleting an object (default: Delete)",
+                                "type": "string",
+                                "enum": [
+                                  "Delete"
+                                ],
+                                "nullable": true
+                              },
+                              "items": {
+                                "description": "The list of object mapping",
+                                "type": "array",
+                                "items": {
+                                  "description": "writeGroupItem describe an object to maintain within",
+                                  "type": "object",
+                                  "required": [
+                                    "name",
+                                    "values"
+                                  ],
+                                  "properties": {
+                                    "name": {
+                                      "description": "name of the item (used for handlebars renders: write.<group>.<name>)",
+                                      "type": "string"
+                                    },
+                                    "teardown": {
+                                      "description": "Delete the Object on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                                      "type": "boolean",
+                                      "nullable": true
+                                    },
+                                    "values": {
+                                      "description": "configuration of this object (yaml format, use handlebars to generate your needed values)",
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "keyName": {
+                                "description": "keyName: the key of the object (default: id)",
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "keyUseSlash": {
+                                "description": "keyUseSlash: should the update/delete url end with a slash at the end (default: false)",
+                                "type": "boolean",
+                                "nullable": true
+                              },
+                              "name": {
+                                "description": "name of the write (used for handlebars renders: write.<name>)",
+                                "type": "string"
+                              },
+                              "path": {
+                                "description": "path appended to the client's baseurl for this group of objects",
+                                "type": "string"
+                              },
+                              "readMethod": {
+                                "description": "Method to use when reading an object (default: Post)",
+                                "type": "string",
+                                "enum": [
+                                  "Get"
+                                ],
+                                "nullable": true
+                              },
+                              "teardown": {
+                                "description": "Delete the Objects on RestEndPoint deletion (default: true, inability to do so will block RestEndPoint)",
+                                "type": "boolean",
+                                "nullable": true
+                              },
+                              "updateMethod": {
+                                "description": "Method to use when updating an object (default: Patch)",
+                                "type": "string",
+                                "enum": [
+                                  "Patch",
+                                  "Put",
+                                  "Post"
+                                ],
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "status": {
+                      "description": "The status object of `RestEndPoint`",
+                      "type": "object",
+                      "required": [
+                        "conditions",
+                        "generation",
+                        "owned",
+                        "ownedTarget"
+                      ],
+                      "properties": {
+                        "conditions": {
+                          "type": "array",
+                          "items": {
+                            "description": "ApplicationCondition contains details about an application condition, which is usually an error or warning",
+                            "type": "object",
+                            "required": [
+                              "message",
+                              "status",
+                              "type"
+                            ],
+                            "properties": {
+                              "lastTransitionTime": {
+                                "description": "LastTransitionTime is the time the condition was last observed",
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                              },
+                              "message": {
+                                "description": "Message contains human-readable message indicating details about condition",
+                                "type": "string"
+                              },
+                              "status": {
+                                "description": "Status (\"True\" or \"False\") describe if the condition is enbled",
+                                "type": "string",
+                                "enum": [
+                                  "True",
+                                  "False"
+                                ]
+                              },
+                              "type": {
+                                "description": "Type is an application condition type",
+                                "type": "string",
+                                "enum": [
+                                  "Ready",
+                                  "InputMissing",
+                                  "InputFailed",
+                                  "TemplateFailed",
+                                  "PreScriptFailed",
+                                  "PostScriptFailed",
+                                  "TeardownScriptFailed",
+                                  "ReadFailed",
+                                  "WriteFailed",
+                                  "WriteDeleteFailed",
+                                  "WriteAlreadyExist",
+                                  "OutputFailed",
+                                  "OutputDeleteFailed",
+                                  "OutputAlreadyExist"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        "generation": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "owned": {
+                          "type": "array",
+                          "items": {
+                            "description": "List all owned k8s objects",
+                            "type": "object",
+                            "required": [
+                              "kind",
+                              "name",
+                              "namespace",
+                              "uid"
+                            ],
+                            "properties": {
+                              "kind": {
+                                "description": "Either ConfigMap or Secret",
+                                "type": "string",
+                                "enum": [
+                                  "Secret",
+                                  "ConfigMap"
+                                ]
+                              },
+                              "name": {
+                                "description": "name of the owned object",
+                                "type": "string"
+                              },
+                              "namespace": {
+                                "description": "namespace of the owned object",
+                                "type": "string"
+                              },
+                              "uid": {
+                                "description": "uid of the owned object",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "ownedTarget": {
+                          "type": "array",
+                          "items": {
+                            "description": "List all owned rest objects",
+                            "type": "object",
+                            "required": [
+                              "group",
+                              "key",
+                              "name",
+                              "path",
+                              "teardown"
+                            ],
+                            "properties": {
+                              "group": {
+                                "description": "Object writeGroup",
+                                "type": "string"
+                              },
+                              "key": {
+                                "description": "Object key",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Object name within its writeGroup",
+                                "type": "string"
+                              },
+                              "path": {
+                                "description": "Object path within the client",
+                                "type": "string"
+                              },
+                              "teardown": {
+                                "description": "should we manage this object deletion",
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "subresources": {
+                "status": {}
+              }
+            }
+          ],
+          "conversion": {}
+        },
+        "status": {
+          "conditions": [],
+          "acceptedNames": {
+            "plural": "restendpoints",
+            "singular": "restendpoint",
+            "shortNames": [
+              "rep"
+            ],
+            "kind": "RestEndPoint",
+            "listKind": "RestEndPointList"
+          },
+          "storedVersions": [
+            "v1"
+          ]
+        }
+      },
+      "short": "RestEndPoint",
+      "apiGroup": "kuberest.solidite.fr",
+      "apiKind": "RestEndPoint",
+      "apiVersion": "v1",
+      "readProperties": {
+        "spec": "spec",
+        "status": "status"
+      },
+      "writeProperties": {
+        "spec": "spec"
+      },
+      "group": "kuberest",
+      "sub": "kuberest",
+      "listExcludes": [],
+      "readExcludes": [],
+      "simpleExcludes": [],
+      "gqlDefs": {
+        "metadata": "metadata!",
+        "spec": "JSONObject",
+        "status": "JSONObject"
+      },
+      "namespaced": true
+    }
+  ]
+}

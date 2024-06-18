@@ -179,11 +179,29 @@ export function use{{ short }}(router) {
         editor.value.ready=true;
       },
   });
+  const createError = (err) => {
+    notifyError(i18n.global.t('new.notifyError'));
+    console.log('creation error',err);
+  };
+  const deleteError = (err) => {
+    notifyError(i18n.global.t('delete.notifyError'));
+    console.log('deletion error',err);
+  };
+  const patchError = (err) => {
+    notifyError(i18n.global.t('edit.notifyError'));
+    console.log('mutation error', err);
+  };
+
+
   return {
     onlyReadProperties, onlyWriteProperties, editor, viewer, $q, viewerUpdate: (obj) => {
-      viewer.value.full=gqlDataToYaml(obj)
+      viewer.value.full=gqlDataToYaml({
+        "apiVersion": "{{#if (ne apiGroup "") }}{{ apiGroup }}/{{/if}}{{ apiVersion }}",
+        "kind": "{{ apiKind }}",
+        ...obj
+      });
 {{#each writeProperties}}
-      viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]})
+      viewer.value.props["{{this}}"]=gqlDataToYaml({"{{this}}": obj["{{this}}"]});
 {{/each}}
     },
     can: (verb:string, namespace?:string) => can(verb, '{{group}}', '{{short}}', namespace),
@@ -217,18 +235,60 @@ export function use{{ short }}(router) {
     toEdit: (name) => router.push({ name: '{{group}}{{short}}Edit', params: {name}}),
 {{/if}}
     toParentView: (group,short,name,namespace) => router.push({ name: `${group}${short}View`, params: {name,namespace}}),
-    deleteDone: () => notifySuccess(i18n.global.t('delete.notifyDone')),
-    deleteError: (err) => {
-      notifyError(i18n.global.t('delete.notifyError'));
-      console.log('deletion error',err);
+    createError, patchError, deleteError,
+    createDone: (d) => {
+{{#if (defined crd)}}
+  {{#if namespaced}}
+      if (d.data != undefined && d.data.namespacedCrdObjectCreate != undefined && d.data.namespacedCrdObjectCreate.error != undefined)
+        return createError(d.data.namespacedCrdObjectCreate.error);
+  {{else}}
+      if (d.data != undefined && d.data.clusteredCrdObjectCreate != undefined && d.data.clusteredCrdObjectCreate.error != undefined)
+        return createError(d.data.clusteredCrdObjectCreate.error);
+  {{/if}}
+{{else}}
+      if (d.data != undefined && d.data.{{ group }}{{ short }}Create != undefined && d.data.{{ group }}{{ short }}Create.error != undefined)
+        return createError(d.data.{{ group }}{{ short }}Create.error);
+{{/if}}
+      else {
+        notifySuccess(i18n.global.t('new.notifyDone'));
+        router.go(-1);
+      }
     },
-    patchDone: () => {
-      notifySuccess(i18n.global.t('edit.notifyDone'));
-      router.go(-1);
+    deleteDone: (d) => {
+{{#if (defined crd)}}
+  {{#if namespaced}}
+      if (d.data != undefined && d.data.namespacedCrdObjectDelete != undefined && d.data.namespacedCrdObjectDelete.error != undefined)
+        return deleteError(d.data.namespacedCrdObjectDelete.error);
+  {{else}}
+      if (d.data != undefined && d.data.clusteredCrdObjectDelete != undefined && d.data.clusteredCrdObjectDelete.error != undefined)
+        return deleteError(d.data.clusteredCrdObjectDelete.error);
+  {{/if}}
+{{else}}
+      if (d.data != undefined && d.data.{{ group }}{{ short }}Delete != undefined && d.data.{{ group }}{{ short }}Delete.error != undefined)
+        return deleteError(d.data.{{ group }}{{ short }}Delete.error);
+{{/if}}
+      else {
+        notifySuccess(i18n.global.t('delete.notifyDone'))
+        router.go(-1);
+      }
     },
-    patchError: (err) => {
-      notifyError(i18n.global.t('edit.notifyError'));
-      console.log('mutation error', err)
+    patchDone: (d) => {
+{{#if (defined crd)}}
+  {{#if namespaced}}
+      if (d.data != undefined && d.data.namespacedCrdObjectPatch != undefined && d.data.namespacedCrdObjectPatch.error != undefined)
+        return deleteError(d.data.namespacedCrdObjectPatch.error);
+  {{else}}
+      if (d.data != undefined && d.data.clusteredCrdObjectPatch != undefined && d.data.clusteredCrdObjectPatch.error != undefined)
+        return deleteError(d.data.clusteredCrdObjectPatch.error);
+  {{/if}}
+{{else}}
+      if (d.data != undefined && d.data.{{ group }}{{ short }}Patch != undefined && d.data.{{ group }}{{ short }}Patch.error != undefined)
+        return deleteError(d.data.{{ group }}{{ short }}Patch.error);
+{{/if}}
+      else {
+        notifySuccess(i18n.global.t('edit.notifyDone'));
+        router.go(-1);
+      }
     },
 {{#if namespaced}}
     actionNew: (namespace)    => router.push({ name: '{{group}}{{short}}Create', params: {namespace}}),

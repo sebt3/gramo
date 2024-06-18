@@ -7,6 +7,14 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
       annotations
       labels
       creationTimestamp
+      ownerReferences {
+        apiVersion
+        blockOwnerDeletion
+        controller
+        kind
+        name
+        uid
+      }
       uid
   {{/if}}
 {{/each}}
@@ -25,6 +33,14 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
         annotations
         labels
         creationTimestamp
+        ownerReferences {
+          apiVersion
+          blockOwnerDeletion
+          controller
+          kind
+          name
+          uid
+        }
         uid
     {{/if}}
       }
@@ -48,7 +64,6 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
           namespace
           annotations
           labels
-          creationTimestamp
           uid
         }
           {{#each properties}}
@@ -81,6 +96,14 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
       annotations
       labels
       creationTimestamp
+      ownerReferences {
+        apiVersion
+        blockOwnerDeletion
+        controller
+        kind
+        name
+        uid
+      }
       uid
     {{/if}}
     }
@@ -96,7 +119,6 @@ query {{ name }}Query($namespace: queryParameters{{#each objects}}{{#unless (isN
           namespace
           annotations
           labels
-          creationTimestamp
           uid
         }
         {{#each properties}}
